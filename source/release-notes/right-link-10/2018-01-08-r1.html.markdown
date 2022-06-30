@@ -1,9 +1,0 @@
----
-title: RightLink v10.6.1 Modification
-date: 2018-01-08
-week: 2018-01-08
-blog: release-notes
----
-
-## Changes in Behavior
-* Updated backoff retries for network timeouts

@@ -1,8 +1,0 @@
----
-title: Optima Common Bill Ingestion
----
-
-- sitemap.order_by(:title).all.each do |page|
-  ul
-    - if page.data.category == 'cbi'
-     li =link_to page.data.title, page.url
