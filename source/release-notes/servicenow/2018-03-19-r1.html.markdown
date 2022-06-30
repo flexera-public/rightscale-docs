@@ -1,0 +1,19 @@
+---
+title: ServiceNow Integration
+date: 2018-03-19
+week: 2018-03-19
+blog: release-notes
+---
+
+## Release Details
+
+* [ServiceNow Releases](/servicenow/releases.html)
+
+## New features
+
+* Support for **Istanbul**
+* Support for **Jakarta**
+* Support for **Kingston**
+* Re-certify Application in ServiceNow Store
+
+**Version:** 1.1.13

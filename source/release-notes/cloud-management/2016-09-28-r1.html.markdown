@@ -1,0 +1,11 @@
+---
+title: Cloud Management
+date: 2016-09-28
+week: 2016-09-26
+blog: release-notes
+---
+
+## New Features
+
+* **Stop/Start/Reboot** is now supported on Azure Resource Manager, no matter whether the action is initiated from the RightScale UI/API or from Azure itself.
+

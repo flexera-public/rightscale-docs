@@ -1,0 +1,18 @@
+---
+title: Policies
+date: 2019-03-29
+week: 2019-03-25
+blog: release-notes
+---
+
+## New Features
+
+Policies now give you **more control over what conditions cause an incident to be updated**, allowing you to specify which fields of data should be used in determining whether or not incident data has changed. This is particularly useful in cases where incident data contains a time element, such as "N days ago", allowing you to ignore the "days ago" field when determining if an incident has been updated. For more on this feature, see the `hash_include` and `hash_exclude` attributes of the `policy` declaration, [described in the documentation](/policies/reference/v20180301/policy_template_language.html#describing-the-policy-conditions)
+
+## New Policies
+
+* [AWS Subnet Name Sync](https://github.com/rightscale/policy_templates/blob/master/operational/aws/subnet_name_sync) ensures that all Subnet names in AWS are synchronized to Cloud Management.
+
+* [AWS VPC Name Sync](https://github.com/rightscale/policy_templates/tree/master/operational/aws/vpc_name_sync) ensures that all VPC names in AWS are synchronized to Cloud Management.
+
+* [Azure: Tag Resources with Resource Group Name](https://github.com/rightscale/policy_templates/blob/master/compliance/tags/azure_rg_tags) ensures that all resources contain a user-specified tag containing the name of the Resource Group containing the resource.

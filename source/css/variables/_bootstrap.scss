@@ -1,0 +1,206 @@
+//
+// Bootstrap Variables
+// --------------------------------------------------
+
+// Navbar
+// --------------------
+
+$navbar-default-color:                      #4c4d4f;
+$navbar-default-bg:                         #dadee3;
+$navbar-default-border:                     shade(#dadee3, 8);
+$navbar-default-link-color:                 #4c4d4f;
+$navbar-default-link-hover-color:           #4c4d4f;
+$navbar-default-link-hover-bg:              darken(#dadee3, 4);
+$navbar-default-link-active-color:          #4c4d4f;
+$navbar-default-link-active-bg:             transparent;
+$navbar-default-link-disabled-color:        transparent;
+$navbar-default-link-disabled-bg:           transparent;
+$navbar-default-brand-color:                #4c4d4f;
+$navbar-default-brand-hover-color:          #4c4d4f;
+$navbar-default-brand-hover-bg:             transparent;
+$navbar-default-toggle-hover-bg:            darken(#dadee3, 4);
+$navbar-default-toggle-icon-bar-bg:         #4c4d4f;
+$navbar-default-toggle-border-color:        darken(#dadee3, 4);
+
+// Scaffolding
+// --------------------
+
+$body-bg: #fff;
+$text-color: $text;
+$link-color: $link;
+$link-hover-color: darken($link-color, 10);
+
+// Typography
+// --------------------
+
+$helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$bariol: "bariol", Helvetica Neue, Helvetica, Arial, sans-serif;
+$font-family-sans-serif: $helvetica;
+$font-family-monospace: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+$font-family-base: $font-family-sans-serif;
+$font-size-base: 14px;
+$line-height-base: 1.615;
+$headings-color: $heading;
+$headings-font-family:    $bariol;
+$headings-font-weight:    500;
+$headings-line-height:    1.1;
+$em-base:                 10px;
+
+// List group
+// --------------------
+
+$list-group-bg:                 transparent;
+$list-group-border:             $grey-border;
+$list-group-border-radius:      3px;
+$list-group-hover-bg:           lighten($body, 1);
+$list-group-active-color:       $link-color;
+$list-group-active-bg:          $grey-border;
+$list-group-active-border:      $grey-border;
+$list-group-active-text-color:  $link-color;
+$list-group-link-color:         $link-color;
+$list-group-link-hover-color:   $link-hover-color;
+$list-group-link-heading-color: $heading;
+
+// Buttons
+// --------------------
+
+$btn-font-weight:                normal;
+$btn-default-color:              $heading;
+$btn-default-bg:                 #fff;
+$btn-default-border:             $grey-border;
+$btn-primary-color:              #fff;
+$btn-primary-bg:                 $brand-primary;
+$btn-primary-border:             darken($btn-primary-bg, 5%);
+$btn-success-color:              #fff;
+$btn-success-bg:                 $brand-success;
+$btn-success-border:             darken($btn-success-bg, 5%);
+$btn-info-color:                 #fff;
+$btn-info-bg:                    $brand-info;
+$btn-info-border:                darken($btn-info-bg, 5%);
+$btn-warning-color:              #fff;
+$btn-warning-bg:                 $brand-warning;
+$btn-warning-border:             darken($btn-warning-bg, 5%);
+$btn-danger-color:               #fff;
+$btn-danger-bg:                  $brand-danger;
+$btn-danger-border:              darken($btn-danger-bg, 5%);
+$btn-link-disabled-color:        $gray-light;
+
+// Components
+// --------------------
+
+$padding-base-vertical:     6px;
+$padding-base-horizontal:   12px;
+
+$padding-large-vertical:    10px;
+$padding-large-horizontal:  16px;
+
+$padding-small-vertical:    5px;
+$padding-small-horizontal:  10px;
+
+$padding-xs-vertical:       1px;
+$padding-xs-horizontal:     5px;
+
+$line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
+$line-height-small:         1.5;
+
+$border-radius-base:        3px;
+$border-radius-large:       6px;
+$border-radius-small:       3px;
+
+//** Global color for active items (e.g., navs or dropdowns).
+$component-active-color:    #fff;
+//** Global background color for active items (e.g., navs or dropdowns).
+$component-active-bg:       $brand-primary;
+//** Width of the `border` for generating carets that indicator dropdowns.
+$caret-width-base:          4px;
+//** Carets increase slightly in size for larger components.
+$caret-width-large:         5px;
+
+// Code
+// --------------------
+
+$code-color:                  #c7254e;
+$code-bg:                     #f9f2f4;
+
+$kbd-color:                   #fff;
+$kbd-bg:                      #333;
+
+$pre-bg:                      #fff;
+$pre-color:                   #333638;
+$pre-border-color:            darken($body, 6);
+$pre-scrollable-max-height:   340px;
+$pre-font-size:               12px;
+
+
+// Type
+// --------------------
+
+//** Horizontal offset for forms and lists.
+$component-offset-horizontal: 180px;
+//** Text muted color
+$text-muted:                  $gray-light;
+//** Abbreviations and acronyms border color
+$abbr-border-color:           $gray-light;
+//** Headings small color
+$headings-small-color:        $gray-light;
+//** Blockquote small color
+$blockquote-small-color:      $gray-light;
+//** Blockquote font size
+$blockquote-font-size:        ($font-size-base * 1.25);
+//** Blockquote border color
+$blockquote-border-color:     $gray-lighter;
+//** Page header border color
+$page-header-border-color:    #dadee3;
+//** Width of horizontal description list titles
+$dl-horizontal-offset:        $component-offset-horizontal;
+//** Horizontal line color.
+$hr-border:                   $grey-border;
+
+// Jumbotron
+// --------------------
+
+$jumbotron-padding:              0;
+$jumbotron-heading-color:        $heading;
+$jumbotron-color:                $text;
+$jumbotron-bg:                   #F4F5F7;
+$jumbotron-bottom-border:        darken($light-grey-border, 3);
+
+// Panels
+// --------------------
+
+$panel-bg:                    #fff;
+$panel-body-padding:          rem(15);
+$panel-heading-padding:       rem(10) rem(15);
+$panel-footer-padding:        $panel-heading-padding;
+$panel-border-radius:         $border-radius-base;
+
+//** Border color for elements within panels
+$panel-inner-border:          $light-grey-border;
+$panel-footer-bg:             shade($body, 1);
+
+$panel-default-text:          $text;
+$panel-default-border:        $grey-border;
+$panel-default-heading-bg:    #fff;
+$panel-default-title-color:   $heading;
+
+// Tables
+// --------------------
+
+$table-cell-padding:            rem(8);
+$table-condensed-cell-padding:  rem(5);
+$table-border-color:            $light-grey-border;
+
+
+// Code
+// --------------------
+
+$highlight-border:              $grey-border;
+$highlight-border-inner:        $light-grey-border;
+$highlight-padding:             rem(10);
+
+// Alerts
+// --------------------
+
+$state-info-text:                #3F6388;
+$state-info-bg:                  #D7E9FB;
+$state-info-border:              #B4D6F7;

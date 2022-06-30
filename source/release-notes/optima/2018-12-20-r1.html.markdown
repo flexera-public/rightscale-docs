@@ -1,0 +1,10 @@
+---
+title: Optima
+date: 2018-12-20
+week: 2018-12-17
+blog: release-notes
+---
+
+## New features
+
+* Optima now **supports Azure CSP for the latest cost features** including Tabular View and Custom Dashboards. You can get started with CSP in Optima by following [our guide](/clouds/azure_resource_manager/getting_started/managing_csp_partnerships_and_customers.html).

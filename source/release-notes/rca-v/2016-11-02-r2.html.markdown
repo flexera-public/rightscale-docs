@@ -1,0 +1,12 @@
+---
+title: Cloud Appliance for vSphere
+date: 2016-11-02
+week: 2016-10-31
+blog: release-notes
+---
+
+## RCA-V Adapter v2.0 update
+
+* Support setting static IPs at boot via userdata on instances using RightLink 10 
+
+**Version:** vscale_2.0_20161028_16

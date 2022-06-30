@@ -1,0 +1,16 @@
+---
+title: Self-Service
+date: 2015-05-27
+week: 2015-05-25
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* Bugfix: fixed non-working filters in AccountPreference.index call.
+* Bugfix: fixed end-date calendar to not show today if it's already passed.
+* Bugfix: made the system smarter about using an existing session.
+* Bugfix: made the UI remember your column visibility and sorting preferences.
+
+
+**Note**: [Archived Release Notes are Available Here](http://support.rightscale.com/18-Release_Notes/Self-Service)

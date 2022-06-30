@@ -1,0 +1,33 @@
+//
+// Callouts
+// --------------------------------------------------
+
+.callout {
+  .callout-title {
+    @include clearfix;
+    margin-bottom: rem(4);
+    img {
+      display: inline;
+      margin-right: rem(8);
+      vertical-align: baseline;
+      width: 16px;
+    }
+    h4 {
+      color: $blue;
+      display: inline;
+      margin-top: 0;
+    }
+  }
+  span {
+    font-size: rem(13);
+    display: block;
+    padding-left: rem(28);
+  }
+  > a {
+    color: $text;
+  }
+  a:hover,
+  a:focus {
+    text-decoration: none;
+  }
+}

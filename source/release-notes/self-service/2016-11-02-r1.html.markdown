@@ -1,0 +1,10 @@
+---
+title: Self-Service
+date: 2016-11-02
+week: 2016-10-31
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* Bugfix that was preventing some column preferences from being saved

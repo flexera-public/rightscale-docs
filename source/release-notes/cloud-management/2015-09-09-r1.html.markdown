@@ -1,0 +1,12 @@
+---
+title: Cloud Management
+date: 2015-09-09
+week: 2015-09-07
+blog: release-notes
+---
+
+## New Features
+
+* **OpenStack - Bootable Volume Support** - We now provide tools that help you leverage OpenStack's ability to boot instances from an existing volume. With RightScale, you can now create volumes from images as well as specify volumes to boot from. See the [OpenStack boot volume guide](/clouds/openstack/openstack_boot_volume_guide.html) for additional information.
+
+* **CM API 1.5 - Instance MediaType** - Two new attributes have been added to API 1.5 Instance MediaType. The attributes are: `monitoring_collector_http` which specifies the hostname used to GET from or POST to the monitoring system, and `monitoring_collector_udp` which specifies the hostname used to push the data to the monitoring system using the collectd udp protocol. See [http://reference.rightscale.com/api1.5/media_types/MediaTypeInstance.html](http://reference.rightscale.com/api1.5/media_types/MediaTypeInstance.html) for additional information.

@@ -1,0 +1,16 @@
+---
+title: Optima
+date: 2018-02-26
+week: 2018-02-26
+blog: release-notes
+---
+
+## New Features
+
+* Added the ability to **export Excel files** from tabular view, providing for exports that work in various localized currencies through Excel.
+
+    ![/img/optima-tabular-export.png](/img/optima-tabular-export.png)
+
+## Changes in Behavior
+
+* For customers that are part of an AWS [Enterprise Discount Program](https://aws.amazon.com/pricing/enterprise/), those discounts are now automatically calculated and incorporated into cost reporting in Optima throughout the month. To enable these features tailored to your agreement, please [contact RightScale support](support@rightscale.com).

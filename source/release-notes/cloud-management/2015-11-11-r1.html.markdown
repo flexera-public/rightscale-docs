@@ -1,0 +1,14 @@
+---
+title: Cloud Management
+date: 2015-11-11
+week: 2015-11-09
+blog: release-notes
+---
+
+## New Features
+
+* **Microsoft Azure** - All Azure instance types are now supported, including the newly released Dv2 instance type series.
+
+## Changes in Behavior
+
+* Updated the name sync with CloudStack so that hyphens no longer get stripped from instance names.

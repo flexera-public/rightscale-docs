@@ -1,0 +1,16 @@
+---
+title: Optima
+date: 2018-03-23
+week: 2018-03-19
+blog: release-notes
+---
+
+## New Features
+
+* In Tabular view, the dimensions can now be dragged-and-dropped to rearrange them
+
+    ![/img/optima-tabular-dimension-drag.png](/img/optima-tabular-dimension-drag.png)
+
+## Changes in Behavior
+
+* The `Reserved Instance Details` page under in Instance Analyzer has been deprecated. The new `Reserved Instances` top-level page contains a more complete and accurate list of your AWS Reserved Instances

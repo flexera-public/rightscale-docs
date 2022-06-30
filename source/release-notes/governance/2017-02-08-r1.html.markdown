@@ -1,0 +1,34 @@
+---
+title: Governance
+date: 2017-02-08
+week: 2017-02-06
+blog: release-notes
+---
+
+## New Features
+
+Announcing General Availability of the new Governance application, located within the RightScale product dropdown, to provide enhanced identity access management (IAM). With features like User Groups, Role Inheritance, Full Audit entries etc, users with role `enterprise_managers` and `admins` will get greater control over the user's permissions.
+
+![governance_release_notes.png](/img/governance_release_notes.png)  
+
+* **Organizations:** Organization is new concept we have introduced to help you manage multiple accounts within your company. For existing customers, we have automatically created an Organization based on your master account.
+
+* **Groups:** Organize users into Groups based on your organizational needs or other criteria and assign specific roles to the Groups.
+
+* **Role inheritance:** Inheritance is a powerful feature for assigning Roles at the top level, say organization, and then cascading it down to the Group/Account/User level. Roles granted at the organization level will automatically appear at the account level.
+
+!!info*Note:* All inherited roles are shown explicitly and can only be modified at the level they were assigned. <code>enterprise_manager</code> can only be granted at the organization level whereas role <code>admin</code> can only be granted at the account level.
+
+* **Audit Entries:** Gain visibility into which users are making changes to your cloud resources.
+
+* **New Self-Service User types:** New granular roles (`ss_end_user`, `ss_designer`, `ss_observer`) for the Self-Service application designed to give you complete flexibility. Learn more [Self-Service User types](/ss/getting_started/ss_user_types.html)
+
+## Changes in Behavior
+
+* Cloud Management **User** tab, for managing permissions, is now moved under the new Governance application to allow you to manage user permissions in one place. 
+
+* **API support for provisioning Self-Service users:** Self-Service roles (`ss_end_user`, `ss_designer`, `ss_observer`) can now be assigned via the [API 1.5](http://reference.rightscale.com/api1.5/resources/ResourcePermissions.html). Learn more about [Inviting Self-Service users.](/ss/getting_started/ss_user_types.html#inviting-self-service-users)
+
+* With the new Self-Service user types, you can now grant Cloud Management and Self-Service roles independently of each other giving you more control over the platform.
+
+![governance_releasenotes_roles.png](/img/governance_releasenotes_roles.png)

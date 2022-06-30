@@ -1,0 +1,18 @@
+---
+title: RightLink v6.3.4
+date: 2015-08-27
+week: 2015-08-24
+blog: release-notes
+---
+
+**Release Version**: RightLink 6.3.4 GA
+
+**Release Date**:  Aug 27, 2015
+
+RightLink v6.3.4 is a point release with the following bug fixes:
+  * Updated right-agent gem to  2.6.1 - Robustness improvements. Reconnects quicker if network connectivity is restored after a long down time.
+  * Rackconnect fix - No longer stuck in booting if Rackspace account is provisioned for Rack Connect, but the data center is not.
+
+You can view full changes in the [GitHub repository located here](http://github.com/rightscale/right_link/blob/master/RELEASES.rdoc#634). [Archived Release Notes for older releases are available Here](http://support.rightscale.com/18-Release_Notes/RightLink_Release_Notes)
+
+It is also recommended that you review the [RightLink 5 to 6 Breaking Changes](http://support.rightscale.com/18-Release_Notes/RightLink_Release_Notes/RightLink_6.0/RightLink_5_to_6_Breaking_Changes/index.html) document which identifies changes in RightLink 6 which may cause issues with ServerTemplates previously working with RightLink 5.

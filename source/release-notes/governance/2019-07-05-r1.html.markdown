@@ -1,0 +1,10 @@
+---
+title: Policies
+date: 2019-07-05
+week: 2019-07-01
+blog: release-notes
+---
+
+## New Policies
+
+* [AWS Instance Scheduled Events](https://github.com/rightscale/policy_templates/tree/master/operational/aws/instance_scheduled_events) checks for any scheduled events on EC2 instances that could cause operational issues.

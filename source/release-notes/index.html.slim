@@ -1,0 +1,36 @@
+---
+title: Release Notes
+layout: release_notes_layout
+blog: release-notes
+description: View detailed notes on all RightScale product releases including new feature descriptions, changes in behavior, and bug fixes. Subscribe to release notes via RSS.
+---
+.row
+  .col-md-8
+    p Additions and updates to the RightScale platform. Use the navigation on the left to select the product category.
+    h3 Latest Weekly Changes
+    .article-group
+      - blog.articles[0...7].group_by {|a| a.data.week }.each do |week, articles|
+        - if week
+          .article-group-object
+            h4 = link_to "Week of #{week}", "/release-notes/week-of-#{week}.html"
+            .clearfix
+              - articles.each do |article|
+                .article
+                  h1.article-title
+                    a<> href='#{article.url}' #{article.title}
+                  .article-time
+                    time[datetime="#{article.date.strftime('%m-%e-%Y')}"]
+                      = article.date.strftime('%B %e, %Y')
+                  .article-tease
+                    = article.body
+      .article-group-footer
+        a[href="/release-notes/weekly-all.html" class="btn btn-default"] See All
+
+  .col-md-4
+    a<> href='/release-feed.xml'
+      img[src="/img/status-rss-icon.png" style="width:20px;height:20px;border:0;vertical-align:text-bottom;margin-right:8px;"]
+      | RSS Feed
+    h4
+      strong RightScale Release Schedules
+    p RightScale performs regularly scheduled weekly no-downtime releases of the Cloud Management and Self-Service products every Wednesday afternoon (PDT). Optima no-downtime releases occur every Thursday morning (PDT).
+    p If you have questions regarding the RightScale release schedule, please contact our support team at <a href="mailto:support@rightscale.com">support@rightscale.com</a>

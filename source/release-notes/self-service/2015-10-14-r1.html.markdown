@@ -1,0 +1,10 @@
+---
+title: Self-Service
+date: 2015-10-14
+week: 2015-10-12
+blog: release-notes
+---
+
+## New Features
+
+* **CloudApp Details** - We have revamped the UI when viewing details of a CloudApp based on user feedback and suggestions. The information and styling has been improved for all user types of Self-Service. For additional information, see the [Viewing CloudApp Details](/ss/guides/ss_user_interface_guide.html#catalog-view-viewing-cloudapp-details) section of the Self-Service User Interface Guide.

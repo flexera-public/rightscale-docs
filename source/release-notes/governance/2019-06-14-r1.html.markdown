@@ -1,0 +1,12 @@
+---
+title: Policies
+date: 2019-06-14
+week: 2019-06-10
+blog: release-notes
+---
+
+## New Policies
+
+* [AWS Reserved Instance Recommendations](https://github.com/rightscale/policy_templates/tree/master/cost/aws/reserved_instances/recommendations) checks the AWS Cost Explorer API and reports on any RI recommendations with potential savings above a specified threshold.
+
+* [Azure Reserved Instance Recommendations](https://github.com/rightscale/policy_templates/tree/master/cost/azure/reserved_instances/recommendations) checks the Azure EA API and reports on any RI recommendations with potential savings above a specified threshold.

@@ -1,0 +1,28 @@
+---
+title: Governance
+date: 2017-05-23
+week: 2017-05-22
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* Introducing new frictionless way to manage users, groups, and accounts in **bulk**. Governance users can now switch the view to update multiple users, roles, accounts, and groups seamlessly.
+
+    **Users Page**
+
+    <div style="border: thin solid black">
+    	<img src="/img/gov-users-listview.png" alt="">
+	</div> 
+    
+    **Groups Page**
+
+    <div style="border: thin solid black">
+    	<img src="/img/gov-groups-listview.png" alt="">
+	</div>
+
+    **Accounts Page**
+
+    <div style="border: thin solid black">
+    	<img src="/img/gov-accounts-listview.png" alt="">
+	</div>

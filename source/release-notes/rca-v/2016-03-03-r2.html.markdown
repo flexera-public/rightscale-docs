@@ -1,0 +1,11 @@
+---
+title: Cloud Appliance for vSphere
+date: 2016-03-03
+week: 2016-02-29
+blog: release-notes
+---
+
+## RCA-V Adapter v2.0 fix for RightLink 10
+
+* fix a small bug where userdata file was incorrectly named
+

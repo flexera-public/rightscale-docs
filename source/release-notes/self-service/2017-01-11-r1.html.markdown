@@ -1,0 +1,10 @@
+---
+title: Self-Service
+date: 2017-01-11
+week: 2017-01-09
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* Notification emails are now sent when a CloudApp fails if the launch process was `aborted` or `canceled`

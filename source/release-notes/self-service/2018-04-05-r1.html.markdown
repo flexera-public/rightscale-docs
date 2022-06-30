@@ -1,0 +1,11 @@
+---
+title: Self-Service
+date: 2018-04-05
+week: 2018-04-02
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* Added `private_ip_address` attribute to the [instance](/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-instance) and [server](/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-server) resource declarations in cat. 
+* Allow users with only the `ss_end_user` role to use [Self-Service Plugins](/ss/guides/ss_plugins.html)

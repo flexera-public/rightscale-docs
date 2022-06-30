@@ -1,0 +1,20 @@
+---
+title: RightLink v10.4.0 Release
+date: 2016-05-04
+week: 2016-05-02
+blog: release-notes
+---
+
+##New Features
+
+* **Integration with Docker** on the instance to detect running containers and images and send that information to RightScale in the form of tags on the instance. Read more about the details and how to enable this feature [on our documentation page](/rl10/reference/rl10_docker_support.html)
+
+##Changes in Behavior
+
+* Bugfix for Enablement scripts (Linux/Windows) to ensure exact IP address matching vs. fuzzy matching 
+* Bugfix for Windows enablement/disablement script that was causing long execution times
+* Updated RL10 Linux Setup Hostname script to fix an issue where the configured hostname would not persisting a reboot in some cases 
+* Updated RL10 Linux Enable Monitoring script to always use latest release of EPEL repo vs. a hard-coded version 
+ 
+
+For additional detail and documentation on this release, please refer to the following [release notes.](/rl10/releases/rl10_10.4.0_release.html)

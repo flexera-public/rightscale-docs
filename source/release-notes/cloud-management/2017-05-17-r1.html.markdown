@@ -1,0 +1,16 @@
+---
+title: Cloud Management
+date: 2017-05-17
+week: 2017-05-15
+blog: release-notes
+---
+
+## New Features
+
+* Simplified invite experience for the **Self-Service** users by adding the new roles (`ss_end_user`, `ss_designer`, and `ss_observer`) to the current Invite flow.
+	
+	![selfservice_invite_flow.png](/img/selfservice_invite_flow.png)
+
+## Changes in Behavior
+
+* Bugfix: changed the way Security Group Rules map to Inbound and Outbound security rules in Azure Resource Manager to more closely match the behavior in Azure

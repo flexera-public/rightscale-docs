@@ -1,0 +1,73 @@
+//
+// Status Page
+// --------------------------------------------------
+
+.status-page {
+  padding-top: 0;
+  .navbar-static-top {
+    margin-bottom: 0;
+  }
+  .status-feed {
+    @extend .pull-right;
+    margin-top: rem(8);
+  }
+  .status-feed img {
+    background-color: $orange;
+    border-radius: 3px;
+    margin-right: 6px;
+    padding: 3px;
+    width: 18px;
+    vertical-align: sub;
+  }
+  .table-status,
+  .legend-status {
+    [class^="status-is-"] {
+      border-radius: 6px;
+      display: inline-block;
+      height: 12px;
+      vertical-align: middle;
+      width: 12px;
+    }
+    .status-is-green {
+      background-color: $green;
+    }
+    .status-is-yellow {
+      background-color: $saffron;
+    }
+    .status-is-red {
+      background-color: $red;
+    }
+  }
+  .table-status {
+    margin-top: rem(32);
+    [class^="status-is-"] {
+      display: block;
+      margin: 0.5rem;
+    }
+  }
+  .legend-status {
+    [class^="status-is-"] {
+      margin-right: rem(4);
+      margin-bottom: rem(5);
+    }
+  }
+}
+
+.status-heading {
+  @extend .page-header;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.status-page {
+  .page-header {
+    h2 {
+      margin-bottom: rem(16);
+      margin-top: 0;
+    }
+    h4 {
+      color: $text;
+      margin-bottom: rem(20);
+    }
+  }
+}

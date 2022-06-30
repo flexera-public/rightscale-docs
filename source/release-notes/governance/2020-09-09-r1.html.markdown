@@ -1,0 +1,19 @@
+---
+title: Policies
+date: 2020-09-09
+week: 2020-09-07
+blog: release-notes
+---
+
+
+## Changes to Existing Policies
+
+* [AWS Old Snapshots](https://github.com/flexera/policy_templates/blob/master/cost/aws/old_snapshots) included Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.
+* [AWS Delete Unused Classic Load Balancers](https://github.com/flexera/policy_templates/blob/master/cost/aws/elb/clb_unused) included Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.
+* [Azure Idle Compute Instances](https://github.com/flexera/policy_templates/blob/master/cost/azure/idle_compute_instances/) included Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.
+* [AWS Unused IP Addresses](https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_ip_addresses/) included Total Estimated Monthly Savings in the policy incident.
+* [No Recent Snapshots](https://github.com/flexera/policy_templates/blob/master/operational/snapshots) include running and operational states when searching for instances with no recent snapshots
+* [Billing Center Cost Anomaly](https://github.com/flexera/policy_templates/blob/master/cost/billing_center_cost_anomaly) fixed empty table cells in incident
+* [Google Rightsize CloudSQL Instances](https://github.com/flexera/policy_templates/blob/master/cost/google/cloudsql_rightsizing/) fix error related to getting CPU metrics
+* [Azure Hybrid Use Benefit for Windows Server](https://github.com/flexera/policy_templates/blob/master/cost/azure/hybrid_use_benefit) - removed Windows Client/Windows 10 VM's from the incident.
+* [AWS Inefficient Instance Utilization using CloudWatch](https://github.com/flexera/policy_templates/blob/master/cost/aws/instance_cloudwatch_utilization/) - Fix issue with duplicate records displayed in the incident

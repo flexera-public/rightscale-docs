@@ -1,0 +1,16 @@
+---
+title: Cloud Management
+date: 2017-11-29
+week: 2017-11-27
+blog: release-notes
+---
+
+## New Features
+
+* Support for using **service accounts in GCE** to register projects with RightScale accounts. To learn more [check out the registration documentation](/clouds/google/getting_started/google_connect_gce_to_rightscale.html). If you already have GCE projects registered, [read about updating them to use service accounts](/clouds/google/getting_started/google_connect_gce_to_rightscale.html#updating-your-credentials).
+* Support for **P3 and C5 instance types in AWS**
+* Support for **M5 and H1 instance types in AWS**
+
+## Changes in Behavior
+
+* Registering Google projects with RightScale accounts [now uses service accounts](/clouds/google/getting_started/google_connect_gce_to_rightscale.html) instead of user credentials.

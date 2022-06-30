@@ -1,0 +1,12 @@
+---
+title: Optima
+date: 2019-01-31
+week: 2019-01-28
+blog: release-notes
+---
+
+## New features
+
+* In addition to monthly, quarterly, and biannual calendar periods, the Optima date range calendar now has an additional tab for daily granularity, as seen below. When daily is selected, users can choose a custom range of up to 31 days in the calendar. Daily data is available in Tabular View and all Dashboard reports except the resource list, which will support a daily calendar period at a future date.
+
+    ![daily granularity](/img/optima-daily-granularity-calendar.png)

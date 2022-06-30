@@ -1,0 +1,19 @@
+---
+title: Self-Service
+date: 2015-06-17
+week: 2015-06-15
+blog: release-notes
+---
+
+## New Features
+
+**User Inteface Enhancment** - Introduced a new slideout panel for interactions with large amounts of content (such as launching a CloudApp and viewing a CAT source).
+
+**Cloud Workflow Language** - The `provision()` and `delete()`` functions have been rewritten in Cloud Workflow RCL language. The definitions used for these functions will be publicly documented in the coming weeks and allow you to inspect their behavior or create your own equivalents.
+
+## Changes in Behavior
+
+* Improved the `auto_terminate` behavior so that any resources that fail to be terminated/deleted are skipped and the user is notified, while any resources that can be terminated/deleted, are.
+* Bugfix: fixed a bug that prevented users from Terminating a CloudApp that was in the Stopped state.
+* Bugfix: fixed a bug that was calling the on_error handler during a "cancel" rollback.
+* Added a timeout to the `canceling_operations` transition. When a CloudApp is terminated and operations are running, we cancel those operations. There is now a 2-hour timeout for those operations to be canceled, else the operations will be aborted.

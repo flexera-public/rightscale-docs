@@ -1,0 +1,12 @@
+---
+title: Cloud Management
+date: 2017-10-11
+week: 2017-10-09
+blog: release-notes
+---
+
+## New Features
+
+* Support for **image families on Google** so that a Multi-Cloud Image can point to the "latest" of a given image family on GCP instead of a specific version. Use "latest" images to avoid having the versioned image deprecated out from under your servers.
+
+    ![google-image-family.png](/img/google-image-family.png)

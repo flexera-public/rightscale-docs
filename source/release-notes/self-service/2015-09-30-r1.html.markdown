@@ -1,0 +1,10 @@
+---
+title: Self-Service
+date: 2015-09-30
+week: 2015-09-28
+blog: release-notes
+---
+
+## New Features
+
+* **Introducing Test CloudApps** - In order to help CAT developers during the design and testing phase of CATs as well as simplify the End User experience, we have introduced the notion of Test CloudApps. Test CloudApps are any CloudApp launched from the Designer UI and they are hidden from End Users. For more details, see [Testing CATs](/ss/guides/ss_testing_CATs.html) on our docs site.

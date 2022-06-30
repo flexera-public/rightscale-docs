@@ -1,0 +1,15 @@
+---
+title: Self-Service
+date: 2016-08-18
+week: 2016-08-15
+blog: release-notes
+---
+
+## New Features
+
+* **Azure Resource Manager Volumes** are now supported in CAT using the `volume` declaration type
+
+## Changes in Behavior
+
+* Bugfix: fixed a bug that prevented sleep_until calls from being canceled if the operation/process was canceled
+* Bugfix: fixed a problem in RCL when following resource links with the `view` attribute

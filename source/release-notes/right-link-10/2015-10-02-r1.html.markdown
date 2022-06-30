@@ -1,0 +1,19 @@
+---
+title: RightLink v10.2.1 (GA)
+date: 2015-10-02
+week: 2015-09-29
+blog: release-notes
+---
+
+RightLink version 10.2.1 is now Generally Available.
+
+**New Features and Bug Fixes**:
+
+* Support for Windows. Initial clouds supported include EC2, Openstack, vSphere, Softlayer.
+* Support for GCE on Linux
+* A basic monitoring agent is now built-in to RightLink. Currently only the Windows Base ServerTemplate makes use of this agent by default.
+* Bundle RightScale networking scripts with RightLink. Install scripts on vSphere cloud. Scripts configure networking for RightScale Cloud Appliance for vSphere (RCA-V).
+* User homedir created for 'rightlink' user in /home/rightlink
+* Numerous bug fixes.
+
+For additional detail and documentation on this release, please refer to the following [release notes.](/rl10/releases/rl10_10.2.1_release.html)

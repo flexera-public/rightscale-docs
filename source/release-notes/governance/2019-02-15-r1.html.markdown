@@ -1,0 +1,14 @@
+---
+title: Policies
+date: 2019-02-15
+week: 2019-02-11
+blog: release-notes
+---
+
+## New Policies
+
+* [Billing Center Cost Anomaly](https://github.com/rightscale/policy_templates/tree/master/cost/billing_center_cost_anomaly) analyzes spend in billing centers and alerts if there is a change in spend above a given threshold.
+
+## Changes to Existing Policies
+
+* [Scheduled Report](https://github.com/rightscale/policy_templates/tree/master/cost/scheduled_reports) - added a graphical chart of the previous 6 months of spend

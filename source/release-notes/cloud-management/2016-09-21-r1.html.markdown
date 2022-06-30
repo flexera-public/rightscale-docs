@@ -1,0 +1,11 @@
+---
+title: Cloud Management
+date: 2016-09-21
+week: 2016-09-19
+blog: release-notes
+---
+
+## New Features
+
+* Added the ability to use **Credentials for proxy username/password** tag settings for RightLink 10, offering a secure method for configuring proxy information. Read more about [how to use these settings](/rl10/reference/10.5.2/rl10_proxying_rightlink.html).
+* Add support for **fingerprinted images in CM API 1.5**, making it easier to create MultiCloud Images (MCIs) in an automated fashion for your private clouds. The new [CM API 1.5 MultiCloudImageMatchers resource](http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageMatchers.html) allows you to manage these MCI configurations.

@@ -1,0 +1,22 @@
+//
+// Jumbotron
+// --------------------------------------------------
+
+.jumbotron {
+  @extend .text-center;
+  border-bottom: 1px solid $jumbotron-bottom-border;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  margin-bottom: 2rem;
+  padding: rem(15) 0;
+  h1 {
+    font-size: 36px;
+    margin-top: rem(4);
+  }
+  .lead {
+    color: $text;
+    margin-bottom: rem(16);
+    @media (max-width: $screen-sm) {
+      font-size: 16px;
+    }
+  }
+}

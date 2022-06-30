@@ -1,0 +1,12 @@
+---
+title: Self-Service
+date: 2015-09-16
+week: 2015-09-14
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* It is now easier to use HTTP functions in RCL with RightScale APIs. To make any call to any of the RS APIs, just omit the authentication header and Cloud Workflow will use the existing session to make the call. Note that this means the user running the CloudApp must have the requisite permissions (or have had them delegated to the CloudApp).
+
+* Fixed a bug where terminating Azure instances sometimes failed due to the boot volumes not having been deleted yet.

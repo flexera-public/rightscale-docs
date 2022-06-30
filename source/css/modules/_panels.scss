@@ -1,0 +1,32 @@
+//
+// Panels
+// --------------------------------------------------
+
+.panel-default
+.panel-title {
+  color: $panel-default-title-color;
+  font-size: 2.1rem;
+  font-weight: 400;
+}
+
+// Cards
+.panel {
+  margin-top: rem(24);
+  .panel-body > *,
+  .panel-footer > * {
+    margin-bottom: 0;
+  }
+  .panel-body .table {
+    tr:first-child {
+      td {
+        border-top: 0 none;
+        padding-top: 0;
+      }
+    }
+    tr:last-child {
+      td {
+        padding-bottom: 0;
+      }
+    }
+  }
+}

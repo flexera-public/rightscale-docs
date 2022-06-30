@@ -1,0 +1,13 @@
+---
+title: Cloud Appliance for vSphere
+date: 2017-05-17
+week: 2017-05-15
+blog: release-notes
+---
+
+## New Features
+
+* Fix to allow the discovery of IP Addresses on network interfaces other then the primary interface
+* Enhanced logging around IP Address discovery
+
+**Version:** vscale_2.0_20170517_10

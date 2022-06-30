@@ -1,0 +1,18 @@
+---
+title: Policies
+date: 2020-08-14
+week: 2020-08-10
+blog: release-notes
+---
+## New Features
+
+* The Policy Manager has a new feature to allow users to run actions on selected resources within a Policy Incident.  The user also can select an action to run automatically when the incident is created.  [Read more](/policies/users/getting_started/#selectable-actions).  Review the Readme file of the policy templates that interest you for additional details as it pertains this new feature.
+
+## New Policies
+
+* [AWS - Unused IP Addresses](https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_ip_addresses) identify unused AWS EC2 IP Addresses (EIP) and allows the user to delete the IP address.
+* [AWS - Untagged Resources](https://github.com/flexera/policy_templates/blob/master/compliance/aws/untagged_resources) identifies AWS resources that do not have a tag and allow the user to create a new tag on the resource
+* [AWS - Schedule Instance](https://github.com/flexera/policy_templates/tree/master/cost/aws/schedule_instance) allows the user to stop and start an AWS instance on a schedule.
+* [Azure - Untagged Resources](https://github.com/flexera/policy_templates/blob/master/compliance/azure/azure_untagged_resources) identifies Azure resources that do not have a tag and allow the user to create a new tag on the resource.
+* [Azure - Unused IP Addresses](https://github.com/flexera/policy_templates/blob/master/cost/azure/unused_ip_addresses) identifies unused Azure IP Addresses and allows the user to delete the IP address.
+* [Google - Unlabeled Resources](https://github.com/flexera/policy_templates/blob/master/compliance/google/unlabeled_resources) identifies Google Cloud resources that do not have a label and allow the user to create a new label on the resource.

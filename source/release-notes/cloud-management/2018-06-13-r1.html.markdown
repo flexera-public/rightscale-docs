@@ -1,0 +1,10 @@
+---
+title: Cloud Management
+date: 2018-06-13
+week: 2018-06-11
+blog: release-notes
+---
+
+## New Features
+
+* Server Array **scaling behavior can now be customized using Cloud Workflow**. When a server array needs to scale up or down, [custom RCL logic can be used to tailor the specific behavior](/cm/dashboard/manage/arrays/arrays_cwf.html), such as configuring the launching instance to use spot pricing or available RIs, or ensuring the terminating instance is the instance of your choosing. 

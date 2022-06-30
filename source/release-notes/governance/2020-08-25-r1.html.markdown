@@ -1,0 +1,18 @@
+---
+title: Policies
+date: 2020-08-25
+week: 2020-08-24
+blog: release-notes
+---
+
+## New Policies
+
+* [Azure - Schedule Instance](https://github.com/flexera/policy_templates/blob/master/cost/azure/schedule_instance) allows you to schedule start and stop times for your Azure virtual machine.
+* [Google - Schedule Instance](https://github.com/flexera/policy_templates/blob/master/cost/google/schedule_instance) allows you to schedule start and stop times for your Google instances.
+
+## Changes to Existing Policies
+
+* [AWS Unused Volumes](https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_volumes) included Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.
+* [Azure Unused Volumes](https://github.com/flexera/policy_templates/blob/master/cost/azure/unattached_volumes) included Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.
+* [Azure Rightsize SQL Databases](https://github.com/flexera/policy_templates/blob/master/cost/azure/rightsize_sql_instances)
+* All AWS Policies - fix issue where the policy failed because of AWS Service Control Policy region restrictions.

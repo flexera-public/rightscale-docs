@@ -1,0 +1,10 @@
+---
+title: Policies
+date: 2019-10-11
+week: 2019-10-07
+blog: release-notes
+---
+
+## Changes to Existing Features
+
+* Policies can now be configured **to run on a monthly interval** for use cases that require less frequent checks. Simply choose the [monthly option under policy schedule](/policies/users/guides/apply_policy.html#common-policy-configuration-options--policy-schedule-) when applying your policy.

@@ -1,0 +1,20 @@
+---
+title: Policies
+date: 2019-10-25
+week: 2019-10-21
+blog: release-notes
+---
+
+## New Policies
+
+* [Running Instance Count Anomaly](https://github.com/rightscale/policy_templates/blob/master/cost/instance_anomaly/README.md) checks for changes in the count of instances running in a specific account over the prior 30-day period and alerts you if the count has crossed the specified threshold.
+* [AWS Unencrypted ELB Listeners (CLB)](https://github.com/rightscale/policy_templates/blob/master/security/aws/clb_unencrypted/README.md) checks for any CLBs that are unencrypted and sends an alert.
+* [AWS Unencrypted ELB Listeners (ALB/NLB)](https://github.com/rightscale/policy_templates/blob/master/security/aws/elb_unencrypted/README.md) checks for any ALBs or NLBs that are unencrypted and sends an alert.
+* [Monthly Actual v. Budgeted Spend Report](https://github.com/rightscale/policy_templates/blob/master/cost/budget_v_actual/README.md) allows you to specify a budget amount for a given billing center and be altered if the spend crosses that threshold.
+* [AWS Disallowed Regions](https://github.com/rightscale/policy_templates/blob/master/compliance/aws/disallowed_regions/README.md) reports on any instance usage in regions that you specify as disallowed, allowing for termination of the instances after user approval.
+* [Azure Unused SQL Databases](https://github.com/rightscale/policy_templates/blob/master/cost/azure/unused_sql_databases/README.md) checks for unused Azure SQL Databases, based on DB connections, and deletes the database after user approval.
+* [New Service Usage](https://github.com/rightscale/policy_templates/blob/master/cost/new_service_usage/README.md) reports on any new service usage in the current month that did not exist in the previous month, based on billing data.
+
+## Changes to Existing Features
+
+* [Azure Subscription Access](https://github.com/rightscale/policy_templates/blob/master/compliance/azure/subscription_access/README.md) was modified to account for more than 100 users and to only gather subscription-level role assignments.

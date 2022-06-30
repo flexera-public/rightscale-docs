@@ -1,0 +1,16 @@
+---
+title: ServiceNow Integration
+date: 2018-12-19
+week: 2018-12-17
+blog: release-notes
+---
+
+## Release Details
+
+* [ServiceNow Releases](/servicenow/releases.html)
+
+## New features
+
+* Support for **London**
+
+**Version:** 1.1.13

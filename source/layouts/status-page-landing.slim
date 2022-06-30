@@ -1,0 +1,33 @@
+doctype 5
+html lang="en"
+  head
+    meta charset="utf-8"
+    title = current_page.data.title || ""
+    meta name="description" content=current_page.data.description
+    meta name="viewport" content="initial-scale=1"
+    - if current_page.data.tags
+      | <meta name="docsearch:keywords" content='"#{current_page.data.tags}"' />
+    link rel="icon" href="https://my.rightscale.com/favicon.ico"
+    /! Stylesheets
+    = stylesheet_link_tag "main", type: false
+    /! JavaScript
+    = javascript_include_tag "main", type: false
+  body.status-page
+    = partial "partials/header-static"
+    .wrap
+      .jumbotron
+        .container
+          h1 = "RightScale System Status - Key Services"
+      .container-fluid.max-width
+        .row
+          .col-sm-9
+            .clearfix
+              .main-content == yield
+          .col-sm-3
+            .aside
+              .aside-header
+                h4 System Status History
+              = partial "partials/status-history"
+
+    = partial "partials/footer"
+    = partial "partials/scripts"

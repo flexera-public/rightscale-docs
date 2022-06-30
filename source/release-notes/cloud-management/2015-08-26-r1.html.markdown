@@ -1,0 +1,15 @@
+---
+title: Cloud Management
+date: 2015-08-26
+week: 2015-08-24
+blog: release-notes
+---
+
+## New Features
+
+* **GCE - Remove Public IP Option** - When creating an instance, server, or array on GCE, you now have the option to remove the public IP from the instance, ensuring that it will not have a public IP assigned when it is launched. When using this option, you must ensure that the instance's private network allows routes to the RightScale platform in order for RightLink to connect.
+
+## Changes in Behavior
+
+* RightScale now identifies and correctly handles cases in which instances are stopped/started in the cloud instead of through RightScale. This applies to AWS, Azure, VMware, and SoftLayer.
+* For OpenStack cloud registration, if the protocol returned by the public endpoint is incorrect, we instead use the protocol used in the catalog.

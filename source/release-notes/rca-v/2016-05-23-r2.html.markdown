@@ -1,0 +1,12 @@
+---
+title: Cloud Appliance for vSphere
+date: 2016-05-23
+week: 2016-05-23
+blog: release-notes
+---
+
+## RCA-V Adapter v2.0 update
+
+* Change error to warning when the instance type cannot be calculated immediately after launching a VM.  Some environments are slow to show the required attributes to calculate what instance type is being used.
+
+**Version:** vscale_2.0_20160523_21

@@ -1,0 +1,10 @@
+---
+title: Cloud Management
+date: 2018-09-13
+week: 2018-09-10
+blog: release-notes
+---
+
+## New Features
+
+* Added support for the **AWS X1e instance type**
