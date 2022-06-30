@@ -1,0 +1,18 @@
+---
+title: Cloud Management
+date: 2015-07-08
+week: 2015-07-03
+blog: release-notes
+---
+
+## New Features
+
+* **SoftLayer** - Added the ability to Stop and Start virtual servers using the RightScale Cloud Management (CM) Dashboard as well as the RightScale API. Due to the fickle nature of SoftLayer cloud, after issuing the Stop request, please confirm that the operation indeed completed successfully by looking at the audit entries for the virtual server in the CM Dashboard. In the event of failures, a retry of the operation is recommended.
+
+## CM API 1.5 Change Log
+
+**Modified Resources:**
+
+* *VolumeSnapshots*
+  * **create** - removed the optional `volume_snapshot_copy` hash
+  * added *copy* action

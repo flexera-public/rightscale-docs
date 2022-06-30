@@ -1,0 +1,18 @@
+---
+title: Governance
+date: 2017-05-09
+week: 2017-05-08
+blog: release-notes
+---
+
+## New Features
+
+* Governance users can now download a detailed user role report (CSV), broken down by accounts, for better visibility as well as auditing.
+
+	**Enterprise Manager's View**
+
+	![governance-exportcsv.gif](/img/governance-exportcsv.gif)
+
+	**Admin's View**
+
+	![governance-exportcsv-accounts.gif](/img/governance-exportcsv-accounts.gif)

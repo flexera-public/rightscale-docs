@@ -1,0 +1,10 @@
+---
+title: Cloud Management
+date: 2018-09-19
+week: 2018-09-16
+blog: release-notes
+---
+
+## New Features
+
+* Hashicorp has certified the **[RightScale provider for Terraform](https://www.terraform.io/docs/providers/rightscale/index.html)**, allowing [Terraform](https://www.terraform.io) users to include multi-cloud resources in their configurations. RightScale resources can be provisioned/updated/destroyed/etc using the Terraform tools like any other resource, and allow for building Terraform configurations that can support multiple clouds with one set of files/resources. Additionally, the provider exposes the ability to run arbitrary [Cloud Workflow code](/ss/reference/rcl/v2/index.html) as part of a configuration, providing a powerful tool for complex configuration tasks as part of a Terraform configuration.

@@ -1,0 +1,17 @@
+---
+title: Cloud Appliance for vSphere
+date: 2015-11-11
+week: 2015-11-09
+blog: release-notes
+---
+
+## New Features
+
+**wstunnel Update** - the RCA-V admin portal has been updated to use the latest version of **wstunnel** (v1.0.6) for communication with the RightScale platform. We recommend all customers upgrade to this new version using the steps outlined below:
+
+* Login to the RCA-V Admin UI.
+* Click on **RightScale Platform** in the left column.
+* Find the **Admin Interface** card and click on **Upgrade** button.
+* Look for the package labeled `vscale-admin_1.3_20151110_23`.
+* **Download** and **Activate** that package.
+* Refresh your browser window.

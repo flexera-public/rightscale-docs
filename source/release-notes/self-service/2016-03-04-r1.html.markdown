@@ -1,0 +1,10 @@
+---
+title: Self-Service
+date: 2016-03-04
+week: 2016-02-29
+blog: release-notes
+---
+
+## New Features
+
+* **Self-Service Only Users** - Users can now be granted access only to Self-Service, allowing them to launch and manage infrastructure that has been defined and approved by application designers. These Self-Service only users are not able to log in to either Cloud Management or Optima. Read more about how to add these users here: [Granting Self-Service only access](/ss/getting_started/ss_user_types.html#granting-permissions-granting-self-service-only-access-to-account).

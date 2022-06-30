@@ -1,0 +1,15 @@
+---
+title: Cloud Management
+date: 2015-12-02
+week: 2015-11-30
+blog: release-notes
+---
+
+## New Features
+
+* **OpenStack** - OpenStack Kilo is now officially supported in RightScale. For more information, see the [OpenStack documentation](/clouds/openstack/openstack_setup_guide.html) on our docs site.
+* **Dashboard Sidebar Redesign** - Along with resolving minor bugs in how the sidebar hides/shows on certain views within Cloud Management, the new sidebar design is part of a continued effort to align the look and feel of RightScale's applications for a consistent user experience.
+* **Disabling RightScripts** - We have added support for disabling RightScripts from the boot sequence when launching a Server/Array through the CM API 1.5, allowing you greater control of the boot behavior of your RightScale servers.
+* **EC2 Instance Tenancy Option** - In EC2, you can now select the tenancy for a given instance when launching it (instead of relying on the VPC tenancy setting), giving you more flexibility around workload placement in AWS.
+* **EC2 g2 Instances** - We have added support for `g2.8xl` instance types in EC2.
+* **GCE Preemptible Instances** - We have added support for launching instances and configuring servers/arrays to use "preemptible" instances in GCE. Use of these types of instances in GCE can drastically reduce costs, but come with a variety of limitations -- see GCE documentation for more information. This setting is now available in the Cloud Management Dashboard and available in the API and CAT through the `cloud_specific_attributes` hash of an instance.

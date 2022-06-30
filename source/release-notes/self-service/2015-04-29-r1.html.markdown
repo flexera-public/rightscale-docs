@@ -1,0 +1,19 @@
+---
+title: Self-Service
+date: 2015-04-29
+week: 2015-04-27
+blog: release-notes
+---
+
+## New Features
+
+* Added new "run" action to ScheduledActions resource in the API so that any custom operation can be scheduled.
+* Improved the login process so that users are redirected to the correct location when they come to Self-Service by way of a link.
+
+## Changes in Behavior
+
+* Fixed a bug that prevented End Users from modifying a running CloudApp schedule and end date.
+* Fixed a bug that was causing notification emails to be sent for Terminated CloudApps.
+* Added ranges as a first class entity type in RCL, providing an easy method to iterate through numerical or string ranges.
+
+**Note**: [Archived Release Notes are Available Here](http://support.rightscale.com/18-Release_Notes/Self-Service)

@@ -1,0 +1,15 @@
+---
+title: Policies
+date: 2019-12-06
+week: 2019-12-02
+blog: release-notes
+---
+
+## New Policies
+
+* [Disallowed Cloud Images](https://github.com/rightscale/policy_templates/blob/master/compliance/disallowed_images/README.md) reports on any image usage outside of the specified approved images.
+* [SaaS Manager - Suspicious Users](https://github.com/rightscale/policy_templates/blob/master/saas/fsm/suspicious_users/README.md) creates an incident when Flexera SaaS Manager detects suspicious users logging into SaaS applications.
+* [SaaS Manager - User Status Change](https://github.com/rightscale/policy_templates/blob/master/saas/fsm/user_status_change/README.md) identifies users whose status changes to `inactive` in Flexera SaaS Manager.
+* [SaaS Manager - Renewal Reminder](https://github.com/rightscale/policy_templates/blob/master/saas/fsm/renewal_reminder/README.md) identifies applications with upcoming contract renewals.
+* [Office 365 Security Alerts](https://github.com/rightscale/policy_templates/blob/master/saas/office365/security_alerts/README.md) surfaces security alerts of a user-specified severity level that have been raised in Office 365.
+* [SaaS Manager - Unsanctioned Spend](https://github.com/rightscale/policy_templates/blob/master/saas/fsm/unsanctioned_spend/README.md) creates an incident when Flexera SaaS Manager identifies unsanctioned spend on SaaS applications.

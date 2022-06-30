@@ -1,0 +1,15 @@
+---
+title: Cloud Management
+date: 2016-12-29
+week: 2016-12-26
+blog: release-notes
+---
+
+## New Features
+
+* **Ed25519 and other new key types** are now supported by [RightLink10 Managed Login](/rl10/reference/10.6.0/rl10_managed_ssh_login.html)
+
+## Changes in Behavior
+
+* Bugfix: fixed a bug that would cause problems when launching multiple instances concurrently on Azure Resource Manager
+* Bugfix: fixed a bug that would revert the spot/On-Demand choice for AWS instances when editing a Server

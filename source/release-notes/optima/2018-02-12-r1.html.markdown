@@ -1,0 +1,20 @@
+---
+title: Optima
+date: 2018-02-12
+week: 2018-02-12
+blog: release-notes
+---
+
+## New Features
+
+* Added a new date picker for `Tabular` view in Billing to provide additional controls over the granularity and timeframe shown in the table.
+
+    ![/img/optima-tabular-date-picker.png](/img/optima-tabular-date-picker.png)
+
+* Recommendations in billing centers can now be "ignored", helping to reduce the noise by providing a way for non-applicable recommendations to be hidden for users. Users with the `billing_center_admin` or `enterprise_manager` roles are able to ignore and restore recommendations.
+
+    ![/img/ignore_from_detail_window.png](/img/ignore_from_detail_window.png)
+
+## Changes in Behavior
+
+* When in a billing center, changing the breakdown dimension dropdown no longer resets the page to the current month -- the currently selected month remains selected.

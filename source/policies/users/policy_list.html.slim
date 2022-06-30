@@ -1,0 +1,71 @@
+---
+title: List of Built-in Policies
+description: List of all current built-in policies
+alias: [policies/getting_started/policy_list.html]
+---
+
+p Flexera provides a wide variety of policies that you can apply on Day 1 without much investment. All our policies are open source and can be found in our <a href='https://github.com/rightscale/policy_templates'>public git repo</a>.
+
+p Interested in policies not listed here? Contact your Account Manager or <a href='mailto:sales@rightscale.com'>our sales team</a>, or <a href='../developers'>write your own</a>.
+
+<h2 id="cost_policies">Cost Policies</h2>
+p Increase cost visibility and management in your multi-cloud world and take appropriate actions to run an efficient infrastructure.
+
+table
+  thead
+    tr
+      th Name
+      th Version
+      th Description
+  - data.policies.cost.each do |p|
+    <tr><td><a href='https://github.com/rightscale/policy_templates/blob/master/#{p.readme}'>#{p.name}</a></td><td>#{p.version}</td><td>#{p.description}</td></tr>
+
+
+<h2 id="security_policies">Security Policies</h2>
+p Gain visibility and control across all your public and/or private cloud environments with our security policies. Improve security across your applications, data, and associated infrastructure by finding security vulnerabilities before your customers do.
+
+table
+  thead
+    tr
+      th Name
+      th Version
+      th Description
+  - data.policies.security.each do |p|
+    <tr><td><a href='https://github.com/rightscale/policy_templates/blob/master/#{p.readme}'>#{p.name}</a></td><td>#{p.version}</td><td>#{p.description}</td></tr>
+
+<h2 id="operational_policies">Operational Policies</h2>
+p Save valuable human time and investment by automating everyday IT operations. Running an automated and efficient cloud infrastructure frees up expensive resources on high ROI projects like scaling, growth, and deliver value faster than anyone else.
+
+table
+  thead
+    tr
+      th Name
+      th Version
+      th Description
+  - data.policies.operational.each do |p|
+    <tr><td><a href='https://github.com/rightscale/policy_templates/blob/master/#{p.readme}'>#{p.name}</a></td><td>#{p.version}</td><td>#{p.description}</td></tr>
+
+<h2 id="compliance_policies">Compliance Policies</h2>
+p Enterprises typically have multiple compliance requirements but struggle to automate them which leads to downtime as well as resource waste. By having a strong compliance strategy but also ability to quickly automate it provides peace of mind and avoids business interruption.
+
+table
+  thead
+    tr
+      th Name
+      th Version
+      th Description
+  - data.policies.compliance.each do |p|
+    <tr><td><a href='https://github.com/rightscale/policy_templates/blob/master/#{p.readme}'>#{p.name}</a></td><td>#{p.version}</td><td>#{p.description}</td></tr>
+
+- if data.policies.saas_management
+    <h2 id="saas_management_policies">SaaS Management Policies</h2>
+    p As your technology landscape matures, SaaS becomes a larger part of your spend between all of the services used for backoffice and for delivering applications. These policies help you monitor your SaaS tools for cost, compliance, and security purposes.
+
+    table
+      thead
+        tr
+          th Name
+          th Version
+          th Description
+      - data.policies.saas_management.each do |p|
+            <tr><td><a href='https://github.com/rightscale/policy_templates/blob/master/#{p.readme}'>#{p.name}</a></td><td>#{p.version}</td><td>#{p.description}</td></tr>

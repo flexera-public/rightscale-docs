@@ -1,0 +1,25 @@
+---
+title: Cloud Appliance for vSphere
+date: 2017-08-16
+week: 2017-08-14
+blog: release-notes
+---
+
+## RCA-V Adapter v3.0 release
+
+* Support for vSphere 6.5
+* Update appliance to Ubuntu 16.04
+* Support datastores in folders
+* Support host clusters in folders
+* Improve error handling when profile driven storage permissions are not set
+* Sync instance names from RightScale to vSphere
+* Delete userdata ISOs after upload
+* Use whitelisted URLs for admin UI status checks
+* Improve error handling when discovering instance types
+* Backup application config to datastore
+
+**Version:** vscale_3.0_20170814_17, vscale-admin_3.0_20170829_18
+
+[How to upgrade to RCAV 3.0](/rcav/v3.0/rcav_upgrade_to_3_0.html)
+
+[More information about RCAV 3.0](/rcav/v3.0/index.html)

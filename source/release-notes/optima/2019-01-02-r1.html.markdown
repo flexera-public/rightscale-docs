@@ -1,0 +1,12 @@
+---
+title: Optima
+date: 2019-01-02
+week: 2019-01-01
+blog: release-notes
+---
+
+## New features
+
+* Bill connections for Optima can now be added and updated directly by users in the UI and can be automated using the Optima API. To get started, [see the billing configuration guide for Optima](/optima/guides/billing_configuration.html)
+
+    ![bill select](/img/optima-bill-config-cloudselect.png)

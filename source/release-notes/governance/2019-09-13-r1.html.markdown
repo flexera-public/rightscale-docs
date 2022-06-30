@@ -1,0 +1,18 @@
+---
+title: Policies
+date: 2019-09-13
+week: 2019-09-09
+blog: release-notes
+---
+
+## New Features
+
+* **Organizational Summaries** give users with org-scoped access to policies an improved view of policy information across all accounts in the organization. All operational views of policies, including the Dashboard, provide an "Organization Summary" option in the account selector that rolls up data from across all accounts in the organization. Applied policies are grouped together and can be managed from a single page. To check it out, go to the Dashboard page in Policy Manager.
+* Policy managers can now **[skip pre-defined approval steps](/policies/users/guides/apply_policy.html#common-policy-configuration-options--skip-action-approvals-)** in the action sequence of a policy incident, allowing for policy remediations to be fully automated. When applying a policy, a new option is available called "Skip action approvals" in both the UI and the API.
+
+## New Policies
+
+* [Schedule FlexNet Manager report](https://github.com/flexera/policy_templates/tree/master/operational/fnms/schedule_fnms_reports) runs a FlexNet Manager custom report and sends the results via email.
+* [Google Idle Compute Instances](https://github.com/flexera/policy_templates/blob/master/cost/google/idle_compute_instances/README.md) checks for idle instances in Google Compute Engine, as defined by CPU and memory average utilization, and optionally terminates the instances after approval.
+* [AWS Idle Compute Instances](https://github.com/flexera/policy_templates/blob/master/cost/aws/idle_compute_instances/README.md) checks for idle instances in AWS, as defined by CPU and memory average utilization, and optionally terminates the instances after approval.
+* [AWS Bucket Size Check](https://github.com/rightscale/policy_templates/blob/master/cost/aws/s3_bucket_size/README.md) checks for S3 buckets larger than a specified size.

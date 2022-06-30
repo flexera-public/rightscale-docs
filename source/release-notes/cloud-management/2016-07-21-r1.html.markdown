@@ -1,0 +1,10 @@
+---
+title: Cloud Management
+date: 2016-07-21
+week: 2016-07-18
+blog: release-notes
+---
+
+## New Features
+
+* **Initial Support for Azure Resource Manager** - Now available in Cloud Management is the next generation Microsoft cloud, Azure Resource Manager. During this initial release, access must be requested through support and there are some important known limitations to be aware of. Read more about our [ARM Support here](/clouds/azure_resource_manager)

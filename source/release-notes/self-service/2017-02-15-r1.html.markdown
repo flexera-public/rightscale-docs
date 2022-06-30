@@ -1,0 +1,15 @@
+---
+title: Self-Service
+date: 2017-02-15
+week: 2017-02-13
+blog: release-notes
+---
+
+## New Features
+
+* A `Failed` CloudApp can now be "forced" into either the `Running` or `Stopped` states by users that have either `designer` or `admin` privileges. This can be leveraged when the logic in the CloudApp or some environmental factors cause errors in a CloudApp operation, but the underlying issues can be resolved manually. This action is available in the CloudApp view in the UI and the [Execution resource `patch` action](http://reference.rightscale.com/selfservice/manager/index.html#/1.0/controller/V1::Controller::Execution/patch) in the API.
+
+## Changes in Behavior
+
+* Bugfix: fixed a bug that caused a "session expired" growler to show in Self-Service on the CWF Console when another browser window changed accounts in Cloud Management
+* Bugfix: fixed a bug in custom provision functions that required that the function take an actual named resource as its input parameter -- such functions can now accept a generic resource declaration name

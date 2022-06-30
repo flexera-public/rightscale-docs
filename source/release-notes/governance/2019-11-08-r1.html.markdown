@@ -1,0 +1,12 @@
+---
+title: Policies
+date: 2019-11-08
+week: 2019-11-04
+blog: release-notes
+---
+
+## New Policies
+
+* [AWS Savings Plan Recommendations](https://github.com/rightscale/policy_templates/blob/master/cost/aws/savings_plan/recommendations/README.md) uses the AWS Cost Explorer to raise incidents if AWS recommends any Savings Plan purchases where the savings is more than the specified threshold.
+* [AWS EC2 Instances not running FlexNet Inventory Agent](https://github.com/rightscale/policy_templates/blob/master/compliance/aws/instances_without_fnm_agent/README.md) reports on any instance running in EC2 that does not have the FlexNet Inventory Agent installed.
+* [Azure Migrate Integration](https://github.com/rightscale/policy_templates/blob/master/operational/azure/azure_migrate/README.md) collects the resources from a RISC Foundations assessment and seeds Azure Migrate with the discovered servers.

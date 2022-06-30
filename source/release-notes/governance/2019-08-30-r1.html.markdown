@@ -1,0 +1,15 @@
+---
+title: Policies
+date: 2019-08-30
+week: 2019-08-26
+blog: release-notes
+---
+
+## New Policies
+
+* [Azure Long Stopped Instances](https://github.com/rightscale/policy_templates/blob/master/compliance/azure/azure_long_stopped_instances/README.md) checks for Azure VMs that have been stopped for a user-specified amount of time and optionally terminates the instances after approval.
+* [Azure AHUB Utilization with Manual Entry](https://github.com/rightscale/policy_templates/blob/master/compliance/azure/ahub_manual/README.md) ensures that you are taking full advantage of the Azure Hybrid Use Benefit in your cloud environments.
+
+## Changes to Existing Policies
+
+* [Superseded Instances](https://github.com/rightscale/policy_templates/blob/master/cost/superseded_instance/README.md) was updated to include the region of the instance in the report.

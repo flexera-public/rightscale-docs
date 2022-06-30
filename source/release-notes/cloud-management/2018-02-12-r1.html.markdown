@@ -1,0 +1,12 @@
+---
+title: Cloud Management
+date: 2018-02-12
+week: 2018-02-12
+blog: release-notes
+---
+
+## New Features
+
+* Alerts can now [trigger arbitrary Cloud Workflow code](/cm/dashboard/design/alert_escalations/#valid-actions-for-alert-escalations-run-cloud-workflow) to run, allowing for orchestration of complex tasks and integration with external paging/ticketing systems
+* [Actions can now be taken when an active alert "resolves"](/cm/dashboard/design/alert_escalations/alert_escalations_actions.html#create-a-new-alert-escalation-define-alert-resolution-action--labs-), enabling richer integration with incident tracking systems and reducing operator overhead
+

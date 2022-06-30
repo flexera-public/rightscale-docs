@@ -1,0 +1,11 @@
+---
+title: Optima
+date: 2018-07-24
+week: 2018-07-23
+blog: release-notes
+---
+
+## New Features
+
+* **Custom dashboards** can now be created in billing centers, giving you complete control over what costs you see and how they are laid out within your billing centers. You can pick from various visualizations of data and filter the data to show only particular costs. Custom dashboards are scoped to the user, so any changes you make won't affect other users in your organization. [Get started today by reading the documentation](/optima/guides/custom_dashboards.html)
+    ![optima-custom-dashboard-example.png](/img/optima-custom-dashboard-example.png)

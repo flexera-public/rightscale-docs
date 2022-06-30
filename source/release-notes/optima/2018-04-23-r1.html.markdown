@@ -1,0 +1,16 @@
+---
+title: Optima
+date: 2018-04-23
+week: 2018-04-23
+blog: release-notes
+---
+
+## New Features
+
+* In Tabular view, you can now choose to show "percent change" for each data cell, giving you a quick way to identify large changes in spend month over month. To show/hide the percentages, use the "Show" button -- the tooltip explains the logic behind the coloring of the percentages.
+
+    ![/img/optima-tabular-percent-change.png](/img/optima-tabular-percent-change.png)
+
+## Changes in Behavior
+
+* The `Reserved Instance Details` page under in Instance Analyzer has been deprecated. The new `Reserved Instances` top-level page contains a more complete and accurate list of your AWS Reserved Instances

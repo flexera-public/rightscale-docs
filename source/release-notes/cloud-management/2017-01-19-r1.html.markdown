@@ -1,0 +1,14 @@
+---
+title: Cloud Management
+date: 2017-01-19
+week: 2017-01-16
+blog: release-notes
+---
+
+## New Features
+
+* **New Audit Entries** are now being created when a Server Array pricing type or state change is made in either Cloud Management UI or CM API 1.5. You can find these audit entries in the Audit Entries tab of the affected Server Array.
+
+## Changes in Behavior
+
+* Fixed a bug that would, in some cases, cause VmWare volumes to not be able to be re-attached once they were detached

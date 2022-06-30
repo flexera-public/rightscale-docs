@@ -1,0 +1,33 @@
+---
+title: Policies
+date: 2018-07-30
+week: 2018-07-30
+blog: release-notes
+alias: release-notes/policies/2018/07/30.html
+---
+
+## New Features
+
+Announcing a completely redesigned multi-cloud policy management capability in RightScale with built-in **Cost, Security, Compliance, and Operational** policies to help you achieve quick ROI. 
+
+**Key Capabilities** 
+
+* [Built-in Policies](/policies/getting_started/policy_list.html) for Cost, Security, Operational, and Compliance use cases
+* Dry run policies and then configure them to take automatic actions on any API backed cloud, service, and resource
+* Automate policies across your entire cloud landscape (multiple accounts)
+* Maintain policy-as-code using the built-in [policy template language](/policies/reference/policy_template_language.html) to write your own policies
+* Policies can enforce rules on any cloud or any service with an API
+* Automate your policies using the fully-featured Policies API and documentation
+
+Learn more about [RightScale Policies](/policies).
+
+![policy_catalog.png](/img/policy_catalog.png)
+
+![policy_dashboard_v1.png](/img/policy_dashboard_v1.png)
+
+![policy_applied.png](/img/policy_applied.png)
+
+![policy_incidents.png](/img/policy_incidents.png)
+
+![policy_template.png](/img/policy_template.png)
+

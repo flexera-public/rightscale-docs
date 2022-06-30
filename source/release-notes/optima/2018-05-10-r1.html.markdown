@@ -1,0 +1,10 @@
+---
+title: Optima
+date: 2018-05-10
+week: 2018-05-07
+blog: release-notes
+---
+
+## New Features
+
+* Billing centers can now **be created in a hierarchical structure**, allowing you to break down your costs incrementally into their component pieces. Users can be granted access to billing data at any level of the hierarchy and perform their own analysis of the costs relevant to their area of responsibility. [Get started with hierarchical billing centers](/ca/ca_billing_center_hierarchies.html) to create more powerful breakdowns of your multi-cloud costs.

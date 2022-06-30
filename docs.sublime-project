@@ -1,0 +1,11 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": false,
+			"path": ".",
+			"folder_exclude_patterns": ["build", ".bundle"],
+			"file_exclude_patterns": ["tags", ".tags"]
+		}
+	]
+}

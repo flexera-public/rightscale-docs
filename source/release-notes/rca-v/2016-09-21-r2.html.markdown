@@ -1,0 +1,12 @@
+---
+title: Cloud Appliance for vSphere
+date: 2016-09-21
+week: 2016-09-19
+blog: release-notes
+---
+
+## RCA-V Adapter v2.0 update
+
+* Fix a memory leak in volume snapshot create
+
+**Version:** vscale_2.0_20160921_23

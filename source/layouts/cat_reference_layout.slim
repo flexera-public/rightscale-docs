@@ -1,0 +1,10 @@
+= wrap_layout :layout do 
+  h1 Summary
+  = yield
+  h1 Fields
+  #content-fields
+    = yield_content :fields
+
+  h1 Example
+  #content-example
+    pre = yield_content :example

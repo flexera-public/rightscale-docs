@@ -1,0 +1,12 @@
+---
+title: Optima
+date: 2018-03-15
+week: 2018-03-12
+blog: release-notes
+---
+
+## New Features
+
+* Added `region` as a new dimension available in Tabular view and in the Billing Center Overview page. 
+
+    ![/img/optima-region-dimension.png](/img/optima-region-dimension.png)

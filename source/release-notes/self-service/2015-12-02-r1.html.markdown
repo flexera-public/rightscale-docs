@@ -1,0 +1,10 @@
+---
+title: Self-Service
+date: 2015-12-02
+week: 2015-11-30
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* **to_s Function** - Changed the behavior of the `to_s` function for hashes to return a correct JSON representation of the hash as documented. It was incorrectly returning a string representation (similar to what `inspect` does).

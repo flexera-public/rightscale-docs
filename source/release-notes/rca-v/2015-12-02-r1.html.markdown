@@ -1,0 +1,17 @@
+---
+title: Cloud Appliance for vSphere
+date: 2015-12-02
+week: 2015-11-30
+blog: release-notes
+---
+
+## Bug Fix
+
+**Security Fix** Fix a bug were some passwords were only being partially filtered out of logs.
+
+* Login to the RCA-V Admin UI.
+* Click on **vCenter** in the left column.
+* Find the **Cloud Appliance (vscale)** card and click on **Upgrade** button.
+* Look for the package labeled `vscale_1.3_20151202_17`.
+* **Download** and **Activate** that package.
+* Refresh your browser window.

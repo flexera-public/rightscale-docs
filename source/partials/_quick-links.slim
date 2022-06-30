@@ -1,0 +1,13 @@
+.clearfix
+  .quick-links.text-center
+    ul.list-inline
+      li.sr-only
+        strong Quick Links:
+      li = link_to "/api", {:class => "btn btn-default"}
+        span
+          = image_tag 'icon-api.svg'
+          | Flexera CMP APIs
+      li = link_to "/release-notes", {:class => "btn btn-default"}
+        span
+          = image_tag 'icon-notes.svg'
+          | Release Notes

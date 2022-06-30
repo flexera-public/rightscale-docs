@@ -1,0 +1,15 @@
+---
+title: Cloud Management
+date: 2017-01-05
+week: 2017-01-02
+blog: release-notes
+---
+
+## New Features
+
+* **New Audit Entries** are now being created for various actions in Cloud Management. The following actions are now being audited and can be found in the accounts audit entries under Reports -> Audit Entries:
+  * Connecting to a cloud
+  * Changes to IP Whitelist settings
+  * Creating a new child account
+  * Changes to SSO settings
+

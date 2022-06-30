@@ -1,0 +1,10 @@
+---
+title: Cloud Management
+date: 2015-10-21
+week: 2015-10-19
+blog: release-notes
+---
+
+## New Features
+
+* **OpenStack Bootable Volumes** - We now support in the Cloud Management dashboard the ability to launch an OpenStack instance, server, or array and boot from an image to a new volume. You may also specify the size of the new volume and whether to delete or retain the volume when the instance/server terminates. The **Instance Provisioner** and **Add Server Assistant** UIs have been enhanced to provide this capability. For additional information, see [Create a New Instance using the Instance Provisioner](/cm/dashboard/clouds/generic/instances_actions.html#create-a-new-instance-using-the-instance-provisioner) and [Add Server Assistant](/cm/dashboard/design/server_templates/servertemplates_actions.html#add-server-assistant).

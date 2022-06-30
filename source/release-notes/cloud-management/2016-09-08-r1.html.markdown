@@ -1,0 +1,10 @@
+---
+title: Cloud Management
+date: 2016-09-08
+week: 2016-09-05
+blog: release-notes
+---
+
+## New Features
+
+* Support for the **X1 instance type** on AWS clouds

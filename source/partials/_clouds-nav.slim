@@ -1,0 +1,14 @@
+aside.main-nav role="complementary"
+  nav.list-group role="navigations"
+    = link_to "/clouds", class: "list-group-item"
+      h4.list-group-heading
+        = image_tag 'product-cloud-management.svg'
+        span Supported Clouds
+    = link_to "Connecting Clouds", "/clouds/connecting_clouds.html", class: "list-group-item"
+    = link_to "Amazon Web Services", "/clouds/aws/aws_about.html", class: "list-group-item"
+    = link_to "Google Cloud Platform", "/clouds/google", class:"list-group-item"
+    = link_to "Microsoft Azure (Classic)", "/clouds/azure/azure_about.html", class:"list-group-item"
+    = link_to "Microsoft Azure Resource Manager", "/clouds/azure_resource_manager/", class:"list-group-item"
+    = link_to "OpenStack", "/clouds/openstack/openstack_about.html", class:"list-group-item"
+    = link_to "IBM SoftLayer", "/clouds/softlayer/softlayer_about.html", class:"list-group-item"
+    = link_to "VMware vSphere", "/clouds/vmware/vmware_about.html", class:"list-group-item"

@@ -1,0 +1,12 @@
+---
+title: Self-Service
+date: 2016-06-29
+week: 2016-06-27
+blog: release-notes
+---
+
+## New Features
+
+* **CAT Imports** is now available, allowing you to create *package* CATs that can be imported into other CATs, enabling code reuse and best practices implementation. You can read more about how it works on the [Packaging CATs docs page](/ss/guides/ss_packaging_cats.html). Please note that this requires using a new CAT Version and associated RCL Version that both contain **breaking changes**. Details on the changes are listed on the [CAT Changelog](/ss/reference/cat/changelog.html) and the [RCL Changelog](/ss/reference/rcl/changelog.html) pages.
+* Support for escaped characters and shorthand classes in RCL regex
+

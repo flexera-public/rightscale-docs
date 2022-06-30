@@ -1,0 +1,13 @@
+---
+title: Cloud Management
+date: 2016-10-12
+week: 2016-10-10
+blog: release-notes
+---
+
+## New Features
+
+* **Support for P2 Instance Types** when launching servers on AWS. Note that the pricing information has not yet been updated in Optima, so Instance Analyzer might show incorrect costs for these instances.
+* **Azure Placement Group Tags now sync** between RightScale and Azure Resource Manager. Use the tag predicate `azure` in RightScale to create a tag that syncs to the cloud. More resource tag sync functionality is coming soon.
+
+

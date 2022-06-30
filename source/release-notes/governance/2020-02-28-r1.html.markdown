@@ -1,0 +1,29 @@
+---
+title: Policies
+date: 2020-02-28
+week: 2020-02-24
+blog: release-notes
+---
+
+## New Features
+
+* Credential manager now supports native creation and editing of credentials for [Azure Resource Manager](/policies/users/guides/credential_management.html#provider-specific-credentials--azure--), [Azure Enterprise Agreement](/policies/users/guides/credential_management.html#provider-specific-credentials--azure--), and [Google cloud](/policies/users/guides/credential_management.html#provider-specific-credentials--google--). These native editors simplify the process of creating and updating credentials for those services.
+* The [API for managing credentials](https://reference.rightscale.com/cred-management/) is now publicly available. Automate the process of connecting services and rotating creds by leveraging this set of API calls.
+
+## Changes to Existing Features
+
+* Improved success and error messages when managing credentials
+* Selected credential information is now available when viewing applied policies
+* Improved experience when editing credentials
+* Simplified credential editing screens for AWS credential types
+
+## New Policies
+
+* [AWS Unattached Volumes](https://github.com/flexera/policy_templates/tree/master/cost/aws/unused_volumes/README.md) checks for old volumes that can be deleted using the AWS APIs directly.
+* [Google Unattached Volumes](https://github.com/rightscale/policy_templates/blob/master/cost/google/unattached_volumes/README.md) checks for old volumes that can be deleted using the Google APIs directly.
+* [Google Old Snapshots](https://github.com/rightscale/policy_templates/blob/master/cost/google/old_snapshots/README.md) checks for old snapshots that can be deleted using the Google APIs directly.
+
+## Changes to Existing Policies
+
+* [Budget Alerts](https://github.com/rightscale/policy_templates/blob/master/cost/budget_alerts/README.md) was updated to provide a more accurate assessment of current month costs against the specified budget amount.
+* [Billing Center Cost Anomalies](https://github.com/rightscale/policy_templates/blob/master/cost/billing_center_cost_anomaly/README.md) was updated to help reduce noise by allowing for a minimum spend amount before billing centers are reported on.

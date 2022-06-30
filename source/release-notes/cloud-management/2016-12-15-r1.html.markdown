@@ -1,0 +1,16 @@
+---
+title: Cloud Management
+date: 2016-12-15
+week: 2016-12-12
+blog: release-notes
+---
+
+## New Features
+
+* **Azure Resource Manager is now available** for all accounts and plan types. As part of this release, Cloud Management now shows the Storage Account ([Placement Group in RightScale](/clouds/azure_resource_manager/reference/resources.html#storage-accounts)) type in the UI and the API. Additionally, [tags are now synced between RightScale Deployments and Azure Resource Groups](/clouds/azure_resource_manager/reference/tagging.html#tagging-on-arm-and-rightscale-resource-groups-and-deployments)
+
+## Changes in Behavior
+
+* You can now specify just a **Server href instead of an Instance href** when creating [IPAddressBindings](http://reference.rightscale.com/api1.5/resources/ResourceIpAddressBindings.html#create) and [VolumeAttachments](http://reference.rightscale.com/api1.5/resources/ResourceVolumeAttachments.html#create), simplifying the API call and/or Cloud Workflow code for managing these resources (the server must have a current_instance)
+* The **Availability Set is now an optional parameter** when creating a server/instance in Azure Resource Manager
+* Bugfix: fixed a bug where not all available volumes were being shown for attachment for vSphere clouds

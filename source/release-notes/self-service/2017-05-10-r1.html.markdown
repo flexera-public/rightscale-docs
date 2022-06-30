@@ -1,0 +1,16 @@
+---
+title: Self-Service
+date: 2017-05-10
+week: 2017-05-08
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* Account names in the account picker now have a hover-over effect to show the full name in case the name is truncated in the list
+
+    ![account-selector-tooltip](/img/ss-account-selector-tooltip.png)
+
+* Bugfix: fixed bug that prevented downloading CAT source for imported packages
+* Bugfix: fixed bug that prevented canceling or postponing a custom scheduled action
+  

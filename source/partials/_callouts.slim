@@ -1,0 +1,31 @@
+div.callout = link_to "/api/"
+  div.panel.panel-default
+    div.panel-body
+      div.callout-title
+        = image_tag 'icon-api.svg'
+        h4 Flexera CMP APIs
+      span See the API reference documentation for all of our products.
+
+div.callout = link_to "/ca/cloud_comp/ca_getting_started_with_cloud_comparison.html" do
+  div.panel.panel-default
+    div.panel-body
+      div.callout-title
+        = image_tag 'icon-cloud-blue.svg'
+        h4 Cloud Comparison
+      span Compare public clouds based on the features they offer.
+
+div.callout = link_to "http://feedback.rightscale.com", target: "_blank" do
+  div.panel.panel-default
+    div.panel-body
+      div.callout-title
+        = image_tag 'icon-feedback.svg'
+        h4 Feedback
+      span Get in touch and we’ll get back to you as soon as we can.
+
+div.callout = link_to "/release-notes" do
+  div.panel.panel-default
+    div.panel-body
+      div.callout-title
+        = image_tag 'icon-notes.svg'
+        h4 Release Notes
+      span See the notes for the latest releases of each application and what’s changed.

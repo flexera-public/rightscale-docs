@@ -1,0 +1,10 @@
+---
+title: Cloud Management
+date: 2017-08-16
+week: 2017-08-14
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* Added support for showing the attachment between OS disks and Servers in AzureRM clouds -- now associated OS disk volumes can be found in the Volumes tab for a Server.

@@ -1,0 +1,35 @@
+//
+// Media
+// --------------------------------------------------
+
+// Media blocks
+.media {
+  margin-top: rem(22);
+  margin-bottom: rem(22);
+}
+
+.media img {
+  max-width: 100%;
+}
+
+// Wide embed video (16:9)
+.media {
+  &.media-video-wide {
+    @extend .embed-responsive;
+    @extend .embed-responsive-16by9;
+    .media-video-item {
+      @extend .embed-responsive-item;
+    }
+  }
+}
+
+// Slim embed video (4:3)
+.media {
+  &.media-video-slim {
+    @extend .embed-responsive;
+    @extend .embed-responsive-4by3;
+    .media-video-item {
+      @extend .embed-responsive-item;
+    }
+  }
+}

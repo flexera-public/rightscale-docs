@@ -1,0 +1,18 @@
+---
+title: Governance
+date: 2017-03-30
+week: 2017-03-27
+blog: release-notes
+---
+
+## New Features
+
+* Enterprise Managers now have the option to navigate to the Invitations Page directly from the Users page.
+
+	![add_user.png](/img/add_user.png)  
+
+
+## Changes in Behavior
+
+* New UI loading indicator while the page is loading the data. 
+* Improved usability around new user invite flow by reducing the number of clicks it takes to get to the Invite page.

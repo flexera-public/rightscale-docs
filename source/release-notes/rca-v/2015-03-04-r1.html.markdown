@@ -1,0 +1,36 @@
+---
+title: Cloud Appliance for vSphere
+date: 2015-03-04
+week: 2015-03-02
+blog: release-notes
+---
+
+## Overview
+
+This version of the appliance addresses three specific issues:
+
+1. **Volume attachments progressively getting slower when the number of volumes in the vSphere environment increases.** Due to a locking issue in the VMFS implementation on vSphere, the performance of the volume attach operation through RightScale was impacted when the overall number of volumes managed by RCA-V increased. While RightScale does not have much control over the timing of VMware's release for the VMFS issue, we have worked around the issue by placing each volume created/managed by RightScale under its own sub-folder. This circumvents the locking issue we have encountered on vSphere. This fix requires an upgrade to the vscale_1.2_20150303_16 package. See instructions below.
+2. **Boot time performance improvement:**  Servers launched on vSphere will be polled more aggressively (instead of a 2 minute poll interval) so a "powered-on" VM gets detected quickly allowing the subsequent booting steps to start quicker than it normally would.  This enhancement will result in boot time reduction of up to 90 seconds.
+3. **When sharing a VLAN across two datacenters, RCA-V only allowed a network to be configured for one of the datacenters.** This issue has been resolved such that the same network that is shared across two datacenters can now be configured under both datacenters using VM Networks->Add Network for each datacenter. In order to take advantage of this fix, you must upgrade to the vscale-admin_1.2_20150305_16 package. Upgrade instructions for the admin package are provided below.
+
+## Upgrade Instructions
+
+To upgrade the "vscale-admin" package, please follow the steps outlined below:
+
+* Login to RCA-V Admin UI
+* Click on RightScale Platform in the left column.
+* Find the Admin Interface card and click on Upgrade button.
+* Look for the package labeled "vscale-admin_1.2_20150305_16".
+* Download and Activate that package.
+* Refresh your browser window.
+
+To upgrade the "vscale" package, please follow the steps outlined below:
+
+* Login to RCA-V Admin UI
+* Click on vCenter in the left column.
+* Find the Cloud Appliance card and click on Upgrade button.
+* Look for the package labeled "vscale_1.2_20150303_16".
+* Download and Activate that package.
+* Refresh your browser window.
+
+**Note**: [Archived Release Notes are Available Here](http://support.rightscale.com/18-Release_Notes/RCA-V)

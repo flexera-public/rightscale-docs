@@ -1,0 +1,10 @@
+---
+title: Optima
+date: 2019-01-18
+week: 2019-01-14
+blog: release-notes
+---
+
+## New features
+
+* Custom tag-based dimensions can now be added and updated directly by users in the UI which allow a user to specify tags used for filtering and grouping Billing Center cost data.  You can find them under Settings -> Custom Tags in Optima.

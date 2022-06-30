@@ -1,0 +1,10 @@
+---
+title: RightScale Cloud Management - September 30, 2015
+date: 2015-09-30
+week: 2015-09-28
+blog: release-notes
+---
+
+## New Features
+
+* **Pricing Support** - Building upon the recent addition of "Spot" or "On-Demand" pricing support for ServerArray and Server resources in API 1.5, you can now also specify "Spot" or "On-Demand" pricing when launching raw instances via API 1.5.

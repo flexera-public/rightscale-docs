@@ -1,0 +1,11 @@
+---
+title: Self-Service
+date: 2016-07-20
+week: 2016-07-18
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* Fixed a bug with using `retry` and `skip` keywords in error handlers in RCL v2
+

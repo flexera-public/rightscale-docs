@@ -1,0 +1,24 @@
+//
+// Hero
+// --------------------------------------------------
+
+// Product hero
+.hero {
+  background-color: $jumbotron-bg;
+  border: 1px solid rgba($grey-border, 0.58);
+  border-bottom-color: rgba($grey-border, 0.7);
+  border-radius: 3px;
+  margin-bottom: rem(20);
+  padding-top: rem(5);
+  padding-left: rem(30);
+  padding-bottom: rem(10);
+  padding-right: rem(20);
+  h1 {
+    font-size: rem(24);
+    margin-bottom: rem(5);
+  }
+  p {
+    font-size: 1.6rem;
+    font-weight: normal;
+  }
+}

@@ -1,0 +1,10 @@
+---
+title: Self-Service
+date: 2015-10-21
+week: 2015-10-19
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* Fixed a bug that prevented using strings as regular expressions in the `split()` function.

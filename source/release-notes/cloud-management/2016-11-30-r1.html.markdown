@@ -1,0 +1,16 @@
+---
+title: Cloud Management
+date: 2016-11-30
+week: 2016-11-28
+blog: release-notes
+---
+
+## New Features
+
+* **Instance tag synchronization** is now enabled for Azure Resource Manager. For more information, read the [documentation for Azure Resource Manager](/clouds/azure_resource_manager/reference/tagging.html)
+
+## Changes in Behavior
+
+* Use of Availability Sets for Instances in Azure Resource Manager is now optional
+
+  
