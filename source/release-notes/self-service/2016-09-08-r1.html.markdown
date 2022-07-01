@@ -1,0 +1,15 @@
+---
+title: Self-Service
+date: 2016-09-08
+week: 2016-09-05
+blog: release-notes
+---
+
+## New Features
+
+* A **new function to retrieve Credential values** has been added to both Cloud Workflow and CAT. This allows you to more easily leverage sensitive credential values in your CAT/CWF code. Learn how to use the `cred()` function in both [CAT files](/ss/reference/cat/v20160622/index.html#built-in-methods-and-other-keywords) and in [Cloud Workflow code](/ss/reference/rcl/v2/ss_RCL_functions.html#miscellaneous-cred).
+* Added the ability to **set schedules and end dates** for Test CloudApp launches from Designer to help your CAT authors save costs when they are developing CloudApps.
+
+## Changes in Behavior
+
+* Bugfix: fixed a bug that prevented checkboxes from rendering properly in the CloudApp launch dialog

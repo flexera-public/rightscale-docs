@@ -1,0 +1,12 @@
+---
+title: Self-Service
+date: 2017-03-29
+week: 2017-03-27
+blog: release-notes
+---
+
+## New Features
+
+* An indicator has been added for the [deprecation of CAT version 20131202](/faq/end_of_life_end_of_service.html#schedule-cat-versions). Anyone impacted has also received an email with additional information
+* After publishing a CAT from Designer, the "Launch" link in the success growler will now launch the CloudApp from Catalog, instead of from Designer
+  

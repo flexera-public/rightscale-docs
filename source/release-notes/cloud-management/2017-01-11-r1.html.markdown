@@ -1,0 +1,12 @@
+---
+title: Cloud Management
+date: 2017-01-11
+week: 2017-01-09
+blog: release-notes
+---
+
+## New Features
+
+* **Support for new AWS Regions** - AWS Canada Central, and AWS UK London are now available in Cloud Management. Follow the [AWS registration flow](/clouds/aws/aws_quick_start.html#add-aws-add-aws-account-credentials) to add these new regions to your account.
+* A **custom admin username** can now be set for Windows instances on Azure Resource Manager. You can find the new field in the Server launch UI and API.
+* **Install-at-boot support for Windows on ARM, GCE, and AWS** allows for easier installation of the RightLink10 agent on your servers. Follow the [install-at-boot instructions](/rl10/reference/10.6.0/rl10_install_at_boot_windows.html) and note that this requires [RightLink v10.6.0](/rl10/reference/) or later

@@ -1,0 +1,14 @@
+---
+title: Cloud Management
+date: 2018-08-08
+week: 2018-08-06
+blog: release-notes
+---
+
+## New Features
+
+* Added support for the **AWS r5, r5d, and z1d instance families**.
+* New [CM 1.6 Cloud Account API](https://reference.rightscale.com/api1.6/index.html#/1.6/controller/V1_6-Definitions-CloudAccounts) to expose **cloud accounts** registered in the RightScale account. The index call will return the subscription-id for Azure, Account id for AWS, and Project name for Google in the `tenant_uid` field of the response. The API requires `observer` role on any account.
+* Support for discovering **Google Custom Instances**. RightScale will now detect the custom instance and display it in the instance list for Google. It may take up to 5 minutes before the information is updated.
+
+    ![google_custom_image.png](/img/google_custom_image.png)

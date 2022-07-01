@@ -1,0 +1,13 @@
+---
+title: Cloud Appliance for vSphere
+date: 2016-04-06
+week: 2016-04-04
+blog: release-notes
+---
+
+## RCA-V Adapter v2.0 error handling fix
+
+* Fix error handling when the extraConfig of a VM is not yet available
+
+
+

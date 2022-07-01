@@ -1,0 +1,17 @@
+---
+title: Self-Service
+date: 2016-07-28
+week: 2016-07-25
+blog: release-notes
+---
+
+## New Features
+
+* **New strftime() function** in RCL allows easy translation of datetimes into various string formats for use with other APIs. [Learn how to use this function](/ss/reference/rcl/v2/ss_RCL_functions.html#data-conversion-strftime) in our docs.
+
+## Changes in Behavior
+
+* The parser will now throw an error on upload if an operation is missing a "definition" field
+* Redesigned tabs for consistency across fht eplatform
+* Bugfix that was causing buttons to appear/disappear and the page to "jump"
+* Various other bugfixes and UI improvements

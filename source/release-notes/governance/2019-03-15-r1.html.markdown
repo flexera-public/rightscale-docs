@@ -1,0 +1,14 @@
+---
+title: Policies
+date: 2019-03-15
+week: 2019-03-11
+blog: release-notes
+---
+
+## New Policies
+
+* [Google Committed Use Discount (CUD) Report](https://github.com/rightscale/policy_templates/tree/master/cost/google/cud_report) reports on all CUDs that have been purchased in the given GCP project.
+
+## Changes to Existing Policies
+
+* [Downsize Instances](https://github.com/rightscale/policy_templates/tree/master/cost/downsize_instance) - refreshed with new instance type mappings for scaling up or down

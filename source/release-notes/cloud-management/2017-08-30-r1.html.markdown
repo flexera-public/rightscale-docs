@@ -1,0 +1,15 @@
+---
+title: Cloud Management
+date: 2017-08-30
+week: 2017-08-28
+blog: release-notes
+---
+
+## New Features
+
+* Support for **"deny" rules and rule priority** for Security Group Rules in Azure Resource Manager, available through the Cloud Management UI, CM API 1.5, and Self-Service CAT files
+* Support for **Korea South region** in Azure Resource Manager
+
+## Changes in Behavior
+
+* Discovery of the `os_platform` for custom Windows images on Google Compute Engine

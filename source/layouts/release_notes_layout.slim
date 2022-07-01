@@ -1,0 +1,55 @@
+doctype 5
+html lang="en"
+  head
+    meta charset="utf-8"
+    title= current_page.data.title || ""
+    meta name="description" content=current_page.data.description
+    meta name="viewport" content="initial-scale=1"
+    - if current_page.data.tags
+      | <meta name="docsearch:keywords" content='"#{current_page.data.tags}"' />
+    link rel="icon" href="https://my.rightscale.com/favicon.ico"
+    /! Stylesheets
+    = stylesheet_link_tag "main", type: false
+    /! JavaScript
+    = javascript_include_tag "main", type: false
+  body class=page_classes
+    = partial "partials/header"
+    .wrap
+      .container-fluid.max-width
+        .row
+          .col-sm-3
+           .clearfix
+              aside.main-nav role="complementary"
+                nav.list-group role="navigations"
+                  = link_to "/release-notes", class: "list-group-item"
+                    h4.list-group-heading Release Notes
+                  = link_to "Cloud Management", "/release-notes/cloud-management.html", class: "list-group-item menu-item-cm"
+                  = link_to "Self-Service", "/release-notes/self-service.html", class: "list-group-item menu-item-ss"
+                  = link_to "Governance", "/release-notes/governance.html", class: "list-group-item menu-item-gov"
+                  = link_to "Optima", "https://helpnet.flexerasoftware.com/?product=Optima", class: "list-group-item menu-item-ca"
+                  = link_to "RCA-V", "/release-notes/rca-v.html", class: "list-group-item menu-item-rca"
+                  = link_to "RightLink 10", "/release-notes/right-link-10.html", class: "list-group-item menu-item-rl10"
+              div.callout = link_to "https://support.rightscale.com/18-Release_Notes"
+                div.panel.panel-default
+                  div.panel-body
+                    div.callout-title
+                      = image_tag 'icon-notes.svg'
+                      h4 Archived Release Notes
+                    span View previously published release notes.
+              div.callout = link_to "mailto:support@rightscale.com"
+                div.panel.panel-default
+                  div.panel-body
+                    div.callout-title
+                      = image_tag 'icon-feedback.svg'
+                      h4 Release Questions?
+                    span Our technical support staff is ready to help.
+          .col-sm-9
+            .clearfix
+              .main-content
+                .page-header
+                  h1 = current_page.data.title
+                  = yield_content :release_notes_subtitle
+                = yield
+
+    = partial "partials/footer"
+    = partial "partials/scripts"

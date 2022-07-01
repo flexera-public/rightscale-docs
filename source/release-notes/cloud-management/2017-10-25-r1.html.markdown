@@ -1,0 +1,11 @@
+---
+title: Cloud Management
+date: 2017-10-25
+week: 2017-10-23
+blog: release-notes
+---
+
+## New Features
+
+* Support for **specifying service accounts** for instances/servers on Google Compute Engine in the Cloud Management UI, CM API 1.5, and Self-Service CAT files. Use service accounts in GCE to allow your virtual machine to make scoped calls to other services in your project. You can find the new option in the instance and server launch windows and the `cloud_specific_attributes` hash in CM API 1.5 (and CAT files).
+* Improved security group rule support for Azure Resource Manager allows you to use RightScale to see more information about your security group rules created in Azure.

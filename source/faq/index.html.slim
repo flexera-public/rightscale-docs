@@ -1,0 +1,8 @@
+---
+title: RightScale General FAQs
+description: View our extensive list of Frequently Asked Questions on the RightScale Cloud Management platform. Both general and cloud-specific topics are covered.
+---
+- sitemap.order_by(:title).all.each do |page|
+  ul
+    - if page.data.category == 'general'
+     li =link_to page.data.title, page.url

@@ -1,0 +1,64 @@
+//
+// Subnav
+// --------------------------------------------------
+
+.subnav-right {
+  margin-top: 0;
+  margin-bottom: rem(20);
+  .nav > li > a {
+    border-left: 3px solid $body;
+    color: $text;
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    padding: rem(4) rem(18);
+  }
+  .nav > li > a:hover,
+  .nav > li > a:focus {
+    background-color: lighten($body, 1);
+    border-left: 3px solid $blue;
+    color: $text;
+    padding-left: rem(18);
+    text-decoration: none;
+  }
+  .nav > .active > a,
+  .nav > .active:hover > a,
+  .nav > .active:focus > a {
+    background-color: transparent;
+    border-left: 3px solid $blue;
+    color: $blue;
+    font-weight: bold;
+    padding-left: rem(18);
+  }
+  .nav .nav {
+    display: none;
+    padding-bottom: rem(10);
+  }
+  .nav .nav > li > a {
+    color: $blue;
+    font-size: 12px;
+    font-weight: normal;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: rem(28);
+  }
+  .nav .nav > .active > a,
+  .nav .nav > .active:hover > a,
+  .nav .nav > .active:focus > a {
+    font-weight: 500;
+    padding-left: rem(28);
+  }
+  .nav > .active > ul {
+    display: block;
+  }
+}
+
+// Sub-nav affix
+
+.affix {
+  .sub-nav {
+    @media (min-width: $screen-lg) {
+      width: 232px;
+    }
+  }
+}

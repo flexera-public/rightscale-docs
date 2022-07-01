@@ -1,0 +1,17 @@
+---
+title: Policies
+date: 2019-02-01
+week: 2019-01-28
+blog: release-notes
+---
+
+## New Policies
+
+* [Underutilized Azure Reserved Instances](https://github.com/rightscale/policy_templates/tree/master/cost/azure/reserved_instances/utilization) reports on Azure Reserved Instances that are not being utilized to help identify and remediate waste.
+* [Budget Alerts](https://github.com/rightscale/policy_templates/tree/master/cost/budget_alerts) allows you to set a budget amount on a per-billing center or organization level and get an alert when your actual or forecasted spend is above the specified budget amount.
+* [Azure Hybrid Use Benefit](https://github.com/rightscale/policy_templates/tree/master/cost/azure/hybrid_use_benefit) identifies all VMs not leveraging Azure Hybrid Use Benefit (AHUB) and allows for AHUB to be enabled after approval.
+
+## Changes to Existing Policies
+
+* [Untagged Resources](https://github.com/rightscale/policy_templates/tree/master/compliance/tags/tag_checker) - fixed issue with creating tag for invalid_tag
+* [Downsize Instances](https://github.com/rightscale/policy_templates/tree/master/cost/downsize_instance) - Added cpu and memory datapoint check for instances that are operational, but not sending monitoring data back to the platform

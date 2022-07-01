@@ -1,0 +1,17 @@
+---
+title: Cloud Appliance for vSphere
+date: 2017-09-21
+week: 2017-09-18
+blog: release-notes
+---
+
+## RCA-V Adapter v3.0 update
+
+* Rotate wstunnel logs
+* Increase RCA-V appliance memory to 2G.
+
+**Version:** vscale_3.0_20170814_17, vscale-admin_3.0_20170921_19
+
+[Updating the RCA-V appliance](/rcav/v3.0/rcav_upgrade_to_3_0.html)
+
+[More information about RCA-V 3.0](/rcav/v3.0/index.html)

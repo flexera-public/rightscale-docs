@@ -1,0 +1,24 @@
+---
+title: Policies
+date: 2021-03-16
+week: 2021-03-15
+blog: release-notes
+---
+
+## Platform Changes
+
+* The FROM email address in the Policy Incident emails changed to noreply@flexera.com from noreply-governance@rightscale.com
+
+## New Policy Templates
+
+* [Azure Hybrid Use Benefit for Linux](https://github.com/flexera/policy_templates/blob/master/cost/azure/hybrid_use_benefit_linux/) - The policy identifies all Linux server instances (SLES and RHEL) that are not currently using [Azure Hybrid Use Benefit](https://azure.microsoft.com/en-us/pricing/hybrid-benefit/). It raises an incident for all applicable VMs not currently using AHUB, which once approved, will enable AHUB on all identified instances.
+* [Azure MCA Reserved Instances Recommendations](https://github.com/flexera/policy_templates/blob/master/cost/azure/reserved_instances/mca_recommendations/) - This new policy provides recommendations for Azure Reservations billed under Azure CSP MCA.
+
+## Changes to Existing Policy Templates
+
+* [Schedule Reports](https://github.com/flexera/policy_templates/blob/master/cost/scheduled_reports) - Fixed issue with top 10 cost categories when there is no data yet for current month.
+* [Superseded Instances](https://github.com/flexera/policy_templates/blob/master/cost/superseded_instance) - Corrected duplicate column name
+* [AWS Unused Volumes](https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_volumes/) - 1) Fixed issue that may prevent an AWS snapshot to be created before terminating a volume.  2) Improved action error handling and debug logging.  3) Add a parameter to override the Flexera One org ID to use when querying Optima for cases when the project is not in the same org where the AWS bill is registered in Optima
+* [AWS Unused IP Addresses](https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_ip_addresses/) - 1) Improved action error handling and debug logging. 2) corrected the cost for total estimated savings
+* [AWS Old Snapshots](https://github.com/flexera/policy_templates/blob/master/cost/aws/old_snapshots/) - 1) Improved action error handling and debug logging. 2) Add a parameter to override the Flexera One org ID to use when querying Optima for cases when the project is not in the same org where the AWS bill is registered in Optima
+* [Budget Alerts by Cloud Account](https://github.com/flexera/policy_templates/blob/master/cost/budget_alerts_by_account/) - 1) Fixed AWS account name lookup bug that lead to an error, 2) Refactored Billing Center index call to return Billing Centers the user has access to, 3) Fixed budget column heading

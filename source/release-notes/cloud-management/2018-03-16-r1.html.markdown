@@ -1,0 +1,12 @@
+---
+title: Cloud Management
+date: 2018-03-16
+week: 2018-03-12
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* A new account preference has been added which, when enabled, uses the user-specified volume name as the name of the volume in Google Cloud Platform. If left disabled, the default, RightScale uses a unique string for the volume name in Google to prevent clashes. This setting can be enabled per-account by any user with the `admin` role by going to Settings -> Account Settings -> Preferences and enabling the "Unique Google Volume Names" setting.
+
+    ![/img/cm-account-settings-google-volumes.png](/img/cm-account-settings-google-volumes.png)

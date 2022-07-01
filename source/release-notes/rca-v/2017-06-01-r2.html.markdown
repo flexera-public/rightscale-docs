@@ -1,0 +1,12 @@
+---
+title: Cloud Appliance for vSphere
+date: 2017-06-01
+week: 2017-05-29
+blog: release-notes
+---
+
+## New Features
+
+* Fix update installer, to allow appliance OS (Ubuntu 12.04) to be upgraded with current updates.
+
+**Version:** vscale_2.0_20170601_10

@@ -1,0 +1,12 @@
+---
+title: Policies
+date: 2019-08-16
+week: 2019-08-12
+blog: release-notes
+---
+
+## Changes to Existing Policies
+
+* [Superseded Instances](https://github.com/rightscale/policy_templates/blob/master/cost/superseded_instance/README.md) was updated to show the monthly estimated cost for each instance instead of the run rate.
+* [Cheaper Regions](https://github.com/rightscale/policy_templates/blob/master/cost/cheaper_regions/README.md) was updated to show the resource IDs of affected virtual machines.
+* [Old Snaphots](https://github.com/rightscale/policy_templates/blob/master/cost/volumes/old_snapshots/README.md) was updated to always send an email when new snapshots are detected.

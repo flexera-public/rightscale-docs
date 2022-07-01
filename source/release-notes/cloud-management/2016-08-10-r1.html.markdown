@@ -1,0 +1,11 @@
+---
+title: Cloud Management
+date: 2016-08-10
+week: 2016-08-08
+blog: release-notes
+---
+
+## New Features
+
+* **Azure private images in premium storage accounts** can now be used to launch servers.
+* **Expandable Deployment descriptions** in Cloud Management allow you to leverage Deployment descriptions more effectively by placing relevant content right where it can be used while ensuring that important Server information isn't below the fold

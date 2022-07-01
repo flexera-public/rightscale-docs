@@ -1,0 +1,8 @@
+.clearfix
+
+  a href = "/status/" Current System Status <br>
+  - blog.articles.each do |article, i|
+    / div.media
+      / div.media-body
+    a href = article.url =article.date.strftime('%B %d, %Y - %I:%M%p')
+    <br>

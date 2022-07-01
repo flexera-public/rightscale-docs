@@ -1,0 +1,14 @@
+---
+title: Cloud Management
+date: 2016-01-27
+week: 2016-01-25
+blog: release-notes
+---
+
+## New Features
+
+* **MCI Creation** - Selection of machine images when creating or editing MCIs has been improved with a new filterable selection interface.
+
+## Changes in Behavior
+
+* **Server Arrays** - Cloning a Server Array will now also clone the recurring volume attachments. 

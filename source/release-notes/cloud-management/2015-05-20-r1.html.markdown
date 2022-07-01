@@ -1,0 +1,18 @@
+---
+title: Cloud Management
+date: 2015-05-20
+week: 2015-05-18
+blog: release-notes
+---
+
+## New Features
+
+* **OpenStack and SoftLayer Support Added to Instance Provisioner** - The Instance Provisioner in the RightScale Cloud Management Dashboard now supports OpenStack and SoftLayer clouds. You can access the Instance Provisioner by navigating to Manage > Instances & Servers > New Instance. For additional information on using the Instance Provisioner in the RightScale Dashboard see [New Instance](/cm/dashboard/manage/instances_and_servers/index.html#new-instance) on the RightScale support site.
+
+## Changes in Behavior
+
+* **Product Selector Menu** - The Product Selector on the RightScale Cloud Management Dashboard has been enhanced to always show all menu options (Optima and Self-Service) regardless of account settings.
+
+* **Account Cost Quotas** - As indicated in a previous release note, we are gradually removing cost information from the CM Dashboard. With this release we have removed Account Cost Quotas from the Enterprise Account View on the CM Dashboard.
+
+**Note**: [Archived Release Notes are Available Here](http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard)

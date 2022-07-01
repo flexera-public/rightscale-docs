@@ -1,0 +1,50 @@
+---
+title: Flexera CMP APIs
+lead: Below are links to reference documentation for all our moving parts.
+description: Flexera CMP APIs provide unified access to cloud resources and data on events, configurations, user actions, costs, monitors, and logs.
+---
+
+.panel.panel-default
+  .panel-heading
+    .panel-title API Overview
+  .panel-body
+    p For a general overview of the concepts used across all APIs, including <strong>endpoints</strong>, <strong>authentication</strong>, <strong>headers</strong>, and more, see the following information:
+    ul
+      li
+        a<> href="general_usage.html" RightScale API Overview
+	br
+	p From time to time RightScale may make significant upgrades to APIs. Often we support the old version and new versions, but if we need to retire an existing API, we provide notice and a minimum of one year of parallel support.
+
+.clearfix.api-docs-callouts
+  .row
+    .col-sm-4
+      .text-center
+        img<> src='/img/product-cloud-management.svg'
+        h2 Cloud Management API
+        .text-left.list-group
+          - data.api.cm.section.each do |i|
+            a.list-group-item<> href='#{i.url}' target='_blank' #{i.name}
+
+    .col-sm-4
+      .text-center
+        img<> src='/img/product-cloud-analytics.svg'
+        h2 Optima API
+        .text-left.list-group
+          - data.api.ca.section.each do |i|
+            a.list-group-item<> href='#{i.url}' target='_blank' #{i.name}
+
+    .col-sm-4
+      .text-center
+        img<> src='/img/product-self-service.svg'
+        h2 Self-Service API
+        .text-left.list-group
+          - data.api.ss.section.each do |i|
+            a.list-group-item<> href='#{i.url}' target='_blank' #{i.name}
+
+    .col-sm-4
+      .text-center
+        img<> src='/img/policy-gov-mark.svg'
+        h2 Governance API
+        .text-left.list-group
+          - data.api.gov.section.each do |i|
+            a.list-group-item<> href='#{i.url}' target='_blank' #{i.name}

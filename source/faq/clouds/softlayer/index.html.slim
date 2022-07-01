@@ -1,0 +1,8 @@
+---
+title: SoftLayer
+---
+
+- sitemap.order_by(:title).all.each do |page|
+  ul
+    - if page.data.category == 'softlayer'
+     li =link_to page.data.title, page.url

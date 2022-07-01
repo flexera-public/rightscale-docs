@@ -1,0 +1,15 @@
+---
+title: Cloud Management
+date: 2016-06-02
+week: 2016-05-30
+blog: release-notes
+---
+
+## New Features
+
+* **OpenStack Liberty Support**. OpenStack Liberty is now a supported private cloud in RightScale. All of the major capabilities of OpenStack that are supported by RightScale are available with Liberty. Read more about RightScale's support for OpenStack [on our docs site](/cm/dashboard/clouds/openstack/).
+* Added a new field to instances that indicate whether or not they were **provisioned by** RightScale.
+
+## Changes in Behavior
+
+* Changed the way that the platform gets password data for AWS instances -- if AWS responds with a `403 Permission Denied`, the platform now gives up instead of retrying the call.

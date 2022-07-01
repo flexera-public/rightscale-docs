@@ -1,0 +1,22 @@
+---
+title: Policies
+date: 2019-05-10
+week: 2019-05-04
+blog: release-notes
+---
+
+## New Policies
+
+* [AWS Unused ECS Clusters](https://github.com/rightscale/policy_templates/tree/master/compliance/aws/ecs_unused) checks all ECS clusters to determine if any are unused (no registered instances, no running tasks, no pending tasks, no active services) and offers the option to delete the cluster after manual approval.
+* [AWS Internet-facing Load Balancers](https://github.com/rightscale/policy_templates/tree/master/security/aws/loadbalancer_internet_facing) checks all AWS load balancers (both Classic Load Balancers(ELBs) and Application Load Balancers(ALBs)) and reports on any that are Internet-facing. When such a load balancer is detected, the user can choose to delete it after approval.
+* [AWS Unencrypted Volumes](https://github.com/rightscale/policy_templates/tree/master/security/aws/ebs_unencrypted_volumes) checks all Elastic Block Store (EBS) volumes in a given account and reports on any that are not encrypted.
+* [Low Account Usage](https://github.com/rightscale/policy_templates/tree/master/cost/low_account_usage) reports on accounts with low usage, which may indicate abandoned accounts that could be cancelled or consolidated into larger accounts for ease of management.
+* [Low Service Usage](https://github.com/rightscale/policy_templates/tree/master/cost/low_service_usage) reports on services with low usage, which may indicate abandoned services that can be terminated or potentially consolidated into a larger account/region for ease of management.
+* [Google Unused IP Address](https://github.com/rightscale/policy_templates/tree/master/cost/google/unutilized_ip_addresses) checks Google for Unutilized IP Addresses.
+
+## Changes to Existing Policies
+
+* [Budget Alerts](https://github.com/rightscale/policy_templates/tree/master/cost/budget_alerts) was updated to reduce the frequency of incident creation and notification for already-reported overages.
+* [AWS Reserved Instance Utilization Report](https://github.com/rightscale/policy_templates/tree/master/cost/aws/reserved_instances/utilization) was updated to add additional fields to the report.
+
+[Learn about updating policies](/policies/faq/#general-questions-how-do-i-update-an-applied-policy-with-a-new-version-of-the-policy-)

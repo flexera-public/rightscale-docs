@@ -1,0 +1,10 @@
+---
+title: Cloud Management
+date: 2017-04-13
+week: 2017-04-10
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* CentOS 5 mirrors are now frozen to 4/12/2017 (`latest` points to this date). Any use of a date farther in the future will cause errors when launching.

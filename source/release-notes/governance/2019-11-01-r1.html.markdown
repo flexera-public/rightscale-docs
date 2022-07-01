@@ -1,0 +1,17 @@
+---
+title: Policies
+date: 2019-11-01
+week: 2019-10-28
+blog: release-notes
+---
+
+## New Policies
+
+* [Azure Regulatory Compliance](https://github.com/rightscale/policy_templates/blob/master/compliance/azure/compliance_score/README.md) provides an overview of the regulatory compliance controls and compliance scores from [Azure Security Center](https://docs.microsoft.com/en-us/azure/security-center/security-center-intro)
+* [NetFlow Top Talkers](https://github.com/rightscale/policy_templates/blob/master/operational/azure/network_flow/README.md) uses RISC Foundations data to identify the top communication routes for each application stack to external dependencies based on network traffic patterns.
+* [Application Migration Recommendations](https://github.com/rightscale/policy_templates/blob/master/operational/compute_instance_migration/README.md) analyzes RISC CloudScape data and provides recommendations for migrating application stacks to the most cost effective cloud provider.
+
+## Changes to Existing Policies
+
+* [Inefficient Instance Utilization using RightLink](https://github.com/rightscale/policy_templates/blob/master/cost/rightlink_rightsize/README.md) was renamed for clarity and now supports VMWare instances through the use of RCA-V.
+* [Scheduled Report](https://github.com/rightscale/policy_templates/blob/master/cost/scheduled_reports/README.md) now provides additional options for the timeline of spend visualization when running this policy.

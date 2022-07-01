@@ -1,0 +1,9 @@
+---
+title: RightLink v10.6.0 Modification
+date: 2017-03-31
+week: 2017-03-27
+blog: release-notes
+---
+
+## Changes in Behavior
+* Modified the installation and enablement scripts to make them more resilient in cases where the Linux OS has increased security on `/tmp` and restrictive umask settings.

@@ -1,0 +1,75 @@
+---
+title: Cloud Appliance for vSphere
+date: 2015-07-28
+week: 2015-07-27
+blog: release-notes
+---
+
+## New Features
+
+This version of the RightScale Cloud Appliance for vSphere (v1.3) introduces the following new features.
+
+### Proxy Support for Private Clouds
+
+Network admins within enterprises almost always require a proxy as a sentinel between the internal network and the open Internet. Typically, private clouds that are behind a corporate firewall are behind a proxy server as well. All traffic from/to these private clouds has to traverse through the proxy server.
+
+We now support traffic proxying for all communication between:
+* RightScale platform and the cloud controller (for OpenStack, CloudStack)
+* RightScale platform and RCA-V (for vSphere environment)
+* RightScale platform and virtual machines within the private cloud. This is RightLink traffic.
+Both *authenticated* and *non-authenticated* proxies are supported.
+
+In order to enable proxy support, please follow the instructions below:
+
+1. From the RCA-V Admin UI, go to **Connectivity** > **RightScale Platform** > **Overview card** > **Edit**.
+2. Select the HTTP(s) Proxy Enabled checkmark as shown below and supply the proxy URL.
+    ![Overview Card](/img/rcav-rel-note-proxy-enable.png)
+3. You can specify the authenticated proxy URL using the following format: `http://username:password@proxyurl:proxyport`
+4. To remove the proxy, uncheck the HTTP(s) Proxy Enabled box.
+
+### Support for Volumes on vSphere Storage Clusters
+
+This version of RCA-V adds additional volume management capabilities related to use of storage clusters.
+
+Volume Types can now be associated with Storage Clusters in vSphere instead of individual datastores. Volumes are created based on a volume type, thereby associating the volume to a storage cluster and not to a specific datastore within the storage cluster. Volume creation and attachment should remain at the cluster level, delegating the responsibility of actual datastore selection to the SDRS mechanism.
+
+Snapshots for the volume can be associated with an individual datastore or storage cluster.
+
+This feature is significant for enterprises that rely on the SDRS mechanism to create a balanced workload in their storage clusters, rather than having to pick an individual datastore for a volume that remains tied to that volume through its lifecycle.
+At present, re-location of volumes using automatic Storage vMotion is not supported.
+
+## Download Instructions
+
+The latest version of the RCA-V appliance can be downloaded from the URL in this [latest file](http://rightscale-vscale.s3.amazonaws.com/appliances/latest).
+The latest appliance encapsulates the latest versions of the vscale and vscale-admin packages.
+
+## Upgrade Instructions
+
+You can upgrade the vscale and vscale-admin packages to the latest versions using the RCA-V Admin UI. Please note that the upgrade path requires the  RCA-V 1.2 appliance with vscale-admin_1.2_20150305_16, vscale_1.2_20150303_16, or newer.
+
+### Upgrading the vscale-admin Package
+
+* From the RCA-V Admin UI, go to **Connectivity** > **RightScale Platform** > **Admin Interface** > **Upgrade**.
+
+![admin package upgrade 1](/img/rcav-rel-note-upgrade1.png)
+
+### Upgrading the vscale Package
+
+* From the RCA-V Admin UI, go to **Connectivity** > **Center** > **Cloud Appliance (vscale)** > **Upgrade**.
+
+![vscale package upgrade 2](/img/rcav-rel-note-vscale-upgrade.png)
+
+In case you are on an older version of the appliance, it is best to make a copy of the `vscale.cfg` config file (which can be accessed through the **Admin UI** > **Cloud Configuration** > **Advanced**) and apply it to a new install of the latest version of the appliance.
+
+## Bug Fixes
+
+The RCA-V v1.3 release addresses the following bugs/issues.
+
+1. Implemented consistent name duplication checks across all cards in the Admin UI.
+2. Introduced support for virtual CDROM to enable the following:
+  * Added support for cloud-init.
+  * Allow userdata to persist through a Stop (PowerOff) and Start (PowerOn) operation using a virtual CDROM drive.<br>
+  **Note**: Virtual CDROM is the default mechanism for placing userdata into the VM. This can be turned off manually by adding `cloud_init_support => false` to either the tenant defaults or specific tenant config in the **Advanced** section of RCA-V Admin.
+3. Addressed an issue where dynamic type networks did not work as the default network.
+4. Addressed an issue where VM snapsnots were not getting cleaned up after a failure.
+5. Added ping time in the **Connectivity** > **Center** > **vCenter Server** card to show the network latency between the RCA-V appliance and the  vCenter server.

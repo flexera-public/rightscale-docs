@@ -1,0 +1,10 @@
+---
+title: Self-Service
+date: 2015-07-22
+week: 2015-07-20
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* Fixed the `join()` function in CAT to take an array as the first argument.

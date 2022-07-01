@@ -1,0 +1,14 @@
+---
+title: Governance
+date: 2017-10-27
+week: 2017-10-23
+blog: release-notes
+---
+
+## Changes in Behavior
+
+* To increase visibility around billing center level permissions, users with `enterprise_manager` role can use Governance to see the list of billing centers a user has access to with the ability to easily navigate to them.
+
+    <div style="border: thin solid black">
+        <img src="/img/billing_center_gov.png" alt="">
+    </div>

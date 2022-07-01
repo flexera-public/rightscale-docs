@@ -1,0 +1,136 @@
+//
+//
+//
+
+.release-notes {
+  .article-group-object {
+    > h4 {
+      font-size: rem(18);
+      font-weight: bold;
+      margin: 0 0 2rem 0;
+      padding: 0;
+      &:before {
+        display: none;
+      }
+    }
+  }
+  .page-subheader {
+    font-size: rem(20);
+    font-weight: bold;
+    line-height: 1.1;
+    margin: 0 0 rem(14) 0;
+    padding: 0;
+    opacity: 0.9;
+    letter-spacing: -1px;
+  }
+  .page-time {
+    color: $heading;
+    font-family: $bariol;
+    font-size: rem(24);
+    font-weight: bold;
+    line-height: 1.1;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 3.2rem;
+  }
+  .release-notes-weekof,
+  .release-notes-category {
+    .article {
+      border-bottom: 1px solid rgba(#000, 0.1);
+      margin: 2rem 0;
+      padding: 1rem 0 2rem;
+      &:first-of-type {
+        padding-top: 0;
+        margin-top: 0;
+      }
+      &:last-of-type {
+        border: none;
+        margin-bottom: 0;
+      }
+    }
+  }
+  .release-notes-category {
+    .article-title {
+      font-family: $bariol;
+      font-size: rem(18);
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+      &:before {
+        display: none;
+      }
+    }
+  }
+  &.release-notes_cloud-management .menu-item-cm {
+    box-shadow: inset 3px 0 0 $blue;
+  }
+  &.release-notes_self-service .menu-item-ss {
+    box-shadow: inset 3px 0 0 $blue;
+  }
+  &.release-notes_cloud-analytics .menu-item-ca {
+    box-shadow: inset 3px 0 0 $blue;
+  }
+  &.release-notes_server-templates .menu-item-st {
+    box-shadow: inset 3px 0 0 $blue;
+  }
+  &.release-notes_rca-v .menu-item-rca {
+    box-shadow: inset 3px 0 0 $blue;
+  }
+  &.release-notes_right-link-6 .menu-item-rl6 {
+    box-shadow: inset 3px 0 0 $blue;
+  }
+  &.release-notes_right-link-10 .menu-item-rl10{
+    box-shadow: inset 3px 0 0 $blue;
+  }
+  &.release-notes_mcis-right-images .menu-item-mci {
+    box-shadow: inset 3px 0 0 $blue;
+  }
+  .category-cloud-management {
+    &:before {
+      content: "Cloud Management";
+      display: block;
+    }
+  }
+  .category-self-service {
+    &:before {
+      content: "Self-Service";
+      display: block;
+    }
+  }
+  .category-cloud-analytics {
+    &:before {
+      content: "Optima";
+      display: block;
+    }
+  }
+  .category-server-templates {
+    &:before {
+      content: "Server Templates";
+      display: block;
+    }
+  }
+  .category-rca-v {
+    &:before {
+      content: "RCA-V";
+      display: block;
+    }
+  }
+  .category-right-link-6 {
+    &:before {
+      content: "RightLink 6";
+      display: block;
+    }
+  }
+  .category-right-link-10 {
+    &:before {
+      content: "RightLink10";
+      display: block;
+    }
+  }
+  .category-mcis-right-images {
+    &:before {
+      content: "MCIs & RightImages";
+      display: block;
+    }
+  }
+}

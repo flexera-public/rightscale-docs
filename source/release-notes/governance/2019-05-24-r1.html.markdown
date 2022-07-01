@@ -1,0 +1,20 @@
+---
+title: Policies
+date: 2019-05-24
+week: 2019-05-20
+blog: release-notes
+---
+
+## New Policies
+
+* [AWS Unencrypted RDS Instances](https://github.com/rightscale/policy_templates/tree/master/security/aws/rds_unencrypted) checks all RDS instances and reports on any that are unencrypted.
+* [AWS Public Accessible RDS Instances](https://github.com/rightscale/policy_templates/tree/master/security/aws/rds_publicly_accessible) checks all RDS instances and reports on any that are publicly accessible.
+* [VMWare Instance Tag Sync](https://github.com/rightscale/policy_templates/tree/master/operational/vmware/instance_tag_sync) ensures that all tags that exist in Cloud Management are pushed to VMWare.
+* [Google StackDriver Utilization](https://github.com/rightscale/policy_templates/tree/master/cost/google/instances_stackdriver_utilization/) utilizes Google Stackdriver to provide a report of utilization on all instances in the given project.
+* [AWS Instance CloudWatch Utilization](https://github.com/rightscale/policy_templates/tree/master/cost/aws/instance_cloudwatch_utilization/) utilizes AWS Cloudwatch to provide a report of utilization on all instances in the given account.
+* [GitHub.com Unpermitted Outside Collaborators](https://github.com/rightscale/policy_templates/tree/master/compliance/github/outside_collaborators/) checks for any users that have access to a repository but are outside the Github organization and haven't been whitelisted.
+* [GitHub.com Unpermitted Repository Names](https://github.com/rightscale/policy_templates/tree/master/compliance/github/repository_naming/) checks all repositories in the Github organization for any that do not match the specified naming scheme.
+* [GitHub.com Unpermitted Top-Level Teams](https://github.com/rightscale/policy_templates/tree/master/compliance/github/toplevel_teams/) checks the top-level/parent teams for a Github organization to ensure they are in the specified whitelist.
+* [GitHub.com Unpermitted Sized Repositories](https://github.com/rightscale/policy_templates/tree/master/compliance/github/repository_size/) checks all repositories in the Github organization that are too small and/or too old (potentially indicating an unused repository).
+* [GitHub.com Repository Branches without Protection](https://github.com/rightscale/policy_templates/tree/master/compliance/github/repository_branch_protection/) checks all repositories that are part of the Github organization for any specified branch names that are not protected.
+* [GitHub.com Repositories without Admin Team](https://github.com/rightscale/policy_templates/tree/master/compliance/github/repository_admin_team/) checks for any repositories in the Github organization that do have at least one team assigned the `admin` role.

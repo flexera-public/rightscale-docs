@@ -1,0 +1,39 @@
+---
+title: Policies
+date: 2020-01-17
+week: 2020-01-13
+blog: release-notes
+---
+
+## New Features
+
+* Policies now have **credential management** built-in to the product, making it easier to connect your different clouds for policy governance. Along with the feature release, many policies have been upgraded to use the new credential capability (see below). [Check out the docs to learn more](/policies/users/guides/credential_management.html). Some of the benefits include:
+  * Simplified experience to connect clouds for policy governance
+  * Ability to rotate credentials without affecting running policies
+  * Support for new credential types including AWS Cross-Account Roles and NTLM
+  * Reduced overhead when dealing with multiple cloud accounts
+* Policy designers can now specify a **default frequency** value [in their policies](/policies/developers/reference/v20180301/policy_template_language.html#metadata), simplifying the process of applying a policy for their users.
+
+## New Policies
+
+* An on-premises version of [AWS EC2 Instances not running FlexNet Inventory Agent](https://github.com/rightscale/policy_templates/blob/master/compliance/aws/instances_without_fnm_agent/README.md)
+* An on-premises version of [Azure Instances not running FlexNet Inventory Agent](https://github.com/rightscale/policy_templates/blob/master/compliance/azure/instances_without_fnm_agent/README.md)
+* An on-premises version of [FlexNet Manager Licenses At Risk](https://github.com/rightscale/policy_templates/blob/master/compliance/fnms/fnms_licenses_at_risk/README.md)
+* An on-premises version of [Schedule FlexNet Manager Report](https://github.com/rightscale/policy_templates/blob/master/operational/fnms/schedule_fnms_reports/README.md)
+
+## Changes to Existing Policies
+
+The following policies have been updated to support the new method of credential management mentioned above:
+* [AWS EC2 Instances not running FlexNet Inventory Agent - Cloud](https://github.com/rightscale/policy_templates/blob/master/compliance/aws/instances_without_fnm_agent/README.md)
+* [AWS Inefficient Instance Utilization using CloudWatch](https://github.com/rightscale/policy_templates/blob/master/cost/aws/instance_cloudwatch_utilization/README.md)
+* [AWS Open Buckets](https://github.com/rightscale/policy_templates/blob/master/security/storage/aws/public_buckets/README.md)
+* [AWS Rightsize RDS Instances](https://github.com/rightscale/policy_templates/blob/master/cost/aws/rds_instance_cloudwatch_utilization/README.md)
+* [AWS Unused RDS Instance](https://github.com/rightscale/policy_templates/blob/master/cost/aws/unused_rds/README.md)
+* [Azure Inefficient Instance Utilization using Log Analytics](https://github.com/rightscale/policy_templates/blob/master/cost/azure/instances_log_analytics_utilization/README.md)
+* [Azure Instances not running FlexNet Inventory Agent - Cloud](https://github.com/rightscale/policy_templates/blob/master/compliance/azure/instances_without_fnm_agent/README.md)
+* [Azure Long-Stopped Instances](https://github.com/rightscale/policy_templates/blob/master/compliance/azure/azure_long_stopped_instances/README.md)
+* [Azure Rightsize SQL Databases](https://github.com/rightscale/policy_templates/blob/master/cost/azure/rightsize_sql_instances/README.md)
+* [Azure Subscription Access](https://github.com/rightscale/policy_templates/blob/master/compliance/azure/subscription_access/README.md)
+* [FlexNet Manager Licenses At Risk - Cloud](https://github.com/rightscale/policy_templates/blob/master/compliance/fnms/fnms_licenses_at_risk/README.md)
+* [Google Inefficient Instance Utilization using StackDriver](https://github.com/rightscale/policy_templates/blob/master/cost/google/instances_stackdriver_utilization/README.md)
+* [Schedule FlexNet Manager Report - Cloud](https://github.com/rightscale/policy_templates/blob/master/operational/fnms/schedule_fnms_reports/README.md)

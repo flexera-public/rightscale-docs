@@ -1,0 +1,49 @@
+//
+// Home Page
+// --------------------------------------------------
+
+.index {
+  padding-top: 0;
+  .navbar-static-top {
+    margin-bottom: 0;
+  }
+  .quick-links {
+    .btn-default {
+      color: $blue;
+      font-family: $headings-font-family;
+      font-size: rem(18);
+      font-weight: 500;
+      padding: rem(6) rem(16);
+      span {
+        vertical-align: text-bottom;
+      }
+      img {
+        margin-right: rem(8);
+      }
+    }
+  }
+  .panel {
+    margin: rem(15) 0;
+    .panel-heading {
+      font-family: $headings-font-family;
+      font-weight: 700;
+      font-size: rem(16);
+      a.external-link:after {
+        content: "\e164";
+        display: inline-block;
+        float: right;
+        font-family: 'Glyphicons Halflings';
+        font-size: 24px;
+        font-style: normal;
+        font-size: 16px;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1;
+        margin-top: 4px;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+}

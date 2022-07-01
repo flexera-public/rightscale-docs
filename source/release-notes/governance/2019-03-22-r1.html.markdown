@@ -1,0 +1,10 @@
+---
+title: Policies
+date: 2019-03-22
+week: 2019-03-18
+blog: release-notes
+---
+
+## New Policies
+
+* [GitHub Available Seats](https://github.com/rightscale/policy_templates/tree/master/compliance/github/available_seats) alerts you when you are close to your maximum number of seats in a GitHub organization or when the seats you have purchased are under-utilized.

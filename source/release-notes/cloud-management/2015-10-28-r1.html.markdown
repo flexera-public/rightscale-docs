@@ -1,0 +1,18 @@
+---
+title: Cloud Management
+date: 2015-10-28
+week: 2015-10-26
+blog: release-notes
+---
+
+## New Features
+
+* **GCE Instance Tag Support** - RightScale now supports GCE instance tags and syncs them with the cloud. Any tags on a RS instance prefixed with "gce:" will be synced to GCE, and tags from GCE will come in to RS in the same format. [Read more about it here.](/cm/rs101/tagging.html#how-rightscale-tags-and-cloud-tags-are-related-gce-instance-tags)
+
+## Changes in Behavior
+
+* **SAML/SSO Improvements** - Our SAML/SSO implementation has been enhanced as follows:
+  * Invitation emails sent to an SSO-enabled invitee now contain a link that logs the user in through SSO with one click, no additional user action required and no discovery hint needed.
+  * SAML login once again redirects to a user's last account instead of to an account selector. (This is default behavior that can be changed by making use of default SAML RelayState; refer to the [RightScale SAML RelayStates](/platform/saml/rightscale_saml_relay_states.html) page on our documentation site for additional information.
+  * Password-reset emails have consistent HTML styling.
+* **Hard Instance Shutdown** - We've added a hard shutdown after an instance has been decommissioning for a specified period. The default time is 50 minutes, but can be extended through the use of an instance tag. [Read more about it here.](/cm/management_guide/server_states.html#rightscale-server-states-decommissioning)

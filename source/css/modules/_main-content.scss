@@ -1,0 +1,57 @@
+//
+// Main Content
+// --------------------------------------------------
+
+// Markdown table
+.main-content {
+  table {
+    @extend .table;
+    @extend .table-bordered;
+    thead {
+      background-color: $body;
+      th {
+        color: $heading;
+      }
+    }
+  }
+}
+
+// Content hash tag links
+.main-content {
+  h2:before,
+  h3:before {
+    content: " ";
+    display: block;
+    height: 70px;
+    margin-top: -70px;
+    visibility: hidden;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: initial;
+}
+
+// Sub-content heading blocks
+h3 {
+  border-bottom: 2px solid $light-grey-border;
+  font-weight: 400;
+  padding-bottom: rem(8);
+}
+.panel {
+  h3 {
+    border-bottom: none;
+    font-weight: 400;
+    padding: 0;
+  }
+}
+
+// Release notes
+.release-notes {
+  .main-content {
+    .media-heading {
+      margin-top: 0;
+    }
+  }
+}

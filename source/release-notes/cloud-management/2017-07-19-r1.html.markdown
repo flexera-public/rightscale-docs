@@ -1,0 +1,10 @@
+---
+title: Cloud Management
+date: 2017-07-19
+week: 2017-07-17
+blog: release-notes
+---
+
+## New Features
+
+* Added support for **Managed Disks in Microsoft Azure**, allowing you to create and manage these resources through the Cloud Management UI, API, and CAT files in Self-Service. For more information, [read the documentation for Managed Disks](/clouds/azure_resource_manager/reference/resources.html#managed-disks).

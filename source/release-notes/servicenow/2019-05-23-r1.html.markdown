@@ -1,0 +1,18 @@
+---
+title: ServiceNow Integration
+date: 2019-05-23
+week: 2019-05-20
+blog: release-notes
+---
+
+## Release Details
+
+* [ServiceNow Releases](/servicenow/releases.html)
+
+## Changes in Behavior
+
+* Revised Inbound Executions to exclude Cost Value and Cost Unit fields
+* Rebranded the application as "Flexera Cloud Management"
+* Adjusted redirect URL on Documentation link 
+
+**Version:** 1.2.0

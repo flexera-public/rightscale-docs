@@ -1,0 +1,102 @@
+//
+// Articles and Release Notes
+// ----------------------------------------
+
+.article-group {
+  .article-group-object {
+    padding: 2rem 0;
+    margin: 2rem 0;
+    border-bottom: 1px solid rgba(#000, 0.1);
+    &:first-of-type {
+      padding-top: 1rem;
+      margin-top: 0;
+    }
+    &:last-of-type {
+      border: 0 none;
+      margin-bottom: 0;
+    }
+  }
+  .article-group-footer {
+    padding: 1rem 0;
+  }
+}
+.article {
+  margin: 3rem 0 3rem 0;
+  padding: 0;
+  &:last-of-type {
+    margin: 3rem 0 0 0;
+  }
+  &:first-of-type {
+    margin: 0 0 3rem 0;
+  }
+  .article-title {
+    font-size: rem(24);
+    font-weight: normal;
+    margin: 0 0 rem(4) 0;
+    padding: 0;
+  }
+  .article-time {
+    font-size: rem(14);
+    font-weight: normal;
+    font-weight: 500;
+    opacity: 0.9;
+    letter-spacing: -0.5px;
+  }
+  .article-tease,
+  .article-body {
+    margin: 2rem 0 0 0;
+    &:first-of-type {
+      margin: 0;
+    }
+    h1, h2, h3, h4, h4, h5 {
+      font-family: $helvetica;
+      font-weight: bold;
+      margin: 0;
+    }
+    h1 {
+      font-size: rem(28);
+      line-height: 1.2;
+      margin-top: rem(29.25);
+      margin-bottom: rem(16);
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+    h2 {
+      font-size: rem(21);
+      line-height: 1.225;
+      margin-top: rem(22.75);
+      margin-bottom: rem(16);
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+    h3 {
+      font-size: rem(18);
+      line-height: 1.43;
+      margin-top: rem(19.5);
+      margin-bottom: rem(16);
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+    h4 {
+      font-size: rem(16);
+      line-height: 1.43;
+      margin-top: rem(16.25);
+      margin-bottom: rem(16);
+    }
+    h5 {
+      font-size: rem(13);
+      line-height: 1.4;
+      margin-top: rem(13);
+      margin-bottom: rem(16);
+    }
+    h5 {
+      font-size: rem(12);
+      line-height: 1.4;
+      margin-top: rem(13);
+      margin-bottom: rem(16);
+    }
+  }
+}
