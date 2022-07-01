@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Designing and Deploying High-Availability Websites</title><meta content="Guidelines for deploying high-availability websites with front-end load balancers, application servers, and databases using the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_designers_guide cm_designers_guide_cm-designing-and-deploying-high-availability-websites" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Designers Guide</a></p><div class="page-header"><h1>Designing and Deploying High-Availability Websites</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Properly designing high-availability (HA) web applications on the Cloud is a difficult task due to the overwhelming number of components and failure scenarios that can arise. In the real world, there is a large variance between deployments because virtually every web application has its own set of requirements. RightScale has developed solutions for the most common use-cases. By no means is this document meant to be an inclusive guide that will explain every type of scenario. The purpose of this guide is to discuss several of the most common components and also show some best practices when designing a web server architecture for a high-availability site. It will also highlight elements that you should consider when designing such architectures. An architect should carefully examine each component of their application and ensure that it is properly load balanced, fault tolerant, and scalable.</p>
+
+<p>The most basic architecture that will provide a high-availability is the following 3-tier setup. It is a load-balanced 6-server setup with fault tolerance and database backups that are stored as EBS Snapshots.</p>
+
+<p><img src="/img/cm-6-server-setup-diagram.png" alt="cm-6-Server-setup-diagram.png" width="388" height="372" /></p>
+
+<p>Now let&#39;s take a close look at each tier.</p>
+
+<h2 id="frontends---load-balancers">FrontEnds / Load Balancers</h2>
+
+<p>Depending on the complexity of your site, you could either have FrontEnd servers that act as your load balancers and application servers or a more complex setup where the amount of incoming traffic warrants the use of two dedicated load balancers.</p>
+
+<p><img src="/img/cm-setup-diagrams.png" alt="cm-setup-diagrams.png" width="725" height="333" /></p>
+
+<p>Load balancers (LB) provide many advantages to serving client requests directly from your application servers, because they allow you to better control how traffic is handled in order to provide optimal performance. Most importantly, load balancers distribute requests between application servers and monitor them to ensure that client requests are always directed to a healthy machine.</p>
+
+<p>RightScale has found HAProxy to be the highest performance, most reliable and dependable software load balancer, especially when you need to scale very quickly. When HAProxy is used in conjunction with Apache, it allows you to handle SSL connections and filter incoming requests to serve static content locally or direct traffic to one or more server arrays. This additional use of Apache adds a lot of flexibility with only a negligible amount of latency. Our default load balancers are configured to run in this manner.</p>
+
+<p>By default, clients round-robin through the load balancers by a DNS A-name record. In the unlikely event that a load balancer goes down, clients will simply retry the next address returned after a browser-specific timeout. You can also configure a hot-swappable standby, which monitors your load balancer&#39;s and assumes the A-record or elastic IP of a downed machine.</p>
+
+<p><img src="/img/cm-load-balancer-reroute.gif" alt="cm-load-balancer-reroute.gif" width="690" height="240" /></p>
+
+<p>Under normal conditions, there is no need to scale the number of load balancers because two of these servers can handle a very large amount of traffic. However, if you do need to automatically scale your load balancers, this can be done by creating two scripts. One that registers and deregisters A records with your DNS provider when your servers are launched and when they are terminated. The second script loads an HAProxy config when it is launched.</p>
+
+<h2 id="application-servers">Application Servers</h2>
+
+<p>In order to design a robust application in the Cloud, you need to ensure that it will be able to gracefully handle machine failure. What happens if one of the application servers is unresponsive?</p>
+
+<p>If your application does not require session persistence, then this is not a concern, since the load balancer will be able to detect this condition and remove the faulty server from the rotation, ensuring that user requests are always sent to a healthy machine.</p>
+
+<p>However, if your application does require session persistence, then you will need to properly address this issue. Generally, the best solution is to store session data in the database. This allows clients to transparently move between application servers while maintaining their session state. HAProxy is able to tie a user to a specific server throughout the duration of their session.</p>
+
+<p><img src="/img/cm-app-server-session.gif" alt="cm-app-server-session.gif" width="513" height="358" /></p>
+
+<p>While this may be good enough for some applications, it can cause clients to lose their session if an application server becomes no longer available due to accidental termination or an automatic <q>scale-down</q> of your application server array.</p>
+
+<p><img src="/img/cm-app-server-lost-session.gif" alt="cm-app-server-lost-session.gif" width="554" height="358" /></p>
+
+<p>It&#39;s important to think about session persistence when performing the following tasks:</p>
+
+<ul>
+<li><strong>Autoscaling</strong> - When you set up a scalable application server array, it is usually best to <q>scale-down</q> (terminate servers) using alerts that are based on CPU Idle Time. If a application server is not idle, there are probably active sessions that would suddenly be lost if the server was terminated. By default, application ServerTemplates from RightScale are automatically configured to connect/disconnect from the load balancer(s) whenever a server is lauched or terminated. See the <a href="/cm/dashboard/manage/arrays/arrays_actions.html#set-up-autoscaling-using-voting-tags">Set up Autoscaling using Voting Tags</a> tutorial for more information.</li>
+<li><strong>Upgrading Application Servers</strong> - When you upgrade software on your application servers, you should launch new application servers (with the latest software) and terminate the old application servers once all sessions have been ended. As a best practice, you may want to keep the old server running for an extended amount of time to ensure that no active sessions are accidentally terminated, while all new traffic will be sent to the new application servers.</li>
+</ul>
+
+<h2 id="database-servers">Database Servers</h2>
+
+<p>For the majority of web applications, it is absolutely essential to run a reliable database. RightScale provides the necessary master/slave ServerTemplates that are already preconfigured for automatic replication and regular backups. They are also designed to easily handle a variety of failover scenarios, such as a failure of the Master-DB.</p>
+
+<p><img src="/img/cm-replication.png" alt="cm-replication.png" width="322" height="172" /></p>
+
+<p>By default, the database ServerTemplates perform asynchronous replication so that your database is always present on two live servers (i.e. Master-DB, Slave-DB). If you are using one of the MySQL-EBS setups, backups of your database will be stored as EBS Snapshots. Any database restore will use one of the previously saved EBS Snapshots to restore the data.</p>
+
+<p>There is also a <q>promote to master</q> operational script on all RightScale database templates, so that any <q>slave</q> server can assume the <q>master</q> role simply by running one script on the server. This script makes it easy to recover from a failure of the master database server. By default, promoting a slave to master is a manual process. Although you can write a script that will automatically failover your database, it is not a recommended practice. Remember, the database is the core component of your site. If for some reason the data on a Master-DB becomes corrupt or there is a sudden failure, it is usually due to a serious problem. It is best to investigate the problem and perform any major actions to your database yourself. For instance, if the data on your Master-DB is corrupt and you promote the Slave-DB, you could be promoting a database that is also corrupt. As a best practice, you should always try and <q>roll forward</q> by manually promoting a slave (if the database is uncorrupted) or launch a new database server using the most recent EBS snapshot (that is not corrupt).</p>
+
+<p>If your application is read intensive, then the best way to scale is to launch multiple slaves and have your application round-robin its reads through these slaves using a DNS A-name record. If you have a static number of slaves, this can be done with the default templates. However, if you want your slaves to scale, you will need to create a script that will register and deregister A records when your servers launch and when they are terminated.</p>
+
+<p>If you are running a <strong>non-relational</strong> database, such as MySQL cluster, then you can simply add more nodes into your deployment.</p>
+
+<p>If you are running a <strong>relational</strong> database then usually the best way to scale your database is to run multiple master/slave pairs. This is typically the only way to increase the amount of writes that your deployment can handle. This requires partitioning your database and having your application decide which master to direct requests to.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>MySQL proxy and Master/Master architectures do NOT allow you to increase your writes.</p>
+</div>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

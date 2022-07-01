@@ -1,0 +1,440 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Guide for Evaluating Microsoft Azure</title><meta content="The purpose of this evaluation guide is to show the power of combining the IaaS features and functionality of the Microsoft Azure cloud with RightScale Cloud Management to manage all of your cloud infrastructure with a single, integrated solution." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="clouds clouds_azure clouds_azure_Guide_for_Evaluating_Microsoft_Azure" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="azure_about.html"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Microsoft Azure (Classic)</span></h4></a><a class="list-group-item" href="azure_quick_start.html">Quick Start</a><a class="list-group-item" href="azure_tutorials.html">Tutorials</a><a class="list-group-item" href="/faq/clouds/azure/">FAQs</a><a class="list-group-item" href="Guide_for_Evaluating_Microsoft_Azure.html">Evaluation Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Supported Clouds</a> &#x2F; <a href="./">Microsoft Azure (Classic)</a></p><div class="page-header"><h1>Guide for Evaluating Microsoft Azure</h1></div><div class="main-content"><h2 id="purpose-of-the-evaluation-guide">Purpose of the Evaluation Guide</h2>
+
+<p>The purpose of this evaluation guide is to show the power of combining the IaaS features and functionality of the Microsoft Azure cloud with RightScale Cloud Management to manage all of your cloud infrastructure with a single, integrated solution.</p>
+
+<h2 id="audience">Audience</h2>
+
+<p>In general, readers of this evaluation guide fall into one of the following two groups:</p>
+
+<ul>
+<li><strong>New Microsoft Azure users and New RightScale users</strong> - if you are new to Microsoft Azure and new to RightScale, we recommend that you read the entire evaluation guide to gain a more complete understanding of the Microsoft Azure + RightScale solution.</li>
+<li><strong>New Microsoft Azure users but experienced RightScale users</strong> - If you are new to Microsoft Azure but have some experience with RightScale, feel free to skip the Introduction to RightScale and Register for a RightScale Account sections.</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>Microsoft Azure is Microsoft&#39;s application platform for the public cloud - it is the development, service hosting, and service management environment for the Microsoft Azure platform. It provides developers with on-demand compute, storage, bandwidth, content delivery, middleware, and marketplace capabilities to build, host, and scale web applications through Microsoft data centers.</p>
+
+<p>Understanding the various components of Microsoft Azure is helpful when making decisions about how to build and manage your cloud and for seeing the value of using RightScale + Microsoft Azure for this purpose. The three main components of Microsoft Azure are Web Sites, Cloud Services, and Virtual Machines.</p>
+
+<h2 id="introduction-to-microsoft-azure">Introduction to Microsoft Azure</h2>
+
+<p>Microsoft Azure is an open and flexible cloud platform that enables you to quickly build, deploy and manage applications across a global network of Microsoft-managed datacenters. Microsoft Azure is built to support open technologies with any OS, language, database, or tool. Comprehensive networking capabilities connect on-premise infrastructure to Azure as well as integrated IaaS and PaaS on a shared network. Microsoft offers rock solid service with a 99.95% monthly SLA and global footprint of 6 data centers.</p>
+
+<h2 id="introduction-to-rightscale">Introduction to RightScale</h2>
+
+<p>RightScale is the leading cloud management platform, supporting Microsoft Azure and a range of public and private clouds. RightScale has more than 50,000 users and has launched over 4 million servers including many of the largest production deployments and scaling events in public and private clouds.</p>
+
+<p>RightScale provides complete lifecycle management for public and private cloud-based applications including provisioning, monitoring, configuration, automation, auditing, and governance. This enables efficient administration with a single view of multiple cloud accounts’ usage, resources, and role-based access controls. RightScale is a multi-cloud solution, making it easy to migrate workloads into and out of public and private clouds, with consistent governance, monitoring, and automation, and to construct hybrid and multi-data center environments for large organizations, distributed applications, and high availability. In addition, RightScale offers services including consultative support, business critical SLAs, onboarding services, and end-to-end engineering that has advised the cloud’s cutting edge deployments.</p>
+
+<h2 id="key-rightscale-concepts">Key RightScale Concepts</h2>
+
+<p>RightScale Cloud Management is the bridge between your applications and your cloud infrastructure. The MultiCloud Platform provides a universal remote to conveniently access your public, private, and hybrid cloud resource pools from one Dashboard and API. The Configuration Framework provides intelligent cloud blueprints to configure and operate your servers in a dynamic and completely customizable fashion. The MultiCloud Marketplace™ provides a one-stop shop of cloud-ready components. The Automation Engine gives you the power to provision, monitor, scale, and manage entire server deployments efficiently and reliably. Governance Controls allow you to keep watch over access, security, auditing, reporting, and budgeting through a “single pane of glass” view.</p>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<h3 id="use-cases-windows-based">Windows-based</h3>
+
+<p>Microsoft Azure provides extensive support for .Net, IIS, SQL Server, Active Directory, and other Windows-based applications.</p>
+
+<h3 id="use-cases-highly-available">Highly available</h3>
+
+<p>Microsoft Azure offers a global footprint of data centers that the offer geographic coverage, redundancy, and capacity to host mission critical, highly available applications.</p>
+
+<h3 id="use-cases-highly-scalable">Highly scalable</h3>
+
+<p>From big data analytics to gaming, SaaS, and websites, Microsoft Azure is well suited to run highly scalable applications.</p>
+
+<h2 id="multicloud-platform">MultiCloud Platform</h2>
+
+<p>RightScale Cloud Management enable management of all of your clouds — Microsoft Azure, other public clouds, and private clouds — and all of your resources — compute, storage, and networking. Cloud-specific differences are abstracted so you can focus on running your applications. All of your resources are in one place and are organized for ease with logical groups of servers called deployments. Provision, configure, and automate individual servers or entire deployments in minutes. All of your resources are accessible from the RightScale Dashboard and API.</p>
+
+<h2 id="configuration-framework">Configuration Framework</h2>
+
+<p>The RightScale configuration framework — the ServerTemplate™ — is the key to efficient, automated provisioning and operations on Microsoft Azure and other public and private clouds. ServerTemplates are built from modular images, scripts, and variable inputs. ServerTemplates are dynamic, provisioning your servers at boot time using your chosen configuration and variable inputs. Dynamic configuration ensures that your servers are provisioned in context — they automatically register with the correct load balancers and databases, begin backups with the proper frequencies and storage locations, and much more.</p>
+
+<p>The modular and dynamic aspects of ServerTemplates enable them to be completely customizable, from the inputs all the way down to the images. Each element of a ServerTemplate is version controlled, providing reproducible behavior across time and infrastructure, so that you design once and then consistently deploy multiple times on multiple clouds. ServerTemplates abstract cloud-specific differences, ensuring consistent multi-cloud configuration across public, private, and hybrid cloud resource pools.</p>
+
+<p>[<img src="/img/azure-config-framework-st.png" alt="azure-config-framework-st.png" width="550" height="550" /></p>
+
+<p>The RightScale MultiCloud Marketplace™ offers ServerTemplates™, scripts, and architectures published by RightScale, our partners, and our users. All of these pre-built configurations are fully customizable and provide a huge variety of solutions to get started. Swap scripts and recipes in or out and change default inputs and alerts. ServerTemplates and components published by RightScale are rigorously tested, version controlled, and backed by our support.</p>
+
+<h2 id="automation-engine">Automation Engine</h2>
+
+<p>The RightScale automation engine provides powerful tools to make cloud resources efficient, elastic, and highly available. Keep tabs on your resources with granular Server and Application Monitoring. View entire systems of hundreds of servers with Cluster Monitoring. Link monitors to Alerts and Escalations that notify you of issues and automatically take action. Scale resources up and down according to your needs with Auto-Scaling Arrays. Stand up entire architectures using Deployment Orchestration. Perform Application and Database Automation with powerful tools such as tags and our customizable library of scripts.</p>
+
+<h2 id="governance-controls">Governance Controls</h2>
+
+<p>Manage access and usage of cloud resources with a comprehensive set of RightScale governance controls. Control authentication, permissions, and credentials with the Access and Security Manager. Create secure environments for multiple teams with Enterprise Manager and Federated Identity. Resolve issues and trace events with Auditing.</p>
+
+<h2 id="services---support">Services & Support</h2>
+
+<p>RightScale has been a provider of leading services and support for public and private clouds since 2006. RightScale offers a range of services to help you succeed, from do-it-yourself materials to white glove engineering. Onboarding services provide you with invaluable assistance getting cloud projects up and running on time. Round-the-clock support keeps your applications running. In-depth training offers insights into using RightScale, cloud-based applications, and adopting cloud best practices.</p>
+
+<h2 id="registration">Registration</h2>
+
+<h3 id="registration-create-a-microsoft-azure-account">Create a Microsoft Azure Account</h3>
+
+<ol>
+<li>Log in to your Microsoft account. <a href="https://login.live.com/">https://login.live.com/</a></li>
+<li>Sign-up for a Microsoft Azure account. <a href="https://account.windowsazure.com/SignUp">https://account.windowsazure.com/SignUp</a></li>
+<li>Create a subscription for the required services. Click the <strong>Sign up for a free trial</strong> option and provide the required personal and billing information.</li>
+<li><p>Click <strong>add subscription</strong>.</p>
+
+<p>[<img src="/img/azure-subscription.png" alt="azure-subscription.png" width="550" height="227" /></p></li>
+<li><p>At a minimum, please select the &#39;Pay-As-You-Go&#39; option and purchase the subscription.</p></li>
+<li><p>Click the <strong>Portal</strong> link. After going through the Microsoft Azure Tour, click on <strong>Settings</strong> in the left navigational pane. Later, when you add the cloud to a RightScale account, you will need to select the specific <strong>Subscription ID</strong> that you want to associate with your RightScale account.  </p>
+
+<p>[<img src="/img/azure-subscriptionID.png" alt="azure-subscriptionID.png" width="550" height="296" /></p></li>
+<li><p>In order for RightScale to control your Microsoft Azure subscription and assets, you must first create security credentials. Use the following link to download your subscription profile: <a href="https://manage.windowsazure.com/publishsettings">https://manage.windowsazure.com/publishsettings</a>.<br>
+<em>Note</em>: You must be logged in to the Azure console in order to download the publish profile.</p></li>
+<li><p>Keep the file in a secure location as they serve as your credentials to administer on behalf of your subscriptions. You will need this file in order to add the cloud to a RightScale account.</p></li>
+</ol>
+
+<h3 id="registration-add-microsoft-azure-to-your-account">Add Microsoft Azure to your Account</h3>
+
+<h4 id="connect-to-a-cloud">Connect to a Cloud</h4>
+
+<ol>
+<li><p>After logging into the Dashboard, go to <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Clouds.</strong> Click <strong>Connect to a Cloud.</strong></p></li>
+<li><p>Next, click the (+) icon next to Microsoft Azure.</p></li>
+</ol>
+
+<p><strong>NOTE</strong>: Azure is a cloud with several regions which you can view by clicking the arrow next to its name in the <q>Connect to Public Clouds</q> box. For every region, you must register individually using the same Azure credentials. Only 5 regions can be added to a RightScale account. RightScale requires a virtual network for each region. By default Microsoft Azure subscriptions have a maximum of 5 virtual networks they can create. This means that only up to 5 regions can be added to RightScale by default. Please contact Microsoft to request more virtual networks in your subscription if needed.</p>
+
+<p><img src="/img/azure-connect-to-windows.png" alt="azure-connect-to-windows.png" width="721" height="563" /></p>
+
+<h4 id="upload-publish-profile">Upload Publish Profile</h4>
+
+<p><strong>NOTE</strong> : Make sure you are signed up for <a href="http://support.rightscale.com/09-Clouds/Microsoft_Azure/Tutorials/Sign_up_for_Microsoft_Azure/index.html">‘Virtual Machines &amp; Virtual Networks’</a>.</p>
+
+<p>Next, upload your publish profile file.</p>
+
+<h4 id="select-a-subscription-id">Select a Subscription ID</h4>
+
+<ol>
+<li><p>Select a Subscription ID from the drop-down list. This lists all your Subscription IDs found at <a href="https://account.windowsazure.com/Subscriptions">https://account.windowsazure.com/Subscriptions</a> when logged in.</p></li>
+<li><p>Click on the ‘Subscriptions’ link at the top of your Microsoft Azure portal.</p>
+
+<p><strong>NOTE</strong> : Azure does not currently support specifying the public IP space. They dynamically assign public IPs.</p></li>
+<li><p>Click <strong>Continue</strong>.</p></li>
+</ol>
+
+<p><strong>NOTE</strong> : You are going to be registering a Microsoft Azure subscription where you will specify a virtual network and subnet where virtual machines launched via RightScale will be provisioned. If virtual networks already exist within this Microsoft Azure subscription you will be given the option to select a virtual network on the next page. If no virtual networks exist within this Microsoft Azure subscription, RightScale will create one on your behalf. When creating a subnet within that virtual network, we will use the private IP range specified in the Subnet Prefix field on the next page.</p>
+
+<h2 id="virtual-network">Virtual Network</h2>
+
+<h3 id="virtual-network-no-existing-virtual-network">No Existing Virtual Network</h3>
+
+<p><img src="/img/azure-create-virtual-network.png" alt="azure-create-virtual-network.png" width="729" height="221" /></p>
+
+<p><strong>Subnet Prefix:</strong> Specify a Private IP address range in CIDR format for the subnet that will be created on your behalf in Azure.</p>
+
+<h3 id="virtual-network-existing-virtual-network">Existing Virtual Network</h3>
+
+<p>If you have an existing virtual network, you must go back into the Azure portal and make sure there’s a subnet within the virtual network with same name as the virtual network itself.</p>
+
+<ul>
+<li>Navigate to Preview.</li>
+<li>Choose Networks on the left panel which will take you to Virtual Networks.</li>
+<li>Click on the name of your virtual network.</li>
+<li>Click Configure.</li>
+</ul>
+
+<p>Add a subnet with the same name as the virtual network.</p>
+
+<p>Once you have an existing virtual network and subnet, you will see the following screen:</p>
+
+<p><img src="/img/azure-select-network.png" alt="azure-select-network.png" width="730" height="218" /></p>
+
+<p>Select your virtual network and subnet and click <strong>Continue</strong>.</p>
+
+<p>Once your cloud credentials have been verified, you will see that the Microsoft Azure cloud is enabled under the Clouds tab. You will now see all of your Microsoft Azure resources under the Clouds menu (Clouds <em>&gt;</em> Microsoft Azure). You may need to refresh the tab to view your newly added Azure cloud.</p>
+
+<h3 id="virtual-network-check-the-cloud-status">Check the Cloud Status</h3>
+
+<p>On the same Clouds tab or on the Cloud Credentials widget in the Overview tab, you may check the status of your cloud. Both of these items must be valid and active (green) in order to successfully launch cloud servers:</p>
+
+<p><img src="/img/azure-cloud-credential-status.png" alt="azure-cloud-credential-status.png" width="550" height="204" /></p>
+
+<p><strong>NOTE</strong> : RightScale could take several hours to discover the instance types before you can launch a server after initially adding a cloud.</p>
+
+<h2 id="introductory-lab">Introductory Lab</h2>
+
+<p>This introductory lab introduces some of the fundamental steps required for creating deployments and launching servers with RightScale + Microsoft Azure.</p>
+
+<h3 id="introductory-lab-create-a-deployment">Create a Deployment</h3>
+
+<p>Your deployment is the container for your servers. A deployment consists of a cluster or group of Servers that work together and share common Input variables and cloud configurations.</p>
+
+<p>Before launching servers, you must create a deployment. To create a deployment:</p>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong>.</li>
+<li>Click <strong>New</strong> and provide the following information:</li>
+</ol>
+
+<ul>
+<li><strong>Nickname</strong> - User-defined name for the deployment.</li>
+<li><strong>Description</strong> - A short, internal-only description of the deployment.</li>
+</ul>
+
+<h3 id="introductory-lab-import-a-servertemplate">Import a ServerTemplate</h3>
+
+<p>A ServerTemplate includes one or more MultiCloud Images that define an operating system and the supporting applications for the server. It is a collection of RightScripts or Chef recipes that install select applications and define configuration settings and other attributes. You can import ServerTemplates from the RightScale MultiCloud Marketplace.</p>
+
+<p>To import a ServerTemplate:</p>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong></li>
+<li>Find and select the <strong>Base ServerTemplate for Windows</strong> ServerTemplate. Browse by categories, perform a keyword search, or use the filter options to find the correct ServerTemplate.</li>
+<li>Click <strong>Import</strong>.</li>
+</ol>
+
+<p>Once imported, the ServerTemplate and associated RightScripts are considered part of your <q>local</q> collection.</p>
+
+<h3 id="introductory-lab-add-a-server">Add a Server</h3>
+
+<p>Now that you have imported a ServerTemplate, you can add a server to your deployment using the imported ServerTemplate. To add a server to the deployment:</p>
+
+<ol>
+<li>Go to your deployment ( <strong>Manage</strong> &gt; <strong>Deployments</strong> &gt; <em>your deployment</em>).</li>
+<li>Click <strong>Add Server</strong> to add a server and select your cloud from the <strong>Cloud</strong> drop down menu</li>
+<li>Select your imported ServerTemplate from <strong>ServerTemplates in Your Account</strong>.</li>
+</ol>
+
+<p>Launch the server.</p>
+
+<p>Check the events pane on the left for real time updates of your server&#39;s status.</p>
+
+<h2 id="server-management-and-monitoring">Server Management and Monitoring</h2>
+
+<p>The RightScale management platform offers options for managing and monitoring your servers after you launch them in Microsoft Azure. This section provides an overview of some of the available options.</p>
+
+<h3 id="server-management-and-monitoring-inputs">Inputs</h3>
+
+<p>Inputs are used to create easily customizable and reusable scripts. Inputs are variables within a script that allow you to substitute specific, user-defined values for the input when an associated script is run on a server. A ServerTemplate&#39;s <strong>Inputs</strong> tab shows all of the inputs declared in any of its scripts (RightScripts or Chef Recipes) located under its Scripts tab.</p>
+
+<h3 id="server-management-and-monitoring-rdp">RDP</h3>
+
+<p>You can use RDP to securely connect to servers in the cloud through the RightScale Dashboard. To connect to a server using RDP, go to <em>your deployment &gt; server name &gt;</em> <strong>RDP</strong></p>
+
+<h3 id="server-management-and-monitoring-audit-entries">Audit Entries</h3>
+
+<p>The <strong>Audit Entries</strong> tab shows a detailed, historical record for all server activity within a deployment. Audit entries are created for the vast majority of actions, such as launching and terminating instances, script execution, or performing database backups. These log files can be used for troubleshooting problems or tracking changes. To see an Audit Entry report, go to <em>your deployment</em> &gt; <strong>Reports</strong> &gt; <strong>Audit Entries.</strong></p>
+
+<h3 id="server-management-and-monitoring-monitoring">Monitoring</h3>
+
+<p>The <strong>Monitoring</strong> tab ( <strong>Manage</strong> &gt; <strong>View Dashboard</strong> &gt; <strong>Monitoring</strong> ) displays real-time graphical data for all servers in your deployment. By default, the &#39;cpu-overview&#39; and &#39;interface if_packets-eth0&#39; graphs are displayed, which show you status of your server&#39;s resources and incoming/outgoing data (packet) traffic. You can view detailed graphs for individual servers as well, if those servers have monitoring enabled. Cluster Monitoring is also available and provides a simple and efficient means to browse through monitoring data for Deployments consisting of many Servers.</p>
+
+<p><img src="/img/azure-monitoring.gif" alt="azure-monitoring.gif" width="550" height="353" /></p>
+
+<h3 id="server-management-and-monitoring-deployment-budget-estimate-widget">Deployment Budget Estimate Widget</h3>
+
+<p>The Deployment Budget Estimate Widget is s built-in widget that provides a budgetary breakdown of all deployments in the account. By default, the built-in widgets display on the <strong>Overview</strong> tab of the Dashboard ( <strong>Manage</strong> &gt; <strong>View Dashboard</strong> &gt; <strong>Overview</strong> ).</p>
+
+<h2 id="advanced-configuration">Advanced Configuration</h2>
+
+<p>The advanced configuration options allow you to take full advantage of the management and monitoring capabilities of RightScale + Microsoft Azure. This section describes some of the advanced configuration options available in the RightScale Dashboard.</p>
+
+<h3 id="advanced-configuration-architecture-diagram">Architecture Diagram</h3>
+
+<p>The following diagram shows the components that make up the 3-tier architecture for the RightScale + Microsoft Azure solution. The 3-tier architecture consists of your chosen DNS service, load balancers, application servers, database servers, and storage. Try building one yourself: <a href="http://support.rightscale.com/09-Clouds/Microsoft_Azure/Tutorials/3_Tier_Deployment_with_Microsoft_Azure/index.html">3 Tier Deployment with Microsoft Azure</a>.</p>
+
+<p><img src="/img/azure-3tier-diagram.png" alt="azure-3tier-diagram.png" width="366" height="400" /></p>
+
+<h3 id="advanced-configuration-advanced-management-features">Advanced Management Features</h3>
+
+<p>After your deployment is up and running, RightScale provides a set of advanced management features to help you monitor and manage your Microsoft Azure cloud. These advanced features are described here.</p>
+
+<h3 id="advanced-configuration-user-management">User Management</h3>
+
+<p>RightScale user management features allow you to control access to your Microsoft Azure cloud and add or remove users as needed. RightScale has several types of users that are defined by their roles. RightScale administrators can assign the different roles to users, depending on each user&#39;s needs. This level of control adds flexibility and lets users collaborate on projects in RightScale and in your Microsoft Azure cloud.</p>
+
+<h3 id="advanced-configuration-governance-and-control">Governance and Control</h3>
+
+<p>Governance and control refers to the ability to view all cloud activities from a single dashboard with comprehensive audits and logs while controlling user access, server security, resource usage, and budgeting</p>
+
+<p>You can decide how to control access to your cloud resources and how to govern changes, processes, and workflows. You can distribute control among deployments, accounts, or regions using a different administrator for each or centralize control and maintain it under one administrator, deployment, or account. Because you can structure your administration of RightScale and Microsoft Azure in whatever way best serves your business needs, we don&#39;t offer a step-by-step process for putting your governance and control systems in place. But for the purposes of this evaluation guide, the following example uses the enterprise account to demonstrate one method for using a centralized model.</p>
+
+<h4 id="centralized-control-example-(enterprise-account)">Centralized Control Example (Enterprise Account)</h4>
+
+<p>Enterprise customers can create a &#39;master&#39; enterprise account that acts as an umbrella account for all of its &#39;child&#39; accounts. Use the master enterprise account to monitor the cloud related activity across all RightScale accounts in the enterprise. Each child account is essentially a separate RightScale account with its own credentials. Each enterprise can have up to four child accounts. If you require more than four child accounts, please contact <a href="mailto:sales@rightscale.com">sales@rightscale.com</a>.</p>
+
+<p>The user who is given the &#39;enterprise_manager&#39; user role will be responsible for managing all accounts of the enterprise.</p>
+
+<p><img src="/img/azure-enterprise.png" alt="azure-enterprise.png" width="857" height="426" /></p>
+
+<p>In the preceding diagram, Michael is the Enterprise Manager. He maintains that role across all accounts in his enterprise.He has access to both master and child accounts. Regardless of which account he is logged into and viewing, he has access to the Enterprise view under <strong>Settings</strong> &gt; <strong>Organization</strong>.</p>
+
+<p>The Enterprise view is where he can monitor and manage all activity within the Enterprise. He can track current run-rates, add/remove/modify user roles, and invite users across all accounts.</p>
+
+<h4 id="enterprise-user-roles">Enterprise User Roles</h4>
+
+<p>One additional role is available to the enterprise.</p>
+
+<ul>
+<li><strong>enterprise_manager</strong> - Manages all accounts within the enterprise. Grants user role privileges across all accounts in the enterprise. Controls which child accounts have access to which sharing groups. The master enterprise account must have at least one &#39;enterprise_manager&#39; user. An &#39;enterprise_manager&#39; can also grant the same privileges to another user.</li>
+</ul>
+
+<h2 id="managing-permissions-and-users">Managing Permissions and Users</h2>
+
+<p>One of the core responsibilities of administrators is managing accounts, users, roles, and permissions. The terms &#39;accounts&#39;, &#39;user&#39;, and &#39;roles&#39; are used in this evaluation guide and can cause some confusion. This section contains detailed descriptions of these terms and provides information about their appropriate usage/application.</p>
+
+<h3 id="managing-permissions-and-users-accounts">Accounts</h3>
+
+<p>Each user needs access to two types of accounts:</p>
+
+<ul>
+<li><strong>RightScale Account</strong> - Create a RightScale Account to log in to the RightScale Dashboard and manage your Microsoft Azure cloud. Registration requires an email and password. To view information about your RightScale Account in the Dashboard, go to <strong>Settings</strong> &gt; <strong>Account</strong>.<br>
+<strong>Note</strong> : Unless otherwise specified, the word &#39;account&#39; in the documentation refers to your RightScale Account.</li>
+<li><strong>Microsoft Azure Account</strong> - Before you can use the RightScale Dashboard to manage your server instances in Microsoft Azure, make sure you have valid Microsoft Azure credentials. You need to enter valid credentials into the Dashboard in order to launch and manage resources in your Microsoft Azure cloud through the RightScale Dashboard or API.</li>
+</ul>
+
+<p>The following diagram shows three separate users. John set up the &#39;Site1.com&#39; RightScale account and invited Ben (who has his own RightScale account) to be a user of the &#39;Site1.com&#39; RightScale account. Ben set up his own RightScale account, which he&#39;s enabled to manage resources across multiple cloud providers. Greg is new to RightScale and has never set up his own RightScale account, however Ben invited him to be a user of his &#39;Site2.com&#39; RightScale account.</p>
+
+<p><img src="/img/azure-account-model.png" alt="azure-account-model.png" width="486" height="349" /></p>
+
+<p>Keep in mind that a RightScale Account is separate from a Cloud Account. You can register multiple cloud accounts with a single RightScale account. However, you will be responsible for paying for all cloud and cloud-related cloud usage costs. If you are a paying customer of RightScale, your cloud usage costs are separate charges from your RightScale Edition subscription fee.</p>
+
+<p><img src="/img/azure-billing-model.png" alt="azure-billing-model.png" width="761" height="275" /></p>
+
+<h3 id="managing-permissions-and-users-user">User</h3>
+
+<p>RightScale users are identified by their email address. Each user can have access to multiple RightScale Accounts. Create your own RightScale Account or accept invitations to be a user of other RightScale Accounts. To view information about your User settings across all of the RightScale accounts that you have access to, go to <strong>Settings</strong> &gt; <strong>User</strong>.</p>
+
+<p>In the diagram below, John Doe is identified as <a href="mailto:&#x27;john@mysite.com" title="mailto:&#39;john@mysite.com">&#39;john@mysite.com</a>&#39; in the RightScale platform. He currently has access to three RightScale Accounts and has different user role privileges in each of those accounts.</p>
+
+<p><img src="/img/azure-user.png" alt="azure-user.png" width="495" height="80" /></p>
+
+<p>In the RightScale system, your email address is used as your username or unique identifier and is also used in audit entries, changelogs, and histories to identify which user performed a particular action(s) within a RightScale Account. Therefore, it&#39;s important that login credentials (email/password) are never shared or used by multiple users because it will not be possible to track user actions in the Dashboard.</p>
+
+<h3 id="managing-permissions-and-users-invite-users">Invite Users</h3>
+
+<p>Users with &#39;admin&#39; user role privileges can send RightScale account invitations to other users. In order to invite a user to a RightScale account, you must send the invitation to the email address that the user will use to log into the RightScale Dashboard.</p>
+
+<p>To send a RightScale account invitation, go to <strong>Settings</strong> &gt; <strong>Account Settings</strong>. Under the <strong>Invitations</strong> tab, click the <strong>Invite Users</strong> button. Click the <strong>Send Invitations</strong> button to send an email invitation to each user. (A copy of the email invitation will also be sent to the owner of the RightScale account.) Invitations can be either temporary or permanent. Temporary invitations allow account admins to invite users to their account, but the invited user will be removed after a specified number of days.</p>
+
+<p><strong>Note</strong>: If you have a free RightScale account, you must grant each invited user &#39;admin&#39; user role privileges.</p>
+
+<p>The invitation link that users receive in email will expire in six days. If the user does not use the invitation to activate a RightScale account within that period, you must send a new invitation.</p>
+
+<h3 id="managing-permissions-and-users-accept-an-account-invitation">Accept an Account Invitation</h3>
+
+<p>An invitation to a RightScale account sends an email from <a href="mailto:root@rightscale.com">root@rightscale.com</a>. If the email is not in the recipient&#39;s inbox, check the spam folder or perform a keyword search for &#39;rightscale&#39; in your email.</p>
+
+<p>To accept the account invitation, click on the validation link in the email. Once you are logged into the Dashboard, you&#39;ll need to click the <strong>Accept Invitation</strong> button.</p>
+
+<h2 id="managing-your-rightscale-account">Managing your RightScale Account</h2>
+
+<p>If you are an &#39;admin&#39;user of a RightScale account, you can use the various user roles to control the permissions of all invited users in order to manage their level of access and functionality. Only &#39;admin&#39; users can send account invitations. If you are an &#39;admin&#39; user, you must specify a user&#39;s roles before sending an account invitation. Later, you can change a user&#39;s roles under the <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Users</strong> tab.</p>
+
+<p><strong>Note</strong> : Only an &#39;admin&#39; user can revoke another user&#39;s &#39;admin&#39; privileges.</p>
+
+<p>It&#39;s important that you never share the email/password that you use to log into the RightScale Dashboard. For example, if an account (e.g. &#39;Site1.com&#39;) has multiple users, each user should create a unique RightScale account. Later, the &#39;admin&#39; user of the &#39;Site1.com&#39; account can invite additional users to that account. This is the only way that you can have user accountability within an account. If you share the same email/password with multiple users, there is no way to determine who launched or terminated a server. It&#39;s important that each action can be attributed to a single user.</p>
+
+<h2 id="user-roles">User Roles</h2>
+
+<p>To view your own user role privileges across all of your accounts, go to <strong>Settings</strong> &gt; <strong>User</strong> &gt; <strong>Info</strong>. Remember, user roles are account-specific. The following is a list of available roles and a brief description of what each role can do in the RightScale Dashboard.</p>
+
+<p><strong>admin:</strong> Administrative control of the RightScale Account.</p>
+
+<p><strong>actor:</strong> Ability to manage all cloud related activity.</p>
+
+<p><strong>observer:</strong> Ability to view the RightScale account.</p>
+
+<p><strong>designer:</strong> Ability to create ServerTemplates, RightScripts, and Macros. Ability to view local object collections under the Design menu.</p>
+
+<p><strong>library:</strong> Ability to import objects from the MultiCloud Marketplace to your local view (collection). The ability to view the MultiCloud Marketplace requires the &#39;designer&#39; role.</p>
+
+<p><strong>security_manager:</strong> Ability to create a cloud Security Group and modify an existing Security Group&#39;s port permissions. Ability to view and generate Infrastructure Audit Reports.</p>
+
+<p><strong>server_login:</strong> Ability to log into servers.</p>
+
+<p><strong>publisher:</strong> Ability to create sharing groups and share RightScale objects (ServerTemplates, RightScripts, and Macros) with other users.</p>
+
+<p><strong>enterprise_manager:</strong> (Enterprise only) Manages all accounts within the enterprise. Send account invitations and grant user role privileges across all accounts in the enterprise.</p>
+
+<p><strong>ca_user:</strong> Ability to view billing information.</p>
+
+<h2 id="server-roles">Server Roles</h2>
+
+<p>Sometimes the word &#39;role&#39; refers to a server&#39;s role or configuration. For example, when you launch an instance on a cloud you are provisioning a <q>blank</q> piece of hardware that you can configure to fulfill a specific type of server role. Additionally, you can use different ServerTemplates to configure instances to fulfill certain roles such as dedicated load balancers, application servers, database servers, etc.</p>
+
+<p><img src="/img/azure-server-roles.png" alt="azure-server-roles.png" width="598" height="299" /></p>
+
+<h2 id="collaboration">Collaboration</h2>
+
+<p>RightScale gives you a single pane of glass to manage your Microsoft Azure cloud which makes collaboration across teams and regions easy and effective. Instead of using multiple tools or systems to manage cloud assets, using the RightScale cloud management platform enables you to see everything in one place. You can manage public clouds, private clouds, and hybrid clouds across geographies and time zones under one platform.</p>
+
+<h2 id="saml">SAML</h2>
+
+<p>Security Assertion Markup Language (SAML) is an XML standard used to authenticate users from an Identity Provider (IdP) to a software provider. SAML allows a user to log on once to a site (an IdP) and have access granted to affiliated websites. In conjunction with our provisioning API, this functionality enables you to authenticate and synchronize with existing identity stores.</p>
+
+<p>RightScale is enabling SAML 2.0-based Single Sign-On (SSO) functionality for Enterprise Plan customers who request this feature. This, combined with our provisioning API, allows for full identity federation including syncing with Active Directory. In addition, we have tested this functionality with our partners Okta and PingIdentity so that you can use their (and similar) SaaS-based Identity Provider.</p>
+
+<h2 id="oauth">OAuth</h2>
+
+<p>OAuth-compatible authentication and authorization supports a password-less Dashboard user that can login to the API and make authenticated requests. This feature is currently in public beta. Please contact support with any issues. You can enable OAuth by going to <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>API Credentials</strong>. Here you can obtain an API access token which allows you to make changes without logging in.</p>
+
+<h2 id="microsoft-active-directory-integration">Microsoft Active Directory Integration</h2>
+
+<p>RightScale supports Microsoft Active Directory (AD) integration by allowing you to launch Windows AD domain controllers in public or private clouds using the Microsoft Active Directory ServerTemplate.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Using RightScale to manage your Microsoft Azure cloud gives you maximum control and flexibility by integrating all of your cloud management into one interface. Using Microsoft Azure with RightScale provides you with the following benefits:</p>
+
+<ul>
+<li>Manage your entire Microsoft Azure cloud infrastructure with a single, integrated solution using RightScale.</li>
+<li>Use RightScale abstraction with customization so you can focus on your applications running in Microsoft Azure rather than on administration.</li>
+<li>Automate deployment and management of cloud resources.</li>
+<li>Build and manage your cloud by leveraging the expertise of both the RightScale and Microsoft Azure teams.</li>
+<li>Provision and monitor your servers in the Internet-scale hosting environment provided by Microsoft Azure, using RightScale as a <q>single pane of glass</q> management interface.</li>
+</ul>
+
+<h2 id="support">Support</h2>
+
+<p>Contact RightScale Support at <a href="mailto:support@rightscale.com">support@rightscale.com</a>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

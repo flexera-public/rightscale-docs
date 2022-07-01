@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Reference Architecture</title><meta content="This page describes a sample architecture that covers the various aspects of an OpenStack cloud managed through RightScale including networking, OpenStack components, services, hardware configuration, and monitoring." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="clouds clouds_openstack clouds_openstack_openstack_ref_arch" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="openstack_about.html"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>OpenStack</span></h4></a><a class="list-group-item" href="openstack_setup_guide.html">Setup Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Supported Clouds</a> &#x2F; <a href="./">OpenStack</a></p><div class="page-header"><h1>Reference Architecture</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Here is a sample architecture that covers the various aspects of an OpenStack cloud managed through RightScale including networking, OpenStack components, services, hardware configuration, and monitoring. Use can use this information as a guide in developing your own OpenStack architectures.</p>
+
+<h2 id="networking">Networking</h2>
+
+<ul>
+<li>Neutron</li>
+</ul>
+
+<h2 id="adding-openstack-to-rightscale">Adding OpenStack to RightScale</h2>
+
+<h3 id="adding-openstack-to-rightscale-cloud-capabilities">Cloud Capabilities</h3>
+
+<p>When adding an OpenStack zone with basic networking and security groups to the RightScale Cloud Management (CM) Dashboard, the following cloud capabilities should be set:</p>
+
+<ul>
+<li><strong>Security Groups</strong>: Enabled</li>
+<li><strong>Port Forwarding</strong>: Disabled</li>
+<li><strong>Subnets</strong>: Disabled</li>
+<li><strong>Multiple Subnets</strong>: Disabled</li>
+</ul>
+
+<h2 id="components">Components</h2>
+
+<h3 id="components-keystone,-horizon,-dnsmasq-and-mysql-server">Keystone, Horizon, dnsmasq and MySQL Server</h3>
+
+<p>Runs the Cinder, Swift-Proxy, Glance, Nova-Network and Nova-Manage services. Provides image management, block storage, object storage proxy and compute management. This server has high I/O and network requirements. A RAID5 array provides improved disk I/O while still providing fault tolerance. 10Gb network configuration is recommended for the storage server to reduce instance and snapshot creation time.</p>
+
+<h4 id="network">Network</h4>
+
+<ul>
+<li>10Gb Private NIC</li>
+<li>1-10Gb Public NIC</li>
+</ul>
+
+<h4 id="disk-configuration">Disk Configuration</h4>
+
+<ul>
+<li>RAID5</li>
+</ul>
+
+<h4 id="expansion">Expansion</h4>
+
+<ul>
+<li>If block storage disk space becomes an issue, additional Cinder nodes can be added to increase space. Adding extra Glance servers can be used to reduce disk and network I/O on each Glance server.</li>
+</ul>
+
+<h3 id="components-swift-object-nodes">Swift-Object Nodes</h3>
+
+<p>Runs the Cinder, Swift-Proxy, Glance, Nova-Network and Nova-Manage services. Provides image management, block storage, object storage proxy and compute management. This server has high I/O and network requirements. A RAID5 array provides improved disk I/O while still providing fault tolerance. 10Gb network configuration is recommended for the storage server to reduce instance and snapshot creation time.</p>
+
+<h4 id="network">Network</h4>
+
+<ul>
+<li>10Gb Private NIC</li>
+</ul>
+
+<h4 id="disk-configuration">Disk Configuration</h4>
+
+<ul>
+<li>SSD RAID0</li>
+</ul>
+
+<h4 id="expansion">Expansion</h4>
+
+<p>Additional hypervisors should be added to a cluster in the event that that VMs cannot be launched due to hypervisor disk or memory capacity. Extra hypervisors can also be added to a cluster if VMs are running slow due to insufficient disk I/O.</p>
+
+<h2 id="example-hardware-configuration">Example Hardware Configuration</h2>
+
+<table><thead>
+<tr>
+<th>Component</th>
+<th>Server</th>
+<th>Disk Speed</th>
+<th>Disk Size</th>
+<th>CPU</th>
+<th>Memory</th>
+<th>Port Speed</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Management Server</td>
+<td>osmanagement1</td>
+<td>7.2K SATA</td>
+<td>500GB (2x 500GB SATA - RAID1)</td>
+<td>Single 5310</td>
+<td>8GB</td>
+<td>1Gb</td>
+</tr>
+<tr>
+<td>Storage Server</td>
+<td>oskvmfs1</td>
+<td>15k SCSI</td>
+<td>3.6TB(7x 600GB 15k SCSI - RAID5)</td>
+<td>Single 5310</td>
+<td>8GB</td>
+<td>10Gb</td>
+</tr>
+<tr>
+<td>Hypervisor</td>
+<td>oskvm1</td>
+<td>SSD</td>
+<td>1.6TB (4x 400GB SSD - RAID0)</td>
+<td>Dual X5650</td>
+<td>48GB</td>
+<td>10Gb</td>
+</tr>
+<tr>
+<td>Hypervisor</td>
+<td>oskvm2</td>
+<td>SSD</td>
+<td>1.6TB (4x 400GB SSD - RAID0)</td>
+<td>Dual X5650</td>
+<td>48GB</td>
+<td>10Gb</td>
+</tr>
+</tbody></table>
+
+<h2 id="services">Services</h2>
+
+<h3 id="services-common">Common</h3>
+
+<p>Juno source:<br>
+ /etc/apt/sources.list.d/Juno.list<br>
+ deb <a href="http://ubuntu-cloud.archive.canonical.com/ubuntu">http://ubuntu-cloud.archive.canonical.com/ubuntu</a> precise-updates/Juno main</p>
+
+<h3 id="services-keystone">Keystone</h3>
+
+<p>Packages:</p>
+
+<ul>
+<li>keystone</li>
+<li>python-keystone</li>
+<li>python-keystoneclient</li>
+</ul>
+
+<p>Configuration Files:</p>
+
+<ul>
+<li><a href="http://privatecloudtools.s3.amazonaws.com/OpenStack/Juno/Config/keystone.tgz">http://privatecloudtools.s3.amazonaw...g/keystone.tgz</a></li>
+</ul>
+
+<h3 id="services-nova">Nova</h3>
+
+<p>Packages:</p>
+
+<ul>
+<li>nova-api</li>
+<li>nova-cert</li>
+<li>nova-common</li>
+<li>nova-conductor</li>
+<li>nova-consoleauth</li>
+<li>nova-novncproxy</li>
+<li>nova-scheduler</li>
+<li>python-nova</li>
+<li>python-novaclient</li>
+</ul>
+
+<p>Configuration Files:</p>
+
+<ul>
+<li><a href="http://privatecloudtools.s3.amazonaws.com/OpenStack/Juno/Config/nova.tgz">http://privatecloudtools.s3.amazonaw...onfig/nova.tgz</a></li>
+</ul>
+
+<h3 id="services-neutron">Neutron</h3>
+
+<p>Packages:</p>
+
+<ul>
+<li>python-neutron</li>
+<li>python-neutronclient</li>
+<li>neutron-common</li>
+<li>neutron-dhcp-agent</li>
+<li>neutron-l3-agent</li>
+<li>neutron-metadata-agent</li>
+<li>neutron-plugin-openvswitch</li>
+<li>neutron-plugin-openvswitch-agent</li>
+<li>neutron-server</li>
+</ul>
+
+<p>Configuration Files:</p>
+
+<ul>
+<li><a href="http://privatecloudtools.s3.amazonaws.com/OpenStack/Juno/Config/neutron.tgz">http://privatecloudtools.s3.amazonaw...ig/neutron.tgz</a></li>
+</ul>
+
+<h3 id="services-glance">Glance</h3>
+
+<p>Packages:</p>
+
+<ul>
+<li>glance</li>
+<li>glance-api</li>
+<li>glance-common</li>
+<li>glance-registry</li>
+<li>python-glance</li>
+<li>python-glanceclient</li>
+</ul>
+
+<p>Configuration Files:</p>
+
+<ul>
+<li><a href="http://privatecloudtools.s3.amazonaws.com/OpenStack/Juno/Config/glance.tgz">http://privatecloudtools.s3.amazonaw...fig/glance.tgz</a></li>
+</ul>
+
+<h3 id="services-cinder">Cinder</h3>
+
+<p>Packages:</p>
+
+<ul>
+<li>cinder-api</li>
+<li>cinder-common</li>
+<li>cinder-scheduler</li>
+<li>cinder-volume</li>
+<li>python-cinder</li>
+<li>python-cinderclient</li>
+</ul>
+
+<h3 id="services-swift">Swift</h3>
+
+<p>Packages:</p>
+
+<ul>
+<li>python-swift</li>
+<li>python-swiftclient</li>
+<li>swift</li>
+<li>swift-proxy</li>
+</ul>
+
+<h3 id="services-nova-compute">Nova-compute</h3>
+
+<p>Packages:</p>
+
+<ul>
+<li>nova-common</li>
+<li>nova-compute</li>
+<li>nova-compute-kvm</li>
+<li>python-nova</li>
+<li>python-novaclient</li>
+</ul>
+
+<h3 id="services-neutron-agent">Neutron-agent</h3>
+
+<p>Packages:</p>
+
+<ul>
+<li>python-neutron</li>
+<li>python-neutronclient</li>
+<li>neutron-common</li>
+<li>neutron-dhcp-agent</li>
+<li>neutron-l3-agent</li>
+<li>neutron-metadata-agent</li>
+<li>neutron-plugin-openvswitch</li>
+<li>neutron-plugin-openvswitch-agent</li>
+</ul>
+
+<h3 id="services-swift-object">Swift-object</h3>
+
+<p>Packages:</p>
+
+<ul>
+<li>python-swift</li>
+<li>python-swiftclient</li>
+<li>swift</li>
+<li>swift-account</li>
+<li>swift-container</li>
+<li>swift-object</li>
+</ul>
+
+<h2 id="monitoring-steps">Monitoring Steps</h2>
+
+<p>Zenoss is recommended for OpenStack monitoring, but OpenStack monitoring is also possible with Nagios.</p>
+
+<ul>
+<li>For more information on Zenoss look here: <a href="https://github.com/zenoss/ZenPacks.zenoss.OpenStackInfrastructure/blob/develop/README.mediawiki">https://github.com/zenoss/ZenPacks.zenoss.OpenStackInfrastructure/blob/develop/README.mediawiki</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>EC2 Load Balancing</title><meta content="Common procedures for working with EC2 Load Balancing in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_aws cm_dashboard_clouds_aws_actions cm_dashboard_clouds_aws_actions_load_balancing_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../../">Cloud Management</a> &#x2F; <a href="../../../">Dashboard User's Guide</a> &#x2F; <a href="../../">clouds</a> &#x2F; <a href="../">Amazon Web Services (AWS)</a> &#x2F; <a href="./">AWS Actions</a></p><div class="page-header"><h1>EC2 Load Balancing</h1></div><div class="main-content"><h2 id="create-an-aws-elastic-load-balancer">Create an AWS Elastic Load Balancer</h2>
+
+<h3 id="create-an-aws-elastic-load-balancer-overview">Overview</h3>
+
+<p>You can use Amazon&#39;s Elastic Load Balancers (ELB) for load balancing purposes. Windows and Linux ServerTemplates can automatically register and unregister when servers are launched in a deployment or autoscaling array. For mission critical applications using AWS Elastic Load Balancers, you should configure the ELB to service application servers running in multiple availability zones.</p>
+
+<p><img src="/img/cm-3tier-ELB.png" alt="cm-3tier-ELB.png" width="725" height="545" /></p>
+
+<p>Use the following procedure to create a new Amazon Elastic Load Balancer (ELB).</p>
+
+<h3 id="create-an-aws-elastic-load-balancer-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>If you have valid Amazon Web Services (AWS) EC2 credentials, you are automatically granted the Elastic Load Balancer service. No additional service sign ups are required.</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="create-an-aws-elastic-load-balancer-steps">Steps</h3>
+
+<h4 id="create-a-load-balancer">Create a Load Balancer</h4>
+
+<ol>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Load Balancing</strong></li>
+<li>Click <strong>Create ELB</strong> and fill out the required form fields:</li>
+</ol>
+
+<p><img src="/img/cm-create-ELB.png" alt="cm-create-ELB.png" width="725" height="465" /></p>
+
+<p>General Info:</p>
+
+<ul>
+<li><strong>Load Balancer name</strong> - The name of our Elastic Load Balancer. It must be unique within your AWS account.</li>
+<li><strong>VPC</strong> - The Virtual Private Cloud you&#39;d like to associate to this load balancer.</li>
+<li><strong>Internal Load Balancer</strong> - Select this option to create an internal load balancer. A DNS name will be created and it will contain the private IP address of the load balancer. This option is only available if you set a value for VPC.</li>
+<li><strong>Subnets</strong> - Your load balancer can interface with instances in one or more subnets. Only subnets in the selected VPC are available. This option is only visible if you set a value for VPC.</li>
+<li><strong>Security Groups</strong> - One or more security groups to manage traffic communicating with your load balancer. This option is only visible if you set a value for VPC.</li>
+<li><strong>Availability Zone(s)</strong> - Select all of the availability zones for which the ELB will service. (<em>Tip</em>: Click in the box to view and select additional zones.) An ELB will only load balance across instances in the selected availability zones. An ELB is region-specific; it cannot load balance across multiple regions. For example, you cannot load balance your application traffic amongst instances in the &#39;us-east&#39; and &#39;us-west&#39; regions. Note: This field is not displayed if you have selected a value for VPC.</li>
+</ul>
+
+<p>Default Listener:</p>
+
+<ul>
+<li><strong>LB Protocol</strong> - The routing transport protocol that will be used by the ELB. (TCP, HTTP, HTTPS)</li>
+<li><strong>LB Port</strong> - External port that the ELB will listen on to accept client requests. Valid ports are 80, 443, 1024-65535.
+
+<ul>
+<li>For an example (v13.5 LTS) 3-tier deployment, use <strong>HTTP:80</strong>.</li>
+</ul></li>
+<li><strong>Instance Protocol</strong> - The routing transport protocol that the ELB will use to connect to the instances (i.e. application servers) in its load balancing pool. (HTTP, HTTPS, TCP, SSL) If you are using one of the application ServerTemplates (v12+) published by RightScale, select &#39;HTTP&#39; for the protocol. <em>Note</em>: The Load Balancer and Instance Protocols must match. You can create additional listener rules after you create the ELB.]</li>
+<li><strong>Instance Port</strong> - The port that the ELB will use to send traffic to the application instances. Valid ports are 1 to 65535. The Instance Port does not have to match the Load Balancer Port. If you are using one of the application ServerTemplates (v12+) published by RightScale, the default application listener port is &#39;8000&#39;.
+
+<ul>
+<li>For an example (v13.5 LTS) 3-tier deployment, use <strong>HTTP:8000</strong>.</li>
+</ul></li>
+<li><strong>Stickiness</strong> - This is where you can create a session sticky policy for your load balancer (stickiness meaning that once a session starts, all requests will attempt to routed subsequent to the same server for that given session). You can select one of the following options:
+
+<ul>
+<li><strong>Disable Stickiness</strong> - Does not allow session stickiness the load balancer and application server.</li>
+<li><strong>Load Balancer Generated Cookie Stickiness</strong> - A special cookie is used to track the backend server instance for each request. When the LB receives a request, it checks to see if this cookie is present in the request. If so, the load balancer sends the request to the application server specified in the cookie. If not, the request is sent to a server chosen based on the existing load balancing algorithm. This option creates a stickiness policy with sticky session lifetime controlled by the lifetime of the browser or a specified expiration period. This only works with HTTP/HTTPS listeners.</li>
+<li><strong>Application Generated Cookie Stickiness</strong> - This is similar to the Load Balancer Generated Cookie Stickiness option, with the following exception: once a cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.</li>
+</ul></li>
+</ul>
+
+<ol>
+<li>Click <strong>Save</strong>.</li>
+<li>Configure the Health Check test for the ELB and click <strong>Save</strong>.</li>
+</ol>
+
+<p><img src="/img/cm-ELB-health-check.png" alt="cm-ELB-health-check.png" width="550" height="339" /></p>
+
+<h4 id="add-additional-listeners-(optional)">Add Additional Listeners (optional)</h4>
+
+<p>Elastic Load Balancers support both HTTP and HTTPS (SSL) requests. When you create an ELB, you must define a default listener. If you wish to set up additional listeners (e.g. HTTPS), you can configure them after the ELB is created.</p>
+
+<p>![File:12-Guidesdiag-3tierELB_http_https-v1.png)</p>
+
+<p>Listener ports should be defined when your ELB is created. If you are setting up an ELB to load balance across applications servers launched with one of RightScale&#39;s v12.11 or v13.5 LTS ServerTemplates, you may need to modify your ELB and add additional listeners, as necessary.</p>
+
+<ol>
+<li>Click on the Elastic Load Balancer you would like to modify.</li>
+<li>Check the configuration of the application ServerTemplate that will be used to launch the application servers that will connect to the ELB. Make sure that the application servers are configured to listen for requests from the ELB on the correct port. You will need to set up the listener appropriately, depending on how the application servers will be configured. (e.g. Application Listen Port (8000), LB_PORT (80), etc.)</li>
+<li>To configure <strong>HTTP</strong> access, add a listener to forward requests to the appropriate port (e.g. 8000) for the application server. Click <strong>Add Listener</strong> to create a new listener for the ELB.
+
+<ul>
+<li><strong>LB Protocol</strong>: Select &#39;HTTP&#39;</li>
+<li><strong>LB Port</strong>: Enter &#39;80&#39;</li>
+<li><strong>Instance Protocol</strong>: Select &#39;HTTP&#39;</li>
+<li><strong>Instance Port</strong>: Use &#39;8000&#39; (for v12.11 or v13.5 LTS ServerTemplates); use &#39;8080&#39; (for v14 ServerTemplates)</li>
+<li><strong>Stickiness</strong>: You can choose either to have stickiness disabled or generate a sticky session based on either load balancer or application generated HTTP cookies.</li>
+</ul></li>
+<li>To allow <strong>HTTPS (SSL)</strong> access, add a listener to forward requests to the appropriate port (e.g. 8000) for the application servers. Click <strong>Add Listener</strong> to create a new listener for the ELB.
+
+<ul>
+<li><strong>LB Protocol</strong>: Select &#39;HTTPS&#39;</li>
+<li><strong>LB Port</strong>: Enter &#39;443&#39;</li>
+<li><strong>Instance Protocol</strong>: Select &#39;HTTPS&#39;</li>
+<li><strong>Instance Port</strong>: Use &#39;8000&#39; (for v12.11 or v13.5 LTS ServerTemplates); use &#39;8080&#39; (for v14 ServerTemplates)</li>
+<li><strong>Stickiness</strong>: You can choose either to have stickiness disabled or generate a sticky session based on either load balancer or application generated HTTP cookies.</li>
+<li><strong>Certificate</strong>: Select an SSL Certificate. See <a href="/cm/dashboard/clouds/aws/actions/server_certificates_actions.html#create_an_aws_server_certificate.html">Create an AWS Server Certificate</a>.</li>
+</ul></li>
+</ol>
+
+<h4 id="update-the-dns-records">Update the DNS Records</h4>
+
+<p>Once you&#39;ve created your ELB, find its DNS name (e.g. elbname-12345678.us-east-1.elb.amazonaws.com) and use it to create a CNAME with your DNS provider. For an ELB, you cannot create a DNS record that points to an IP address because it could change over time.</p>
+
+<ol>
+<li>Go to the Elastic Load Balancer&#39;s <strong>Info</strong> tab in the RightScale Dashboard.</li>
+<li>Copy the <q>DNS name</q> for the ELB. (e.g. elb-name-2005463590.us-west-1.elb.amazonaws.com)</li>
+</ol>
+
+<p><img src="/img/cm-ELB-info.png" alt="cm-ELB-info.png" width="697" height="199" /></p>
+
+<ol>
+<li>Create a CNAME with your DNS provider (e.g. AWS Route 53, DNS Made Easy, DynDNS, etc.)</li>
+</ol>
+
+<p><strong>Example: Amazon Route 53</strong></p>
+
+<p><img src="/img/cm-ELB-create-CNAME.png" alt="cm-ELB-create-CNAME.png" width="405" height="425" /></p>
+
+<h4 id="create-a-security-group-for-application-servers">Create a Security Group for Application Servers</h4>
+
+<p>The next step is to create or update a security group that will be used by application servers to allows ingress communication from an ELB. By default, RightScale&#39;s Linux-based application ServerTemplates (e.g. PHP, Rails, Tomcat) listen on TCP port 8000 and the Windows-based application ServerTemplate (e.g. Microsoft IIS App) listens on TCP port 80.</p>
+
+<ol>
+<li>Create or modify a security group in the AWS region where the ELB will service requests to the application servers. Later, you will configure the application servers to use this security group in order to connect to the ELB.</li>
+<li>Create the desired port permissions. At a minimum, you will need to open up port 80 for HTTP access. You can also open up 443 for HTTPS (SSL) access. Specify the following information to create a permission for an ELB.
+
+<ul>
+<li><strong>Direction</strong>: Inbound</li>
+<li><strong>Protocol</strong>: TCP - Group</li>
+<li><strong>Ports</strong>:</li>
+<li>For v12.11 or v13.5 LTS ServerTemplates, use 8000..8000 (PHP, Rails, Tomcat, Django); 80..80 (Microsoft IIS)</li>
+<li>For v14 ServerTemplates, use 8080..8080 (PHP, Rails, Tomcat, Django); 80..80 (Microsoft IIS)</li>
+<li><strong>Owner</strong>: amazon-elb</li>
+<li><strong>Group</strong>: amazon-elb-sg</li>
+</ul></li>
+</ol>
+
+<p><img src="/img/cm-security-group-for-ELB.png" alt="cm-security-group-for-ELB.png" width="242" height="502" /></p>
+
+<ol>
+<li>Click <strong>Save</strong>.</li>
+<li>Later, when you set up your application servers and/or server array, be sure to use the above security group for the application servers will connect to the Elastic Load Balancer.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You cannot add a new security group to a running instance. In such cases, it&#39;s recommended that you add the security group to the <q>next</q> server and relaunch the server.</p>
+</div>
+
+<h2 id="add-an-instance-to-an-aws-elastic-load-balancer">Add an Instance to an AWS Elastic Load Balancer</h2>
+
+<h3 id="add-an-instance-to-an-aws-elastic-load-balancer-overview">Overview</h3>
+
+<p>Once you have created and configured your load balancer, you can add instances to it. Use the following procedure to add an instance to an AWS Elastic Load Balancer.</p>
+
+<h3 id="add-an-instance-to-an-aws-elastic-load-balancer-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A configured AWS Elastic Load Balancer (ELB)</li>
+</ul>
+
+<h3 id="add-an-instance-to-an-aws-elastic-load-balancer-steps">Steps</h3>
+
+<ol>
+<li>Navigate to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Load Balancing</strong> &gt; <em>LoadBalancerName</em>.</li>
+<li>Click <strong>Add Instance</strong>.</li>
+<li>Select the instances that you want to add and click <strong>Save</strong>.</li>
+<li>To remove an instance, click the check box for the instance and select <strong>Remove</strong> from the <strong>Actions</strong> drop down.</li>
+</ol>
+
+<h2 id="remove-an-instance-from-an-aws-elastic-load-balancer">Remove an Instance from an AWS Elastic Load Balancer</h2>
+
+<h3 id="remove-an-instance-from-an-aws-elastic-load-balancer-overview">Overview</h3>
+
+<p>Once you have created and configured your load balancer and added an instance to it, you may need to remove the instance. This is very simple to do. Use the following procedure to unregister a Server attached to an AWS Elastic Load Balancer (ELB).</p>
+
+<h3 id="remove-an-instance-from-an-aws-elastic-load-balancer-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A configured AWS Elastic Load Balancer with a server attached to it.</li>
+</ul>
+
+<h3 id="remove-an-instance-from-an-aws-elastic-load-balancer-steps">Steps</h3>
+
+<ol>
+<li>Navigate to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Load Balancing</strong> &gt; <em>LoadBalancerName</em></li>
+<li>Expand the <strong>Instances</strong> tab.</li>
+<li>Select the instances that you want to remove.</li>
+<li>Select <strong>Remove</strong> from the Actions drop down.<br></li>
+</ol>
+
+<h2 id="add-listeners-to-an-elastic-load-balancer">Add Listeners to an Elastic Load Balancer</h2>
+
+<h3 id="add-listeners-to-an-elastic-load-balancer-overview">Overview</h3>
+
+<p>When you first create a new Elastic Load Balancer, it&#39;s automatically set up with one listener already predefined. By default, an ELB will be configured to listen over HTTP on port 80 and forward traffic to port 80 on the receiving EC2 instances, which are typically your application servers.</p>
+
+<ul>
+<li>HTTP; 80-&gt;80</li>
+</ul>
+
+<p>To add additional listeners or make changes to existing ones, use the <strong>Listeners</strong> tab of the ELB. Use the following procedure to add listeners to an existing Amazon Elastic Load Balancer (ELB).</p>
+
+<h3 id="add-listeners-to-an-elastic-load-balancer-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An existing ELB</li>
+<li>&#39;actor&#39; user role privileges</li>
+<li>To add a Listener for SSL communications, you&#39;ll need a <a href="/cm/dashboard/clouds/aws/server_certificates.html">Server Certificate</a>.</li>
+</ul>
+
+<h3 id="add-listeners-to-an-elastic-load-balancer-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Load Balancing</strong>.</li>
+<li>Select&nbsp;an existing ELB from the list.</li>
+<li>Click <strong>Add Listener</strong>.</li>
+</ol>
+
+<p>To add a Listener, specify the following information:</p>
+
+<ul>
+<li><strong>Load Balancer Protocol</strong> - The routing transport protocol that will be used by the ELB.
+
+<ul>
+<li>HTTP</li>
+<li>HTTPS</li>
+<li>TCP</li>
+<li>SSL</li>
+</ul></li>
+<li><strong>Load Balancer Port</strong> - External port that the ELB will listen on to accept client requests. Valid ports are 80, 443, 1024-65535.</li>
+<li><strong>Instance Protocol</strong> - The front end protocol used by the instance.</li>
+<li><strong>Instance Port</strong> - The port that the ELB will use to send traffic to the application instances. Valid ports are 1 to 65535. The Instance Port does not have to match the Load Balancer Port.</li>
+<li><strong>Certificate</strong> (for HTTPS and SSL only) - Select or upload the Server Certificate that will be used for encryption purposes. See <a href="/cm/dashboard/clouds/aws/server_certificates.html">Server Certificates</a>.</li>
+<li><strong>Stickiness</strong> - (HTTP and HTTPS only) - Use stickiness to bind a user&#39;s session to a specific application instance. Also known as session affinity.</li>
+</ul>
+
+<h2 id="create-a-new-sticky-session">Create a New Sticky Session</h2>
+
+<h3 id="create-a-new-sticky-session-overview">Overview</h3>
+
+<p>By default, AWS ELB distributes requests to Instances running your application based on the lowest load. However, you can create a Sticky Session so that a request is bound to the same Instance for the length of the entire session. Sticky sessions are based on either load balancer or application generated HTTP cookies. This tutorial will step you through how to create a Sticky Session for your ELB. Use the following procedure to create a new Sticky Session policy for an AWS Elastic Load Balancer (ELB).</p>
+
+<h3 id="create-a-new-sticky-session-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A created ELB and two or more front end Servers that have registered with the ELB.</li>
+<li>There is an AWS-imposed limit of 20 policies per ELB.</li>
+<li>Load Balancer protocol set to either HTTP or HTTPS</li>
+</ul>
+
+<h3 id="create-a-new-sticky-session-steps">Steps</h3>
+
+<ol>
+<li>Navigate to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Load Balancing</strong>.</li>
+<li>Click the ELB that you want to create a Sticky Session for.</li>
+<li>Expand the <strong>Listener(s)</strong> tab.</li>
+<li>Select either <strong>Load Balancer Generated Cookie Stickiness</strong> or <strong>Application Generated Cookie Stickiness</strong> to determine the basis for stickiness and set the following parameters:
+
+<ul>
+<li>For Load Balancer Generated Cookie Stickiness, set the Expiration Period (in seconds), after which stickiness will be disabled. Leaving this field blank means that stickiness will not expire.</li>
+<li>For Application Generated Cookie Stickiness, enter the Cookie Name.</li>
+</ul></li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+
+<p><img src="/img/cm-stickiness.png" alt="cm-stickiness.png" width="550" height="438" /></p>
+
+<h3 id="create-a-new-sticky-session-additional-elb-information">Additional ELB Information</h3>
+
+<p>The following is an excerpt from the AWS ELB Developer Guide (Sept 2010), where it speaks to the Cookie Type:</p>
+
+<p><strong>Load Balancer-Generated HTTP Cookies</strong></p>
+
+<p>The load balancer uses a special load balancer-generated cookie to track the application instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. If so, the request is sent to the application instance specified in the cookie. If there is no cookie, the load balancer chooses an application instance based on the existing load balancing algorithm. A cookie is inserted into the response for binding subsequent requests from the same user to that application instance. The policy configuration defines a cookie expiry, which establishes the duration of validity for each cookie.</p>
+
+<p>For more information about the policy configuration for load balancer-generated HTTP cookies, see <a href="http://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_CreateLBCookieStickinessPolicy.html">Create LB Cookie Stickiness Policy</a>.</p>
+
+<p><strong>Application-Generated HTTP Cookies</strong></p>
+
+<p>The load balancer uses a special cookie to associate the session with the original server that handled the request, but follows the lifetime of the application-generated cookie corresponding to the cookie name specified in the policy configuration. The load balancer only inserts a new stickiness cookie if the application response includes a new application cookie. If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.</p>
+
+<p>For more information about the policy configuration for application-generated HTTP cookies, see <a href="http://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_CreateAppCookieStickinessPolicy.html">Create App Cookie Stickiness Policy</a>.</p>
+
+<h3 id="create-a-new-sticky-session-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<h4 id="disable-a-sticky-session">Disable a Sticky Session</h4>
+
+<ul>
+<li>Navigate to the Load Balancer</li>
+<li>Expand the <strong>Listener(s)</strong> tab.</li>
+<li>Select <strong>Disable Stickiness</strong></li>
+</ul>
+
+<h2 id="edit-an-aws-elastic-load-balancer-configuration">Edit an AWS Elastic Load Balancer Configuration</h2>
+
+<h3 id="edit-an-aws-elastic-load-balancer-configuration-overview">Overview</h3>
+
+<p>There are several ways you can modify your load balancer&#39;s configuration that will affect the way it operates. One of the more common edits you can perform from the Dashboard is changing (adding to or deleting from) the Availability Zones your load balancer distributes traffic in. Use the following procedure to edit the configuration of an AWS Elastic Load Balancer (ELB) in the RightScale Dashboard.</p>
+
+<h3 id="edit-an-aws-elastic-load-balancer-configuration-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>EC2 credentials, and a previously created AWS Elastic Load Balancer</li>
+</ul>
+
+<h3 id="edit-an-aws-elastic-load-balancer-configuration-steps">Steps</h3>
+
+<ol>
+<li>Navigate to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Load Balancing</strong>.</li>
+<li>Select the correct <em>LoadBalancerName</em> link.</li>
+<li>You will be given the option to modify these areas:
+
+<ul>
+<li><strong>Info</strong> - This section displays the DNS Name of the LB and the Availability Zone(s) associated to the LB. You can edit this section to modify the zones the LB should service traffic in.</li>
+<li><strong>Health Check</strong> - Based on the information configured in this section, ELB routinely checks the health of the load balancer within an AWS instance. You can specify either TCP, HTTP, HTTPS, or SSL and a valid port between one and 65535. The default is TCP:80. Additionally, you can specify the following:</li>
+<li><strong>Response Timeout</strong> - Time to wait when receiving a response from the health check (between two and 60 seconds)</li>
+<li><strong>Health Check Interval</strong> - Amount of time between health checks (0.1 min. to 5 min.)</li>
+<li><strong>Unhealthy Threshold</strong> - Number of consecutive health check failures before an instance is declared as unhealthy (two to 10)</li>
+<li><strong>Healthy Threshold</strong> - Number of consecutive health check successes before an instance is declared as healthy (two to 10)</li>
+<li><strong>Instance(s)</strong> - You can view current instances associated to your LB and add instances to your LB.</li>
+<li><strong>Listener(s)</strong> - You can view current listeners associated to your LB and add new listeners to your LB.</li>
+</ul></li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Consult the AWS documentation for additional information. (Our default values align with AWS and the above values could possibly become dated over time.)</p>
+</div>
+
+<ul>
+<li>After editing one of all of these sections, don&#39;t forget to <strong>Save</strong> your changes.</li>
+</ul>
+
+<h3 id="edit-an-aws-elastic-load-balancer-configuration-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<p>To view the current configuration of your load balancer, navigate to:</p>
+
+<p><strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Load Balancing</strong> &gt; <em>LoadBalancerName</em></p>
+
+<h2 id="delete-an-aws-elastic-load-balancer-configuration">Delete an AWS Elastic Load Balancer Configuration</h2>
+
+<h3 id="delete-an-aws-elastic-load-balancer-configuration-overview">Overview</h3>
+
+<p>Use the following procedure to delete an AWS Elastic Load Balancer in the RightScale Dashboard.</p>
+
+<h3 id="delete-an-aws-elastic-load-balancer-configuration-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>EC2 credentials, and a previously created AWS Elastic Load Balancer.</li>
+</ul>
+
+<h3 id="delete-an-aws-elastic-load-balancer-configuration-steps">Steps</h3>
+
+<ol>
+<li>Navigate to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Load Balancing</strong>.</li>
+<li>Select the correct <em>LoadBalancerName</em> checkbox.</li>
+<li>Select the <strong>Actions</strong> dropdown and <strong>Delete</strong>.</li>
+<li>Confirm deletion in the dialog window.</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

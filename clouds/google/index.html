@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Google Cloud Platform</title><meta content="Google Cloud Platform can be managed alongside other clouds using RightScale" name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="clouds clouds_google clouds_google_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/clouds/google"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Google Cloud Platform</span></h4></a><a class="list-group-item" href="/clouds/google/getting_started">Getting Started</a><a class="list-group-item" href="/clouds/google/reference">Reference</a><a class="list-group-item" href="/faq/clouds/google">FAQ</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Supported Clouds</a></p><div class="page-header"><h1>Google Cloud Platform</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>RightScale allows you to discover, provision, take action, and create policies across a wide variety of Google Cloud Platform (GCP) cloud services, including compute, storage, network, database, middleware, and application services.</p>
+
+<p>Many cloud services are supported out-of-the-box in RightScale while others leverage a plugin. Plugins describe the API of a service provider for the RightScale platform, including defining the parameters which must be specified to interact with the service, the structure of resources in the service, and how RightScale can create and interact with those resources. RightScale continually creates new plugins for cloud services which are shared in a <a href="https://github.com/rightscale/rightscale-plugins">public repository on GitHub</a>. RightScale partners or customers can <a href="/ss/reference/cat/v20161221/ss_plugins.html">create their own plugins</a>.  </p>
+
+<p>There are four approaches that you can leverage to manage cloud services in RightScale:</p>
+
+<ul>
+<li>Native integration - no plugin is required</li>
+<li>Out-of-the-box plugin - plugin is provided by RightScale. (<a href="https://github.com/rightscale/rightscale-plugins">GitHub repo</a>)</li>
+<li>Custom plugin - <a href="/ss/reference/cat/v20161221/ss_plugins.html">create a plugin</a> for other cloud services</li>
+<li>http/https - use the <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#http-https-functions">http/https function in Cloud Application Templates</a></li>
+</ul>
+
+<h2 id="supported-google-cloud-platform--gcp--services">Supported Google Cloud Platform (GCP) Services</h2>
+
+<p>Below is a list of services supported for GCP. Other services can be supported through <a href="/ss/reference/cat/v20161221/ss_plugins.html">custom plugins</a> or the <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#http-https-functions">http/https function in Cloud Application Templates</a>.</p>
+
+<table><thead>
+<tr>
+<th><strong>Google Services</strong></th>
+<th><strong>How Supported</strong></th>
+<th><strong>Link to Plugin</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>GCE</td>
+<td>Native and Plugin</td>
+<td><a href="https://github.com/rightscale/rightscale-plugins/blob/master/google/gce">Google Compute Engine</a></td>
+</tr>
+<tr>
+<td>Persistent Disks</td>
+<td>Native</td>
+<td></td>
+</tr>
+<tr>
+<td>Networks</td>
+<td>Native</td>
+<td></td>
+</tr>
+<tr>
+<td>Cloud DNS</td>
+<td>Plugin</td>
+<td><a href="https://github.com/rightscale/rightscale-plugins/blob/master/google/google_cloud_dns">GCP Cloud DNS</a></td>
+</tr>
+<tr>
+<td>GKE</td>
+<td>Plugin</td>
+<td><a href="https://github.com/rightscale/rightscale-plugins/blob/master/google/gke">GKE</a></td>
+</tr>
+<tr>
+<td>Cloud SQL Database</td>
+<td>Plugin</td>
+<td><a href="https://github.com/rightscale/rightscale-plugins/blob/master/google/google_cloud_sql">GCP Cloud SQL</a></td>
+</tr>
+<tr>
+<td>Bigtable</td>
+<td>Plugin</td>
+<td><a href="https://github.com/rightscale/rightscale-plugins/blob/master/google/google_bigtable">GCP Bigtable</a></td>
+</tr>
+<tr>
+<td>Any other GCP services</td>
+<td>Custom plugin or http/https support</td>
+<td>&nbsp;</td>
+</tr>
+</tbody></table>
+
+<h2 id="contact-information">Contact Information</h2>
+
+<h3 id="contact-information-google">Google</h3>
+
+<ul>
+<li><strong>Corporate website:</strong>  <a href="http://cloud.google.com/products/compute-engine.html">http://cloud.google.com/products/compute-engine.html</a></li>
+</ul>
+
+<h3 id="contact-information-rightscale">RightScale</h3>
+
+<ul>
+<li><strong>Sales</strong> - For information about your account specifics, contact your account manager <em>or</em> email <a href="mailto:sales@rightscale.com">sales@rightscale.com</a></li>
+<li><strong>Support</strong> - Report any bugs related to RightScale, please raise a support ticket from the Dashboard or email <a href="mailto:support@rightscale.com">support@rightscale.com</a>.</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

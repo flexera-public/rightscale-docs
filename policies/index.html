@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Policy Automation</title><meta content="Effortless governance via RightScale Policy Automation" name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="policies policies_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/"><h4 class="list-group-heading"><img src="../img/product-governance.svg" /><span>Policies Users Guide</span></h4></a><a class="list-group-item" href="/policies/">About</a><a class="list-group-item" href="/policies/users/getting_started">Getting Started</a><a class="list-group-item" href="/policies/users/guides">Guides</a><a class="list-group-item" href="users/policy_list.html">Flexera Policies</a><a class="list-group-item" href="/policies/users/faq">FAQ</a></nav></aside><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/developers"><h4 class="list-group-heading"><img src="../img/product-governance.svg" /><span>Policies Developers Guide</span></h4></a><a class="list-group-item" href="/policies/developers">Overview</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a></p><div class="page-header"><h1>Policy Automation</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>RightScale Policy Management allows you to automate governance across your multi-cloud environment to increase agility and efficiency while managing security and risk in your organization. The capability is purpose built to leverage an intelligent policy engine that lets you enforce rules and best practices to help you achieve your business outcomes like saving time, cost reduction, increasing utilization, and rightsizing your cloud environment.</p>
+
+<p><strong>Key Capabilities</strong></p>
+
+<ul>
+<li>Built-in Policies for Cost, Security, Operational, and Compliance use cases</li>
+<li>Dry run policies and then configure them to take approved actions on any API backed cloud, service, and resource</li>
+<li>Automate policies across your entire cloud landscape (multiple accounts)</li>
+<li>Maintain policy-as-code using the built-in <a href="/policies/reference/policy_template_language.html">policy template language</a> to write your own policies</li>
+<li>Policies can enforce rules on any cloud or any service with an API</li>
+<li>Automate your policies using the fully-featured Policies API and documentation</li>
+</ul>
+
+<div class="media">
+  <img src="/img/policy_intro.gif" alt="">
+  <div class="media-caption">
+    <b>Introduction to RightScale Policy Automation</b>
+  </div>
+</div>
+
+<h2 id="policy-use-cases">Policy Use Cases</h2>
+
+<p>RightScale developed a wide variety of built-in policies that provide high value with minimal effort on Day 1. You can simply select the policy you are interested in, customize it, and apply it to individual accounts or across multiple accounts to achieve your business outcomes. <a href="/policies/getting_started/policy_list.html">Find the complete list here</a>.</p>
+
+<p>In addition to following examples, the policy engine supports writing custom policies to help customers achieve custom requirements and not be limited by what RightScale provides out of the box.</p>
+
+<h3 id="policy-use-cases-cost">Cost</h3>
+
+<p>Increase cost visibility and management in your multi-cloud world and take appropriate actions to run an efficient infrastructure.</p>
+
+<ul>
+<li>Identify where you are wasting spend and realize immediate savings</li>
+<li>Collaborate to reduce future cloud costs</li>
+<li>Use tagging as a foundation for ongoing cost management</li>
+<li>Automate waste prevention</li>
+</ul>
+
+<h3 id="policy-use-cases-security">Security</h3>
+
+<p>Gain visibility and control across all your public and/or private cloud environments with our security policies. Improve security across your applications, data, and associated infrastructure by finding security vulnerabilities before your customers do.</p>
+
+<ul>
+<li>Secure public storage buckets</li>
+<li>Take control of your security groups</li>
+<li>Monitor and secure IAM access</li>
+</ul>
+
+<h3 id="policy-use-cases-operational">Operational</h3>
+
+<p>Save valuable human time and investment by automating everyday IT operations. Running an automated and efficient cloud infrastructure frees up expensive resources on high ROI projects like scaling, growth, and deliver value faster than anyone else.</p>
+
+<ul>
+<li>Reduce waste by putting instances on schedule</li>
+<li>Put automatic key rotation to avoid downtime</li>
+</ul>
+
+<h3 id="policy-use-cases-compliance">Compliance</h3>
+
+<p>Enterprises typically have multiple compliance requirements but struggle to automate them which leads to downtime as well as resource waste. By having a strong compliance strategy but also ability to quickly automate it provides peace of mind and avoids business interruption.</p>
+
+<ul>
+<li>Ensure comprehensive tagging strategy</li>
+<li>Write custom policies for HIPAA, GDPR, PCI, and more</li>
+</ul>
+
+<h2 id="policy-actions">Policy Actions</h2>
+
+<p>Policy Engine leverages our multi-cloud orchestration platform written in <a href="/ss/reference/rcl/v2/index.html">Cloud Workflow Language</a> that allows managing entire applications running on the cloud. Actions can be defined that help remediate policy incidents or that trigger other automation to report on incidents.</p>
+
+<p>The sequence of actions that occur when an incident is detected is defined in the <a href="#basic-concepts-policy-template-">policy template</a>. At any point in the sequence, <a href="/policies/users/getting_started/index.html#manual-approval-steps">manual approval steps</a> can be inserted that require an authorized user to press an <q>Approve</q> button in the UI (or equivalent API call) before the sequence is resumed. Actions can also be <a href="/policies/users/getting_started/index.html#run-action">run manually</a>. When applying a policy, the policy manager can choose to skip all defined approval steps so that the action sequence runs fully automated immediately when an incident is detected. In this case the incident details will show that the approval steps were skipped.</p>
+
+<p><strong>Examples</strong></p>
+
+<ul>
+<li>Start/Stop instances</li>
+<li>Change (downsize) instances</li>
+<li>Add/Remove Tags</li>
+<li>Add/Terminate/Delete resources (e.g.: Unattached volumes, old snapshots)</li>
+<li>Migrate between storage classes</li>
+<li>Slack and Email Notifications</li>
+<li>Running Operational Runlists</li>
+<li>Scaling Server Arrays</li>
+<li>Retrieving and analyzing metrics data</li>
+<li>Sending requests to external applications</li>
+</ul>
+
+<h2 id="basic-concepts">Basic Concepts</h2>
+
+<p><img src="/img/policy_nutshell.png" alt="policy_nutshell.png" width="2182" height="536" /></p>
+
+<h3 id="basic-concepts-policy-template-">Policy Template </h3>
+
+<p>Open source Policy definition, written in powerful <a href="/policies/reference/policy_template_language.html">Policy Template Language</a>, that defines the blueprint of a Policy. It specifies input parameters, conditions, and actions the policy will take when it is triggered. You can use built-in policy templates from RightScale as is or customize the source code to create your own custom policy. Policy Template can be <strong>published</strong> to the <strong>Catalog</strong> to make it visible to the entire organization.</p>
+
+<h3 id="basic-concepts-applied-policy">Applied Policy</h3>
+
+<p>A running policy that has been applied from a policy template. It inherits all the properties of the policy template. One policy template can be applied as many times as needed with different input parameters. For example, you could apply a policy that looks for unattached volumes to development accounts and production accounts with different parameters and resolution actions. In development accounts, you could configure the applied policy to  automatically delete unattached volumes after 3 days, while in the production accounts, you could simply send an email alert.</p>
+
+<h3 id="basic-concepts-credentials">Credentials</h3>
+
+<p>In order to gather information and, in some cases, take action, policies need to be able to reach out to other APIs. While some policies interact only with other Flexera APIs, many policies interact directly with service provider APIs. In these cases, the system must have credentials for those APIs. The <code>Credentials</code> page provides a central location to enter, manage, and update credentials that can be used by policies. Credentials can only be managed by users with <code>enterprise_manager</code> role on the Organization or <code>admin</code> role on the Project, but all users that can apply policies have access to use credentials while applying a policy.</p>
+
+<h3 id="basic-concepts-incident">Incident</h3>
+
+<p>When the conditions of the applied policy are met, an incident is created. It contains all the information about why the policy was triggered and the current status. One applied policy can have more than 1 incident. Incidents can be in one of the following states:</p>
+
+<ul>
+<li><code>active</code> - one or more conditions were found to be true during the policy check (this state is called <code>triggered</code> in the API)</li>
+<li><code>resolved</code> - the conditions that created this incident no longer exist, or the <code>resolve_incident</code> <a href="/policies/reference/v20180301/policy_template_language.html#resolutions-">function was called</a></li>
+<li><code>terminated</code> - the applied policy was terminated while the incident was active</li>
+</ul>
+
+<p>Incidents that are not actionable (they are <code>terminated</code> or <code>resolved</code> with no pending actions) are archived after 30 days and available only <a href="https://reference.rightscale.com/governance-policies/#/ArchivedIncident/ArchivedIncident_index">via the API</a>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

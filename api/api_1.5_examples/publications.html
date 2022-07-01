@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Publications</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Publications</h1></div><div class="main-content"><h2 id="import-publications">Import Publications</h2>
+
+<p>Imports the given publication and its metadate to this account. When imported, the API call will return a <Location> header with the relative URI of the imported ServerTemplate. Only non-HEAD revisions that are shared with the account can be imported.</p>
+
+<p><dl> </dl></p>
+
+<h3 id="import-publications-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<p><strong>Prerequisite:</strong> Example requires a publication ID for the asset that you wish to import. This publication ID can be found by using the API <a href="/api/api_1.5_examples/publications.html">List Publications</a> tutorial <strong>.</strong> The return data from the &#39;List Publications&#39; API call will contain a &#39;links&#39; section, which should contain a &#39;self&#39; URI with the ID in it. For example, in the return data below, <strong>177563</strong> is the publication ID:</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;links&gt;
+          &lt;link rel="self" href="/api/publications/177563"/&gt;
+          &lt;link rel="lineage" href="/api/publication_lineages/14092"/&gt;
+        &lt;/links&gt;
+</code></pre>
+
+<p><em><strong>Important!</strong></em> Do <em>NOT</em> attempt to import publication using the lineage ID as this will not work! Only importing by the publication ID is currently supported.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="c"># Replace "PUBLICATION" variable below with publication ID (use "list publications" API call if needed to gather ID)</span>
+    <span class="nv">PUBLICATION</span><span class="o">=</span><span class="s2">"45"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST https://my.rightscale.com/api/publications/<span class="nv">$PUBLICATIONS</span>/import.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> :</p>
+
+<ul>
+<li>Truncated XML output with limited headers included.</li>
+<li>There is only one example listed in the output to save space.</li>
+<li><Location> header returned shows relative URI to the imported ServerTemplate</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>     &lt; HTTP/1.1 201 Created
+    HTTP/1.1 201 Created
+    * Server nginx/1.0.14 is not blacklisted
+    &lt; Server: nginx/1.0.14
+    Server: nginx/1.0.14
+    &lt; Date: Tue, 29 Oct 2013 21:05:52 GMT
+    Date: Tue, 29 Oct 2013 21:05:52 GMT
+    &lt; Content-Type: text/html; charset=utf-8
+    Content-Type: text/html; charset=utf-8
+    &lt; Transfer-Encoding: chunked
+    Transfer-Encoding: chunked
+    &lt; Connection: keep-alive
+    Connection: keep-alive
+    &lt; Status: 201 Created
+    Status: 201 Created
+    &lt; X-Runtime: 28076
+    X-Runtime: 28076
+    &lt; Set-Cookie:
+    Set-Cookie:
+    &lt; Cache-Control: no-cache
+    Cache-Control: no-cache
+    &lt; Location: /api/server_templates/324064001
+    Location: /api/server_templates/324064001
+    &lt; X-Request-Uuid: af69d2a3d7a64146b31b6a2a8ba66326
+    X-Request-Uuid: af69d2a3d7a64146b31b6a2a8ba66326
+</code></pre>
+
+<h2 id="list-publications">List Publications</h2>
+
+<p>List all Publications of an account. Note that only non-HEAD revisions are listed.</p>
+
+<h3 id="list-publications-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/publications.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> :</p>
+
+<ul>
+<li>Truncated XML output without headers included.</li>
+<li>There is only one example listed in the output to save space.</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    &lt;publication&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/publications/43984"/&gt;
+          &lt;link rel="lineage" href="/api/publication_lineages/14092"/&gt;
+        &lt;/links&gt;
+        &lt;publisher&gt;RightScale&lt;/publisher&gt;
+        &lt;created_at&gt;2012/11/15 20:05:43 +0000&lt;/created_at&gt;
+        &lt;commit_message&gt;
+          &lt;text&gt;Updated description to include Rackspace NextGen.&lt;/text&gt;
+          &lt;time&gt;2012/11/15 19:52:36 +0000&lt;/time&gt;
+          &lt;user&gt;lopaka@rightscale.com&lt;/user&gt;
+        &lt;/commit_message&gt;
+        &lt;actions&gt;
+          &lt;action rel="import"/&gt;
+        &lt;/actions&gt;
+        &lt;content_type&gt;ServerTemplate&lt;/content_type&gt;
+        &lt;description&gt;This ServerTemplate is on the Infinity Lineage. For the latest LTS version, see the [12-LTS Release](http://www.rightscale.com/library/server_templates/LAMP-All-In-One-Trial-with-MyS/lineage/15403)  
+    For a description of the Infinity and LTS lineages, see [ServerTemplate Release Methodology](/cm/rs101/servertemplate_release_and_lineage_methodology.html)
+
+    Launches a complete LAMP (Linux, Apache, MySQL, PHP) stack on a single server in any of the supported cloud infrastructures. It includes default values for all required inputs so you can launch a server in less than 15 minutes. This ServerTemplate is designed for demonstration purposes only and is not recommended for production use.  
+
+    If you want to launch a LAMP stack with your own application code and database, please see: [LAMP All-In-One with MySQL 5.5](http://www.rightscale.com/library/server_templates/LAMP-All-In-One-with-MySQL-5-5/lineage/14093)
+
+    __Related ServerTemplates:__  
+    [PHP App Server](http://www.rightscale.com/library/server_templates/PHP-App-Server/lineage/2288)  
+    [Database Manager for MySQL 5.5](http://www.rightscale.com/library/server_templates/Database-Manager-for-MySQL-5-5/lineage/13699)
+    __Release Notes:__  
+    [LAMP All-In-One with MySQL 5.5 Release Notes](http://support.rightscale.com/18-Release_Notes/ServerTemplates_and_RightImages/v13.1#LAMP_All-In-One_with_MySQL_5.5_\(v13.1\))
+
+    __Application versions:__
+    * Apache 2.2.3
+    * MySQL 5.5.20
+    * PHP 5.3.6
+
+    __Supported compute clouds:__
+    * Amazon Web Services EC2
+    * Citrix CloudStack (2.2 and Acton)
+    * Google Compute Engine
+    * OpenStack
+    * RackSpace
+    * SoftLayer
+    * Windows Azure
+
+    __Supported backup clouds:__
+    * Amazon Web Services S3
+    * Azure Storage
+    * Google Cloud Storage
+    * RackSpace CloudFiles
+    * SoftLayer Object Storage
+
+    __Supported MultiCloud Images:__
+    * CentOS 6 - Amazon, Google, CloudStack, OpenStack, RackSpace, Rackspace NextGen, SoftLayer, Windows Azure
+    * Ubuntu 12.04 - Amazon, Google, CloudStack, OpenStack, RackSpace, Rackspace NextGen, SoftLayer, Windows Azure
+    * RHEL 6 - Amazon
+    &lt;/description&gt;
+        &lt;name&gt;LAMP All-In-One with MySQL 5.5 (v13.1.1)&lt;/name&gt;
+        &lt;updated_at&gt;2012/11/15 20:05:01 +0000&lt;/updated_at&gt;
+        &lt;revision&gt;77&lt;/revision&gt;
+        &lt;revision_notes&gt;Added support for RackSpace and AWS Sydney.&lt;/revision_notes&gt;
+      &lt;/publication&gt;
+</code></pre>
+
+<h2 id="show-publications">Show Publications</h2>
+
+<p>Show information about a single Publication. Note that only non-HEAD revisions are shown.</p>
+
+<h3 id="show-publications-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">PUBLICATION</span><span class="o">=</span><span class="s2">"45"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/publications/<span class="nv">$PUBLICATIONS</span>.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : Truncated XML output without headers included (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;publication&gt;
+      &lt;links&gt;
+        &lt;link rel="self" href="/api/publications/45"/&gt;
+        &lt;link rel="lineage" href="/api/publication_lineages/2335"/&gt;
+      &lt;/links&gt;
+      &lt;publisher&gt;RightScale&lt;/publisher&gt;
+      &lt;created_at&gt;2009/10/28 04:13:24 +0000&lt;/created_at&gt;
+      &lt;commit_message&gt;
+        &lt;text&gt;Initial version&lt;/text&gt;
+        &lt;time&gt;2008/10/02 04:05:47 +0000&lt;/time&gt;
+        &lt;user&gt;&lt;/user&gt;
+      &lt;/commit_message&gt;
+      &lt;actions&gt;
+        &lt;action rel="import"/&gt;
+      &lt;/actions&gt;
+      &lt;content_type&gt;ServerTemplate&lt;/content_type&gt;
+      &lt;description&gt;Combined Load Balancer and Rails application in one box.&amp;#13;
+    The site is configured for HTTP traffic only (not SSL) and with mongrel_cluster.&lt;/description&gt;
+      &lt;name&gt;Rails FrontEnd v1&lt;/name&gt;
+      &lt;updated_at&gt;2010/04/15 04:39:28 +0000&lt;/updated_at&gt;
+      &lt;revision&gt;1&lt;/revision&gt;
+      &lt;revision_notes&gt;Initial version&lt;/revision_notes&gt;
+    &lt;/publication&gt;
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

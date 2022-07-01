@@ -1,0 +1,997 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Arrays - Actions</title><meta content="Common procedures for working with Server Arrays in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_manage cm_dashboard_manage_arrays cm_dashboard_manage_arrays_arrays_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Manage</a> &#x2F; <a href="./">Arrays</a></p><div class="page-header"><h1>Arrays - Actions</h1></div><div class="main-content"><h2 id="add-a-scalable-application-server-array-to-a-deployment">Add a Scalable Application Server Array to a Deployment</h2>
+
+<h3 id="add-a-scalable-application-server-array-to-a-deployment-objective">Objective</h3>
+
+<p>To add a scalable alert-based server array to a 3-tier deployment for autoscaling the application tier.</p>
+
+<h3 id="add-a-scalable-application-server-array-to-a-deployment-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A running 3-tier deployment that was created by following one of the <q>3 Tier Deployment Setup</q> tutorials.</li>
+<li>At least two operational application servers.</li>
+<li>&#39;designer&#39; and &#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="add-a-scalable-application-server-array-to-a-deployment-overview">Overview</h3>
+
+<p>In this tutorial, you will perform the following actions:</p>
+
+<ul>
+<li>Create an alert-based, application server array.</li>
+<li>Add custom alerts for autoscaling purposes. (i.e. growing/shrinking the server array)</li>
+<li>Transition to a deployment that solely uses a server array for the application tier.</li>
+</ul>
+
+<p><img src="/img/cm-3tier-conversion.png" alt="cm-3tier-conversion.png" width="725" height="277" /></p>
+
+<h3 id="add-a-scalable-application-server-array-to-a-deployment-steps">Steps</h3>
+
+<h4 id="create-a-server-array">Create a Server Array</h4>
+
+<p>The first step is to create a new alert-based server array and associate it with your 3-tier deployment.</p>
+
+<ol>
+<li>Go to your 3-tier deployment&#39;s <strong>Servers</strong> tab. Go to the ServerTemplate that you used to create the application servers in the existing deployment. Since a server array is designed to launch identical instances with the same configuration, you will use the same ServerTemplate to launch and configure each instance into array.
+<img src="/img/cm-select-app-server-template.png" alt="cm-select-app-server-template.png" width="488" height="170" /></li>
+<li>Click the ServerTemplate&#39;s <strong>Add Array</strong> action button. Although you can use a HEAD version of a ServerTemplate it&#39;s strongly recommended that you use a committed revision of the ServerTemplate, especially for use in production environments. The use of a HEAD version of a ServerTemplate should only be used for certain development and staging environments.</li>
+<li>Select the compute <strong>Cloud</strong> into which the instances will be launched (e.g. AWS US-West) and your 3-tier <strong>Deployment</strong>. (<em>Note</em>: Once the cloud is selected for a server array, it cannot be changed.)</li>
+</ol>
+
+<h4 id="server-details-tab">Server Details tab</h4>
+
+<p>Provide the required information under the <strong>Server Details</strong> tab.</p>
+
+<p><img src="/img/cm-new-alert-array-server-details.png" alt="cm-new-alert-array-server-details.png" width="550" height="358" /></p>
+
+<ul>
+<li>Hardware
+
+<ul>
+<li><strong>Array Name</strong> - Enter a name for the server array. (e.g. MyArray)</li>
+<li><strong>MultiCloud Image</strong> - Select the appropriate MultiCloud Image (MCI) based upon the desired operating system and distribution. If you do not have a preference, the MCI</li>
+<li><strong>Instance Type</strong> - Select which instance type of the chosen cloud that will be used to launch new instances in the server array.</li>
+<li><strong>Pricing*</strong> - Select which pricing option to use for launching new instances in the array. For example, AWS offers <q>on-demand</q> and <q>spot</q> pricing options.</li>
+<li><strong>EBS Optimized*</strong> - (AWS only) Select this checkbox to use high performance connectivity to EBS volumes for supported instance types.<br>
+* Denotes cloud-specific options that may not be applicable based on the chosen cloud.</li>
+</ul></li>
+<li>Networking
+
+<ul>
+<li><strong>SSH Key*</strong> - Select the SSH Key that will be used to launch the instance.</li>
+<li><strong>Security Group(s)*</strong> - Select which security group(s) will be used to launch the instance. Security groups are firewall settings that are enforced by the cloud provider. At least one security group must be selected. (<em>Note</em>: The specific firewall permissions of the security group can be modified at a later time.)</li>
+<li><strong>Availability Zone*</strong> - The zone/datacenter into which the instances will be launched. If the cloud supports more than one zone/datacenter, it&#39;s strongly recommended that you use the &#39;Weighted across multiple zones&#39; option to distribute instances in the array across multiple zones for high availability purposes.<br>
+* Denotes cloud-specific options that may not be applicable based on the chosen cloud.<br></li>
+</ul></li>
+</ul>
+
+<h4 id="array-details-tab">Array Details tab</h4>
+
+<p>Provide the required information under the <strong>Array Details</strong> tab.</p>
+
+<p><img src="/img/cm-new-alert-array-array-details.png" alt="cm-new-alert-array-array-details.png" width="550" height="358" /></p>
+
+<ol>
+<li>Autoscaling Policy
+
+<ul>
+<li><strong>Status</strong> - Defines whether or not the array is active. It&#39;s strongly recommended that you keep the &#39;disabled&#39; state until you have properly tested the array and confirmed that it will successfully launch instances that reach the operational state.</li>
+<li><strong>Disabled</strong> - The array is inactive and will not be allowed to automatically resize based on its alerts.</li>
+<li><strong>Enabled</strong> - The array is active and all of its preferences will take effect including min/max counts and resize policy (i.e. autoscaling)</li>
+<li><strong>Min Count</strong> - The minimum number of instances that will be launched into the server array. If you are using a server array to launch all application servers in a deployment, it&#39;s strongly recommended that the minimum count is greater than one for high availability purposes. (e.g. 2)</li>
+<li><strong>Max Count</strong> - The maximum number of instances that can be launched into a server array. (e.g. 20)</li>
+<li><strong>Array Type</strong> - Select the <strong>Alert-based</strong> option since you are going to create alerts to trigger resize actions. (i.e. autoscaling up/down)</li>
+</ul></li>
+<li>Array Type Details
+
+<ul>
+<li><strong>Decision Threshold</strong> - Resize action (grow/shrink) will be based on a voting system where each application server has a voting tag based on whether or not any of the alert specifications defined for autoscaling exists. This parameter defines the percent of voting servers that must exist before a resize action can occur. The default setting (51%) ensures that a majority of the servers must vote for the same scale up/down action in order to trigger a resize of the array (i.e. autoscaling). See <a href="/cm/rs101/understanding_the_voting_process.html">Understanding the Voting Process</a> for details.</li>
+<li><strong>Choose Voters by Tag</strong> - Defines the tag that RightScale&#39;s elasticity daemon will check for to determine who is a <q>voter</q> for this particular server array. You must make sure that each server array has a different voter tag otherwise you may have servers in a different deployment that are voting and causing resize actions for an incorrect server array. If you do not have a strong preference for a voter tag, it&#39;s recommended that you simply use the default option, which uses the server array&#39;s nickname as the voter tag. (e.g. MyArray) (<em>Important</em>: The voter tag is case sensitive.)</li>
+<li><strong>Resize up by</strong> - Defines how many new instances you want to launch when you grow (i.e. scale up). When a decision is made to <q>grow an array,</q> we recommend launching at least 2 servers in order to ensure that a significant impact will be made to your setup. Remember, if your deployment needs more server resources, it&#39;s better to overcompensate than under-compensate. Similarly, if you have larger setups or you have a predictable scaling pattern (ex: 5 servers at a time), you also have the flexibility to scale in bulk. (e.g. 2)</li>
+<li><strong>Resize down by</strong> - Defines how many new instances you want to launch when you grow (i.e. scale up). (e.g. 1)</li>
+<li><strong>Resize calm time</strong> - The calm time defines how long you want to wait before you repeat another action. Since it takes a few minutes for a new server to be launched and become fully operational, you&#39;ll want to give yourself a buffer before another action can be taken. For normal situations, we recommend using a calm time of 15 minutes. (e.g. 15)</li>
+</ul></li>
+<li>Click <strong>Confirm</strong>.</li>
+<li>Review your choices and click <strong>Finish</strong>.</li>
+</ol>
+
+<h3 id="add-a-scalable-application-server-array-to-a-deployment-add-alerts-for-autoscaling">Add Alerts for Autoscaling</h3>
+
+<p>The next step is to add custom alerts for autoscaling purposes. It&#39;s important to remember that any <q>voting</q> server must have the same set of custom alert specifications. For example, if you have any application servers that you created and launched in the context of the deployment (i.e. servers listed under the deployment&#39;s Servers tab), you must make sure each of them have the same alerts as the server array.</p>
+
+<p>In this example, you&#39;re going to replace the current application servers in the deployment with a scalable server array of application servers, which will allow your application tier to <q>grow</q> by launching additional application servers or <q>shrink</q> by terminating existing application servers that are no longer needed to handle the current work load. Therefore, you can add the alerts at the server array level (under the server array&#39;s Next Alerts tab), so that any new instances launched into the array will be configured with the same alerts. Another option would be to add the alerts at the ServerTemplate level, but then it would be difficult to use the same ServerTemplate in a different context because it would contain deployment-specific alerts.</p>
+
+<ol>
+<li>Go to the server array&#39;s Next Alerts tab.</li>
+<li>Create an alert specification for growing the array. Click <strong>New</strong>.
+
+<ul>
+<li><strong>Name</strong> - Enter a name for the alert. (e.g. Grow Array)</li>
+<li><strong>Description</strong> - Enter a brief description. (e.g. Launch additional instances into the server array.)</li>
+<li><strong>Condition</strong> - Enter the condition under which an alert will be triggered for a &#39;grow&#39; action. The condition consists of a specific metric, threshold, duration for which the condition must exist, and the desired voting action (grow/shrink) that will be taken. The tag will dynamically change on the server when an alert is triggered. Instead of associating the alert specification with an alert escalation, you&#39;re going to set a tag on the server that will be used for voting for a resize (autoscaling) action.</li>
+<li><strong>metric</strong> : &#39;cpu-0/cpu-idle&#39;</li>
+<li><strong>threshold</strong> : &lt; 30%</li>
+<li><strong>duration</strong> : 5 minutes</li>
+<li><strong>vote</strong> : vote to &#39;<em>grow</em>&#39; server array by setting the voter tag &#39;<em>MyArray</em>&#39; (RightScale&#39;s elasticity daemon will evaluate the number of voters for a resize action by finding all servers with the matching voter tag.)   <img src="/img/cm-voting-tag-match-3tier.png" alt="cm-voting-tag-match-3tier.png" width="725" height="237" /><br></li>
+<li>Click <strong>Save</strong> when ready</li>
+</ul></li>
+<li>Create an alert specification for shrinking the array. Click <strong>New</strong>.
+
+<ul>
+<li><strong>Name</strong> - Enter a name for the alert. (e.g. Shrink Array)</li>
+<li><strong>Description</strong> - Enter a brief description. (e.g. Terminating servers that are no longer needed.) <em>Note</em>: The oldest instance (i.e. the one with the earliest launch time) will be terminated first.</li>
+<li><strong>Condition</strong> - Enter the condition under which an alert will be triggered. You will most likely want to use the opposite condition as the <q>grow</q> alert specification_._</li>
+<li><strong>metric</strong> : &#39;cpu-0/cpu-idle&#39;</li>
+<li><strong>threshold</strong> : &gt; 70%</li>
+<li><strong>duration</strong> : 5 minutes</li>
+<li><strong>vote</strong> : vote to &#39;<em>shrink</em>&#39; server array by setting the voter tag &#39;<em>MyArray</em>&#39;</li>
+</ul></li>
+</ol>
+
+<h3 id="add-a-scalable-application-server-array-to-a-deployment-configure-inputs">Configure Inputs</h3>
+
+<p>Since you already defined values for the inputs that are required by the <q>application</q> ServerTemplate at the deployment level when you created the 3-tier deployment, you should not have to define any inputs prior to launching a test instance. However, if there are any missing inputs that need to be defined, it&#39;s strongly recommended as a best practice that you define all inputs related to the server array under the deployment&#39;s Inputs tab.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The Input confirmation screen that you are typically used to seeing in the dashboard when you launch a single server in a deployment, is not displayed when an instance is launched in a server array either manually or automatically (because of a resize action). Therefore, it&#39;s important that all required inputs have correct values set otherwise the instance may become stranded in booting.</p>
+</div>
+
+<ul>
+<li>Go to the deployment&#39;s <strong>Inputs</strong> tab and provide values for any missing inputs that are required by any boot scripts.</li>
+</ul>
+
+<h3 id="add-a-scalable-application-server-array-to-a-deployment-test-the-server-array">Test the Server Array</h3>
+
+<p>As a best practice, you should always manually launch a single instance in a server array to verify your configuration settings.</p>
+
+<ul>
+<li>Go to the server array and click the <strong>Launch</strong> action button. If you have configured your inputs correctly, the server will reach the operational state. If the server becomes <q>stranded in booting,</q> terminate the server and check your inputs again.</li>
+</ul>
+
+<h3 id="add-a-scalable-application-server-array-to-a-deployment-enable-the-server-array">Enable the Server Array</h3>
+
+<p>Once a server array is enabled (i.e. active) it&#39;s allowed to autoscale by either resizing up or down based on the predefined alert conditions. Minimum and maximum server count settings will also take effect.</p>
+
+<ul>
+<li>Go to the server array&#39;s <strong>Info</strong> tab and click the <strong>enable</strong> text link for the <q>Status</q> field. If the server array does not have enough running servers to meet the minimum server count (e.g. 2), RightScale&#39;s elasticity daemon will evaluate the number of <q>operational</q> servers in the server array and launch enough new servers to satisfy the minimum server count. <em>Note</em>: Only <q>operational</q> servers will satisfy the array&#39;s minimum instance count.</li>
+</ul>
+
+<p><img src="/img/cm-3tier-add-array.png" alt="cm-3tier-add-array.png" width="566" height="390" /></p>
+
+<h3 id="add-a-scalable-application-server-array-to-a-deployment-clean-up-application-server-tier">Clean-up Application Server Tier</h3>
+
+<p>Most users find it useful to simply use a server array for managing the entire application tier instead of managing dedicated application servers in a deployment, as well as a server array. For example, if you want at least two running application servers at all times, you can simply set the application server array to have a minimum server count of two. Remember, any server that needs to be a <q>voter</q> for an autoscaling action needs to inherit the correct alert specifications for voting for a grow/shrink resize action of the array. In this tutorial, you added the alert specifications to the server array so that any new servers launched into the array will inherit the same alerts for autoscaling. If there are any running application servers in the deployment, you may want to terminate them because they do not have the proper alerts for autoscaling and are therefore unable to vote for a scaling action.</p>
+
+<ol>
+<li>If the server array has a minimum server count of two and you have at least two operational application servers in the array that are properly connected to the load balancer tier and master database server, go to the deployment&#39;s <strong>Servers</strong> tab terminate any running application servers.</li>
+<li>Once the servers are terminated, delete the servers from the deployment.</li>
+</ol>
+
+<p>The deployment should now have a reference architecture similar to the following diagram.</p>
+
+<p><img src="/img/cm-3tier-array.png" alt="cm-3tier-array.png" width="481" height="389" /></p>
+
+<h3 id="add-a-scalable-application-server-array-to-a-deployment-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<h4 id="test-the-server-array-for-autoscaling-(optional)">Test the Server Array for Autoscaling (Optional)</h4>
+
+<p>Use the following tutorial to perform an autoscaling test on the alert-based server array to verify that the alerts and resize actions are occurring as expected.</p>
+
+<ul>
+<li><a href="http://support.rightscale.com/ServerTemplates/Open_Source/Siege_Load_Tester/Siege_Load_Tester_-_Tutorial/index.html">Siege Load Tester - Tutorial</a></li>
+</ul>
+
+<h2 id="add-server-array-assistant">Add Server Array Assistant</h2>
+
+<h3 id="add-server-array-assistant-overview">Overview</h3>
+
+<p>Adding a server array to a deployment is done through a flow of selecting a ServerTemplate, configuring the Server Details, Array Details and then reviewing your selections for confirmation. On the Confirm tab, you have the option of saving your settings as defaults for adding future servers to that specific deployment. Be sure to take advantage of the information offered in the tooltips throughout the add server array flow. Just hover over a tooltip to view additional information about that specific component.</p>
+
+<h3 id="add-server-array-assistant-choose-a-cloud">Choose a Cloud</h3>
+
+<p>You may add a server array from the array index page by navigating to <strong>Manage</strong> &gt; <strong>Arrays</strong>. There, you can view all of your active and inactive servers arrays with the option of adding a new server array by clicking <strong>New Array</strong>.</p>
+
+<p>After clicking <strong>New Array</strong>, you will be prompted to choose a cloud and specify a deployment to add your server array. After making these selections, you will then be taken through the add server array flow to configure the rest of your settings. You also have the ability to add a server array directly from your desired deployment by navigating to <em>Your Deployment</em> &gt; <strong>Add Array</strong>.</p>
+
+<h4 id="add-a-new-array">Add a New Array</h4>
+
+<p>There are several different ways to get to the <strong>Add Server Array Assistant</strong> in the Dashboard.</p>
+
+<ul>
+<li><strong>Manage</strong> &gt; <strong>Deployments</strong> &gt; <strong><em>Deployment_Name</em></strong> &gt; <strong>Add Array</strong></li>
+<li><strong>Manage</strong> &gt; <strong>Arrays</strong> &gt; <strong>New Array</strong></li>
+<li><strong>Design</strong> &gt; <strong>ServerTemplates</strong> &gt; <strong><em>ServerTemplate_Name</em></strong> &gt; <strong>Add Array</strong></li>
+</ul>
+
+<h4 id="choose-a-cloud">Choose a Cloud</h4>
+
+<p>When you click the Add Array button you will be prompted to make a cloud selection. Select the cloud where you will eventually launch the array. (Servers are cloud-specific.)</p>
+
+<p>If you are adding a server array through the <strong>Design</strong> &gt; <strong>ServerTemplate</strong> route or through the <strong>Manage</strong> &gt; <strong>Arrays</strong> &gt; <strong>New Array</strong> route as shown above, you will need to specify a cloud and deployment.</p>
+
+<p>If you are adding the array directly from a deployment, the <q>Deployment</q> row will be hidden and you will only need to specify a cloud.</p>
+
+<p><img src="/img/cm-add-new-array2.png" alt="cm-add-new-array2.png" width="429" height="191" /></p>
+
+<p><em>Note</em>: You will only be able to create a server in the chosen cloud if one of the ServerTemplate&#39;s MultiCloud Images supports that cloud.</p>
+
+<p>Make your selections and click <strong>Continue</strong>.</p>
+
+<h3 id="add-server-array-assistant-choose-a-servertemplate">Choose a ServerTemplate</h3>
+
+<p>The next step to add a server array to a deployment is to select a ServerTemplate. Available to you are the ServerTemplates that exist in your account. There are multiple ways to find the ServerTemplate of your choice by using the Filter Options on the left. Enter the name of the ServerTemplate or sort the list by using one or several of the Filter Options including Publisher, Tags, Category, and Name or Date. After choosing a ServerTemplate, select its revision you would like to use and proceed to Server Details.</p>
+
+<p><img src="/img/cm-server-array-server-template.png" alt="cm-server-array-server-template.png" width="725" height="522" />  </p>
+
+<p><strong>Finish</strong> takes you to the show page of your server array where you can edit settings and launch your server if you have the minimum of required components. <strong>Cancel</strong> will cancel your selections and take you back to the Server Array index page or the Servers tab of your deployment. <strong>Confirm</strong> will take you to the Confirm tab and allow you to review your settings while also giving you the option to make these settings your Server Defaults.</p>
+
+<h3 id="add-server-array-assistant-configure-server-details">Configure Server Details</h3>
+
+<p>The Server Details tab allows you to configure your server array by making selections under Hardware and Networking. Server Details will show particular fields and options depending on which cloud you chose to launch your server array. The Hardware section shows the basic settings of your server array tied to the ServerTemplate you chose in your previous step. Here, you can change the name of your server array and select a MultiCloud Image and Instance Type. The Networking section displays the security and network options for your server array. Each cloud also offers different Advanced Options, available below the Hardware section.</p>
+
+<p>Each Server Details tab looks has different fields depending on which cloud was chosen. For more detailed information on the Server Details of each cloud, see below.</p>
+
+<h4 id="aws">AWS</h4>
+
+<p><img src="/img/cm-add-array-aws.png" alt="cm-add-array-aws.png" width="604" height="757" /></p>
+
+<ul>
+<li><strong>Array Name</strong> - Provide a name for the server array.</li>
+<li><strong>MultiCloud Image</strong> - Select the MultiCloud Image to be used for the Server Array. The default MultiCloud Image is inherited from the ServerTemplate.</li>
+<li><strong>Instance Type</strong> - Select the type of instance that will be launched. By default, the instance type is specified by the chosen MCI, however it can be overwritten if you want to launch a smaller or larger instance type.</li>
+<li><strong>Pricing</strong> - Choose either Spot or On Demand for your instances.</li>
+<li><strong>EBS Optimized</strong> - Check the box if you want to launch instances that use optimized EBS volumes for better performance. <em>Note</em>: Additional charges from Amazon do apply.</li>
+<li><strong>VPC Subnet</strong> - If applicable, specify a subnet of your Virtual Private Cloud (VPC).</li>
+<li><strong>SSH Key</strong> - The SSH key that will be used by all servers in the server array.</li>
+<li><strong>Security Group(s)</strong> - Select one or more security groups that will be used by all servers launched in the server array.</li>
+<li><strong>Availability Zone</strong> - Specify which availability zone(s) new server instances should be launched into.
+
+<ul>
+<li>Use the &#39;any&#39; option if you want the cloud provider to choose which zone the server will be launched. There is no guarantee that the instances will be launched evenly across all zones. For example, all instances could be launched into the same zone. Therefore, if you want instances to be evenly distributed across all zones, you should use the &#39;<a href="http://support.rightscale.com/Glossary_of_Terms/index.html">weighted</a>&#39; option instead.</li>
+<li>If <q>Weighted across availability zones</q> is chosen, you will see a green message: <q>You can set weights on the Array Details tab.</q> There, you can set probability percentages of instance allocation that total 100% and specify a max number of instances for each availability zone.</li>
+</ul></li>
+<li><strong>Machine Image</strong> - The AMI that will be used to build the machine. RightScale will only support instances launched with one of our RightImages. We recommend using ServerTemplates with RightImages.</li>
+<li><strong>Ramdisk Image</strong> - Select a Ramdisk image of your choice. (optional)</li>
+<li><strong>Kernel Image</strong> - Select a kernel image of your choice. (optional)</li>
+<li><strong>Ec2 user data</strong> - This information is passed to the instance using the EC2 user launch data mechanism which is limited to 16KB of data. The best way to pass configuration data into instances is with RightScripts, but this user data field is sometimes useful for testing purposes.</li>
+</ul>
+
+<p>AWS Pricing</p>
+
+<p>With an AWS server, you have the option to choose the type of pricing for your instance. The default is On-Demand, with the current On-Demand price listed right below. If you select Spot from the Pricing dropdown, the current spot prices will be viewable for each Availability Zone.</p>
+
+<p><img src="/img/cm-server-details-spot.png" alt="cm-server-details-spot.png" width="644" height="536" /></p>
+
+<h4 id="google-compute-engine">Google Compute Engine</h4>
+
+<p><img src="/img/cm-add-array-google.png" alt="cm-add-array-google.png" width="725" height="584" /></p>
+
+<ul>
+<li><strong>Array Name</strong> - Provide a name for the server array.</li>
+<li><strong>MultiCloud Image</strong> - Select the MultiCloud Image to be used for the Server Array. The default MultiCloud Image is inherited from the ServerTemplate.</li>
+<li><strong>Instance Type</strong> - Specify the type (size) of instance to launch.</li>
+<li><strong>Security Group</strong> - Security group that will be used by all servers in the server array.</li>
+<li><strong>Datacenter / Zone</strong> - The regional datacenter in the cloud (Datacenter and Zone are synonymous). A cloud will often have multiple Datacenters which can help when architecting a highly available deployment.
+
+<ul>
+<li>If <a href="http://support.rightscale.com/Z-Glossary_of_Terms/index.html">Weighted across availability zones</a> is chosen, you will see a green message: <q>You can set weights on the Array Details tab.</q> There, you can set probability percentages of instance allocation that total 100% and specify a max number of instances for each availability zone.</li>
+</ul></li>
+<li><strong>Machine Image</strong> - The image that will be used to build the machine. RightScale will only support instances launched with one of our RightImages. We recommend using ServerTemplates with RightImages.</li>
+<li><strong>User data</strong> - This information is passed to the instance. The best way to pass configuration data into instances is with RightScripts, but this user data field is sometimes useful for testing purposes.</li>
+</ul>
+
+<h3 id="add-server-array-assistant-configure-array-details">Configure Array Details</h3>
+
+<h4 id="alert-based-arrays">Alert-based Arrays</h4>
+
+<p><img src="/img/cm-alert-array-details.png" alt="cm-alert-array-details.png" width="550" height="411" /></p>
+
+<ul>
+<li><strong>Status</strong> - The status of the server array. If active, the server array is enabled for scaling actions. For alert-based arrays, if you disable an array with running instances, the server array will no longer be able to scale up or down, but the instances will continue to run until they are manually terminated. It&#39;s recommended that you keep the server array disabled until you have manually launched and tested instances into the array because you do not want to enable an array with a minimum count of 10 and have 10 servers strand in booting because there was an error in the configuration.</li>
+<li><strong>Min Count</strong> - The minimum number of active servers that must exist at all times in the server array. If you are setting up a multi-tier deployment, it&#39;s strongly recommended that you have a minimum count of two (2) for redundancy purposes.</li>
+<li><strong>Max Count</strong> - The maximum number of active servers that must exist at all times in the server array.</li>
+<li><strong>Array Type</strong> - Specify alert-based or queue-based arrays. Secondary options will change accordingly.
+
+<ul>
+<li><em>For <a href="http://support.rightscale.com/Z-Glossary_of_Terms/index.html">Weighted Arrays</a></em> - If <q>Weighted across availability zones</q> was chosen in the previous Server Details tab, you can set probability percentages of instance allocation that total 100% and specify a max number of instances for each availability zone. It&#39;s strongly recommended that you distribute the instances in the array across multiple zones (if available) to protect against a single zone failure from affecting the entire application tier.</li>
+</ul></li>
+<li><strong>Decision Threshold</strong> - Percent of votes that must be made by all application servers in order to trigger an alert escalation and resize the server array. Typically, you will want to specify that a majority of your application tier is experiencing a problem before you want a scaling action to occur. If you set the threshold too low, you may experience premature and unnecessary scaling actions.</li>
+<li><strong>Choose Voters by Tag</strong> - The Voters Tag that RightScale will use in order to determine when to scale up/down. For example, the elasticity daemon will look for all servers with the specified tag (e.g. MyArray) when counting the number of votes for a scale/up action. When the number of votes for a particular scaling action (e.g. grow) exceeds the decision threshold, the server array will automatically scale based on the specified resize parameters. By default, the name of the server array will be used as the voter tag, however you can specify a different string if desired. If you use the nickname of the server array as the voter tag, it&#39;s recommended that you use a simple string. (e.g. my-tag)</li>
+<li><strong>Resize up by</strong> - Number of servers that should be added from a server array when a resize action occurs. Typically, you will want to use a more agressive value for scaling up and a more conservative value for scaling down.</li>
+<li><strong>Resize down by</strong> - Number of servers that should be removed from a server array when a resize action occurs.</li>
+<li><strong>Resize calm time</strong> - Time (in minutes) that must pass before another action can be taken on the server array. The calm time prevents an array from being resized too frequently. Be sure to allow enough time for the server to become operational and start taking load. You should always test the server array and determine the nominal launch time for your configuration in order to determine the appropriate calm time for your application. Clouds, instance sizes, and the time required to complete all the boot scripts are all factors that should be taken into consideration.</li>
+</ul>
+
+<h4 id="queue-based-arrays-(ec2-only)">Queue-based Arrays (EC2-only)</h4>
+
+<p><img src="/img/cm-queue-array.png" alt="cm-queue-array.png" width="654" height="405" /></p>
+
+<ul>
+<li><strong>Status</strong> - The status of the server array. If active, the server array is enabled for scaling actions.</li>
+<li><strong>Min Count</strong> - The minimum number of active servers that must exist at all times in the server array.</li>
+<li><strong>Max Count</strong> - The maximum number of active servers that must exist at all times in the server array.</li>
+<li><strong>Array Type</strong> - Specify alert-based or queue-based arrays. Secondary options will change accordingly.</li>
+<li><strong>Elasticity Function</strong> - Defines how the server array should grow/shrink. (size or age)</li>
+<li><strong>Items per Instance</strong> - Max number of items in queue per operational instance.</li>
+<li><strong>Indicator Queue</strong> - Select the input SQS queue that contains all of the job tasks.</li>
+<li><strong>Audit Queue</strong> - Select the audit SQS queue that will store audit entries.</li>
+</ul>
+
+<h3 id="add-server-array-assistant-confirm-settings">Confirm Settings</h3>
+
+<p>The Confirm tab for adding a server gives a summary of details for your server array, as well as a list of Alerts that are inherited from the ServerTemplate you selected. The selections listed in the Confirm Details section summarize the settings for your server array. You have the option of saving these settings as defaults for future servers arrays used in that deployment. For more information, see <a href="/cm/rs101/server_defaults.html">Server Defaults</a>.</p>
+
+<h2 id="clone-a-server-array">Clone a Server Array</h2>
+
+<h3 id="clone-a-server-array-objective">Objective</h3>
+
+<p>To clone an existing server array and all of its components.</p>
+
+<h3 id="clone-a-server-array-overview">Overview</h3>
+
+<p>When you clone a server array, you create an exact copy of its configuration as well. Your new array will be identical, but with a new name and disabled by default. The server array clone will use the same ServerTemplate, SSH key, security group in the same cloud in the same deployment.</p>
+
+<h3 id="clone-a-server-array-steps">Steps</h3>
+
+<ol>
+<li><p>Go to <strong>Manage</strong> &gt; <strong>Arrays</strong> &gt; <em>array name</em>.  </p>
+
+<p><img src="/img/cm-server-array.png" alt="cm-server-array.png" width="486" height="604" />  </p></li>
+<li><p>Click <strong>Clone</strong>. The nickname of the array is automatically changed from &#39;Server Array&#39; to &#39;Server Array v1&#39; or from &#39;Server Array v1&#39; to &#39;Server Array v2&#39; etc. You will be redirected to the info tab of the cloned server array.</p></li>
+</ol>
+
+<p><img src="/img/cm-server-array-clone.png" alt="cm-server-array-clone.png" width="483" height="603" /></p>
+
+<p>The following parameters are applied to the new array:</p>
+
+<ul>
+<li>The schedule gets cloned.</li>
+<li>Only alerts on the ServerTemplate get cloned, and not alerts defined on the server array.</li>
+<li>If you set a vote alert on the ServerTemplate, then you need to specify a custom value. The corresponding voter tag value then must be set on each server array as well.</li>
+<li>The cloned array does not vote for the old server array. The cloned server array does not inherit any such custom voter tag value. Instead it will use its generated nickname as the voter tag value.</li>
+<li>The tag(s) of the server array will also be cloned and included in the cloned array.</li>
+<li>Voter alert specs get cloned that match the new nickname.</li>
+</ul>
+
+<h2 id="copy-alerts-to-all-instances-in-an-array">Copy Alerts to All Instances in an Array</h2>
+
+<h3 id="copy-alerts-to-all-instances-in-an-array-objective">Objective</h3>
+
+<p>To apply the alerts in a server array from &#39;Next&#39; to current instances.</p>
+
+<h3 id="copy-alerts-to-all-instances-in-an-array-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>Requires &#39;actor&#39; user role privileges to use this feature.</li>
+</ul>
+
+<h3 id="copy-alerts-to-all-instances-in-an-array-overview">Overview</h3>
+
+<p>This feature allows you to apply the alerts from &#39;Next&#39; in a Server array to all the current instances. Any edits or new alerts added to the <strong>Next Alerts</strong> tab of your server array can be merged into the current running instances with bulk selection and update. Also, you may delete alerts from an array in bulk with this action reflected on all active instances without having to relaunch the instances or delete the alerts from each instance individually.</p>
+
+<h3 id="copy-alerts-to-all-instances-in-an-array-steps">Steps</h3>
+
+<ol>
+<li><p>Navigate to your array ( <strong>Manage</strong> &gt; <strong>Arrays</strong> &gt; <em>Your Array</em>). The Arrays page is shown here.  </p>
+
+<p><img src="/img/cm-deployment-arrays.png" alt="cm-deployment-arrays.png" width="725" height="154" />  </p></li>
+<li><p>Click on the <strong>Next Alerts</strong> tab, where your alert specifications are listed. This is the list of alerts specified in your ServerTemplate and/or added by you. Any alerts imported or created for this array will automatically be included in future instances launched in this array. However, if you would like to apply these alerts to current running instances in your array, you can select which alerts you want to copy to the running instances, select <q>Copy alerts to all array instances</q> and click <strong>Apply to selected</strong>.  </p></li>
+</ol>
+
+<p><img src="/img/cm-alerts-list.png" alt="cm-alerts-list.png" width="725" height="246" /></p>
+
+<ol>
+<li>A confirmation will display, listing all of the alerts that you selected and the number of instances that will be updated. Click <strong>OK</strong> to confirm.<br></li>
+</ol>
+
+<p><img src="/img/cm-copy-alerts-dialog.png" alt="cm-copy-alerts-dialog.png" width="607" height="371" /></p>
+
+<ol>
+<li>Click <strong>Audit Entries</strong> to view a summary of your action.<br></li>
+</ol>
+
+<p><img src="/img/cm-copy-alerts-confirmation.png" alt="cm-copy-alerts-confirmation.png" width="586" height="197" /></p>
+
+<p>Or Check the events pane to track the status of your action.  </p>
+
+<p><img src="/img/cm-copy-alerts-events-pane.png" alt="cm-copy-alerts-events-pane.png" width="667" height="447" /></p>
+
+<h2 id="create-a-new-alert-based-server-array">Create a New Alert-based Server Array</h2>
+
+<h3 id="create-a-new-alert-based-server-array-objective">Objective</h3>
+
+<p>To create an alert-based server array.</p>
+
+<h3 id="create-a-new-alert-based-server-array-overview">Overview</h3>
+
+<p>Alert-based server arrays are typically used to set up an application tier for autoscaling purposes.</p>
+
+<h3 id="create-a-new-alert-based-server-array-steps">Steps</h3>
+
+<p>To create a server array, go to <strong>Manage</strong> &gt; <strong>Arrays</strong>. You will need to select the cloud infrastructure or region where the server array instances will be launched. Instances that are launched in an array must exist in the same region, but can be dispersed across multiple availability zones within the same region. You will add the server array through the Add Server Array Assistant.</p>
+
+<p>Provide the following information:</p>
+
+<h4 id="servertemplate-tab">ServerTemplate Tab</h4>
+
+<p><strong>ServerTemplate</strong> - Choose the template that you would like to use in order to scale your deployment. This ServerTemplate will be used to create the new servers that will be added to the server array. Since you are scaling the number of application servers, you will need to select the latest version of the appropriate (PHP/Rails/Tomcat) application ServerTemplate, not a frontend ServerTemplate. (If you need to make changes to the template, you will need to clone it.)<br>
+ <em>Note</em>: Make sure that the Inputs for the ServerTemplate are properly configured and that they will boot correctly.</p>
+
+<h4 id="server-details-tab">Server Details Tab</h4>
+
+<ul>
+<li><strong>Cloud</strong> - Each array must be associated with a cloud or cloud region.</li>
+<li><strong>SSH Key</strong> &amp; <strong>Security Group</strong> - Specify the appropriate <strong>SSH key</strong> and <strong>Security Group(s)</strong> that will be attached to the array (if required by the cloud provider).</li>
+<li><strong>Datacenter/Zone</strong> or <strong>Availability Zone</strong> - Choose a datacenter/zone or availability zone within your cloud (if required by the cloud provider). If <a href="http://support.rightscale.com/Z-Glossary_of_Terms/index.html">weighted across</a>... is chosen, you may then fill in the <strong>Instance allocation</strong> fields and <strong>Max instances</strong> for each in the Array Details tab.</li>
+</ul>
+
+<h4 id="array-details-tab">Array Details Tab</h4>
+
+<h4 id="autoscaling-policy">AutoScaling Policy</h4>
+
+<ul>
+<li><strong>Status</strong> - The status of the server array. If active (enabled), the server array is allowed to respond to triggered alert conditions and autoscale. For alert-based arrays, if you disable an array with running instances, the server array will no longer be able to scale up or down, but the instances will continue to run until they are manually terminated. If you are setting up the server array for the first time, you may want to manually launch a few application servers into the array to make sure that the configurations are correct before you enable the server array. For example, you do not want to enable a server array with a minimum count of 10 and have all of the servers strand in booting because of a bad configuration.<br></li>
+</ul>
+
+<p><strong>Warning!</strong> If a server array is enabled and an instance strands in booting and does not become operational, additional instances will be launched into the array until there are enough operational servers that meet the minimum count or the maximum count is reached. Therefore, it&#39;s strongly recommended that you test the array&#39;s configuration and manually launch a few servers into the array before you enable it and make it active.  </p>
+
+<ul>
+<li><strong>Min Count</strong> - The minimum number of active servers that must exist at all times in the server array. If all of your application servers are going to be launched into the server array, you should set the minimum count to two (2) where each server is launched into a different zone (if supported by the cloud) so that your site will remain functional if one of the application servers goes down.</li>
+<li><strong>Max Count</strong> - The maximum number of active servers that must exist at all times in the server array.</li>
+<li><strong>Array Type</strong> - Specify alert-based or queue-based arrays. Secondary options will change accordingly.</li>
+<li><strong>Instance Allocation</strong> * - Give the percentage probability you would like for a new instance to land in the given datacenter / zone or availability zone.</li>
+<li><strong>Max instances</strong> * - Maximum number of instances that may be launched in the given datacenter / zone or availability zone.</li>
+</ul>
+
+<p><em>*For Weighted Arrays</em> - If <q>Weighted across availability zones</q> was chosen in the previous Server Details tab, you can set percentages of instance allocation that total 100% and specify a max number of instances for each availability zone.</p>
+
+<h4 id="array-type-details">Array Type Details</h4>
+
+<ul>
+<li><strong>Decision threshold</strong> - The elasticity decision threshold is the percentage of servers that must agree in order to trigger an alert before an action is taken. Each server can vote once for a particular alert. Default = 51%. We recommend setting this value to 51% or larger in order to ensure that the majority of your servers agree before action is taken. The decision threshold prevents unnecessary <q>scale ups</q> because of one outlier server that is out of control. This is what we mean when we say that we scale democratically.</li>
+<li><strong>Choose voters by tag</strong> - The Voters Tag that RightScale will use in order to determine when to scale up/down. For example, the elasticity daemon will look for all Servers using the specified tag (e.g. MyArray) when counting the number of votes for a scale/up action. When the number of votes for a particular scaling action (e.g. grow) exceeds the decision threshold, the server array will automatically scale based on the specified resize parameters.</li>
+<li><strong>Resize by</strong> - The resize parameter defines how many servers you want to launch when you scale. When a decision is made to <q>grow an array,</q> we recommend launching at least 2 servers in order to ensure that a significant impact will be made to your setup. Remember, if your deployment needs more server resources, it&#39;s better to overcompensate than under-compensate. Similarly, if you have larger setups or you have a predictable scaling pattern (ex: 5 servers at a time), you also have the flexibility to scale in bulk.
+
+<ul>
+<li><strong>Resize Up by:</strong>  Number of servers to scale up by</li>
+<li><strong>Resize Down by:</strong> Number of servers to scale down by</li>
+<li><em>Note</em>: Typically, you will want to resize down more conservatively than how you resize up so that you don&#39;t accidentally terminate too many instances that would either degrade your site&#39;s performance or immediately result in a resize up action.</li>
+</ul></li>
+<li><strong>Resize calm time</strong> - The calm time defines how long you want to wait before you repeat another action. Since it takes a few minutes for a new server to be launched and become fully operational, you&#39;ll want to give yourself a buffer before another action can be taken. For normal situations, we recommend using a calm time of 15 minutes.<br></li>
+</ul>
+
+<p>Click <strong>Save</strong>.</p>
+
+<h4 id="test-the-server-array">Test the Server Array</h4>
+
+<p>Before you enable the server array and make it active, it&#39;s important to first test the configuration of the server array.</p>
+
+<ol>
+<li>Go to the server array and click the <strong>Launch</strong> button to manually launch a single instance into the array.</li>
+<li>If the server becomes operational, it&#39;s probably safe to enable the array. If the server becomes stranded in booting, you should troubleshoot the problem by looking into its audit entries. Terminate the instance and fix the array&#39;s configuration. Repeat the steps above until you are able to successfully launch a single instance.</li>
+</ol>
+
+<p>!!info*Note:* If you are using load balancing service and are setting up the deployment for the first time, you should not enable the array until you have created your CLB.</p>
+
+<h2 id="create-a-new-queue-based-server-array">Create a New Queue-based Server Array</h2>
+
+<h3 id="create-a-new-queue-based-server-array-objective">Objective</h3>
+
+<p>Create a queue-based application server array.</p>
+
+<h3 id="create-a-new-queue-based-server-array-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>Amazon SQS Queues must be enabled on the AWS account. See <a href="http://support.rightscale.com/03-Tutorials/01-RightScale/3._Upgrade_Your_Account/1.9_Sign-up_for_Additional_Cloud_Services/index.html">Sign-up for Additional Cloud Services</a>.</li>
+<li>Requires a paid edition of RightScale. To upgrade, contact <a href="mailto:sales@rightscale.com">sales@rightscale.com</a></li>
+</ul>
+
+<h3 id="create-a-new-queue-based-server-array-overview">Overview</h3>
+
+<p>A Server Arrays is made up of identical servers running in the cloud. Queue-based arrays are commonly used for performing batch processing tasks, where each server is a worker instance that&#39;s used to process items (work units) in an SQS input queue. Instances that are launched into an array must exist in the same region (e.g. AWS US-East), however you can control into which availability zones within that region that instances will be launched. Additional availability zone data transfer costs may apply.</p>
+
+<p>You can use the RightScale Cloud Management Platform to monitor the number of items and scale up the number of instances in the server array accordingly. Currently, a server array can be configured to scale up based on the number of items in the queue or the age of the items in the queue. However, you are ultimately responsible for determining how to scale down the array. Since each application is unique, you must determine when an instance is no longer needed and expendable. There are several different ways that you can scale down your array.</p>
+
+<ul>
+<li>Manually terminate instances</li>
+<li>Create and configure a self-terminating script on each instance</li>
+<li>Use an external resource/instance to monitor instance usage in the array and determine which instance can/should be terminated.</li>
+</ul>
+
+<h3 id="create-a-new-queue-based-server-array-steps">Steps</h3>
+
+<p>There are two types of queue-based server arrays. They are both addressed in below.</p>
+
+<ol>
+<li><a href="/cm/dashboard/manage/arrays/arrays_actions.html">Based on the number of jobs in the queue</a></li>
+<li><a href="/cm/dashboard/manage/arrays/arrays_actions.html">Based on the amount of time a job is in the queue</a></li>
+</ol>
+
+<h3 id="create-a-new-queue-based-server-array-based-on-the-amount-of-jobs-in-the-queue">Based on the amount of jobs in the queue</h3>
+
+<p>To create a server array, go to <strong>Manage</strong> &gt; <strong>Arrays</strong> and click <strong>New Array</strong>. You will add the server array through the Add Server Array Assistant.</p>
+
+<p>Provide the following information:</p>
+
+<h4 id="servertemplate">ServerTemplate</h4>
+
+<p><strong>ServerTemplate</strong> - Choose the template that you would like to use in order to scale your deployment. This ServerTemplate will be used to create the new servers that will be added to the server array. Since you are scaling the number of application servers, you will need to select the latest version of the appropriate (PHP/Rails/TomCat) application ServerTemplate, not a front-end ServerTemplate. (If you need to make changes to the template, you will need to clone it.)  </p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Make sure that the Inputs for the ServerTemplate are properly configured and that they will boot correctly.</p>
+</div>
+
+<h4 id="server-details">Server Details</h4>
+
+<ul>
+<li><strong>Cloud</strong> - Each array must be associated with a cloud or cloud region.</li>
+<li><strong>SSH Key</strong> &amp; <strong>Security Group</strong> - Specify the appropriate <strong>SSH key</strong> and <strong>Security Group(s)</strong> that will be attached to the array.</li>
+</ul>
+
+<h4 id="server-options">Server Options</h4>
+
+<ul>
+<li><strong>Cloud</strong> - Each array must be associated with a cloud or cloud region.</li>
+<li><strong>ServerTemplate</strong> - Select the ServerTemplate that will be used to create the worker instances in the server array. (If you need to make changes to the template, you will need to clone it.) <em>Note</em>: Make sure that the Inputs for the ServerTemplate are properly configured and that they will boot correctly. Before making an array active, you might want to launch a test instance into the array to verify that a functional instance can be launched.</li>
+<li><strong>SSH Key</strong> &amp; <strong>Security Group</strong> - Specify the appropriate <strong>SSH key</strong> and <strong>Security Group(s)</strong> that will be attached to the array.</li>
+</ul>
+
+<h4 id="array-details">Array Details</h4>
+
+<ul>
+<li><strong>Status</strong> - The status of the server array. If active, the server array is enabled for scaling actions.</li>
+<li><strong>Min Count</strong> - The minimum number of active servers that must exist at all times in the server array.</li>
+<li><strong>Max Count</strong> - The maximum number of active servers that must exist at all times in the server array.</li>
+<li><strong>Array Type</strong> - Specify alert-based or queue-based arrays. Secondary options will change accordingly.</li>
+<li><strong>Elasticity Function</strong> - Defines how the server array should grow/shrink. (size or age)</li>
+<li><strong>Items per Instance</strong> - Max number of items in queue per operational instance.</li>
+<li><strong>Indicator Queue</strong> - Select the input SQS queue that contains all of the job tasks.</li>
+<li><strong>Audit Queue</strong> - Select the audit SQS queue that will store audit entries.</li>
+</ul>
+
+<h4 id="queues">Queues</h4>
+
+<ul>
+<li><strong>Elasticity function</strong> - Defines how the server array should grow/shrink. Select <strong>sqs_queue_size</strong>.</li>
+<li><strong>Elasticity params</strong> - Defines the elasticity parameters that will be used to determine when a server array should be resized.
+
+<ul>
+<li><strong>Items per instance</strong> - Defines the ratio of worker instances per items in the queue. Ex: If there are 50 items in the queue and <q>Items per instance</q> is set to 10, the server array will resize to 5 worker instances (50/10). Default = 10</li>
+</ul></li>
+<li><strong>Indicator</strong> - Select the input SQS queue that contains all of the job tasks.</li>
+<li><strong>Audit</strong> - (optional) Select the audit SQS queue that will store audit entries.</li>
+<li><strong>Audit entry analysis</strong> - If checked, it will populate a Statistics tab for your array. If unchecked, no Statistics tab will appear.</li>
+</ul>
+
+<h4 id="example-1">Example 1</h4>
+
+<p>If there are 100 jobs in the queue and there are already 8 servers running, the server array will only add 2 additional worker instances.</p>
+
+<ul>
+<li>Items per instance: 10<br></li>
+<li>Default max count: 20</li>
+</ul>
+
+<h4 id="example-2">Example 2</h4>
+
+<p>If there are 1000 jobs in the queue and there are already 10 servers running, the server array will only add 10 additional worker instances, because the maximum server count is set to 20 worker instances.</p>
+
+<ul>
+<li>Items per instance: 10<br></li>
+<li>Default max count: 20</li>
+</ul>
+
+<h3 id="create-a-new-queue-based-server-array-based-on-the-amount-of-time-a-job-is-in-the-queue">Based on the amount of time a job is in the queue</h3>
+
+<p>To create a server array, go to Manage -&gt; Arrays and click a <strong>New</strong> button.</p>
+
+<p>Provide the following information:</p>
+
+<h4 id="general">General</h4>
+
+<ul>
+<li><strong>Nickname</strong> - Provide a Nickname for the server array. (e.g. MyFirstArray)</li>
+<li><strong>Array Type</strong> - select Queue <strong>-based</strong> as the type of server array. (The secondary configuration options will change accordingly.)</li>
+<li><strong>Deployment</strong> - Each server array must be associated with a particular deployment. Although you can attach more than one server array to a deployment.</li>
+<li><strong>Active</strong> - Leave the <q>Active</q> checkbox unchecked until you are ready to make the array active. WARNING: If checked, the array will be enabled after it is saved. New instances may be launched.</li>
+</ul>
+
+<h4 id="server-options">Server Options</h4>
+
+<ul>
+<li><strong>Cloud</strong> - Each array must be associated with a cloud or cloud region.</li>
+<li><strong>ServerTemplate</strong> - Select the ServerTemplate that will be used to create the worker instances in the server array. (If you need to make changes to the template, you will need to clone it.) <em>Note</em>: Make sure that the Inputs for the ServerTemplate are properly configured and that they will boot correctly. Before making an array active, you might want to launch a test instance into the array to verify that a functional instance can be launched.</li>
+<li><strong>SSH Key</strong> &amp; <strong>Security Group</strong> - Specify the appropriate <strong>SSH key</strong> and <strong>Security Group(s)</strong> that will be attached to the array.</li>
+</ul>
+
+<h4 id="server-allocation-policy">Server Allocation Policy</h4>
+
+<ul>
+<li><strong>Default min count</strong> - The minimum number of worker instances that must be operational at all times in the server array. You can set this value to zero to avoid idle server usage costs. But, if you have time-sensitive tasks that need to be processed immediately, you might want to use a value of at least one worker instance. Default = 1.</li>
+<li><strong>Default max count</strong> - The maximum number of servers that can be operational at any given time in the server array. Default = 20. Amazon will not let you launch more than 20 servers unless you submit a form request to increase this limit.</li>
+<li><strong>Availability Zone</strong> - Defines into which availability zone(s) new servers of your array will be launched. You can either select a specific zone or select the <q>Any</q> or <q>Weighted</q> option to disperse servers across multiple availability zones. By dispersing your servers across multiple availability zones, you are hopefully preventing all of your array servers from suddenly disappearing if an availability zone ever failed. The <q>Weighted</q> option allows you to control the ratio of server dispersion across all of the zones. For example, if you wanted to launch a majority of servers into a particular zone (us-east-1a), you can give &#39;us-east-1a&#39; a larger weighted value than the other zones. Any positive integer is sufficient.
+<em>Note</em>: Associated cross-zone data traffic rates do apply.</li>
+</ul>
+
+<h4 id="queues">Queues</h4>
+
+<ul>
+<li><strong>Elasticity function</strong> - defines how the server array should grow/shrink. Select <strong>sqs_item_age</strong>.</li>
+<li><strong>Elasticity params</strong> - defines the elasticity parameters that will be used to determine when a server array should be resized.
+
+<ul>
+<li><strong>Max age</strong> - defines the threshold (in seconds) before a resize action occurs on the server array. (i.e. If an item&#39;s age is greater than or equal to the <q>max age,</q> a new instance will be launched.) An item&#39;s age is determined by the <a href="/cm/dashboard/manage/arrays/arrays_actions.html#create-a-new-queue-based-server-array">Algorithm</a> variable (max_10 or avg_10).</li>
+<li><strong>Regexp</strong> - each job task receives a timestamp when it&#39;s added to the queue. The timestamp is used to determine an item&#39;s <q>age</q> in the queue. It needs to contain a parenthesized sub-expression that, when matched, can be parsed as a date/time. The age is calculated by finding the difference between a timestamp specified in the body of the message and current time. The system finds this timestamp by matching a regular expression against the body of the message. We recommend that you create a field, created_at: with a UTC timestamp when creating a work_unit. You would specify the following regex string excluding the quotes <q>created_at: (\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d **XXX** )</q> where <strong>XXX</strong> is GMT or UTC depending on your machine. You would then specify the following for the elasticity function to determine the scaling event:</li>
+<li>If you are using UTC, copy and paste created_at: (\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d UTC) into the field.</li>
+<li>To verify that your regex expression matches the format of the timestamp in your work_unit go to <strong>Clouds</strong> &gt; <strong>AWS Global</strong> &gt; <strong>Queues</strong> and click on your input queue. Go to the Messages tab and click <q>View Top Item</q> link. You should now be able to see the format of the timestamp as it appears in the work_unit.</li>
+<li><strong>Algorithm</strong> - defines how an item&#39;s age will be determined, either by the average age or max (oldest) age. Default: <q>avg_10</q></li>
+<li><strong>max_10</strong> - the maximum age of 10 items in the queue. It will look for the oldest item in the sample.</li>
+<li><strong>avg_10</strong> - the average age of 10 items in the queue.</li>
+<li><strong>Resize by</strong> - the number of instances that should be added/removed from a server array when a resize action occurs. Default = 1</li>
+<li><strong>Resize calm time</strong> - the time (in minutes) that must pass before another action can be taken on the server array. This variable helps prevent an array from being resized too frequently. Default = 5</li>
+</ul></li>
+<li><strong>Indicator</strong> - Select the input SQS queue that contains all of the job tasks.</li>
+<li><strong>Audit</strong> - (optional) Select the audit SQS queue that will store audit entries.</li>
+<li><strong>Audit entry analysis</strong> - If checked, it will populate a Statistics tab for your array. If unchecked, no Statistics tab will appear.</li>
+</ul>
+
+<h4 id="example-1">Example 1</h4>
+
+<p>Currently, only one worker instance is running. A set of jobs was just added to the SQS input queue. Based on the elasticity parameters below, the server array will add 2 additional servers once an item (out of a sample of 10) has been in the SQS input queue for 30 seconds or longer. After 2 new servers have been launched, the server array must wait 10 minutes before it&#39;s allowed to resize again.</p>
+
+<p>Max age: 30<br>
+ Algorithm: max_10<br>
+ Resize by: 2<br>
+ Resize calm time: 10 min</p>
+
+<h4 id="example-2">Example 2</h4>
+
+<p>Currently, there are 5 worker instances running. Based on the elasticity parameters below, the server array will add an additional server if the average age of 10 items in the SQS input queue is equal or greater to 2 minutes. After a new server is launched, the server array must wait 5 minutes before it&#39;s allowed to resize again.</p>
+
+<p>Max age: 120<br>
+ Algorithm: avg_10<br>
+ Resize by: 1<br>
+ Resize calm time: 5 min</p>
+
+<h2 id="create-a-new-server-array-with-spot-instances">Create a New Server Array with Spot Instances</h2>
+
+<h3 id="create-a-new-server-array-with-spot-instances-objective">Objective</h3>
+
+<p>Create an application Server Array using Spot Instances.</p>
+
+<h3 id="create-a-new-server-array-with-spot-instances-overview">Overview</h3>
+
+<p>Server Arrays are identical servers running in the cloud. The RightScale Cloud Management Platform can monitor and scale up (or down) the number of servers in a Server Array to meet application demands based on alerts or queues (Grid-based Server Arrays). This tutorial uses Spot Instances for the servers in your Server Array. Since hourly rates for Spot Instances are usually lower than On-Demand prices, there is potential for cutting costs. You can set the max price that you&#39;re willing to pay for your Spot Instances and even view the recent history of your chosen type of instance to be able to get a good idea of what to set as your max price. Prices for Spot Instances vary based on supply and demand.</p>
+
+<h3 id="create-a-new-server-array-with-spot-instances-steps">Steps</h3>
+
+<p>To create a Server Array, go to <strong>Manage</strong> &gt; <strong>Arrays</strong>. You will need to select the cloud infrastructure or EC2 region where the Server Array instances will be launched. Instances that are launched in an array must exist in the same region (e.g. AWS US-East), but can be dispersed across multiple availability zones within the same region.</p>
+
+<p>Having now set up your Server Array to use Spot Instances, you can finish this tutorial depending on which Server Array you&#39;ve selected:</p>
+
+<ul>
+<li><a href="/cm/dashboard/manage/arrays/arrays_actions.html">Create a New Queue-based Server Array</a></li>
+<li><a href="/cm/dashboard/manage/arrays/arrays_actions.html">Create a New Alert-based Server Array</a></li>
+</ul>
+
+<h2 id="delete-a-server-array">Delete a Server Array</h2>
+
+<h3 id="delete-a-server-array-objective">Objective</h3>
+
+<p>To delete a server array.</p>
+
+<h3 id="delete-a-server-array-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An existing Server Array</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="delete-a-server-array-overview">Overview</h3>
+
+<p>When you delete a Server Array, you&#39;re only deleting the Server Array object or metadata.</p>
+
+<p>You can delete a Server Array regardless of whether it&#39;s active (enabled) or inactive (disabled). You can also delete a Server Array regardless of whether or not it has any running instances. As a best practice, you should only delete Server Arrays that are inactive. If you delete a Server Array that&#39;s active and contains running instances, it can become very difficult to locate all of the running instances of an array once it&#39;s been deleted.</p>
+
+<p><strong>Important!</strong> Instances that are currently running in a Server Array are NOT terminated when an array is deleted. The reason why an array&#39;s instances are not automatically terminated is because some of the instances could be hosting active user sessions. If you delete a server array that contains running instances, you must manually delete each instance in the array. Go to <strong>Clouds</strong> &gt; <strong>AWS Region</strong> &gt; <strong>EC2 Instances</strong> and search for all instances of the Server Array. (Tip: Use the <q>Filter by Nickname</q> option and perform a keyword search using the Server Array&#39;s Nickname.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>A deleted Server Array will no longer be allowed to scale. RightScale&#39;s alert daemon ignores a deleted Server Array. For example, if you delete an &#39;enabled&#39; Server Array that contains running instances (5) and has a minimum instance count configuration (e.g. 2), and later you terminate all running instances of that array, the Server Array will not automatically launch the minimum count of instances (e.g. 2).</p>
+</div>
+
+<h3 id="delete-a-server-array-steps">Steps</h3>
+
+<ol>
+<li>As a best practice, you should make sure you&#39;ve taken the necessary precautionary steps before deleting a Server Array.
+
+<ul>
+<li>Disabled the server array</li>
+<li>Terminated any running instances (Server Array&#39;s Instances tab)</li>
+</ul></li>
+<li>Go to <strong>Manage</strong> &gt; <strong>Arrays</strong>.</li>
+<li>Click the <strong>Delete</strong> action icon next to the array that you want to delete. (<em>Note</em>: You cannot delete a Server Array from the array&#39;s show page.)</li>
+</ol>
+
+<h2 id="enable-or-disable-a-server-array">Enable or Disable a Server Array</h2>
+
+<h3 id="enable-or-disable-a-server-array-objective">Objective</h3>
+
+<p>To enable a Server Array so that it&#39;s allowed to automatically scale up/down (grow/shrink) based on the queue-based or alert-based triggers.</p>
+
+<h3 id="enable-or-disable-a-server-array-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="enable-or-disable-a-server-array-overview">Overview</h3>
+
+<p>The state of the Server Array determines its autoscaling properties. Regardless of the array&#39;s state, instances can still be launched and terminated manually.</p>
+
+<p>The array can have one of the following states:</p>
+
+<ul>
+<li><strong>Enabled</strong> (active) - The server array will be monitored by RightScale&#39;s alert daemon and permitted to autoscale. Voting servers and thresholds will be monitored appropriately. When the decision threshold has been exceeded for either a resize up/down action, the appropriate scaling event will occur.</li>
+<li><strong>Disabled</strong> (inactive) - The server array is not monitored by RightScale&#39;s alert daemon and is not permitted to autoscale. Voting servers and thresholds will be ignored. No running instances will be affected, and if you want to terminate active array instances, you can use the &#39;Terminate all&#39; button.</li>
+</ul>
+
+<p>As a best practice, you only want to enable a Server Array once you&#39;re confident that everything has been configured properly and that there are no missing inputs. Be sure to test a server array manually, before enabling it for autoscaling. For example, before you enable an array, you may want to test it by using the Launch button (on the Server Array&#39;s show page) to manually launch a test instance to make sure that it will be launched and configured successfully. You do not want to enable an array that will launch instances that will strand in booting and never become operational.</p>
+
+<h3 id="enable-or-disable-a-server-array-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Arrays</strong>.</li>
+<li>Click the <strong>Enable</strong> text link next to the array that you want to make active. You can also click a similar <strong>Enable</strong> text link on a Server Array&#39;s show page.</li>
+</ol>
+
+<h2 id="run-a-rightscript-on-servers-in-a-server-array">Run a RightScript on Servers in a Server Array</h2>
+
+<h3 id="run-a-rightscript-on-servers-in-a-server-array-objective">Objective</h3>
+
+<p>Run a RightScript on potentially many Servers in a Server Array.</p>
+
+<h3 id="run-a-rightscript-on-servers-in-a-server-array-overview">Overview</h3>
+
+<p>Instead of manually executing a RightScript on each individual Server in an array, you can run a RightScript on one or all Servers in an array. There are a couple different ways that you can execute RightScripts:</p>
+
+<ul>
+<li>Run RightScript on the oldest Server in the array</li>
+<li>Run RightScript on Remaining Servers</li>
+<li>Run RightScript on All Servers</li>
+</ul>
+
+<p><strong>Scenario A</strong>: You want to update all of your application servers to pull from the latest code from your SVN repository. After updating your ServerTemplate so that all new servers will be launched into the array with the updated software branch, you also need to update the existing application servers that are currently operational.</p>
+
+<p><strong>Scenario B</strong>: You have a server array that has application servers that were launched with different ServerTemplates. You need to run a script on all servers that are using ServerTemplate A. Or you need to run a script that&#39;s used in both ServerTemplates (A and B).</p>
+
+<p>Just like at the Deployment and Server levels, you can also use the &#39;Any Script&#39; option to run any RightScript in your RightScale account&#39;s local collection.</p>
+
+<h3 id="run-a-rightscript-on-servers-in-a-server-array-steps">Steps</h3>
+
+<h4 id="run-a-script-on-a-server-in-the-array">Run a Script on a Server in the Array</h4>
+
+<p>Go to <strong>Manage</strong> &gt; <strong>Arrays</strong>. Select an active server array that has running instances on which you would like to execute a script. Under the <strong>Scripts</strong> tab, you will see a list of scripts that you can run on the server instances.</p>
+
+<p>Select a script and click its <strong>Run</strong> button.</p>
+
+<p><img src="/img/cm-run-script-array.png" alt="cm-run-script-array.png" width="725" height="283" /></p>
+
+<p>A list of all ServerTemplates in the array that contain that script will be listed. Typically, server instances in an array will use the same ServerTemplate.</p>
+
+<p>Select which ServerTemplate(s) you would like to run the script on and the choose whether or not you want to run the script on one or all servers in the array.</p>
+
+<p>If you want to test the script before running it across all servers in the array, you can use the <strong>run on oldest</strong> option, which will execute the script on the <q>oldest</q> server in the array. You can track the progress of the script&#39;s execution in the Events pane.</p>
+
+<p>If you choose the <strong>run on all</strong> option, the the script will be executed on all servers in the array.</p>
+
+<p><img src="/img/cm-run-on-oldest.png" alt="cm-run-on-oldest.png" width="725" height="120" /></p>
+
+<p>Before a script is actually run, you will have a chance to verify the input parameters that will be used during the script&#39;s execution.</p>
+
+<p><img src="/img/cm-input-validtaion.png" alt="cm-input-validtaion.png" width="665" height="214" /></p>
+
+<p>If you choose the <strong>run on oldest</strong> option and run the script on one server, you will see another option, <strong>run on remaining</strong> , which will run the script on the remaining servers.</p>
+
+<p><em>Note</em>: When you <strong>run on remaining</strong>, it will run on the remaining servers that are in the array when you click the button. If your array scales-up or down between the execution of both actions, the number of instances listed may not be accurate.</p>
+
+<h2 id="set-up-autoscaling-using-voting-tags">Set up Autoscaling using Voting Tags</h2>
+
+<h3 id="set-up-autoscaling-using-voting-tags-objective">Objective</h3>
+
+<p>To add scale-up and scale-down alerts for horizontal autoscaling of an alert-based server array, which is commonly used for autoscaling an application tier of a multi-tier deployment.</p>
+
+<p><em>Note</em>: The ability to set up autoscaling using Alert Escalations will be eventually be deprecated. (<a href="http://support.rightscale.com/03-Tutorials/02-AWS/02-Website_Edition/How_do_I_set_up_Autoscaling%3F/index.html">Set up Autoscaling using Alert Escalations?</a>) Please use this tutorial for autoscaling purposes.</p>
+
+<h3 id="set-up-autoscaling-using-voting-tags-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>Requires &#39;actor&#39; user role privileges</li>
+<li>An existing Deployment that you want to set up for alert-based autoscaling.</li>
+</ul>
+
+<h3 id="set-up-autoscaling-using-voting-tags-overview">Overview</h3>
+
+<p>Once you&#39;ve set up a typical website deployment you&#39;ll most likely want to configure it for autoscaling. Autoscaling is the ability to launch additional server resources automatically based upon different alert conditions you&#39;ve predefined. For example, you can set up a server array so that additional servers are launched into the array (grow) when a majority of the servers are being overworked (e.g. cpu-idle &lt; 30% for 15 min or longer) and then scale back down (shrink) when traffic decreases and underutilized application servers can be safely terminated. This tutorial explains how to set up horizontal scaling where additional servers are launched to help overworked servers, whereas vertical scaling involves increasing instance sizes where you&#39;re upgrading existing machines with more powerful counterparts.</p>
+
+<p>Horizontal scaling is configured by using a RightScale concept called Voting Tags. These server tags are used specifically for the purpose of setting up a scalable, alert-based server arrays. The following steps will explain how to set up autoscaling using Voting Tags. To learn more about how server votes are counted, see <a href="/cm/rs101/understanding_the_voting_process.html">Understanding the Voting Process</a>.</p>
+
+<p>Even if you don&#39;t think you&#39;ll need to autoscale in the near future, it&#39;s always a good idea to prepare your Deployment for such events. The ability to autoscale is one of the key benefits of cloud computing. If you&#39;ve been following the Deployment Setup tutorials, you already have a typical 4-server Deployment. This tutorial explains the few extra steps that you need to take in order to properly configure a Deployment for horizontal scaling.</p>
+
+<p><img src="/img/cm-4server-array.png" alt="cm-4server-array.png" width="582" height="381" /></p>
+
+<h3 id="set-up-autoscaling-using-voting-tags-steps">Steps</h3>
+
+<h4 id="create-a-server-array">Create a Server Array</h4>
+
+<p>The first step is to create the server array. Although you can define your alert specifications first, the process of setting up a scalable server array is less prone to error if you start by creating a server array first. When you create the server array, be sure to associate it with the desired deployment. Remember, this server array will be used when servers in the deployment require additional server resources. Be sure to note the Voter Tag that you specify for the array (<q>Choose voters by tag</q>). Later on in the tutorial you will need to make sure that you use the same voting tag when you create your alert specifications. For this tutorial, simply use the default Voting Tag, which uses the Server Array&#39;s nickname (e.g. MyArray) and make sure that the array is disabled as you&#39;re not ready for autoscaling.</p>
+
+<h4 id="create-an-alert-specification">Create an Alert Specification</h4>
+
+<p>Now that you&#39;ve created a Server Array and specified which Voting Tag RightScale should use to evaluate when a Server Array should autoscale, you are now ready to configure your alert specifications. Before you can create an alert specification, you must first answer the following questions:</p>
+
+<ul>
+<li>Which metric(s) should be used for autoscaling?</li>
+<li>Who should be allowed to vote for a scaling action?</li>
+</ul>
+
+<h4 id="which-metric(s)-should-be-used-for-autoscaling?">Which metric(s) should be used for autoscaling?</h4>
+
+<p>Although, it&#39;s typically sufficient to scale up/down based on a single metric (e.g. cpu), you can set up an array where multiple metrics can trigger scaling actions. Let&#39;s say you want to set up a scalable array of PHP application servers. Since your application can be both memory and cpu intensive at times, you need to set up alert specifications where both of these key metrics are monitored. Additionally, you want the server array to scale up/down based upon both of these metrics. Remember, for each metric that you want to use for autoscaling, you have to create two alerts: one for scaling up and one for scaling down.</p>
+
+<h4 id="who-should-be-allowed-to-vote-for-a-scaling-action?">Who should be allowed to vote for a scaling action?</h4>
+
+<p>Next, you will need to determine who should be allowed to vote for a scale up/down action. The answer to this question, as well as the architecture of your deployment will impact how you configure your pool of voting Servers. Basically, you need to make sure that each Server that you want to be allowed to vote for a scaling action has the appropriate alert specifications. Remember, a Server can inherit its alerts from multiple sources, so you must choose the best place to define your alerts. Alert specifications can be defined at the Server, ServerTemplate, or Server Array levels. As a best practice, you should only configure them at the ServerTemplate or Server Array levels as it&#39;s difficult to keep configurations at the Server level consistent. The following guidelines can be used to help guide your decision.</p>
+
+<ul>
+<li>If your application is only being served by Servers in your Server Array, you can either specify them at the Server Array or ServerTemplate levels. This way, all new Servers that are launched into the array will inherit the correct alert specifications. <em>Note</em>: A Server will inherit alerts from its ServerTemplate and Server Array. So, it&#39;s important that you define an alert in one of those places and not both. Otherwise, your Server may have a duplicate alert that could affect a Server&#39;s aggregated vote.</li>
+<li>If your application is being served by Servers in your Deployment (not just in a Server Array), you will need to add the same alert(s) in multiple places. For example, if you have two FrontEnd servers that are serving your application, they should be allowed to vote for a scaling action. Therefore, you&#39;ll need to add the alert specifications to those Servers&#39; ServerTemplates (e.g. <q>PHP FrontEnd v9</q>). You will also need to make sure that Servers in your Server Array also be allowed to vote since they will be dedicated application servers. Therefore, you&#39;ll need to add the same alert specification at either the Server Array level or to the ServerTemplate that&#39;s being used to launch new instances in the Server Array.</li>
+</ul>
+
+<p>Once you&#39;ve answered those prerequisite questions, you&#39;re ready to define those alert specifications. In this example, we&#39;ll be defining them at the ServerTemplate level.</p>
+
+<h4 id="create-an-alert-specification-to-grow-and-shrink">Create an Alert Specification to <q>grow</q> and <q>shrink</q></h4>
+
+<p>For this example, let&#39;s define the following alert specifications at the ServerTemplate level. Locate the ServerTemplate(s) that will be used by all voting Servers. If you&#39;re using FrontEnd servers or application servers in your Deployment and you want them to be able to vote for growing/shrinking an array, you will also need to add the same alert specifications to those ServerTemplates as well. Remember, in order to add an alert specification to a ServerTemplate, it must be an editable HEAD version, so you may have to clone the ServerTemplate. If an alert specification&#39;s condition exists for longer than the defined threshold, an alert is triggered.</p>
+
+<ul>
+<li>If &#39;cpu-0/cpu-idle&#39; is &lt; 30 percent for 15 minutes, then vote to &#39;<strong>grow</strong>&#39; the server array by setting the &#39;<strong>MyArray</strong>&#39; voter tag.</li>
+<li>If &#39;cpu-0/cpu-idle&#39; is &gt; 80 percent for 45 minutes, then vote to &#39;<strong>shrink</strong>&#39; the server array by setting the &#39;<strong>MyArray</strong>&#39; voter tag.</li>
+</ul>
+
+<p><strong><em>Important!</em></strong></p>
+
+<p>The voting tags must match! Voting Tags are NOT case-sensitive.</p>
+
+<p><img src="/img/cm-voting-tag-match.png" alt="cm-voting-tag-match.png" width="725" height="237" /></p>
+
+<p>Remember, the Voter Tag that you specify when creating an alert specification must match the tag that you previously set at the Server Array level, otherwise autoscaling will not work properly.</p>
+
+<p>Server Array: MyArray<br>
+ Servers&#39; Voting Tag: <code>rs_vote:MyArray=none</code></p>
+
+<p>See <a href="/cm/rs101/create_a_new_alert_specification.html">Create an Alert Specification</a>.</p>
+
+<h4 id="launch-a-test-server">Launch a Test Server</h4>
+
+<p>Before you enable the array for autoscaling, it&#39;s always a recommended best practice to launch a test server into the server array. Go to the Server Array&#39;s show page (Manage &gt; Arrays &gt; <em>MyArray</em>) and click the <strong>Launch</strong> action button. Make sure that the new Server has the proper Voting Tags. Check the Server&#39;s Info tab and make sure under the Tag(s) section it has the following tag: <code>rs_vote:MyArray=none</code></p>
+
+<h4 id="enable-the-server-array">Enable the Server Array</h4>
+
+<p>If the test Server was launched and configured properly, you can now enable the array for autoscaling. Under the Server Array&#39;s Info tab, click the <strong>Enable</strong> text link under Status. The Server Array is now active and will autoscale accordingly.</p>
+
+<h4 id="next-steps">Next Steps</h4>
+
+<p>If you are following the Deployment Setup tutorials and just added a scalable server array to your 4-server setup, you may be curious about the next steps in the lifecycle of your Deployment.</p>
+
+<p>As your site continues to grow, you may need to consider transitioning to a 3-tiered architecture where you have two dedicated load balancers, where the entire bandwidth/cpu/memory of the FrontEnd is used for load balancing purposes only so that it&#39;s no longer responsible for also serving the application. If you typically, only need around 6 servers to handle a majority of your load 90% of the time, you might want to let the FrontEnds continue to serve your application. However, if you anticipate a large scaling event in the future or if you plan to manage more than these 6 servers on a regular basis, you might want to migrate from the standard 4-server setup. See <a href="/cm/management_guide/transition_from_a_4_server_to_6+_server_setup.html">Transition from a 4-Server to 6+ Server Setup</a>.</p>
+
+<p><img src="/img/cm-6server-setup-array.png" alt="cm-6server-setup-array.png" width="562" height="390" /></p>
+
+<h2 id="test-a-server-array">Test a Server Array</h2>
+
+<h3 id="test-a-server-array-objective">Objective</h3>
+
+<p>To launch a sample server instance in the server array for testing purposes.</p>
+
+<h3 id="test-a-server-array-overview">Overview</h3>
+
+<p>Before you enable an array and make it active so that triggered alert conditions can cause scale-up actions that launch new instances in the array, you may want to perform a few precautionary tests to ensure that any new server instances will boot correctly and be properly configured with the correct inputs.</p>
+
+<h3 id="test-a-server-array-steps">Steps</h3>
+
+<p>Go to <strong>Manage</strong> &gt; <strong>Arrays</strong> and select your server array. Click the <strong>Launch</strong> action button to launch a single server into the array. You can manually launch a new server instance into the array regardless of whether or not the array is active (enabled).</p>
+
+<p><strong>Warning!</strong> Your existing frontends or load balancers will send traffic to the server instance once it becomes operational, so it&#39;s best to perform this test in a staging environment or during non peak time to minimize any customer facing errors.</p>
+
+<p>Under the Server Array&#39;s Instances tab you&#39;ll find your test server instance that you just launched.</p>
+
+<p><img src="/img/cm-array-instances-tab.png" alt="cm-array-instances-tab.png" width="725" height="197" /></p>
+
+<p>Once the server becomes operational, click on the Server&#39;s link to view more information.</p>
+
+<p>Click the server&#39;s <strong>Public DNS name</strong> link under the Server&#39;s Info tab to test its functionality. Check the Inputs tab to make sure it&#39;s connecting to the correct frontend / load balancer. Test to make sure that the server is properly communicating with the database. Remember, if you find configurations that need to be changed, you will need to make them at the ServerTemplate or Server Array level so that the change will persist and be inherited by future server launches in the server array. If you make such changes, you should terminate the existing server instance and launch a new one.</p>
+
+<p>If you are satisfied that newly launched server instances are being properly configured, it is reasonably safe to assume that you can now enable the server array and make it active.</p>
+
+<h2 id="update-inputs-of-multiple-instances-in-a-server-array">Update Inputs of Multiple Instances in a Server Array</h2>
+
+<h3 id="update-inputs-of-multiple-instances-in-a-server-array-objective">Objective</h3>
+
+<p>To update the inputs of running instances in a server array. current input values of multiple running servers within a deployment.</p>
+
+<h3 id="update-inputs-of-multiple-instances-in-a-server-array-overview">Overview</h3>
+
+<p>Inputs for new instances launched into a server array are set at launch time. You can check the server array&#39;s Inputs tab to verify which values will be set, according to the input inheritance rules. However, you may want to change an input that will affect all current and future running instances. For example, you may be using a server array for your application tier and push out new application code from a different repository. In such cases, you will need to update the appropriate input under the Server Array&#39;s Inputs tab, as well as change the same input for all running instances. But, what if there are 20 running instances in the server array? In such cases, instead of editing the Inputs tab of each running instance, you can change the input on some or all running instances by using the bulk set inputs feature. See the steps below for details.</p>
+
+<h3 id="update-inputs-of-multiple-instances-in-a-server-array-steps">Steps</h3>
+
+<h4 id="select-running-servers-to-update">Select running servers to update</h4>
+
+<ol>
+<li>Under the Server Array&#39;s Instances tab, select the running instances that you want to update. Since you will most likely want to apply the change to all running instances, use the <q>Select All</q> text link shortcuts.</li>
+<li>Select the <strong>Set Inputs</strong> option from the dropdown menu selector and click the <strong>Apply to selected</strong> action button.<br>
+<img src="/img/cm-select-instances.png" alt="cm-select-instances.png" width="550" height="376" /></li>
+</ol>
+
+<h4 id="specify-new-input-values">Specify new input values</h4>
+
+<p>Under the <q>Bulk Inputs Update</q> screen, provide the new input values that you want to apply to the selected instances. Use the dropdown menu to specify how the input will be set. You can either inherit the input value from one of the component levels or set it manually.</p>
+
+<p><img src="/img/cm-use-server-array.png" alt="cm-use-server-array.png" width="535" height="255" /></p>
+
+<ul>
+<li><strong>Unchanged</strong> - Do nothing</li>
+<li><strong>Use ServerTemplate value</strong> - Use the value specified under the ServerTemplate&#39;s Inputs tab.</li>
+<li><strong>Use deployment value</strong> - Use the value specified under the Deployment&#39;s Inputs tab.</li>
+<li><strong>Use ServerArray value</strong> - Use the value specified under the Server Array&#39;s Inputs tab.</li>
+<li><strong>Unset</strong> - Change to no value. <em>Note</em>: If you attempt to run a script that requires a value for this input, you will need to specify a value for the input before the script can be executed.</li>
+<li><strong>Text</strong> - Enter new text value.</li>
+<li><strong>Cred</strong> - Change to a credential (Design &gt; Credentials).</li>
+<li><strong>Env</strong> - Change to an environment variable.</li>
+<li><strong>Key</strong> - Change to an SSH key.</li>
+<li><strong>No value/Ignore</strong> - Select to ignore value for input.</li>
+</ul>
+
+<p>Click <strong>Save</strong>.</p>
+
+<h4 id="verify-inputs-for-running-instances">Verify Inputs for Running Instances</h4>
+
+<p>Go to the Inputs tab of one of the updated instances in the server array and verify that the input was changed accordingly.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

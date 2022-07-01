@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>User Roles (RBAC)</title><meta content="The following Role Based Access Control (RBAC) is a list of RightScale User Roles. Keep in mind that user roles are account-specific." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_ref cm_ref_user_roles" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Reference Information</a></p><div class="page-header"><h1>User Roles (RBAC)</h1></div><div class="main-content"><p>RightScale has an extensive Role Based Access Control (RBAC) to provide complete control over various parts of the platform. To view your own user roles across all of your accounts, go to <strong>Settings</strong> &gt; <strong>User</strong> &gt; <strong>Info</strong>. User Roles are account scoped but some roles can be granted at the Organization level from <a href="https://governance.rightscale.com">Governance</a> application.</p>
+
+<h3 id="-admin">admin</h3>
+
+<p>Administrative control of the RightScale Account. An account can have multiple users with &#39;admin&#39; privileges. Only &#39;admins&#39; can send and receive account invitations. Only an &#39;admin&#39; can add/change public/private cloud infrastructures and credentials, modify user permissions, and accept account group invitations on behalf of a RightScale account. The RightScale account owner (the person who created the account) cannot have admin privileges revoked by another &#39;admin&#39; user; the account owner will always have &#39;admin&#39; user role privileges in the account he/she created. However, only an &#39;admin&#39; user can revoke another user&#39;s &#39;admin&#39; privileges. The &#39;admin&#39; role is also needed to view and generate Infrastructure Audit Reports, view Customer Usage Reports (if the RightScale account is enabled for this feature), and to set account markups and markdowns in Optima.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Admins will also need <b>actor</b> permissions to add/change public/private cloud infrastructures and credentials.</p>
+</div>
+
+<h3 id="-actor">actor</h3>
+
+<p>Ability to manage all cloud related activity. You need &#39;actor&#39; privileges in order to act on resources and services at the cloud infrastructure level such as launch/terminate servers, create volumes and snapshots, and run scripts on running servers. You will also need this permission to create and manage deployments and server arrays. <em>Note</em>: The ability to create security groups and related firewall rules requires the &#39;security_manager&#39; user role.</p>
+
+<h3 id="-observer">observer</h3>
+
+<p>Ability to view the RightScale account. If users do not have at least &#39;observer&#39; role privileges, they will not be able to log into the Dashboard and view the account in Cloud Management.</p>
+
+<h3 id="-designer">designer</h3>
+
+<p>Ability to create RightScale-specific components such as ServerTemplates, RightScripts, MultiCloud Images, Repositories, Credentials, and Alert Escalations. You will need this permission to essentially perform actions underneath the Design menu of the Dashboard. With this permission you can also browse the MultiCloud Marketplace (MCM) (from within the RightScale Dashboard) for ServerTemplates and RightScripts, but you will need the &#39;library&#39; user role in order to import an object from the MCM. <em>Note</em>: You can also view publicly-viewable assets in the MCM using <a href="http://www.rightscale.com/library/server_templates">http://www.rightscale.com/library</a>.</p>
+
+<h3 id="-library">library</h3>
+
+<p>Ability to import objects from the MultiCloud Marketplace into a RightScale account. The ability to view the MultiCloud Marketplace (while logged into the RightScale dashboard) requires the &#39;designer&#39; role.</p>
+
+<h3 id="-security_manager">security_manager</h3>
+
+<p>Ability to manage network and firewall permissions that are used by instances in the cloud. You will need this permission in order to create security groups and define individual firewall rules within those security groups. You will also need this permission in order to create Virtual Private Clouds (VPCs) and subnets. Only trusted users should be granted this permission. You will also be able to view and generate Infrastructure Audit Reports.</p>
+
+<h3 id="-server_login">server_login</h3>
+
+<p>Ability to log into running servers. For Linux servers running RightLink10, you can SSH into the instance using your <a href="/rl10/reference/rl10_managed_ssh_login.html#login-names-rightscale-generated-default-login-name">default</a> or <a href="/rl10/reference/rl10_managed_ssh_login.html#login-names-user-definable-custom-login-name">custom</a> login name. For Linux servers running RightLink prior to Rightlink10, you are identified by the first part of the email address used to log into the RightScale Dashboard. For Windows servers you can create a Remote Desktop Connection using RDP. Your managed SSH Key is used for authentication purposes. In order to establish a remote connection you must also make sure that the running instance has the appropriate firewall permissions to allow SSH (TCP port 22) and RDP (TCP port 3389) connections. See <a href="/cm/rs101/server_login_control.html#who-manages-server-login-control-">What is Server Login Control?</a></p>
+
+<h3 id="-server_superuser">server_superuser</h3>
+
+<p>Ability to execute &#39;sudo&#39; on running servers. (Applies to Linux-based (not Windows) servers only.) Similar to the &#39;security_manager&#39; role, only trusted users should be granted this permission. <em>Note</em>: You will still need &#39;server_login&#39; privileges in order to start an SSH/RDP session.</p>
+
+<h3 id="-publisher">publisher</h3>
+
+<p>Ability to create sharing groups and share RightScale objects (ServerTemplates, RightScripts, and Macros) with other users. If you have a RightScale partner account, you can publish RightScale objects so that they appear in the MultiCloud Marketplace.</p>
+
+<h3 id="-credential_viewer">credential_viewer</h3>
+
+<p>Ability to view the value of a RightScale Credential object.</p>
+
+<h3 id="-enterprise_manager">enterprise_manager</h3>
+
+<p>(Enterprise only) Manages all accounts within a RightScale organization. Send account invitations and grant user role privileges across all accounts in the organization. The organization must have at least one &#39;enterprise_manager&#39; user. An &#39;enterprise_manager&#39; can also grant the same privileges to another user. See <a href="/cm/dashboard/settings/enterprise/index.html">Organization</a>.  </p>
+
+<p><strong>Note</strong> : To enable the &#39;enterprise_manager&#39; role, someone that is already an &#39;enterprise_manager&#39; needs to be enable the role from the <a href="https://governance.rightscale.com">Governance</a> module of RightScale.</p>
+
+<h3 id="-ca_user">ca_user</h3>
+
+<p>The <code>ca_user</code> role grants a user access to detailed billing information in the <a href="https://analytics.rightscale.com">RightScale Optima</a> site. This type of information is especially useful for users who want to keep track of their estimated infrastructure costs in order to stay within the allotted budget. </p>
+
+<h3 id="-billing_center_admin">billing_center_admin</h3>
+
+<p>The <code>billing_center_admin</code> role grants <strong>read-write</strong> access to Billing Centers and all accesses granted by <strong>ca_user</strong> within <a href="https://analytics.rightscale.com">RightScale Optima</a> for that organization.</p>
+
+<h3 id="-billing_center_viewer">billing_center_viewer</h3>
+
+<p>The <code>billing_center_viewer</code> role grants <strong>read-only</strong> access along with the ability to create reports and alerts for Billing Centers within <a href="https://analytics.rightscale.com">RightScale Optima</a> for that organization.</p>
+
+<h3 id="-ss_end_user">ss_end_user</h3>
+
+<p>The <code>ss_end_user</code> role grants a user <a href="/ss/getting_started/ss_user_types.html">End User privileges</a> in Self-Service so they can view the Catalog along with managing CloudApps (e.g.: Launch, Terminate etc).</p>
+
+<h3 id="-ss_observer">ss_observer</h3>
+
+<p>The <code>ss_observer</code> role grants a user <a href="/ss/getting_started/ss_user_types.html">Observer privileges</a> in Self-Service to view the Catalog and running CloudApps, but they can not take any action on them. </p>
+
+<h3 id="-ss_designer">ss_designer</h3>
+
+<p>The <code>ss_designer</code> role grants a user <a href="/ss/getting_started/ss_user_types.html">Designer privileges</a> in Self-Service to view the Design menu to upload and publish CATs, manage Schedules, and interact with the Cloud Workflow Console.</p>
+
+<h3 id="-policy_publisher">policy_publisher</h3>
+
+<p>The <code>policy_publisher</code> role grants user access to the policy automation to publish or un-publish policy templates to the Catalog. Learn more about <a href="/policies/#access-control">Policy Automation Access Control</a>.</p>
+
+<h3 id="-policy_designer">policy_designer</h3>
+
+<p>The <code>policy_designer</code> role grants user access to the policy automation to design, upload, and test policy templates. Learn more about <a href="/policies/#access-control">Policy Automation Access Control</a>.</p>
+
+<h3 id="-policy_manager">policy_manager</h3>
+
+<p>The <code>policy_manager</code> role grants user access to the policy automation to apply policy templates and monitor them. Learn more about <a href="/policies/#access-control">Policy Automation Access Control</a>.</p>
+
+<h3 id="-policy_viewer">policy_viewer</h3>
+
+<p>The <code>policy_manager</code> role grants user view-only access to the policy automation to view running policies and incidents. Learn more about <a href="/policies/#access-control">Policy Automation Access Control</a>.</p>
+
+<h2 id="see-also">See also</h2>
+
+<ul>
+<li><a href="/cm/rs101/rightScale_account_and_user_role_management.html">Account Management/User Roles</a></li>
+<li><a href="/cm/ref/user_role_privs.html">User Role Privileges</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

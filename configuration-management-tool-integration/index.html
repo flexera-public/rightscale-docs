@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Configuration Management Integration</title><meta content="Provides introductory and general usage information on the RightScale Configuration Management Integration." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="configuration-management-tool-integration configuration-management-tool-integration_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a></p><div class="page-header"><h1>Configuration Management Integration</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>RightScale recognizes that most enterprises leverage a variety of different configuration management tools in different application teams across the organization. To provide choice in the configuration tools you use, RightScale offers a “<strong>bring your own configuration management</strong>” approach that integrates with your configuration tool (or tools), including Chef, Puppet, Ansible, Salt, Terraform or others. RightScale also integrates with templating capabilities from cloud providers, such as AWS CloudFormation or Azure Templates. This flexibility enables you to leverage any existing configuration tools that may be in place in your organization.</p>
+
+<p><img src="/img/rightscale-cmp-tools.png" alt="RightScale CMP Tools" width="543" height="279" /></p>
+
+<h2 id="about-rightscale-provisioning-template">About RightScale Provisioning Template</h2>
+
+<p>RightScale templates enable modeling for single or multi-cloud provisioning. They also can be used to bootstrap instances and connect those instance to your configuration management systems. In addition, they add consistent policy and governance controls that span all of your clouds regardless of what configuration tooling is being used.</p>
+
+<p>There are two levels of templates: SeverTemplates for individual servers and Cloud Application Templates for complete systems that can combine multiple cloud server and services and even span multiple clouds. </p>
+
+<ol>
+<li><p>ServerTemplates: A <a href="/cm/dashboard/design/server_templates/servertemplates_concepts.html">ServerTemplate</a> provides a configuration and automation framework to deploy individual servers across one or more clouds. It leverages RightScripts which are OS-native scripts (e.g. BASH, Python, Powershell, etc) that are run automatically when launching servers. These RightScripts can perform configuration management themselves or can hand off all or parts of the configuration management to systems like Chef, Puppet, Ansible, etc. It can leverage RightScripts, (RightScale native automation) and work in conjunction with configuration tools like Chef, Puppet, Ansible, or Terraform. </p></li>
+<li><p>Cloud Application Templates (CATs): A <a href="/ss/reference/">CAT</a> includes both a declarative component to specify resources and a workflow component for orchestrating across one or more VMs or services to deploy any arbitrarily complex application.</p></li>
+</ol>
+
+<p>Provisioning workflows are created as a script in a CAT. They can be executed from a self-service portal UI, through an API, or on a scheduled basis. You can include policies, such as placement rules, within the provisioning workflow logic. You can also access the RightScale Pricing API in order to find the lowest cost venue. RightScale can provision directly through Cloud APIs, no third party tool is needed. However, if you have existing configuration tools or templates (Chef recipes, AWS Cloud Formation templates, etc), RightScale can work in conjunction with those as well. </p>
+
+<p><img src="/img/cat-diagram.png" alt="CAT Diagram" width="634" height="352" /></p>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<p>Depending on your particular configuration tool and your desired approach, you can integrate RightScale with your configuration tools in a variety of ways. Below are a few common use cases.</p>
+
+<h3 id="use-cases-bootstrap-chef-client-and-connect-to-chef-server">Bootstrap Chef Client and connect to Chef Server</h3>
+
+<p>In this use case a RightScale CAT is used to provision one or more Chef client nodes to any cloud. Each node will be bootstrapped using a RightScale ServerTemplate which will provision the instances in any cloud, deploy the appropriate image based on the cloud and region selected, apply any policies, install the Chef client, and connect the Chef client to a Chef Server.</p>
+
+<p>The Chef client on the server then communicates with the Chef Server or Hosted Chef to further configure the server according the appropriate cookbooks. </p>
+
+<h3 id="use-cases-bootstrap-puppet-client-and-connected-to-puppet-master">Bootstrap Puppet Client and connected to Puppet Master</h3>
+
+<p>This use case is identical to the Chef use case except the ServerTemplate is used to bootstrap the server and install the puppet client and invoke the client to reach out to the Puppet Master.</p>
+
+<h3 id="use-cases-deploy-instance-and-connect-to-ansible-tower">Deploy instance and connect to Ansible Tower</h3>
+
+<p>In this use case a RightScale CAT is used to deploy one or more instances in any cloud. Each server will be bootstrapped using a RightScale ServerTemplate which will deploy the appropriate image based on the cloud and region selected, apply any policies, and register the server with Ansible Tower. </p>
+
+<p>Additionally, the CAT can orchestrate with Ansible Tower to execute playbooks on the provisioned servers.</p>
+
+<h3 id="use-cases-provision-using-rightscale-provider-with-terraform">Provision using RightScale provider with Terraform</h3>
+
+<p>There is a <a href="https://github.com/rightscale/terraform-provider-rightscale">Terraform provider</a> for Rightscale. Using the Terraform provider, you can create Terraform configurations that provision systems using RightScale templates or resources (including CATs or ServerTemplates) and leverage RightScale orchestration and automation, including the RightScale workflow language.</p>
+
+<p>Using the RightScale provider with Terraform a multi-cloud management that seamlessly plugs in to your Terraform environment and adds robust orchestration, governance, policy management and cost management to your existing Terraform workflows.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

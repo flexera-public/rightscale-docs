@@ -1,0 +1,494 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Download, Deploy, and Configure the RightScale Cloud Appliance for vSphere (RCA-V)</title><meta content="This article describes the steps for setting up a RCA-V cloud installation so that the vSphere environment can be managed by the RightScale Cloud Management Platform." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="rcav rcav_v3" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rcav/"><h4 class="list-group-heading"><span>RightScale Cloud Appliance for vSphere (RCA-V)</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="./">RCA-V Version 3.0</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">RightScale Cloud Appliance for vSphere (RCA-V)</a> &#x2F; <a href="./">Version 3.0</a></p><div class="page-header"><h1>Download, Deploy, and Configure the RightScale Cloud Appliance for vSphere (RCA-V)</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To set up a RCA-V cloud installation so that the vSphere environment can be managed by the RightScale Cloud Management platform.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>Completion of the <a href="rcav_prepare_vsphere_environment.html">Prepare the vSphere cloud for RightScale Connectivity</a> steps</li>
+<li>Access to the vSphere client</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>Configure an existing vSphere environment with the RightScale Cloud Management (CM) Platform so that you can launch and manage virtual machines (VMs) as cloud-like instances using the RightScale Dashboard/API. Below is an architectural diagram of a completed setup.</p>
+
+<p><img src="/img/rcav-setup-diagram.png" alt="rcav-setup-diagram.png" width="550" height="471" /></p>
+
+<p>Follow the steps below to properly deploy and configure the RCA-V in your vSphere environment. The setup consists of the following key steps.</p>
+
+<h2 id="download-the-rca-v-and-nat-dhcp-appliances">Download the RCA-V and NAT/DHCP Appliances</h2>
+
+<ul>
+<li>The link to the latest RCA-V release is in a file called <a href="http://rightscale-vscale.s3.amazonaws.com/appliances/latest">“latest”</a>. Download this file, open it and grab the URL to the latest release.</li>
+<li>The NAT/DHCP appliance can be <a href="http://rightscale-vscale.s3.amazonaws.com/appliances/rsnet.ova">downloaded from here</a>.</li>
+</ul>
+
+<h2 id="deploy-a-nat-dhcp-appliance--optional-">Deploy a NAT/DHCP Appliance (Optional)</h2>
+
+<p>If you already have access to a NAT/DHCP service in your vSphere environment, you can skip this step.</p>
+
+<ol>
+<li>Open the vSphere Client and choose <strong>File &gt; Deploy OVF Template</strong>.</li>
+<li>Specify the source location of the OVA file. You can either browse to a locally saved file or enter a URL. Use the following file:
+
+<ul>
+<li><strong>NAT/DHCP Appliance</strong> - Use the local file you previously downloaded.</li>
+</ul></li>
+<li>Verify the Template&#39;s details and click <strong>Next</strong>.</li>
+<li><strong>Name and Location</strong>: Provide a name for the appliance (e.g. RightScale DHCP/NAT Appliance​) and click <strong>Next</strong>.</li>
+<li><strong>Host/Cluster</strong>: Choose a datacenter/cluster and click <strong>Next</strong>.
+
+<ul>
+<li><strong>Specific Host</strong>: Choose a specific host within the cluster and click <strong>Next</strong>.</li>
+</ul></li>
+<li><strong>Resource Pool</strong>: (Optional) Select a resource pool (if one exists) and click <strong>Next</strong>.</li>
+<li><strong>Storage</strong>: Select a destination storage for the virtual machine (VM) files.</li>
+<li><strong>Disk Format</strong>: Specify the format for storing the virtual disks.
+
+<ul>
+<li>Choose <strong>Thin Provision</strong> and click <strong>Next</strong>.</li>
+</ul></li>
+<li><strong>Network Mapping</strong>: Specify which networks should be mapped to the instance. You should see both a private and public network. No changes are required. Click <strong>Next</strong>.<br>
+<img src="/img/rcav-NAT-network-mapping.png" alt="RCA-V NAT Network Mapping" width="530" height="217" /></li>
+<li><strong>Properties</strong>: Configure the additional properties for the appliance and click <strong>Next</strong>.</li>
+<li><strong>Ready to Complete</strong>: Review your selections and click <strong>Finish</strong>. But do not turn on the deployment!</li>
+<li>Before you launch the appliance you should verify that all of your selections were properly allocated. In the vSphere Client, right-click on the virtual machine that you just defined for launching the RCA-V and view its <strong>Properties</strong>. You should see two networks, an internal (private) network and an external (public) network. If you do not see both networks, contact your vSphere administrator.</li>
+<li>Right-click on the virtual machine and click <strong>Power &gt; Power On</strong>.</li>
+</ol>
+
+<h2 id="deploy-the-rca-v">Deploy the RCA-V</h2>
+
+<ol>
+<li>Open the vSphere Client and choose <strong>File &gt; Deploy OVF Template</strong>.</li>
+<li>Specify the source location of the OVA file. You can either browse to a locally saved file or enter a URL. Use the following file:
+
+<ul>
+<li><strong>RCA-V Appliance</strong> - Use the local file you previously downloaded.​</li>
+</ul></li>
+<li>Verify the Template&#39;s details and click <strong>Next</strong>.</li>
+<li><p><strong>Name and Location</strong>: Provide a name for the appliance (e.g. RCA-V1) and click <strong>Next</strong>.</p>
+
+<p><img src="/img/rcav-name-RCA.png" alt="RCA-V Name RCA" width="475" height="255" /></p></li>
+<li><p><strong>Host/Cluster</strong>: Choose a datacenter/cluster and click <strong>Next</strong>.</p>
+
+<p><img src="/img/rcav-select-cluster.png" alt="RCA-V Select Cluster" width="203" height="90" /></p></li>
+<li><p><strong>Specific Host</strong>: Choose a specific host within the cluster and click <strong>Next</strong>.</p>
+
+<p><img src="/img/rcav-hostname.png" alt="RCA-V Hostname" width="540" height="137" /></p></li>
+<li><p><strong>Resource Pool</strong>: (Optional) Select a resource pool (if one exists) and click <strong>Next</strong>.</p>
+
+<p><img src="/img/rcav-select-resource-pool.png" alt="RCA-V Select Resource" width="547" height="157" /></p></li>
+<li><p><strong>Storage</strong>: Select a destination storage for the virtual machine (VM) files.</p>
+
+<p><img src="/img/rcav-select-storage.png" alt="RCA-V Select Storage" width="541" height="135" /></p></li>
+<li><p><strong>Disk Format</strong>: Specify the format for storing the virtual disks. Choose <strong>Thin Provision</strong> and click <strong>Next</strong>.</p>
+
+<p><img src="/img/rcav-disk-format.png" alt="RCA-V Disk Format" width="358" height="180" /></p></li>
+<li><p><strong>Network Mapping</strong>: Specify which networks should be mapped to the instance. You should only see a single (primary) network. No changes are required. Click <strong>Next</strong>.</p>
+
+<p><img src="/img/rcav-NAT-network-mapping.png" alt="RCA-V NAT Network Mapping" width="530" height="217" /></p></li>
+<li><p><strong>Properties</strong>: Configure the additional properties for the appliance and click <strong>Next</strong>.</p>
+
+<p><img src="/img/rcav-RCA-properties.png" alt="RCA-V RCA Properties" width="498" height="372" /></p>
+
+<ul>
+<li>DNS - Enter valid DNS server ip addresses comma separated</li>
+<li>IP - Enter the private IP address of the RCA-V. (e.g. 10.100.100.90)</li>
+<li>Netmask - The primary subnet of the RCA-V. Enter 255.255.255.0</li>
+<li>Gateway -  Enter the private IP address of the NAT appliance. (e.g. 10.100.100.99)</li>
+</ul></li>
+<li><p><strong>Ready to Complete</strong>: Review your selections.  Do not check the <q>Power on after deployment</q> option!  Click <strong>Finish</strong>.</p>
+
+<p><img src="/img/rcav-RCA-finish.png" alt="RCA-V Finish" width="600" height="566" /></p></li>
+<li><p>Before you launch the appliance you should verify that all of your selections were properly allocated. In the vSphere Client, right-click on the virtual machine that you just defined for launching the RCA-V and view its <strong>Properties</strong>. You should see two network adapters. One adapter is for the private network (VM Network) and the other is for the public adapter.</p></li>
+<li><p>You are now ready to power on (launch) the appliance. Right-click on the virtual machine and click <strong>Power &gt; Power On</strong>.</p></li>
+<li><p>Once the instance is operational, check its <strong>Summary</strong> tab to verify that it has a single (private) IP address. The IP address should match the one that was specified earlier in Step 11 as the RCA-V&#39;s primary IP address. (e.g. 10.100.100.90) Save this value because you will need it in the next step when you open a Remote Desktop Connection to the RCA-V instance.</p>
+
+<p><img src="/img/rcav-RCA-summary-IP.png" alt="RCA-V RCA Summary IP" width="600" height="421" /></p></li>
+</ol>
+
+<h2 id="configure-the-rca-v">Configure the RCA-V</h2>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>RCA-V Admin UI has been tested using Chrome and Safari browsers. There are certain known issues with using Firefox and Internet Explorer -- they are not recommended at this time.</p>
+</div>
+
+<h3 id="configure-the-rca-v-install-security-patches--optional-">Install Security Patches (Optional)</h3>
+
+<p>Note that the latest security patches are applied to the RCA-V ova image prior to each release.  Per your corporate policy, it may be necessary to apply the latest security patches to the RCA-V.  Use the <a href="./rcav_troubleshooting_guide.html#knowing-your-environment">default admin credentials</a> to ssh into the appliance.  </p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The RCA-V has not been patched against the Meltdown and Spectre vulnerabilities in versions <code>vscale-3.0-20170921-13</code> and older.</p>
+</div>
+
+<h3 id="configure-the-rca-v-log-in-to-the-rca-v">Log in to the RCA-V</h3>
+
+<p>If you launched the RCA-V instance on your private network, you can access the RCA-V&#39;s Admin UI from a device within the same network.</p>
+
+<p><img src="/img/rcav-RCA-login.png" alt="RCA-V RCA Login" width="590" height="324" /></p>
+
+<ol>
+<li>Enter the RCA-V&#39;s IP address of the instance in a browser window. Use the IP address from the previous step.
+<strong>Example</strong>: https://10.100.100.90​/</li>
+<li><p>Log in to the RCA-V&#39;s administrator console by using the default username and password.
+Username: <strong>rightscale</strong>
+Password: <strong>vscale2013@@</strong></p>
+
+<p><img src="/img/rcav-RCA-initial-screen.png" alt="RCA-V RCA Initial Screen" width="600" height="330" /></p></li>
+</ol>
+
+<p><a name="platform"></a></p>
+
+<h3 id="configure-the-rca-v-rightscale-connectivity---rightscale-platform">RightScale Connectivity - RightScale Platform</h3>
+
+<p>Configure the RCA-V to connect to the RightScale platform.</p>
+
+<p><img src="/img/rcav-RS-platform.png" alt="RCA-V RS Platform" width="581" height="401" /></p>
+
+<ol>
+<li>Go to <strong>Connectivity &gt; ​RightScale Platform</strong> in the left navigation bar. Edit the Overview card.​​
+
+<ul>
+<li>​<strong>Gateway</strong>: The status of the connection to RightScale&#39;s multi-cloud gateway.</li>
+<li><strong>Gateway URL</strong>: The endpoint of the secure websocket tunnel that points to the RightScale platform. Please use the default value (wss://wstunnel10-1.rightscale.com).</li>
+<li><strong>Tunnel</strong>: The status of the secure websocket tunnel between the RCA-V and RightScale.</li>
+<li><strong>Rendez-vous Token</strong>: The Rendez-vous token is used to identify your RCA-V through the secure websocket tunnel to the RightScale Platform. You will need to create your own token.
+
+<ul>
+<li>Enter a 5-7 letter prefix such as your company name or company_enviroment (e.g. acme12). When you click <strong>Save</strong>, a 24-character random string will be automatically appended to the prefix to create the full token string. (e.g. acme12_ABC123abc789=ABC123abc78)</li>
+<li>Save the Rendez-vous Token because you will use this value later when you <a href="rcav_register_vsphere_cloud.html">Register the vSphere ​Cloud with RightScale</a>.</li>
+</ul></li>
+<li><strong>HTTP(s) Proxy Enabled</strong>: Check this box if RCA-V is using a proxy server to reach the RightScale platform.
+
+<ul>
+<li>Unauthenticated proxy example: https://1.2.3.4:3126</li>
+<li>Authenticated proxy basic username/password: http://basicuser:basicpass@1.2.3.4:3126</li>
+<li>Authenticated proxy with domain-based username: http://domain\\basicuser:basicpass@1.2.3.4:3126</li>
+<li>NOTE: the need to escape the backslash between domain and user name 3 times.</li>
+</ul></li>
+<li><strong>Mirror</strong>: The status of the RCA-V&#39;s connection to the RightScale&#39;s mirrors.​</li>
+<li><strong>Mirror URL</strong>: The Mirror URL is used to download software updates to the RCA-V and must use the appropriate URL based upon the location of your RightScale account. The correct URL will automatically be added for you.
+
+<ul>
+<li>For example, if you are using the &#39;https://us-4.rightscale.com&#39; cluster, use &#39;https://island10.rightscale.com&#39; (default).</li>
+</ul></li>
+</ul></li>
+<li>In a few minutes, the status of the connectivity between the RightScale platform and your vSphere environment will be established. All status icons should turn to green.</li>
+</ol>
+
+<h3 id="configure-the-rca-v-rightscale-connectivity---vcenter">RightScale Connectivity - vCenter</h3>
+
+<p>Configure the vCenter credentials.</p>
+
+<p><img src="/img/rcav-vCenter.png" alt="RCA-V vCenter" width="486" height="348" /></p>
+
+<ol>
+<li>Go to <strong>Connectivity &gt; vCenter</strong> in the left navigation bar. Edit the vCenter Server card.​
+
+<ul>
+<li><strong>Status</strong>: The status of the connection between the RCA-V and vCenter Server.</li>
+<li><strong>vSphere API Version</strong>: The version of the vSphere API that the RCA-V will use to make API requests.</li>
+<li><strong>Hostname/IP Address</strong>: Enter either the hostname or IP address of the vCenter Server.  RCA-V must have network access to vCenter server.</li>
+<li><strong>Username</strong>: Enter the username for the <q>RightScale</q> user that was previously created in the <strong>Create a Non-Admin User</strong> step (in the <a href="rcav_prepare_vsphere_environment.html">Prepare the vSphere cloud for RightScale Connectivity</a> document).</li>
+<li><strong>Password</strong>: Enter the matching password for the <q>RightScale</q> user.​</li>
+</ul></li>
+</ol>
+
+<h3 id="configure-the-rca-v-vsphere-cloud-configuration">vSphere Cloud Configuration</h3>
+
+<h4 id="overview">Overview</h4>
+
+<ol>
+<li>Go to <strong>Cloud Configuration &gt; Overview</strong> in the left navigation bar. At this point you shouldn&#39;t have any tenants defined.</li>
+</ol>
+
+<h4 id="global-policies">Global Policies</h4>
+
+<ol>
+<li>Go to the <strong>Cloud Configuration &gt; Global Policies</strong> section to view the policies that apply to the entire vSphere cloud.</li>
+<li><p>Select the appropriate Datastore for your vSphere cloud. The Datastore will store the RCA-V&#39;s configuration information and SSH Keys that will be used to launch new VMs. <strong>Note that a vSAN based datastore can not be used for SSH keys storage or for appliance config storage.</strong></p>
+
+<p><img src="/img/rcav-datastores.png" alt="RCA-V Datastores" width="490" height="268" /></p></li>
+<li><p>If necessary, you can also change the default values for the VM provisioning policy if they are not preferred for your vSphere cloud. Edit the <strong>VM Policies</strong> card. For more detailed information about the different options, see <a href="https://docs.vmware.com/en/VMware-vSphere/5.5/com.vmware.vsphere.hostclient.doc/GUID-4C0F4D73-82F2-4B81-8AA7-1DD752A8A5AC.html">About Virtual Disk Provisioning Policies</a>.</p>
+
+<p><img src="/img/rcav-VM-policies.png" alt="RCA-V VM Policies" width="491" height="270" /></p>
+
+<ul>
+<li>Cloning model:
+
+<ul>
+<li>Linked Clone (default)</li>
+<li>Full Clone</li>
+</ul></li>
+<li>Storage provisioning:
+
+<ul>
+<li>Thin (default)</li>
+<li>Thick Lazy</li>
+<li>Thick Eager</li>
+</ul></li>
+<li>MAC Address Allocation: Specify whether or not newly provisioned VMs are dynamically allocated a MAC address. It is <strong>strongly recommended</strong> that you select this option to avoid MAC address conflicts.</li>
+</ul></li>
+<li><p>Global network settings can be specified that will be applied to all VMs launched in the environment.</p>
+
+<p><img src="/img/rcav-global-policies-network-settings.png" alt="RCA-V Global Policies - Network Settings" width="486" height="289" />  </p>
+
+<ul>
+<li><strong>Routes to RightScale:</strong>  Used to specify any additional routes in CIDR format (other than the default gateway) needed to allow servers to get a direct network connection back to RightScale. If specified, the RightScale network agent will add an explicit route to the VM&#39;s route table for this destination. If the default gateway is sufficient or DHCP sets the required route(s), then this field should be left blank.</li>
+<li><strong>DNS Servers:</strong> What DNS servers should be statically configured on the VM. If preset in the image or DHCP sets the DNS servers, this field should be left blank.</li>
+<li><strong>NTP Servers:</strong> What NTP servers should be statically configured on the VM. If preset in the image or DHCP sets the NTP servers, this field should be left blank.</li>
+<li><strong>Default VM Network:</strong> During a server launch, a RightScale Dashboard user has the option of selecting “cloud-default” in the event they do not want to explicitly select a network in which to launch their server. In order to support this functionality, you (as the RCA-V administrator) must assign a network as “default” in the <strong>Network Settings</strong> card. Use the <strong>Default VM Network</strong> drop-down to assign a network as “default”. The drop-down lists all the networks where VMs can be launched. (<strong>Note</strong>: Only available in v1.1 and later.)</li>
+</ul></li>
+</ol>
+
+<p>NOTE: The <em>Routes to RightScale</em>, <em>DNS Servers</em>, and <em>NTP Servers</em> configurations are only applied when using the RightScale Network Agent. See <a href="/rl10/reference/rl10_rcav.html">Advanced Networking for vSphere</a> for more information about these advanced networking features employed for VMware environments.</p>
+
+<h4 id="zones">Zones</h4>
+
+<p>Zones are a cloud constructs that RightScale uses to represent a single cluster+datastore within a specific datacenter in your vSphere environment. They also represent resource boundaries for tenants; the RCA-V partitions the VMs that are accessible in the vSphere environment into non-overlapping zones. After you define your zones, you will create tenants, which are comprised of one or more zones.</p>
+
+<p><img src="/img/rcav-zm.png" alt="RCA-V ZM" width="600" height="353" /></p>
+
+<ol>
+<li>Go to <strong>Cloud Configuration &gt; Zones</strong> in the left navigation bar.</li>
+<li><p>Click <strong>Add Zone</strong>.</p>
+
+<p><img src="/img/rcav-zones.png" alt="RCA-V Zones" width="492" height="270" /></p></li>
+</ol>
+
+<ul>
+<li><strong>Zone Name</strong> - The provided name will serve as the name of the availability zone/datacenter within the vSphere cloud as well as within the RightScale Dashboard. (e.g. acme-1a)</li>
+<li><strong>Datacenter and Cluster</strong> - Select the datacenter:cluster combination that will be mapped to the zone.</li>
+<li><strong>Datastore</strong> - Select the datastore where the VMs within the defined zone can access machine images and other cloud resources. Be sure to select a Datastore that either contains or will contain the required RightLink-enabled images (e.g. RightImages) that are required to launch VMs through the RightScale Cloud Management Platform (Dashboard/API).</li>
+</ul>
+
+<p>3. Click <strong>Save</strong>.</p>
+
+<p><a name="tenants"></a></p>
+
+<h4 id="tenants">Tenants</h4>
+
+<p>The next step is to create tenants in your vSphere cloud. A tenant consists of one or more zones. Later, when you give other RightScale accounts access to your vSphere cloud, you will grant them access to a single tenant that you&#39;ve defined in the RCA-V. Since a tenant can only be used once, you must create additional tenants for each additional RightScale account that will be granted access to your vSphere cloud.</p>
+
+<p>Note that each new Tenant added here can <em>optionally</em> result in a corresponding vSphere Resource Pool getting created in the vSphere environment. The Tenant configuration (described below) allows for configuring the quota parameters for the vSphere Resource Pool.</p>
+
+<p><img src="/img/rcav-user-account-mapping.png" alt="RCA-V User Account Mapping" width="600" height="337" /></p>
+
+<ol>
+<li>Go to <strong>Cloud Configuration &gt; Tenants</strong> in the left navigation bar.</li>
+<li><p>Click <strong>Add Tenant</strong>.</p>
+
+<p><img src="/img/rcav-add-tenant.png" alt="RCA-V Add Tenant" width="600" height="146" /></p></li>
+</ol>
+
+<ul>
+<li><strong>Tenant Name</strong> - Provide a name for the tenant and click Continue. (e.g. Dev)</li>
+<li><strong>Tenant Password</strong> - Create a password for the tenant.</li>
+<li><strong>Add Zone</strong> - Select and add one or more zones to associate with the tenant. Remember, you can create multiple tenants which leverage resources in the same zones (i.e. datacenter:cluster:datastore combination).</li>
+<li>Once a Zone has been added to the Tenant, one can edit the  zone parameters by clicking on Edit button.  This allows you to configure the level of resource allocation this tenant would have on that particular zone. Since multiple RightScale accounts have access to essentially the same pool of VMs, you may want users to see other active VMs that were launched from outside of their account. Use the <q>See Unowned VMs</q> checkbox to specify whether or not users will also see other VMs.</li>
+</ul>
+
+<ol>
+<li>Click <strong>Save</strong>.<br></li>
+<li><p>Please save the tenant name and password. Later, when you add the vSphere cloud to this RightScale account you will need to specify a valid tenant name and password.</p>
+
+<p><img src="/img/rcav-edit-zone1.png" alt="RCA-V Edit Zone1" width="600" height="264" /></p></li>
+</ol>
+
+<h4 id="vm-networks">VM Networks</h4>
+
+<p>The next step is to define the network(s) that will be assigned to a VM that is launched via the RightScale cloud management platform (in your vSphere cloud).</p>
+
+<ol>
+<li>Go to <strong>Cloud Configuration &gt; VM Networks</strong> in the left navigation bar.</li>
+<li><p>Click <strong>Add Network</strong>. Pick a Network from the drop-down list. This network can be configured so that VMs launched via RightScale Dashboard can make use of it.</p>
+
+<p><img src="/img/rcav-VM-network-private.png" alt="RCA-V VM Network Private" width="491" height="484" />
+  <img src="/img/rcav-VM-network-public.png" alt="RCA-V VM Network Public" width="491" height="484" /></p></li>
+</ol>
+
+<ul>
+<li><p><strong>IP Assignment</strong>:  Pick a method to be used for IP addresses will be assigned to new VMs.</p>
+
+<ul>
+<li><strong>DHCP Server</strong>: This method assumes that there is a DHCP server available to this network.</li>
+<li><strong>Dynamic IPs</strong>:   This method allows you to provide a range of IP address pool that RightScale platform will use to assign IP addresses when VMs are launched via RightScale platform. RightScale will keep track of IP addresses that are already in-use and return the addresses to the pool once the VM is terminated. The VMs will retain their IP address across reboots.
+
+<ul>
+<li>IP Range -  Hyphen separated IP address range (inclusive). e.g. 10.10.10.23 - 10.10.10.99</li>
+<li>Netmask - e.g. 255.255.255.0</li>
+<li>Default Gateway - address of a default gateway on the subnet. Must not be set if  IP assignment method is set to DHCP.</li>
+</ul></li>
+<li><strong>Static IPs</strong>:  This method assumes that  at the time of VM launch, fixed IP addresses will be passed from RightScale platform. See <a href="rcav_administrator.html#setting-a-static-ip">Setting a Static IP</a> for details on how to do this.</li>
+</ul></li>
+<li><p><strong>Connectivity Method</strong>: None -  This interface does not have connectivity to the RightScale platform.Via Default Gateway -  Use gateway IP address that is specified in the <q>Default Gateway</q> field or value supplied by DHCP server (in case DHCP is selected as IP Assignment method)Via Explicit Gateway -  Use a different gateway IP address (value specified in <q>Explicit Gateway</q> field). Explicit Gateway - (e.g. 10.100.100.91)​</p></li>
+<li><p><strong>Static Routes</strong>:</p>
+
+<ul>
+<li><strong>Gateway</strong>: Special gateway for routes to the RightScale platform</li>
+<li><strong>Route Destinations</strong>:
+
+<ul>
+<li>Special routes to reach the RightScale platform via Static Route Gateway. This should not be set if a Default gateway is set and can route to RightScale</li>
+<li>For proof-of-concept purposes, it is recommended that you set this value to 0.0.0.0/0  (i.e. all traffic will be routed through the same gateway IP address).</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<ol>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h4 id="instance-types">Instance Types</h4>
+
+<p>Instance Types are the most commonly used practice by cloud providers, to offer predefined VM configuration that can be identified with a label. e.g: small, medium, large, xlarge. Setup the Instance Types for your vSphere Cloud. When launching a VM from RightScale Dashboard, you will have an option of picking an instance type for the VM.</p>
+
+<p>Within RightScale, it is important to associate all VMs with an Instance Type in order to take advantage of RightScale products such as Optima and Self-Service, that rely on Instance Type as a means of identifying VM hardware configuration. Servers launched using RightScale dashboard or API will always have an Instance Type associated with it. However, for VMs that are not launched through RightScale may have VM configuration that does not match any currently defined Instance Types.</p>
+
+<p>In such cases, it is important to go through the <q>Discover Instance Types</q> described below, and define new Instance Types so that all VMs are associated with an Instance Type.</p>
+
+<p><img src="/img/rcav-discover-instance-type-button.png" alt="RCA-V Discover Instance Type Button" width="600" height="138" /></p>
+
+<p><em>Discover Instance Types</em></p>
+
+<p>This is a new feature is available with RCA-V releases 1.2 and higher. Click on Discover Instance Types button to get a list of all current VMs in the environment. Each VM is mapped to an existing Instance Type, based on its vCPU, Memory configuration. In cases where VM&#39;s configuration does not match the Instance Type already defined within RCA-V, the user will have an opportunity to create new Instance Type labels for such VMs.</p>
+
+<p><img src="/img/rcav-discover-instance-types.png" alt="RCA-V Discover Instance Types" width="600" height="265" /></p>
+
+<p><em>Add an Instance Type</em></p>
+
+<p>This form allows you to define a new instance type. You must provide Instance Type Name, Description, Memory (in GB), Virtual CPU count for the instance type.</p>
+
+<p>If Memory Reservation is checked, the VM created using such instance type would have a guaranteed lower bound on the amount of  physical memory the host reserves even when host memory is over-committed.</p>
+
+<p>You can Edit an already existing instance type.  VMs that were launched using the original instance type will continue to function and show up as original instance type. VMs launched after modifying instance type will be launched according to the specs of the new instance type.</p>
+
+<p>By default, Small, Small (Memory reserved), Large, Large (Memory reserved) instance types are pre-configured.</p>
+
+<p><img src="/img/rcav-instance-type-page.png" alt="RCA-V Instance Type Page" width="600" height="139" /></p>
+
+<h4 id="volume-types">Volume Types</h4>
+
+<p>A Volume Type is a RightScale construct that captures a variety of low-level concepts that vSphere supports and exposes them as a high level construct. This helps RightScale users create and attach volumes to their servers without having to know details regarding the vSphere infrastructure.</p>
+
+<p>The RCA-V administrator is encouraged to create more than one volume type. At least one volume type must be configured by the RCA-V administrator before a RightScale user can create a volume using the RightScale Dashboard or API.</p>
+
+<p>All volumes created through RightScale are associated with a volume type defined using the Admin UI. This allows RightScale to place the volume based on a storage policy (aka storage profile) on a datastore. Different classes of storage (either with different QoS or SLA) can be placed under different storage profiles.</p>
+
+<p>RightScale dashboard and API also allow creation of volume snapshots, ability to attach and detach volumes to servers or VMs.</p>
+
+<p><img src="/img/rcav-volume-type.png" alt="RCA-V Volume Type" width="600" height="140" /></p>
+
+<p>A volume type comprises the following parameters:</p>
+
+<ul>
+<li><strong>Name</strong>  - This is a label for the Volume Type and will be exposed to the end user on the RightScale dashboard. Please pick a meaningful name that represents the Volume Type.</li>
+<li><strong>Storage Profile</strong> - A drop-down control with values based on discovery of Storage Profiles in the vSphere environment. Select “None” if you have not defined any Storage Profiles in your vSphere environment.</li>
+<li><strong>Datastore</strong>  - A drop-down control with values based on discovery of datastores that belong to the Storage Profile selected above. If no storage profiles are defined and you select “None”, all datastores that are available to use are displayed. Volume created for this Volume Type will be stored in the datastore configured here.</li>
+<li><strong>Datastore For Snapshots</strong> - Specify the datastore where the snapshots for the volumes of this Volume Type must be stored.<br></li>
+<li><strong>Provisioning mode</strong> - Possible selectable values are Thin, Thick Lazy, Thick Eager Zeroed (default).</li>
+<li><strong>Description</strong> - Enter a short meaningful description of the volume type.</li>
+</ul>
+
+<h3 id="configure-the-rca-v-proxy-support-for-private-clouds">Proxy Support for Private Clouds</h3>
+
+<p>Network admins within enterprises almost always require a proxy as a sentinel between the internal network and the open Internet. Typically, private clouds that are behind a corporate firewall are behind a proxy server as well. All traffic from/to these private clouds has to traverse through the proxy server.</p>
+
+<p>We now support traffic proxying for all communication between:</p>
+
+<ul>
+<li>RightScale platform and the cloud controller (for OpenStack)</li>
+<li>RightScale platform and RCA-V (for vSphere environment)</li>
+<li>RightScale platform and virtual machines within the private cloud. This is RightLink traffic.
+Both <em>authenticated</em> and <em>non-authenticated</em> proxies are supported.</li>
+</ul>
+
+<p>In order to enable proxy support, please follow the instructions below:</p>
+
+<ol>
+<li>From the RCA-V Admin UI, go to <strong>Connectivity</strong> &gt; <strong>RightScale Platform</strong> &gt; <strong>Overview card</strong> &gt; <strong>Edit</strong>.</li>
+<li>Select the HTTP(s) Proxy Enabled checkmark as shown below and supply the proxy URL.
+<img src="/img/rcav-rel-note-proxy-enable.png" alt="Overview Card" width="725" height="276" /></li>
+<li>You can specify the authenticated proxy URL using the following format: <code>http://username:password@proxyurl:proxyport</code></li>
+<li>To remove the proxy, uncheck the HTTP(s) Proxy Enabled box.</li>
+</ol>
+
+<h3 id="configure-the-rca-v-cloud-appliance-management">Cloud Appliance Management</h3>
+
+<h4 id="rightscale-password">RightScale Password</h4>
+
+<p>Your setup is almost complete. Change the password for <q>rightscale</q> user from default value of <q>vscale2013@@</q> before you register the RCA-V with RightScale. This username/password is used to access the RCA-V&#39;s Admin UI and by the RightScale platform to securely access the appliance. This username/password cannot be used for ssh access to the appliance.</p>
+
+<ol>
+<li><p>Go to <strong>Cloud Appliance Mgmt &gt; System &gt; RightScale Password</strong> card and click <strong>Edit</strong>.</p>
+
+<p><img src="/img/rcav-RS-password1.png" alt="RCA-V RS Password1" width="415" height="251" /></p></li>
+<li><p>Specify a new password. Please follow the recommended password strength guideline for choosing your password.</p></li>
+<li><p>Be sure to save the password value in a safe place.</p></li>
+<li><p>After you change the password you will need to log in again.</p></li>
+</ol>
+
+<h4 id="admin-password">Admin Password</h4>
+
+<p>You may also want to change the default password for the <q>admin</q> user for the appliance. Default value is <q>vscale2013@@</q>. The password is used to access the RCA-V&#39;s Admin UI and to gain ssh access to the appliance. Please follow the recommended password strength guideline for choosing your password.</p>
+
+<h4 id="services-password">Services Password</h4>
+
+<p><q>services</q> user is used to let RightScale services/support access the admin UI and to SSH into the appliance. Please follow the recommended password strength guideline for choosing your password.​</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>The RCA-V should now be properly configured with your vSphere cloud. The next step is to register the RCA-V with the RightScale platform so that you can use the RightScale Dashboard and API to manage your vSphere resources.</p>
+
+<p><strong>Important!</strong> Be sure to give the following information to the person who will be installing and configuring the RCA-V.</p>
+
+<p><strong>Rendez-vous token</strong>​: ______________________  (from the <a href="#platform">RightScale Platform</a> step)<br>
+    <strong>Tenant Name</strong>:  _____________________  (from the <a href="#tenants">Tenants</a> step)<br>
+    <strong>Tenant Password</strong>:  _____________________  (from the <a href="#tenants">Tenants</a> step)</p>
+
+<p>Please proceed to the next step in the setup guide.</p>
+
+<ul>
+<li><a href="rcav_register_vsphere_cloud.html">Register a vSphere Cloud with RightScale</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

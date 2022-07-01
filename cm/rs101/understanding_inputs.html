@@ -1,0 +1,313 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Understanding Inputs</title><meta content="RightScale Inputs are essentially variables within a script that allow you to substitute specific, user-defined values for the input when an associated script is run on a server." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_understanding_inputs" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>Understanding Inputs</h1></div><div class="main-content"><h2 id="what-are-inputs-">What are Inputs?</h2>
+
+<p>Inputs are used to create easily customizable and reusable scripts. Inputs are essentially variables within a script that allow you to substitute specific, user-defined values for the input when an associated script is run on a server. You should create an input for any value that should be customizable within a script. This way, the same script can be used in multiple cloud environments and on across multiple servers to produce different results depending on the context in which it&#39;s used.</p>
+
+<p>A ServerTemplate&#39;s Inputs tab shows all of the inputs declared in any of its scripts (RightScripts or Chef Recipes) located under its Scripts tab. Users can define values that should be used in place of the declared input when the related script is executed. The following diagram shows how inputs are used by RightScripts however the same variable substitution rules apply to Chef recipes.</p>
+
+<p><img src="/img/cm-script-input-example.png" alt="cm-script-input-example.png" width="725" height="595" /></p>
+
+<h2 id="types-of-inputs">Types of Inputs</h2>
+
+<p>There are several different input types. You can select the input type from the dropdown menu when editing them under an Inputs tab.</p>
+
+<p><img src="/img/cm-input-types.png" alt="cm-input-types.png" width="642" height="142" /></p>
+
+<p>There are several different input types. You can select the input type from the dropdown menu when editing them under an inputs tab.</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Inherit</td>
+<td>To inherit a value, select the <q>inherit</q> option and specify from where you would like to inherit. For more information on the hierarchy of inputs, see <a href="/cm/rs101/inheritance_of_inputs.html">Inheritance of Inputs</a>.</td>
+</tr>
+<tr>
+<td>Env</td>
+<td>Environment Variable. Select one of the predefined environment variables from a cloud infrastructure or RightScale. When you select an environment variable, the associated value will be passed to the server. For example, if you need to use a unique identifier, you can select the &#39;EC2_INSTANCE_ID&#39; input, which is a unique ID that&#39;s assigned by Amazon when an instance is launched (e.g. i-baad23d3). You have the option of using either the server&#39;s own environment variables or one from another server in the deployment. See <a href="/cm/ref/environment_inputs.html">List of Environment Inputs</a>.</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>Enter a valid text value for the input parameter. Inputs that are required in order to execute a script will be highlighted in red if values are missing. Make sure there are no trailing whitespaces at the end of the text value. Values set at higher levels in the inputs hierarchy will be inherited. For more information on the hierarchy of inputs, see <a href="/cm/rs101/inheritance_of_inputs.html">Inheritance of Inputs</a>.</td>
+</tr>
+<tr>
+<td>Array</td>
+<td>Enter an array/string of comma-separated values. You should only use this option for Chef recipes, not RightScripts. If you use this option for a RightScript, the array of values will be collapsed into a single, comma-separated string. So, you will need to parse the values within your script if you choose to use an array type with a RightScript.</td>
+</tr>
+<tr>
+<td>Cred</td>
+<td>Select one of the credentials that you&#39;ve previously created and defined in your account. Typically you will create and use credentials for referencing private/sensitive information like your AWS Secret Access Key or the login/password to access your database or SVN repository.</td>
+</tr>
+<tr>
+<td>Key</td>
+<td>A list of valid SSH Keys for a cloud/region. Only SSH Keys that contain key material will be listed.</td>
+</tr>
+<tr>
+<td>No Value/Ignore</td>
+<td>The input will be ignored. No value will be passed to the server in the context of a RightScript. This can only be applied in the event of an optional input, and cannot be used for required inputs.</td>
+</tr>
+</tbody></table>
+
+<p><strong>Ambiguous Inputs</strong> occur if two or more RightScripts both call for the same input name, but have different values. This will create ambiguous inputs and you will be given error messages in the UI and you will not be able to launch until this is fixed.</p>
+
+<p><strong>Note</strong>: When you launch a server all of the inputs and their values are displayed. Missing inputs are displayed in red.</p>
+
+<h2 id="input-hierarchy-rules">Input Hierarchy Rules</h2>
+
+<p>Please see <a href="/cm/rs101/inheritance_of_inputs.html">Inheritance of Inputs</a>.</p>
+
+<h2 id="creating-new-inputs-in-scripts">Creating New Inputs in Scripts</h2>
+
+<p>If you are creating new scripts (RightScripts or Chef Recipes), be sure to follow best practices for creating new inputs.</p>
+
+<h3 id="creating-new-inputs-in-scripts-rightscripts">RightScripts</h3>
+
+<p>Before you create new inputs it&#39;s strongly recommended that you check RightScale&#39;s latest published ServerTemplates to see if a similar input already exists. For example, to reference the fully qualified domain of the master database, use MASTER_DB_DNSNAME, which is used by many RightScale scripts instead of creating your own input with a slightly different name.</p>
+
+<h4 id="reserved-prefixes">Reserved Prefixes</h4>
+
+<p>If you are creating your own private RightScripts and need to create new inputs, it&#39;s strongly recommended that you use unique (not generic) input variable names to avoid unintentional confusion and collision with other scripts. For example, if you need to create a set of inputs that is specific to your company or project, you should consider using a common prefix for each unique input so that all of your inputs are easily identifiable and grouped together. (e.g. COMPANY_INPUT_1). If the name is too long, consider using a meaningful acronym instead.</p>
+
+<p>However, there are several input prefixes that are reserved and cannot be used to create your own inputs.</p>
+
+<ul>
+<li><strong>EC2_</strong> Prefix is reserved for EC2 environment variables.</li>
+<li><strong>RS_</strong>  Prefix is reserved for RightScale. Inputs with the <q>R_</q> prefix are reserved for RightScale&#39;s internal use only and are not user-configurable. Therefore, they will not be displayed under the Inputs tab or on the input confirmation screen when you launch an instance.</li>
+</ul>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>The syntax that is used to declare an input inside the code of a script differs slightly depending on the language. Most RightScripts published by RightScale are written in Bash, whereas most of the Chef Recipes are written in Ruby. It&#39;s recommended that you also use underscores (_) and not spaces or dashes to separate two words. (e.g. MY_INPUT)</p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning:</strong><p>If a script contains <a href="/cm/dashboard/design/rightscripts/rightscripts_metadata_comments.html">RightScript Metadata Comments</a>, this input detection will not work and the input definitions in the comments will be used instead.</p>
+</div>
+
+<ul>
+<li><strong>Bash</strong> - $MYINPUT</li>
+<li><strong>Ruby</strong> - ENV[&#39;MYINPUT&#39;]</li>
+<li><strong>Perl</strong> - $ENV{&#39;MYINPUT&#39;}</li>
+<li><strong>Powershell</strong> - $env:MYINPUT</li>
+</ul>
+
+<h4 id="identifying-inputs">Identifying Inputs</h4>
+
+<p>When you are looking at a RightScript&#39;s Inputs tab, the inputs in the code are automatically identified if they are defined with the correct syntax. The identified inputs display as user-defined input parameters under the Inputs tabs. The following example shows how inputs are identified within a bash script.</p>
+
+<p><img src="/img/cm-rightscript-inputs.png" alt="cm-rightscript-inputs.png" width="710" height="304" /></p>
+
+<p>If you are in Edit mode, you can use the <strong>Identify</strong> button to parse through the new code and display all properly declared inputs. As a best practice, you should always provide helpful descriptions that appear as tooltip hints when a user declares values for the inputs.</p>
+
+<p>Below are a few examples of different types of inputs.</p>
+
+<p><img src="/img/cm-input-descriptions.png" alt="cm-input-descriptions.png" width="713" height="1010" /></p>
+
+<ul>
+<li><strong>Input Type</strong> - An input can either be used to pass a single string value or an array or values to a script.</li>
+<li><strong>Default Value</strong> - If an input is &#39;Advanced&#39;, it&#39;s strongly recommended that you provide an acceptable default value for the input. It can either be a hard coded value or a selection from a dropdown menu.</li>
+<li><strong>Category</strong> - Select a category under which the input will be displayed when viewing an Inputs tab. You can also create a new category, if necessary.</li>
+<li><strong>Input Description</strong> - You should always provide a detailed input description that clearly states what value should be passed as well as include an example value or list the acceptable range of values to demonstrate correct values with the correct syntax.</li>
+<li><strong>Advanced Options</strong> - Use the checkboxes to control how inputs are displayed under the Inputs tab when users provide values for missing inputs.
+
+<ul>
+<li><strong>Required</strong> - Check this box if a value for the input is required in order for the script to run successfully.</li>
+<li><strong>Advanced</strong> - Check this box if it&#39;s an input that applies to an advanced configuration. Since Advanced inputs are not displayed by default under the Inputs tab, it&#39;s strongly recommended that you provide an acceptable default value for the input.</li>
+<li><strong>Provide a dropdown list of values</strong> - Check this box to provide a predefined dropdown menu of acceptable values. It&#39;s recommended that you provide a dropdown menu if there is a defined list of acceptable values, which helps prevent users from entering an unsupported value or use incorrect syntax.</li>
+</ul></li>
+</ul>
+
+<h3 id="creating-new-inputs-in-scripts-chef-recipes">Chef Recipes</h3>
+
+<h4 id="reserved-prefixes">Reserved Prefixes</h4>
+
+<p>Unlike RightScripts, there are no reserved prefixes that you are not allowed to use in Chef recipes.</p>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>To declare an input (also called a <q>Chef attribute</q>) in a Chef recipe, use the following syntax: <strong>[:part1][:part2][:part_N_]</strong></p>
+
+<p>Below is the code from one of our Chef cookbooks. Notice the three inputs (Chef attributes) that are declared in the code.</p>
+
+<ul>
+<li>[:db][:data_dir]</li>
+<li>[:db][:admin][:user]</li>
+<li>[:db][:admin][:password]</li>
+</ul>
+
+<p><strong>&#39;db::setup_privileges_admin.rb&#39;</strong></p>
+<pre class="syntax-highlight plaintext"><code>#
+# Cookbook Name:: db
+#
+# Copyright RightScale, Inc. All rights reserved. All access and use subject to the
+# RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
+# if applicable, other agreements such as a RightScale Master Subscription Agreement.
+
+rightscale_marker :begin
+
+DATA_DIR = node[:db][:data_dir]
+
+user = node[:db][:admin][:user]
+log "Adding #{user} with administrator privileges for all databases."
+
+db DATA_DIR do
+  privilege "administrator"
+  privilege_username user
+  privilege_password node[:db][:admin][:password]
+  privilege_database "*.*" # All databases
+  action :set_privileges
+end
+
+rightscale_marker :end
+</code></pre>
+
+<h4 id="identifying-inputs">Identifying Inputs</h4>
+
+<p>Even though an input (Chef attribute) is declared in a Chef recipe, RightScale will not identify it as such until it&#39;s been properly declared in the cookbook&#39;s metadata. If you create a new input in a Chef recipe you must also remember to manually update the metadata file (metadata.rb). Before you commit your changes to your cookbook repository, you must first rake the metadata, which updates the metadata.json file (from the metadata.rb file). RightScale only displays inputs if they are found in the cookbook&#39;s metadata (specifically the metadata.json file).</p>
+
+<p>The following is an example of two properly documented inputs within the cookbook&#39;s metadata.</p>
+
+<p><strong>&#39;db::metadata.rb&#39;</strong></p>
+<pre class="syntax-highlight plaintext"><code>attribute "db/admin/user",
+  :display_name =&gt; "Database Admin Username",
+  :description =&gt; "The username of the database user with 'admin' privileges (e.g., cred:DBADMIN_USER).",
+  :required =&gt; "required",
+  :recipes =&gt; [
+      "db::install_server",
+      "db::setup_privileges_admin"
+  ]
+
+attribute "db/admin/password",
+  :display_name =&gt; "Database Admin Password",
+  :description =&gt; "The password of the database user with 'admin' privileges (e.g., cred:DBADMIN_PASSWORD).",
+  :required =&gt; "required",
+  :recipes =&gt; [
+       "db::install_server",
+       "db::setup_privileges_admin"
+  ]
+</code></pre>
+
+<p>If the recipe and metadata are properly constructed, the Chef attributes will appear as user-definable inputs in the Dashboard.</p>
+
+<p><img src="/img/cm-chef-input.png" alt="cm-chef-input.png" width="582" height="106" /></p>
+
+<p>For more information about how to update the Chef metadata correctly, see <a href="http://support.rightscale.com/12-Guides/Chef_Cookbooks_Developer_Guide/02-End_User/04-RightScale_Support_of_Chef/Chef_Metadata/index.html">Chef Metadata</a>.</p>
+
+<h2 id="defining-values-for-inputs">Defining Values for Inputs</h2>
+
+<h3 id="defining-values-for-inputs-where-should-i-define-inputs-">Where Should I Define Inputs?</h3>
+
+<p>As a best practice, you should define a majority of your inputs at either the ServerTemplate or deployment level.</p>
+
+<p>You should only define inputs at the server or server array levels for performing tests or under unique circumstances. In a production environment, all inputs should inherit their values from previous levels (deployment level and below). The key benefit of defining inputs at the deployment level or below is that you can more easily maintain consistent server configurations across your entire deployment and associated arrays, because you can go to a single location (the deployment&#39;s Inputs tab) to see which input values are being used and know where those values are being inherited from. It&#39;s easier to troubleshoot problems within a deployment if you follow strict processes for defining inputs. For example, a problem within a deployment could be caused by the wrong input value being used by a server because the incorrect value was overwritten at the server level.</p>
+
+<p>Although you have the flexibility to define inputs at the server or server array level, it&#39;s not a recommended best practice for most use cases. Unless you&#39;re an advanced user with unique configuration circumstances, you should only set an input parameter at the server level for development and testing purposes. An example might be that you&#39;ve cloned a server and want to test it with a slightly different input parameter. One of the problems with defining input values at the server or server array (highest precedence) level is that it&#39;s difficult to keep track of a server&#39;s inputs. For example, if you need to troubleshoot a configuration problem you might have to manually check each server&#39;s Inputs tab to investigate the cause of the problem. However, setting input parameters at the Server level can prove to be quite useful in the right situation.</p>
+
+<h3 id="defining-values-for-inputs-when-should-i-define-values-for-inputs-">When Should I Define Values for Inputs?</h3>
+
+<p>As a best practice, you should always define any inputs that are required by any boot/decommission scripts before you try to launch a server or enable a server array. Ideally, when a server is launched either manually or automatically, it inherits input values that were previously defined at one of the inheritance levels.</p>
+
+<p>As a safety precaution, you are not allowed to manually launch a server if there are required inputs with missing values. If you try to launch a server that contains missing inputs, you will receive an error message that prompts you to provide values for any missing inputs that are highlighted in red. The following example screenshot shows an error message for missing inputs.</p>
+
+<p><img src="/img/cm-missing-inputs.png" alt="cm-missing-inputs.png" width="550" height="393" /></p>
+
+<p>If you receive this error message, you should cancel the server launch. At this point, you should go back and define values for any missing (required) inputs under the deployment&#39;s Inputs tab before launching the server again.</p>
+
+<p>Although you can provide values for any missing inputs on this screen and continue the launch process, it&#39;s not a recommended best practice. See the following section for details.</p>
+
+<h3 id="defining-values-for-inputs-what-is-the-difference-between--launch--and--save-and-launch--">What is the Difference Between "Launch" and "Save and Launch"?</h3>
+
+<p>When you manually launch a single server from the Dashboard, the <q>Inputs Confirmation</q> screen displays which user-defined values are used for the declared inputs. When values have been provided for the missing inputs, you can continue the launch process.</p>
+
+<p>At this point, you have two options if are going to continue launching the server. It&#39;s important to understand the difference between these two distinct actions.</p>
+
+<ul>
+<li><strong>Launch</strong> - The current server will be launched with the specified input values. However, the specified values for the missing inputs will only be applied to the current server that&#39;s being launched. Any values that are provided at this screen for missing inputs will not be preserved. So, if the server is relaunched (thereby terminating the current server and launching a new server), the same inputs will be missing values. As a result, the new server will become <q>stranded in booting</q> and fail to reach the operational state. If you want to preserve the specified inputs for future launches, you must define the same values at the deployment (recommended) or server level. If you want to preserve the input at the server level, you must define it under the <q>Next</q> server&#39;s Inputs tab, which affects future launches and relaunches of that server.</li>
+<li><strong>Save and Launch</strong> - The current server will be launched with the specified input values and the values will be saved at the server level. The same input values will be saved under the server&#39;s <q>Next</q> Inputs tab, which affects future launches and relaunches of that server. To follow best practices you should not define inputs at the server level because it overwrites values set at one of the other inheritance levels. It&#39;s recommended that you define any inputs that you want to preserve at the deployment level or below.</li>
+</ul>
+
+<h3 id="defining-values-for-inputs-can-i-define-multiple-values-for-an-input-">Can I Define Multiple Values for an Input?</h3>
+
+<p>Yes, although it is not a recommended best practice for most use cases.</p>
+
+<p>Ideally, you should only have a single input to represent a particular value. If you&#39;re using RightScale&#39;s published ServerTemplates, you should verify whether or not an input already exists that represents the value you&#39;re trying to parametize before you create a new one. Avoid creating multiple inputs that are designed to represent the same value. For example, inside of a single script or across multiple scripts, you shouldn&#39;t have two inputs that are used to pass the name of your application (e.g. Application Name, Application). If you are using several different ServerTemplates within a single deployment, you can go to the deployment&#39;s Inputs tab to see if there are multiple inputs where the same value is being used. If such cases do exist, you may want to consider consolidating the inputs.</p>
+
+<p>At the deployment level, you can only define one value for an input. However, you may have a deployment that contains servers where different values are used for the same input depending on its ServerTemplate. This type of configuration might be appropriate in certain use cases. For example, you may have two different types of application servers that connect to a database server on different ports. As long as you don&#39;t override the input at the deployment or server/array level, each server can inherit a different value if it&#39;s set at the ServerTemplate level. The following example screesnshot shows the ServerTemplate inheritance in a deployment.</p>
+
+<p><img src="/img/cm-two-inputs.png" alt="cm-two-inputs.png" width="725" height="119" /></p>
+
+<p>Remember, where you define inputs determines which value is used. By using the input hierarchy correctly, you can accurately control which values are ultimately inherited and used by a script.</p>
+
+<h3 id="defining-values-for-inputs-can-i-hide-a-sensitive-value-for-an-input-">Can I Hide a Sensitive Value for an Input?</h3>
+
+<p>Yes. RightScale&#39;s Credential Store (Design -&gt; Credentials) allows you to create credentials for hiding sensitive values where you can hide the actual value from users in the Dashboard, but still allow that value to be passed to a script at execution time. For example, as a database system administrator, you might want to hide your database&#39;s administrator username and password from other members of your team, however those secret credentials need to be applied to the database setup scripts in order to properly launch and configure the database servers. In such cases, you can create a credential for each sensitive value.</p>
+
+<p>A user will need &#39;designer&#39; user role privileges to create a credential. Only the user who created the credential and other users with &#39;admin&#39; user role privileges will be able to see the hidden value of a credential.</p>
+
+<p><img src="/img/cm-input-credentials.png" alt="cm-input-credentials.png" width="603" height="105" /></p>
+
+<h2 id="managing-inputs">Managing Inputs</h2>
+
+<h3 id="managing-inputs-how-do-i-update-an-input-on-a-running-server-">How Do I Update an Input on a Running Server?</h3>
+
+<p>Remember, a server receives its inputs when it&#39;s launched. Once a server becomes operational, the inputs that it was originally launched with are static and can be seen under the <q>current</q> server&#39;s Inputs tab. (The <q>next</q> server&#39;s Inputs tab shows which inputs will be used to launch the next iteration of that server that results from either a launch or relaunch action.) You can execute any of the scripts defined by the server&#39;s ServerTemplate during runtime, even boot and decommission scripts.</p>
+
+<p>If you want to change one of the inputs on the current server, you can run a script that uses the input. However, you must specify the new value for the input under the <q>current</q> server&#39;s Inputs tab before you run the script. Input hierarchy rules do not apply anymore because the server is already operational.</p>
+
+<p>Typically, you will only need to run one of the boot/operational/decommission scripts. However, you can also use the &#39;Any Script&#39; option to execute any script in your RightScale account.</p>
+
+<p><strong>Note</strong>: When you use the &#39;Any Script&#39; option, the new inputs will not be saved to the <q>current</q> server&#39;s Inputs tab, however they will be recorded in the audit entry.</p>
+
+<p>It&#39;s important to remember that when you change the input on a running server, the change is not automatically preserved. If you want to save the modified input for future iterations of that server, you need to update the Inputs tab at one of the input inheritance levels, preferably the deployment level.</p>
+
+<h3 id="managing-inputs-does-the--current--server-s-inputs-tab-always-reflect-what-the-server-was-originally-launched-with-">Does the "Current" Server's Inputs Tab Always Reflect what the Server was Originally Launched With?</h3>
+
+<p>No. Remember, since you can change an input on a running server, the <q>current</q> server&#39;s Inputs tab can change over the lifetime of the server. As a result, the <q>current</q> server&#39;s Inputs tab may not reflect which inputs were used to originally launch the server. However, you can check the server&#39;s audit entries for details.</p>
+
+<h2 id="see-also">See also</h2>
+
+<ul>
+<li><a href="/faq/How_do_RightScript_inputs_work.html">How do RightScript inputs work?</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

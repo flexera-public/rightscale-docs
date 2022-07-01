@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>About SSH Keys</title><meta content="SSH Keys are used to establish secure client-server connections via SSH (secure shell) to running instances in the cloud. An SSH Key pair consists of both public and private key material." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_generic cm_dashboard_clouds_generic_ssh_keys_concepts" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">clouds</a> &#x2F; <a href="./">Generic Cloud Services</a></p><div class="page-header"><h1>About SSH Keys</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p><strong>SSH Keys</strong> are used to establish secure client-server connections via SSH (secure shell) to running instances in the cloud. An SSH Key pair consists of both public and private key material. (For older RightImages (e.g. v4) they were also used to execute RightScripts on the running instance.) The SSH key is passed directly into an instance in order to provide root login access to the machine via SSH. Once an instance is launched, you can typically find it inserted into the <strong>/root/.ssh/authorized_keys</strong> file.</p>
+
+<p>SSH Keys that are generated inside the Dashboard or from the RightScale API will have key material, whereas SSH Keys generated outside of RightScale will not have any key material. (The <strong>Key Material</strong> is basically the encrypted portion of the private key.) However, you can manually add the key material for one of your SSH keys inside the Dashboard. (<em>Note</em>: Not all cloud software supports SSH key generation. See the next section for more information.) The Dashboard will always display all SSH Keys associated with an account, regardless of whether or not they have key material. You can still launch an instance inside the Dashboard using an SSH key that does not have any key material, but you will not be able to SSH into the instance or use any of RightScale&#39;s convenient features such as bundling, backups, automation, etc. Without knowing the contents of the SSH Keys, RightScale will not be able to access your instance to perform such tasks.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>When you launch an instance, be sure to select an SSH Key that contains key material. (Key material = yes)</p>
+</div>
+
+<h3 id="overview-cloud-support-for-ssh-keys">Cloud Support for SSH Keys</h3>
+
+<p>Some Cloud software may not support the generation of SSH Keys directly, in which case from within the RightScale Dashboard you will not see an entry for SSH Keys. That is, you cannot navigate to <strong>Clouds</strong> &gt; <em>CloudName</em> &gt; <strong>SSH Keys</strong>... it is not an option. This is not to say your cloud infrastructure cannot make use of SSH keys to access running instances, etc. The first time you log into the Dashboard, we create an SSH key pair for you. It&#39;s saved in our database, and we send it to every Server booted within your account (or accounts). When you click SSH icon or button for the Server, we give you the private key so you can gain SSH access to the Server.</p>
+
+<p>As a best practice, we suggest that users generate their own keys and give us just the public key, keeping their private key private (known only to them). This can be accomplished at any time and all of the instances will be updated in real time.</p>
+
+<h3 id="overview-rightimage-compatibility-differences">RightImage Compatibility differences</h3>
+
+<p>It is important to recognize that v4 and v5 RightImages behave differently with respect to SSH Keys. v5 RightImages are said to be <q>RightLink enabled</q>. v4 RightImages (pre-RightLink) rely heavier on SSH Keys. If you are launching instances using v4 RightImages, RightScale will use the SSH Key in order to run RightScripts on the instance. Therefore, it&#39;s important that you only use SSH Keys where the private key material is available and not missing. Otherwise RightScale will not be able to run any RightScripts on the instance to complete the boot process thereby resulting in a Server that <q>strands</q> in booting. If you are using v5 (or later) RightImages, RightScale&#39;s Managed SSH feature will be used to establish SSH access and RightLink will be used to run RightScripts on the instance. You can either use the unique SSH Key that RightScale generates for each user or upload your own SSH Key.</p>
+
+<h2 id="ssh-keys-screen">SSH Keys Screen</h2>
+
+<p>The following fields are available on the SSH Keys screen</p>
+
+<ul>
+<li><strong>Name</strong> - Name of the SSH Key. Clicking the Name hyperlink takes you to that SSH Key&#39;s show page. <em>Note</em>: Some entities don&#39;t have unique names in their respective clouds. In particular, SSH Keys are like this in some clouds (for example, in some private clouds). This is why RightScale created an RS_ID. The RS_ID is held unique within an account (within a timeframe). From a practical perspective, this means an SSH Key can be created and named <q>Test</q>. You won&#39;t be able to create another one in the same account called <q>Test</q>. You can, however, delete the SSH Key and create a new one called <q>Test</q>. It will have different key material and will not SSH into already launched Servers that used the prior <q>Test</q> SSH Key.</li>
+<li><strong>Key Material</strong> - Refers to the public/private key pair used for SSH Keys. Set to either <q>yes</q> or <q>no</q>. <q>Yes</q> means that RightScale possesses the private key material for that SSH key, and can SSH into any running instance that trusts that key. This is normally the case if the SSH Key was either created from the Dashboard, or manually added to it. <q>No</q> means that the RightScale database does not contain the private key; although you can launch instances that trust that key, you cannot SSH into those instances directly from the Dashboard. <em>Important!</em> Even if RightScale knows the private key material, it is only displayed in the Dashboard&#39;s Private Key field for the user who created it, or accounts with &#39;admin&#39; privileges.</li>
+<li><strong>Resource UID</strong> - Resource Unique Identifier for the SSH Key. To tie this back into the <q>Name</q> discussion above, some clouds use the Name of SSH Key as the Resource UID. This is why the Name and Resource UID match. The RS_ID for non-sharable entities (such as SSH Keys) is unique and random. <em>Note</em>: This is a RightScale only concept that guarantees uniqueness while leaving no security loopholes with respect to implementation.</li>
+</ul>
+
+<p>You can take the following actions from the SSH Keys screen.</p>
+
+<ul>
+<li><strong>New</strong> - Create a new SSH Key pair whereby the cloud generates the key pair for you.</li>
+<li><strong>Delete</strong> - Delete an existing SSH KEY pair.</li>
+</ul>
+
+<p>See <a href="/cm/dashboard/clouds/generic/ssh_keys_actions.html">Create a New SSH Key</a></p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+<li><a href="/faq/How_Do_I_Access_Servers_Using_SSH.html">How Do I Access Servers Using SSH?</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

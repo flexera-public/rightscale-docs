@@ -1,0 +1,3353 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightScale PowerShell Library</title><meta content="Overview and function descriptions for the RightScale PowerShell Library. RightScale's PowerShell Library contains a number of useful PowerShell scripts and functions." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_windows_guide cm_windows_guide_rightscale_powershell_library" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Windows Guide</a></p><div class="page-header"><h1>RightScale PowerShell Library</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Windows ServerTemplates published by RightScale contain a script (<strong>SYS Install RightScale PowerShell library</strong>), which runs in the boot sequence and installs RightScale&#39;s PowerShell Library onto the Windows server. RightScale&#39;s PowerShell Library contains a number of useful PowerShell scripts and functions. Several of the other RightScripts in RightScale&#39;s Windows ServerTemplates leverage these functions in their own code, which means there is a dependency on the above script, which is why it&#39;s typically the first RightScript executed in the boot sequence.</p>
+
+<p>If you are developing your own Windows ServerTemplates, it&#39;s recommended that you add the  <strong>SYS Install RightScale PowerShell library</strong> RightScript to the ServerTemplate&#39;s boot sequence so that you can take advantage of RightScale&#39;s PowerShell Library in your own scripts.</p>
+
+<hr>
+
+<h2 id="file-ad\ad-ps1">File ad\AD.ps1</h2>
+
+<p>AD.ps1</p>
+
+<h3 id="file-ad\ad-ps1-function-checkadsiteexist">Function CheckAdSiteExist</h3>
+
+<p>This function connects to remote domain controller and check if site exists.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckAdSiteExist [[-AdminPassword] &lt;String&gt;] [[-AdminAccount] &lt;String&gt;] [[-SiteName] &lt;String&gt;] [[-ServerName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>AdminPassword</strong> - Password of user name which has permissions for AD connection. .PARAMETER AdminAccount - Login, like DomainName\LoginName.</li>
+<li><strong>AdminAccount</strong> -</li>
+<li><strong>SiteName</strong> - Name of AD site. .PARAMETER ServerName - Address of domain controller.</li>
+<li><strong>ServerName</strong> -</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight plaintext"><code>CheckAdSiteExist -AdminAccount "Domain\Administrator" -AdminPassword "PaSSwo@rd" -ServerName "10.10.10.10" -SiteName "Default"
+</code></pre>
+
+<h3 id="file-ad\ad-ps1-function-transfer_fsmo">Function Transfer_FSMO</h3>
+
+<p>This function transfers or seizes FSMO roles in Active directory</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Transfer_FSMO [[-Dc_Name] &lt;String&gt;] [[-FsmoRole] &lt;String&gt;] [[-UserLogin] &lt;String&gt;] [[-Userpassword] &lt;String&gt;] [&lt;CommonP arameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>Dc_Name</strong> - FQDN name or IP address of the domain controller.</li>
+<li><strong>FsmoRole</strong> - Name of FSMO role. Possible values: <q>becomeSchemaMaster</q>, <q>becomeDomainMaster</q>, <q>becomeRidMaster</q>, <q>becomeInfrastructur eMaster</q>, <q>becomePdc</q>. .PARAMETER UserLogin - Active Directory&#39;s account login. .PARAMETER UserPassword - Password of AD account.</li>
+<li><strong>UserLogin</strong> -</li>
+<li><strong>Userpassword</strong> -</li>
+</ul>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight plaintext"><code>Transfer_Fsmo -Dc_Name "10.10.10.10" -FsmoRole "becomeSchemaMaster" -UserLogin "Administrator" -Userpassword "PasSwo5rd"
+</code></pre>
+
+<hr>
+
+<h2 id="file-ad\adbackuppolicy-ps1">File ad\AdBackupPolicy.ps1</h2>
+
+<p>Function implementing AD backup retention policy.</p>
+
+<h3 id="file-ad\adbackuppolicy-ps1-function-adbackuppolicy">Function ADBackupPolicy</h3>
+
+<p>This function connects to storage in different clouds and remove old backup.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>ADBackupPolicy [[-RemoteStorage] &lt;String&gt;] [[-StorageName] &lt;String&gt;] [[-BackupLineage] &lt;String&gt;] [[-NumberBackupsToKeep] &lt;Int32&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [[-RackspaceUserName] &lt;String&gt;] [[-RackspaceAuthKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>RemoteStorage</strong> - Type of remote storage.</li>
+<li><strong>StorageName</strong> - Name of storage conteiner.</li>
+<li><strong>BackupLineage</strong> -</li>
+<li><strong>NumberBackupsToKeep</strong> - Number of backups to leave.</li>
+<li><strong>accessKeyId</strong> -</li>
+<li><strong>secretAccessKey</strong> -</li>
+<li><strong>RackspaceUserName</strong> -</li>
+<li><strong>RackspaceAuthKey</strong> -</li>
+</ul>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight plaintext"><code>ADBackupPolicy -RemoteStorage "$remoteFileStorage" -StorageName "$StoragetName" -BackupLineage "$AD_Backup_Name" -NumberBackupsToKeep $NumberBackupsToKeep
+</code></pre>
+
+<hr>
+
+<h2 id="file-ad\addownloadbackup-ps1">File ad\ADDownloadBackup.ps1</h2>
+
+<p>ADDownloadBackup.ps1</p>
+
+<h3 id="file-ad\addownloadbackup-ps1-function-getadbackupfromremotestorage">Function GetADBackupFromRemoteStorage</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetADBackupFromRemoteStorage [[-RemoteStorage] &lt;String&gt;] [[-StorageName] &lt;String&gt;] [[-BackupLineage] &lt;String&gt;] [[-timestamp] &lt;String&gt;] [[-DestinationPath] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [[-RackspaceUserName] &lt;String&gt;] [[-RackspaceAuthKey] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-ad\addownloadbackup-ps1-function-getadbackupfromremotestorage">Function GetADBackupFromRemoteStorage</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetADBackupFromRemoteStorage [[-RemoteStorage] &lt;String&gt;] [[-StorageName] &lt;String&gt;] [[-BackupLineage] &lt;String&gt;] [[-timestamp] &lt;String&gt;] [[-DestinationPath] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [[-RackspaceUserName] &lt;String&gt;] [[-RackspaceAuthKey] &lt;String&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-ad\checkbootmode-ps1">File ad\CheckBootMode.ps1</h2>
+
+<p>CheckBootMode.ps1</p>
+
+<h3 id="file-ad\checkbootmode-ps1-function-checkbootmode">Function CheckBootMode</h3>
+
+<p>This function check boot mode of OS.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckBootMode [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-aws\aws-ps1">File aws\Aws.ps1</h2>
+
+<p>General AWS functions.</p>
+
+<h3 id="file-aws\aws-ps1-function-initawssdk">Function InitAwsSdk</h3>
+
+<p>Loads AWS SDK into current PowerShell session. SDK should be already installed (e.g. via a RightScript).</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>InitAwsSdk [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<hr>
+
+<h2 id="file-aws\ec2-ps1">File aws\EC2.ps1</h2>
+
+<p>Functions dealing with AWS EC2.</p>
+
+<h3 id="file-aws\ec2-ps1-function-createec2clientbyaz">Function CreateEc2ClientByAz</h3>
+
+<p>Creates AmazonEC2Client instance that can be used to perform AWS SDK calls for resources located in some AWS availability zone.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CreateEc2ClientByAz [[-az] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>az</strong> - Name of the availability zone. Extracted from env varibale EC2_PLACEMENT_AVAILABILITY_ZONE if not passed.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Instance implementing AmazonEC2 interface (<a href="http://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html">Amazon API Docs</a>).</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight plaintext"><code>$ec2 = CreateEc2ClientByAz 'us-east'
+</code></pre>
+
+<h3 id="file-aws\ec2-ps1-function-getawsregionname">Function GetAwsRegionName</h3>
+
+<p>Returns display name of AWS region by region id.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetAwsRegionName [[-regionId] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>regionId</strong> - String ID of the AWS region, for example &#39;us-east-1&#39;</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Name of the AWS region.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight plaintext"><code>$regionName = GetAwsRegionName 'us-east-1'
+</code></pre>
+
+<h3 id="file-aws\ec2-ps1-function-getendpointbyaz">Function GetEndpointByAz</h3>
+
+<p>Gets domain name or URL of AWS availability zone endpoint.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetEndpointByAz [[-az] &lt;String&gt;] [[-addHttps] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>az</strong> - Name of the availability zone, following AZs are supported: us-east, us-west-2, us-west-1, eu-west, ap-southeast, ap-northeast.</li>
+<li><strong>addHttps</strong> - Flag indicating if the domain name should be prefixed by https://. $True is the default value.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Domain name of availability zone endpoint prefixed by https:// if specified. Throws exception is region is invalid.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight plaintext"><code>$endpointHttps = GetEndpointByAz 'us-west-2'
+</code></pre>
+
+<h3 id="file-aws\ec2-ps1-function-getinstanceimagename">Function GetInstanceImageName</h3>
+
+<p>Returns name of the image for the instance. With default parameters it returns name of the image for current instance. Uses AWS SDK calls.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetInstanceImageName [[-instanceId] &lt;String&gt;] [[-az] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>instanceId</strong> - AWS instance id. Extracted from env variable EC2_INSTANCE_ID by default.</li>
+<li><strong>az</strong> - Name of the availability zone. Extracted from env varibale EC2_PLACEMENT_AVAILABILITY_ZONE by default.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Name of the EC2 image (not MCI).</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight plaintext"><code>$imgName = GetInstanceImageName
+</code></pre>
+
+<h3 id="file-aws\ec2-ps1-function-getinstancevpcid">Function GetInstanceVpcId</h3>
+
+<p>Returns VPC id if current instance is deployed in VPC, otherwise returns $Null.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetInstanceVpcId [[-instanceId] &lt;String&gt;] [[-az] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;Co mmonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>instanceId</strong> - AWS instance id. Extracted from env variable EC2_INSTANCE_ID by default.</li>
+<li><strong>az</strong> - Name of the availability zone. Extracted from env variable EC2_PLACEMENT_AVAILABILITY_ZONE by default.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Name of the EC2 image (not MCI).</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight plaintext"><code>$imgName = GetInstanceImageName
+</code></pre>
+
+<h3 id="file-aws\ec2-ps1-function-getsnapshotinfobyid">Function GetSnapshotInfoById</h3>
+
+<p>Get volume snapshot information by snapshot id. Performs DescribeSnapshots AWS API call with passed snapshot id.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetSnapshotInfoById [[-snapshotId] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonParameters &gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>snapshotId</strong> - AWS snapshot id.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Snapshot object or $Null</p>
+
+<hr>
+
+<h2 id="file-aws\s3-ps1">File aws\S3.ps1</h2>
+
+<p>Functions dealing with AWS S3 service.</p>
+
+<h3 id="file-aws\s3-ps1-function-deletefroms3">Function DeleteFromS3</h3>
+
+<p>Deletes a file from S3 bucket.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>DeleteFromS3 [[-bucket] &lt;String&gt;] [[-name] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonPa rameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>bucket</strong> - Name of S3 bucket to delete file from.</li>
+<li><strong>name</strong> - Name of the file in S3 bucket.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing (throws exception if delete failed).</p>
+
+<h3 id="file-aws\s3-ps1-function-getfroms3">Function GetFromS3</h3>
+
+<p>Downloads a file from S3 bucket.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetFromS3 [[-bucket] &lt;String&gt;] [[-name] &lt;String&gt;] [[-destPath] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>bucket</strong> - Name of S3 bucket to download file from.</li>
+<li><strong>name</strong> - Name of the file in S3 bucket.</li>
+<li><strong>destPath</strong> - Full destination path (dir + file name).</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-aws\s3-ps1-function-getlistfroms3">Function GetListFromS3</h3>
+
+<p>Gets list of files stored in S3 bucket.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetListFromS3 [[-bucket] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>bucket</strong> - Name of S3 bucket.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Array of file names stored in S3 bucket. Throws exception if failed.</p>
+
+<h3 id="file-aws\s3-ps1-function-getlistfroms3prefix">Function GetListFromS3Prefix</h3>
+
+<p>Gets list of files stored in S3 bucket which names start with specified prefix.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetListFromS3Prefix [[-bucket] &lt;String&gt;] [[-prefix] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>bucket</strong> - Name of S3 bucket.</li>
+<li><strong>prefix</strong> - Prefix to filter file names (string).</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Array of file names. Throws exception if failed.</p>
+
+<h3 id="file-aws\s3-ps1-function-puttos3">Function PutToS3</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>PutToS3 [[-localPath] &lt;String&gt;] [[-bucket] &lt;String&gt;] [[-name] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [[-blocksize] &lt;Int32&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-ebs\ebsbackuprestorevolume-ps1">File ebs\EbsBackupRestoreVolume.ps1</h2>
+
+<p>Function to do EBS snapshot of a volume (used by AD template).</p>
+
+<h3 id="file-ebs\ebsbackuprestorevolume-ps1-function-ebsbackupexists">Function EbsBackupExists</h3>
+
+<p>Returns $True of at least one backup of given lineage name exists or $False if it doesn&#39;t.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsBackupExists [[-lineageName] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>lineageName</strong> - Lineage name.</li>
+</ul>
+
+<h3 id="file-ebs\ebsbackuprestorevolume-ps1-function-ebsbackupvolume">Function EbsBackupVolume</h3>
+
+<p>Simply requests EBS snapshot of a volume and performs cleanup of previous backups.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsBackupVolume [[-DriveLetter] &lt;Object&gt;] [[-lineageName] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>DriveLetter</strong> - Drive letter of a volume to do snapshot (single char).</li>
+<li><strong>lineageName</strong> - Name of backup, used as lineage name.</li>
+</ul>
+
+<h3 id="file-ebs\ebsbackuprestorevolume-ps1-function-ebsclearbackuplineage">Function EbsClearBackupLineage</h3>
+
+<p>Deletes all backups in given backup lineage.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsClearBackupLineage [[-lineageName] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>lineageName</strong> - Lineage name of backups to be cleared.</li>
+</ul>
+
+<h3 id="file-ebs\ebsbackuprestorevolume-ps1-function-ebsrestorevolume">Function EbsRestoreVolume</h3>
+
+<p>Restores single volume from EBS snapshot.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsRestoreVolume [[-dbLineageName] &lt;Object&gt;] [[-timestamp] &lt;Object&gt;] [[-iops] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>dbLineageName</strong> - Name of the backup lineage to restore from.</li>
+<li><strong>timestamp</strong> - Timestamp of the specific backup to restore from (optional). Restores from the most recent backup if omitted.</li>
+<li><strong>iops</strong> - The number of I/O operations per second (IOPS) that the volume supports. IOPS is currently only supported on Amazon EC2. Range is 100 to 1000. Example: 500</li>
+</ul>
+
+<hr>
+
+<h2 id="file-ebs\ebsbackupvolumes-ps1">File ebs\EbsBackupVolumes.ps1</h2>
+
+<p>Functions to do EBS snapshots.</p>
+
+<h3 id="file-ebs\ebsbackupvolumes-ps1-function-commitsnapshot">Function CommitSnapshot</h3>
+
+<p>Commits snapshot. Adds tag committed=true by invoking update_ebs_snapshot.js API 1.0 call.</p>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>CommitSnapshot [[-aws_id] <String>] [<CommonParameters>]</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>aws_id</strong> - AWS ID of the snapshot.</li>
+</ul>
+
+<h3 id="file-ebs\ebsbackupvolumes-ps1-function-ebsbackupvolumes">Function EbsBackupVolumes</h3>
+
+<p>Performs backup by creating EBS snapshots of data and log volumes. Simple and striped volumes are supported. This function creates EBS snapshots of data nd log volumes by invoking create_ebs_backup.js API 1.0 call. Uses VSS to guarantee consistency of files on data volume. Also performs cleanup of lineage backup with parameters passed via env variables (DB_BACKUP_KEEP_LAST, DB_BACKUP_KEEP_DAILY, etc).</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsBackupVolumes [[-dataVolRoot] &lt;Object&gt;] [[-logsVolRoot] &lt;Object&gt;] [[-dbLineageName] &lt;Object&gt;] [[-dataVolDevices] &lt;Ar ray&gt;] [[-logsVolDevices] &lt;Array&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>dataVolRoot</strong> - Drive letter of data volume (single char).</li>
+<li><strong>logsVolRoot</strong> - Drive letter of logs volume (single char).</li>
+<li><strong>dbLineageName</strong> - Backups lineage name.</li>
+<li><strong>dataVolDevices</strong> - Array of device names that make up data volume (required for striped volume, could be omitted for simple volume). If omitted the device name is assumed to be xvdX, where X is drive letter (e.g xvdd for D:\, xvde for E:\, etc).</li>
+<li><strong>logsVolDevices</strong> - The same as dataVolDevices but for logs volume.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if successful, throws exception if failed.</p>
+
+<hr>
+
+<h2 id="file-ebs\ebscreateattachstripe-ps1">File ebs\EbsCreateAttachStripe.ps1</h2>
+
+<p>Functions to create and attache striped volumes.</p>
+
+<h3 id="file-ebs\ebscreateattachstripe-ps1-function-ebscreateattachstripedvolume">Function EbsCreateAttachStripedVolume</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsCreateAttachStripedVolume [[-numberStripes] &lt;Int32&gt;] [[-stripeSize] &lt;Int32&gt;] [[-driveLetter] &lt;String&gt;] [[-reservedLetters] &lt;Array&gt;] [[-instanceId] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [[-iops] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-ebs\ebscreateattachstripe-ps1-function-ebsgetattacheddevices">Function EbsGetAttachedDevices</h3>
+
+<p>Function to get device names of all volumes attached to the instance.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsGetAttachedDevices [[-instanceId] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>instanceId</strong> - AWS ID of the instance (optional, env variable EC2_INSTANCE_ID is used by default).</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Array of device names of attached volumes (array of strings).</p>
+
+<hr>
+
+<h2 id="file-ebs\ebscreateattachvolume-ps1">File ebs\EbsCreateAttachVolume.ps1</h2>
+
+<p>Functions to create and attach simple (not striped) volumes to the instance.</p>
+
+<h3 id="file-ebs\ebscreateattachvolume-ps1-function-ebsattachvolume">Function EbsAttachVolume</h3>
+
+<p>Function to attach existing EBS volume to the instance.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsAttachVolume [[-vol_id] &lt;String&gt;] [[-driveLetter] &lt;String&gt;] [[-timeout] &lt;Int32&gt;] [[-newVolume] &lt;Boolean&gt;] [[-device] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>vol_id</strong> - AWS ID of the volume to attach.</li>
+<li><strong>driveLetter</strong> - Drive letter to assign to new volume. Optional, if skipped device parameter should be specified.</li>
+<li><strong>timeout</strong> - Timeout in seconds to wait for successful attachment (0 means infinity).</li>
+<li><strong>newVolume</strong> - Flag indicating whether to format attached volume.</li>
+<li><strong>device</strong> - Device name to attach volume as. If skipped drive letter is used as last letter of device name (i.e. &#39;e&#39; means xvde, etc).</li>
+</ul>
+
+<h3 id="file-ebs\ebscreateattachvolume-ps1-function-ebscreateattachvolume">Function EbsCreateAttachVolume</h3>
+
+<p>This function creates a new EBS volume, attaches to current instance, assings drive letter and formats new volume.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsCreateAttachVolume [[-driveLetter] &lt;Object&gt;] [[-sizeGb] &lt;Object&gt;] [[-deleteOnTermination] &lt;Object&gt;] [[-iops] &lt;String &gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>driveLetter</strong> - Drive letter to assign to the attached volume (char). Also used as last letter of device name to attach the volume (so &#39;d&#39; means &#39;xvdd&#39;, &#39;e&#39; means &#39;xvde&#39;, etc).</li>
+<li><strong>sizeGb</strong> - Size of the new volume in GB (positive integer).</li>
+<li><strong>deleteOnTermination</strong> - Flag indicating whether to set delete on termination flag for new volume.</li>
+<li><strong>iops</strong> - The number of I/O operations per second (IOPS) that the volume supports. IOPS is currently only supported on Amazon EC2. Range is 100 to 1000. Example: 500</li>
+</ul>
+
+<h3 id="file-ebs\ebscreateattachvolume-ps1-function-ebscreatevolume">Function EbsCreateVolume</h3>
+
+<p>Function to create a new EBS volume and wait until new volume is actually created (i.e. for &#39;available&#39; status).</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsCreateVolume [[-sizeGb] &lt;Int32&gt;] [[-name] &lt;String&gt;] [[-iops] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>sizeGb</strong> - Size in GB of the new volume (positive integer).</li>
+<li><strong>name</strong> - Name of the new volume.\</li>
+<li><strong>iops</strong> - The number of I/O operations per second (IOPS) that the volume supports. IOPS is currently only supported on Amazon EC2. Range is 100 to 1000. Example: 500</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>AWS volume ID of the created volume.</p>
+
+<hr>
+
+<h2 id="file-ebs\ebsdeleteontermination-ps1">File ebs\EbsDeleteOnTermination.ps1</h2>
+
+<p>Function to set delete on termination flag.</p>
+
+<h3 id="file-ebs\ebsdeleteontermination-ps1-function-ebssetdeleteontermination">Function EbsSetDeleteOnTermination</h3>
+
+<p>Sets delete on termination flag for EBS volume. Volume should be already attached to the instance.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsSetDeleteOnTermination [-instance_id] &lt;Object&gt; [-volume_id] &lt;Object&gt; [-device_name] &lt;Object&gt; [-flag] &lt;Object&gt; [[-acc essKeyId] &lt;Object&gt;] [[-secretAccessKey] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>instance_id</strong> - AWS ID of the instance.</li>
+<li><strong>volume_id</strong> - AWS ID of the attached volume.</li>
+<li><strong>device_name</strong> - Name of device the volume is attached to the instance as.</li>
+<li><strong>flag</strong> - Flag indicating whether to set or clear delete on termination flag.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<hr>
+
+<h2 id="file-ebs\ebsdeletevolume-ps1">File ebs\EbsDeleteVolume.ps1</h2>
+
+<p>Functions to detach and delete EBS volumes.</p>
+
+<h3 id="file-ebs\ebsdeletevolume-ps1-function-ebsdeletevolume">Function EbsDeleteVolume</h3>
+
+<p>Function to detach and delete simple EBS volume.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsDeleteVolume [[-drive] &lt;Object&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>drive</strong> - Drive letter of the volume to detach and delete.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if successful, $False is fails.</p>
+
+<h3 id="file-ebs\ebsdeletevolume-ps1-function-ebsdetachallvolumes">Function EbsDetachAllVolumes</h3>
+
+<p>Detach all volumes from the instance or set delete on termination flag.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsDetachAllVolumes [[-instanceId] &lt;String&gt;] [[-setDeleteOnTermination] &lt;Boolean&gt;] [[-waitForDetachment] &lt;Boolean&gt;] [[- accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>instanceId</strong> - AWS ID of the instance (optional, uses value of EC2_INSTANCE_ID env variable by default).</li>
+<li><strong>setDeleteOnTermination</strong> - Flag idicating whether to set delete on termination flag instead of actual detachment (was added vecause of AWS detachment issue).</li>
+<li><strong>waitForDetachment</strong> - Flag indicating whether to wait for actual detachment of each volume (i.e. for &#39;available&#39; status of the volume).</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if successful, $False if fails.</p>
+
+<h3 id="file-ebs\ebsdeletevolume-ps1-function-ebsdetachvolume">Function EbsDetachVolume</h3>
+
+<p>Function to detach EBS volume for the instance and wait until it&#39;s detached actually.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsDetachVolume [[-drive] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>drive</strong> - Drive letter of the volume to detach.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>AWS ID of the detached volume or $False if failed.</p>
+
+<hr>
+
+<h2 id="file-ebs\ebsrestorevolumes-ps1">File ebs\EbsRestoreVolumes.ps1</h2>
+
+<p>Function to restore EBS volumes from snapshots.</p>
+
+<h3 id="file-ebs\ebsrestorevolumes-ps1-function-ebsgetlatestlineage">Function EbsGetLatestLineage</h3>
+
+<p>Function to compare 2 backup lineages to determine which one has the most recent backup.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsGetLatestLineage [[-lineage1] &lt;Object&gt;] [[-lineage2] &lt;Object&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String &gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>lineage1</strong> - Name of the first lineage to compare.</li>
+<li><strong>lineage2</strong> - Name of the second lineage to compare.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Name of the lineage which has the most recent backup or empty string if bith lineages are empty.</p>
+
+<h3 id="file-ebs\ebsrestorevolumes-ps1-function-ebsrestorevolumes">Function EbsRestoreVolumes</h3>
+
+<p>Restores data and log volumes from EBS snapshots. Supports simple and striped volumes.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsRestoreVolumes [[-dbLineageName] &lt;Object&gt;] [[-timestamp] &lt;Object&gt;] [[-iops_data] &lt;Object&gt;] [[-iops_logs] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>dbLineageName</strong> - Name of the backup lineage to restore from.</li>
+<li><strong>timestamp</strong> - Timestamp of the specific backup to restore from (optional). Restores from the most recent backup if omitted.</li>
+<li><strong>iops_data</strong> -</li>
+<li><strong>iops_logs</strong> -</li>
+</ul>
+
+<hr>
+
+<h2 id="file-ebs\ebsvolumeinfo-ps1">File ebs\EbsVolumeInfo.ps1</h2>
+
+<p>Functions to get EBS volume information using AWS SDK calls.</p>
+
+<h3 id="file-ebs\ebsvolumeinfo-ps1-function-ebsgetvolumeid">Function EbsGetVolumeId</h3>
+
+<p>Get EBS volume ID by device name.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsGetVolumeId [[-device] &lt;String&gt;] [[-instanceId] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt; CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>device</strong> - Device name of attached volume, for example &#39;xvdd&#39; (string).</li>
+<li><strong>instanceId</strong> - AWS ID of the instance, optional (extracted from EC2_INSTANCE_ID env variable if omitted).</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Volume ID if successful, $False if failed.</p>
+
+<h3 id="file-ebs\ebsvolumeinfo-ps1-function-ebsgetvolumestatus">Function EbsGetVolumeStatus</h3>
+
+<p>Function to get status of EBS volume.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsGetVolumeStatus [[-volumeId] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>volumeId</strong> - AWS ID of the volume.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Volume status (e.g. &#39;available&#39;, &#39;in-use&#39;, etc) or $False if failed.</p>
+
+<h3 id="file-ebs\ebsvolumeinfo-ps1-function-ebswaitforvolumestatus">Function EbsWaitForVolumeStatus</h3>
+
+<p>Function to wait for specific status of a volume with a timeout.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>EbsWaitForVolumeStatus [[-volumeId] &lt;String&gt;] [[-status] &lt;String&gt;] [[-timeout] &lt;Int32&gt;] [[-accessKeyId] &lt;String&gt;] [[-se cretAccessKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>volumeId</strong> - AWS ID of the volume.</li>
+<li><strong>status</strong> - Status of the volume to wait for (e.g. &#39;available&#39;, &#39;in-use&#39;).</li>
+<li><strong>timeout</strong> - Timeout in seconds (default is 30 minutes).</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if volume got specified status, $False if exited by timeout.</p>
+
+<hr>
+
+<h2 id="file-rax\cloudfiles-ps1">File rax\CloudFiles.ps1</h2>
+
+<p>Functions dealing with Rackspace CloudFiles service.</p>
+
+<h3 id="file-rax\cloudfiles-ps1-function-backuppolicy">Function BackupPolicy</h3>
+
+<p>BackupPolicy</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>BackupPolicy [[-container] &lt;String&gt;] [[-Lineage] &lt;String&gt;] [[-NumberBackupsToKeep] &lt;Int32&gt;] [[-username] &lt;String&gt;] [[-a uthKey] &lt;String&gt;] [[-region] &lt;String&gt;] [[-snet] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>container</strong> - The name of the container.</li>
+<li><strong>Lineage</strong> - Array of file names to be uploaded.</li>
+<li><strong>NumberBackupsToKeep</strong> - The path for backup&#39;s downloads.</li>
+<li><strong>username</strong> - Rackspace username</li>
+<li><strong>authKey</strong> - Rackspace auth key</li>
+<li><strong>region</strong> -</li>
+<li><strong>snet</strong> - This parameter indicates if to use RAX service network or not. If this parameter is true and cloud is rackspace - then Service network will be used for data monipulation.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-rax\cloudfiles-ps1-function-deleteitemcloudfiles">Function DeleteItemCloudFiles</h3>
+
+<p>This function deletes a storage object in a given container.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>DeleteItemCloudFiles [[-container] &lt;String&gt;] [[-storageitem] &lt;String&gt;] [[-username] &lt;String&gt;] [[-authKey] &lt;String&gt;] [[- region] &lt;String&gt;] [[-snet] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>container</strong> - The name of the container that contains the storage.</li>
+<li><strong>storageitem</strong> - The name of the storage object to delete.</li>
+<li><strong>username</strong> - Rackspace username</li>
+<li><strong>authKey</strong> - Rackspace auth key</li>
+<li><strong>region</strong> -</li>
+<li><strong>snet</strong> - This parameter indicates if to use RAX service network or not. If this parameter is true and cloud is rackspace - then Service network will be used for data monipulation.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-rax\cloudfiles-ps1-function-getbackupfilefromcloudspace">Function GetBackupFileFromCloudSpace</h3>
+
+<p>This function connects to Cloudfiles and lookig for the last backup.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetBackupFileFromCloudSpace [[-container] &lt;String&gt;] [[-lineagename] &lt;String&gt;] [[-PathDestination] &lt;String&gt;] [[-Timestam p] &lt;String&gt;] [[-username] &lt;String&gt;] [[-authKey] &lt;String&gt;] [[-region] &lt;String&gt;] [[-snet] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>container</strong> - The name of the container.</li>
+<li><strong>lineagename</strong> - Array of file names to be uploaded.</li>
+<li><strong>PathDestination</strong> - The path for backup&#39;s downloads.</li>
+<li><strong>Timestamp</strong> - Timestamp of backup in format <q>yyyyMMddhhmmss</q></li>
+<li><strong>username</strong> - Rackspace username</li>
+<li><strong>authKey</strong> - Rackspace auth key</li>
+<li><strong>region</strong> -</li>
+<li><strong>snet</strong> - This parameter indicates if to use RAX service network or not. If this parameter is true and cloud is rackspace - then Service network will be used for data monipulation.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight plaintext"><code>GetBackupFileFromCloudSpace "TestContainer" "testik" "c:\backup" "20111024095922"
+</code></pre>
+
+<h3 id="file-rax\cloudfiles-ps1-function-getfileslistfromcloudfiles">Function GetFilesListFromCloudFiles</h3>
+
+<p>This function retrieves the objects of a container, excluding folders.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetFilesListFromCloudFiles [[-container] &lt;String&gt;] [[-username] &lt;String&gt;] [[-authKey] &lt;String&gt;] [[-region] &lt;String&gt;] [[-snet] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>container</strong> - The name of the container.</li>
+<li><strong>username</strong> - Rackspace username</li>
+<li><strong>authKey</strong> - Rackspace auth key</li>
+<li><strong>region</strong> -</li>
+<li><strong>snet</strong> - This parameter indicates if to use RAX service network or not. If this parameter is true and cloud is rackspace - then Service network will be used for data monipulation.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-rax\cloudfiles-ps1-function-getfromcloudfiles">Function GetFromCloudFiles</h3>
+
+<p>This function downloads a storage object from Cloud Files.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetFromCloudFiles [[-container] &lt;String&gt;] [[-name] &lt;String&gt;] [[-destPath] &lt;String&gt;] [[-username] &lt;String&gt;] [[-authKey] &lt;String&gt;] [[-region] &lt;String&gt;] [[-snet] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>container</strong> - The name of the container.</li>
+<li><strong>name</strong> - The name of the storage object to retrieve.</li>
+<li><strong>destPath</strong> - Local path for downloaded item.</li>
+<li><strong>username</strong> - Rackspace username</li>
+<li><strong>authKey</strong> - Rackspace auth key</li>
+<li><strong>region</strong> -</li>
+<li><strong>snet</strong> - This parameter indicates if to use RAX service network or not. If this parameter is true and cloud is rackspace - then Service network will be used for data monipulation.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-rax\cloudfiles-ps1-function-getlistfromcloudfilesprefix">Function GetListFromCloudFilesPrefix</h3>
+
+<p>This function retrieves the objects of a container, excluding folders.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetListFromCloudFilesPrefix [[-container] &lt;String&gt;] [[-prefix] &lt;String&gt;] [[-username] &lt;String&gt;] [[-authKey] &lt;String&gt;] [[-region] &lt;String&gt;] [[-snet] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>container</strong> - The name of the container.</li>
+<li><strong>prefix</strong> -</li>
+<li><strong>username</strong> - Rackspace username</li>
+<li><strong>authKey</strong> - Rackspace auth key</li>
+<li><strong>region</strong> -</li>
+<li><strong>snet</strong> - This parameter indicates if to use RAX service network or not. If this parameter is true and cloud is rackspace - then Service network will be used for data monipulation.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-rax\cloudfiles-ps1-function-putlisttocloudfiles">Function PutListToCloudFiles</h3>
+
+<p>This function puts a numeros files to CloudFiles.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>PutListToCloudFiles [[-LocalFiles] &lt;Array&gt;] [[-container] &lt;String&gt;] [[-username] &lt;String&gt;] [[-authKey] &lt;String&gt;] [[-reg ion] &lt;String&gt;] [[-snet] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>LocalFiles</strong> - Array of file names to be uploaded.</li>
+<li><strong>container</strong> - The name of the container.</li>
+<li><strong>username</strong> - Rackspace username</li>
+<li><strong>authKey</strong> - Rackspace auth key</li>
+<li><strong>region</strong> -</li>
+<li><strong>snet</strong> - This parameter indicates if to use RAX service network or not. If this parameter is true and cloud is rackspace - then Service network will be used for data monipulation.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-rax\cloudfiles-ps1-function-puttocloudfiles">Function PutToCloudFiles</h3>
+
+<p>This function uploads a storage object to Cloud Files.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>PutToCloudFiles [[-localPath] &lt;String&gt;] [[-container] &lt;String&gt;] [[-name] &lt;String&gt;] [[-username] &lt;String&gt;] [[-authKey] &lt; String&gt;] [[-region] &lt;String&gt;] [[-snet] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>localPath</strong> - The complete file path of the storage object to be uploaded.</li>
+<li><strong>container</strong> - The name of the container to put the storage object in.</li>
+<li><strong>name</strong> - The name of file in container.</li>
+<li><strong>username</strong> - Rackspace username</li>
+<li><strong>authKey</strong> - Rackspace auth key</li>
+<li><strong>region</strong> -</li>
+<li><strong>snet</strong> - This parameter indicates if to use RAX service network or not. If this parameter is true and cloud is rackspace - then Service network will be used for data monipulation.</li>
+</ul>
+
+<hr>
+
+<h2 id="file-ros\ros-ps1">File ros\Ros.ps1</h2>
+
+<p>Functions to deal with ROS in service-independent manner. S3 and Cloud Files are supported now. These functions provide level of abstraction between remote storage services and multicloud functions or RightScripts. General workflow of using these functions is: 1. Create ROS context which basically contains type of remote storage service, access credentials needed to deal with the service and additional information (for example name of S3 bucket). 2. Execute functions (get, put, delete, list, etc).</p>
+
+<h3 id="file-ros\ros-ps1-function-initroscontextfrominputs">Function InitRosContextFromInputs</h3>
+
+<p>InitRosContextFromInputs</p>
+
+<h3 id="file-ros\ros-ps1-function-initroscontextfrominputsapp">Function InitRosContextFromInputsApp</h3>
+
+<p>InitRosContextFromInputsApp</p>
+
+<h3 id="file-ros\ros-ps1-function-rosauthenticatesoftlayer">Function RosAuthenticateSoftlayer</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosAuthenticateSoftlayer [[-slRegion] &lt;String&gt;] [[-userName] &lt;String&gt;] [[-authKey] &lt;String&gt;] [[-useinternalendpoint] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-ros\ros-ps1-function-rosdeleteobject">Function RosDeleteObject</h3>
+
+<p>Function to delete a file from remote storage.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosDeleteObject [[-ctx] &lt;Hashtable&gt;] [[-name] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>ctx</strong> - Initialized ROS context.</li>
+<li><strong>name</strong> - Name of the file to delete.</li>
+</ul>
+
+<h3 id="file-ros\ros-ps1-function-rosgetlist">Function RosGetList</h3>
+
+<p>Function to get a list of files stored in the remote storage.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosGetList [[-ctx] &lt;Hashtable&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>ctx</strong> - Initialized ROS context.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>List of file names (array of strings).</p>
+
+<h3 id="file-ros\ros-ps1-function-rosgetlistprefix">Function RosGetListPrefix</h3>
+
+<p>Function to get list of files stored in the remote storage with names starting with specified prefix.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosGetListPrefix [[-ctx] &lt;Hashtable&gt;] [[-prefix] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>ctx</strong> - Initialized ROS context.</li>
+<li><strong>prefix</strong> - Prefix to filter file names (string value).</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>List of file names (array of strings).</p>
+
+<h3 id="file-ros\ros-ps1-function-rosgetobject">Function RosGetObject</h3>
+
+<p>Function to download a file from remote storage.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosGetObject [[-ctx] &lt;Hashtable&gt;] [[-name] &lt;String&gt;] [[-destPath] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>ctx</strong> - Initialized ROS context.</li>
+<li><strong>name</strong> - Name of the file to download.</li>
+<li><strong>destPath</strong> - Complete local path to store downloaded file to.</li>
+</ul>
+
+<h3 id="file-ros\ros-ps1-function-rosgettype">Function RosGetType</h3>
+
+<p>Extracts ROS type for ROS context.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosGetType [[-ctx] &lt;Hashtable&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>ctx</strong> - ROS context.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>ROS type (&#39;s3&#39;,&#39;cloud_files&#39; or &#39;Azure_Storage&#39; for now).</p>
+
+<h3 id="file-ros\ros-ps1-function-rosinitazure_storage">Function RosInitAzure_Storage</h3>
+
+<p>Function to initialize ROS context for Rackspace Cloud Files.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosInitAzure_Storage [[-container] &lt;String&gt;] [[-userName] &lt;String&gt;] [[-authKey] &lt;String&gt;] [[-parallelThreadCount] &lt;Int3 2&gt;] [[-blockSize] &lt;Int64&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>container</strong> - Name of Cloud Files container.</li>
+<li><strong>userName</strong> - The Rackspace user name that&#39;s used to authenticate requests to Rackspace services.</li>
+<li><strong>authKey</strong> - The Rackspace API key that&#39;s used to authenticate requests to Rackspace services. Note that we have to convert block size param from MB to bytes</li>
+<li><strong>parallelThreadCount</strong> -</li>
+<li><strong>blockSize</strong> -</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>ROS context (hashtable).</p>
+
+<h3 id="file-ros\ros-ps1-function-rosinitcloudfiles">Function RosInitCloudFiles</h3>
+
+<p>Function to initialize ROS context for Rackspace Cloud Files.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosInitCloudFiles [[-container] &lt;String&gt;] [[-userName] &lt;String&gt;] [[-authKey] &lt;String&gt;] [[-rax_region] &lt;String&gt;] [[-stor age_servicenet] &lt;String&gt;] [[-is_rax_cloud] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>container</strong> - Name of Cloud Files container.</li>
+<li><strong>userName</strong> - The Rackspace user name that&#39;s used to authenticate requests to Rackspace services.</li>
+<li><strong>authKey</strong> - The Rackspace API key that&#39;s used to authenticate requests to Rackspace services.</li>
+<li><strong>rax_region</strong> -</li>
+<li><strong>storage_servicenet</strong> - This parameter indicates if to use RAX service network or not. If this parameter is true and cloud is rackspace - then Service network will be used for data monipulation.</li>
+<li><strong>is_rax_cloud</strong> - This parameter indicates if instance is in Rackspace cloud</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>ROS context (hashtable).</p>
+
+<h3 id="file-ros\ros-ps1-function-rosinits3">Function RosInitS3</h3>
+
+<p>Function to initialize ROS context for AWS S3.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosInitS3 [[-bucket] &lt;String&gt;] [[-accessKeyId] &lt;String&gt;] [[-secretAccessKey] &lt;String&gt;] [[-blockSize] &lt;Object&gt;] [&lt;Common Parameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>bucket</strong> - Name of S3 bucket.</li>
+<li><strong>accessKeyId</strong> - The Access Key ID used to authenticate requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>secretAccessKey</strong> - The Secret Access Key used to authenticate your requests to AWS services. Not required parameter, by default value of AWS_ACCESS_KEY_ID env variable is used.</li>
+<li><strong>blockSize</strong> -</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>ROS context (hashtable).</p>
+
+<h3 id="file-ros\ros-ps1-function-rosinitsoftlayerstorage">Function RosInitSoftlayerStorage</h3>
+
+<p>Function to initialize ROS context for Soflayer Storage.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosInitSoftlayerStorage [[-slRegion] &lt;String&gt;] [[-container] &lt;String&gt;] [[-userName] &lt;String&gt;] [[-authKey] &lt;String&gt;] [[- useinternalendpoint] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>slRegion</strong> - Name of SoftLayer region (currently supported Softlayer_Dallas, Softlayer_Amsterdam and Softlayer_Singapore).</li>
+<li><strong>container</strong> - Name of SoftLayer Storage container.</li>
+<li><strong>userName</strong> - The SoftLayer user name that&#39;s used to authenticate requests to SoftLayer storage.</li>
+<li><strong>authKey</strong> - The SoftLayer auth key that&#39;s used to authenticate requests to SoftLayer storage.</li>
+<li><strong>useinternalendpoint</strong> -</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>ROS context (hashtable).</p>
+
+<h3 id="file-ros\ros-ps1-function-rosinitswift">Function RosInitSwift</h3>
+
+<p>Function to initialize ROS context for OpenStack Swift.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosInitSwift [[-authurl] &lt;String&gt;] [[-userid] &lt;String&gt;] [[-password] &lt;String&gt;] [[-container] &lt;String&gt;] [[-blockSize] &lt;I nt64&gt;] [[-useinternalendpoint] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>authurl</strong> - Swift authentication endpoint URL</li>
+<li><strong>userid</strong> - User id of account in format tenantID:username</li>
+<li><strong>password</strong> - Account password</li>
+<li><strong>container</strong> - Container name on storage</li>
+<li><strong>blockSize</strong> - Size of file part upload</li>
+<li><strong>useinternalendpoint</strong> -</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>ROS context (hashtable).</p>
+
+<h3 id="file-ros\ros-ps1-function-rosissupported">Function RosIsSupported</h3>
+
+<p>Function to determine if ROS service is supported.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosIsSupported [[-rosType] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>rosType</strong> - Mnemonic name of the ROS service. Currently supported values are &#39;s3&#39; and &#39;cloud_files&#39;.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-ros\ros-ps1-function-rosputobject">Function RosPutObject</h3>
+
+<p>Function to upload a file to remote storage.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosPutObject [[-ctx] &lt;Hashtable&gt;] [[-localPath] &lt;String&gt;] [[-name] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>ctx</strong> - Initialized ROS context.</li>
+<li><strong>localPath</strong> - Complete local path to the file that should be uploaded.</li>
+<li><strong>name</strong> - Name under which the file will be stored on remote storage.</li>
+</ul>
+
+<hr>
+
+<h2 id="file-ros\rosbackups-ps1">File ros\RosBackups.ps1</h2>
+
+<p>This file provides function dealing with SQL Server ROS backups. SQL Server ROS backups are native SQL Server dump files uploaded to remote storage. Currently full, diff and log backups are supported (with full backup containing system databases - master, model, msdb). Restore could be performed from full, full+diff or full+diff+log backups. ROS backups are organized as multiple files named under following naming convention: <lineage name><backup type><timestamp>N.bak, where lineage name – lineage name of your server (DB_LINEAGE_NAME input). backup type – type of the backup (could be full, diff or log). timestamp – UTC date and time of the backup in format YYYYMMDDHHMMSS. N – database index within this backup (starts from 1). .bak – file name extension. Also each backup contains .ini file with the information about the backup. Ini files are named similarly: SQLS_BAK_<lineage name><backup type><timestamp>.ini. Besides storing backup metadata ini file could be considered as a marker that backup is completed successfully.</p>
+
+<h3 id="file-ros\rosbackups-ps1-function-checkcanrestoresysdatabases">Function CheckCanRestoreSysDatabases</h3>
+
+<p>Compare SQL Server versions. This function compares SQL Server version used for backup and the version of instance. If versions mismatch throw error with message.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckCanRestoreSysDatabases [[-backupVersion] &lt;String&gt;] [[-instanceVersion] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>backupVersion</strong> -</li>
+<li><strong>instanceVersion</strong> -</li>
+</ul>
+
+<h3 id="file-ros\rosbackups-ps1-function-extractextension">Function ExtractExtension</h3>
+
+<p>Helper function to extract extension from file name.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>ExtractExtension [[-fileName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>fileName</strong> - File name to extract extension from.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Extracted extension (string).</p>
+
+<h3 id="file-ros\rosbackups-ps1-function-extracttimestamp">Function ExtractTimestamp</h3>
+
+<p>Helper function to extract timestampt from backup file name.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>ExtractTimestamp [[-fileName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>fileName</strong> - File name to extract timestamp from. assume that last 14 digits in file name followed by &#39;_&#39; is a timestamp</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Timestamp as string in format YYYYMMDDHHMMSS.</p>
+
+<h3 id="file-ros\rosbackups-ps1-function-restartmssqlserver">Function RestartMsSqlServer</h3>
+
+<p>RestartMsSqlServer</p>
+
+<h3 id="file-ros\rosbackups-ps1-function-roscleanbackups">Function RosCleanBackups</h3>
+
+<p>Helper function to perform cleanup on a list of ini files.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosCleanBackups [[-rosCtx] &lt;Hashtable&gt;] [[-iniFiles] &lt;Array&gt;] [[-keepLast] &lt;Int32&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>rosCtx</strong> - Initialized ROS context.</li>
+<li><strong>iniFiles</strong> -</li>
+<li><strong>keepLast</strong> - Number of backups to keep (positive integer value). Default value is 60.</li>
+</ul>
+
+<h3 id="file-ros\rosbackups-ps1-function-roscleanuplineagebackups">Function RosCleanupLineageBackups</h3>
+
+<p>Function that performs simple cleanup of backup on the remote storage. This function implements simple retention policy to keep specified number of last backups for given lineage name. Default value is to keep last 60 backups.</p>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>RosCleanupLineageBackups [[-rosCtx] <Hashtable>] [[-lineage] <String>] [[-keepLast] <Int32>] [<CommonParameters>]</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>rosCtx</strong> - Initialized ROS context.</li>
+<li><strong>lineage</strong> - Lineage name of backups.</li>
+<li><strong>keepLast</strong> - Number of backups to keep (positive integer value). Default value is 60.</li>
+</ul>
+
+<h3 id="file-ros\rosbackups-ps1-function-rosfindbackups">Function RosFindBackups</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosFindBackups [[-rosCtx] &lt;Hashtable&gt;] [[-lineage] &lt;String&gt;] [[-backupType] &lt;String&gt;] [[-startingFrom] &lt;String&gt;] [[-latestBefore] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-ros\rosbackups-ps1-function-rosfindlatestbackup">Function RosFindLatestBackup</h3>
+
+<p>Function to find latest backup for given lineage (globally or before specified timestamp).</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosFindLatestBackup [[-rosCtx] &lt;Hashtable&gt;] [[-lineage] &lt;String&gt;] [[-backupType] &lt;String&gt;] [[-latestBefore] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>rosCtx</strong> - Initialized ROS context.</li>
+<li><strong>lineage</strong> - Lineage name of backups.</li>
+<li><strong>backupType</strong> - Type of backups to search. Currently supported values: full, diff, log.</li>
+<li><strong>latestBefore</strong> - Timestamp to get the latest backup that is created before a certain date.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Parsed ini file of the backup found (hashtable). $False if backup was not found.</p>
+
+<h3 id="file-ros\rosbackups-ps1-function-rosfulllineagerestore">Function RosFullLineageRestore</h3>
+
+<p>Performs restore of latest backups for given lineage.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosFullLineageRestore [[-rosCtx] &lt;Hashtable&gt;] [[-lineage] &lt;String&gt;] [[-backupDir] &lt;String&gt;] [[-noRecovery] &lt;Boolean&gt;] [[-skipRestoreSystemDatabases] &lt;Boolean&gt;] [[-latestBefore] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>rosCtx</strong> - Initialized ROS context.</li>
+<li><strong>lineage</strong> - Lineage name of backups.</li>
+<li><strong>backupDir</strong> - Full path to store backup files temporarily on downloading and before restoring in SQL Server.</li>
+<li><strong>noRecovery</strong> - Flag indicating to restore in NORECOVERY mode (default is $False). Find full backup</li>
+<li><strong>skipRestoreSystemDatabases</strong> -</li>
+<li><strong>latestBefore</strong> -</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$False if backup is not found.</p>
+
+<h3 id="file-ros\rosbackups-ps1-function-roslineagebackup">Function RosLineageBackup</h3>
+
+<p>Function to perform backup of specified type. This function performs full, diff or log backup of each database of local SQL Server instance(including system databases for full backup) and uploads backup files to remote storage. Note, that no archiving is performed so it&#39;s recommended to enable SQL Server backup compression (supported from SQL Server 2008R2). WARNING: if $backupType parameter is &#39;log&#39; and full backup was not taken previously for a database (LastBackupDate property is empty) this function performs full backup to NUL device to enable creating log backup. Missing this full backup is potentially dangerous because it breaks backup/restore chain. So if you need full backup/restore chain you need to make sure you did full backup before invoking this function with $backupType = &#39;log&#39;. Note: The use case for doing log backup without full one is using Snapshots method for backups (so data and log files are stored inside snapshots provided by the cloud so full backup is not needed). Performing log backups is needed to enable log truncation and prevent infinite growing of log files.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosLineageBackup [[-rosCtx] &lt;Hashtable&gt;] [[-lineage] &lt;String&gt;] [[-backupDir] &lt;String&gt;] [[-backupType] &lt;String&gt;] [[-iniF ileName] &lt;String&gt;] [[-filterDbNames] &lt;Array&gt;] [[-filterInclusive] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>rosCtx</strong> - Initialized ROS context.</li>
+<li><strong>lineage</strong> - Lineage name of backups.</li>
+<li><strong>backupDir</strong> - Full path to store backup files temporarily before uploading to ROS.</li>
+<li><strong>backupType</strong> - Type of backup to perform (string value &#39;full&#39;, &#39;diff&#39; or &#39;log&#39;). Full backup is default.</li>
+<li><strong>iniFileName</strong> - Name of ini file to create (optional). Naming convention is used if not specified: SQLS_BAK_<lineage name><backup type><timestamp>.ini.</li>
+<li><strong>filterDbNames</strong> - Array of database names to backup or omit (depending on value of filterInclusive parameter).</li>
+<li><strong>filterInclusive</strong> - Flag indicating whether to backup only databases specified in filterDbNames parameter or skip the mentioned databases. TODO Check params</li>
+</ul>
+
+<h3 id="file-ros\rosbackups-ps1-function-roslineagerestore">Function RosLineageRestore</h3>
+
+<p>Performs restore from previously taken backup.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosLineageRestore [[-rosCtx] &lt;Hashtable&gt;] [[-backupIni] &lt;Hashtable&gt;] [[-backupDir] &lt;String&gt;] [[-noRecovery] &lt;Boolean&gt;] [[-filterDbNames] &lt;Array&gt;] [[-filterInclusive] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>rosCtx</strong> - Initialized ROS context.</li>
+<li><strong>backupIni</strong> - Parsed ini file containing information about backup (generally obtained via RosFindLatestBackup function).</li>
+<li><strong>backupDir</strong> - Full path to store backup files temporarily on downloading and before restoring in SQL Server.</li>
+<li><strong>noRecovery</strong> - Flag indicating to restore in NORECOVERY mode (default is $False).</li>
+<li><strong>filterDbNames</strong> - Array of database names to restore or omit (depending on value of filterInclusive parameter).</li>
+<li><strong>filterInclusive</strong> - Flag indicating whether to restore only databases specified in filterDbNames parameter or skip the mentioned databases.</li>
+</ul>
+
+<h3 id="file-ros\rosbackups-ps1-function-roslineagerestorebackups">Function RosLineageRestoreBackups</h3>
+
+<p>Restores list of backups between $firstAfter and $latestBefore timestamps. RosLineageRestore function is used to restore single backup.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosLineageRestoreBackups [[-rosCtx] &lt;Hashtable&gt;] [[-backupDir] &lt;String&gt;] [[-backupsList] &lt;Object&gt;] [[-firstAfter] &lt;Stri ng&gt;] [[-latestBefore] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>rosCtx</strong> - Initialized ROS context.</li>
+<li><strong>backupDir</strong> - Full path to store backup files temporarily on downloading and before restoring in SQL Server.</li>
+<li><strong>backupsList</strong> - List of backups to restore (array of parsed ini files).</li>
+<li><strong>firstAfter</strong> - Timestamp to limit backups to be restored after specified in this param.</li>
+<li><strong>latestBefore</strong> - Timestamp to limit backups to be restored before specified in this param.</li>
+</ul>
+
+<h3 id="file-ros\rosbackups-ps1-function-roslineagerestoresysdatabases">Function RosLineageRestoreSysDatabases</h3>
+
+<p>Performs restore of system databases (master, model, msdb) from previously taken backup. It stops SQLSERVERAGENT service, restarts MSSQLSERVER in single user mode, performs a restore, then restarts services in normal mode.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RosLineageRestoreSysDatabases [[-rosCtx] &lt;Hashtable&gt;] [[-backupIni] &lt;Hashtable&gt;] [[-backupDir] &lt;String&gt;] [&lt;CommonParame ters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>rosCtx</strong> - Initialized ROS context.</li>
+<li><strong>backupIni</strong> - Parsed ini file containing information about backup (generally obtained via RosFindLatestBackup function). Should be full type of backup.</li>
+<li><strong>backupDir</strong> - Full path to store backup files temporarily on downloading and before restoring in SQL Server.</li>
+</ul>
+
+<hr>
+
+<h2 id="file-rs\rightscripts-ps1">File rs\RightScripts.ps1</h2>
+
+<p>Functions dealing with RightScripts.</p>
+
+<h3 id="file-rs\rightscripts-ps1-function-rsrunrightscripttmo">Function RsRunRightScriptTmo</h3>
+
+<p>Executes RightScript on instances that have specified list of tags set and waits until specified tag changes its value (generally used to track that RightScript completes).</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsRunRightScriptTmo [[-rsName] &lt;Object&gt;] [[-params] &lt;Object&gt;] [[-timeOut] &lt;Object&gt;] [[-tagList] &lt;Object&gt;] [[-returnTag] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>rsName</strong> - Name of the RightScript to run.</li>
+<li><strong>params</strong> - Params string in format &#39;-p PARAM1=type:VALUE1 -p PARAM2=type:VALUE2 ...&#39; For example: &#39;-p SIZE=text:5 -p AWS_ACCESS_KEY_ID=cred:AWS_ACCESS_KEY_ID -p AWS_SECRET_ACCESS_KEY=cred:AWS_SECRET_ACCES S_KEY&#39;</li>
+<li><strong>timeOut</strong> - Timeout in seconds to wait for returnTag.</li>
+<li><strong>tagList</strong> - List of tags to identify instance to run RightScript on.</li>
+<li><strong>returnTag</strong> - Name of the tag to return its value.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Value of returnTag or empty string if exited by timeout.</p>
+
+<hr>
+
+<h2 id="file-rs\rsapi15-ps1">File rs\RsApi15.ps1</h2>
+
+<p>Functions to perform RightScale API 1.5 calls.</p>
+
+<h3 id="file-rs\rsapi15-ps1-function-rsapi15_callwithretry">Function RsApi15_CallWithRetry</h3>
+
+<p>Function to do RightScale API 1.5 call with retry.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_CallWithRetry [[-href] &lt;String&gt;] [[-method] &lt;String&gt;] [[-params] &lt;String&gt;] [[-authCookies] &lt;Object&gt;] [[-maxAtte mpts] &lt;Int32&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>href</strong> - Href of the API call to invoke (added to <a href="https://my.rightscale.com">https://my.rightscale.com</a>).</li>
+<li><strong>method</strong> - HTTP method of the call, i.e. &#39;GET&#39;, &#39;POST&#39;, &#39;PUT&#39;, etc (string).</li>
+<li><strong>params</strong> - Parameters of the call.</li>
+<li><strong>authCookies</strong> - Authentication cookies returned by RsApi15_Login or RsApi15_InstanceLogin functions or $Null ($Null is valid for login calls only). Make full URL adding / if neccessary</li>
+<li><strong>maxAttempts</strong> -</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Response object or $Null if fails.</p>
+
+<h3 id="file-rs\rsapi15-ps1-function-rsapi15_callwithretryjson">Function RsApi15_CallWithRetryJson</h3>
+
+<p>Calls RsApi15_CallWithRetry and parses returned JSON output.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_CallWithRetryJson [[-href] &lt;String&gt;] [[-method] &lt;String&gt;] [[-params] &lt;String&gt;] [[-authCookies] &lt;Object&gt;] [[-max Attempts] &lt;Int32&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>href</strong> - Href of the API call to invoke (added to <a href="https://my.rightscale.com">https://my.rightscale.com</a>).</li>
+<li><strong>method</strong> - HTTP method of the call, i.e. &#39;GET&#39;, &#39;POST&#39;, &#39;PUT&#39;, etc (string).</li>
+<li><strong>params</strong> - Parameters of the call.</li>
+<li><strong>authCookies</strong> - Authentication cookies returned by RsApi15_Login or RsApi15_InstanceLogin functions or $Null ($Null is valid for login calls only).</li>
+<li><strong>maxAttempts</strong> -</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Hashtable in the following format (-key: value): -HttpStatusCode: HTTP status code returned -HttpLocation: value of the Location header returned -JSON: parsed content of the response object</p>
+
+<h3 id="file-rs\rsapi15-ps1-function-rsapi15_login">Function RsApi15_Login</h3>
+
+<p>Login to RightScale API 1.5 service via instance token.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_Login [[-acctHref] &lt;String&gt;] [[-email] &lt;String&gt;] [[-password] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>acctHref</strong> -</li>
+<li><strong>email</strong> -</li>
+<li><strong>password</strong> -</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Set of authentication cookies (System.Net.CookieContainer object) if successful or $Null if failed</p>
+
+<hr>
+
+<h2 id="file-rs\rsapi15_backups-ps1">File rs\RsApi15_Backups.ps1</h2>
+
+<p>Backups related functions (API 1.5).</p>
+
+<h3 id="file-rs\rsapi15_backups-ps1-function-rsapi15_backupsinglevolume">Function RsApi15_BackupSingleVolume</h3>
+
+<p>Performs backup by creating snapshot of specified volume.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_BackupSingleVolume [[-context] &lt;Object&gt;] [[-volLetter] &lt;String&gt;] [[-lineage] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function.</li>
+<li><strong>volLetter</strong> - Drive letter the volume (single char).</li>
+<li><strong>lineage</strong> - Name of backup lineage (string, extracted from env variable DB_LINEAGE_NAME by default).</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Hrefs of the created backup, throws exception if failed.</p>
+
+<h3 id="file-rs\rsapi15_backups-ps1-function-rsapi15_backupvolumes">Function RsApi15_BackupVolumes</h3>
+
+<p>Performs backup by creating snapshots of data and log volumes. Simple and striped volumes are supported. This function creates snapshots of data nd log volumes by invoking /api/backups API 1.5 call. Uses VSS to guarantee consistency of files on data volume. Also commits the created backup.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_BackupVolumes [[-context] &lt;Object&gt;] [[-dataVolLetter] &lt;String&gt;] [[-logsVolLetter] &lt;String&gt;] [[-lineage] &lt;String &gt;] [[-dataVolDevices] &lt;Array&gt;] [[-logsVolDevices] &lt;Array&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function.</li>
+<li><strong>dataVolLetter</strong> - Drive letter of data volume (single char). By default is extracted from RS_SQLS_DATA_VOLUME env variable.</li>
+<li><strong>logsVolLetter</strong> - Drive letter of logs volume (single char). By default is extracted from RS_SQLS_LOGS_VOLUME env variable.</li>
+<li><strong>lineage</strong> - Name of backup lineage (string, extracted from env variable DB_LINEAGE_NAME by default).</li>
+<li><strong>dataVolDevices</strong> - Array of device names that make up data volume (required for striped volume, could be omitted for simple volume). If omitted the device name is assumed to be /dev/xvdX, where X is drive letter (e.g /dev/xvde for E:\, etc).</li>
+<li><strong>logsVolDevices</strong> - The same as dataVolDevices but for logs volume.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Hrefs of the created backup, throws exception if failed.</p>
+
+<h3 id="file-rs\rsapi15_backups-ps1-function-rsapi15_cleanuplineage">Function RsApi15_CleanupLineage</h3>
+
+<p>Performs cleanup of the backups lineage with specified parameters of retention policy.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_CleanupLineage [[-context] &lt;Object&gt;] [[-lineage] &lt;String&gt;] [[-keepLast] &lt;Int32&gt;] [[-dailies] &lt;Int32&gt;] [[-weekli es] &lt;Int32&gt;] [[-monthlies] &lt;Int32&gt;] [[-yearlies] &lt;Int32&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function.</li>
+<li><strong>lineage</strong> - Name of backups lineage.</li>
+<li><strong>keepLast</strong> - Number of last backups to keep (optional, default is 60).</li>
+<li><strong>dailies</strong> - Number of daily backups to keep (optional, default is 14).</li>
+<li><strong>weeklies</strong> - Number of weekly backups to keep (optional, default is 6).</li>
+<li><strong>monthlies</strong> - Number of montly backups to keep (optional, default is 12).</li>
+<li><strong>yearlies</strong> - Number of yearly backups to keep (optional, default is 2).</li>
+</ul>
+
+<h3 id="file-rs\rsapi15_backups-ps1-function-rsapi15_commitbackup">Function RsApi15_CommitBackup</h3>
+
+<p>Performs commit of the specified backup (adds committed=true tag).</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_CommitBackup [[-context] &lt;Object&gt;] [[-backupHref] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function.</li>
+<li><strong>backupHref</strong> - Href of the backup to commit.</li>
+</ul>
+
+<h3 id="file-rs\rsapi15_backups-ps1-function-rsapi15_findbackup">Function RsApi15_FindBackup</h3>
+
+<p>Find latest backup for given lineage.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_FindBackup [[-context] &lt;Object&gt;] [[-lineage] &lt;String&gt;] [[-timestamp] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function</li>
+<li><strong>lineage</strong> - Name of backups lineage to search in.</li>
+<li><strong>timestamp</strong> - Timestamp to search for backups latest before that moment of time. Optional.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Href of found backup or $False if not found.</p>
+
+<h3 id="file-rs\rsapi15_backups-ps1-function-rsapi15_restoresinglevolume">Function RsApi15_RestoreSingleVolume</h3>
+
+<p>Restores single volume from previously created backup.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_RestoreSingleVolume [[-context] &lt;Object&gt;] [[-backupHref] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function.</li>
+<li><strong>backupHref</strong> - Href of the backup to restore volumes from.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Hrefs of the restored volume, throws exception if failed.</p>
+
+<h3 id="file-rs\rsapi15_backups-ps1-function-rsapi15_restorevolumes">Function RsApi15_RestoreVolumes</h3>
+
+<p>Restores volumes from previously created backup. Simple and striped volumes are supported.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_RestoreVolumes [[-context] &lt;Object&gt;] [[-backupHref] &lt;String&gt;] [[-volumeType1] &lt;String&gt;] [[-volumeType2] &lt;String &gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function.</li>
+<li><strong>backupHref</strong> - Href of the backup to restore volumes from.</li>
+<li><strong>volumeType1</strong> - Volume type name for first volume</li>
+<li><strong>volumeType2</strong> - Volume type name for second volume</li>
+</ul>
+
+<h3 id="file-rs\rsapi15_backups-ps1-function-rsapi15_waitbackupcompleted">Function RsApi15_WaitBackupCompleted</h3>
+
+<p>Waits until specified backup is completed.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_WaitBackupCompleted [[-context] &lt;Object&gt;] [[-backupHref] &lt;String&gt;] [[-timeout] &lt;Int32&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function.</li>
+<li><strong>backupHref</strong> - Href of the backup.</li>
+<li><strong>timeout</strong> - Timeout in seconds.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if successfull, throws exception if failed.</p>
+
+<hr>
+
+<h2 id="file-rs\rsapi15_volumes-ps1">File rs\RsApi15_Volumes.ps1</h2>
+
+<p>Volumes related functions (API 1.5).</p>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-getvolumereadystatus">Function GetVolumeReadyStatus</h3>
+
+<p>GetVolumeReadyStatus</p>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_attachvolume">Function RsApi15_AttachVolume</h3>
+
+<p>Attach volume to the instance.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_AttachVolume [[-context] &lt;Object&gt;] [[-volumeHref] &lt;String&gt;] [[-driveLetter] &lt;String&gt;] [[-newVolume] &lt;Boolean&gt;] [[-device] &lt;String&gt;] [[-startDiskpart] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function</li>
+<li><strong>volumeHref</strong> - Href of the volume to attach.</li>
+<li><strong>driveLetter</strong> - Drive letter to assign to attached volume.</li>
+<li><strong>newVolume</strong> - Flag indicating whether to format the volume after attachment.</li>
+<li><strong>device</strong> - Device name to attach to (optional, /dev/xvd{driveLetter} is used by default).</li>
+<li><strong>startDiskpart</strong> - Flag indicating whether to start instance of diskpart tool to have stable volume indices.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Index of disk in the system (to be used to select disk in diskpart tool).</p>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_createattachstripedvolume">Function RsApi15_CreateAttachStripedVolume</h3>
+
+<p>Creates specified number of volumes, attaches to the current instance, creates striped volume, formats and assigns drive letter for that striped volume.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_CreateAttachStripedVolume [[-context] &lt;Object&gt;] [[-numberStripes] &lt;Int32&gt;] [[-stripeSize] &lt;String&gt;] [[-driveLet ter] &lt;String&gt;] [[-reservedLetters] &lt;Array&gt;] [[-volumeType] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function</li>
+<li><strong>numberStripes</strong> - Number of stripes that make up striped volume.</li>
+<li><strong>stripeSize</strong> - Size of each stripe in GB (positive integer) or name of the volume type.</li>
+<li><strong>driveLetter</strong> - Drive letter to assign to new striped volume.</li>
+<li><strong>reservedLetters</strong> - Array of last letters of device names that should not be used when attaching stripes (e.g. @(&#39;e&#39;) means not to use &#39;xvde&#39; so xvde device will be available to attach another volume after this function completes).</li>
+<li><strong>volumeType</strong> -</li>
+</ul>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_createattachvolume">Function RsApi15_CreateAttachVolume</h3>
+
+<p>Create and attach volume.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_CreateAttachVolume [[-context] &lt;Object&gt;] [[-size] &lt;String&gt;] [[-driveLetter] &lt;String&gt;] [[-volumeType] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function</li>
+<li><strong>size</strong> - Size of the volume to be created. This could be integer value specifying size in GB or name of the volume type that exist in the cloud.</li>
+<li><strong>driveLetter</strong> - Drive letter to assign to the new volume.</li>
+<li><strong>volumeType</strong> - Name of the volume type</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Href of the created volume attachment.</p>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_createvolume">Function RsApi15_CreateVolume</h3>
+
+<p>Creates new volume from scratch or restores from snapshot.\</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_CreateVolume [[-context] &lt;Object&gt;] [[-size] &lt;String&gt;] [[-snapshotHref] &lt;String&gt;] [[-name] &lt;String&gt;] [[-volumeTy pe] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function</li>
+<li><strong>size</strong> - Size of the volume to be created. This could be integer value specifying size in GB or name of the volume type that exist in the cloud.</li>
+<li><strong>snapshotHref</strong> - Href of the snapshot to restore volume from.</li>
+<li><strong>name</strong> - Name of the new volume.</li>
+<li><strong>volumeType</strong> - Name of the volume type</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Href of the created volume, throws eexception if failed.</p>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_deletevolume">Function RsApi15_DeleteVolume</h3>
+
+<p>Deletes the volume.</p>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>RsApi15_DeleteVolume [[-context] <Object>] [[-volHref] <String>] [<CommonParameters>]</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function</li>
+<li><strong>volHref</strong> - Href of the volume to delete. Single attempt to delete volume on rackspace-ng because volumes with existing snapshot cannot be deleted</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if successful, throws exception if failed.</p>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_detachvolume">Function RsApi15_DetachVolume</h3>
+
+<p>Detach volume from the instance.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_DetachVolume [[-context] &lt;Object&gt;] [[-volHref] &lt;String&gt;] [[-driveLettersSync] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function</li>
+<li><strong>volHref</strong> - Href of the volume to detach.</li>
+<li><strong>driveLettersSync</strong> - Comma separated list of drive letters to flush disk cache. Flushing is performed using sync utility (should be installed already).</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if successful, throws exception if failed.</p>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_deviceidtodriveletter">Function RsApi15_DeviceIdToDriveLetter</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_DeviceIdToDriveLetter [[-deviceId] &lt;String&gt;] [[-cloudProvider] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_deviceidtosuffix">Function RsApi15_DeviceIdToSuffix</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_DeviceIdToSuffix [[-deviceId] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_drivelettertodeviceid">Function RsApi15_DriveLetterToDeviceId</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_DriveLetterToDeviceId [[-driveLetter] &lt;String&gt;] [[-cloudProvider] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_getattachedvolumes">Function RsApi15_GetAttachedVolumes</h3>
+
+<p>Get list of all volumes attched to the instance.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_GetAttachedVolumes [[-context] &lt;Object&gt;] [[-deviceStartsWith] &lt;String&gt;] [[-skipDevice] &lt;String&gt;] [&lt;CommonParame ters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function</li>
+<li><strong>deviceStartsWith</strong> - Use this param to return only volumes which attachment device name starts with specified string.</li>
+<li><strong>skipDevice</strong> -</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Array of hrefs of volumes attached to the current instance (array of strings).</p>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rsapi15_waitvolumestatus">Function RsApi15_WaitVolumeStatus</h3>
+
+<p>Function to wait for specific status of a volume with a timeout.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_WaitVolumeStatus [[-context] &lt;Object&gt;] [[-volHref] &lt;String&gt;] [[-status] &lt;String&gt;] [[-timeout] &lt;Int32&gt;] [&lt;Common Parameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>context</strong> - Instance context returned by RsApi15_GetInstanceContext function</li>
+<li><strong>volHref</strong> - Href of the volume to check status.</li>
+<li><strong>status</strong> - Status of the volume to wait for (e.g. &#39;available&#39;, &#39;in-use&#39;).</li>
+<li><strong>timeout</strong> - Timeout in seconds (default is 30 minutes).</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if volume got specified status, throws an exception if exited by timeout.</p>
+
+<h3 id="file-rs\rsapi15_volumes-ps1-function-rscreatevolumename">Function RsCreateVolumeName</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsCreateVolumeName [[-serverName] &lt;String&gt;] [[-driveLetter] &lt;String&gt;] [[-stripeNumber] &lt;Int32&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-rs\rsapicallwithretry-ps1">File rs\RsApiCallWithRetry.ps1</h2>
+
+<p>Functions to perform RightScale API 1.0 calls.</p>
+
+<h3 id="file-rs\rsapicallwithretry-ps1-function-rsapicallwithretry">Function RsApiCallWithRetry</h3>
+
+<p>Function to do RightScale API 1.0 call with retry.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApiCallWithRetry [[-subPath] &lt;Object&gt;] [[-method] &lt;Object&gt;] [[-params] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>subPath</strong> - Subpath of the API URL to call (string). Base path is extracted from RS_API_URL env variable.</li>
+<li><strong>method</strong> - HTTP method of the call, i.e. &#39;GET&#39;, &#39;POST&#39;, &#39;PUT&#39;, etc (string).</li>
+<li><strong>params</strong> - Parameters of the call (string).</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Response object if successful, $False if failed.</p>
+
+<h3 id="file-rs\rsapicallwithretry-ps1-function-rsapicallwithretryjson">Function RsApiCallWithRetryJson</h3>
+
+<p>Function that call RsApiCallWithRetry and parses JSON output into PowerShell objects (strings, arrays, hashtables, etc).</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApiCallWithRetryJson [[-subPath] &lt;Object&gt;] [[-method] &lt;Object&gt;] [[-params] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>subPath</strong> - Subpath of the API URL to call (string). Base path is extracted from RS_API_URL env variable.</li>
+<li><strong>method</strong> - HTTP method of the call, i.e. &#39;GET&#39;, &#39;POST&#39;, &#39;PUT&#39;, etc (string).</li>
+<li><strong>params</strong> - Parameters of the call (string).</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Parsed object (System.Collections.IDictionary) if successfull, $False if failed.</p>
+
+<hr>
+
+<h2 id="file-rs\rsinstanceapi15-ps1">File rs\RsInstanceApi15.ps1</h2>
+
+<p>Helper functions for instance-facing login.</p>
+
+<h3 id="file-rs\rsinstanceapi15-ps1-function-rsapi15_getinstancecontext">Function RsApi15_GetInstanceContext</h3>
+
+<p>Function to get instance information to be used for next API calls.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_GetInstanceContext [[-authCookies] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>authCookies</strong> - Authentication cookies returned by RsApi15_InstanceLogin function.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Hashtable containing following elements (-key: value): -name: name of the instance, -auth: authentication cookies (copy of input parameter) -cloud_href: href of the cloud, -datacenter_href: href of the datacenter, -instance_href: href of the instance itself.</p>
+
+<h3 id="file-rs\rsinstanceapi15-ps1-function-rsapi15_instancelogin">Function RsApi15_InstanceLogin</h3>
+
+<p>Login to RightScale API 1.5 service via instance token.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsApi15_InstanceLogin [[-apiToken] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>apiToken</strong> - API token to be used for login. Defaults to RS_API_TOKEN env variable.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Set of authentication cookies (System.Net.CookieContainer object) if successful or $Null if failed</p>
+
+<hr>
+
+<h2 id="file-rs\rstag-ps1">File rs\RsTag.ps1</h2>
+
+<p>Functions dealing with tags (using rs_tag utility).</p>
+
+<h3 id="file-rs\rstag-ps1-function-rstag_getcountall">Function RsTag_GetCountAll</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsTag_GetCountAll [[-tagList] &lt;Object&gt;]
+</code></pre>
+
+<h3 id="file-rs\rstag-ps1-function-rstag_getvalue">Function RsTag_GetValue</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsTag_GetValue [[-tagList] &lt;Object&gt;] [[-returnTag] &lt;Object&gt;]
+</code></pre>
+
+<h3 id="file-rs\rstag-ps1-function-rstag_getvalues">Function RsTag_GetValues</h3>
+
+<p>Returns array of values of the specified tag on instaces having all tags from the specified list.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RsTag_GetValues [[-tagList] &lt;Object&gt;] [[-returnTag] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>tagList</strong> - List of tags to look for (array of strings or space-separated string).</li>
+<li><strong>returnTag</strong> - Name of the tag to return value.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Array of values of the returnTag tag on discovered instance, empty array if not found.</p>
+
+<hr>
+
+<h2 id="file-sqls\certificate-ps1">File sqls\Certificate.ps1</h2>
+
+<p>Certificate functions.</p>
+
+<h3 id="file-sqls\certificate-ps1-function-createcertfromstring">Function CreateCertFromString</h3>
+
+<p>Restore certificate and private key (protected by password) from base64 encoded string (input - credential) and save its to local path.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CreateCertFromString [[-Ip] &lt;String&gt;] [[-server] &lt;Server&gt;] [[-cert] &lt;String&gt;] [[-KeyPassword] &lt;String&gt;] [&lt;CommonParamet ers&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>Ip</strong> - Ip addres of partner. Used to create cert names/filenames</li>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>cert</strong> - Base64 encoded value. Contains certificate and private key.</li>
+<li><strong>KeyPassword</strong> - Password to decript private key</li>
+</ul>
+
+<h3 id="file-sqls\certificate-ps1-function-displaycertasstring">Function DisplayCertAsString</h3>
+
+<p>Displays certificate and private key as base64 encoded strings</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>DisplayCertAsString [[-certPath] &lt;String&gt;] [[-pkPath] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>certPath</strong> - Path to certificate file</li>
+<li><strong>pkPath</strong> - Path to private key file</li>
+</ul>
+
+<h3 id="file-sqls\certificate-ps1-function-sqlscreateandsavecert">Function SqlsCreateAndSaveCert</h3>
+
+<p>Creates certificate with specified name and saves it to local file. Drops one with the same name if exists.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsCreateAndSaveCert [[-server] &lt;Server&gt;] [[-certName] &lt;String&gt;] [[-localCertPath] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>certName</strong> - Name of the certificate to be created.</li>
+<li><strong>localCertPath</strong> - Complete path to file to save certificate as.</li>
+</ul>
+
+<h3 id="file-sqls\certificate-ps1-function-sqlscreatecertificate">Function SqlsCreateCertificate</h3>
+
+<p>Creates SQL Server certificate for given database.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsCreateCertificate [[-server] &lt;Server&gt;] [[-dbName] &lt;String&gt;] [[-certName] &lt;String&gt;] [[-subject] &lt;String&gt;] [[-passwor d] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>dbName</strong> - Database name.</li>
+<li><strong>certName</strong> - Certificate name.</li>
+<li><strong>subject</strong> - Certificate subject.</li>
+<li><strong>password</strong> - Certificate password.</li>
+</ul>
+
+<h3 id="file-sqls\certificate-ps1-function-sqlscreatecertificatemaster">Function SqlsCreateCertificateMaster</h3>
+
+<p>Creates SQL Server certificate for master database.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsCreateCertificateMaster [[-server] &lt;Server&gt;] [[-certName] &lt;String&gt;] [[-subject] &lt;String&gt;] [[-password] &lt;String&gt;] [&lt; CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>certName</strong> - Certificate name.</li>
+<li><strong>subject</strong> - Certificate subject.</li>
+<li><strong>password</strong> - Certificate password.</li>
+</ul>
+
+<h3 id="file-sqls\certificate-ps1-function-sqlsdisplaycert">Function SqlsDisplayCert</h3>
+
+<p>Creates certificate with specified name, encode it using base64 algorithm and saves it to local file. Drops one with the same name if exists.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsDisplayCert [[-server] &lt;Server&gt;] [[-privateKeyPassword] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>privateKeyPassword</strong> - Password which will be used to encrypt private key.</li>
+</ul>
+
+<h3 id="file-sqls\certificate-ps1-function-sqlsdropallcertmasterprefix">Function SqlsDropAllCertMasterPrefix</h3>
+
+<p>Erases all certificates with preffix <q>SQLS_CERT</q></p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsDropAllCertMasterPrefix [[-server] &lt;Server&gt;] [[-preffix] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>preffix</strong> -</li>
+</ul>
+
+<h3 id="file-sqls\certificate-ps1-function-sqlssavecert">Function SqlsSaveCert</h3>
+
+<p>Saves certificate with specified name to local file.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsSaveCert [[-server] &lt;Server&gt;] [[-certName] &lt;String&gt;] [[-localCertPath] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>certName</strong> - Name of the certificate to be saved.</li>
+<li><strong>localCertPath</strong> - Complete path to file to save certificate as.</li>
+</ul>
+
+<hr>
+
+<h2 id="file-sqls\mirroring-ps1">File sqls\Mirroring.ps1</h2>
+
+<p>Utility functions for setting up mirroring.</p>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlsconfigurepartnercertauth">Function SqlsConfigurePartnerCertAuth</h3>
+
+<p>Configures SQL Server instance to act as partner in mirroring configuration (principal or mirror).</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsConfigurePartnerCertAuth [[-server] &lt;Server&gt;] [[-partnerIp] &lt;String&gt;] [[-certName] &lt;String&gt;] [[-certPath] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>partnerIp</strong> - IP address of another partner.</li>
+<li><strong>certName</strong> - Certificate name used for authentication.</li>
+<li><strong>certPath</strong> - Certificate file used for authentication.</li>
+</ul>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlsconnecttopartner">Function SqlsConnectToPartner</h3>
+
+<p>Starts mirroring session for all non-system databases.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsConnectToPartner [[-server] &lt;Server&gt;] [[-partnerIp] &lt;String&gt;] [[-tcpPort] &lt;Int32&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>partnerIp</strong> - IP address of another partner.</li>
+<li><strong>tcpPort</strong> - TCP port number to be used for mirroring data transfer (integer).</li>
+</ul>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlscreatemirroringendpointcert">Function SqlsCreateMirroringEndpointCert</h3>
+
+<p>Creates mirroring endpoint with certificate authentication on specified TCP port. Drops one with the same name if exists.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsCreateMirroringEndpointCert [[-server] &lt;Server&gt;] [[-tcpPort] &lt;Int32&gt;] [[-certName] &lt;String&gt;] [[-role] &lt;String&gt;] [&lt;C ommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>tcpPort</strong> - TCP port number to be used for mirroring data transfer (integer).</li>
+<li><strong>certName</strong> - Certificate name to be used for authentication.</li>
+<li><strong>role</strong> - ROLE = { WITNESS | PARTNER | ALL }</li>
+</ul>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlscreatemirroringstatechangealert">Function SqlsCreateMirroringStateChangeAlert</h3>
+
+<p>Creates mirroring state change Alert object to supply mirroring state graph.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsCreateMirroringStateChangeAlert [[-server] &lt;Server&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+</ul>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlscreatemirroringstatechangejob">Function SqlsCreateMirroringStateChangeJob</h3>
+
+<p>Creates mirroring state change Job object to supply mirroring state graph.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsCreateMirroringStateChangeJob [[-server] &lt;Server&gt;] [[-adm_pwd] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>adm_pwd</strong> -</li>
+</ul>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlsdeletemirroringendpoint">Function SqlsDeleteMirroringEndpoint</h3>
+
+<p>Deletes mirroring endpoint.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsDeleteMirroringEndpoint [[-server] &lt;Server&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+</ul>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlsdeletemirroringstatechangealertandjob">Function SqlsDeleteMirroringStateChangeAlertAndJob</h3>
+
+<p>Clean up RightScale Objects in SQL Server</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsDeleteMirroringStateChangeAlertAndJob [[-server] &lt;Server&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+</ul>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlsgetpartnertag">Function SqlsGetPartnerTag</h3>
+
+<p>Gets value of specified tag for mirroring partner server.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsGetPartnerTag [[-lineage] &lt;String&gt;] [[-role] &lt;String&gt;] [[-tag] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>lineage</strong> - Lineage name.</li>
+<li><strong>role</strong> - Mirroring role (&#39;principal&#39;, &#39;mirror&#39; or &#39;witness&#39;)</li>
+<li><strong>tag</strong> - Name of the tag to get value of.</li>
+</ul>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Value of the tag, $false is unable to get tag.</p>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlsremovelogin">Function SqlsRemoveLogin</h3>
+
+<p>Removes certificate, user and login for specified IP</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsRemoveLogin [[-server] &lt;Server&gt;] [[-ip] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> - Server object (instance of Microsoft.SqlServer.Management.Smo.Server).</li>
+<li><strong>ip</strong> - IP address of partner.</li>
+</ul>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlsstartbroker">Function SqlsStartBroker</h3>
+
+<p>Enable Service Broker on msdb.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsStartBroker [[-server] &lt;Server&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>server</strong> -</li>
+</ul>
+
+<h3 id="file-sqls\mirroring-ps1-function-sqlswaitforpartner">Function SqlsWaitForPartner</h3>
+
+<p>Waits until specified status of mirroring partner. Uses RightScale tags for status tracking.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsWaitForPartner [[-lineage] &lt;String&gt;] [[-role] &lt;String&gt;] [[-status] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-sqls\movesysdatabases-ps1">File sqls\MoveSysDatabases.ps1</h2>
+
+<p>Utitlity function to move system databases.</p>
+
+<h3 id="file-sqls\movesysdatabases-ps1-function-sqlsmovesysdatabases">Function SqlsMoveSysDatabases</h3>
+
+<p>Moves data and log files of SQL Server system databases (master, model, msdb, tempdb) to other locations. Supports both copying files to new locations or just <q>switching</q> to existing files. Function stops SQL Server service if running but doesn&#39;t start it again.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsMoveSysDatabases [[-dataPath] &lt;String&gt;] [[-logsPath] &lt;String&gt;] [[-copyFiles] &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-sqls\query-ps1">File sqls\Query.ps1</h2>
+
+<p>Functions to perform queries on SQL Server instance.</p>
+
+<h3 id="file-sqls\query-ps1-function-sqlsexecnonquery">Function SqlsExecNonQuery</h3>
+
+<p>Executes query against specified database.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsExecNonQuery [[-server] &lt;Server&gt;] [[-dbName] &lt;String&gt;] [[-query] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-sqls\query-ps1-function-sqlsexecnonquerymaster">Function SqlsExecNonQueryMaster</h3>
+
+<p>Executes query against master database.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsExecNonQueryMaster [[-server] &lt;Server&gt;] [[-query] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-sqls\query-ps1-function-sqlsselectvalue">Function SqlsSelectValue</h3>
+
+<p>Executes SELECT query on specified database and returns the first column of the first row of the result set.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsSelectValue [[-server] &lt;Server&gt;] [[-dbName] &lt;String&gt;] [[-query] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Value of the column of the first row of the result set or $Null if the query produces empty result set.</p>
+
+<hr>
+
+<h2 id="file-sqls\sqlserver-ps1">File sqls\SqlServer.ps1</h2>
+
+<p>General SQL Server functions.</p>
+
+<h3 id="file-sqls\sqlserver-ps1-function-createmasterkeypassword">Function CreateMasterKeyPassword</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CreateMasterKeyPassword [[-server] &lt;Server&gt;] [[-password] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-sqls\sqlserver-ps1-function-getsqlserver">Function GetSqlServer</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetSqlServer [[-name] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-sqls\sqlserver-ps1-function-getsqlserverversion">Function GetSQLServerVersion</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetSQLServerVersion [[-server] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>&#39;2012&#39; or &#39;2008R2&#39;</p>
+
+<h3 id="file-sqls\sqlserver-ps1-function-loadsqlsassemblies">Function LoadSqlsAssemblies</h3>
+
+<p>Version-agnostic Function to load SMO assemblies.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>LoadSqlsAssemblies [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-sqls\sqlserver-ps1-function-openorcreatemasterkey">Function OpenOrCreateMasterKey</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>OpenOrCreateMasterKey [[-server] &lt;Server&gt;] [[-password] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-sqls\sqlserver-ps1-function-setsqlagentproperty">Function SetSQLAgentProperty</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SetSQLAgentProperty [[-propertyName] &lt;String&gt;] [[-propertyValue] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-sqls\sqlserver-ps1-function-sqlshasmirroring">Function SqlsHasMirroring</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsHasMirroring [[-server] &lt;Server&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-sqls\sqlsutils-ps1">File sqls\SqlsUtils.ps1</h2>
+
+<p>SQL Server utility functions.</p>
+
+<h3 id="file-sqls\sqlsutils-ps1-function-sqlscandodiffbackup">Function SqlsCanDoDiffBackup</h3>
+
+<p>Check whether full backup was already performed for a given database so there is a base to do diff backup.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsCanDoDiffBackup [[-server] &lt;Server&gt;] [[-dbName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-sqls\sqlsutils-ps1-function-sqlsenabletcp">Function SqlsEnableTcp</h3>
+
+<p>SqlsEnableTcp</p>
+
+<h3 id="file-sqls\sqlsutils-ps1-function-sqlsforcedatabasesrecovery">Function SqlsForceDatabasesRecovery</h3>
+
+<p>Performs restore with recovery for all databases in &#39;Restoring&#39; state.</p>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>SqlsForceDatabasesRecovery [[-server] <Server>] [<CommonParameters>]</p>
+
+<h3 id="file-sqls\sqlsutils-ps1-function-sqlssetsingleusermode">Function SqlsSetSingleUserMode</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsSetSingleUserMode [-singleUserMode]
+</code></pre>
+
+<h3 id="file-sqls\sqlsutils-ps1-function-sqlswaitdbstatus">Function SqlsWaitDbStatus</h3>
+
+<p>Waits until specified database has specified status.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsWaitDbStatus [[-server] &lt;Server&gt;] [[-dbName] &lt;String&gt;] [[-status] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-sqls\sqlsutils-ps1-function-sqlswaitserverstatus">Function SqlsWaitServerStatus</h3>
+
+<p>Waits until SQL Server has specified status.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>SqlsWaitServerStatus [[-status] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-tools\archive-ps1">File tools\Archive.ps1</h2>
+
+<p>Functions to deal with archives.</p>
+
+<h3 id="file-tools\archive-ps1-function-archive">Function Archive</h3>
+
+<p>This function archives a folder or a file.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Archive [[-Source] &lt;String&gt;] [[-PathTo7Zip] &lt;String&gt;] [[-ArchName] &lt;String&gt;] [[-ArchiveDestination] &lt;String&gt;] [[-ArchFi leSize] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Return a list of archvived files (array of file names) or throws exception if failed.</p>
+
+<h3 id="file-tools\archive-ps1-function-unzipfile">Function UnzipFile</h3>
+
+<p>Unzips file from a specified location.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>UnzipFile [[-SourcePath] &lt;String&gt;] [[-PathTo7Zip] &lt;String&gt;] [[-DestinationPath] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-tools\checks-ps1">File tools\Checks.ps1</h2>
+
+<p>Functions to check values and inputs.</p>
+
+<h3 id="file-tools\checks-ps1-function-checkchar">Function CheckChar</h3>
+
+<p>Checks if a value is a character from specified array.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckChar [[-value] &lt;String&gt;] [[-values] &lt;Array&gt;] [[-errorMessage] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if the value is correct otherwize throws an exception.</p>
+
+<h3 id="file-tools\checks-ps1-function-checkinputchar">Function CheckInputChar</h3>
+
+<p>Checks if a input of a RightScript is a character from specified array.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckInputChar [[-inputName] &lt;String&gt;] [[-optional] &lt;Boolean&gt;] [[-values] &lt;Array&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if the value is correct otherwize throws an exception.</p>
+
+<h3 id="file-tools\checks-ps1-function-checkinputint">Function CheckInputInt</h3>
+
+<p>Checks if a input of a RightScript is an integer within specified range.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckInputInt [[-inputName] &lt;String&gt;] [[-optional] &lt;Boolean&gt;] [[-minValue] &lt;Int32&gt;] [[-maxValue] &lt;Int32&gt;] [&lt;CommonParam eters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if the value is correct otherwize throws an exception.</p>
+
+<h3 id="file-tools\checks-ps1-function-checkinputnotempty">Function CheckInputNotEmpty</h3>
+
+<p>Checks if input of a RightScript is not empty.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckInputNotEmpty [[-inputName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if value is not empty, throws exception if empty</p>
+
+<h3 id="file-tools\checks-ps1-function-checkint">Function CheckInt</h3>
+
+<p>Checks if a value is an integer within specified range.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckInt [[-value] &lt;String&gt;] [[-minValue] &lt;Int32&gt;] [[-maxValue] &lt;Int32&gt;] [[-errorMessage] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if the value is correct otherwize throws an exception.</p>
+
+<h3 id="file-tools\checks-ps1-function-checknotempty">Function CheckNotEmpty</h3>
+
+<p>Checks if value is not empty.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckNotEmpty [[-value] &lt;String&gt;] [[-errorMessage] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if value is not empty, throws exception if empty</p>
+
+<hr>
+
+<h2 id="file-tools\extractreturn-ps1">File tools\ExtractReturn.ps1</h2>
+
+<p>Functions to extract returned value (useful for cmdlets/functions that write something to console during execution).</p>
+
+<h3 id="file-tools\extractreturn-ps1-function-extractreturn">Function ExtractReturn</h3>
+
+<p>Extracts last value from pipeline output of a cmdlet or a function.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>ExtractReturn [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Last items in the pipeline (value actually returned by prev function/cmdlet).</p>
+
+<h3 id="file-tools\extractreturn-ps1-function-getextractreturn">Function GetExtractReturn</h3>
+
+<p>Returns last item from its parameter.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetExtractReturn [[-value] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-tools\genhtmlhelp-ps1">File tools\GenHtmlHelp.ps1</h2>
+
+<p>Helper functions to generate simple HTML help for .ps1 files in a directory.</p>
+
+<h3 id="file-tools\genhtmlhelp-ps1-function-getfunctions">Function GetFunctions</h3>
+
+<p>Helper function to get all functions declared in .ps1 file in a directory.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetFunctions [[-path] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-tools\genhtmlhelp-ps1-function-help_getdescription">Function Help_GetDescription</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Help_GetDescription [[-help] &lt;Object&gt;]
+</code></pre>
+
+<h3 id="file-tools\genhtmlhelp-ps1-function-help_getnotes">Function Help_GetNotes</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>Help_GetNotes [[-help] <Object>]</p>
+
+<h3 id="file-tools\genhtmlhelp-ps1-function-help_getreturnvalues">Function Help_GetReturnValues</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Help_GetReturnValues [[-help] &lt;Object&gt;]
+</code></pre>
+
+<h3 id="file-tools\genhtmlhelp-ps1-function-help_getsynopsis">Function Help_GetSynopsis</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Help_GetSynopsis [[-help] &lt;Object&gt;]
+</code></pre>
+
+<h3 id="file-tools\genhtmlhelp-ps1-function-help_getsyntax">Function Help_GetSyntax</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Help_GetSyntax [[-help] &lt;Object&gt;]
+</code></pre>
+
+<h3 id="file-tools\genhtmlhelp-ps1-function-tohtmlsafe">Function ToHtmlSafe</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>ToHtmlSafe [[-in] &lt;Object&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-tools\inifiles-ps1">File tools\IniFiles.ps1</h2>
+
+<p>Functions to work with .ini files.</p>
+
+<h3 id="file-tools\inifiles-ps1-function-parseinifile">Function ParseIniFile</h3>
+
+<p>Function to parse .ini file.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>ParseIniFile [[-file] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Contents of .ini file as nested hashtable.</p>
+
+<h3 id="file-tools\inifiles-ps1-function-writeinifile">Function WriteIniFile</h3>
+
+<p>Function to save .ini file.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>WriteIniFile [[-ini] &lt;Hashtable&gt;] [[-file] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-tools\loadassembly-ps1">File tools\LoadAssembly.ps1</h2>
+
+<p>Wrapper function to load assembly.</p>
+
+<h3 id="file-tools\loadassembly-ps1-function-loadassembly">Function LoadAssembly</h3>
+
+<p>Wrapper function to load assembly. Now using [System.Reflection.Assembly]::LoadWithPartialName. To be reimplemented when LoadWithPartialName becomes deprecated.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>LoadAssembly [[-partialName] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-tools\newgenericobject-ps1">File tools\NewGenericObject.ps1</h2>
+
+<p>Function to create generic object (no built-in one in PowerShell).</p>
+
+<h3 id="file-tools\newgenericobject-ps1-function-newgenericobject">Function NewGenericObject</h3>
+
+<p>Creates an object of a generic type (PowerShell lacks built-in function for that).</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>NewGenericObject [[-typeName] &lt;String&gt;] [[-typeParameters] &lt;String[]&gt;] [[-constructorParameters] &lt;Object[]&gt;] [&lt;CommonPa rameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Created object or throws exception if fails.</p>
+
+<hr>
+
+<h2 id="file-tools\passwords-ps1">File tools\Passwords.ps1</h2>
+
+<p>Helper functions dealing with passwords.</p>
+
+<h3 id="file-tools\passwords-ps1-function-genrandompassword">Function GenRandomPassword</h3>
+
+<p>Generates random password of specified length. Only alphanumeric characters are used. Also the functions ensures the password contains at least one upper case letter, one lower case letter and one digit.</p>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>GenRandomPassword [[-len] <Int32>] [<CommonParameters>]</p>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Generated password as string value.</p>
+
+<hr>
+
+<h2 id="file-tools\repartitiondisk-ps1">File tools\RepartitionDisk.ps1</h2>
+
+<p>Repartition disk utility function.</p>
+
+<h3 id="file-tools\repartitiondisk-ps1-function-repartitiondisk">Function RepartitionDisk</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RepartitionDisk [[-size1] &lt;String&gt;] [[-letter1] &lt;Char&gt;] [[-size2] &lt;String&gt;] [[-letter2] &lt;Char&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-tools\resolveerror-ps1">File tools\ResolveError.ps1</h2>
+
+<p>Function to provide extended error description.</p>
+
+<h3 id="file-tools\resolveerror-ps1-function-resolveerror">Function ResolveError</h3>
+
+<p>Provides extended error description (writes to console). Useful in troubleshooting.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>ResolveError [[-errorRecord] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="parameters">Parameters</h4>
+
+<hr>
+
+<h2 id="file-tools\sample-ps1">File tools\Sample.ps1</h2>
+
+<p>Sample PS1 file.</p>
+
+<h3 id="file-tools\sample-ps1-function-sample">Function Sample</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Sample [[-a] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-tools\sample-ps1-function-sample2">Function Sample2</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Smaple2 [[-a] &lt;Object&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-tools\text-ps1">File tools\Text.ps1</h2>
+
+<p>Functions dealing with text files.</p>
+
+<h3 id="file-tools\text-ps1-function-filessearchreplace">Function FilesSearchReplace</h3>
+
+<p>Function to search and replace string in text files.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>FilesSearchReplace [[-files] &lt;Object&gt;] [[-search_for] &lt;Object&gt;] [[-replace_to] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-tools\tools-ps1">File tools\tools.ps1</h2>
+
+<p>Other utility functions.</p>
+
+<h3 id="file-tools\tools-ps1-function-check_process_exist">Function Check_Process_Exist</h3>
+
+<p>Checks if process exist.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Check_Process_Exist [[-process_name] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-tools\tools-ps1-function-loadsnapin">Function LoadSnapin</h3>
+
+<p>Load a PowerShell snapin</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>LoadSnapin [[-SnapinName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-tools\unzip-ps1">File tools\Unzip.ps1</h2>
+
+<p>Unzip function.</p>
+
+<h3 id="file-tools\unzip-ps1-function-unzipfiles">Function UnzipFiles</h3>
+
+<p>Unzips a folder or a file.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>UnzipFiles [[-Source] &lt;String&gt;] [[-PathTo7Zip] &lt;String&gt;] [[-ArchiveDestination] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>List of archvived files (array of strings).</p>
+
+<hr>
+
+<h2 id="file-waz\wazstorage-ps1">File waz\WazStorage.ps1</h2>
+
+<p>Functions dealing with Azure Storage service.</p>
+
+<h3 id="file-waz\wazstorage-ps1-function-deleteitemazurestorage">Function DeleteItemAzureStorage</h3>
+
+<p>This function deletes a storage object in a given container.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>DeleteItemAzureStorage [[-container] &lt;String&gt;] [[-storageitem] &lt;String&gt;] [[-accountname] &lt;String&gt;] [[-accountkey] &lt;Stri ng&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-waz\wazstorage-ps1-function-getfileslistfromazurestorage">Function GetFilesListFromAzureStorage</h3>
+
+<p>This function retrieves the objects of a container, excluding folders.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetFilesListFromAzureStorage [[-container] &lt;String&gt;] [[-accountname] &lt;String&gt;] [[-accountkey] &lt;String&gt;] [&lt;CommonParamet ers&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-waz\wazstorage-ps1-function-getfileslistfromazurestorageprefix">Function GetFilesListFromAzureStoragePrefix</h3>
+
+<p>This function retrieves the objects of a container, excluding folders.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetFilesListFromAzureStoragePrefix [[-container] &lt;String&gt;] [[-prefix] &lt;String&gt;] [[-accountname] &lt;String&gt;] [[-accountkey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-waz\wazstorage-ps1-function-getfromazurestorage">Function GetFromAzureStorage</h3>
+
+<p>This function downloads a storage object from Azure Storage.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetFromAzureStorage [[-container] &lt;String&gt;] [[-name] &lt;String&gt;] [[-destPath] &lt;String&gt;] [[-accountname] &lt;String&gt;] [[-acco untkey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-waz\wazstorage-ps1-function-putlisttoazurestorage">Function PutListToAzureStorage</h3>
+
+<p>This function puts a numeros files to CloudFiles.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>PutListToAzureStorage [[-LocalFiles] &lt;Array&gt;] [[-container] &lt;String&gt;] [[-accountname] &lt;String&gt;] [[-accountkey] &lt;String&gt; ] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<h3 id="file-waz\wazstorage-ps1-function-puttoazurestorage">Function PutToAzureStorage</h3>
+
+<p>This function uploads a storage object to Azure Files.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>PutToAzureStorage [[-localPath] &lt;String&gt;] [[-container] &lt;String&gt;] [[-name] &lt;String&gt;] [[-accountname] &lt;String&gt;] [[-accou ntkey] &lt;String&gt;] [[-parallelThreadCount] &lt;Int32&gt;] [[-blockSiziInBytes] &lt;Int64&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Nothing</p>
+
+<hr>
+
+<h2 id="file-win\acl-ps1">File win\Acl.ps1</h2>
+
+<p>Functions to deal with NTFS permissions.</p>
+
+<h3 id="file-win\acl-ps1-function-aclallowinheritancefiles">Function AclAllowInheritanceFiles</h3>
+
+<p>Allow inheritance to files in specified directory</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>AclAllowInheritanceFiles [[-dir] &lt;String&gt;] [[-filter] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-win\acl-ps1-function-aclgrantfullcontrol">Function AclGrantFullControl</h3>
+
+<p>Grants full control permissions to specified directory including files and subdirectories.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>AclGrantFullControl [[-dir] &lt;String&gt;] [[-acctName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-win\firewall-ps1">File win\Firewall.ps1</h2>
+
+<p>Functions to deal with Windows firewall.</p>
+
+<h3 id="file-win\firewall-ps1-function-opentcpport">Function OpenTcpPort</h3>
+
+<p>Function to allow inbound connection on specified port and optionally for specified IP address.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>OpenTcpPort [[-port] &lt;Int32&gt;] [[-ip] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<hr>
+
+<h2 id="file-win\hosts-ps1">File win\Hosts.ps1</h2>
+
+<p>Hosts.ps1</p>
+
+<h3 id="file-win\hosts-ps1-function-set-hostsentry">Function Set-HostsEntry</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Set-HostsEntry [-IPAddress] &lt;String&gt; [-HostName] &lt;String&gt; [-Verbose] [-Debug] [-ErrorAction &lt;ActionPreference&gt;] [-WarningAction &lt;ActionPreference&gt;] [-ErrorVariable &lt;String&gt;] [-WarningVariable &lt;String&gt;] [-OutVariable &lt;String&gt;] [-OutBuffer &lt;Int32&gt;] [-WhatIf] [-Confirm]
+</code></pre>
+
+<hr>
+
+<h2 id="file-win\iis-ps1">File win\IIS.ps1</h2>
+
+<p>Functions dealing with IIS server.</p>
+
+<h3 id="file-win\iis-ps1-function-checkapppoolstatus">Function CheckAppPoolStatus</h3>
+
+<p>This function returns status for application pool in IIS Web server.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckAppPoolStatus [[-AppName] &lt;String&gt;] [[-ServerName] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>App pool status as string, possible values are <q>Starting</q>, <q>Started</q>, <q>Stopping</q>, <q>Stopped</q>.</p>
+
+<h3 id="file-win\iis-ps1-function-startapppool">Function StartAppPool</h3>
+
+<p>This function starts application pool in IIS Web server.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>StartAppPool [[-AppName] &lt;String&gt;] [[-ServerName] &lt;Object&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-win\ipsettings-ps1">File win\IpSettings.ps1</h2>
+
+<p>Functions to deal with network settings.</p>
+
+<h3 id="file-win\ipsettings-ps1-function-addfirewallrule">Function AddFirewallRule</h3>
+
+<p>Adds firewall rule.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>AddFirewallRule [[-Name] &lt;Object&gt;] [[-Ports] &lt;Object&gt;] [[-Protocol] &lt;Object&gt;] [[-RemoteAddress] &lt;Object&gt;] [&lt;CommonParam eters&gt;]
+</code></pre>
+
+<h3 id="file-win\ipsettings-ps1-function-checkipvalid">Function CheckIpValid</h3>
+
+<p>This function checks if provided ip address is valid</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckIpValid [[-IpAddress] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-win\ipsettings-ps1-function-getallipv4ipaddresses">Function GetAllIPv4IPAddresses</h3>
+
+<p>Returns array of all IP addresses for all network adapters.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetAllIPv4IPAddresses [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Array of IP addresses (array of strings).</p>
+
+<h3 id="file-win\ipsettings-ps1-function-resolvednsname">Function ResolveDNSName</h3>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>ResolveDNSName [[-DnsName] &lt;String&gt;]
+</code></pre>
+
+<h3 id="file-win\ipsettings-ps1-function-set_dynamic_ip">Function Set_Dynamic_IP</h3>
+
+<p>Enables DHCP on all network adapters.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Set_Dynamic_IP [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-win\ipsettings-ps1-function-set_static_ip">Function Set_Static_IP</h3>
+
+<p>Sets static IP mode for all network adapters.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Set_Static_IP [&lt;CommonParameters&gt;]
+</code></pre>
+
+<hr>
+
+<h2 id="file-win\registry-ps1">File win\Registry.ps1</h2>
+
+<p>Registry.ps1</p>
+
+<h3 id="file-win\registry-ps1-function-addregkey">Function addRegKey</h3>
+
+<p>Used to add reg key.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>addRegKey [[-regFullPath] &lt;String&gt;] [[-regKey] &lt;String&gt;] [[-regValue] &lt;String&gt;] [[-regtype] &lt;String&gt;] [&lt;CommonParameter s&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-win\registry-ps1-function-changeregkey">Function changeRegKey</h3>
+
+<p>Changes value of existing reg key.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>changeRegKey [[-regFullPath] &lt;String&gt;] [[-regKey] &lt;String&gt;] [[-regValue] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-win\registry-ps1-function-checkregkey">Function CheckRegKey</h3>
+
+<p>Check if reg key exist.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CheckRegKey [[-regFullPath] &lt;String&gt;] [[-regKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-win\registry-ps1-function-removeregkey">Function removeRegKey</h3>
+
+<p>Removes reg key.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>removeRegKey [[-regFullPath] &lt;String&gt;] [[-regKey] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<hr>
+
+<h2 id="file-win\schtasks-ps1">File win\SchTasks.ps1</h2>
+
+<p>Functions to deal with scheduled tasks.</p>
+
+<h3 id="file-win\schtasks-ps1-function-createscheduledtask">Function CreateScheduledTask</h3>
+
+<p>Creates scheduled task with specified name, command, frequesncy that runs on behalf of specified user (user account is optionally created and added to specified group).</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CreateScheduledTask [-taskName] &lt;String&gt; [-command] &lt;String&gt; [[-frequencyHours] &lt;Int32&gt;] [[-userName] &lt;String&gt;] [[-grou pName] &lt;String&gt;] [[-password] &lt;String&gt;] [[-createUser] &lt;Boolean&gt;] [-delayHours &lt;Int32&gt;] [-delayMinutes &lt;Int32&gt;] [-delet eExisting &lt;Boolean&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-win\schtasks-ps1-function-deletescheduledtask">Function DeleteScheduledTask</h3>
+
+<p>Deletes Scheduled Windows task. If user on behalf of which name scheduled task is running exists and specifyed it will be also deleted.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>DeleteScheduledTask [[-taskName] &lt;String&gt;] [[-userName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-win\schtasks-ps1-function-scheduledtaskexists">Function ScheduledTaskExists</h3>
+
+<p>Checks if scheduled task with specified name exists on local computer.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>ScheduledTaskExists [[-taskName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if scheduled task exists, $False if it doesn&#39;t exist</p>
+
+<hr>
+
+<h2 id="file-win\services-ps1">File win\Services.ps1</h2>
+
+<p>Functions dealing with Windows services.</p>
+
+<h3 id="file-win\services-ps1-function-restartservice">Function RestartService</h3>
+
+<p>Restarts service snd checks if it&#39;s restarted within specified timeout.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>RestartService [[-serviceName] &lt;String&gt;] [[-timeOutSec] &lt;Int32&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-win\services-ps1-function-startservice">Function StartService</h3>
+
+<p>Starts service snd checks if it&#39;s started within specified timeout.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>StartService [[-serviceName] &lt;String&gt;] [[-timeOutSec] &lt;Int32&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-win\services-ps1-function-stopservice">Function StopService</h3>
+
+<p>Stops service snd checks if it&#39;s stopped within specified timeout.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>StopService [[-serviceName] &lt;String&gt;] [[-timeOutSec] &lt;Int32&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<hr>
+
+<h2 id="file-win\users-ps1">File win\Users.ps1</h2>
+
+<p>Functions to deal with users and groups.</p>
+
+<h3 id="file-win\users-ps1-function-createuser">Function CreateUser</h3>
+
+<p>Creates user on local computer and puts it into specifyed group.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>CreateUser [[-userName] &lt;String&gt;] [[-groupName] &lt;String&gt;] [[-password] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-win\users-ps1-function-deleteuser">Function DeleteUser</h3>
+
+<p>Deletes Specifyed user.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>DeleteUser [[-userName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h3 id="file-win\users-ps1-function-userexists">Function UserExists</h3>
+
+<p>Checks if specifued user exists on computer.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>UserExists [[-userName] &lt;String&gt;] [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True if user exists, $False if it doesn&#39;t exist</p>
+
+<hr>
+
+<h2 id="file-win\version-ps1">File win\Version.ps1</h2>
+
+<p>Helper functions to get Windows version and bitness.</p>
+
+<h3 id="file-win\version-ps1-function-getostype">Function GetOSType</h3>
+
+<p>This function gets type of operating system.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>GetOSType [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>Hashtable @{<q>type</q> = <version>; <q>Architecture</q> = <bitness>}</p>
+
+<h3 id="file-win\version-ps1-function-is32bit">Function Is32Bit</h3>
+
+<p>This function checks if operating system is 32 bit.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Is32Bit [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-win\version-ps1-function-is64bit">Function Is64Bit</h3>
+
+<p>This function checks if operating system is 64 bit.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>Is64Bit [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-win\version-ps1-function-isserver2003">Function IsServer2003</h3>
+
+<p>This function checks if operating system is Windows Server 2003.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>IsServer2003 [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-win\version-ps1-function-isserver2008">Function IsServer2008</h3>
+
+<p>This function checks if operating system is Windows Server 2008.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>IsServer2008 [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-win\version-ps1-function-isserver2008r2">Function IsServer2008R2</h3>
+
+<p>This function checks if operating system is Windows Server 2008R2.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>IsServer2008R2 [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+
+<h3 id="file-win\version-ps1-function-isserver2012">Function IsServer2012</h3>
+
+<p>This function checks if operating system is Windows Server 2012.</p>
+
+<h4 id="syntax">Syntax</h4>
+<pre class="syntax-highlight plaintext"><code>IsServer2012 [&lt;CommonParameters&gt;]
+</code></pre>
+
+<h4 id="return-value">Return Value</h4>
+
+<p>$True or $False.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

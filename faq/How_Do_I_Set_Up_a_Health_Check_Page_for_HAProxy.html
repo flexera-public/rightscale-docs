@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>How do I set up a health check page for HAProxy?</title><meta content="This article explains how to create a health-check page that HAProxy will use to check the status of a web server or application." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="faq faq_How_Do_I_Set_Up_a_Health_Check_Page_for_HAProxy" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">RightScale General FAQs</a></p><div class="page-header"><h1>How do I set up a health check page for HAProxy?</h1></div><div class="main-content"><h2 id="background">Background</h2>
+
+<p>This document explains how to create a health-check page that HAProxy will use to check the status of a web server or application.</p>
+
+<p>While the exact contents of your health-check page are not important, its name should be unique (e.g. including a random number). The same page is used for <em>all</em> application servers to determine whether the server is running (<em>up</em>). While you are not prevented from using index.html as the health-check page, this is not recommended. This is because most web sites have an index.html page and, thus, there is a risk that your load balancer will direct client traffic to a web site other than your own in the cloud. For this reason, you should always use a health-check URI with a unique file name.</p>
+
+<p><em>Example:</em> The Amazon EC2 cloud recycles IP addresses; so, if one server was terminated and another launched for a different site—with the same IP address and page name as your health-check page name (specified in your HEALTH_CHECK_URI RightScript input)—HAProxy could consider the server to be running and part of the load-balancer pool even though it is someone else&#39;s, and direct traffic to it.</p>
+
+<h2 id="answer">Answer</h2>
+
+<p>Follow the steps below to set up a Health Check Page for HAProxy for your application (Tomcat, Rails, PHP).</p>
+
+<p>When following the below examples, substitute occurrences of <em>&lt;######&gt;</em> or <em>######</em> with your own unique, random numeric string.</p>
+
+<p><em>Warning:</em> When specifying a HEALTH_CHECK_URI RightScript input, remember to include the health-check file in your application bundle. For example, in the case of Apache Tomcat, if you set HEALTH_CHECK_URI to <q>/health\_check378923.jsp</q>, remember to include <em>health_check378923.jsp</em> in your WAR file.</p>
+
+<h3 id="answer-set-up-a-health-check-page">Set up a Health Check Page</h3>
+
+<h4 id="apache-tomcat">Apache Tomcat</h4>
+
+<ol>
+<li><p>Create a file named <em>health_check&lt;######&gt;.jsp</em> in your application with the following contents.  </p>
+<pre class="syntax-highlight plaintext"><code>&lt;HTML&gt;
+  &lt;HEAD&gt;
+    &lt;TITLE&gt;Hello World&lt;/TITLE&gt;
+  &lt;/HEAD&gt;
+  &lt;BODY&gt;
+    &lt;H1&gt;Hello World&lt;/H1&gt;
+    Today is: &lt;%= new java.util.Date().toString() %&gt;
+  &lt;/BODY&gt;
+&lt;/HTML&gt;
+</code></pre></li>
+<li><p>Set your HEALTH_CHECK_URI script input to:</p>
+
+<p><code>/health\_check_&lt;######&gt;_.jsp</code></p></li>
+</ol>
+
+<h4 id="ruby-on-rails/mongrel">Ruby on Rails/Mongrel</h4>
+
+<ol>
+<li><p>Create a file named <em>mongrel_health_check.rb</em> with the below contents, and add it to your server or repository.  </p>
+<pre class="syntax-highlight plaintext"><code>####
+# Copyright (c) 2011 RightScale, Inc, All Rights Reserved Worldwide.
+#
+# THIS PROGRAM IS CONFIDENTIAL AND PROPRIETARY TO RIGHTSCALE
+# AND CONSTITUTES A VALUABLE TRADE SECRET. Any unauthorized use,
+# reproduction, modification, or disclosure of this program is
+# strictly prohibited. Any use of this program by an authorized
+# licensee is strictly subject to the terms and conditions,
+# including confidentiality obligations, set forth in the applicable
+# License Agreement between RightScale.com, Inc. and
+# the licensee.
+#
+# Handler for status/health checks.
+# Load balancers (or other machines for that matter) will be able to monitor the health of
+# each mongrel by retrieving a successful response from this handler
+# This file can be included in the configuration of the mongrels (i.e., mongrel_cluster.yml)
+# config_script: lib/mongrel_health_check_handler.rb
+
+# This must be called from a Mongrel configuration...
+class MongrelHealthCheckHandler &lt; Mongrel::HttpHandler
+  def initialize
+    #Make sure it's expired by the time we process the first request
+    @DB_OK_at= Time.at(0)
+    @freshness= 30
+    @error_msg=""
+  end
+  def process(request,response)
+
+    # Write down if it's time to do a more heavyweight check
+    db_stale=true if( (Time.now()-@DB_OK_at).to_i &gt; @freshness )
+
+    check_db if db_stale
+
+    code = ( (Time.now()-@DB_OK_at).to_i &gt; @freshness )? 500:200
+    # Return OK if ActiveRecord is not connected yet (i.e., test mongrel only)
+    code = 200 unless ActiveRecord::Base.connected?
+
+    response.start(code) do |head,out|
+      head["Content-Type"] = "text/html"
+
+      t = Time.now()
+      out.write "Now: #{t} , DB OK #{(t-@DB_OK_at).to_i}s ago\n"
+      out.write "ERROR:#{@error_msg}" if @error_msg != ""
+    end
+  end
+
+  # Check health of DB, and update the @DB_OK_at timestamp if it succeeds
+  def check_db
+    if ActiveRecord::Base.connected?
+      begin      
+        ActiveRecord::Base.connection.verify!(0) #verify now (and reconnect if necessary)
+        ActiveRecord::Base.connection.select_value("SELECT NOW()")
+        @DB_OK_at = Time.now
+        @error_msg = ""
+      rescue Exception =&gt; e
+        # Do your logging/error handling here
+        @error_msg = e.inspect
+      end
+    end
+  end
+end
+
+uri "/mongrel-status######", :handler =&gt; MongrelHealthCheckHandler.new, :in_front =&gt; true
+</code></pre></li>
+<li><p>Modify the last line in the above file so that the page can be uniquely identified with your application (e.g. change <q>mongrel-status_######_</q> to <q>mongrel-status1234089</q>).</p></li>
+<li><p>Add the following to /etc/mongrel_cluster/mongrel_cluster.yml:<br>
+<code>config\_script:&amp;nbsp; _&lt;PathToFile&gt;_/mongrel\_health\_check.rb</code>
+Or, alternatively, set your OPT_MONGREL_CONFIG_SCRIPT input to the path where you saved the above file. Be sure to specify the full path to the file from the base directory of your Rails application; e.g. <code>lib/mongrel\_health\_check\_handler.rb</code>.</p></li>
+<li><p>Set HEALTH_CHECK_URI to the value you specified at the end of the file above: /mongrel-status_&lt;######&gt;_</p></li>
+</ol>
+
+<h4 id="php">PHP</h4>
+
+<ol>
+<li><p>Create a file named health_check_&lt;######&gt;_.php in your application with the following contents.  </p>
+<pre class="syntax-highlight plaintext"><code>&lt;?php
+phpinfo();
+?&gt;
+</code></pre></li>
+<li><p>Set&nbsp; OPT_HEALTH_CHECK_URI to: /health_check_&lt;######&gt;_.php</p></li>
+</ol>
+
+<h3 id="answer-verify-health-check-pages">Verify Health Check Pages</h3>
+
+<p>If your site&#39;s permissions allow it (and assuming that your script input OPT_LB_STATS_URI is set to <code>haproxy-status</code>) you can simply add <code>/haproxy-status</code> to your load-balancer hostname URL to display an HAProxy status report in a tabular HTML format:</p>
+
+<p><em>Example:</em> http://www.mysite.com/haproxy-status</p>
+
+<p><img src="/img/faq-HAProxyStatus.png" alt="faq-HAProxyStatus.png" width="600" height="353" /></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Alerts, Alert Escalations, and Server Arrays</title><meta content="Understanding the relationship between alerts, escalations, and server arrays in the RightScale Cloud Management Platform." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_alerts_alert_escalations_and_server_arrays" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>Alerts, Alert Escalations, and Server Arrays</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>The purpose of this document is to explain the relationship between alerts, alert escalations, and server arrays.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>In order to truly understand RightScale&#39;s alert and monitoring system and how you can use it to automatically perform various actions on your setup, it&#39;s important to understand each component in the context of the others. The alert and monitoring system is comprised of the following key components. Each component is discussed in more detail here as well.</p>
+
+<ul>
+<li><a href="/cm/rs101/monitoring_system.html">Monitoring</a></li>
+<li><a href="/cm/rs101/server_array.html">Server Arrays</a></li>
+<li><a href="/cm/rs101/alert_escalation.html">Alert Escalations</a></li>
+<li><a href="/cm/rs101/alerts.html">Alerts</a></li>
+</ul>
+
+<p>Follow the <a href="/cm/dashboard/manage/arrays/arrays_actions.html#set-up-autoscaling-using-voting-tags">How do I set up Autoscaling?</a> tutorial to learn how to configure a scalable alert-based array.</p>
+
+<h2 id="scalable-architecture-diagrams">Scalable Architecture Diagrams</h2>
+
+<p>First, we&#39;ll show you some common scalable alert-based architectures.</p>
+
+<p>Architectures for front-end, client-facing sites. A common basic scalable setup is a four-server setup featuring front-end servers that act as both load balancers and application servers.</p>
+
+<p><img src="/img/cm-server-setup-website-array.png" alt="cm-server-setup-website-array.png" width="582" height="381" /></p>
+
+<p>For larger websites, you might have two front-end servers that are used strictly as load balancers, so you can expand the number of application servers underneath.</p>
+
+<p><img src="/img/cm-scalable-diagram.gif" alt="cm-scalable-diagram.gif" width="562" height="390" /></p>
+
+<h2 id="monitoring">Monitoring</h2>
+
+<p>RightScale&#39;s Monitoring system serves as the backbone for Alerts and Alert Escalations. Before you can use any alerts, you must first enable each server for monitoring. If you are not using one of RightScale&#39;s ServerTemplates, you need to enable all of your servers for monitoring. See <a href="/cm/rs101/setting_up_collectd.html">Setting up collectd</a></p>
+
+<p><strong>Important!</strong> Alerts only work on servers that have monitoring enabled.</p>
+
+<h2 id="server-arrays">Server Arrays</h2>
+
+<p>A <strong>Server Array</strong> is a group of mostly identical instances where the number of instances in the array varies (i.e., scales) over time in response to changing factors. RightScale offers both alert and queue-based arrays. Alert-based arrays are most commonly used for scaling a pool of application servers.</p>
+
+<p>When you create an array, you need to associate it with a particular deployment. Multiple arrays can be associated with the same deployment. For example, you might have an alert-based array for scaling the number of application servers and a queue-based array for scaling worker instances for back-end batch processing.</p>
+
+<p><img src="/img/cm-site-grid-array-diagram.png" alt="cm-site-grid-array-diagram.png" width="536" height="527" /></p>
+
+<p>In some ways, you have the same level of control with server arrays as you do with deployments. For example, you can define common inputs and alerts that will be inherited by all servers in the array or run RightScripts on server instances.</p>
+
+<p>When you create a server array you must define <strong>how</strong> you want that pool of server resources to scale-up and scale-down. For example, you can define the minimum and maximum number of servers that can be launched in an array, which availability zones you want server instances to be launched into, as well as basic server launch options that will be used for all server instances including ServerTemplate, SSH Key, Security Group, instance type, and machine image (RightImage). The server array&#39;s scaling parameters also dictate how many servers should be launched when scaling-up or how many servers to shutdown when scaling-down. You can also specify different rates for scale-up and scale-down actions. For example, you might want to scale-up quickly by adding four servers at a time, whereas you might take a more conservative approach when scaling-down by terminating only two servers at a time.</p>
+
+<p>When scaling-up, you must define the decision threshold (Default: 51%) at the server array level, which defines the percent of servers that must be voting to <code>grow</code> or <code>shrink</code> before the array is allowed to scale. This threshold helps prevent an outlier server from unnecessarily scaling the array. For example, one of the application servers might get hit with an odd spike, but the rest of the servers are operating normally. Instead of one server making the decision to scale, you can set a 51% decision threshold to ensure that you only scale-up when a majority of the servers are experiencing the same alert condition. Be sure to check out the voting section that follows so that you thoroughly understand the flow of the voting actions.</p>
+
+<p>If you have predictable scaling patterns, you can also configure a daily/weekly scaling schedule where your array automatically grows/shrinks at predefined times. See <a href="/cm/dashboard/manage/arrays/arrays_concepts.html#server-array-schedule">Server Array Schedule</a> and <a href="/cm/dashboard/manage/arrays/arrays_concepts.html#manage-server-arrays">Server Arrays</a> for more information.</p>
+
+<h2 id="alerts">Alerts</h2>
+
+<p>An alert (specification) defines the conditions under which an alert is triggered and an alert escalation is called. Several of the most common alerts have already been predefined for your convenience and are already included in many of our ServerTemplates. You can either create an alert from scratch (see <a href="/cm/rs101/create_a_new_alert_specification.html">Create an Alert</a>) or import an alert from one of the following locations:</p>
+
+<ul>
+<li>Default (RightScale Alerts) - A list of commonly used alerts configured by RightScale</li>
+<li>Server - An alert that&#39;s defined at the Server level</li>
+<li>Private/Imported ServerTemplate - An alert that&#39;s defined at the ServerTemplate level</li>
+</ul>
+
+<p>To create your own custom alerts, see <a href="/cm/rs101/create_a_custom_alert_specification.html">Create a Custom Alert</a>.</p>
+
+<p>An alert must be assigned at either the ServerTemplate, Server, or Server Array level.</p>
+
+<p><img src="/img/cm-assign-alerts.png" alt="cm-assign-alerts.png" width="587" height="263" /></p>
+
+<p>When you create an alert you need to associate it with a particular alert escalation. You can only assign one alert escalation to an alert. However, you can create multiple alerts that monitor the same metric and then vote for a different alert escalation. Similarly, you can have multiple alerts that call the same alert escalation. For example, you might have several alerts that point to the &#39;default&#39; alert escalation.</p>
+
+<h2 id="see-also">See also</h2>
+
+<ul>
+<li><a href="/cm/rs101/understanding_the_voting_process.html">Understanding the Voting Process</a></li>
+<li><a href="/cm/dashboard/manage/arrays/arrays_actions.html#set-up-autoscaling-using-voting-tags">How do I set up Autoscaling?</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>EC2 SSH Keys - Actions</title><meta content="Common procedures for working with EC2 SSH Keys in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_aws cm_dashboard_clouds_aws_actions cm_dashboard_clouds_aws_actions_ec2_ssh_keys_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../../">Cloud Management</a> &#x2F; <a href="../../../">Dashboard User's Guide</a> &#x2F; <a href="../../">clouds</a> &#x2F; <a href="../">Amazon Web Services (AWS)</a> &#x2F; <a href="./">AWS Actions</a></p><div class="page-header"><h1>EC2 SSH Keys - Actions</h1></div><div class="main-content"><h2 id="create-a-new-ssh-key">Create a New SSH Key</h2>
+
+<h3 id="create-a-new-ssh-key-overview">Overview</h3>
+
+<p>Before you can launch your deployment, you need to create an SSH Key in the RightScale Dashboard. The SSH key is passed into the new instance to allow root login access to your instance via SSH. Typically you&#39;ll find it inserted into <strong>/root/.ssh/authorized_keys</strong> after the instance is launched. If you launch an instance with an SSH Key pair that was not created through RightScale, then many of our convenient features (bundling, backups, automation, etc.) will <em>not</em> be available to you. Without knowing the contents of the SSH Keys, RightScale will not be able to access your instance to perform such tasks. It&#39;s important to use an SSH key that has key material.</p>
+
+<h3 id="create-a-new-ssh-key-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>Note that SSH is required to run RightScripts (prior to RightLink enabled images, which are RightImages prior to v5), so setting up your SSH key can be very important.</li>
+<li>Amazon SSH keys are EC2 region-specific. You cannot use an SSH key that you created in EC2-US for an instance in a different region like EC2-EU. This tutorial assumes you are creating an SSH key for EC2-US. (Functionally, creating SSH keys for the EU region is similar.)</li>
+</ul>
+
+<h3 id="create-a-new-ssh-key-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>SSH Keys</strong>. Click the <strong>New</strong> action button.</li>
+<li>Name the key pair (for example <q>production</q>) and click the <strong>Create</strong> action button.</li>
+</ul>
+
+<p><img src="/img/cm-create-key.png" alt="cm-create-key.png" width="452" height="202" /></p>
+
+<ul>
+<li>Copy this key locally to SSH into your instance.</li>
+</ul>
+
+<p><img src="/img/cm-show-key.png" alt="cm-show-key.png" width="550" height="490" /></p>
+
+<h2 id="add-private-ssh-key-material">Add Private SSH Key Material</h2>
+
+<h3 id="add-private-ssh-key-material-overview">Overview</h3>
+
+<h4 id="how-come-i-can&#39;t-ssh-into-my-ec2-instance-in-the-rightscale-dashboard?">How come I can&#39;t SSH into my EC2 instance in the RightScale Dashboard?</h4>
+
+<p>There may be several reasons why the <strong>SSH Console</strong> button is not visible in the Dashboard for a running EC2 instance. An SSH key consists of a matching private-public keypair. When you create an SSH Key, you are given the matching private key material. AWS will only give you the matching private key material once (when the key is generated). Typically, you will save it in a safe location.</p>
+
+<h4 id="for-instances-launched-directly-from-images-(not-servertemplates)">For instances launched directly from images (not ServerTemplates)</h4>
+
+<p>By default, when you create an SSH key in the RightScale platform, RightScale will store the private key material for you. But, if you create an SSH key outside of the RightScale platform, RightScale will not be able to capture the private key material. Therefore, if you are new to RightScale and created a new RightScale account, you may notice that you can see all of your running EC2 instances (Clouds &gt; AWS Region &gt; EC2 Instances), but the <strong>SSH Console</strong> action button is not available. The reason why the <strong>SSH Console</strong> button is not visible in the Dashboard for a running EC2 instance is because RightScale does not have the matching private key material for the SSH key that was used to launch the instance. If you want to SSH into the instance from the Dashboard, you must upload your private key material to RightScale. Otherwise, you will only be able to SSH into the instance from outside the Dashboard using your own SSH client.</p>
+
+<h4 id="for-instances-launched-with-a-servertemplates-using-a-v4-rightimage">For instances launched with a ServerTemplates using a v4 RightImage</h4>
+
+<p>If you are using an older v4 RightImage, the SSH Key is used to establish a client-server connection to the instance so that scripts can be run and for establishing SSH console sessions inside the Dashboard. It&#39;s strongly recommended that you upgrade any instances using v4 RightImages to v5 RightImages in order to eliminate this AWS-specific dependency. v5 RightImages have a RightLink agent for establishing secure connections with an instance for running scripts and establishing SSH console sessions.</p>
+
+<h3 id="add-private-ssh-key-material-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;actor&#39; user role privileges</li>
+<li>access to the matching SSH key&#39;s private key material</li>
+</ul>
+
+<h3 id="add-private-ssh-key-material-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>SSH Keys</strong>. Find the SSH key that has its private key material missing. Most likely you created the SSH Key outside of the RightScale platform.</li>
+</ul>
+
+<p><img src="/img/cm-no-key-material.png" alt="cm-no-key-material.png" width="725" height="118" /></p>
+
+<ul>
+<li>Click on the SSH Key that has missing private key information so that you can edit it and provide the missing private key information.</li>
+<li>Click <strong>Edit</strong>.</li>
+</ul>
+
+<p><img src="/img/cm-show-no-private-key.png" alt="cm-show-no-private-key.png" width="613" height="247" /></p>
+
+<ul>
+<li>Copy and paste the matching private key information and click <strong>Update</strong>.</li>
+</ul>
+
+<p>[<img src="/img/cm-update-key-material.png" alt="cm-update-key-material.png" width="550" height="479" /></p>
+
+<ul>
+<li>Go back to the SSH Keys index page and you should now see that the private key material is no longer missing.</li>
+</ul>
+
+<p><img src="/img/cm-yes-key-material.png" alt="screen-YesKeyMaterial-v1.png" width="725" height="84" /></p>
+
+<ul>
+<li>Go to the instance that you were unable to SSH into from the Dashboard and you should now see the <strong>SSH Console</strong> action button as an option.</li>
+</ul>
+
+<p>If you are interested in using a native SSH client, visit the following FAQ for additional information: (<a href="/faq/How_Do_I_Configure_My_Native_SSH_Client_to_Work_with_RightScale.html">How do I configure my native SSH client to work with RightScale?</a>)</p>
+
+<h2 id="create-an-rsa-key-pair">Create an RSA Key Pair</h2>
+
+<h3 id="create-an-rsa-key-pair-overview">Overview</h3>
+
+<p>To create an RSA key pair that you can use to <a href="/cm/dashboard/clouds/aws/actions/ec2_ssh_keys_actions.html#Create_a_New_SSH_Key_by_Importing_an_RSA_Key_Pair">Create a New SSH Key by Importing an RSA Key Pair</a>.</p>
+
+<h3 id="create-an-rsa-key-pair-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>SSH client that supports RSA key pair creation</li>
+<li>Running Linux instance that you can SSH into</li>
+</ul>
+
+<h3 id="create-an-rsa-key-pair-steps">Steps</h3>
+
+<ul>
+<li>SSH into the running Linux instance. The example below is based off of an Ubuntu 10.04 instance.</li>
+<li><p>In the terminal window, type the following linux command at the prompt:</p>
+<pre class="syntax-highlight plaintext"><code># ssh-keygen
+</code></pre></li>
+<li><p>Provide a name that will be used for the key files that will be created.</p>
+<pre class="syntax-highlight plaintext"><code>Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): my-keypair
+</code></pre></li>
+<li><p>When asked to provide a passphrase, leave it blank and click Enter. You do not want to use a passphrase.</p>
+<pre class="syntax-highlight plaintext"><code>Enter passphrase (empty for no passphrase): &lt;ENTER&gt;Enter same passphrase again: &lt;ENTER&gt;
+</code></pre></li>
+<li><p>Next, locate the created private and public key files.</p>
+<pre class="syntax-highlight plaintext"><code># lltotal 120
+drwx------ 7 root root 4096 2011-12-15 00:03 ./
+drwxr-xr-x 21 root root 4096 2011-12-14 23:58 ../
+-rw-r--r-- 1 root root 3463 2011-12-14 23:58 .bashrc
+drwx------ 2 root root 4096 2011-12-14 23:58 .cache/
+drwxr-xr-x 2 root root 4096 2011-12-14 23:58 .chef/
+drwxr-xr-x 4 root root 4096 2011-11-09 02:40 .gem/
+-rw-r--r-- 1 root root 181 2011-12-14 23:57 .gemrc
+-rw------- 1 root root 56103 2011-12-14 23:58 .git_completion.sh
+-rw------- 1 root root 74 2011-12-14 23:58 .gitconfig
+-rw------- 1 root root 32 2011-12-14 23:57 .monit.id
+-rw------- 1 root root 1675 2011-12-15 00:03 my-keypair-rw-r--r-- 1 root root 404 2011-12-15 00:03 my-keypair.pub-rw-r--r-- 1 root root 140 2010-04-23 09:45 .profile
+drwxrwx--- 2 root root 4096 2011-11-09 02:43 .rightscale/
+drwx------ 2 root root 4096 2011-12-14 23:58 .ssh/
+-rw------- 1 root root 115 2011-12-14 23:58 .vimrc
+</code></pre></li>
+<li><p>View the files and save the contents of your RSA keypair. For your records, you may want to copy and paste the value into a text file for archiving purposes.</p>
+
+<ul>
+<li>my-keypair (private key)</li>
+<li>my-keypair.pub (public key)
+~~~
+# view my-keypair
+~~~</li>
+</ul></li>
+</ul>
+
+<h2 id="create-a-new-ssh-key-by-importing-an-rsa-key-pair">Create a New SSH Key by Importing an RSA Key Pair</h2>
+
+<h3 id="create-a-new-ssh-key-by-importing-an-rsa-key-pair-overview">Overview</h3>
+
+<p>Use the following procedure to create an AWS SSH Key by using the <q>Import</q> feature to use your own RSA key pair.</p>
+
+<h3 id="create-a-new-ssh-key-by-importing-an-rsa-key-pair-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;actor&#39; user role privileges</li>
+<li>valid RSA keypair (See <a href="/cm/dashboard/clouds/aws/actions/ec2_ssh_keys_actions.html#Create_an_RSA_Key_Pair">Create an RSA Key Pair</a>)</li>
+</ul>
+
+<h3 id="create-a-new-ssh-key-by-importing-an-rsa-key-pair-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>SSH Keys</strong>. Click the <strong>Import</strong> action button.</li>
+<li>Provide a name of the SSH Key and the public key material for your key pair and click <strong>Import</strong>.</li>
+</ul>
+
+<p><img src="/img/cm-import-key.png" alt="cm-import-key.png" width="533" height="428" /></p>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>The SSH Key that you just generated does not have private key material like other EC2 SSH Keys. You may not be able to successfully use the SSH key inside the Dashboard/API to log into instances depending on the RightImage version that&#39;s being used as well as your Managed SSH preferences. v4 RightImages require that the private key material be present in order to access the instance and successfully execute scripts.</p>
+</div>
+
+<p><img src="/img/cm-no-key-material.png" alt="cm-no-key-material.png" width="725" height="118" /></p>
+
+<p>You will not be able to successfully launch an instance using a v4 RightImage because the private key material is missing. However, you can use the key pair for instances using v5 RightImages since Managed SSH is used for authentication purposes.</p>
+
+<p>One of the benefits of using the Import key pair feature is that you can use the same RSA key pair in multiple AWS regions, unlike standard EC2 SSH Keys. Simply repeat the import process using the same RSA key pair to create valid EC2 SSH Keys in other regions in which you would like to use the same key pair.</p>
+
+<h2 id="delete-an-ssh-key">Delete an SSH Key</h2>
+
+<h3 id="delete-an-ssh-key-overview">Overview</h3>
+
+<p>Use the following procedure to delete an existing AWS SSH Key.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>You can delete an SSH Key that is referenced by an inactive or active (running) server, so if you try to launch or relaunch a server whose SSH Key was deleted, the request will fail because you will need to select an existing SSH Key.</p>
+</div>
+
+<h3 id="delete-an-ssh-key-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>Only the user who created the SSH Key or a user with &#39;admin&#39; privileges will be allowed to delete an SSH Key (assuming they also have &#39;actor&#39; user role privileges).</li>
+<li>You must have &#39;actor&#39; user role privileges in order to delete the key.</li>
+</ul>
+
+<h3 id="delete-an-ssh-key-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>SSH Keys</strong>.</li>
+<li>You can either click the <strong>Delete</strong> icon next to the SSH Key you want to delete or click the <strong>Delete</strong> action button at an SSH Key&#39;s show page.</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

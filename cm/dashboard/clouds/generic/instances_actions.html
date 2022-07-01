@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Instances - Actions</title><meta content="Common procedures for working with Instances in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_generic cm_dashboard_clouds_generic_instances_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">clouds</a> &#x2F; <a href="./">Generic Cloud Services</a></p><div class="page-header"><h1>Instances - Actions</h1></div><div class="main-content"><h2 id="create-a-new-instance">Create a New instance</h2>
+
+<p>Use the following steps to create a new Instance in the Cloud so you can launch it and use it for various purposes.</p>
+
+<h3 id="create-a-new-instance-steps">Steps</h3>
+
+<ol>
+<li>Navigate to <strong>Clouds</strong> &gt; <em>CloudName</em> &gt; <strong>Instances</strong></li>
+<li>Click the <strong>New</strong> action button and fill out the field information. (Use the information below for additional information if needed.)</li>
+<li>Click the <strong>Launch</strong> action button when ready to launch your new instance.
+
+<ul>
+<li><strong>Image</strong> - What image the new instance should use, boot from, etc.</li>
+<li><strong>Instance Type</strong> - Generically speaking, the size of the instance. Typically includes compute resources such as the amount of CPU, memory, and ephemeral storage.</li>
+<li><strong>Security Group(s)</strong> - Select one or more Security Groups. Security Groups are firewalls in the cloud supporting various inbound networking rules (such as allow/deny access to various ports, protocols, IP addresses, other Security Groups,etc.).</li>
+<li><strong>Datacenter/Zone</strong> - A regional datacenter in the cloud (Datacenter and Zone are synonymous). A cloud will often have multiple Datacenters which can help when architecting a highly available Deployment. For example, a US based cloud with four Datacenters might be North, South, East and West.</li>
+</ul></li>
+</ol>
+
+<h2 id="create-a-new-instance-using-the-instance-provisioner">Create a New Instance using the Instance Provisioner</h2>
+
+<p>Use the Instance Provisioner to create a new Instance in the Cloud so you can launch it and use it for various purposes. Note that the steps provided below are somewhat generic in nature but focused on creating instances in AWS. You will want to visit these cloud-specific pages as needed for the cloud you are working with.</p>
+
+<ul>
+<li><a href="/cm/dashboard/clouds/google/google_add_instance.html">Google - Add and Launch a New GCE Instance</a></li>
+<li><a href="/cm/dashboard/clouds/azure/azure_add_instance.html">Azure - Add and Launch a New Microsoft Azure Instance</a></li>
+<li><a href="/cm/dashboard/clouds/openstack/openstack_add_instance.html">OpenStack - Add and Launch a New OpenStack Instance</a></li>
+<li><a href="/cm/dashboard/clouds/softlayer/softlayer_add_instance.html">SoftLayer - Add and Launch a New SoftLayer Instance</a></li>
+<li><a href="/cm/dashboard/clouds/vsphere/vsphere_add_instance.html">vSphere - Add and Launch a New vSphere Instance</a></li>
+</ul>
+
+<h3 id="create-a-new-instance-using-the-instance-provisioner-steps">Steps</h3>
+
+<p>The Instance Provisioner walks you through the following steps to creating a new Instance:</p>
+
+<ul>
+<li>Selecting an image</li>
+<li>Specifying hardware settings</li>
+<li>Configuring networking parameters</li>
+<li>Confirming launch settings</li>
+<li>Launching the Instance.</li>
+</ul>
+
+<p>Use the following procedure to create a new Instance in the Cloud using the Instance Provisioner.</p>
+
+<ol>
+<li><p>Navigate to <strong>Clouds</strong> &gt; <em>CloudName</em> &gt; <strong>Instances</strong> &gt; <strong>New</strong>. The Image screen of the Instance Provisioner displays.</p>
+
+<p><img src="/img/cm-new-instance-wiz1.png" alt="cm-new-instance-wiz1.png" width="725" height="307" /></p></li>
+<li><p>In the left-hand pane, select the machine image you want to use for your Instance. You can use the filter controls to help you locate the images that are of interest to you. The information displayed in the right-hand pane provides specific details on the selected image. Once you have chosen an appropriate image, click <strong>Hardware</strong> to move to the next screen. Note that you can also use the &#39;breadcrumbs&#39; at the top of the screen to navigate through the various steps of the Instance Provisioner.</p>
+
+<p><img src="/img/cm-new-instance-wiz2.png" alt="cm-new-instance-wiz2.png" width="725" height="423" /></p></li>
+<li><p>The Hardware screen provides the following fields and controls for configuring the hardware and storage settings for your Instance.</p>
+
+<ul>
+<li><strong>Instance Name</strong> - a user-defined name for the instance. Use this text field to enter a name for your Instance.</li>
+<li><strong>Deployment</strong> - the RightScale deployment into which the Instance will be launched. Use the drop-down list to select an existing deployment.</li>
+<li><strong>Instance Type</strong> - a cloud-specific descriptor identifying a combination of CPU, storage, memory, and networking capacity. Use the drop-down list to select an appropriate type.</li>
+<li><strong>IAM Instance Profile or ARN</strong> - the AWS Identity and Access Management Profile or the Amazon Resource Name. Enter the IAM Instance Profile name, or if you prefer, you can enter the ARN in the proper format (arn:aws:service:region:account:resource). IAM roles contained in the Instance Profile will be assigned to the server instance at launch time.</li>
+<li><strong>Ephemeral Storage Volumes</strong> - the number of ephemeral storage devices that will be attached to the Instance. Set this to &#39;Maximum&#39; to utilize the maximum number of ephemeral devices that the selected instance type can support.</li>
+<li><strong>Storage Type</strong> - the type of disk to use for all volumes attached to the Instance. May be dictated by the image selected.</li>
+<li><strong>Kernel ID</strong> - the core of the Instance operating system. Use the drop-down list to select an available kernel ID.</li>
+<li><strong>RAM Disk ID</strong> - identifies the RAM disk that contains the files required for the kernel. Use the drop-down list to select an available RAM Disk ID.</li>
+<li><strong>Boot to New Volume</strong> - If enabled, the instance will launch into volume storage. Otherwise, it will boot to local storage. Available only on certain clouds.</li>
+<li><strong>Delete Volume on Termination</strong> - If &#39;Delete&#39; is selected, the associated volume will be deleted when the instance is terminated. Only shown if &#39;Boot to New Volume&#39; is enabled.</li>
+<li><strong>Root Volume Size (GB)</strong> - The size (in gigabytes) of the volume that contains the root filesystem of the instance. Available only on certain clouds.</li>
+<li><strong>User Data</strong> - allows for the configuration of the Instance during launch. Use this optional text field to specify your User Data.</li>
+</ul></li>
+<li><p>Enter or select appropriate values for the settings on the Hardware screen, then click <strong>Networking</strong>.</p>
+
+<p><img src="/img/cm-new-instance-wiz3.png" alt="cm-new-instance-wiz3.png" width="725" height="299" /></p></li>
+<li><p>The Networking screen provides the following fields and controls for configuring the networking and security settings for your Instance.</p>
+
+<ul>
+<li><strong>Network</strong> - the Amazon Virtual Private Cloud (VPC) into which the Instance will be launched. The Network contains the IP address range, subnets, route tables, and internet gateways. Use this drop-down to select the network for your Instance.</li>
+<li><strong>Datacenter</strong> - a location within a cloud region, meant to isolate a failure from reaching other zones. Use this drop-down to select a datacenter.</li>
+<li><strong>Auto-Assign Public IP</strong> - enables/disables auto-assignment of addresses from Amazon&#39;s public IP address pool when the Instance is launched. You can assign an elastic IP address if you require an IP address that persists across launches. Use this toggle control to enable or disable auto-assignment of public IP addresses.</li>
+<li><strong>SSH Key</strong> - provides secure console login to your Instance. Use this drop-down to select a previously created SSH key, or you can click the <strong>New</strong> button to create a new key.</li>
+<li><strong>Security Groups</strong> - provide firewall rule sets that control access to your Instance. Use this drop-down to select one or more security groups for your Instance. You can also click the <strong>New</strong> button to create a new security group.</li>
+</ul></li>
+<li><p>Enter or select appropriate values for the settings on the Networking screen, then click <strong>Confirm and Launch</strong>.</p>
+
+<p><img src="/img/cm-new-instance-wiz4.png" alt="cm-new-instance-wiz4.png" width="725" height="335" /></p></li>
+<li><p>Review your settings for the Instance you want to launch. If you need to change anything, you can use the &#39;breadcrumbs&#39; at the top of the screen or the buttons in the lower left-hand portion of the screen to navigate back to make modifications. Click <strong>Launch</strong> to initiate launching the Instance.</p></li>
+</ol>
+
+<h2 id="stop-a-running-instance">Stop a Running Instance</h2>
+
+<p>You can stop a running instance by taking the following steps.</p>
+
+<ol>
+<li>Navigate to <strong>Clouds</strong> &gt; <em>Cloud Provider</em> &gt; <strong>Instances</strong>.</li>
+<li>Click the link for the instance you want to stop. The Instance Info page displays.</li>
+<li>Click the <strong>Stop</strong> button to stop the selected instance.</li>
+<li>Click <strong>OK</strong> when prompted for confirmation.</li>
+</ol>
+
+<h2 id="start-a-stopped-instance">Start a Stopped Instance</h2>
+
+<p>You can start a stopped instance by taking the following steps.</p>
+
+<ol>
+<li>Navigate to <strong>Clouds</strong> &gt; <em>Cloud Provider</em> &gt; <strong>Instances</strong>.</li>
+<li>Click the link for the instance you want to start. The Instance Info page displays.</li>
+<li>Click the <strong>Start</strong> button to start the selected instance.</li>
+<li>Click <strong>OK</strong> when prompted for confirmation.</li>
+</ol>
+
+<h2 id="add-instances-to-a-new-deployment">Add Instances to a New Deployment</h2>
+
+<p>When you go to the instances section in RightScale you can see all the active or terminated instances in your cloud. The instances you see can be added to a deployment, switched to a different deployment, or added to a new deployment.</p>
+
+<h3 id="add-instances-to-a-new-deployment-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Clouds</strong> &gt;<em>cloud provider</em> &gt; <strong>Instances</strong>.</li>
+<li>Select the Instance or Instances you want to move into a deployment from the Actions column.</li>
+<li>Select <strong>Add to Deployment</strong> from the drop down in the bottom right hand corner of the screen and click <strong>Apply to Selected</strong>.</li>
+<li><p>The Add Instance(s) to Deployment will pop up. Choose to create a New Deployment or add to an existing deployment. <em>Note</em>: If adding an instance that already exists in a deployment, the instance name will appear red and will be moved out of the deployment into the one you select or create.</p>
+
+<p><img src="/img/cm-add-instance-to-deployment.png" alt="cm-add-instance-to-deployment.png" width="404" height="305" /></p>
+
+<ul>
+<li><strong>Deployments</strong> - You can chose an existing deployment or you can make a new deployment. By default, <strong>New Deployment</strong> is selected.</li>
+<li><strong>New Deployment Name</strong> - Only displays if you are creating a new deployment. This will be the name of the deployment your instances will be added to.</li>
+<li><strong>Instances to be Added</strong> - This will list the instances that are being added to the deployment. If you&#39;re adding an instance that already exists in a deployment, the instance name will appear red and will be moved out of the deployment into the one you select or create.</li>
+</ul></li>
+<li><p>Click <strong>Apply</strong>.<br></p></li>
+<li><p>You will be directed back to the list of instances. If you would like to go to the instance&#39;s deployment, you can click on the deployment name in the Deployment column.</p></li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

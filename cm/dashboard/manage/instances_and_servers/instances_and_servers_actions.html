@@ -1,0 +1,599 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Instances and Servers - Actions</title><meta content="Common procedures for working with Instances and Servers in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_manage cm_dashboard_manage_instances_and_servers cm_dashboard_manage_instances_and_servers_instances_and_servers_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Manage</a> &#x2F; <a href="./">Instances and Servers</a></p><div class="page-header"><h1>Instances and Servers - Actions</h1></div><div class="main-content"><h2 id="ssh-into-a-server-">SSH into a Server
+</h2>
+
+<h3 id="ssh-into-a-server--objective-">Objective
+</h3>
+
+<p>To open an SSH terminal session on a Linux-based server for root level access to the running server instance or array instance in the cloud.</p>
+
+<h3 id="ssh-into-a-server--overview-">Overview
+</h3>
+
+<p>The <strong>SSH</strong> action opens a terminal session on each selected server instance or array instance using Mindterm or your native SSH client. You can configure the default setting in <strong>User Settings</strong> &gt; <strong>SSH</strong>. Note that any selected Server Next, Array Next, or unmanaged instances are ignored by the SSH action.</p>
+
+<p>In the cloud, you still have root level access to the actual running instance. In order to create a secure connection to a running instance, an SSH key is used for authentication purposes. An SSH key is a security component used by some cloud providers to secure client connections to servers in the cloud over SSH or Remote Desktop Protocol (RDP). The type of SSH Key that is used for establishing secure client-server communication depends on the type of underlying RightImage that&#39;s being used.</p>
+
+<h4 id="v4-rightimages">v4 RightImages</h4>
+
+<p>For servers launched with <strong>v4 RightImages</strong>, EC2 SSH Keys are used to create an SSH Console session from the Dashboard, as well as securely run RightScripts on an instance. When you launch an instance in EC2, you must specify which EC2 SSH Key will be used authenticate an SSH Console session. When the instance is actually launched, Amazon will load the public key onto the instance. Later, when you try to SSH into the instance, the matching private key material will be used to authenticate an SSH session. When you SSH into an instance from the RightScale Dashboard/API, it&#39;s important that you use an SSH Key where the private key material is stored in RightScale&#39;s database, otherwise, RightScale will not be able to provide the matching private key to validate and create an SSH session or run RightScripts (resulting in a <q>stranded in booting</q> server). One of the shortcomings with this method is that multiple users will use the same SSH Key to SSH into an instance. Therefore, it becomes difficult to control user level access or determine who is actually SSH-ing into an instance. v5 RightImages address this particular issue by enabling Managed SSH for more granular user level SSH access.</p>
+
+<h4 id="v5-rightimages">v5 RightImages</h4>
+
+<p>For servers launched with <strong>v5 RightImages</strong>, RightLink is used to establish a secure connection between the instance and the RightScale core site for running scripts. Managed SSH is also supported, which allows each user to use their own SSH Key (<strong>Settings</strong> &gt; <strong>User Settings</strong> &gt; <strong>SSH</strong>) to establish secure shell access for client-server connections. If you&#39;re using EC2 instances, you must still specify an EC2 SSH Key when you launch an instance. However, it&#39;s no longer used for SSH purposes, so it&#39;s no longer imperative that the EC2 SSH key have key material stored in the RightScale database like instances using v4 RightImages. But, you can still use the EC2 SSH key to SSH into an instance using a third party tool like PuTTY or AWS Console.</p>
+
+<h3 id="ssh-into-a-server--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>A running cloud instance</li>
+<li>Valid key authentication for establishing a secure shell connection. The type of required key authentication varies depending on the underlying machine image and your SSH user preferences and settings.</li>
+<li>&#39;server_login&#39; and &#39;server_superuser&#39; if you are running RightImage 5.7 and lower (both roles will need to be enabled to be able to SSH into a server). If you are running 5.8 or newer, like with 5.7 and lower, you can have both roles enabled or you can have either &#39;server_login&#39; (which allows you to login as the user of the account without root access) and &#39;server_superuser&#39; (which allows you to login as root to the server). For more information, see <a href="/cm/rs101/rightScale_account_and_user_role_management.html">RightScale Account and User Management</a>.</li>
+<li>If you&#39;re using a cloud that support security groups to control the instance&#39;s firewall permissions (e.g. AWS) you must configure the security group to allow SSH access over TCP port 22. See <a href="/cm/dashboard/clouds/generic/security_groups_actions.html#create-a-new-security-group">Create a New Security Group</a>.</li>
+<li>If you are using a VLAN cloud that uses IP port forwarding instead of security groups to control an instance&#39;s firewall permissions you must set up a port forwarding rule for TCP port 22 to allow SSH access. See <a href="/cm/dashboard/clouds/generic/port_forwarding_rules_actions.html#create-a-new-port-forwarding-rule">Create new Port Forwarding Rules</a>.</li>
+<li>Requires &#39;server_login&#39; user role privileges to SSH into a server from the RightScale dashboard.</li>
+</ul>
+
+<h3 id="ssh-into-a-server--steps-">Steps
+</h3>
+
+<h4 id="ssh-into-a-running-server-instance-or-array-instance">SSH into a Running Server Instance or Array Instance</h4>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select one or more server instances or array instances for which you want to open an SSH session.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>SSH</strong> from the drop-down menu. If you selected more than one item you will be prompted for confirmation.  </p>
+
+<p><img src="/img/cm-msa-action-ssh.png" alt="cm-msa-action-ssh.png" width="392" height="517" /></p></li>
+<li><p>An SSH session is initiated according to your configuration in User Settings -&gt; SSH.</p></li>
+</ol>
+
+<p>Alternately, you can simply click the SSH icon in the Operations column to initiate an SSH console session.</p>
+
+<h2 id="launch-a-server-">Launch a Server
+</h2>
+
+<h3 id="launch-a-server--objective-">Objective
+</h3>
+
+<p>To launch the selected the server (if no instance exists) or launch a new instance into an array.</p>
+
+<h3 id="launch-a-server--overview-">Overview
+</h3>
+
+<p>On the Instances and Servers page you can either launch a single server or multiple servers at the same time. Similarly, you can launch new instances into one or more selected arrays. Currently running server instances are ignored by the <strong>Launch</strong> action as are currently running array instances. Unmanaged instances are also ignored.</p>
+
+<h3 id="launch-a-server--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="launch-a-server--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select one or more servers you want to launch or the array(s) you want to launch a new instance into.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>Launch</strong> from the drop-down menu.</p>
+
+<p><img src="/img/cm-msa-action-launch.png" alt="cm-msa-action-launch.png" width="349" height="494" /></p></li>
+</ol>
+
+<h2 id="terminate-a-server-">Terminate a Server
+</h2>
+
+<h3 id="terminate-a-server--objective-">Objective
+</h3>
+
+<p>To terminate selected running server instances, all running instances in a selected array, selected instances in a given array, or unmanaged instances.</p>
+
+<p>Note that the <strong>Terminate</strong> action will only work on a running unlocked server or array instance. Selected servers/instances that are not running are ignored by the <strong>Terminate</strong> action.</p>
+
+<h3 id="terminate-a-server--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>Unlocked running Servers/Instances</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="terminate-a-server--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select one or more servers, arrays, or array instances.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>Terminate</strong> from the drop-down menu.  </p>
+
+<p><img src="/img/cm-msa-action-terminate.png" alt="cm-msa-action-terminate.png" width="366" height="492" /></p></li>
+<li><p>A dialog prompts you for confirmation. Click <strong>Terminate</strong>.</p>
+
+<p><img src="/img/cm-msa-terminate-confirm.png" alt="cm-msa-terminate-confirm.png" width="550" height="446" /></p></li>
+</ol>
+
+<h2 id="stop-a-running-instance-">Stop a Running Instance
+</h2>
+
+<h3 id="stop-a-running-instance--objective-">Objective
+</h3>
+
+<p>To stop a running instance from the Instances &amp; Servers page.</p>
+
+<h3 id="stop-a-running-instance--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>Unlocked running Instances</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="stop-a-running-instance--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select one or more running instances that you want to stop.</li>
+<li>Click <strong>Actions</strong> and select <strong>Stop</strong> from the drop-down menu.</li>
+<li>Click <strong>Stop</strong> when prompted for confirmation.</li>
+</ol>
+
+<h2 id="start-a-stopped-instance-">Start a Stopped Instance
+</h2>
+
+<h3 id="start-a-stopped-instance--objective-">Objective
+</h3>
+
+<p>To start a stopped instance from the Instances &amp; Servers page.</p>
+
+<h3 id="start-a-stopped-instance--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>Stopped Instances</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="start-a-stopped-instance--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select one or more stopped instances that you want to start.</li>
+<li>Click <strong>Actions</strong> and select <strong>Start</strong> from the drop-down menu.</li>
+<li>Click <strong>Start</strong> when prompted for confirmation.</li>
+</ol>
+
+<h2 id="set-current-server-inputs-">Set Current Server Inputs
+</h2>
+
+<h3 id="set-current-server-inputs--objective-">Objective
+</h3>
+
+<p>To define input values for a currently running/operational server. <em>Note</em>: Array instances and unmanaged Instances are ignored by the <strong>Set Current Inputs</strong> action.</p>
+
+<h3 id="set-current-server-inputs--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>&#39;actor&#39; user role privileges</li>
+<li>One or more running or operational servers within a deployment</li>
+</ul>
+
+<h3 id="set-current-server-inputs--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select a currently running server instance.</li>
+<li>Click <strong>Actions</strong> and select <strong>Set Current Server Inputs</strong> from the drop-down menu.<br></li>
+</ol>
+
+<p><img src="/img/cm-msa-action-set-current-inputs.png" alt="cm-msa-action-set-current-inputs.png" width="368" height="498" />  </p>
+
+<ol>
+<li>A dialog similar to the following identifies the instances that you can set server inputs for. Scroll through the Bulk Inputs Update section and change the inputs as needed, then click <strong>Set Inputs</strong>.</li>
+</ol>
+
+<p><img src="/img/cm-msa-set-current-interrupts-confirm.png" alt="cm-msa-set-current-interrupts-confirm.png" width="550" height="334" /></p>
+
+<h2 id="set-next-server-inputs-">Set Next Server Inputs
+</h2>
+
+<h3 id="set-next-server-inputs--objective-">Objective
+</h3>
+
+<p>To set input values on the <q>next</q> launch of one or more servers. <em>Note</em>: The <strong>Set Next Server Inputs</strong> action is not valid when servers or instances in different deployments are selected. Arrays, array instances, and unmanaged instances are ignored by the <strong>Set Next Server Inputs</strong> action.</p>
+
+<h3 id="set-next-server-inputs--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>&#39;actor&#39; user role privileges</li>
+<li>One or more servers within a deployment</li>
+</ul>
+
+<h3 id="set-next-server-inputs--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select one or more servers.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>Set Next Server Inputs</strong> from the drop-down menu.  </p>
+
+<p><img src="/img/cm-msa-action-set-next-input.png" alt="cm-msa-action-set-next-input.png" width="348" height="491" />  </p></li>
+<li><p>A dialog identifies the selected resources for which you can set &#39;next&#39; server inputs on. Scroll down in the Bulk Inputs Update section of the dialog, set or modify server inputs as needed, then click <strong>Set Inputs</strong>.</p>
+
+<p><img src="/img/cm-msa-set-next-inputs-confirm.png" alt="cm-msa-set-next-inputs-confirm.png" width="550" height="334" /></p></li>
+</ol>
+
+<h2 id="relaunch-a-server-">Relaunch a Server
+</h2>
+
+<h3 id="relaunch-a-server--objective-">Objective
+</h3>
+
+<p>To relaunch one or more running servers. <em>Note</em>: Server arrays, array instances, and unmanaged instances are ignored by the <strong>Relaunch</strong> action.</p>
+
+<h3 id="relaunch-a-server--overview-">Overview
+</h3>
+
+<p>When a server is relaunched, the current instance is terminated and a new instance is launched in its place. The new server will receive a new aws-id, private DNS name, and public DNS name, because it is a completely different physical machine. Relaunching a server is equivalent to terminating the existing running server and launching a fresh new server in its place, whereas a reboot will restart the same physical machine. When you relaunch a server, the configurations and inputs that are defined under the <q>Next</q> server will be used.</p>
+
+<h3 id="relaunch-a-server--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>An active (running) Server</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="relaunch-a-server--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Click <strong>Actions</strong> and select <strong>Relaunch</strong> from the drop-down menu.</li>
+</ol>
+
+<p><img src="/img/cm-msa-action-relaunch.png" alt="cm-msa-action-relaunch.png" width="340" height="511" /></p>
+
+<h2 id="review-inputs-and-launch-">Review Inputs and Launch
+</h2>
+
+<h3 id="review-inputs-and-launch--objective-">Objective
+</h3>
+
+<p>Review server inputs and launch a single server.</p>
+
+<h3 id="review-inputs-and-launch--overview-">Overview
+</h3>
+
+<p>The <strong>Review Inputs and Launch</strong> action allows you to first review (and possibly change) server inputs prior to launching the selected server. This action only works on one selected server at a time. This action is not available from the <strong>Actions</strong> drop-down if more than one server is selected.</p>
+
+<h3 id="review-inputs-and-launch--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>&#39;actor&#39; user role privileges</li>
+<li>At least one available server</li>
+</ul>
+
+<h3 id="review-inputs-and-launch--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select the server for which you want to review inputs and launch.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>Review Inputs and Launch</strong> from the drop-down menu.  </p>
+
+<p><img src="/img/cm-msa-action-review-inputs-launch.png" alt="cm-msa-action-review-inputs-launch.png" width="338" height="497" />  </p></li>
+<li><p>A dialog identifies the current server input values and provides an opportunity to modify these values prior to launching the selected server. Once you have reviewed and modified inputs, click <strong>Launch</strong>.</p>
+
+<p><img src="/img/cm-msa-review-inputs-launch-confirm.png" alt="cm-msa-review-inputs-launch-confirm.png" width="550" height="521" /></p></li>
+</ol>
+
+<h2 id="add-tag-s--to-a-server-">Add Tag(s) to a Server
+</h2>
+
+<h3 id="add-tag-s--to-a-server--objective-">Objective
+</h3>
+
+<p>To add Rightscale tags to one or more server objects. <em>Note</em>: The <strong>Add Tag(s)</strong> action is not currently available for unmanaged instances.</p>
+
+<h3 id="add-tag-s--to-a-server--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>&#39;actor&#39; User Role Privileges</li>
+<li>An existing server within a deployment to add or remove tags on</li>
+</ul>
+
+<h3 id="add-tag-s--to-a-server--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage &gt; **Instances &amp; Servers</strong>.</li>
+<li>Select on or more servers.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>Add Tag(s)</strong> from the drop-down menu.  </p>
+
+<p><img src="/img/cm-msa-action-add-tag.png" alt="cm-msa-action-add-tag.png" width="335" height="497" />  </p></li>
+<li><p>The Add Tags dialog displays. Enter a new tag in the available edit field and click the <strong>Add</strong> button. Note that you can add more than one tag without closing the dialog. Once you have completed adding your new tags, click <strong>Apply</strong>.</p>
+
+<p><img src="/img/cm-msa-add-tags-confirm.png" alt="cm-msa-add-tags-confirm.png" width="550" height="504" /></p></li>
+</ol>
+
+<h2 id="remove-tag-s--from-a-server-">Remove Tag(s) from a Server
+</h2>
+
+<h3 id="remove-tag-s--from-a-server--objective-">Objective
+</h3>
+
+<p>To remove RightScale tag(s) from one or more servers. <em>Note</em>: The <strong>Remove Tag(s)</strong> action is not currently available for unmanaged instances.</p>
+
+<h3 id="remove-tag-s--from-a-server--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>&#39;actor&#39; User Role Privileges</li>
+<li>An existing server within a deployment to add or remove tags on</li>
+</ul>
+
+<h3 id="remove-tag-s--from-a-server--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select one or more servers from which you want to remove tags.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>Remove Tag(s)</strong> from the drop-down menu.  </p>
+
+<p><img src="/img/cm-msa-action-remove-tags.png" alt="cm-msa-action-remove-tags.png" width="331" height="496" />  </p></li>
+<li><p>The Remove Tags dialog displays. Select one or more tags that you want to remove then click <strong>Remove</strong>.</p>
+
+<p><img src="/img/cm-msa-remove-tags-confirm.png" alt="cm-msa-remove-tags-confirm.png" width="550" height="505" /></p></li>
+</ol>
+
+<h2 id="lock-a-server-">Lock a Server
+</h2>
+
+<h3 id="lock-a-server--objective-">Objective
+</h3>
+
+<p>To lock one or more existing servers within a deployment.</p>
+
+<h3 id="lock-a-server--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>One or more existing servers</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="lock-a-server--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select on or more servers that you want to lock.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>Lock</strong> from the drop-down menu.  </p>
+
+<p><img src="/img/cm-msa-action-lock.png" alt="cm-msa-action-lock.png" width="316" height="493" />  </p></li>
+<li><p>Once the selected resource is locked you will see a &#39;lock&#39; icon next to the entry.  </p>
+
+<p><img src="/img/cm-msa-locked-icon.png" alt="cm-msa-locked-icon.png" width="326" height="163" /></p></li>
+</ol>
+
+<h2 id="unlock-a-server-">Unlock a Server
+</h2>
+
+<h3 id="unlock-a-server--objective-">Objective
+</h3>
+
+<p>To unlock one or more existing servers.</p>
+
+<h3 id="unlock-a-server--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>At least one or more existing servers</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="unlock-a-server--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select one or more servers that you want to unlock.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>Unlock</strong> from the drop-down menu.</p>
+
+<p><img src="/img/cm-msa-action-unlock.png" alt="cm-msa-action-unlock.png" width="298" height="501" /></p></li>
+</ol>
+
+<h2 id="reboot-a-server-">Reboot a Server
+</h2>
+
+<h3 id="reboot-a-server--objective-">Objective
+</h3>
+
+<p>To reboot one or more server instances.</p>
+
+<h3 id="reboot-a-server--prerequistes-">Prerequistes
+</h3>
+
+<ul>
+<li>A current (running) server</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="reboot-a-server--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong>.</li>
+<li>Select one or more servers that you want to reboot.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>Reboot</strong> from the drop-down menu.</p>
+
+<p><img src="/img/cm-msa-action-reboot.png" alt="cm-msa-action-reboot.png" width="310" height="494" /></p></li>
+</ol>
+
+<h2 id="move-a-server-into-a-deployment-">Move a Server into a Deployment
+</h2>
+
+<h3 id="move-a-server-into-a-deployment--objective-">Objective
+</h3>
+
+<p>To move one or more selected servers, or selected arrays (and all associated instances) to a different deployment.</p>
+
+<h3 id="move-a-server-into-a-deployment--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>Two deployments</li>
+<li>An active/inactive server or array that has been configured in a deployment</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="move-a-server-into-a-deployment--overview-">Overview
+</h3>
+
+<p>Before you move a server, it&#39;s important to fully understand its ramifications. Remember, a deployment is a RightScale-specific concept. Deployments provide a means of logically grouping a set of servers together. Typically, you will create a separate deployment for each project in your RightScale account. Servers within a deployment will inherit any input parameters that have been defined at the deployment level unless they are overwritten at the server or server array levels. As a best practice, we strongly recommend that all inputs be defined at either the ServerTemplate or deployments levels. (See <a href="/cm/rs101/understanding_inputs.html">Understanding Inputs</a>.) Therefore, due to the laws of input inheritance, when you move a server from one deployment to the next, it may inherit different input parameters.</p>
+
+<p>You can move both active and inactive servers. Remember, you&#39;re not physically moving a server from one cloud to the next. When you move a server you are only changing the deployment with which it&#39;s associated. In addition, it is possible to move a raw server instance to &#39;no deployment&#39; which causes the server to be removed from the deployment it is currently associated with.</p>
+
+<p><strong>Moving an Active (Operational) Server</strong></p>
+
+<p>When you move an active, running server, none of its current configurations will be changed. However, it is important that you understand which of its inputs are being inherited from the deployment level, because any script that is run after the server has been moved will get its input parameter(s) from the the new deployment. Also, if the server is relaunched, it may be configured completely different the next time it&#39;s launched depending on what input parameters are inherited from the deployment level.</p>
+
+<h3 id="move-a-server-into-a-deployment--steps-">Steps
+</h3>
+
+<ol>
+<li>In the Dashboard user interface, go to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers.</strong></li>
+<li>Select the server(s) you want to move to a different deployment.</li>
+<li><p>Click <strong>Actions</strong> and select <strong>Move</strong> from the drop-down menu.  </p>
+
+<p><img src="/img/cm-msa-action-move.png" alt="cm-msa-action-move.png" width="304" height="498" />  </p></li>
+<li><p>The Confirm Move dialog displays. Use the available drop-down control to select the deployment to which you want to move your selected servers/arrays. Once you have selected the target deployment, click <strong>Move</strong>.  </p>
+
+<p><img src="/img/cm-msa-move-confirm.png" alt="cm-msa-move-confirm.png" width="550" height="503" /></p></li>
+</ol>
+
+<h2 id="transfer-files-using-sftp-">Transfer Files Using SFTP
+</h2>
+
+<h3 id="transfer-files-using-sftp--objective-">Objective
+</h3>
+
+<p>Transfer files between your local machine and a server running in the cloud.</p>
+
+<h3 id="transfer-files-using-sftp--overview-">Overview
+</h3>
+
+<p>If you have configured your SSH user preferences and settings to utilize the <code>ssh://</code> protocol connection method, you can transfer files using the SFTP protocol. The SFTP file transfer capability is not available if you have configured your SSH settings to either the Java Web Start™ or Java Applet connection methods.</p>
+
+<h3 id="transfer-files-using-sftp--prerequisites-">Prerequisites
+</h3>
+
+<ul>
+<li>A running cloud instance</li>
+<li>Valid key authentication for establishing a secure shell connection. The type of required key authentication varies depending on the underlying machine image and your SSH user preferences and settings.</li>
+<li>&#39;server_login&#39; and &#39;server_superuser&#39; if you are running RightImage 5.7 and lower (both roles will need to be enabled to be able to SSH into a server). If you are running 5.8 or newer, like with 5.7 and lower, you can have both roles enabled or you can have either &#39;server_login&#39; (which allows you to login as the user of the account without root access) and &#39;server_superuser&#39; (which allows you to login as root to the server). For more information, see <a href="/cm/rs101/rightScale_account_and_user_role_management.html">RightScale Account and User Management</a>.</li>
+<li>If you&#39;re using a cloud that support security groups to control the instance&#39;s firewall permissions (e.g. AWS) you must configure the security group to allow SSH access over TCP port 22. See <a href="/cm/dashboard/clouds/generic/security_groups_actions.html#create-a-new-security-group">Create a New Security Group</a>.</li>
+<li>If you are using a VLAN cloud that uses IP port forwarding instead of security groups to control an instance&#39;s firewall permissions you must set up a port forwarding rule for TCP port 22 to allow SSH access. See <a href="/cm/dashboard/clouds/generic/port_forwarding_rules_actions.html#create-a-new-port-forwarding-rule">Create new Port Forwarding Rules</a>.</li>
+<li>Requires &#39;server_login&#39; user role privileges to SSH into a server from the RightScale dashboard.</li>
+<li>Requires the ssh:// protocol SSH user setting.</li>
+<li>An SFTP client on your local machine properly configured to utilize SSH private key authentication.</li>
+</ul>
+
+<h3 id="transfer-files-using-sftp--steps-">Steps
+</h3>
+
+<p>At the server level, use the following steps to transfer files using SFTP.</p>
+
+<ol>
+<li>Navigate to the running server show page.</li>
+<li><p>Click either the <strong>SFTP File Transfer</strong> button or the <strong>SFTP</strong> link as shown below.  </p>
+
+<p><img src="/img/cm-server-actions-sftp.png" alt="cm-server-actions-sftp.png" width="600" height="375" />  </p></li>
+<li><p>Depending on your operating system and browser version, you may be prompted to select the SFTP client that you want to use to transfer files.</p></li>
+<li><p>Use your SFTP client of choice to transfer files to/from the running server. See the operating instructions for your SFTP client for detailed information on file transfer procedures.</p></li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>As indicated above, the SFTP file transfer capability is only available if your SSH settings are configured to use the ssh:// protocol.</p>
+</div>
+
+<h2 id="selecting-server-pricing-type-">Selecting Server Pricing Type
+</h2>
+
+<h3 id="selecting-server-pricing-type--overview-">Overview
+</h3>
+
+<p>Although there are 3 different EC2 instance purchasing options, you can only manually control whether you launch an On-Demand or Spot Instance.</p>
+
+<ul>
+<li>On-Demand Instances</li>
+<li>Reserved Instances</li>
+<li>Spot Instances</li>
+</ul>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>Although Reserved Instances are manually purchased from Amazon, it is Amazon, not you, who determines whether your On-Demand instances should be billed at the discounted Reserve Instance price or at the standard On-Demand Instance price. As a user, you can only control whether or not you are launching an On-Demand or Spot Instance.</p>
+</div>
+
+<h3 id="selecting-server-pricing-type--steps-">Steps
+</h3>
+
+<p>How do you select a Server&#39;s Pricing Type?  By default, all Servers will be configured to launch On-Demand Instance types unless you overwrite this preference at the Server level. Once a Server has been added to a Deployment:</p>
+
+<ol>
+<li>Select <q>Spot</q> as the instance type under a Server&#39;s Info tab</li>
+<li>Click <strong>Edit</strong>. If you want to launch a <q>Spot</q> instance type, you will also need to define the Maximum Bid Price. Use the <q>history</q> link to view recent changes to the current spot price. <em>Note</em>: Amazon typically changes the spots randomly throughout the day.</li>
+<li>Click the Save action button when ready</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Spot Instances do not support start/stop functionality.</p>
+</div>
+
+<p>It is also possible to specify Server Priciung Type from within the Add Server wizard on the Server Details page. Use the Pricing dropdown control to select either <q>On Demand</q> or <q>Spot</q>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

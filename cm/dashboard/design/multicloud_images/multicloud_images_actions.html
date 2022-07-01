@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>MultiCloud Images Actions</title><meta content="Common procedures for working with MultiCloud Images in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_design cm_dashboard_design_multicloud_images cm_dashboard_design_multicloud_images_multicloud_images_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Design</a> &#x2F; <a href="./">MultiCloud Images</a></p><div class="page-header"><h1>MultiCloud Images Actions</h1></div><div class="main-content"><h2 id="add-new-cloud-support-to-a-multicloud-image--mci-">Add New Cloud Support to a MultiCloud Image (MCI)</h2>
+
+<p>When a ServerTemplate is published, its MultiCloud Images (MCIs) are also published. Most ServerTemplates are published with multiple MCIs. However, there may be situations where the ServerTemplate cannot be used to Add a Server to a Deployment in the cloud of your choice because the template&#39;s MCIs do not support those clouds/regions. In such cases, you can either create a new MultiCloud Image from scratch or modify an existing MCI. This tutorial explains how to do the latter (i.e. clone and modify an existing MCI).</p>
+
+<p>For this example, let&#39;s assume that you just imported a ServerTemplate from the MultiCloud Marketplace that uses MCIs that only support AWS regions. However, you want to use the same ServerTemplate to launch instances in another private/public cloud that RightScale supports.</p>
+
+<p><strong>Important!</strong> Be sure to add the appropriate RightLink tag to the new MCI, which is the last step of the tutorial otherwise, scripts will not be executed correctly on the Server.</p>
+
+<h3 id="add-new-cloud-support-to-a-multicloud-image--mci--prerequisites">Prerequisites</h3>
+
+<p>If you are adding an image for a private cloud, you must first upload the image to the private cloud itself before you can build an MCI that references it.</p>
+
+<h3 id="add-new-cloud-support-to-a-multicloud-image--mci--steps">Steps</h3>
+
+<p>Go to the ServerTemplate&#39;s <strong>Images</strong> tab. Click on the MCI that you want to modify and add additional cloud support. The Clouds column shows all of the clouds/regions that are supported by a particular MCI. In the screenshot below, the MCI only supports the listed AWS regions.</p>
+
+<p>Alternatively, you can also go directly to the MCI that you want to modify. (Design -&gt; MultiCloud Images)</p>
+
+<p><img src="/img/cm-servertemplate-images-tab.png" alt="cm-servertemplate-images-tab.png" width="725" height="198" /></p>
+
+<h4 id="clone-the-mci">Clone the MCI</h4>
+
+<p>Since you cannot edit a committed revision of a MultiCloud Image, you must first clone it in order to create an editable version under Design -&gt; MultiCloud Images. Click the <strong>Clone</strong> action button. Rename your cloned MCI. (optional)</p>
+
+<h4 id="add-an-image-for-another-cloud">Add an Image for Another Cloud</h4>
+
+<p>Click on the <strong>Clouds</strong> tab of the cloned MCI.</p>
+
+<p>Click the <strong>Add</strong> button. Remember, as a best practice, each MCI should reference copies of the same underlying machine image. So, if you&#39;re adding an image for an MCI that&#39;s referencing <q>RightImage_CentOS_5.4_x64_v5.6</q> images, you should only add a reference to an equivalent image in the newly added cloud. For example, it should have the same operating system (e.g. CentOS 5.4), system architecture (e.g. x64) and RightLink version (e.g. v5.6).</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The information that&#39;s required to add an image will vary depending on the chosen cloud. Some examples are listed below.</p>
+</div>
+
+<h4 id="aws">AWS</h4>
+
+<p>As Amazon continues to launch new EC2 regions, you may want to update an existing MCI to include support for a newly launched region. RightScale often makes the latest RightImages available in the new EC2 region at launch time. If you cannot find an MCI that includes support for the new region, you can still modify an existing MCI and add support for the new region. If you cannot find the matching image in the new region you can create one yourself.</p>
+
+<p><img src="/img/cm-add-aws.png" alt="cm-add-aws.png" width="578" height="411" /></p>
+
+<ul>
+<li><strong>Cloud</strong> - Select an AWS region.</li>
+<li><strong>Machine Image</strong> - Select the appropriate machine image (e.g. RightImage) that will be used by the created Server. The selected image must be compatible with the selected instance type.</li>
+<li><strong>Instance Type</strong> - Select the default instance type that will be used to launch the instance.</li>
+<li><strong>Kernel Image</strong> - Select the appropriate kernel image that will be used to launch the instance.</li>
+<li><strong>Ramdisk Image</strong> - Select the appropriate ramdisk image that will be used to launch the instance.</li>
+<li><strong>User Data</strong> - Data to be passed into the instances at launch time. This field is rarely used but can be useful during development to pass configuration values into the instance.</li>
+</ul>
+
+<h4 id="tag-the-mci">Tag the MCI</h4>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>After creating a new MCI, you must remember to add the following tag so that RightScale will be able to recognize and treat a launched instance appropriately.</p>
+</div>
+
+<p>Under the MCI&#39;s <strong>Info</strong> tab, add the following tag:</p>
+
+<p><code>provides:rs_agent_type=right_link</code></p>
+
+<h3 id="add-new-cloud-support-to-a-multicloud-image--mci--next-steps">Next Steps</h3>
+
+<p>Now that you&#39;ve successfully modified your MCI to support another cloud/region, you can use the MCI in other ServerTemplates.</p>
+
+<h2 id="clone-a-multicloud-image">Clone a MultiCloud Image</h2>
+
+<p>You can clone a MultiCloud Image so that it becomes your own (Private) MCI that you can customize to suit your needs. You cannot edit a committed revision of a MultiCloud Image. You must clone it in order to create an editable version under <strong>Design</strong> &gt; <strong>MultiCloud Images</strong>.</p>
+
+<h3 id="clone-a-multicloud-image-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Design</strong> &gt; <strong>MultiCloud Images</strong>. Select one of the available MCIs that you would like to clone.</li>
+<li>When you click the <strong>Clone</strong> action button, an editable copy of that MCI will be created.</li>
+<li>You may notice a warning message that the cloned object will have its usage reported to RightScale. This message is meant to convey the fact that RightScale is able to track the lineage of an object even if it&#39;s cloned.</li>
+</ul>
+
+<p>By default, the version of an MCI will be incremented. For example, if you clone <q>MCI v8</q> the new cloned version will be named <q>MCI v9</q>. Therefore, we recommend changing the name of the MCI to help better distinguish the cloned MCI from its ancestor. Under the Info tab, notice that we always show where an MCI was cloned from.</p>
+
+<p><img src="/img/cm-clone-mci.png" alt="cm-clone-mci.png" width="676" height="521" /></p>
+
+<h2 id="create-a-custom-rightimage-for-faster-boot-times">Create a Custom RightImage for Faster Boot Times</h2>
+
+<p>You can modify a custom RightImage that will result in faster launch times. If you build a custom ServerTemplate that contains boot scripts that download large packages, you may experience very long server launch times (e.g. greater than 30 minutes). In such cases, you may want to include some of the large packages as part of the image in order to reduce overall server launch times. This tutorial describes the recommended steps for building a custom RightImages for optimal launch times.</p>
+
+<p>Although it&#39;s a recommended best practice to use one of the base RightImages that were published with the ServerTemplate, there may be certain conditions (such as long boot times) that require you to build a custom RightImage. In such cases, it&#39;s strongly recommended that you follow the steps outlined below, which will make it easier to receive support from RightScale&#39;s Support team. It&#39;s difficult to troubleshoot a server that was launched with a custom RightImage because identifying all of the changes that were made to the underlying image can be difficult.</p>
+
+<p>RightScale&#39;s RightImages create a root disk on the instance that&#39;s 10GB in size. Data that is stored in the ephemeral drive or in mounted voumes is not preserved and is included in a bundled image. Therefore, you cannot include an attachment that is 10GB in size. If you want to include a package that is larger than 10GB in size, you can use a snapshot that will create and attach a volume to the instance at boot time.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The instructions below apply to EC2 machine images.</p>
+</div>
+
+<h3 id="create-a-custom-rightimage-for-faster-boot-times-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="create-a-custom-rightimage-for-faster-boot-times-steps-for-linux">Steps for Linux</h3>
+
+<ol>
+<li>Create a custom ServerTemplate that launches a fully configured server according to your specifications.</li>
+<li>Launch a few test servers using the ServerTemplate to record the average launch time.</li>
+<li>The next step is to clone the custom ServerTemplate, which you will use to create a custom RightImage. Name the ServerTemplate accordingly (e.g. <q>Image Builder</q>).</li>
+<li>Under the cloned ServerTemplate&#39;s <strong>Scripts</strong> tab, remove all of the scripts from the Boot Script section EXCEPT for the custom RightScripts that install those large packages including the core set of RightScripts that are common to most ServerTemplates published by RightScale that set up monitoring, logging and timezone. In the example screenshot below, only the &#39;<strong>App A - Install Package (5GB)</strong>&#39; script is kept in the boot list because it installs such a large package (5GB). If a script had to download 5GB of data each time a server is launched, it would take a long time to finish the boot script phase. Alternatively, you could also create a single script that will install and configure any applications and packages that you want to be permanently included at the image level.<br>
+<img src="/img/cm-scripts-remove.png" alt="cm-scripts-remove.png" width="464" height="550" /><br></li>
+<li>Use the <q>Image Builder</q> ServerTemplate to launch a server into the cloud/region where you want to build your custom image. (Remember, images are cloud/region-specific and can only be used to launch servers in the same cloud/region.)</li>
+<li><p>Clean the instance before you bundle a running instance and create a machine image of the VM. The clean-up process ensures that subsequent instance launches using the created image will be unique and not inherit previous SSH keys. For example, you will need to remove ssh keys, logs, rightlink state, etc. The commands may be different depending on the RightLink version.</p>
+
+<ul>
+<li><p>SSH into the instance. For instances launched with a RightImage using RightLink v5.8+, switch to the &#39;root&#39; user so that you can access and modify the directories below.</p>
+<pre class="syntax-highlight plaintext"><code>  $ sudo -i
+</code></pre></li>
+<li><p>Remove SSH Keys</p>
+<pre class="syntax-highlight plaintext"><code>  # rm -vf /home/rightscale/.ssh/* (for RightLink v5.8+)
+</code></pre></li>
+<li><p>Clear the Temp Directory</p>
+<pre class="syntax-highlight plaintext"><code>  # rm -rvf /tmp/*
+</code></pre></li>
+<li><p>Remove State</p>
+<pre class="syntax-highlight plaintext"><code>  # rm -rvf /var/cache/rightscale
+  # rm -vf /etc/rightscale.d/*.js (for RightLink v5.7 or earlier)
+  # rm -rvf /var/lib/rightscale (for RightLink v5.8+)
+  # rm -rvf /var/spool/cloud/*
+  # rm -vf /opt/rightscale/right_link/certs
+</code></pre></li>
+</ul></li>
+<li><p>Once the server becomes operational, click the <strong>Bundle</strong> button. Wait for the bundled image to be completed. The process can take several minutes (~20 min).</p></li>
+<li><p>(Optional) If the bundled EC2 image is going to be used in a different RightScale account, you will need to also share the image with the other accounts.</p></li>
+<li><p>Repeat steps 5-7 to create the same image in other clouds/regions.</p></li>
+<li><p><a href="/cm/dashboard/design/multicloud_images/multicloud_images_actions.html">Create a New MultiCloud Image</a> (MCI) and add references to the custom images that you created across the different clouds/regions. Don&#39;t forget to tag the MCI with the appropriate RightLink tag.</p></li>
+<li><p>Clone the original ST again, except this time you must remove the scripts from the Boot Script list that were used in the <q>Image Builder</q> ServerTemplate to build your custom image. Add the new MCI to the ServerTemplate and remove any other MCIs that you no longer want to be included. Make your new MCI the <q>Default</q> MCI for the ServerTemplate.</p></li>
+<li><p>Create and launch a server with the optimized ServerTemplate and compare the launch time against the original server. You should notice a significant reduction in the total launch time. Commit the ServerTemplate to save the changes or modify the <q>Image Builder</q> ServerTemplate to make further adjustments as necessary.</p></li>
+</ol>
+
+<h2 id="create-a-new-multicloud-image">Create a New MultiCloud Image</h2>
+
+<p>This procedure describes creating a new MultiCloud Image. A <strong>MultiCloud Image</strong> is a RightScale component that functions as a map or pointer to images in specific clouds and/or AWS regions. Each ServerTemplate may reference one or more MultiCloud Images that define which image(s) (e.g. RightImages) should be used when a Server is launched in a particular cloud. ServerTemplates published by RightScale will use predefined and tested MultiCloud Images. However, if you are using custom images, you can create your own MultiCloud Image that will point to these other images. The reasons for creating your own MCI can vary. It could be possible that the ServerTemplate you would like to use doesn’t have an MCI that points to a RightImage in a new Amazon region or you might need to use your own image to comply with your company’s policy. The key benefit of the MCI is that you don&#39;t have to worry about selecting the appropriate image for each cloud/region when you create a Server. All you have to do is select the region and the MCI will automatically select the appropriate image for you.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You can either create a MultiCloud Image under the Design &gt; MultiCloud Images or <q>on-the-fly</q> when creating a ServerTemplate from scratch.</p>
+</div>
+
+<div class="alert alert-warning" role="alert"><strong>Watch out!</strong><p>Be sure to add the appropriate RightLink tag to the new MCI, which is the last step of the tutorial otherwise scripts will not be executed correctly on the Server.</p>
+</div>
+
+<h3 id="create-a-new-multicloud-image-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>You must have &#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="create-a-new-multicloud-image-steps">Steps</h3>
+
+<p>Typically, you will create an MCI that points to identical images in each cloud. If the images are different in any way (OS, system architecture, etc.) you should create a separate MCI for each type.</p>
+
+<h4 id="mci-name-and-description">MCI Name and Description</h4>
+
+<p>In the CM Dashboard, go to <strong>Design</strong> &gt; <strong>MultiCloud</strong>  <strong>Images</strong> and click <strong>New</strong>.</p>
+
+<p>First, you will need to provide some basic information about the new MultiCloud Image.</p>
+
+<ul>
+<li><strong>Nickname</strong> – A short nickname that helps you recognize the MultiCloud Image.</li>
+<li><strong>Description</strong> – A short description of the MultiCloud Image.</li>
+</ul>
+
+<h4 id="select-images-for-each-cloud">Select Images for each Cloud</h4>
+
+<p>Once the object has been created, you will be redirected to its Clouds tab where you must specify an image for each cloud or AWS region that the MultiCloud Image will support. The required information to complete the mapping will vary depending on the cloud.</p>
+
+<h4 id="aws">AWS</h4>
+
+<p>You can only create a mapping to an image that&#39;s already available in the selected cloud. If you&#39;ve created your own custom image that you want to use across multiple AWS regions, you will need to make a copy of the image available in each region that you want to launch an instance into.</p>
+
+<p>If you are adding a reference to a private AMI (that belongs to your AWS account) and plan to publish and share the MCI with another RightScale account, you will need to first privately share the AMI with the other AWS account.</p>
+
+<p><img src="/img/cm-select-image.png" alt="cm-select-image.png" width="609" height="400" /></p>
+
+<ul>
+<li><strong>Clouds</strong> – The cloud infrastructures (AWS US-East, AWS-EU, etc.) for which you are going to select an image. In order to create a MultiCloud Image, you must specify an image for at least one cloud. Remember, you can only specify a single image for each cloud. For example, you can&#39;t specify both a 32-bit and 64-bit image in the &#39;AWS US-East&#39; cloud so that you can launch both small and large instance types with the same ServerTemplate. However, you can create multiple MCIs... for example, one with 32-bit images and small instance types for each cloud and another with 64-bit images and large instance types. A single ServerTemplate can reference multiple MCIs such as the the <q>small</q> and <q>large</q> in our example. You will only be able to add and launch a Server into a cloud where the ServerTemplate&#39;s MultiCloud Image has an image specified. Therefore, if you want to use this MultiCloud Image to launch Server instances into both the &#39;AWS US-East&#39; and &#39;AWS US-West&#39; clouds, you will need to specify a single image for each cloud. Add additional clouds to the MultiCloud Image as needed. As you make your cloud selections, the drop-down will reflect which clouds you can still add MCIs for as you progress. (For example, if you&#39;re using AWS, the initial drop down could include AWS US-East, US-West and EU. If you select an image for US-East, the next time you add an image to that MCI only US-West and EU will be in the drop down menu.)</li>
+<li><strong>Instance Type</strong> – The type of cloud instance that will be launched by default. Instance types are cloud-specific. For AWS, EC2 instance types will be listed (e.g. m1.small, m1.large). Be sure to select the appropriate image that supports your default instance type. (e.g. m1.small, c1.medium instance types must use a 32-bit image (as shown above). Conversely, you will need to select a 64-bit image for any instance types that are larger than a medium (e.g. m1.large, m2.2xlarge, etc.). Be sure to check <a href="/clouds/aws/aws_instance_types.html">Amazon EC2 Instance Types</a> for the latest instance types and charges. Note: It is not necessary to create a MCI for each instance type, only each architecture type (32-bit and 64-bit).</li>
+<li><strong>Machine Image</strong> - Select the image that will be used to build and launch instances with this MultiCloud Image. When possible, it&#39;s recommended that you use the most recent version of our RightImages<sup>TM</sup>. Warning: If you select a non-RightImage that has not been RightLink enabled, RightScale will not be able to provide any support for you and you will not be able to use any RightScripts of your own.</li>
+<li><strong>Kernel image</strong> - The kernel that you want to use for your instance. (Optional)</li>
+<li><strong>Ramdisk image</strong> - The ramdisk that you want to use for your image. (Optional)</li>
+<li><strong>User data</strong> – Data to be passed into the instances using the EC2 user launch data (limited to 16KB). This field is rarely used but can be useful during development to pass configuration values into the instance at boot or runtime. (Optional)</li>
+</ul>
+
+<p>Click the <strong>Save</strong> action button. Repeat the steps above to add additional images for other clouds.</p>
+
+<h3 id="create-a-new-multicloud-image-tag-the-mci">Tag the MCI</h3>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>After creating a new MCI, you must remember to add the following tag so that RightScale will be able to recognize and treat a launched instance appropriately and successfully execute scripts on the Server.</p>
+</div>
+
+<p>Under the MCI&#39;s <strong>Info</strong> tab, add the following tag:</p>
+
+<p><code>provides:rs_agent_type=right_link</code></p>
+
+<h2 id="delete-a-multicloud-image">Delete a MultiCloud Image</h2>
+
+<p>You can delete a MultiCloud Image (MCI) from a RightScale account. When you delete an MCI, the component will be removed from the RightScale account and will no longer be visible under in the Dashboard under Design -&gt; MultiCloud Images. You should only delete MCIs that you will no longer use in the future. When an MCI is deleted, all previous revisions and HEAD version will be removed.</p>
+
+<p>You will only be allowed to delete an MCI that is currently not being used by any ServerTemplates in the RightScale account.</p>
+
+<h3 id="delete-a-multicloud-image-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges in the RightScale account</li>
+</ul>
+
+<h3 id="delete-a-multicloud-image-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>MultiCloud Images</strong>. You can either delete an MCI at the index page or if you&#39;re viewing the show page for a selected MCI. Note: The Delete icon will appear next to each MCI in the index page regardless of whether or not it can be deleted.</li>
+<li>Remove all ServerTemplate dependencies. Before you can delete an MCI you must first remove any references to that MCI from any of the ServerTemplates in your local collection (<strong>Design</strong> &gt; <strong>ServerTemplates</strong>). You can only delete a MultiCloud Image if none of its committed revisions or HEAD version are being referenced by a ServerTemplate. If you are viewing the MCI&#39;s show page, the Delete button will only be displayed when viewing the HEAD version of the MCI. If you attempt to delete an MCI that is being used by one or more ServerTemplates, you will receive the following error message: <q>Cannot delete as the MultiCloud Image (HEAD/committed revision) is being used by one or more ServerTemplates.</q> Use the MCI&#39;s Xref tab to see where it&#39;s being used. The Xref tab is revision-specific, so you will need to make sure that there are zero dependencies for each revision and HEAD version of the MCI.</li>
+<li>Click <strong>Delete</strong>.</li>
+</ol>
+
+<h2 id="publish-and-share-a-multicloud-image">Publish and Share a MultiCloud Image</h2>
+
+<p>You can publish and share a MultiCloud Image (MCI) from the CM Dashboard. Typically MultiCloud Images are published and shared in the context of a ServerTemplate, however they can be published and shared individually. You can only publish a private component that was originally created in your RightScale account. (i.e. It was either created from scratch or cloned.) You cannot publish a committed revision of an component that you imported from the MultiCloud Marketplace (MCM). <em>Note</em>: A particular revision can only be published once.</p>
+
+<p>Although you can publish a HEAD version, it&#39;s not a recommended best practice unless you&#39;re an advanced user that&#39;s actively developing and testing it across multiple RightScale accounts. It&#39;s recommended that you only publish and share committed revisions of a component.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>If you share a MultiCloud Image that has a reference to a privately owned Amazon Machine Image (AMI) (i.e. the AMI was created using your AWS credentials) and want to share the MCI with another RightScale account, you must also privately share the AMI with the other AWS account otherwise the other RightScale account will not have access to use the referenced AMI.</p>
+</div>
+
+<h3 id="publish-and-share-a-multicloud-image-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;publisher&#39; user role privileges</li>
+</ul>
+
+<h3 id="publish-and-share-a-multicloud-image-steps">Steps</h3>
+
+<ol>
+<li>Navigate to <strong>Design</strong> &gt; <strong>MultiCloud Images</strong> in the RightScale Dashboard.</li>
+<li>Select the MultiCloud Image (MCI) that you want to share.</li>
+<li>Select the committed revision that you want to share in the History Timeline Bar. (e.g. Rev 1)</li>
+<li>Click the <strong>Publish to MultiCloud Marketplace</strong> action button.</li>
+</ol>
+
+<h2 id="update-imported-multicloud-images">Update Imported MultiCloud Images</h2>
+
+<p>You can compare and/or import a newer revision of a MultiCloud Image that is available in the MultiCloud Marketplace (MCM). If you are using a MultiCloud Image that was imported from the MultiCloud Marketplace (or a slightly modified version that you created by cloning it), you may want to update the MultiCloud Image when a newer revision becomes available in the MCM.</p>
+
+<h3 id="update-imported-multicloud-images-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+<li>&#39;library&#39; user role privileges are required to import a newer revision from the MCM.</li>
+</ul>
+
+<h3 id="update-imported-multicloud-images-steps">Steps</h3>
+
+<p>The steps required to update an imported ServerTemplate, RightScript, or MultiCloud Image are very similar.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The most common way to import the most recent revision of a MultiCloud Image is from the context of a ServerTemplate.</p>
+</div>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

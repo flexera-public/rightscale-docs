@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Users</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Users</h1></div><div class="main-content"><h2 id="create-user">Create User</h2>
+
+<p>The following creates a new user in the RightScale Cloud Mangement Platform.</p>
+
+<h3 id="create-user-curl">Curl</h3>
+
+<h4 id="example-call">Example Call</h4>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<p><strong>Note</strong> : A <q>\</q> has been added as a line-break for readability. The actual curl command must be interpreted by the shell as a single line/command.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d user[email]<span class="o">=</span><span class="s1">'gregdoe@example.com'</span> <span class="se">\</span>
+    -d user[password]<span class="o">=</span><span class="s1">'SomePassword'</span> <span class="se">\</span>
+    -d user[company]<span class="o">=</span>RightDoe <span class="se">\</span>
+    -d user[phone]<span class="o">=</span>8051234567 <span class="se">\</span>
+    -d user[first_name]<span class="o">=</span>Greg <span class="se">\</span>
+    -d user[last_name]<span class="o">=</span>Doe <span class="se">\</span>
+    https://my.rightscale.com/api/users
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 201 Created
+    Server: nginx/0.7.67
+    Date: Wed, 24 Aug 2011 21:53:30 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 201 Created
+    Location: /api/users/11
+    X-Runtime: 213
+    X-Request-Uuid: 7d1f40f69a5a451b8833b8f537498c83
+    Set-Cookie: _session_id=3c6e155612b283b6e24a8e972839c257; path=/; Secure; HttpOnly
+    Cache-Control: no-cache
+</code></pre>
+
+<h2 id="list-users">List Users</h2>
+
+<p>List users available to the account the user is logged into.</p>
+
+<h3 id="list-users-curl">Curl</h3>
+
+<h4 id="example-call">Example Call</h4>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;. Requires &#39;admin&#39; role.</p>
+<pre class="syntax-highlight plaintext"><code>    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/users.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : Truncated XML output without headers included (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;users&gt;
+      &lt;user&gt;
+        &lt;last_name&gt;lastname_520081487&lt;/last_name&gt;
+        &lt;links&gt;
+          &lt;link href="/api/users/726395087" rel="self"/&gt;
+        &lt;/links&gt;
+        &lt;first_name&gt;firstname_622638519&lt;/first_name&gt;
+        &lt;created_at&gt;2012/10/04 19:25:26 +0000&lt;/created_at&gt;
+        &lt;email&gt;myemail_3000676324@rightscale.com&lt;/email&gt;
+        &lt;company&gt;&lt;/company&gt;
+        &lt;updated_at&gt;2012/10/04 19:25:26 +0000&lt;/updated_at&gt;
+        &lt;actions&gt;&lt;/actions&gt;
+        &lt;phone&gt;&lt;/phone&gt;
+      &lt;/user&gt;
+      &lt;user&gt;
+        &lt;last_name&gt;lastname_520081487&lt;/last_name&gt;
+        &lt;links&gt;
+          &lt;link href="/api/users/726395087" rel="self"/&gt;
+        &lt;/links&gt;
+        &lt;first_name&gt;firstname_622638519&lt;/first_name&gt;
+        &lt;created_at&gt;2012/10/04 19:25:26 +0000&lt;/created_at&gt;
+        &lt;email&gt;myemail_3000676324@rightscale.com&lt;/email&gt;
+        &lt;company&gt;&lt;/company&gt;
+        &lt;updated_at&gt;2012/10/04 19:25:26 +0000&lt;/updated_at&gt;
+        &lt;actions&gt;&lt;/actions&gt;
+        &lt;phone&gt;&lt;/phone&gt;
+      &lt;/user&gt;
+    &lt;/users&gt;
+</code></pre>
+
+<p><strong>Note</strong> : Without &#39;admin&#39; role you will receive an <q>HTTP 403 Forbidden</q> and <q>Permission Denied</q> message.</p>
+
+<h3 id="list-users-supplemental">Supplemental</h3>
+
+<p>You can apply a fliter when listing users to help narrow your search. You can filter by first name, last name, or email.</p>
+<pre class="syntax-highlight plaintext"><code>    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/users.xml -d filter[]="email==john.doe@example.com"
+</code></pre>
+
+<h2 id="update-user">Update User</h2>
+
+<p>The following examples update an existing user record. Note that the authorization logic is substantially different between SAML-based and password-based users; please consult the example that is most relevant to your use case.</p>
+
+<h3 id="update-user-curl">Curl</h3>
+
+<h4 id="update-a-password-based-user">Update a password-based user</h4>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<ul>
+<li>One of the following must be true:
+
+<ul>
+<li>You are logged in as the user being updated</li>
+<li>You provide the current_password of the user being updated (as evidence that you could login as that user)</li>
+</ul></li>
+</ul>
+
+<p><strong>Note</strong> : A <q>\</q> has been added as a line-break for readability. The actual curl command must be interpreted by the shell as a single line/command.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">USER_ID</span><span class="o">=</span><span class="s2">"2112"</span>
+    <span class="nv">CURRENT_PASSWORD</span><span class="o">=</span><span class="s2">"734PUMJGR7QNF"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+    -d user[email]<span class="o">=</span><span class="s1">'gregdoe@example.com'</span> <span class="se">\</span>
+    -d user[current_password]<span class="o">=</span><span class="nv">$CURRENT_PASSWORD</span> <span class="se">\</span>
+    -d user[new_password]<span class="o">=</span><span class="s1">'SomeNewPassword'</span> <span class="se">\</span>
+    -d user[company]<span class="o">=</span>RightDoe <span class="se">\</span>
+    -d user[phone]<span class="o">=</span>8051234567 <span class="se">\</span>
+    -d user[first_name]<span class="o">=</span>Greg <span class="se">\</span>
+    -d user[last_name]<span class="o">=</span>Doe
+    -X PUT https://my.rightscale.com/api/users/<span class="nv">$USER_ID</span>
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 200 OK
+    Server: nginx/0.7.67
+    Date: Wed, 24 Aug 2011 21:53:30 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 200 OK
+</code></pre>
+
+<h4 id="update-a-saml-user">Update a SAML User</h4>
+
+<p><strong>Prerequisites</strong> :</p>
+
+<ul>
+<li>You must have &#39;admin&#39; permission on the account.</li>
+<li>The user whose information you are updating must currently be linked to (via identity_provider_href) to one of your organizaiton&#39;s SAML providers. For more information, see the <a href="/api/api_1.5_examples/end-to-end_examples.html">SAML Provisioning API End to End Tutorial</a></li>
+<li>If updating a user&#39;s SAML principal_uid (also known as <q>NameID</q> or <q>SAML subject,</q>) you must know the value that your SAML provider will transmit to RightScale for this person.</font></li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    user_id="7825"
+    curl -i -H X_API_Version:1.5 -b mycookie -X PUT \
+     -d user[current_email]=john.smith@example.com \
+     -d user[company]='New Company' \
+     -d user[phone]=1234567890 \
+     -d user[first_name]=John \
+     -d user[last_name]=Doe \
+     -d user[identity_provider_href]='/api/identity_providers/76' \
+     -d user[principal_uid]='john.smith@example.com' \
+    https://my.rightscale.com/api/users/$user_id
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 200 OK
+    Server: nginx/0.7.67
+    Date: Wed, 24 Aug 2011 21:53:30 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 200 OK
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

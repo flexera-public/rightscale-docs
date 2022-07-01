@@ -1,0 +1,1541 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Policy Template Language</title><meta content="RightScale allows users to not only take advantage of our policies but also write their own based on their organizational needs. This page outlines the policy template language and how to write a new policy." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="policies policies_developers policies_developers_reference policies_developers_reference_v20180301 policies_developers_reference_v20180301_policy_template_language" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/"><h4 class="list-group-heading"><img src="../../../../img/product-governance.svg" /><span>Policies Users Guide</span></h4></a><a class="list-group-item" href="/policies/">About</a><a class="list-group-item" href="/policies/users/getting_started">Getting Started</a><a class="list-group-item" href="/policies/users/guides">Guides</a><a class="list-group-item" href="../../../users/policy_list.html">Flexera Policies</a><a class="list-group-item" href="/policies/users/faq">FAQ</a></nav></aside><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/developers"><h4 class="list-group-heading"><img src="../../../../img/product-governance.svg" /><span>Policies Developers Guide</span></h4></a><a class="list-group-item" href="/policies/developers">Overview</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Policy Automation</a> &#x2F; <a href="../../">Developers Guide</a> &#x2F; <a href="../">Developers Guide</a> &#x2F; <a href="./">Developers Guide</a></p><div class="page-header"><h1>Policy Template Language</h1></div><div class="main-content"><p>RightScale Policies provide a flexible solution for defining arbitrary policies that span across Cost, Security, Compliance, and Operational categories. Policies may analyze data exposed by the RightScale platform or by any other service. Policies can combine and validate data coming from multiple services. When a policy check fails an incident is created which may in turn trigger a sequence of actions. Actions may be automated and may take advantage of RightScale Cloud Workflow. This makes it possible for policies to trigger arbitrarily complex orchestration involving any service.</p>
+
+<p>Policies are written in code making it possible to version, share and reuse parts of policies across multiple use cases. The policy template language is a simple DSL (Domain Specific Language) similar to the RightScale CAT (Cloud Application Template) language. Policy templates describe how to retrieve the data, how to validate it and what to do when a validation check fails.</p>
+
+<p>Check out some <a href="/policies/getting_started/custom_policy.html#sample-policy-1">sample policies</a> as well as the complete list of <a href="/policies/getting_started/policy_list.html">RightScale policies</a>.</p>
+
+<h2 id="syntax">Syntax</h2>
+
+<p>A policy template consists of a sequence of definitions. Definitions may be simple definitions of the form:</p>
+<pre class="syntax-highlight plaintext"><code>&lt;name&gt; &lt;term&gt;
+</code></pre>
+
+<p>Where <code>&lt;name&gt;</code> is the name of the definition and <code>&lt;term&gt;</code> is a term, for example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">short_description</span> <span class="s2">"Limit the total number of VMs running in a project."</span>
+</code></pre>
+
+<p>Terms can be <a href="#syntax-string-literals">literal values</a> like in the example above, <a href="#syntax-functions">function calls</a>, certain <a href="#reserved-words">reserved words</a> or in some cases <a href="#chaining-datasources">references</a> to other definitions.</p>
+
+<p>Definitions may also be composite definitions of the form:</p>
+<pre class="syntax-highlight plaintext"><code>&lt;name&gt; &lt;term&gt; [, &lt;property&gt;: &lt;string literal&gt;] do
+   &lt;property&gt; &lt;term&gt;
+   &lt;property&gt; &lt;term&gt;
+   …
+end
+</code></pre>
+
+<p>Where <code>&lt;property&gt;</code> is the name of a definition property, for example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"max_instances"</span> <span class="k">do</span>
+   <span class="n">type</span> <span class="s2">"number"</span>
+   <span class="n">label</span> <span class="s2">"Maximum number of instances"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>or</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resources</span> <span class="s2">"instances"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.instances"</span> <span class="k">do</span>
+   <span class="n">cloud_href</span> <span class="n">href</span><span class="p">(</span><span class="vi">@clouds</span><span class="p">)</span>
+   <span class="n">state</span> <span class="s2">"operational"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="syntax-comments">Comments</h3>
+
+<p>Comments start with the character <code>#</code>. They may appear at the end of a line or on a new line:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">short_description</span> <span class="s2">"Limit number of VMs."</span> <span class="c1"># Note: only works on cloud X</span>
+<span class="c1"># Comment on a new line</span>
+</code></pre>
+
+<h3 id="syntax-reserved-words">Reserved Words</h3>
+
+<p>The Policy Template Language also defines a few reserved words that make it possible to retrieve contextual information or iterate over data collections. The list of complete reserved words and their usage is described in the <a href="#reserved-word-reference">Reserved Word Reference</a>. For example <code>rs_org_id</code> returns the ID of the RightScale organization.</p>
+
+<h3 id="syntax-string-literals">String Literals</h3>
+
+<p>A string literal begins and ends with a double or single-quote mark. Double-quoted string expressions are subject to backslash notation. A
+single-quoted string expression isn&#39;t; except for \&#39; and \.</p>
+
+<h4 id="backslash-notation">Backslash Notation</h4>
+
+<p>Also called escape characters, backslashes are used to insert special characters in a string.</p>
+
+<p>Example:</p>
+<pre class="syntax-highlight ruby"><code><span class="s2">"this is a</span><span class="se">\n</span><span class="s2">two line string"</span>
+<span class="s2">"this string has </span><span class="se">\"</span><span class="s2">quotes</span><span class="se">\"</span><span class="s2"> in it"</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Escape Sequence</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>\n</td>
+<td>newline</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>space</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>carriage return</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>tab</td>
+</tr>
+<tr>
+<td>\&quot;</td>
+<td>double quote character</td>
+</tr>
+<tr>
+<td>\&#39;</td>
+<td>single quote character</td>
+</tr>
+<tr>
+<td>\</td>
+<td>backslash</td>
+</tr>
+</tbody></table>
+
+<h4 id="multiline-string-literals">Multiline String Literals</h4>
+
+<p>Multi-line string literals can be defined with <q>here documents</q>, where the delimiter can be any string:</p>
+<pre class="syntax-highlight ruby"><code><span class="o">&lt;&lt;</span><span class="no">END</span><span class="sh">
+on the one ton temple bell
+a moon-moth, folded into sleep,
+sits still.
+</span><span class="no">END</span>
+</code></pre>
+
+<p>The syntax begins with <code>&lt;&lt;</code> and is followed immediately by the delimiter. To end the string, the delimiter appears alone on a line.</p>
+
+<h3 id="syntax-number-literals">Number Literals</h3>
+
+<p>A number literal can be a integer such as <code>5</code> or a floating point number such as <code>5.5</code>.</p>
+
+<h3 id="syntax-array-literals">Array Literals</h3>
+
+<p>Arrays are defined using square brackets and commas to separate the elements:</p>
+<pre class="syntax-highlight ruby"><code><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">]]</span>
+</code></pre>
+
+<h3 id="syntax-object-literals">Object Literals</h3>
+
+<p>Objects are defined using curly braces and colons to separate keys and values:</p>
+<pre class="syntax-highlight ruby"><code><span class="p">{</span>
+   <span class="s2">"a"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="s2">"b"</span><span class="p">:</span> <span class="s2">"c"</span><span class="p">,</span>
+   <span class="s2">"d"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+   <span class="s2">"e"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"f"</span><span class="p">:</span> <span class="mi">4</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="metadata">Metadata</h2>
+
+<p>The first section of a policy template provides generic information about the policy such as its name, a short and long description as well as the policy severity and category:</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s2">"Instance Quota"</span>
+<span class="n">rs_pt_ver</span> <span class="mi">20180301</span>
+<span class="n">type</span> <span class="s2">"policy"</span>
+<span class="n">short_description</span> <span class="s2">"Limit the total number of VMs running in a project."</span>
+<span class="c1"># Optional metadata</span>
+<span class="n">default_frequency</span> <span class="s2">"daily"</span>
+<span class="n">long_description</span> <span class="o">&lt;&lt;-</span><span class="no">EOF</span><span class="sh">
+The Instance Quota policy sends an email to developer@company.com when the
+number of VMs running in the RightScale project exceeds 1,000.
+</span><span class="no">EOF</span>
+<span class="n">severity</span> <span class="s2">"medium"</span>
+<span class="n">category</span> <span class="s2">"Cost"</span>
+<span class="n">tenancy</span> <span class="s2">"single"</span>
+<span class="n">info</span><span class="p">(</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.1"</span><span class="p">,</span>
+  <span class="s2">"provider"</span><span class="p">:</span> <span class="s2">"aws"</span><span class="p">,</span>
+  <span class="s2">"service"</span><span class="p">:</span> <span class="s2">"ec2"</span>
+<span class="p">)</span>
+</code></pre>
+
+<ul>
+<li><code>name</code> defines the policy template name. It must be unique in the project.</li>
+<li><code>rs_pt_ver</code> indicates the policy template language version. The value must be
+<code>20180301</code>.</li>
+<li><code>type</code> must be <code>&quot;policy&quot;</code></li>
+<li><code>short_description</code> provides a short description of what the policy does.</li>
+</ul>
+
+<p>The following definitions are optional:</p>
+
+<ul>
+<li><code>default_frequency</code> sets the interval between policy evaluations if another value is not selected by the person applying the policy. It must be one of <code>&quot;15 minutes&quot;</code> (default), <code>&quot;hourly&quot;</code>, <code>&quot;daily&quot;</code>, <code>&quot;weekly&quot;</code> or <code>&quot;monthly&quot;</code>.</li>
+<li><code>long_description</code> is a long description of what the policy does.</li>
+<li><code>severity</code> indicates the policy severity, it must be one of <code>&quot;low&quot;</code> (default),
+<code>&quot;medium&quot;</code>, <code>&quot;high&quot;</code> or <code>&quot;critical&quot;</code>.</li>
+<li><code>category</code> is an arbitrary value used to group policies into categories, for
+example <code>&quot;Cost&quot;</code>, <code>&quot;Compliance&quot;</code> or <code>&quot;Security&quot;</code>.</li>
+<li><code>info</code> specifies an arbitrary list of metadata attached to the policy and should be an mapping of string to string. For <a href="/policies/users/policy_list.html">Flexera-built policies</a>, the standard is to use the following metadata fields:
+
+<ul>
+<li><code>version</code> - Version of the template, using semantic versioning. Updated every time a policy template is changed.</li>
+<li><code>provider</code> - An identifier for which provider the policy applies to, such as <q>AWS</q>.</li>
+<li><code>service</code> - Where applicable, which service of the provider the policy applies to, such as <q>EC2</q></li>
+</ul></li>
+<li><code>tenancy</code> specifies whether this policy can be applied to more than one project at a time and how incidents are grouped together. It must be one of <code>&quot;multi&quot;</code>, or <code>&quot;single&quot;</code>. If a policy has a <code>credential</code> declaration in it, only <code>single</code> is supported and is the default if not specified. If a policy does not have such a declaration, then this defaults to <code>multi</code>. Generally speaking this should only be set manually in the case where the policy acts on organization-wide resources such as Optima APIs, in which case it should be set to <code>single</code>. Otherwise the default is sufficient and this can be omitted.</li>
+</ul>
+
+<h2 id="parameters">Parameters</h2>
+
+<p>Parameters allow you to get input from end users that can be passed to your policy, used to make decisions on what to validate, and used in custom operation logic. A parameter declaration has a name, a type and other optional fields that let you define things like a default value, or a set of potential values.</p>
+
+<p>Parameters can be referred to in a Policy Template using the syntax <code>$&lt;parameter_name&gt;</code> where <code>parameter_name</code> is the string following the <code>parameter</code> keyword.</p>
+
+<p>Here is an example of a parameter declaration defining a <q>tags</q> parameter which can take a list of tags to be used in the policy template.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"tags"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"list"</span>
+  <span class="n">label</span> <span class="s2">"Tags"</span>
+  <span class="n">description</span> <span class="s2">"A list of tags for the policy"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="parameters-fields">Fields</h3>
+
+<p>The available fields are:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>type</code></td>
+<td>yes</td>
+<td>string</td>
+<td>Defines whether the parameter is a string, a number or a list of values. The possible values for this field are <code>string</code>, and <code>number</code> and <code>list</code>.</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>yes</td>
+<td>string</td>
+<td>The display name shown to the user. Must not be whitespace-only.</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>no</td>
+<td>string</td>
+<td>An optional category used to group parameters in the UI.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>no</td>
+<td>string</td>
+<td>A description shown in the launch UI</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>no</td>
+<td></td>
+<td>Default value for parameter if none is specified. Note this must meet the requirements of the other fields (such as max_length, allowed pattern, etc).</td>
+</tr>
+<tr>
+<td><code>no_echo</code></td>
+<td>no</td>
+<td>boolean</td>
+<td>Whether the value of the parameter should be hidden in UIs and API responses. The possible values for this field are <code>true</code> and <code>false</code> (default).</td>
+</tr>
+<tr>
+<td><code>allowed_values</code></td>
+<td>no</td>
+<td>array</td>
+<td>A comma-separated list of allowed values. Not valid when <code>allowed_pattern</code> is specified.</td>
+</tr>
+<tr>
+<td><code>min_length</code> and <code>max_length</code></td>
+<td>no</td>
+<td>number</td>
+<td>The minimum and maximum number of characters in the parameter value. Only valid when <code>type</code> is one of <code>string</code> or <code>list</code>.</td>
+</tr>
+<tr>
+<td><code>min_value</code> and <code>max_value</code></td>
+<td>no</td>
+<td>number</td>
+<td>The smallest and largest numeric value allowed for the parameter. Only valid when <code>type</code> is <code>number</code>.</td>
+</tr>
+<tr>
+<td><code>allowed_pattern</code></td>
+<td>no</td>
+<td>regexp</td>
+<td>Not valid when &#39;allowed_values&#39; is specified. Note: the Ruby Regexp engine (a PCRE engine) is used to process and validate Regexp values, but there are a few unsupported features. These include modifiers other than &#39;m&#39; and &#39;i&#39;, modifier groups (such as <code>/(?mi)example/</code>), and modifier spans (such as <code>/(?mi:example)/</code>). A helpful tool for developing PCRE regular expressions <a href="https://regex101.com/#pcre">can be found here</a>.</td>
+</tr>
+<tr>
+<td><code>constraint_description</code></td>
+<td>no</td>
+<td>string</td>
+<td>Message displayed when any of the constraint is violated. The system generates default error messages, this field allows overriding these to provide a clearer message to the user.</td>
+</tr>
+</tbody></table>
+
+<p>Notes:</p>
+
+<ul>
+<li>Parameters are displayed in the UI in the same order as they are defined in the template.</li>
+<li>If a default value is set for a parameter, this value will be pre-populated in the UI. For example, for a parameter with allowed values of true/false and a default value of <code>true</code>, the resulting checkbox on the UI would be enabled. Additional information on UI behavior is provided below.</li>
+</ul>
+
+<h3 id="parameters-usage">Usage</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"db_dump_bucket"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"string"</span>
+  <span class="n">label</span> <span class="s2">"Database S3 bucket"</span>
+  <span class="n">category</span> <span class="s2">"Database"</span>
+  <span class="n">description</span> <span class="s2">"URL to S3 bucket that contains MySQL database dump"</span>
+  <span class="n">min_length</span> <span class="mi">3</span>
+  <span class="n">max_length</span> <span class="mi">63</span>
+  <span class="n">allowed_pattern</span> <span class="sr">/[a-z0-9]+[a-z0-9\.-]*/</span>
+  <span class="n">constraint_description</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="sh">
+    Bucket names must be at least 3 and no more than 63 characters long. Bucket names must be a series of one or more labels. Adjacent labels are separated by a single period (.). Bucket names can contain lowercase letters, numbers, and dashes. Each label must start and end with a lowercase letter or a number. Bucket names must not be formatted as an IP address (e.g., 192.168.5.4).
+</span><span class="no">    EOS</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Parameters can be used in other declarations using the <code>$</code> operator, for example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"tags"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"list"</span>
+  <span class="n">label</span> <span class="s2">"A List of Tags"</span>
+<span class="k">end</span>
+
+<span class="c1"># find all instances with the tags from the $tags parameter</span>
+<span class="n">resource</span> <span class="s2">"instances"</span><span class="p">,</span> <span class="ss">type: </span><span class="s1">'rs_cm.instances'</span> <span class="k">do</span>
+  <span class="n">tags</span> <span class="n">any</span><span class="p">(</span><span class="vg">$tags</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="c1"># pass the $tags parameter to the Cloud Work Flow</span>
+<span class="n">define</span> <span class="n">get_code</span><span class="p">(</span><span class="vg">$tags</span><span class="p">)</span> <span class="k">do</span>
+  <span class="c1"># use the $tags parameter</span>
+  <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">end</span>
+</code></pre>
+
+<p>In the example above, the <q>instances</q> resource declaration uses the value associated with the parameter <q>tags</q> to initialize the instances resource tag field.</p>
+
+<h2 id="permissions">Permissions</h2>
+
+<p>Permission declarations validate that the user applying the policy has the required privileges to successfully run the policy.
+The declarations must include the privileges required to retrieve the data as well as the privileges required to run the policy actions.
+Permission declarations are not required to apply the policy or run the policy actions, however, they are recommended.
+The users own privileges are verified against the permission declarations when they attempt to apply the policy.</p>
+
+<p>Each permission declaration can list multiple required privileges. The set is defined by providing a list of resource types and a list of actions that the policy needs to perform on these resources:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">permission</span> <span class="k">do</span>
+   <span class="n">label</span> <span class="s2">"List Instances"</span>
+   <span class="n">resources</span> <span class="s2">"rs_cm.instances"</span>
+   <span class="n">actions</span> <span class="s2">"rs_cm.index"</span>
+<span class="k">end</span>
+
+<span class="n">permission</span> <span class="k">do</span>
+   <span class="n">label</span> <span class="s2">"List and delete servers and instances"</span>
+   <span class="n">resources</span> <span class="s2">"rs_cm.servers"</span><span class="p">,</span> <span class="s2">"rs_cm.instances"</span>
+   <span class="n">actions</span> <span class="s2">"rs_cm.index"</span><span class="p">,</span> <span class="s2">"rs_cm.destroy"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The complete set of resources and actions as well as the mapping between privileges and roles is listed in the
+<a href="permissions.html">Permission Reference</a> section.</p>
+
+<h2 id="retrieving-data">Retrieving Data</h2>
+
+<p>The first step performed when a policy is evaluated is to retrieve the data that needs to be validated. There are two ways to retrieve data from a policy template:</p>
+
+<ul>
+<li><em>Resources</em> make it possible to list resources using the RightScale APIs.</li>
+<li><em>Datasources</em> make it possible to retrieve data from any arbitrary service.</li>
+</ul>
+
+<p>Datasources can also be used to further process data retrieved from either resources or other datasources as described in <a href="#chaining-datasources">Chaining Datasources</a>.</p>
+
+<h3 id="retrieving-data-listing-resources">Listing Resources</h3>
+
+<p>The <code>resources</code> definition identifies a resource type and an optional set of filters used to list resources:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resources</span> <span class="o">&lt;</span><span class="nb">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="ss">type: </span><span class="o">&lt;</span><span class="n">resource</span> <span class="n">type</span><span class="o">&gt;</span> <span class="k">do</span>
+   <span class="n">filter</span> <span class="k">do</span>
+      <span class="o">&lt;</span><span class="n">filter</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">filter</span> <span class="n">comparator</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">filter</span> <span class="n">value</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">filter</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">filter</span> <span class="n">comparator</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">filter</span> <span class="n">value</span><span class="o">&gt;</span>
+      <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+   <span class="nf">end</span>
+   <span class="o">&lt;</span><span class="n">property</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">property</span> <span class="n">value</span><span class="o">&gt;</span>
+   <span class="o">&lt;</span><span class="n">property</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">property</span> <span class="n">value</span><span class="o">&gt;</span>
+   <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">end</span>
+</code></pre>
+
+<ul>
+<li><code>name</code> defines the resource name and must be unique. It can be referenced using @<name> elsewhere in the code.</li>
+<li><code>resource type</code> is the type of resource.</li>
+<li><code>filter</code> is the API field to filter on, such as <q>state</q>. If multiple filters are specified it will AND together the results. Only resources which satisfy all the filters will be returned.</li>
+<li><code>filter comparator</code> is optional and must be either <code>ne:</code> or <code>eq:</code>. If not specified, it defaults to <code>eq:</code>.</li>
+<li><code>filter value</code> is either a term or array of terms. <strong>Caution</strong>: Only ever specify an array of terms with <code>ne:</code> as the comparator. If you specify it with <code>eq:</code> it will do a logical AND and try and set the filter be equal to ALL the values passed in, which will return no results.</li>
+<li><code>property</code> is a property of the resource such as <code>cloud_href</code> or <code>view</code>.</li>
+<li><code>property value</code> is value of the property.</li>
+</ul>
+
+<p>The complete list of supported resource types, filters, and properties is described in the <a href="#resource-reference">Resource Reference</a>.</p>
+
+<p>This example filters returns active Windows instances on AWS clouds. The first resources block filters upon cloud_type to only return AWS regions. The filter comparator is left off and defaults to <code>eq:</code>. The second resources block filters upon the os_platform and <a href="/cm/management_guide/active_vs._inactive_servers.html">state of the instances</a> to get active instances. It can be referenced later in the policy as <code>@instances</code>.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resources</span> <span class="s2">"aws_regions"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.clouds"</span> <span class="k">do</span>
+  <span class="n">filter</span> <span class="k">do</span>
+    <span class="n">cloud_type</span> <span class="s2">"amazon"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">resources</span> <span class="s2">"instances"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.instances"</span> <span class="k">do</span>
+  <span class="n">iterate</span> <span class="vi">@aws_regions</span>
+  <span class="n">cloud_href</span> <span class="n">href</span><span class="p">(</span><span class="n">iter_item</span><span class="p">)</span>
+  <span class="n">filter</span> <span class="k">do</span>
+    <span class="n">os_platform</span> <span class="s2">"windows"</span>
+    <span class="n">state</span> <span class="ss">ne: </span><span class="p">[</span><span class="s2">"stopped"</span><span class="p">,</span> <span class="s2">"provisioned"</span><span class="p">,</span> <span class="s2">"terminated"</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="retrieving-data-including-tags">Including tags</h3>
+
+<p>You can query for resources by tag using <code>tags</code> field in your resource. You can also use the <code>all</code>, <code>any</code>, <code>none</code> methods to expand your search with tags. Only one tag field is supported per resource.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resources</span> <span class="s2">"instances"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.instances"</span> <span class="k">do</span>
+  <span class="n">iterate</span> <span class="vi">@aws_regions</span>
+  <span class="n">cloud_href</span> <span class="n">href</span><span class="p">(</span><span class="n">iter_item</span><span class="p">)</span>
+  <span class="n">tags</span> <span class="s2">"ns:name=*"</span>
+<span class="k">end</span>
+
+<span class="n">resources</span> <span class="s2">"volumes"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.volumes"</span> <span class="k">do</span>
+  <span class="n">iterate</span> <span class="vi">@aws_regions</span>
+  <span class="n">cloud_href</span> <span class="n">href</span><span class="p">(</span><span class="n">iter_item</span><span class="p">)</span>
+  <span class="n">tags</span> <span class="n">any</span><span class="p">([</span><span class="s2">"ns:name=*"</span><span class="p">,</span><span class="s2">"foo:bar=hurray"</span><span class="p">])</span>
+<span class="k">end</span>
+
+<span class="c1"># include fields in your datasource</span>
+<span class="n">datasource</span> <span class="s2">"instances"</span> <span class="k">do</span>
+  <span class="n">iterate</span> <span class="vi">@instances</span>
+  <span class="n">field</span> <span class="s2">"href"</span><span class="p">,</span>        <span class="n">href</span><span class="p">(</span><span class="n">iter_item</span><span class="p">)</span>
+  <span class="n">field</span> <span class="s2">"id"</span><span class="p">,</span>          <span class="n">val</span><span class="p">(</span><span class="n">iter_item</span><span class="p">,</span><span class="s1">'resource_uid'</span><span class="p">)</span>
+  <span class="n">field</span> <span class="s2">"name"</span><span class="p">,</span>        <span class="n">val</span><span class="p">(</span><span class="n">iter_item</span><span class="p">,</span><span class="s1">'name'</span><span class="p">)</span>
+  <span class="n">field</span> <span class="s2">"state"</span><span class="p">,</span>       <span class="n">val</span><span class="p">(</span><span class="n">iter_item</span><span class="p">,</span><span class="s1">'state'</span><span class="p">)</span>
+  <span class="n">field</span> <span class="s2">"type"</span><span class="p">,</span>        <span class="s2">"instances"</span>
+  <span class="n">field</span> <span class="s2">"tags"</span><span class="p">,</span>        <span class="n">val</span><span class="p">(</span><span class="n">iter_item</span><span class="p">,</span><span class="s1">'tags'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Additional tag filters examples.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">tags</span> <span class="s2">"ns:name=*"</span> <span class="c1"># Filter by namespace and key</span>
+<span class="n">tags</span> <span class="s2">"ns:*"</span>      <span class="c1"># Filter by namespace only</span>
+<span class="n">tags</span> <span class="s2">"*"</span>         <span class="c1"># Return any resource with a tag</span>
+<span class="n">tags</span> <span class="n">any</span><span class="p">([</span><span class="s2">"ns:name=*"</span><span class="p">,</span><span class="s2">"foo:bar=hurray"</span><span class="p">])</span> <span class="c1"># Resource must include any tag in array.</span>
+<span class="n">tags</span> <span class="n">all</span><span class="p">([</span><span class="s2">"ns:name=*"</span><span class="p">,</span><span class="s2">"foo:bar=hurray"</span><span class="p">])</span> <span class="c1"># Resource must include all tags in array.</span>
+<span class="n">tags</span> <span class="n">none</span><span class="p">([</span><span class="s2">"ns:name=*"</span><span class="p">,</span><span class="s2">"foo:bar=hurray"</span><span class="p">])</span> <span class="c1"># Resource must not include any tags in array</span>
+</code></pre>
+
+<h3 id="retrieving-data-api-data-with-datasources">API Data with Datasources</h3>
+
+<p>There are three forms of <code>datasource</code> definitions. The first one, discussed here makes it possible to retrieve data from HTTP APIs. The second one, described in the <a href="#processing-datasources-with-javascript">next section</a> makes it possible to use JavaScript to process existing data and the last one described in <a href="#chaining-datasources">Chaining Datasources</a> makes it possible to derive a datasource from existing data.</p>
+
+<h3 id="retrieving-data-authorization">Authorization</h3>
+
+<p>Authorization against any external APIs that a Policy uses is handled using credentials entered in the <a href="/policies/users/guides/credential_management.html">credentials page</a> of Policy Manager. To use credentials to make API calls, add a <code>credentials</code> declaration in the policy template. This declaration specifies all the details needed to use credentials and will allow the user of the policy to select the appropriate credential when applying the policy.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">credentials</span> <span class="o">&lt;</span><span class="nb">name</span><span class="o">&gt;</span> <span class="k">do</span>
+  <span class="n">schemes</span> <span class="o">&lt;</span><span class="n">type1</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">type2</span><span class="o">&gt;</span>
+  <span class="n">label</span> <span class="o">&lt;</span><span class="n">label</span><span class="o">&gt;</span>
+  <span class="n">description</span> <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;</span>
+  <span class="n">tags</span> <span class="o">&lt;</span><span class="n">tag</span> <span class="n">filters</span><span class="o">&gt;</span><span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">end</span>
+</code></pre>
+
+<ul>
+<li><code>name</code> is the name in the policy template language. The credential is referenceable by this name in <code>datasource</code> and <code>define</code> declarations.</li>
+<li><code>schemes</code> is the authorization <code>scheme</code> in the credentials service and must be one of <code>aws_sts</code>, <code>aws</code>, <code>basic</code>, <code>ntlm</code>, <code>api_key</code>, <code>jwt</code>, or <code>oauth2</code>, matching the API that the credential is used with. Multiple schemes can be listed if the credential and code work with multiple types. When a user selects a credential on the <a href="/policies/users/guides/apply_policy.html">Apply Policy screen</a>, they will only be able to select credentials that are of one of the specified schemes.</li>
+<li><code>label</code> is a short human readable label for the credential -- it is shown to the user on the <a href="/policies/users/guides/apply_policy.html">Apply Policy screen</a></li>
+<li><code>description</code> is a longer description of what the credential is used for in the policy and is also shown to the user on the <a href="/policies/users/guides/apply_policy.html">Apply Policy screen</a></li>
+<li><code>tags</code> is an optional field used to filter the credentials that are shown to a user when applying a policy. It may contain tags in the form of <code>key=value</code>. By default, the credential management UI and all Flexera-built policies use the tag key <code>provider</code> for credential matching purposes.</li>
+</ul>
+
+<p>Each <code>credentials</code> declaration will require a separate selection from the user. Note: older Policies may use define authorization inline using the <a href="/policies/reference/inline_auth.html">auth declaration</a>, but this approach is no longer considered best practice.</p>
+
+<p>The following example will authenticate against an AWS API using either an <code>aws</code> or <code>aws_sts</code> scheme type and export a <code>$cred_aws</code> reference.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">credentials</span> <span class="s2">"cred_aws"</span> <span class="k">do</span>
+  <span class="n">schemes</span> <span class="s2">"aws"</span><span class="p">,</span> <span class="s2">"aws_sts"</span>
+  <span class="n">label</span> <span class="s2">"AWS Credential"</span>
+  <span class="n">description</span> <span class="s2">"This credential should have read/write access to AWS EC2 Instances"</span>
+  <span class="n">tags</span> <span class="s2">"provider=aws"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The following example will authenticate against an Azure API using either an <code>oauth2</code>  scheme type. Since there many be many APIs using the <code>oauth2</code> scheme, an optional tags declaration is added to this example. Credentials can be tagged with arbitrary key value pairs. In this case, this block is telling it to filter for credentials marked with <q>cloud=azure</q></p>
+<pre class="syntax-highlight ruby"><code><span class="n">credentials</span> <span class="s2">"cred_azure_compute"</span> <span class="k">do</span>
+  <span class="n">schemes</span> <span class="s2">"oauth2"</span><span class="p">,</span>
+  <span class="n">label</span> <span class="s2">"Azure compute credential"</span>
+  <span class="n">description</span> <span class="s2">"Enter a credential with read/write access to Microsoft.Compute resources."</span>
+  <span class="n">tags</span> <span class="s2">"provider=azure"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>It is highly recommended to provide a <q>provider</q> tag filter and then set the <q>provider</q> field when entering credentials into the dashboard so policy managers can easily find credentials when applying the authored policy.</p>
+
+<h3 id="retrieving-data-pagination">Pagination</h3>
+
+<p>If results from a custom datasource are paginated, you must define a pagination block above your datasource that describes how to extract the next page token from a response and where to insert the token into subsequent queries.</p>
+<pre class="syntax-highlight plaintext"><code>pagination &lt;name&gt; do
+  get_page_marker do
+    body_path &lt;path term&gt;
+    header &lt;header name&gt;
+  end
+  set_page_marker do
+    query &lt;query param name&gt;
+    header &lt;header name&gt;
+    body_field &lt;body field name&gt;
+    uri &lt;true|false&gt;
+  end
+</code></pre>
+
+<ul>
+<li><code>&lt;name&gt;</code> is the name of the paginator. The name can be referred to in the <code>pagination</code> field of datasource request blocks with a <code>$</code> in front.</li>
+<li><code>&lt;path term&gt;</code> is a call to either the <code>jmes_path</code>, <code>jq</code>, or <code>xpath</code> method describing how to extract the page token from the response body (for backward compatibility, it can also be a string which will be interpreted as either JMESPath for JSON encoding or XPath for XML encoding).</li>
+<li><code>&lt;header name&gt;</code> is the name of the http header containing the page token.</li>
+<li><code>&lt;query param name&gt;</code> is the name of the query string parameter to set.</li>
+<li><code>&lt;body field name&gt;</code> is the name of the field in the body to set.</li>
+<li><code>uri</code> should be set to true if the page token marker is a full URL, such as a <code>nextLink</code> attribute returned by Azure ARM services.</li>
+</ul>
+
+<p>For get_page_marker exactly one of <code>body_path</code> or <code>header</code> must be set. For set_page_marker exactly one of <code>query</code>, <code>header</code>, <code>body_field</code>, or <code>uri</code> must be set.</p>
+
+<p>Many AWS API requests contain a variable in the response body called <q>PageToken</q>. This variable should be set as a HTTP query parameter <code>NextToken</code> to subsequent requests. AWS supports both XML and JSON encoding. The datasource definition has an <code>encoding</code> of <code>xml</code> below so an XPath expression is used for the body_path.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">pagination</span> <span class="s2">"aws_pagination_xml"</span> <span class="k">do</span>
+  <span class="n">get_page_marker</span> <span class="k">do</span>
+    <span class="n">body_path</span> <span class="n">xpath</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">"//PageToken"</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="n">set_page_marker</span> <span class="k">do</span>
+    <span class="n">query</span> <span class="s2">"NextToken"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This is the same paginator except for JSON data.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">pagination</span> <span class="s2">"aws_pagination_json"</span> <span class="k">do</span>
+  <span class="n">get_page_marker</span> <span class="k">do</span>
+    <span class="n">body_path</span> <span class="n">jmes_path</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">"PageToken"</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="n">set_page_marker</span> <span class="k">do</span>
+    <span class="n">query</span> <span class="s2">"NextToken"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The following service has a X-Page-Token header that it both returns and expects:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">pagination</span> <span class="s2">"my_service"</span> <span class="k">do</span>
+  <span class="n">get_page_marker</span> <span class="k">do</span>
+    <span class="n">header</span> <span class="s2">"X-Page-Token"</span>
+  <span class="k">end</span>
+  <span class="n">set_page_marker</span> <span class="k">do</span>
+    <span class="n">header</span> <span class="s2">"X-Page-Token"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The following service contains a <code>nextLink</code> parameter in the body that is a full URL to the next page of results. It is assumed that the datasource will specify we want JSON encoding.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">pagination</span> <span class="s2">"azure_arm_pagination_json"</span> <span class="k">do</span>
+  <span class="n">get_page_marker</span> <span class="k">do</span>
+    <span class="n">body_path</span> <span class="n">jmes_path</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">"nextLink"</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="n">set_page_marker</span> <span class="k">do</span>
+    <span class="n">uri</span> <span class="kp">true</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The following service contains a <code>Link</code> header that includes the full URL to the next page of results.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">pagination</span> <span class="s2">"github_api"</span> <span class="k">do</span>
+  <span class="n">get_page_marker</span> <span class="k">do</span>
+    <span class="n">header</span> <span class="s2">"Link"</span>
+  <span class="k">end</span>
+  <span class="n">set_page_marker</span> <span class="k">do</span>
+    <span class="n">uri</span> <span class="kp">true</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The following service is an example of <a href="">an AWS service</a> where the <code>NextPageToken</code> is retrieved and set in the body.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">pagination</span> <span class="s2">"aws_body_pagination"</span> <span class="k">do</span>
+  <span class="n">get_page_marker</span> <span class="k">do</span>
+    <span class="n">body_path</span> <span class="n">jmes_path</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">"NextPageToken"</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="n">set_page_marker</span> <span class="k">do</span>
+    <span class="n">body_field</span> <span class="s2">"NextPageToken"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Some APIs use page numbers rather than a token, this is a case where the power of <code>jq</code> comes in handy as it can express mathematical concepts. Here is an example where the JSON body contains the current page number, the number of items per page, and the total number of items:</p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"paging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pageIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">381</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<p>In this case, you would define the following pagination with a <code>jq</code> expression which will return the next page number unless we have reached the last page:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">pagination</span> <span class="s2">"sonarqube_pagination"</span> <span class="k">do</span>
+  <span class="n">get_page_marker</span> <span class="k">do</span>
+    <span class="n">body_path</span> <span class="n">jq</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">"if .paging.pageIndex * .paging.pageSize &lt; .paging.total then .paging.pageIndex + 1 else null end"</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="n">set_page_marker</span> <span class="k">do</span>
+    <span class="n">query</span> <span class="s2">"p"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>There are also APIs that use page numbers without specifying the page number in the body. In these cases, you can take advantage of the <code>$marker</code> variable which is passed in when a <code>jq</code> expression is evaluated for a pagination. This <code>$marker</code> variable contains the string value of the previous pagination marker (for the first page, the previous page marker is an empty string: <code>&quot;&quot;</code>). Here is an example of the JSON that one of these APIs might have:</p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Here is a pagination that will work with this API given that there are 500 items per page:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">pagination</span> <span class="s2">"500_items_per_page_pagination"</span> <span class="k">do</span>
+  <span class="n">get_page_marker</span> <span class="k">do</span>
+    <span class="n">body_path</span> <span class="n">jq</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">"if .items | length &lt; 500 then null else if $marker != "" then $marker | tonumber + 1 else 2 end end"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Just like the previous pagination, this one also uses <code>null</code> to signify that we have reached the last page.</p>
+
+<h3 id="retrieving-data-request">Request</h3>
+
+<p>The syntax of a datasource that retrieved data from an HTTP API is:</p>
+<pre class="syntax-highlight plaintext"><code>datasource &lt;name&gt; do
+   request do
+      auth $&lt;credentials reference OR auth definition&gt;
+      pagination $&lt;pagination definition&gt;
+      host &lt;host&gt;
+      verb ["GET"|"POST"]     # defaults to "GET"
+      scheme ["http"|"https"] # defaults to "https"
+      path &lt;path&gt;
+      ignore_status [&lt;http status code&gt;, &lt;http status code&gt;...]
+      query &lt;query string name&gt;, &lt;query string value&gt;
+      query &lt;query string name&gt;, &lt;query string value&gt;
+      ...
+      header &lt;header name&gt;, &lt;header value&gt;
+      header &lt;header name&gt;, &lt;header value&gt;
+      ...
+      body_field &lt;body field name&gt;, &lt;body field value&gt;
+      body_field &lt;body field name&gt;, &lt;body field value&gt;
+      ...
+      body &lt;body value&gt;
+   end
+   result do
+      encoding ["json"|"xml"|"text"]
+      [collect jmes_path(response, &lt;jmes_path&gt;) do]
+      [collect jq(response, &lt;jq&gt;) do]
+      [collect xpath(response, &lt;xpath&gt;) do]
+      field &lt;field name&gt;, &lt;term&gt;
+      field &lt;field name&gt;, &lt;term&gt;
+      ...
+      [end]
+   end
+end
+</code></pre>
+
+<p>Where:</p>
+
+<ul>
+<li><code>&lt;name&gt;</code> is the name of the datasource.</li>
+<li><code>&lt;auth definition&gt;</code> is the name of the credentials reference or auth definition that describes how to authenticate requests made to the API.</li>
+<li><code>&lt;pagination definition&gt;</code> is the name of the pagination definition that describes how to iterate through the response pages if any.</li>
+<li><code>&lt;host&gt;</code> is the API hostname.</li>
+<li><code>&lt;verb&gt;</code> is the HTTP request method and defaults to <code>&quot;GET&quot;</code>.</li>
+<li><code>&lt;path&gt;</code> is the HTTP path</li>
+<li><code>&lt;ignore_status&gt;</code> are http status codes to ignore failure on. Normally any status code other than 200-299 will cause the policy to stop evaluation and return a failure. Supply a list of values or a list parameter such as [403, 404] to cause the policy to treat these calls as an empty dataset and continue running.</li>
+<li><code>&lt;query string name&gt;</code> and <code>&lt;query string value&gt;</code> describe the request query string elements if any.</li>
+<li><code>&lt;header name&gt;</code> and <code>&lt;header value&gt;</code> describe any additional headers you wish to send with the API request.</li>
+<li><code>&lt;body field name&gt;</code> and <code>&lt;body field value&gt;</code> describe the body JSON object fields if any. When a <code>body_field</code> is specified, <code>body</code> may not be specified as well.</li>
+<li><code>&lt;body value&gt;</code> describes the entire body. When <code>body</code> is specified, no <code>body_field</code>s may be specified as well.</li>
+</ul>
+
+<blockquote>
+<p>Note: only JSON encoding is supported in the REQUEST body at this time when using <code>body_field</code>; however, other encodings can be sent using <code>body</code>.</p>
+</blockquote>
+
+<h3 id="retrieving-data-result">Result</h3>
+
+<p>The <code>result</code> property details how to parse the HTTP response to produce the resulting data. The properties are:</p>
+
+<ul>
+<li><code>encoding</code>: specifies the response encoding, must be <code>&quot;json&quot;</code>, <code>&quot;xml&quot;</code>, or <code>&quot;text&quot;</code>. With the <code>&quot;text&quot;</code> encoding the body of the response will be returned as a string or an array of strings if multiple requests are made (either in the case of iteration or pagination).</li>
+<li><code>field</code>: identifies a field in the resulting data. The provided term is evaluated to initialize the field value. Typically the term is either the <code>jmes_path</code>, <code>jq</code>, or <code>xpath</code> function.</li>
+</ul>
+
+<p><code>result</code> may also make use of <code>collect</code> to iterate over the response elements. <code>collect</code> accepts a term and a block. The term must be <code>jmes_path</code>, <code>jq</code>, or <code>xpath</code>. The term must return an array which <code>collect</code> iterates over. Each element of the array can then be used to define the data fields. The current element is accessed using the <code>col_item</code> reserved word as shown in the example below.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">datasource</span> <span class="s2">"volumes_us_east"</span> <span class="k">do</span>
+  <span class="n">request</span> <span class="k">do</span>
+    <span class="n">auth</span>                      <span class="vg">$cred_aws_us_east_1</span>
+    <span class="n">pagination</span>                <span class="vg">$aws_pagination_xml</span>
+    <span class="n">host</span>                      <span class="s2">"ec2.amazonaws.com"</span>
+    <span class="n">query</span> <span class="s2">"Action"</span><span class="p">,</span>           <span class="s2">"DescribeVolumes"</span>
+    <span class="n">query</span> <span class="s2">"Filter.1.Name"</span><span class="p">,</span>    <span class="s2">"encrypted"</span>
+    <span class="n">query</span> <span class="s2">"Filter.1.Value.1"</span><span class="p">,</span> <span class="s2">"false"</span>
+    <span class="n">header</span> <span class="s2">"User-Agent"</span> <span class="s2">"My-app"</span>
+  <span class="k">end</span>
+  <span class="n">result</span> <span class="k">do</span>
+    <span class="n">encoding</span> <span class="s2">"xml"</span>
+    <span class="n">collect</span> <span class="n">xpath</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">"/DescribeVolumesResponse/volumeSet/item"</span><span class="p">)</span> <span class="k">do</span>
+      <span class="n">field</span> <span class="s2">"id"</span><span class="p">,</span> <span class="n">xpath</span><span class="p">(</span><span class="n">col_item</span><span class="p">,</span> <span class="s2">"volumeId"</span><span class="p">)</span>
+      <span class="n">field</span> <span class="s2">"region"</span><span class="p">,</span> <span class="s2">"us-east-1"</span>
+      <span class="n">field</span> <span class="s2">"size"</span><span class="p">,</span> <span class="n">xpath</span><span class="p">(</span><span class="n">col_item</span><span class="p">,</span> <span class="s2">"size"</span><span class="p">)</span>
+      <span class="n">field</span> <span class="s2">"type"</span><span class="p">,</span> <span class="n">xpath</span><span class="p">(</span><span class="n">col_item</span><span class="p">,</span> <span class="s2">"volumeType"</span><span class="p">)</span>
+      <span class="n">field</span> <span class="s2">"tag_set"</span> <span class="k">do</span>
+        <span class="n">collect</span> <span class="n">xpath</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">"tagSet"</span><span class="p">)</span> <span class="k">do</span>
+          <span class="n">field</span> <span class="s2">"key"</span><span class="p">,</span> <span class="n">xpath</span><span class="p">(</span><span class="n">col_item</span><span class="p">,</span> <span class="s2">"key"</span><span class="p">)</span>
+          <span class="n">field</span> <span class="s2">"value"</span><span class="p">,</span> <span class="n">xpath</span><span class="p">(</span><span class="n">col_item</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">)</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="processing-datasources-with-javascript">Processing Datasources With JavaScript</h2>
+
+<p>Datasources may use JavaScript to combine and transform data from one or more datasources to create a new datasource. The syntax used in this case is:</p>
+<pre class="syntax-highlight plaintext"><code>datasource &lt;name&gt; do
+   run_script $&lt;script&gt;[, &lt;term&gt;]*
+end
+</code></pre>
+
+<p>Where <code>&lt;script&gt;</code> is the name of script definition and the terms are parameters or datasources given to the script for execution. The script result defines the data returned by the datasource. Terms can be any type (including other datasources, which will show up as arrays of JavaScript Objects).</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The JavaScript Datasource supports the JavaScript ECMAScript 5/ES 5 Specification. Please review the <a href="https://www.ecma-international.org/ecma-262/5.1/">reference</a> when writing a JavaScript Datasource.</p>
+</div>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The JavaScript Datasource includes the <a href="https://underscorejs.org/">underscore library</a>. This library includes some useful functions to assist in managing the data objects passed into the datasource. Version 1.4.4 of the library is currently included.</p>
+</div>
+
+<p>Scripts are defined using script definitions with the following syntax:</p>
+<pre class="syntax-highlight plaintext"><code>script &lt;name&gt;, type: "javascript" do
+  parameters &lt;string literal&gt;[, &lt;string literal]*
+  result &lt;string literal&gt;
+  code &lt;string literal&gt;
+end
+</code></pre>
+
+<p><code>parameters</code> is the list of parameters the script accepts. The parameters will automatically be set as JavaScript variables at the start of script execution.</p>
+
+<p><code>result</code> identifies the name of the JavaScript variable used to extract the data returned by the script. <code>result</code> is required.</p>
+
+<p><code>code</code> contains the actual JavaScript code. <code>code</code> is required.</p>
+
+<p>Example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">datasource</span> <span class="s2">"merge_instances"</span> <span class="k">do</span>
+   <span class="n">run_script</span> <span class="vg">$merge</span><span class="p">,</span> <span class="vg">$instances_us_east</span><span class="p">,</span> <span class="vg">$instances_us_west</span>
+<span class="k">end</span>
+
+<span class="n">script</span> <span class="s2">"merge"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"javascript"</span> <span class="k">do</span>
+  <span class="n">parameters</span> <span class="s2">"instances_us_east"</span><span class="p">,</span> <span class="s2">"instances_us_west"</span>
+  <span class="n">result</span> <span class="s2">"res"</span>
+  <span class="n">code</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="sh">
+  res = []
+  // Concatenate the different arrays of instances
+  var instances = []
+  instances = instances_us_east.concat(instances_us_west)
+
+  // Build the array of json objects containing the instance information as described above.
+  var server_json = {}
+  for (var i = 0; i &lt; instances.length; i++) {
+    var instance = instances[i]
+
+    var name = instance["name"]
+    var state = instance["state"]
+    var href = instance["href"]
+    var tags = instance['tags']
+
+    // build the json object
+    server_json = { "name": name, "href": href, "state": state, "tags": tags }
+
+    // push object onto the output array
+    res.push(server_json)
+  }
+</span><span class="no">  EOS</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>For more complicated examples of JavaScript datasources including scripts that combine together multiple datasources see <a href="/policies/getting_started/policy_list.html">policy examples</a> such as the <a href="https://github.com/rightscale/policy_templates/blob/master/security/security_groups/high_open_ports/open_ports.pt">open ports policy</a></p>
+
+<h2 id="chaining-datasources">Chaining Datasources</h2>
+
+<p>A Datasource describes one type of API call. However, sometimes multiple levels of requests need to be made if you have a resource that is a subresource to another resource. For example, a policy validating that there are no publicly accessible S3 buckets must first fetch all the bucket names then fetch the ACLs for each bucket. In this case a <code>datasource</code> definition can reference a <code>resources</code> definition or another <code>datasource</code> definition. The syntax used to refer to a <code>resources</code> definition is <code>@&lt;resource definition name&gt;</code> and the syntax used to refer to another datasource definition is <code>$&lt;datasource definition name&gt;</code>. For example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resources</span> <span class="s2">"clouds"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.clouds"</span>
+
+<span class="n">resources</span> <span class="s2">"instances"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.instances"</span> <span class="k">do</span>
+   <span class="n">iterate</span> <span class="vi">@clouds</span>            <span class="c1"># iterate through the data retrieved by the</span>
+                              <span class="c1"># "clouds" resource definition.</span>
+
+   <span class="n">cloud_href</span> <span class="n">href</span><span class="p">(</span><span class="n">iter_item</span><span class="p">)</span> <span class="c1"># iter_item returns the cloud data currently</span>
+                              <span class="c1">#  being iterated on.</span>
+<span class="k">end</span>
+</code></pre>
+
+<blockquote>
+<p>Note: <code>iterate</code> may appear only once in a given datasource definition.</p>
+</blockquote>
+
+<p>As shown in the example above references are typically used together with the <code>iterate</code> reserved word to iterate over the elements of the data. If the data is not an array then <code>iterate</code> takes care of wrapping it with a single element array.</p>
+
+<p>References may also be used directly as argument of other functions such as <code>val</code>, <code>href</code>, <code>size</code> or <code>select</code>.</p>
+
+<p>Finally, references can be used when defining the parameters given to <code>run_script</code>:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">datasource</span> <span class="s2">"permissions"</span> <span class="k">do</span>
+   <span class="n">run_script</span> <span class="s2">"get_permissions"</span><span class="p">,</span> <span class="vi">@instances</span><span class="p">,</span> <span class="vi">@security_groups</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><a name="describing-the-policy-conditions" /></a></p>
+
+<h2 id="describing-the-policy-conditions">Describing the Policy Conditions</h2>
+
+<p>Now that we know how to retrieve the data the next step consists of actually writing the conditions they must validate. This is done in the <code>policy</code>
+definition. There can be only one such definition in a given policy template.</p>
+
+<p>A policy definition consists of a list of validations. Each validation may in turn describe multiple checks. A validation also defines one or more
+<a href="#escalations">escalations</a> that trigger when a check fails and <a href="#resolutions">resolutions</a> that trigger when an underlying issue is fixed. Finally a validation also provides a default summary and details <a href="#incident-message-and-email-templates">text templates</a> used to render the incident message.</p>
+
+<p>Each <code>validate</code> or <code>validate_each</code> is run independently and will generate either 0 or 1 incidents.</p>
+
+<p>The syntax for a policy definition is:</p>
+<pre class="syntax-highlight plaintext"><code>policy &lt;string literal&gt; do
+  validate[_each] $&lt;datasource&gt;|@&lt;resources&gt; do
+    summary_template &lt;string literal&gt;
+    detail_template &lt;string literal&gt;
+    hash_include &lt;field_name&gt;, &lt;field_name&gt;, ...
+    hash_exclude &lt;field_name&gt;, &lt;field_name&gt;, ...
+    escalate $&lt;escalation&gt;
+    escalate $&lt;escalation&gt;
+    resolve $&lt;resolution&gt;
+    resolve $&lt;resolution&gt;
+    ...
+    check &lt;term&gt;
+    check &lt;term&gt;
+    ...
+    export &lt;path expression&gt; do
+      resource_level &lt;boolean&gt;
+      field &lt;name&gt; do
+        label &lt;string literal&gt;
+        format &lt;string literal&gt;
+        path &lt;path expression&gt;
+      end
+      field ...
+    end
+  end
+  validate...
+end
+</code></pre>
+
+<p>Where:</p>
+
+<ul>
+<li>Each validation starts with <code>validate</code> or <code>validate_each</code>.
+
+<ul>
+<li><code>validate</code> applies the checks on the given datasource or resources as a whole.</li>
+<li><code>validate_each</code> iterates over the given datasource or resources (which must be an array or is wrapped into a single element array) and applies the checks on each element.</li>
+</ul></li>
+<li><code>summary_template</code> provides a text template that gets applied to the escalation data to render the incident message summary.</li>
+<li><code>detail_template</code> provides a text template that gets applied to the escalation data to render the incident message details. It will be displayed above the export table, if one is specified.</li>
+<li><code>hash_include</code> is array of fields in the escalation data to check in determining whether data has changed and thus actions should be re-run. By default, all fields are checked so if any value changes at all, all actions are run again. This includes emails and cloud workflows. In general, this field does not have to be specified. The general exception is when you have a value such as a timestamp that changes constantly.</li>
+<li><code>hash_exclude</code> is an array of fields in the escalation data to exclude in determining whether data hash changed. This field is mutually exclusive with hash_include.</li>
+<li><code>escalate</code> indicates an <a href="#escalations">escalation</a> to trigger when a check fails.</li>
+<li><code>resolve</code> indicates an <a href="#resolution">resolution</a> to trigger when all existing violations are resolved.</li>
+<li><code>check</code> identifies a term that must return anything BUT <code>false</code>, <code>0</code>, an empty string, an empty array or an empty object. If the term returns one of these values then the check fails, an incident is created and any associated escalation triggers.</li>
+<li><code>export</code> controls whether or not a table of resources is exported for the incident.
+
+<ul>
+<li><code>path expression</code> is a string literal corresponding to a <a href="https://jmespath.org/">jmes_path</a> expression acting upon the violation data. The jmespath can be used to extract a table of resources if the resources exist as a subpath in data. This field is optional.</li>
+<li><code>resource_level</code> is a boolean stating if the data being exported is resource level data or not. If the data is resource level, available actions can be run on a select group of resources or all of them.</li>
+<li><code>field</code> specifies a field in the data, such as id. Each field corresponds to a column in the data table. Fields values should be simple types such as integers, strings, booleans, or arrays of simple values.</li>
+<li><code>name</code> is the object field key/name in the violation <code>data</code> row</li>
+<li><code>label</code> is a human readable label associated with the name and shows up as the header for the column. If omitted, <code>name</code> will be used.</li>
+<li><code>format</code> controls formatting for the column. Currently <q>left</q>, <q>center</q>, and <q>right</q> keywords are supported. By default, columns are left formatted.</li>
+<li><code>path</code> is a string literal corresponding to a <a href="https://jmespath.org/">jmes_path</a> expression acting upon each resource. The jmespath can be used to extract a field from a embedded data structure or to rename a field. By default, <code>name</code> is used.</li>
+</ul></li>
+</ul>
+
+<p>The policy engine runs each check in order and stops when a check <q>fails</q>. A check fails if the corresponding term returns <code>false</code>, <code>0</code>, an empty string, an empty array or an empty object. In the case of <code>validate_each</code> the policy engine applies that algorithm for each element of the datasource or resources.</p>
+
+<p>Each time a check fails the corresponding data is added to the <em>violation data</em>. In the case of <code>validate</code> this can only happen once and thus the escalation data ends up being the validated datasource or resources. In the case of <code>validate_each</code> this means that only the elements that fail a check are added to the escalation data.</p>
+
+<p>The violation data is exported as a table in the incident view page.</p>
+
+<p>Example:</p>
+
+<p>Assume that the <code>$reservations</code> datasource has data like:</p>
+<pre class="syntax-highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my account"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us-west-1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"instance_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m1.small"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"instance_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-01 01:02:03"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"time_left"</span><span class="p">:</span><span class="w"> </span><span class="mi">10200</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">policy</span> <span class="s2">"ri_expiration"</span> <span class="k">do</span>
+  <span class="n">validate_each</span> <span class="vg">$reservations</span> <span class="k">do</span>
+    <span class="n">summary_template</span> <span class="s2">"Reserved instances are nearing expiration."</span>
+    <span class="n">detail_template</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="sh">
+Found {{ len data }} expired reservations in account id {{ rs_project_id }}
+</span><span class="no">EOS</span>
+    <span class="n">export</span> <span class="k">do</span>
+      <span class="n">field</span> <span class="s2">"account_name"</span> <span class="k">do</span>
+        <span class="n">label</span> <span class="s2">"Account Name"</span>
+        <span class="n">path</span> <span class="s2">"account.name"</span>
+      <span class="k">end</span>
+      <span class="n">field</span> <span class="s2">"account_id"</span> <span class="k">do</span>
+        <span class="n">label</span> <span class="s2">"Account ID"</span>
+        <span class="n">path</span> <span class="s2">"account.id"</span>
+      <span class="k">end</span>
+      <span class="n">field</span> <span class="s2">"region"</span> <span class="k">do</span>
+        <span class="n">label</span> <span class="s2">"Region"</span>
+      <span class="k">end</span>
+      <span class="n">field</span> <span class="s2">"instance_type"</span> <span class="k">do</span>
+        <span class="n">label</span> <span class="s2">"Instance Type"</span>
+      <span class="k">end</span>
+      <span class="n">field</span> <span class="s2">"instance_count"</span> <span class="k">do</span>
+        <span class="n">label</span> <span class="s2">"Instance Count"</span>
+      <span class="k">end</span>
+      <span class="n">field</span> <span class="s2">"end_time"</span> <span class="k">do</span>
+        <span class="n">label</span> <span class="s2">"End Time"</span>
+      <span class="k">end</span>
+      <span class="n">field</span> <span class="s2">"time_left"</span> <span class="k">do</span>
+        <span class="n">label</span> <span class="s2">"Time Left In Seconds"</span>
+        <span class="nb">format</span> <span class="s2">"right"</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">hash_include</span> <span class="s2">"id"</span><span class="p">,</span> <span class="s2">"end_time"</span>
+    <span class="n">escalate</span> <span class="vg">$alert</span>
+    <span class="n">check</span> <span class="n">gt</span><span class="p">(</span><span class="n">dec</span><span class="p">(</span><span class="n">to_d</span><span class="p">(</span><span class="n">val</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">"end_time"</span><span class="p">)),</span> <span class="n">now</span><span class="p">),</span> <span class="mi">3</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">3600</span><span class="p">))</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>In the example above the policy defines a single validation with a single check. The check returns a boolean value which is false when the duration between a reserved instance expiration data and now is less than 3 days. In this case the <code>alert</code> escalation triggers. The violation data consists of an array that contains all the reservations that are expiring in less than 3 days.</p>
+
+<p>A table of information is defined to display in the mail as well as display on the incident show page in the dashboard.</p>
+
+<h3 id="describing-the-policy-conditions-triggering-actions">Triggering Actions</h3>
+
+<p>Actions are run anytime the underlying <em>violation data</em> changes. By default, all  fields are used in determining whether the data changes. In the case above, the time_left field will be continually changing and causing actions like email to retrigger. <code>hash_include</code> and <code>hash_exclude</code> can be used to modify this behavior by excluding certain fields form this calculation. By supplying <q>id</q> and <q>end_time</q> to the hash_include method, we ensure that we only get new alerts when one of these two values is changed. We could have also achieved the same ends by doing <code>hash_exclude &quot;time_left&quot;</code> as well -- all other fields in the datasource be relatively stable.</p>
+
+<p>Only top-level fields will be considered for <code>hash_include</code> and <code>hash_exclude</code>. If you have a nested structure such as:</p>
+<pre class="syntax-highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abc"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"baz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"biz"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Then you may specify <code>hash_include &quot;config&quot;</code> to detect any changes in config but not individual fields within config itself. If you wish to hash only a specific field within config such as config.foo, then use a JavaScript based <code>script</code> block to transform the nested fields into top-level fields first.</p>
+
+<h2 id="escalations">Escalations</h2>
+
+<p>Escalation definitions describe a sequence of action items to be taken when a policy fails to validate. Action items are run in order and the escalation will run until all actions are complete or until an error is encountered running one of the action items. Action items are describe below. Action items may appear any number of times in any order, except when noted.</p>
+
+<p>Syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">escalation</span> <span class="o">&lt;</span><span class="nb">name</span><span class="o">&gt;</span> <span class="k">do</span>
+  <span class="n">automatic</span> <span class="o">&lt;</span><span class="n">term</span><span class="o">&gt;</span>
+  <span class="n">label</span> <span class="o">&lt;</span><span class="n">string</span> <span class="n">literal</span><span class="o">&gt;</span>
+  <span class="n">description</span> <span class="o">&lt;</span><span class="n">string</span> <span class="n">literal</span><span class="o">&gt;</span>
+  <span class="n">parameter</span> <span class="o">&lt;</span><span class="n">parameter</span> <span class="n">definition</span> <span class="mi">1</span><span class="o">&gt;</span>
+  <span class="n">parameter</span> <span class="o">&lt;</span><span class="n">parameter</span> <span class="n">definition</span> <span class="mi">2</span><span class="o">&gt;</span>
+  <span class="n">parameter</span> <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+  <span class="nf">&lt;</span><span class="n">action</span> <span class="n">item</span> <span class="mi">1</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">action</span> <span class="n">item</span> <span class="mi">2</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">action</span> <span class="n">item</span> <span class="mi">3</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">action</span> <span class="n">item</span> <span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">&gt;</span>
+<span class="k">end</span>
+</code></pre>
+
+<ul>
+<li><code>name</code> is the name of the escalation. It may be referenced in validate and validate_each blocks by <code>escalate $&lt;name&gt;</code>.</li>
+<li><code>label</code> gives a human readable label for the escalation.</li>
+<li><code>description</code> is optional and should give a description of what will happen when the action is run.</li>
+<li><code>automatic</code> controls whether the escalation is automatically run when an incident is generated, or is manually run. Automatic can be true or false, or a function that evaluates to true or false. If unspecified, it defaults to true for backwards compatibility. Functions used can operate on <a href="#parameters">parameter</a> to the applied policy in order to make whether actions are automatically run configurable.</li>
+<li><code>parameter</code> can appear any number of times. parameters are optional parameters to inject into the request approval. They can be referenced by subsequent actions such as Cloud Workflows or emails within the same escalation. See the <a href="#parameters">Parameters</a> section for more information about defining parameters.</li>
+</ul>
+
+<h3 id="escalations-action-items">Action Items</h3>
+
+<h4 id="email">Email</h4>
+
+<p><code>email</code> causes an email to be sent to the given address or addresses.</p>
+<pre class="syntax-highlight ruby"><code>  <span class="n">email</span> <span class="o">&lt;</span><span class="n">addresses</span><span class="o">&gt;</span> <span class="k">do</span>
+    <span class="n">subject_template</span> <span class="o">&lt;</span><span class="n">subject</span> <span class="n">template</span><span class="o">&gt;</span>
+    <span class="n">body_template</span> <span class="o">&lt;</span><span class="n">body</span> <span class="n">template</span><span class="o">&gt;</span>
+  <span class="k">end</span>
+</code></pre>
+
+<ul>
+<li><code>addresses</code> can be a string, an array of strings corresponding to email addresses. It can also be <a href="#parameters">parameter</a> or function which evaluates to a string or array of strings.</li>
+<li><code>subject template</code> must be a <a href="#incident-message-and-email-templates">go template</a> that is evaluated to be the email subject line. If no subject template is provided, the incident summary is used.</li>
+<li><code>body template</code> must be a <a href="#incident-message-and-email-templates">go template</a> that is evaluated to be the email body. If no body template is provided, the incident detail is used.</li>
+</ul>
+
+<h4 id="request-approval">Request Approval</h4>
+
+<p><code>request_approval</code> creates an approval request, causing the escalation to pause and wait for manual input. The manual input can either be an approval or denial. If its an approval, actions after the request approval will be taken. If its a denial, no further actions will be taken. When applying a policy, policy managers can choose to skip all approvals in the policy using the <q>Skip Approvals</q> option</p>
+<pre class="syntax-highlight ruby"><code>  <span class="n">request_approval</span> <span class="k">do</span>
+    <span class="n">label</span> <span class="o">&lt;</span><span class="n">string</span> <span class="n">literal</span><span class="o">&gt;</span>
+    <span class="n">description</span> <span class="o">&lt;</span><span class="n">string</span> <span class="n">literal</span><span class="o">&gt;</span>
+    <span class="n">parameter</span> <span class="o">&lt;</span><span class="n">parameter</span> <span class="n">definition</span> <span class="mi">1</span><span class="o">&gt;</span>
+    <span class="n">parameter</span> <span class="o">&lt;</span><span class="n">parameter</span> <span class="n">definition</span> <span class="mi">2</span><span class="o">&gt;</span>
+    <span class="n">parameter</span> <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+  <span class="nf">end</span>
+</code></pre>
+
+<ul>
+<li><code>label</code> gives a human readable label for the request approval.</li>
+<li><code>description</code> is optional and should give a description of what will happen when the action is approved.</li>
+<li><code>parameters</code> are optional parameters to inject into the request approval. They can be referenced by subsequent cloud workflows or emails within the same escalation. See the <a href="#parameters">Parameters</a> section for more information.</li>
+</ul>
+
+<h4 id="cloud-workflow">Cloud Workflow</h4>
+
+<p><code>run</code> launches a <a href="/ss/reference/rcl/v2/index.html">Cloud Workflow</a>
+using the given RCL definition. The RCL definition may be given parameters
+specified in a comma separated list. Parameters may be references or any of
+the applicable functions.</p>
+<pre class="syntax-highlight ruby"><code>   <span class="n">run</span> <span class="o">&lt;</span><span class="n">rcl</span> <span class="n">definition</span> <span class="nb">name</span><span class="o">&gt;</span><span class="p">[,</span> <span class="o">&lt;</span><span class="n">parameter</span><span class="o">&gt;</span><span class="p">]</span><span class="o">*</span>
+</code></pre>
+
+<ul>
+<li><code>parameter</code> can be any term. It may be a reference to a datasource, a parameter, a literal value of any type, a function, or a reserved keyword such as <code>data</code>.</li>
+</ul>
+
+<h5 id="cloud-workflow-variables">Cloud Workflow variables</h5>
+
+<p>Besides parameters passed explicitly in the <code>define</code> declaration, a handful of variables are available automatically:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>@@account</code></td>
+<td>Integer</td>
+<td>The RightScale project you&#39;re currently running in, i.e. <code>60073</code></td>
+</tr>
+<tr>
+<td><code>$$cred_*</code></td>
+<td>Credentials reference</td>
+<td>Any <code>credentials</code> or <code>auth</code> declaration is exported based upon name. For example if you have a declaration <code>credentials &quot;cred_azure&quot; do...</code> it will be available for signing http_* requests as <code>$$cred_azure</code>. Note this differs slightly from the reference name in <code>datasource</code> declarations where the reference name would be <code>$cred_azure</code>. For an example, see <a href="custom_policy.html">custom policy</a></td>
+</tr>
+</tbody></table>
+
+<h3 id="escalations-examples">Examples</h3>
+
+<p>Here is an example employing all previously described actions. It does not run automatically. It first optionally sends an email to a third party asking them to look at the approval request that will be created. If the approval request is approved, a Cloud Workflow is run in order to delete the volumes.</p>
+<pre class="syntax-highlight ruby"><code><span class="c1"># RCL used to delete volumes using Cloud Management.</span>
+<span class="n">define</span> <span class="n">run_delete_volumes</span><span class="p">(</span><span class="vg">$data</span><span class="p">)</span>  <span class="k">do</span>
+  <span class="c1"># loop through each data item</span>
+  <span class="n">foreach</span> <span class="vg">$volume</span> <span class="k">in</span> <span class="vg">$data</span> <span class="k">do</span>
+    <span class="c1"># get the volume resource</span>
+    <span class="vi">@volume</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">href: </span><span class="vg">$volume</span><span class="p">[</span><span class="s1">'href'</span><span class="p">])</span>
+    <span class="c1">#delete the volume</span>
+    <span class="vi">@volume</span><span class="p">.</span><span class="nf">delete</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">escalation</span> <span class="s2">"delete_volumes_with_approval"</span> <span class="k">do</span>
+  <span class="n">automatic</span> <span class="kp">false</span>
+  <span class="n">label</span> <span class="s2">"Deleted Volumes"</span>
+  <span class="n">description</span> <span class="s2">"Delete the selected volumes"</span>
+  <span class="n">parameter</span> <span class="s2">"param_email"</span> <span class="k">do</span>
+    <span class="n">type</span> <span class="s2">"string"</span>
+    <span class="n">label</span> <span class="s2">"Person to notify of action"</span>
+    <span class="n">description</span> <span class="s2">"If this is not-empty, a notification email will be sent to the following address."</span>
+  <span class="k">end</span>
+  <span class="n">email</span> <span class="vg">$param_email</span> <span class="k">do</span>
+    <span class="n">subject_template</span> <span class="s2">"Approval request: delete unencrypted volumes found in project {{ rs_project_name }}"</span>
+    <span class="n">body_template</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="sh">
+Unencrypted Volumes
+The following volumes are tagged with one of the tags shown below and are unencrypted:
+{{ range $index, $tag := parameters.enforced_tags }}{{ if $index }}, {{ end }}{{ $tag }}{{ end }}
+{{ range data }}
+| Region       | Volume ID | Volume Tags |
+| ------------ | --------- | ----------- |
+| {{.region }} | {{.id}}   | {{.tag_set}} |
+{{ end }}
+
+We would like your approval to delete the following volumes, please approve or deny this request.
+
+[JIRA Ticket]({{ parameters.jira_url }}/{{ data.jira_ticket_id }})
+
+</span><span class="no">EOS</span>
+  <span class="n">request_approval</span> <span class="k">do</span>
+    <span class="n">label</span> <span class="s2">"Delete volumes"</span>
+    <span class="n">description</span> <span class="s2">"Approving this will delete the listed volumes."</span>
+  <span class="k">end</span>
+  <span class="n">run</span> <span class="s2">"run_delete_volumes"</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="vg">$param_top_level</span><span class="p">,</span> <span class="n">rs_project_id</span>
+<span class="k">end</span>
+
+</code></pre>
+
+<h2 id="resolutions">Resolutions</h2>
+
+<p>Resolutions definitions describe a sequence of action items to be taken when a failing policy is resolved. A policy is resolved when the underlying checks which caused the policy to go into a failed state have been been corrected, either by <a href="#escalations">escalation</a> actions or by manual intervention. Resolutions may not happen as soon as the condition is fixed; conditions are checked on a schedule (typically 15 minutes) chosen when the policy is applied. An applied policy may be manually run by selecting <q>Run Now</q> on the Applied Policies page for a given account.</p>
+
+<p>Syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resolution</span> <span class="o">&lt;</span><span class="nb">name</span><span class="o">&gt;</span> <span class="k">do</span>
+  <span class="n">automatic</span> <span class="o">&lt;</span><span class="n">term</span><span class="o">&gt;</span>
+  <span class="n">label</span> <span class="o">&lt;</span><span class="n">string</span> <span class="n">literal</span><span class="o">&gt;</span>
+  <span class="n">description</span> <span class="o">&lt;</span><span class="n">string</span> <span class="n">literal</span><span class="o">&gt;</span>
+  <span class="n">parameter</span> <span class="o">&lt;</span><span class="n">parameter</span> <span class="n">definition</span> <span class="mi">1</span><span class="o">&gt;</span>
+  <span class="n">parameter</span> <span class="o">&lt;</span><span class="n">parameter</span> <span class="n">definition</span> <span class="mi">2</span><span class="o">&gt;</span>
+  <span class="n">parameter</span> <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+  <span class="nf">&lt;</span><span class="n">action</span> <span class="n">item</span> <span class="mi">1</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">action</span> <span class="n">item</span> <span class="mi">2</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">action</span> <span class="n">item</span> <span class="mi">3</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">action</span> <span class="n">item</span> <span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">&gt;</span>
+<span class="k">end</span>
+</code></pre>
+
+<ul>
+<li><code>name</code> is the name of the resolution. It may be referenced in validate and validate_each blocks by <code>resolve $&lt;name&gt;</code>.</li>
+<li><code>label</code> gives a human readable label for the resolution.</li>
+<li><code>description</code> is optional and should give a description of what will happen when the action is run.</li>
+<li><code>automatic</code> controls whether the resolution is automatically run when an incident is resolved, or is manually run. Automatic can be true or false, or a function that evaluates to true or false. If unspecified, it defaults to true for backwards compatibility. Functions used can operate on <a href="#parameters">parameter</a> to the applied policy in order to make whether actions are automatically run configurable.</li>
+<li><code>parameter</code> can appear any number of times. parameters are optional parameters to inject into the request approval. They can be referenced by subsequent actions such as Cloud Workflows or emails within the same resolution. See the <a href="#parameters">Parameters</a> section for more information about defining parameters.</li>
+</ul>
+
+<h3 id="resolutions-action-items">Action Items</h3>
+
+<p>Action items for resolutions follow the exact same format as action items for escalations. <code>email</code>, <code>request_approval</code>, and <code>run</code> are supported.</p>
+
+<h3 id="resolutions-examples">Examples</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">resolution</span> <span class="s2">"handle_unencrypted_volumes"</span> <span class="k">do</span>
+  <span class="n">label</span> <span class="s2">"Email resolution"</span>
+  <span class="n">description</span> <span class="s2">"Email the resolution report to the email list"</span>
+  <span class="n">email</span> <span class="vg">$escalate_to</span> <span class="k">do</span>
+    <span class="n">subject_template</span> <span class="s2">"Unencrypted volumes resolved in project {{ rs_project_name }}"</span>
+    <span class="n">body_template</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="sh">
+Unencrypted volumes have all been encrypted or deleted.
+</span><span class="no">EOS</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="incident-message-and-email-templates">Incident Message and Email Templates</h2>
+
+<p>The Policy Template Language makes it possible to use text templates to define the content of messages shown to users when an incident is created both in the UI and in emails.</p>
+
+<p>Templates have access to the escalation data via the built-in <code>data</code> function. They also have access to the policy template parameter values via the <code>parameters</code> function. Other functions listed below provide access to contextual information such as the RightScale organization and project. The output of the template is interpreted as <a href="http://commonmark.org/help/">markdown</a> before being rendered into HTML.</p>
+
+<p>The complete list of functions available to templates is:</p>
+
+<ul>
+<li><code>data</code>: The policy escalation data.</li>
+<li><code>parameters</code>: The applied policy parameter values as a hash.</li>
+<li><code>rs_org_id</code>: The RightScale organization ID where the policy is applied.</li>
+<li><code>rs_org_name</code>: The RightScale organization name where the policy is applied.</li>
+<li><code>rs_project_id</code>: The RightScale project ID where the policy is applied.</li>
+<li><code>rs_project_name</code>: The RightScale project name where the policy is applied.</li>
+<li><code>rs_cm_host</code>: The RightScale Cloud Management API hostname.</li>
+<li><code>rs_ss_host</code>: The RightScale Self-Service API hostname.</li>
+<li><code>rs_optima_host</code>: The RightScale Optima API hostname.</li>
+</ul>
+
+<h3 id="incident-message-and-email-templates-text-template-syntax-overview">Text Template Syntax Overview</h3>
+
+<p>Control structures in templates are delimited by <code>{{</code> and <code>}}</code>. For example the following template:</p>
+<pre class="syntax-highlight plaintext"><code>"Project {{ rs_project_id }}: {{ rs_project_name }}"
+</code></pre>
+
+<p>produces <code>Project 123: foo</code> where <code>123</code> is the ID of the RightScale project and <code>foo</code> is its name.</p>
+
+<p>If a control structure left delimiter is followed immediately by a minus sign and space character (<code>{{-</code>), all trailing white space is trimmed from the immediately preceding text. Similarly, if the right delimiter is preceded by a space and minus sign (<code>-}}</code>), all leading white space is trimmed from the immediately following text. The following template produces the same output as the previous one:</p>
+<pre class="syntax-highlight plaintext"><code>&lt;&lt;EOS
+Project
+  {{- rs_project_id }}:
+  {{- rs_project_name }}
+EOS
+</code></pre>
+
+<p>Elements of an object or hash are accessed using <code>.</code>, for example the following prints the value of the field <code>name</code> in the escalation data:</p>
+<pre class="syntax-highlight plaintext"><code>"{{ data.name }}"
+</code></pre>
+
+<p>If the escalation data is an array then the values can be iterated over using the function <code>range</code>:</p>
+<pre class="syntax-highlight plaintext"><code>&lt;&lt;EOS
+{{ range data -}}
+* "{{ .name }}"
+{{ end -}}
+EOS
+</code></pre>
+
+<p>Note how the fields of the current element are accessed using <code>.&lt;name-of-field&gt;</code>. <code>range</code> supports an alternative syntax that makes it possible to access the index and the current element explicitly:</p>
+<pre class="syntax-highlight plaintext"><code>&lt;&lt;EOS
+{{ $index, $elem := range data -}}
+{{ $index }}. "{{ $elem.name }}"
+{{ end -}}
+EOS
+</code></pre>
+
+<p>You may want to include your result in a table. Below is an example how to build a table from the data array.</p>
+<pre class="syntax-highlight ruby"><code><span class="c1"># If a value is passed as first parameter of export, we'll extract that subpath into a table.</span>
+<span class="n">export</span> <span class="s2">"reportData"</span> <span class="k">do</span>
+  <span class="c1"># resource_level is false by default</span>
+  <span class="c1"># if true, there must be an "id" field and it must be unique</span>
+  <span class="n">resource_level</span> <span class="kp">true</span>
+  <span class="n">field</span> <span class="s2">"id"</span> <span class="k">do</span>
+    <span class="c1"># label is for display purposes, if left blank the field name (in this case "id") will be used</span>
+    <span class="n">label</span> <span class="s2">"Billing Center ID"</span>
+  <span class="k">end</span>
+  <span class="n">field</span> <span class="s2">"name"</span> <span class="k">do</span>
+    <span class="n">label</span> <span class="s2">"Billing Center Name"</span>
+  <span class="k">end</span>
+  <span class="n">field</span> <span class="s2">"budget"</span> <span class="k">do</span>
+    <span class="n">label</span> <span class="s2">"Budget"</span>
+  <span class="k">end</span>
+  <span class="n">field</span> <span class="s2">"actual"</span> <span class="k">do</span>
+    <span class="n">label</span> <span class="s2">"Month to Date Spend"</span>
+    <span class="c1"># format tells the UI how the field should be displayed. It can be semantic</span>
+    <span class="nb">format</span> <span class="s2">"currency"</span>
+    <span class="c1"># or css style directive</span>
+    <span class="nb">format</span> <span class="s2">"right $%.2f"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Control structures may also test the value of data for conditional output, for example:</p>
+<pre class="syntax-highlight plaintext"><code>&lt;&lt;EOS
+{{- if .data.email }}
+Email: {{ data.email }}
+{{- end }}
+EOS
+</code></pre>
+
+<p>A condition is true if it evaluates to anything other than false, 0, an empty string, array or data structure. There is also a set of binary comparison operators defined as functions:</p>
+
+<ul>
+<li><code>eq</code> returns true if arg1 == arg2</li>
+<li><code>ne</code> returns true if arg1 != arg2</li>
+<li><code>lt</code> returns true if arg1 &lt; arg2</li>
+<li><code>le</code> returns true if arg1 &lt;= arg2</li>
+<li><code>gt</code> returns true if arg1 &gt; arg2</li>
+<li><code>ge</code> returns true if arg1 &gt;= arg2</li>
+</ul>
+
+<h2 id="reserved-word-reference">Reserved Word Reference</h2>
+
+<p>The reserved words are defined below</p>
+
+<h3 id="reserved-word-reference-rs_org_id">rs_org_id</h3>
+
+<p><code>rs_org_id</code> returns the numerical identifier for RightScale Organization, that the account belongs to which is currently running the policy. It can be used any place a term can be used.</p>
+
+<h3 id="reserved-word-reference-rs_org_name">rs_org_name</h3>
+
+<p><code>rs_org_name</code> returns the name of the RightScale Organization Name that the account belongs, which is currently running the policy. It can be used any place a term can be used.</p>
+
+<h3 id="reserved-word-reference-rs_project_name">rs_project_name</h3>
+
+<p><code>rs_project_name</code> returns the name of the RightScale account that is currently running the policy. It can be used any place a term can be used.</p>
+
+<h3 id="reserved-word-reference-rs_project_id">rs_project_id</h3>
+
+<p><code>rs_project_id</code> returns the numerical identifier of the RightScale account that is currently running the policy. It can be used any place a term can be used.</p>
+
+<h3 id="reserved-word-reference-rs_cm_host">rs_cm_host</h3>
+
+<p><code>rs_cm_host</code> returns the RightScale CloudManagement endpoints.</p>
+
+<h3 id="reserved-word-reference-rs_optima_host">rs_optima_host</h3>
+
+<p><code>rs_optima_host</code> returns the RightScale Optima endpoint.</p>
+
+<h3 id="reserved-word-reference-rs_ss_host">rs_ss_host</h3>
+
+<p><code>rs_ss_host</code> returns the RightScale Self-Service endpoints.</p>
+
+<h3 id="reserved-word-reference-data">data</h3>
+
+<p><code>data</code> is used in a policy validate to refer to the whole datasource structure.</p>
+
+<h3 id="reserved-word-reference-item">item</h3>
+
+<p><code>item</code> is used in a policy validate_each to refer to each item element in the datasource</p>
+
+<h3 id="reserved-word-reference-response">response</h3>
+
+<p><code>response</code> is used to refer to the response XML or JSON data in a datasource result</p>
+
+<h3 id="reserved-word-reference-iter_item">iter_item</h3>
+
+<p><code>iter_item</code> is used to refer to each item when doing iterate in a resource or datasource</p>
+
+<h3 id="reserved-word-reference-iter_index">iter_index</h3>
+
+<p><code>iter_index</code> is the index of each item when doing iterate in a resource or datasource</p>
+
+<h3 id="reserved-word-reference-col_item">col_item</h3>
+
+<p><code>col_item</code> is used to refer to each item when doing a collect in a datasource</p>
+
+<h3 id="reserved-word-reference-col_index">col_index</h3>
+
+<p><code>col_index</code> is the index of each item when doing a collect in a datasource</p>
+
+<h2 id="resource-reference">Resource Reference</h2>
+
+<p>The following table lists all the resources supported by the policy template language. For each resource the table lists the available filters as well as other available properties. Required properties are marked with <code>(*)</code>.</p>
+
+<table><thead>
+<tr>
+<th>Resource</th>
+<th>Filters</th>
+<th>Properties</th>
+<th>Docs</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rs_cm.alert</td>
+<td>alert_spec_href<br/>status</td>
+<td>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html#index">Alerts</a></td>
+</tr>
+<tr>
+<td>rs_cm.alert_spec</td>
+<td>description<br/>escalation_name<br/>name<br/>subject_href</td>
+<td>instance_href<br/>server_href<br/>server_array_href<br/>server_template_href<br/>view<br/>with_inherited</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlertSpecs.html#index">AlertSpecs</a></td>
+</tr>
+<tr>
+<td>rs_cm.cloud</td>
+<td>cloud_type<br/>description<br/>name</td>
+<td>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceClouds.html#index">Clouds</a></td>
+</tr>
+<tr>
+<td>rs_cm.credential</td>
+<td>description<br/>name</td>
+<td>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCredentials.html#index">Credentials</a></td>
+</tr>
+<tr>
+<td>rs_cm.datacenter</td>
+<td>name<br/>resource_uid</td>
+<td>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDatacenters.html#index">Datacenters</a></td>
+</tr>
+<tr>
+<td>rs_cm.deployment</td>
+<td>description<br/>name<br/>resource_group_href<br/>server_tag_scope</td>
+<td>cloud_href(*)<br/>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDeployments.html#index">Deployments</a></td>
+</tr>
+<tr>
+<td>rs_cm.image</td>
+<td>cpu_architecture<br/>description<br/>image_type<br/>name<br/>os_platform<br/>resource_uid<br/>visibility</td>
+<td>cloud_href(*)<br/>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceImages.html#index">Images</a></td>
+</tr>
+<tr>
+<td>rs_cm.instance</td>
+<td>datacenter_href<br/>deployment_href<br/>name<br/>os_platform<br/>parent_href<br/>placement_group_href<br/>private_dns_name<br/>private_ip_address<br/>public_dns_name<br/>public_ip_address<br/>resource_uid<br/>server_template_href<br/>state</td>
+<td>cloud_href(*)<br/>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#index">Instances</a></td>
+</tr>
+<tr>
+<td>rs_cm.instance_type</td>
+<td>cpu_architecture<br/>description<br/>name<br/>resource_uid</td>
+<td>cloud_href(*)<br/>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstanceTypes.html#index">InstanceTypes</a></td>
+</tr>
+<tr>
+<td>rs_cm.ip_address</td>
+<td>deployment_href<br/>name</td>
+<td>cloud_href(*)</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddresses.html#index">IpAddresses</a></td>
+</tr>
+<tr>
+<td>rs_cm.network</td>
+<td>cidr_block<br/>cloud_href<br/>deployment_href<br/>name<br/>resource_uid</td>
+<td>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworks.html#index">Networks</a></td>
+</tr>
+<tr>
+<td>rs_cm.network_gateway</td>
+<td>cloud_href<br/>network_href<br/>name</td>
+<td></td>
+<td><a href="hhttp://reference.rightscale.com/api1.5/resources/ResourceNetworkGateways.html#index">NetworkGateways</a></td>
+</tr>
+<tr>
+<td>rs_cm.placement_group</td>
+<td>cloud_href<br/>deployment_href<br/>name<br/>state</td>
+<td>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePlacementGroups.html#index">PlacementGroups</a></td>
+</tr>
+<tr>
+<td>rs_cm.resource_group</td>
+<td>cloud_href<br/>name<br/>state</td>
+<td></td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceResourceGroups.html#index">ResourceGroups</a></td>
+</tr>
+<tr>
+<td>rs_cm.route_table</td>
+<td>cloud_href<br/>name<br/>network_href</td>
+<td>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRouteTables.html#index">RouteTables</a></td>
+</tr>
+<tr>
+<td>rs_cm.routes</td>
+<td>cloud_href<br/>description<br/>network_href<br/>next_hop_href<br/>next_hop_ip<br/>next_hop_type<br/>next_hop_url<br/>state</td>
+<td>route_table_href(*)</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRoutes.html#index">Routes</a></td>
+</tr>
+<tr>
+<td>rs_cm.security_group</td>
+<td>deployment_href<br/>name<br/>network_href<br/>resource_uid</td>
+<td>cloud_href(*)</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroups.html#index">SecurityGroups</a></td>
+</tr>
+<tr>
+<td>rs_cm.security_group_rule</td>
+<td></td>
+<td>security_group_href<br/>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroupRules.html#index">SecurityGroupRules</a></td>
+</tr>
+<tr>
+<td>rs_cm.server</td>
+<td>cloud_href<br/>deployment_href<br/>name</td>
+<td></td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#index">Servers</a></td>
+</tr>
+<tr>
+<td>rs_cm.server_array</td>
+<td>cloud_href<br/>deployment_href<br/>name</td>
+<td>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#index">ServerArrays</a></td>
+</tr>
+<tr>
+<td>rs_cm.ssh_key</td>
+<td>resource_uid<br/>name</td>
+<td>cloud_href(*)<br/>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSshKeys.html#index">SshKeys</a></td>
+</tr>
+<tr>
+<td>rs_cm.subnet</td>
+<td>datacenter_href<br/>instance_href<br/>resource_uid<br/>name<br/>network_href<br/>visibility</td>
+<td>cloud_href(*)</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSubnets.html#index">Subnets</a></td>
+</tr>
+<tr>
+<td>rs_cm.user</td>
+<td>email<br/>first_name<br/>last_name</td>
+<td></td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceUsers.html#index">Users</a></td>
+</tr>
+<tr>
+<td>rs_cm.volumes</td>
+<td>datacenter_href<br/>deployment_href<br/>resource_uid<br/>name<br/>description<br/>parent_volume_snapshot_href</td>
+<td>cloud_href(*)<br/>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumes.html#index">Volumes</a></td>
+</tr>
+<tr>
+<td>rs_cm.volume_attachment</td>
+<td>instance_href<br/>resource_uid<br/>volume_href<br/></td>
+<td>cloud_href(*)<br/>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeAttachments.html#index">VolumeAttachments</a></td>
+</tr>
+<tr>
+<td>rs_cm.volume_snapshot</td>
+<td>state<br/>deployment_href<br/>resource_uid<br/>name<br/>description<br/>parent_volume_snapshot_href<br/>visibility</td>
+<td>cloud_href(*)<br/>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeSnapshots.html#index">VolumeSnapshots</a></td>
+</tr>
+<tr>
+<td>rs_cm.volume_type</td>
+<td>name<br/>resource_uid<br/></td>
+<td>cloud_href(*)<br/>view</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeTypes.html#index">VolumeTypes</a></td>
+</tr>
+</tbody></table>
+
+<h2 id="functions">Functions</h2>
+
+<p>Functions make it possible to compute values dynamically, for example by concatenating multiple values together or extracting sub-text from an API
+response. The syntax for calling a function is:</p>
+<pre class="syntax-highlight plaintext"><code>&lt;name&gt;(&lt;term&gt;, &lt;term&gt;, …)
+</code></pre>
+
+<p>For example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">href</span><span class="p">(</span><span class="n">col_item</span><span class="p">)</span>
+</code></pre>
+
+<p>A function may have zero or more parameters. The <a href="functions.html">function reference page</a> lists all the functions available for use in policy templates. The list describes the parameters and return values as well as where the function may be used.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

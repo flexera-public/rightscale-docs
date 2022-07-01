@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>What is Auto-Scaling?</title><meta content="Auto-scaling is a way to automatically scale up or down the number of compute resources that are being allocated to your application based on its needs at any given time." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="faq faq_What_is_auto-scaling" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">RightScale General FAQs</a></p><div class="page-header"><h1>What is Auto-Scaling?</h1></div><div class="main-content"><h2 id="background-information">Background Information</h2>
+
+<p>Auto-scaling is a way to automatically scale up or down the number of compute resources that are being allocated to your application based on its needs at any given time.</p>
+
+<p>Before cloud computing, it was very difficult to scale a website, let alone figure out a way to automatically scale (autoscale) a server setup. In a traditional, dedicated hosting environment, you are limited by your hardware resources. Once those server resources are maxed out, your site will inevitably suffer from a performance perspective and possibly crash, thereby causing you to lose data and/or potential business. RightScale allows you to set up and configure the necessary trigger points, called alerts and alert escalations, so that you can create an automated setup that automatically reacts to various monitored conditions when thresholds are exceeded.</p>
+
+<p>Today, cloud computing is totally revolutionizing the way computer resources are allocated, making it possible to build a fully scalable server setup on the Cloud. If your application needs more computing power, you now have the ability to launch additional compute resources on-demand and use them for as long as you want, and then terminate them when they are no longer needed.</p>
+
+<hr>
+
+<h2 id="answer">Answer</h2>
+
+<h3 id="answer-why-do-i-need-autoscaling-">Why do I need autoscaling?</h3>
+
+<p>Autoscaling is useful whenever your site/application needs additional server resources to satisfy the number of page requests or processing jobs.  Many people think about autoscaling in terms of handling sudden bursts or traffic spikes, but autoscaling is equally beneficial over the lifetime of your setup whether it&#39;s one year or ten years.</p>
+
+<p>The key point is that you can now design a scalable architecture that will automatically scale-up or scale-down to meet your needs over the lifetime of your setup regardless of how fast/slow or big/small your site grows over that time.</p>
+
+<p>Here are the most popular ways of autoscaling:</p>
+
+<ul>
+<li><p><strong>Front-end Site Traffic</strong></p>
+
+<ul>
+<li>Scale based on the number of incoming requests (e.g. web pages, objects, data transfer)</li>
+</ul></li>
+<li><p><strong>Back-end Batch Processing  (Scale Horizontally)</strong></p>
+
+<ul>
+<li>Load-based Scaling - Scale based on the number of jobs in the queue</li>
+<li>Time-based Scaling - Scale based on how long jobs have been in the queue</li>
+</ul></li>
+</ul>
+
+<h3 id="answer-how-do-i-use-rightscale-for-autoscaling-">How do I use RightScale for autoscaling?</h3>
+
+<p>RightScale provides an automated, cloud management platform where you can set up your deployment to automatically scale based on conditions that you define.  For example, you can set up a series of alerts and escalations that will automatically scale-up your deployment when your servers are using more than 80% of their processing power.  Conversely, you can set up your deployment to automatically scale-down when your servers are only using 15% of their processing power.</p>
+
+<p>RightScale also uses a democratic voting system in order to ensure that an <q>over-worked</q> server doesn&#39;t accidentally trigger a scale-up/down for the entire deployment.  By default, 51% of your server resources must vote for the same escalation before any action takes place.</p>
+
+<p>You can also define how many servers are launched when you scale-up/down, as well as a maximum number of servers that can be allocated to a deployment.  The Dashboard gives you full control of how your deployment scales.</p>
+
+<p>For front-end autoscaling for the Standard Edition, see <a href="http://support.rightscale.com/03-Tutorials/02-AWS/02-Website_Edition/How_do_I_set_up_Autoscaling%3F/">How do I set up Autoscaling?</a></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

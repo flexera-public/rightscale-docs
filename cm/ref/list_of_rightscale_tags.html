@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>List of RightScale Tags</title><meta content="This is a list of tags that are used by RightScale for various processes and purposes, mostly for tracking by RightScale or daemon operation." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_ref cm_ref_list_of_rightscale_tags" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Reference Information</a></p><div class="page-header"><h1>List of RightScale Tags</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This is a list of tags that are used by RightScale for various processes and purposes, mostly for tracking by RightScale or daemon operation. If you have questions about these tags, please contact <em><a href="mailto:support@rightscale.com">support@rightscale.com</a></em> with your questions. If you are unsure of a tag&#39;s proper usage, please do not add it to the instance without consulting support first.</p>
+
+<p>Additionally, you can also manage cloud tags through RightScale. For more information, see <a href="/cm/rs101/tagging.html#how-rightscale-tags-and-cloud-tags-are-related">Use EC2 Tags in RightScale</a>.</p>
+
+<h2 id="tag-syntax">Tag Syntax</h2>
+
+<p>With these tags, the format for these tags is</p>
+
+<p><strong>Namespace:Predicate=value</strong></p>
+
+<h2 id="list-of-tags">List of Tags</h2>
+
+<h3 id="list-of-tags-tags-for-servers-or-server-arrays">Tags for Servers or Server Arrays</h3>
+
+<p>These tags are used by servers or server arrays:</p>
+
+<table><thead>
+<tr>
+<th><strong>Namespace</strong></th>
+<th><strong>Predicate</strong></th>
+<th><strong>Value</strong></th>
+<th><strong>Description / Example</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rs_agent</td>
+<td>http_proxy</td>
+<td>&lt;<em>ip</em>&gt;:&lt;<em>port</em>&gt;</td>
+<td><strong>Description:</strong><br>Equivalent to setting <code>RS_http_proxy</code> userdata.<br>Signals to RightLink init scripts that they, and the RightLink agent, should proxy all HTTP traffic.<br>Setting is made available to child processes via <code>http_proxy</code> and <code>HTTP_PROXY</code> environment variables. With rightlink 6.3.2 and later, a user and password may also be included in the proxy url.<br><strong>Example:</strong><br>rs_agent:http_proxy=10.0.0.0:80<br>With RL 6.3.2...<br>rs_agent:http_proxy=<code>http://myuser:mypass@10.0.0.1:8080</code></td>
+</tr>
+<tr>
+<td>rs_agent</td>
+<td>http_proxy_user</td>
+<td>&lt;<em>user</em>&gt; <em>or</em> cred:&lt;<em>credential</em>&gt;</td>
+<td><strong>Description:</strong><br>Allows setting the user to use along with the rs_agent:http_proxy and rs_agent:http_proxy_password tags.<br>Its value can be either a plain text user or a reference to a <a href="/cm/dashboard/design/credentials/">Credential</a>.<br>It must be specified along with rs_agent:http_proxy_password and may only be specified when rs_agent:http_proxy is specified as well.<br><strong>Example:</strong><br>rs_agent:http_proxy_user=myuser<br>rs_agent:http_proxy_user=cred:MY_USER</td>
+</tr>
+<tr>
+<td>rs_agent</td>
+<td>http_proxy_password</td>
+<td>cred:&lt;<em>credential</em>&gt;</td>
+<td><strong>Description:</strong><br>Allows setting the password to use along with the rs_agent:http_proxy and rs_agent:http_proxy_user tags.<br>Its value can be a reference to a <a href="/cm/dashboard/design/credentials/">Credential</a> which allows hiding the sensitive password value when viewing server or server array tags.<br>It must be specified along with rs_agent:http_proxy_user and may only specified when rs_agent:http_proxy is specified as well.<br><strong>Example:</strong><br>rs_agent:http_proxy_password=cred:MY_PASS</td>
+</tr>
+<tr>
+<td>rs_agent</td>
+<td>http_no_proxy</td>
+<td>&lt;<em>ip or host</em>&gt;</td>
+<td><strong>Description:</strong><br>Equivalent to setting <code>RS_http_no_proxy</code> userdata.  <br>Signals the RightLink agent that the listed hosts are exceptions to the proxy setting and should be contacted directly.<br>Setting is made available to child processes via <code>no_proxy</code> environment variable.<br><strong>Example:</strong><br><strong>Single IP Address:</strong>  <br>rs_agent:http_no_proxy=10.114.114.33<br><strong>Multiple IP Addresses:</strong><br>rs_agent:http_no_proxy=10.114.114.33,10.11.11.3,10.1.1.3</td>
+</tr>
+<tr>
+<td>rs_launch</td>
+<td>type</td>
+<td>auto</td>
+<td><strong>Description:</strong><br>Automatically set on newly created server arrays.<br>Indicates to RightLink that the instance should be shutdown if it hasn&#39;t gone operational in less than 45 minutes.<br>Write a recipe that removes the tag to disable this behavior (or remove from dash if one off)<br><strong>Example:</strong><br>rs_launch:type=auto</td>
+</tr>
+<tr>
+<td>report</td>
+<td>*</td>
+<td>*</td>
+<td><strong>Description:</strong><br>Use on servers and/or deployments to display custom information when generating a report.<br><strong>Example:</strong><br>report:type=staging</td>
+</tr>
+</tbody></table>
+
+<h3 id="list-of-tags-tags-for-rightlink-6-and-older">Tags for RightLink 6 and older</h3>
+
+<p>These tags are used for troubleshooting. They should only be used when advised by support.</p>
+
+<table><thead>
+<tr>
+<th><strong>Namespace</strong></th>
+<th><strong>Predicate</strong></th>
+<th><strong>Value</strong></th>
+<th><strong>Description / Example</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rs_agent_dev</td>
+<td>log_level</td>
+<td>&lt;<em>level</em>&gt;</td>
+<td><strong>Description:</strong><br><em>RightLink 5.7 and older:</em> Only DEBUG log level is supported, which is turned on when ANY rs_agent_dev tag happens to be set. This tag sets the debug level of both Chef recipes and the RightLink agent. Please note that a restart of the RightLink agent (service restart rightlink) is required for the tag to take effect if the tag was not set prior to boot.<br><em>RightLink 5.8 and newer:</em> This tag will affect the log level of Chef recipes and RightScripts only and not the RightLink agent itself. The tag is also now reread in every time Chef recipes or RightScripts are run. All log levels (FATAL, ERROR, WARN, INFO, and DEBUG) are supported. To set the log level of the RightLink agent itself you must now use the rs_log_level command line utility.<br><strong>Example:</strong><br>rs_agent_dev:log_level=DEBUG</td>
+</tr>
+<tr>
+<td>rs_agent_dev</td>
+<td>break_point</td>
+<td>&lt;<em>cookbook</em>&gt;::&lt;<em>recipe</em>&gt;</td>
+<td><strong>Description:</strong><br>Stop the boot run list before running the specified recipe.<br><strong>Example:</strong><br>rs_agent_dev:break_point=db_mysql::set_up</td>
+</tr>
+<tr>
+<td>rs_agent_dev</td>
+<td>download_cookbooks_once</td>
+<td>true, false</td>
+<td><strong>Description:</strong><br>Download the cookbook repo only on launch -- don&#39;t reload every converge.<br><strong>Example:</strong><br>rs_agent_dev:download_cookbooks_once=true</td>
+</tr>
+<tr>
+<td>rs_agent_dev</td>
+<td>patch_url</td>
+<td>*</td>
+<td><strong>Description:</strong><br>Equivalent to setting RS_patch_url userdata.<br><strong>Example:</strong><br>rs_agent_dev:patch_url=http://example.com</td>
+</tr>
+</tbody></table>
+
+<h3 id="list-of-tags-tags-for-instances">Tags for Instances</h3>
+
+<p><strong>Note</strong> <em>: All rs_* tags are related to RightScale-oriented processes, and should only be used with RightScale published templates or images.</em></p>
+
+<table><thead>
+<tr>
+<th><strong>Namespace</strong></th>
+<th><strong>Predicate</strong></th>
+<th><strong>Value</strong></th>
+<th><strong>Description / Example</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>server</td>
+<td>uuid</td>
+<td>&lt;<em>RS_UUID</em>&gt;</td>
+<td><strong>Description:</strong><br>Used for Load Balancer registration with APP<br>(lb_*::default sets it)<br><strong>Example:</strong><br>server:uuid=01-0KV5O1OPVDAF</td>
+</tr>
+<tr>
+<td>server</td>
+<td>private_ip_<em>N</em></td>
+<td>&lt;<em>ip</em>&gt;</td>
+<td><strong>Description:</strong><br><em>N</em> is the interface order (starting with zero) as discovered by RightLink. Used for identifying a server&#39;s private IP addresses. Also used by iptables for opening ports to specific IPs to servers within the same subnet.  <br>(rightscale::default sets it)<br><strong>Example:</strong><br>server:private_ip_1=10.0.0.0</td>
+</tr>
+<tr>
+<td>server</td>
+<td>public_ip_<em>N</em></td>
+<td>&lt;<em>ip</em>&gt;</td>
+<td><strong>Description:</strong><br><em>N</em> is the interface order (starting with zero) as discovered by RightLink. Used for identifying a server&#39;s public IP addresses.<br><strong>Example:</strong><br>server:public_ip_1=&lt;<em>Your_Public_IP</em>&gt;</td>
+</tr>
+<tr>
+<td>appserver</td>
+<td>active</td>
+<td>true</td>
+<td><strong>Description:</strong><br>Used by database for opening port 3306 to all appservers<br><strong>Example:</strong><br>appserver:active=true</td>
+</tr>
+<tr>
+<td>appserver</td>
+<td>listen_ip</td>
+<td>#{node[:&lt;<em>app</em>&gt;][:&lt;<em>ip</em>&gt;]}</td>
+<td><strong>Description:</strong><br>Use to supply the listening IP<br><strong>Example:</strong><br>appserver:listen_ip=#{node[:app_test][:10.0.0.0]}</td>
+</tr>
+<tr>
+<td>appserver</td>
+<td>listen_port</td>
+<td>#{node[:&lt;<em>app</em>&gt;][:&lt;<em>port</em>&gt;]}</td>
+<td><strong>Description:</strong><br>Use to supply the listening port<br><strong>Example:</strong><br>appserver:listen_port=#{node[:app_test][:5984]}</td>
+</tr>
+<tr>
+<td>memcached_server</td>
+<td>active</td>
+<td>true</td>
+<td><strong>Description:</strong><br>Indicates this server is an active Memcached server and available to service requests.<br><strong>Example:</strong><br>memcached_server:active=tru</td>
+</tr>
+<tr>
+<td>memcached_server</td>
+<td>cluster</td>
+<td>#{node[:memcached][:&lt;<em>cluster_id</em>&gt;]}</td>
+<td><strong>Description:</strong><br>Indicates the Memcached cluster the server is part of.<br><strong>Example:</strong><br>memcached_server:cluster=#{node[:memcached] [:3]}</td>
+</tr>
+<tr>
+<td>memcached_server</td>
+<td>port</td>
+<td>#{node[:memcached][:<em>tcp_port</em>]}</td>
+<td><strong>Description:</strong><br>Indicates the port Memcached is listening on.<br><strong>Example:</strong><br>memcached_server:port=#{node[:memcached] [:16059]}</td>
+</tr>
+<tr>
+<td>rs_monitoring</td>
+<td>state</td>
+<td>active</td>
+<td><strong>Description:</strong><br>Indicates that the state of the monitoring in the instance is active and configured with a server id corresponding to the instance&#39;s UUID.<br><strong>Example:</strong><br>rs_monitoring:state=active</td>
+</tr>
+<tr>
+<td>rs_monitoring</td>
+<td>security_updates_available</td>
+<td>true</td>
+<td><strong>Description:</strong><br>Indicates that security updates are available for the server and the rightscale::do_security_updates Chef recipe can be used to install the security updates. Once the updates are installed, this tag will be removed by the collectd plugin when it checks for updates the next time.<br><strong>Example:</strong><br>rs_monitoring:security_updates_available=true</td>
+</tr>
+<tr>
+<td>rs_monitoring</td>
+<td>reboot_required</td>
+<td>true</td>
+<td><strong>Description:</strong><br>Indicates that a reboot is required for the installed security updates to take effect. This tag is removed once the server is rebooted and all security updates are applied.<br><strong>Example:</strong><br>rs_monitoring:reboot_required=true</td>
+</tr>
+<tr>
+<td>rs_login</td>
+<td>state</td>
+<td>user <em>or</em> active</td>
+<td><strong>Description:</strong><br>Indicates that the instance has fetched and activated a login policy and is ready to receive push updates. The value determines how login works: with <code>user</code>, the instance is using <a href="/rl10/reference/rl10_managed_ssh_login.html">Managed SSH Login</a> with RightLink 10.5.0 or higher so either the default login or custom login name should be used; and with <code>active</code>, the login name will just be <code>rightscale</code>.<br><strong>Example:</strong><br>rs_login:state=user</td>
+</tr>
+<tr>
+<td>loadbalancer</td>
+<td>lb</td>
+<td>&lt;<em>pool_name</em>&gt;</td>
+<td><strong>Description:</strong><br>Used for Load Balancer registration with APP. Also used by appserver for opening port 8000 to all LBs<br>(lb_*::default sets it)<br><strong>Example:</strong><br>loadbalancer:lb=default</td>
+</tr>
+<tr>
+<td>loadbalancer</td>
+<td>app</td>
+<td>&lt;<em>pool_name</em>&gt;</td>
+<td><strong>Description:</strong><br>Used for App Server registration with LB. Also used for LB to request opening port 8000<br>(app_*::default sets it)<br><strong>Example:</strong><br>loadbalancer:app=default</td>
+</tr>
+<tr>
+<td>loadbalancer</td>
+<td>backend_ip</td>
+<td>&lt;<em>ip</em>&gt;:&lt;<em>port</em>&gt;</td>
+<td><strong>Description:</strong><br>Used for Load Balancer registration with APP<br><strong>Example:</strong><br>loadbalancer:backend_ip=10.0.0.0:5984</td>
+</tr>
+<tr>
+<td>database</td>
+<td>active</td>
+<td>true</td>
+<td><strong>Description:</strong><br>Used by appserver to request opening port 3306<br>(db_*::default sets it)<br><strong>Example:</strong><br>database:active=true</td>
+</tr>
+<tr>
+<td>rs_dbrepl</td>
+<td>slave_instance_uuid</td>
+<td>#{node[:rightscale][:&lt;<em>instance_uuid</em>&gt;]}</td>
+<td><strong>Description:</strong><br>This tags the server as a slave database. This tag identifies this server as a DB slave.<br><strong>Example:</strong><br>rs_dbrepl:slave_instance_uuid=#{node[:rightscale][:03-57EM7IF1DH892]}</td>
+</tr>
+<tr>
+<td>rs_decommissioning</td>
+<td>delay</td>
+<td>medium <em>or</em> long</td>
+<td><strong>Description:</strong><br>This tag is used to extend the default time of 50 minutes for auto-terminating or auto-stopping instances stuck in decommissioning. &#39;medium&#39; extends the time to 1 hour and 50 minutes. &#39;long&#39; extends the time to 3 hours and 50 minutes <br><strong>Example:</strong><br>rs_decommissioning:delay=long</td>
+</tr>
+<tr>
+<td>rs_docker</td>
+<td>host</td>
+<td>JSON-encoded list of docker host information</td>
+<td>The host tag has a value that is a JSON encoded list with the Docker engine ID, total memory, and number of CPUs. A RightScale instance will have this tag if it has the RightLink 10 Docker integration running. Here is an example of the host tag: <code>rs_docker:host=[&quot;XFFA:LPC3:7PJX:AEA5:DATR:ADDZ:AQGT:5N6S:WKK7:WNSI:6GI3:LZDE&quot;,3700,1]</code>.</td>
+</tr>
+<tr>
+<td>rs_docker</td>
+<td>c-<container-id></td>
+<td>JSON-encoded list of container information</td>
+<td>The container tag has a predicate starting with <code>c-</code> and followed by the Docker container ID and the value is a JSON encoded list with the Docker container name, Docker image ID, committed memory, and CPU allocation. When the RightLink 10 Docker integration is running, a RightScale instance will have a container tag for each Docker container that is currently running on it. Here is an example of a container tag: <code>rs_docker:c-860f61b2621568556442b1c13eafba0f0f01f4654c4e86407982cd8dfbf4e65b=[&quot;/naughty_morse&quot;,&quot;eb4a127a1188a3e274eb38f079c5e11680b942927956a38b9b6b6c6736e14fd2&quot;,0,0]</code>.</td>
+</tr>
+<tr>
+<td>rs_docker</td>
+<td>i-<imaged-id></td>
+<td>JSON-encoded list of image information</td>
+<td>The image tag has a predicate starting with <code>i-</code> and followed by the Docker image ID and the value is a JSON encoded list with the Docker image name. When the RightLink 10 Docker integration is running, a RightScale instance will have an image tag for each Docker image that has been downloaded to it. Here is an example of an image tag: <code>rs_docker:i-eb4a127a1188a3e274eb38f079c5e11680b942927956a38b9b6b6c6736e14fd2=[&quot;nginx:latest&quot;]</code>.</td>
+</tr>
+</tbody></table>
+
+<p>For more information on RightScale&#39;s docker integration, see <a href="/rl10/reference/rl10_docker_support.html">RightLink 10 Docker Support</a></p>
+
+<h3 id="list-of-tags-tags-for-ebs-backup">Tags for EBS Backup</h3>
+
+<table><thead>
+<tr>
+<th><strong>Namespace</strong></th>
+<th><strong>Predicate</strong></th>
+<th><strong>Value</strong></th>
+<th><strong>Description / Example</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rs_backup</td>
+<td>lineage</td>
+<td>*</td>
+<td><strong>Description:</strong><br>Lineage name of the backups<br><strong>Example:</strong><br>rs_backup:lineage</td>
+</tr>
+<tr>
+<td>rs_backup</td>
+<td>stripe_id</td>
+<td>&lt;<em>#</em>&gt;</td>
+<td><strong>Description:</strong><br>Unique identifier for a striped backup (all snapshots of the same backup will share this stripe_id)<br><strong>Example:</strong><br>rs_backup:stripe_id=20090930214316</td>
+</tr>
+<tr>
+<td>rs_backup</td>
+<td>timestamp</td>
+<td>&lt;<em>#</em>&gt;</td>
+<td><strong>Description:</strong><br>UTC since epoch in seconds<br><strong>Example:</strong><br>rs_backup:timestamp=1377706990</td>
+</tr>
+<tr>
+<td>rs_backup</td>
+<td>committed</td>
+<td>true</td>
+<td><strong>Description:</strong><br>Some contents if there was an API call to <q>commit</q> that snapshot<br><strong>Example:</strong><br>rs_backup:committed=true</td>
+</tr>
+<tr>
+<td>rs_backup</td>
+<td>count</td>
+<td>&lt;<em>#</em>&gt;</td>
+<td><strong>Description:</strong><br>Number of snapshots in the backup<br><strong>Example:</strong><br>rs_backup:count=9</td>
+</tr>
+<tr>
+<td>rs_backup</td>
+<td>device</td>
+<td>/dev/sdc</td>
+<td><strong>Description:</strong><br>Indicates the device the snapshot was taken from.<br><strong>Example:</strong><br>rs_backup:device=/dev/sdc</td>
+</tr>
+<tr>
+<td>rs_backup</td>
+<td>position</td>
+<td>&lt;<em>#</em>&gt;</td>
+<td><strong>Description:</strong><br>Indicates the position in the stripe set the snapshot was taken from.<br><strong>Example:</strong><br>rs_backup:position=5</td>
+</tr>
+</tbody></table>
+
+<p>If you have any questions about these tags, please contact support at <em><a href="mailto:support@rightscale.com">support@rightscale.com</a>.</em> We ask that you do not implement tags unless you are sure of their actions and results from adding those tags. Any tags needed for monitoring or logging will be added automatically by their respective scripts.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

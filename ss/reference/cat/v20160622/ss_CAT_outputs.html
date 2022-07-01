@@ -1,0 +1,881 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>CAT Outputs</title><meta content="This page provides a reference for the Outputs that are available for various resources with Self-Service." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="20160622" name="docsearch:version_major" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="ss ss_reference ss_reference_cat ss_reference_cat_v20160622 ss_reference_cat_v20160622_ss_CAT_outputs" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Self-Service Docs</a> &#x2F; <a href="../../">Reference</a> &#x2F; <a href="../">Cloud Application Templates</a> &#x2F; <a href="./">CAT File Language</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>20160622&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/ss/reference/cat/v20161221/ss_CAT_outputs.html">20161221</a></li><li><a href="/ss/reference/cat/v20160622/ss_CAT_outputs.html">20160622</a></li><li><a href="/ss/reference/cat/v20131202/ss_CAT_outputs.html">20131202</a></li></ul></div></div><div class="page-header"><h1>CAT Outputs</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This page provides a reference for the Outputs that are available for various resources with Self-Service.</p>
+
+<h2 id="example">Example</h2>
+
+<p>Here is an example of using an output to display the instance type of a Server:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">output</span> <span class="s2">"instance_type"</span> <span class="k">do</span>
+  <span class="n">label</span> <span class="s2">"Instance type"</span>
+  <span class="n">category</span> <span class="s2">"Cloud"</span>
+  <span class="n">default_value</span> <span class="vi">@my_server</span><span class="p">.</span><span class="nf">instance_type</span>
+  <span class="n">description</span> <span class="s2">"Instance type that is running"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>All resources contain an <code>href</code> Output which is the API href for the resource.</p>
+
+<h2 id="available-outputs">Available Outputs</h2>
+
+<h3 id="available-outputs-credential">Credential</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td>Attribute: value</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-ip-address">IP Address</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>address</td>
+<td>Attribute: address</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-ip-address-binding">IP Address Binding</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ip_address</td>
+<td>Link: IpAddress: address</td>
+<td></td>
+</tr>
+<tr>
+<td>instance</td>
+<td>Link: Instance: name</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-server">Server</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Attribute: state</td>
+<td>&#39;queued&#39;, &#39;bidding&#39;, &#39;stranded&#39;</td>
+</tr>
+<tr>
+<td>cloud</td>
+<td>Attribute: CurrentInstance: Link: Cloud: name</td>
+<td></td>
+</tr>
+<tr>
+<td>instance_type</td>
+<td>Attribute: CurrentInstance: Link: InstanceType: Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>datacenter</td>
+<td>Attribute: CurrentInstance: Link: Datacenter: name</td>
+<td></td>
+</tr>
+<tr>
+<td>image</td>
+<td>Attribute: CurrentInstance: Link: Image: name</td>
+<td></td>
+</tr>
+<tr>
+<td>image</td>
+<td>Attribute: CurrentInstance: Link: Image: name</td>
+<td></td>
+</tr>
+<tr>
+<td>public_ip_address</td>
+<td>Attribute: CurrentInstance: public_ip_addresses: Array.first</td>
+<td>Since a server may have multiple public IPs, this shows only the first</td>
+</tr>
+<tr>
+<td>private_ip_address</td>
+<td>Attribute: CurrentInstance: private_ip_addresses: Array.first</td>
+<td>Since a server may have multiple private IPs, this shows only the first</td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-instance">Instance</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Attribute: state</td>
+<td>this list may not be complete - please notify us if you see other states</td>
+</tr>
+<tr>
+<td>cloud</td>
+<td>Link: Cloud: name</td>
+<td></td>
+</tr>
+<tr>
+<td>instance_type</td>
+<td>Link: InstanceType: name</td>
+<td></td>
+</tr>
+<tr>
+<td>datacenter</td>
+<td>Link: Datacenter: name</td>
+<td></td>
+</tr>
+<tr>
+<td>image</td>
+<td>Link: Image: name</td>
+<td></td>
+</tr>
+<tr>
+<td>public_ip_address</td>
+<td>Attribute: public_ip_addresses: Array.first</td>
+<td>Since a server may have multiple public IPs, this shows only the first</td>
+</tr>
+<tr>
+<td>private_ip_address</td>
+<td>Attribute: private_ip_addresses: Array: first</td>
+<td>Since a server may have multiple private IPs, this shows only the first</td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-network">Network</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>instance_tenancy</td>
+<td>Attribute: instance_tenancy</td>
+<td></td>
+</tr>
+<tr>
+<td>cidr_block</td>
+<td>Attribute: cidr_block</td>
+<td></td>
+</tr>
+<tr>
+<td>is_default</td>
+<td>Attribute: is_default</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-network-gateway">Network Gateway</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Attribute: created_at</td>
+<td></td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>Attribute: updated_at</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Attribute: state</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>Attribute: type</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-network-option-group">Network Option Group</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Attribute: created_at</td>
+<td></td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>Attribute: updated_at</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>Attribute: type</td>
+<td></td>
+</tr>
+<tr>
+<td>options</td>
+<td>Attribute: options</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-network-option-group-attachment">Network Option Group Attachment</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created_at</td>
+<td>Attribute: created_at</td>
+<td></td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>Attribute: updated_at</td>
+<td></td>
+</tr>
+<tr>
+<td>network_option_group</td>
+<td>Attribute: network_option_group</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-placement-group">Placement Group</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Attribute: created_at</td>
+<td></td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>Attribute: updated_at</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Attribute: state</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-resource-group">Resource Group</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Attribute: state</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-route">Route</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>destination_cidr_block</td>
+<td>Attribute: destination_cidr_block</td>
+<td></td>
+</tr>
+<tr>
+<td>next_hop_type</td>
+<td>Attribute: next_hop_type</td>
+<td></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Attribute: created_at</td>
+<td></td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>Attribute: updated_at</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Attribute: state</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-route-table">Route Table</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Attribute: created_at</td>
+<td></td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>Attribute: updated_at</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-security-group">Security Group</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>cloud</td>
+<td>Link: Cloud: name</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-security-group-rule">Security Group Rule</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cidr_ips</td>
+<td>Attribute: cidr_ips</td>
+<td></td>
+</tr>
+<tr>
+<td>cloud</td>
+<td>Link: Cloud: name</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>direction</td>
+<td>Attribute: direction</td>
+<td></td>
+</tr>
+<tr>
+<td>end_port</td>
+<td>Attribute: end_port</td>
+<td></td>
+</tr>
+<tr>
+<td>group_name</td>
+<td>Attribute: group_name</td>
+<td></td>
+</tr>
+<tr>
+<td>group_owner</td>
+<td>Attribute: group_owner</td>
+<td></td>
+</tr>
+<tr>
+<td>group_uid</td>
+<td>Attribute: group_uid</td>
+<td></td>
+</tr>
+<tr>
+<td>icmp_code</td>
+<td>Attribute: icmp_code</td>
+<td></td>
+</tr>
+<tr>
+<td>icmp_type</td>
+<td>Attribute: icmp_type</td>
+<td></td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>Attribute: protocol</td>
+<td></td>
+</tr>
+<tr>
+<td>source_type</td>
+<td>Attribute: source_type</td>
+<td></td>
+</tr>
+<tr>
+<td>start_port</td>
+<td>Attribute: start_port</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+<tr>
+<td>priority</td>
+<td>Attribute: priority</td>
+<td>Azure only</td>
+</tr>
+<tr>
+<td>action</td>
+<td>Attribute: action</td>
+<td>Azure only</td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-server-array">Server Array</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Attribute: state</td>
+<td>enabled, disabled</td>
+</tr>
+<tr>
+<td>instances_count</td>
+<td>Attribute: instances_count</td>
+<td>enabled, disabled</td>
+</tr>
+<tr>
+<td>cloud</td>
+<td>Attribute: NextInstance: Link: Cloud: name</td>
+<td>enabled, disabled</td>
+</tr>
+<tr>
+<td>datacenter</td>
+<td>Link: Datacenter: name</td>
+<td>enabled, disabled</td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-ssh-key">Ssh Key</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-subnet">Subnet</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>Attribute: description</td>
+<td></td>
+</tr>
+<tr>
+<td>cidr_block</td>
+<td>Attribute: cidr_block</td>
+<td></td>
+</tr>
+<tr>
+<td>is_default</td>
+<td>Attribute: is_default</td>
+<td></td>
+</tr>
+<tr>
+<td>resource_uid</td>
+<td>Attribute: resource_uid</td>
+<td></td>
+</tr>
+<tr>
+<td>visibility</td>
+<td>Attribute: visibility</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Attribute: state</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-volume">Volume</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td>Attribute: size</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>Attribute: status</td>
+<td></td>
+</tr>
+<tr>
+<td>cloud</td>
+<td>Link: Cloud: name</td>
+<td></td>
+</tr>
+<tr>
+<td>datacenter</td>
+<td>Link: Datacenter: name</td>
+<td></td>
+</tr>
+<tr>
+<td>volume_type</td>
+<td>Attribute: volume_type: name</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-volume-attachment">Volume Attachment</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>volume</td>
+<td>Link: Volume: name</td>
+<td></td>
+</tr>
+<tr>
+<td>instance</td>
+<td>Link: Instance: name</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Attribute: state</td>
+<td><q>queued</q>, <q>failed</q>, <q>attaching</q>, <q>attached</q>, <q>detaching</q>, <q>detached</q></td>
+</tr>
+</tbody></table>
+
+<h3 id="available-outputs-volume-snapshot">Volume Snapshot</h3>
+
+<table><thead>
+<tr>
+<th>Output Name</th>
+<th>Semantic to Derive Value</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Attribute: name</td>
+<td></td>
+</tr>
+<tr>
+<td>size</td>
+<td>Attribute: size</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>Attribute: state</td>
+<td>&#39;pending&#39;, &#39;available&#39;, &#39;in-use&#39;, &#39;deleting&#39;, &#39;deleted&#39;</td>
+</tr>
+<tr>
+<td>cloud</td>
+<td>Link: Cloud: name</td>
+<td></td>
+</tr>
+<tr>
+<td>volume</td>
+<td>Link: Volume: name</td>
+<td></td>
+</tr>
+</tbody></table>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Chargeback and Showback Reporting</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="ca ca_ca_chargeback_and_showback_reporting" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="about.html"><h4 class="list-group-heading"><img src="../img/product-cloud-analytics.svg" /><span>Optima</span></h4></a><a class="list-group-item" href="legacy.html">Legacy Feature Documentation</a><a class="list-group-item" href="https://helpnet.flexerasoftware.com/Optima">Current Feature Documentation</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./"></a></p><div class="page-header"><h1>Chargeback and Showback Reporting</h1></div><div class="main-content"><div class="alert alert-danger" role="alert"><strong>Warning</strong><p>The features described on this page will soon be deprecated. Refer to the <a href="https://helpnet.flexerasoftware.com/Optima">latest documentation</a> for information on the latest features.</p>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>RightScale Optima can be used to perform chargeback and showback reporting on all clouds supported by RightScale, including private clouds. You can also use <a href="/ca/ca_cloud_markups_markdowns.html">markups and markdowns</a> to adjust the costs shown from the standard public cloud pricing levels before reporting.</p>
+
+<p>This document will show you how to:</p>
+
+<ol>
+<li>Structure your accounts</li>
+<li>Set up private cloud prices</li>
+<li>Allocate costs with tagging</li>
+<li>Apply markups or discounts to the standard public cloud prices</li>
+<li>Export the adjusted costs for reporting.</li>
+</ol>
+
+<h2 id="structuring-your-accounts-for-chargeback-and-showback">Structuring your Accounts for Chargeback and Showback</h2>
+
+<p>In order to ensure you can chargeback or showback costs accurately, <a href="/cm/administrators_guide/user_and_account_management.html">create separate RightScale accounts</a> for each department or business unit you want to report costs to.</p>
+
+<p>The below diagram shows a typical RightScale enterprise account setup. There is a master account, and three child accounts for different development teams. Each of the child accounts has access to its own cloud accounts, using its own cloud credentials. The RightScale child accounts are tagged with their department and their location.</p>
+
+<p><img src="/img/ca-chargeback-diagram.png" alt="ca-chargeback-diagram.png" width="727" height="315" /></p>
+
+<h2 id="setting-private-cloud-instance-prices">Setting Private Cloud Instance Prices</h2>
+
+<p>To report on private cloud costs in Optima, the private cloud needs to be connected to RightScale, and the private cloud instance types need to have prices assigned. See <a href="/cm/dashboard/settings/account/register_a_private_cloud_with_rightscale.html">Register a Private Cloud with RightScale</a> for information on connecting your private cloud in Cloud Management.</p>
+
+<p>Once the private cloud is registered, Optima will use the prices set in Cloud Management to calculate the cost of all private cloud instances. To set the costs for each instance type on your private cloud, follow the instructions at <a href="/cm/dashboard/clouds/generic/instance_types_actions.html#set-instance-type-prices">Set Instance Type Prices</a>.</p>
+
+<p>Public clouds connected to RightScale will show costs based on the publicly available prices. To apply any custom discounts or markups, see the <a href="/ca/ca_chargeback_and_showback_reporting.html#adjusting-costs-with-markups-and-markdowns">Adjusting Costs with Markups and Markdowns</a> section.</p>
+
+<h2 id="allocating-costs-with-tagging">Allocating Costs with Tagging</h2>
+
+<p>Once all of your cloud accounts are connected to RightScale accounts and you have set up prices for private clouds, you can allocate costs to individual departments or business units.</p>
+
+<p>In order to allocate all cloud costs (compute, storage, network and other services) you will use the Optima Dashboard. On the <a href="/ca/ca_user_interface_dashboard.html">Dashboard</a>, all costs are grouped by account. These accounts can be grouped further by <a href="/ca/using_account_tags.html">using Account tags</a>. All account tags will be shown in the CSV export from the Dashboard, along with the costs of each product and product category.</p>
+
+<p>The Instant <a href="/ca/ca_analyzing_costs.html">Analyzer</a> provides more granular filtering and reporting of compute costs. Here you can use <a href="/cm/rs101/tagging.html">instance and deployment tags</a> to drill down and view instance costs within a single RightScale account.</p>
+
+<h2 id="exporting-the-adjusted-costs">Exporting the Adjusted Costs</h2>
+
+<p>From the Optima Dashboard, click <strong>Export to CSV</strong>. This will download a CSV of all the data on the page, along with any account tags applied to the accounts you have access to, to help with further analysis in a spreadsheet.</p>
+
+<p>If you also need to export more detailed instance costs, go to the Instant Analyzer, click <strong>Full instance details</strong> at the top, and then <strong>Export to CSV</strong>. The CSV will contain all of the columns on the page, as well as tag columns for all tags used in your Instant Analyzer filters.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

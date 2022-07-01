@@ -1,0 +1,866 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Using RightLink 6</title><meta content="Tips and guidelines for using RightLink 6 in your environment." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="rl6 rl6_rl6_using" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl6"><h4 class="list-group-heading"><span>RightLink 6</span></h4></a><a class="list-group-item" href="rl6_about.html">About</a><a class="list-group-item" href="rl6_getting_started.html">Getting Started</a><a class="list-group-item" href="../release-notes/right-link-6.html">Releases</a><a class="list-group-item" href="rl6_installing.html">Installing RightLink 6</a><a class="list-group-item" href="rl6_enabling.html">Enabling Running Instances</a><a class="list-group-item" href="rl6_using.html">Using RightLink 6</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">About RightLink 6</a></p><div class="page-header"><h1>Using RightLink 6</h1></div><div class="main-content"><div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>RightLink 6 <a href="/faq/end_of_life_end_of_service.html#schedule-images-rightlink">has been EOL&#39;d</a> - please refer to the <a href="/rl10">RightLink 10 documentation</a></p>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>The following sections will assist you in using RighLink 6.</p>
+
+<h2 id="command-line-utilities---v6-3">Command Line Utilities - v6.3</h2>
+
+<p>The following command line utilities are useful for setting and getting information between RightLink enabled images and the RightScale platform. These utilities are available for use on instances with RightLink v5.8 and above, for example, if you are using a RightImage (e.g. RightImage_CentOS_5.6_x64_v5.8) or a custom RightScale-enabled image that includes RightLink v5 and above. If you are using older RightImages, some RightLink utilities might not be supported.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>The RightLink command line utilities are currently not available for RightLink 10</p>
+</div>
+
+<h3 id="command-line-utilities---v6-3-general-information">General Information</h3>
+
+<p>RightScale&#39;s command line utilities are found in <code>/usr/bin</code> on Linux systems.  To see all installed <q>rs</q> utilities:</p>
+<pre class="syntax-highlight plaintext"><code>ls /usr/bin/rs_*
+</code></pre>
+
+<p>From within a running instance you can issue a <q>--help</q> or <q>-h</q> command line flag to see synopsis, example and usage information. For example:</p>
+<pre class="syntax-highlight plaintext"><code>rs_log_level -h
+rs_run_recipe --help
+</code></pre>
+
+<p>Below is documentation for the more commonly used RightScale command line utilities for Chef.</p>
+
+<p><strong>Note</strong>: The following utility also exists in the /usr/bin directory.</p>
+
+<ul>
+<li><code>rs_reenroll</code>, <code>rs_thunk</code>, <code>rs_connect</code> - <em>Not</em> designed to be used by RightScale customers or partners.  (This is an Internal tool used by RightScale.)</li>
+</ul>
+
+<h4 id="windows-support">Windows Support</h4>
+
+<p>Although the example screenshots below are from a Linux system, these command line utilities are part of RightLink on Windows systems as well. Usage is the same as Linux systems. Note that <code>/usr/bin</code> is part of the PATH environment variable in Linux and is added to the Windows PATH as well.</p>
+
+<h3 id="command-line-utilities---v6-3-rs_log_level">rs_log_level</h3>
+
+<p><strong>Synopsis</strong></p>
+
+<p>RightScale Log Level Manager (<code>rs_log_level</code>)
+Log Level Manager allows setting and retrieving the RightLink agent log level.</p>
+
+<p><strong>Usage</strong></p>
+<pre class="syntax-highlight plaintext"><code>rs_log_level [-a] [--log-level, -l debug|info|warn|error|fatal]
+</code></pre>
+
+<p><strong>Options</strong></p>
+
+<table><thead>
+<tr>
+<th>Option Flag</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>--log-level, -l LVL</td>
+<td>Set log level of RightLink agent</td>
+</tr>
+<tr>
+<td>--agent, -a</td>
+<td>Apply get/set log level to RightLink agent</td>
+</tr>
+<tr>
+<td>--verbose, -v</td>
+<td>Display debug information</td>
+</tr>
+</tbody></table>
+
+<p>No options prints the current Chef log level. Note the --agent flag is modal. If it&#39;s left off, the Chef log level
+if affected. If added on, the agent log level is affected.</p>
+
+<p><strong>Examples</strong></p>
+
+<p>Retrieve Chef log level:</p>
+<pre class="syntax-highlight plaintext"><code>rs_log_level
+</code></pre>
+
+<p>Retrieve RightLink agent log level:</p>
+<pre class="syntax-highlight plaintext"><code>rs_log_level -a
+</code></pre>
+
+<p>Set Chef log level to debug. Takes effect next Chef converge:</p>
+<pre class="syntax-highlight plaintext"><code>rs_log_level --log-level debug
+rs_log_level -l debug
+</code></pre>
+
+<p>Set RightLink agent log level to debug (needs agent restart to take effect)</p>
+<pre class="syntax-highlight plaintext"><code>rs_log_level -a -l debug
+rs_log_level --agent --log-level debug
+</code></pre>
+
+<p><strong>Note</strong>: You have to be logged in as root to set the log level of the RightLink agent.</p>
+
+<h3 id="command-line-utilities---v6-3-rs_ohai">rs_ohai</h3>
+
+<p><strong>Synopsis</strong></p>
+
+<p>RightScale Ohai (rs_ohai) is an implementation of Ohai by RightScale
+rs_ohai is a utility that inspects a running instance and discovers relevant system-specific data.
+Usage</p>
+
+<p><strong>Options</strong></p>
+
+<table><thead>
+<tr>
+<th>Option Flag</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-d,  --directory DIRECTORY</td>
+<td>A directory to add to the Ohai search path</td>
+</tr>
+<tr>
+<td>-f,  --file FILE</td>
+<td>A file to run Ohai against</td>
+</tr>
+<tr>
+<td>-l,  --log_level LEVEL</td>
+<td>Set the log level (debug, info, warn, error, fatal)</td>
+</tr>
+<tr>
+<td>-L,  --logfile LOGLOCATION</td>
+<td>Set the log file location, defaults to STDOUT - recommended for daemonizing</td>
+</tr>
+</tbody></table>
+
+<p><strong>Examples</strong></p>
+
+<p>Retrieve system data:</p>
+<pre class="syntax-highlight plaintext"><code>rs_ohai
+</code></pre>
+
+<p>Retrieve system data with debugging information output:</p>
+<pre class="syntax-highlight plaintext"><code>rs_ohai --log_level debug
+rs_ohai -l debug
+</code></pre>
+
+<p><strong>Note</strong>: most commands invoked by Ohai/Chef are logged with the debug severity for easier debugging of troublesome providers or recipes.</p>
+
+<h3 id="command-line-utilities---v6-3-rs_run_recipe">rs_run_recipe</h3>
+
+<p><strong>Synopsis</strong></p>
+
+<p>rs_run_recipe is a command line tool that allows running recipes from within
+an instance. You can also execute recipes on other instances within
+the deployment based upon tags.</p>
+
+<p><strong>Usage</strong></p>
+<pre class="syntax-highlight plaintext"><code>rs_run_recipe --name, -n NAME [--json, -j JSON_FILE]
+              [--recipient_tags, -r TAG_LIST]
+              [--thread, -t THREAD_NAME][--policy -P POLICY][--audit_period -A SECONDS]
+              [--scope, -s SCOPE] [--verbose, -v]
+              [--timeout, -T SEC]
+</code></pre>
+
+<p><strong>Options</strong></p>
+
+<table><thead>
+<tr>
+<th>Option Flag</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>--name, -n NAME</td>
+<td>RightScript or Chef recipe name (overriden by id)</td>
+</tr>
+<tr>
+<td>--json, -j JSON_FILE</td>
+<td>JSON file name for JSON to be merged into attributes before running recipe</td>
+</tr>
+<tr>
+<td>--thread, -t THREAD</td>
+<td>Schedule the operation on a specific thread name -t THREAD for concurrent execution. Thread names must begin with a letter and can consist only of lower-case alphabetic characters, digits, and the underscore character.</td>
+</tr>
+<tr>
+<td>--policy, -P POLICY</td>
+<td>Audits for the executable to be run will be grouped under the given policy name. All detail will be logged on the instance, but limited detail will be audited. (1)</td>
+</tr>
+<tr>
+<td>--audit_period -a PERIOD_IN_SECONDS</td>
+<td>Specifies the period of time that should pass between audits</td>
+</tr>
+<tr>
+<td>--recipient_tags, r TAG_LIST</td>
+<td>Tag for selecting which instances the script will be run on. Instances must be in the same deployment or in an <q>account</q> deployment. <q>account</q> deployments are deployments where the <q>Server tag scope</q> field on the info tab is set to <q>account</q>.</td>
+</tr>
+<tr>
+<td>--scope, -s SCOPE</td>
+<td>Scope for selecting tagged recipients: single or all (default all)</td>
+</tr>
+<tr>
+<td>--timeout, -T SEC</td>
+<td>Max time to wait for response from RightScale platform. (default 60 sec)</td>
+</tr>
+<tr>
+<td>--cfg-dir, -c DIR</td>
+<td>Set directory containing configuration for all agents</td>
+</tr>
+<tr>
+<td>--verbose, -v</td>
+<td>Display progress information</td>
+</tr>
+</tbody></table>
+
+<ol>
+<li>thread, policy, and audit_period are often specified together. Policy helps to group audit entries for commonly recurring events, such as Chef converges or scheduled backups.</li>
+</ol>
+
+<p><strong>Examples</strong></p>
+
+<p>Run daily database backup on its own thread to avoid blocking normal RightScript execution. Group all audits from same month together.</p>
+<pre class="syntax-highlight plaintext"><code>rs_run_recipe --name mysql::do_backup --thread backup --policy backup --audit_period 2592000
+</code></pre>
+
+<p>Run the recipe, web_apache::do_restart on this server.</p>
+<pre class="syntax-highlight plaintext"><code>rs_run_recipe --name "web_apache::do_restart"
+</code></pre>
+
+<p>Run the recipe, web_apache::do_restart on all servers in deployment with the tag, server:type=app.</p>
+<pre class="syntax-highlight plaintext"><code>rs_run_recipe --name "web_apache::do_restart" -r "server:type=app" --verbose
+</code></pre>
+
+<p>Run the recipe, rightscale::setup_hostname with a created node.json override file:</p>
+<pre class="syntax-highlight plaintext"><code># ensure root can only read the json file if on a shared system
+touch /root/node.json &amp;&amp; chmod -v 770 /root/node.json
+
+# simple bash heredoc for creating the node.json
+cat &lt;&lt;EOF&gt; /root/node.json
+{
+  "rightscale" : {
+     "timezone":"Australia/Sydney"
+  }
+}
+EOF
+
+# run rs_run_recipe with the node.json created
+rs_run_recipe -v --name="rightscale::setup_timezone" --json /root/node.json
+</code></pre>
+
+<h3 id="command-line-utilities---v6-3-rs_run_right_script">rs_run_right_script</h3>
+
+<p><strong>Synopsis</strong></p>
+
+<p>rs_run_right_script is command line tool that allows running RightScripts
+from within an instance. You can also execute RightScripts on other
+instances within the deployment based upon tags.</p>
+
+<p><strong>Usage</strong></p>
+<pre class="syntax-highlight plaintext"><code>rs_run_right_script [--identity, -i ID |  --name, -n NAME] --parameter, -p NAME=type:VALUE]*
+              [--recipient_tags, -r TAG_LIST]
+              [--thread, -t THREAD_NAME][--policy -P POLICY][--audit_period -A SECONDS]
+              [--scope, -s SCOPE] [--verbose, -v]
+              [--timeout, -T SEC]
+</code></pre>
+
+<p><strong>Options</strong></p>
+
+<table><thead>
+<tr>
+<th>Option Flag</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>--identity, -i ID</td>
+<td>RightScript or ServerTemplateChefRecipe id. (e.g., in https://my.rightscale.com/acct/1/right_scripts/12345, 12345 is the ID)</td>
+</tr>
+<tr>
+<td>--name, -n NAME</td>
+<td>RightScript or Chef recipe name (overriden by id)</td>
+</tr>
+<tr>
+<td>--json, -j JSON_FILE</td>
+<td>JSON file name for JSON to be merged into attributes before running recipe</td>
+</tr>
+<tr>
+<td>--parameter, -p NAME=type:VALUE</td>
+<td>Define or override RightScript input. Note: Only applies to run_right_script</td>
+</tr>
+<tr>
+<td>--thread, -t THREAD</td>
+<td>Schedule the operation on a specific thread name for the concurrent execution. Thread names must begin with a letter and can consist only of lower-case alphabetic characters, digits, and the underscore character.</td>
+</tr>
+<tr>
+<td>--policy, -p POLICY</td>
+<td>Audits for the executable to be run will be grouped under the given policy name. All detail will be logged on the instance, but limited detail will be audited. Available with RightLink 5.8 and above. (1)</td>
+</tr>
+<tr>
+<td>--audit_period, -a PERIOD_IN_SECONDS</td>
+<td>Specifies the period of time that should pass between audits. Available with RightLink 5.8 and above.</td>
+</tr>
+<tr>
+<td>--recipient_tags, -r TAG_LIST</td>
+<td>Tag for selecting which instances the script will be run on. Instances must be in the same deployment or in an <q>account</q> deployment. <q>account</q> deployments are deployments where the <q>Server tag scope</q> field on the info tab is set to <q>account</q>.</td>
+</tr>
+<tr>
+<td>--scope, -s SCOPE</td>
+<td>Scope for selecting tagged recipients: single or all (Default: all)</td>
+</tr>
+<tr>
+<td>--cfg-dir, -c DIR</td>
+<td>Set directory containing configuration for all agents</td>
+</tr>
+<tr>
+<td>--verbose, -v</td>
+<td>Display progress information</td>
+</tr>
+</tbody></table>
+
+<ol>
+<li>thread, policy, and audit_period are often specified together. Policy helps to group audit entries for commonly recurring events, such as Chef converges or scheduled backups.</li>
+</ol>
+
+<p><strong>Note</strong>: If you use <code>rs_run_right_script</code> with the -p option, you must pass a COMPLETE set of input values in which case the input values that are defined on the server are not merged. If you omit any inputs, e.g. do not use -p, then the values defined on the server are used. However we do not provide a way to mix and match.</p>
+
+<p><strong>Examples</strong></p>
+
+<p>Run RightScript with an ID of 34 and verbose output:</p>
+<pre class="syntax-highlight plaintext"><code>rs_run_right_script -i 34 -v
+rs_run_right_script --identity 34 --verbose
+</code></pre>
+
+<p>Run RightScript with name, &#39;Install Nginx&#39; and verbose output:</p>
+<pre class="syntax-highlight plaintext"><code>rs_run_right_script -n "Install Nginx" -v
+rs_run_right_script --name "Install Nginx" --verbose
+</code></pre>
+
+<p>Run RightScript with and ID of 14 and override the input value for &#39;APPLICATION&#39; with &#39;Mephisto&#39;:</p>
+<pre class="syntax-highlight plaintext"><code>rs_run_right_script -i 14 -p "APPLICATION=text:Mephisto"
+</code></pre>
+
+<p>Run RightScript, &#39;Hello World&#39; with credential, &#39;HelloWorldText&#39; for input, HW_TEXT:</p>
+<pre class="syntax-highlight plaintext"><code>rs_run_right_script -n "Hello World" -p "HW_TEXT=cred:HelloWorldText"
+</code></pre>
+
+<p>Run the <q>register app server</q> RightScript on the server that is tagged as being a load balancer. This option takes a space-separated list of one or more tags, which will be used to select one or more target servers on which to run the script or recipe.</p>
+<pre class="syntax-highlight plaintext"><code>rs_run_right_script -n "APP register app server" -r "app:role=load_balancer"
+</code></pre>
+
+<p>Run a phone home script with all audits grouped weekly. Only changes in status of script execution (failure|success) will generate new audit entries.</p>
+<pre class="syntax-highlight plaintext"><code>rs_run_right_script --name "Phone Home" --thread checker --policy checker --audit_period 86400
+</code></pre>
+
+<h3 id="command-line-utilities---v6-3-rs_shutdown">rs_shutdown</h3>
+
+<p><strong>Usage</strong></p>
+<pre class="syntax-highlight plaintext"><code>rs_shutdown [options]
+</code></pre>
+
+<p><strong>Options</strong></p>
+
+<table><thead>
+<tr>
+<th>Option Flag</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>--reboot, -r</td>
+<td>Request reboot</td>
+</tr>
+<tr>
+<td>--stop, -s</td>
+<td>Request stop (boot volume is preserved)</td>
+</tr>
+<tr>
+<td>--terminate, -t</td>
+<td>Request termination (boot volume is discarded)</td>
+</tr>
+<tr>
+<td>--immediately, -i</td>
+<td>Request immediate shutdown (reboot, stop or terminate) by passing any pending scripts and preserving instance state</td>
+</tr>
+<tr>
+<td>--deferred, -d</td>
+<td>Request deferred shutdown (reboot, stop or terminate) pending finishing of any remaining scripts (default)</td>
+</tr>
+<tr>
+<td>--verbose, -v</td>
+<td>Display progress information</td>
+</tr>
+</tbody></table>
+
+<h3 id="command-line-utilities---v6-3-rs_tag">rs_tag</h3>
+
+<p><strong>Synopsis</strong></p>
+
+<p>RightScale Tagger (rs_tag) - Tagger allows listing, adding and removing tags on the current instance and querying for all instances with a given set of tags.</p>
+
+<p><strong>Note</strong>: Spaces in tags are not supported in RightLink v5.7 and earlier.</p>
+
+<p><strong>Usage</strong></p>
+<pre class="syntax-highlight plaintext"><code>rs_tag (--list, -l | --add, -a TAG | --remove, -r TAG | --query, -q TAG_LIST)
+</code></pre>
+
+<p><strong>Options</strong></p>
+
+<table><thead>
+<tr>
+<th>Option Flags</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>--list, -l</td>
+<td>List current instance tags</td>
+</tr>
+<tr>
+<td>--add, -a TAG NAME</td>
+<td>Add tag NAME.</td>
+</tr>
+<tr>
+<td>--remove, -r TAG NAME</td>
+<td>Remove tag NAME</td>
+</tr>
+<tr>
+<td>--query, -q TAG_LIST</td>
+<td>Query tag information about instances in your deployment</td>
+</tr>
+<tr>
+<td>--die, -e</td>
+<td>Exit with error if query/list fails</td>
+</tr>
+<tr>
+<td>--format, -f FMT</td>
+<td>Output format: json, yaml, text</td>
+</tr>
+<tr>
+<td>--verbose, -v</td>
+<td>Display debug information</td>
+</tr>
+<tr>
+<td>--timeout, -t</td>
+<td>Custom timeout parameter (Default = 120 seconds)</td>
+</tr>
+</tbody></table>
+
+<p><strong>Examples</strong></p>
+
+<p>Retrieve all tags:</p>
+<pre class="syntax-highlight plaintext"><code>rs_tag --list
+rs_tag -l
+</code></pre>
+
+<p>Add tag &#39;opinions:tags=awesome&#39; to instance:</p>
+<pre class="syntax-highlight plaintext"><code>rs_tag --add 'opinions:tags=awesome'
+rs_tag -a 'opinions:tags=awesome'
+</code></pre>
+
+<p>Remove tag &#39;opinions:tags=awesome&#39; from instance:</p>
+<pre class="syntax-highlight plaintext"><code>rs_tag --remove 'opinions:tags=awesome'
+rs_tag -r 'opinions:tags=awesome'
+</code></pre>
+
+<p>Get and print last tag value for &#39;opinions:tags&#39;:</p>
+<pre class="syntax-highlight plaintext"><code>tag=$(rs_tag --list | grep 'opinions:tags' | head -n 1) &amp;&amp; tag_value=${tag##*=}
+echo 'Opinion on tags: '"$tag_value"
+</code></pre>
+
+<p>Remove all tags:</p>
+<pre class="syntax-highlight plaintext"><code>for i in `rs_tag --list --format text`; do $(rs_tag --remove $i) ; done
+</code></pre>
+
+<p>In a RightScript, manage a unique tag &#39;on itself&#39; using an Input value:</p>
+<pre class="syntax-highlight shell"><code><span class="c">#!/bin/bash -e</span>
+
+<span class="c"># RightScript: Set node DNS hostname tag</span>
+
+<span class="c"># NODE_HOSTNAME can be set to any type text, environment variable, credential etc.</span>
+<span class="c"># e.g. EC2_PUBLIC_HOSTNAME</span>
+
+<span class="c"># remove any existing rs_node:dns_hostname tags</span>
+<span class="nv">tags_remove</span><span class="o">=</span><span class="k">$(</span>rs_tag --list --format yaml| grep <span class="s1">'rs_node:dns_hostname'</span> | awk <span class="s1">'{ print $2 }'</span><span class="k">)</span>
+
+<span class="c"># remove existing tags</span>
+<span class="k">for </span>tag <span class="k">in</span> <span class="nv">$tags_remove</span>; <span class="k">do
+  </span><span class="nb">echo </span>Removing <span class="s2">"</span><span class="nv">$tag</span><span class="s2">"</span>
+  rs_tag --remove <span class="s2">"</span><span class="nv">$tag</span><span class="s2">"</span>
+<span class="k">done</span>
+
+<span class="c"># Add rs_node dns hostname tag</span>
+rs_tag --add <span class="s1">'rs_node:dns_hostname='</span><span class="s2">"</span><span class="nv">$NODE_DNS_HOSTNAME</span><span class="s2">"</span>
+
+<span class="c"># get and print 1st/last set rs node dns hostname</span>
+<span class="nv">tag</span><span class="o">=</span><span class="k">$(</span>rs_tag --list --format yaml| grep <span class="s1">'rs_node:dns_hostname'</span> | head -n 1<span class="k">)</span> <span class="o">&amp;&amp;</span> <span class="nv">node_dns_hostname</span><span class="o">=</span><span class="k">${</span><span class="nv">tag</span><span class="p">##*=</span><span class="k">}</span>
+<span class="nb">echo</span> <span class="s1">'Current/latest node dns hostname: '</span><span class="s2">"</span><span class="nv">$node_dns_hostname</span><span class="s2">"</span>
+
+<span class="nb">echo</span> <span class="s1">'Done.'</span>
+</code></pre>
+
+<p><strong>Querying for tags:</strong></p>
+
+<p>Use <code>rs_tag</code> with the <code>--query, -q TAG_LIST</code> to query tag information about instances in your deployment only. A query will not return instances that are in a different deployment. <code>TAG_LIST</code> is a space-delimited list of machine tags. You can use some wildcard functions in the <code>TAG_LIST</code> by substituting an asterisk (*) for the value part of the machine tag -- for example, <code>rs_tag -q &quot;loadbalancer:app=\*&quot;</code>.</p>
+
+<p><strong>Note</strong>: This is not a fully supported wildcard function. Semi-wildcard functions will not work, such as rs_tag -q <q>loadbalancer:app=prod*</q></p>
+
+<p>This returns a JSON object to stdout with the following syntax:</p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w"> </span><span class="err">&lt;agentA_id&gt;</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">&lt;tag_n&gt;</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="err">}</span><span class="w">
+</span></code></pre>
+<pre class="syntax-highlight plaintext"><code># rs_tag --query "rs_logging:state=*"
+{
+  "rs-instance-05c03c0150c3b55b83a63b4eb8c0f2af5156d8ea-5013179": {
+    "tags": [
+      "rs_launch:type=auto",
+      "rs_logging:state=active",
+      "rs_login:state=active",
+      "rs_monitoring:state=active"
+    ]
+  },
+  "rs-instance-00f2710adb07e72bbabf42092c93c675098a9ef0-5013178": {
+    "tags": [
+      "rs_launch:type=auto",
+      "rs_logging:state=active",
+      "rs_login:state=active",
+      "rs_monitoring:state=active"
+    ]
+  },
+  "rs-instance-71334da6925feee899ee1e5d58cc8c8b2423a59a-5325028": {
+    "tags": [
+      "rs_logging:state=active",
+      "rs_login:state=active",
+      "rs_monitoring:state=active"
+    ]
+  }
+}
+</code></pre>
+
+<p>Please note that this is not a full wildcard function. You will receive an error if you attempt to enter the following:</p>
+<pre class="syntax-highlight plaintext"><code># rs_tag --query "rs_logging:sta*"
+# rs_tag --query "rs_logging:*"
+# rs_tag --query "rs_logg*"
+</code></pre>
+
+<p>Any of these will instead produce an error about an invalid wildcard statement.</p>
+
+<h3 id="command-line-utilities---v6-3-rs_config">rs_config</h3>
+
+<p><strong>Synopsis</strong></p>
+
+<p>RightScale configuration manager (rs_config) - Allows to get, set and list <a href="rl6_using.html#feature-control">feature configuration values</a>.</p>
+
+<p><strong>Usage</strong></p>
+<pre class="syntax-highlight plaintext"><code>rs_config (--list, -l | --set name value | --get name)
+</code></pre>
+
+<p><strong>Options</strong></p>
+
+<table><thead>
+<tr>
+<th>Option Flags</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>--list, -l</td>
+<td>Lists features and values. Features are: managed_login_enable, package_repositories_freeze,motd_update, decommission_timeout</td>
+</tr>
+<tr>
+<td>--format, -f FMT</td>
+<td>Output format for list operation(json, yaml, text)</td>
+</tr>
+<tr>
+<td>--set, -s <name> <value></td>
+<td>Set feature name to specified value. Valid values: integer for decommission_timeout. on/true, off/false for rest of features</td>
+</tr>
+<tr>
+<td>--get, -g <name></td>
+<td>Outputs the value of the given feature to stdout</td>
+</tr>
+</tbody></table>
+
+<p><strong>Examples</strong></p>
+<pre class="syntax-highlight plaintext"><code>   # Disable managed login. Only takes effect if set prior to boot (during image rebundle).
+   rs_config --set managed_login_enable off
+
+   # Set decommission timeout. Must be set before the decommission bundle is run!
+   rs_config --set decommission_timeout 180
+
+   # Get decommission timeout:
+   rs_config --get decommission_timeout
+</code></pre>
+
+<h3 id="command-line-utilities---v6-3-rs_state">rs_state</h3>
+
+<p><strong>Synopsis</strong></p>
+
+<p>RightScale run state reporter (rs_state) - Report current run state of an instance</p>
+
+<p><strong>Usage</strong></p>
+<pre class="syntax-highlight plaintext"><code>rs_state --type &lt;agent|run&gt;
+</code></pre>
+
+<p><strong>Options</strong></p>
+
+<table><thead>
+<tr>
+<th>Option Flags</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>--type, -t TYPE</td>
+<td>Display desired state (run or agent)</td>
+</tr>
+<tr>
+<td>--verbose, -v</td>
+<td>Display progress information</td>
+</tr>
+</tbody></table>
+
+<p><strong>Examples</strong></p>
+<pre class="syntax-highlight plaintext"><code>   # Print the run state:
+   # Possible values: booting, booting:reboot, operational, stranded,
+   #                  shutting-down:reboot, shutting-down:terminate, shutting-down:stop
+   rs_state --type run
+
+
+   # Print the agent state:
+   # Possible values: pending, booting, operational, stranded,
+   #                  decommissioning, decommissioned
+   rs_state --type agent
+</code></pre>
+
+<h2 id="ntp-time-synchronization">NTP Time Synchronization</h2>
+
+<p>RightLink 6.x enables more flexible and reliable time synchronization between instances and RightLink. RightLink-enabled instances need to have an accurate system clock (+/- 3 minutes) in order to allow reliable, ordered delivery of control messages. Sometimes the cloud&#39;s Hypervisor time is not always configured correctly or properly configured for NTP time synchronization. In order to help ensure that an instance has the correct time, RightLink initiates a time sync on boot using the operating system&#39;s NTP services.​</p>
+
+<p>RightLink Enhancements:</p>
+
+<ul>
+<li>Modified NTP resolution algorithm for both Linux and Windows</li>
+<li>Added Linux support for RS_NTP userdata, which is already supported on Windows</li>
+<li>Added support for rs_timeserver</li>
+</ul>
+
+<h3 id="ntp-time-synchronization-setting-rs_ntp">Setting RS_ntp</h3>
+
+<p>Add a tag to your server: <code>rs_agent:ntp_servers=server1[,server2,...]</code>
+Alternately, edit your MultiCloudImage&#39;s userdata and add the following key/value pair: <code>RS_ntp=server1,[server2,...]</code></p>
+
+<p>These both accomplish the same thing, but the tag is easier to apply.</p>
+
+<h2 id="proxy-support">Proxy Support</h2>
+
+<h3 id="proxy-support-overview">Overview</h3>
+
+<p>RightLink v6.x is HTTPS based and communicates back with the RightScale platform in 3 ways:</p>
+
+<ul>
+<li>HTTPS requests to the RightScale API servers, such as us-3.rightscale.com</li>
+<li>HTTPS requests to the island load balancers (such as island1.rightscale.com) to download attachments, cookbooks, and OS packages.</li>
+<li>Websocket requests to the RightScale routers.</li>
+</ul>
+
+<p>It is highly recommended to use a recent version of the agent (v6.3.2 or newer). v6.3.2 contained important bug fixes to the proxy code. The latest v14 ServerTemplates (v14.2) contain v6.3.3.</p>
+
+<p>With RightLink 6.x, monitoring data is sent via collectd over UDP. Because of the UDP requirement for this version of the agent, monitoring data is not easily proxyable. In order to proxy this data, please use the newer version (RightLink 10) of the agent.</p>
+
+<h3 id="proxy-support-usage">Usage</h3>
+
+<p>To have RightLink go through a proxy, tags must be placed on the Server before launch. The following two tags are supported:</p>
+
+<ul>
+<li><p><code>rs_agent:http_proxy=&lt;ip:port&gt;</code> -- Signals to RightLink init scripts that they, and the RightLink agent, should proxy all HTTP/HTTPS traffic. This setting is made available to child processes via the <code>http_proxy</code> and <code>HTTP_PROXY</code> environment variables.</p></li>
+<li><p><code>rs_agent:http_no_proxy=&lt;ip1&gt;,&lt;ip2&gt;,&lt;ip3&gt;...</code> -- Signals the RightLink agent that the listed hosts are exceptions to the proxy setting and should be contacted directly. This setting is made available to child processes via the <code>no_proxy</code> environment variable.</p></li>
+</ul>
+
+<p><strong>Example</strong>:</p>
+<pre class="syntax-highlight plaintext"><code>rs_agent:http_proxy=10.0.0.0:3128
+rs_agent:http_no_proxy=10.114.114.33
+</code></pre>
+
+<p>With RightLink v6.3.2 and later, a user and password may also be included in the proxy URL to facilitate authentication. Only basic authentication is supported:</p>
+
+<p><strong>Example</strong>:</p>
+<pre class="syntax-highlight plaintext"><code>rs_agent:http_proxy=http://myuser:mypass@10.0.0.1:3128
+</code></pre>
+
+<p>Alternatively, user and password can be specified as separate tags which allows the use of <a href="/cm/dashboard/design/credentials/">Credentials</a>:</p>
+
+<ul>
+<li><code>rs_agent:http_proxy_user=&lt;user&gt;|cred:&lt;CRED&gt;</code> -- Allows setting the user to use along with the <code>rs_agent:http_proxy</code> and <code>rs_agent:http_proxy_password</code> tags. Its value can be either a plain text user or a reference to a <a href="/cm/dashboard/design/credentials/">Credential</a>. It must be specified along with <code>rs_agent:http_proxy_password</code> and may only be specified when <code>rs_agent:http_proxy</code> is specified as well.</li>
+<li><code>rs_agent:http_proxy_password=cred:&lt;CRED&gt;</code> -- Allows setting the password to use along with the <code>rs_agent:http_proxy</code> and <code>rs_agent:http_proxy_user</code> tags. Its value can be a reference to a <a href="/cm/dashboard/design/credentials/">Credential</a> which allows hiding the sensitive password value when viewing server or server array tags. It must be specified along with <code>rs_agent:http_proxy_user</code> and may only specified when <code>rs_agent:http_proxy</code> is specified as well.</li>
+</ul>
+
+<p><strong>Example</strong>:</p>
+<pre class="syntax-highlight plaintext"><code>rs_agent:http_proxy=10.0.0.0:3128
+rs_agent:http_proxy_user=myuser
+rs_agent:http_proxy_password=cred:MY_PASS
+</code></pre>
+
+<p>You must apply these tags to the server itself. It is possible to use hostnames instead of IP addresses, but this presumes that you have properly configured DNS within your VPC or firewalled environment.</p>
+
+<p>Having tagged the server, you may boot the server freely. The RightLink agent will function as expected. RightLink will write the standard proxy environment variables (http_proxy and no_proxy) to /etc/profile.d/http_proxy.sh so that these variables are available to all subprocesses of the agent including package managers, RightScripts and Chef recipes.</p>
+
+<h2 id="feature-control">Feature control</h2>
+
+<p>A system administrator can utilize a special configuration file before installing RightLink which will selectively disable certain features of RightLink on that machine. The intended use case is people who build custom images and want RightLink to behave in a certain way for their deployment environment. Feature control is only possible if you create a special YAML file <strong>prior to installing the RightLink package</strong> or running any RightLink init script or program logic - if using a RightImage, it will need to be rebundled for RightLink to be impacted by these configuration changes. The YAML file contains some boolean flags that affect the behavior of the init scripts and the agent at runtime. Specifically, you can:</p>
+
+<ul>
+<li>Disable managed login</li>
+<li>Disable repo freezing</li>
+<li>Disable MOTD (message of the day) update</li>
+</ul>
+
+<p>To disable one or more of these features, create the following file:<code>/etc/rightscale.d/right_link/features.yml</code>
+And populate the file, supplying <q>true</q> or <q>false</q> for each feature as appropriate.</p>
+<pre class="syntax-highlight yaml"><code><span class="s">motd</span><span class="pi">:</span>
+  <span class="s">update</span><span class="pi">:</span> <span class="s">false</span>
+<span class="s">package_repositories</span><span class="pi">:</span>
+  <span class="s">freeze</span><span class="pi">:</span> <span class="s">false</span>
+<span class="s">managed_login</span><span class="pi">:</span>
+  <span class="s">enable</span><span class="pi">:</span> <span class="s">false</span>
+</code></pre>
+
+<p><strong>Important!  All features are assumed to be enabled by default unless this file exists and the associated feature is marked as <q>false</q> (disabled).</strong> Therefore, you can omit sections for features that should remain enabled.</p>
+
+<h2 id="file-locations">File Locations</h2>
+
+<p>The following shows RightLink file locations split out by operating system (Linux and Windows).</p>
+
+<h3 id="file-locations-linux-systems">Linux Systems</h3>
+
+<table><thead>
+<tr>
+<th>File</th>
+<th>Location</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>/etc/rightscale.d</td>
+<td>Static configuration, incl. <q>hints</q> for init scripts</td>
+</tr>
+<tr>
+<td>/etc/rightscale.d/right_link</td>
+<td>Static files that customize RightLink behavior</td>
+</tr>
+<tr>
+<td>/var/spool/cloud</td>
+<td>Cloud-provided metadata &amp; user-data</td>
+</tr>
+<tr>
+<td>/var/lib/rightscale/right_agent</td>
+<td>Persistent config files generated at startup</td>
+</tr>
+<tr>
+<td>/var/lib/rightscale/right_link</td>
+<td>Persistent RightLink agent state</td>
+</tr>
+<tr>
+<td>/var/run</td>
+<td>Transient agent state, e.g. pid files</td>
+</tr>
+<tr>
+<td>/var/cache</td>
+<td>Cookbooks, attachments, temp files</td>
+</tr>
+<tr>
+<td>/usr/bin</td>
+<td>Public CLI: rs_tag, rs_debug, ...</td>
+</tr>
+<tr>
+<td>/opt/rightscale/bin</td>
+<td>Private CLI: rnac, rad, cook, ...</td>
+</tr>
+<tr>
+<td>/opt/rightscale/sandbox</td>
+<td>Private sandbox (Ruby, RubyGems, ...)</td>
+</tr>
+</tbody></table>
+
+<h3 id="file-locations-windows-systems">Windows Systems</h3>
+
+<p>Data files – Paths are relative to %COMMON_APPDATA%RightScale</p>
+
+<table><thead>
+<tr>
+<th>File</th>
+<th>Location</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rightscale.d</td>
+<td>Static <q>hints</q> for system services</td>
+</tr>
+<tr>
+<td>spool\cloud</td>
+<td>Cloud-provided metadata &amp; user-data (.sh, .rb, raw formats)</td>
+</tr>
+<tr>
+<td>RightAgent</td>
+<td>Persistent config files generated at startup</td>
+</tr>
+<tr>
+<td>right_link</td>
+<td>Persistent RightLink agent state</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>Cookbooks, attachments, temp files</td>
+</tr>
+</tbody></table>
+
+<p>Program logic - Paths are relative to %ProgramFiles(x86)%</p>
+
+<table><thead>
+<tr>
+<th>File</th>
+<th>Location</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RightScale\RightLink</td>
+<td>Application logic &amp; support files</td>
+</tr>
+<tr>
+<td>RightScale\sandbox</td>
+<td>Private sandbox (Ruby, RubyGems, ...)</td>
+</tr>
+</tbody></table>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

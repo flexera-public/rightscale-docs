@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>How do I access servers using SSH?</title><meta content="This article describes how to connect to a running Linux server using an SSH session with RightScale-managed SSH Keys." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="faq faq_How_Do_I_Access_Servers_Using_SSH" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">RightScale General FAQs</a></p><div class="page-header"><h1>How do I access servers using SSH?</h1></div><div class="main-content"><h2 id="background-information">Background Information</h2>
+
+<p>This article describes how to connect to a running Linux server using an SSH session with RightScale&#39;s <a href="/rl10/reference/rl10_managed_ssh_login.html">Managed SSH Login</a> feature.</p>
+
+<p>The steps required to set up an SSH connection differ depending on whether you launch your SSH session from within or outside of the RightScale Dashboard, as described below.</p>
+
+<p><strong>Note</strong> : If you are using a Windows instance, see <a href="http://support.rightscale.com/12-Guides/Dashboard_Users_Guide/Manage/Deployments/Servers/Actions/RDP_into_a_Server">RDP into a Server</a>.</p>
+
+<hr>
+
+<h2 id="answer">Answer</h2>
+
+<h3 id="answer-general-best-practices">General Best Practices</h3>
+
+<p>If the cloud supports the use of SSH Keys (for example, EC2) you should hide the private key material of all ssh keys from non-Admin users.</p>
+
+<h3 id="answer-ssh-user-settings">SSH User Settings</h3>
+
+<p>Your user settings determine your SSH preferences. To view and edit your SSH settings, navigate to <strong>Settings &gt; User Settings &gt; SSH</strong>.</p>
+
+<p><img src="/img/faq-SSH-config.png" alt="faq-SSH-config.png" width="800" height="454" /></p>
+
+<p>This document will refer to these settings.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Your RightScale user account must have <a href="/cm/ref/user_roles.html#-server_login">server_login</a> role enabled in order to SSH into servers. This is also required to see the SSH icon/button on the dashboard.</p>
+</div>
+
+<h3 id="answer-ssh-inside-of-the-rightscale-dashboard">SSH Inside of the RightScale Dashboard</h3>
+
+<p>The easiest way to SSH into your machines is to use the integrated SSH feature available from the Dashboard.</p>
+
+<p>To start your SSH session, click the terminal icon next to the instance that you want to access.</p>
+
+<p><img src="/img/faq-ClickSSH.png" alt="faq-ClickSSH.png" width="800" height="273" /></p>
+
+<p><strong>Note</strong>: More information on setting up a native SSH client to work with the RightScale Dashboard is available in the article titled <a href="http://support.rightscale.com/06-FAQs/FAQ_0062-_How_do_I_configure_my_native_SSH_Client%3F">How do I configure my native SSH client to work with RightScale?</a>.</p>
+
+<h3 id="answer-ssh-outside-of-the-rightscale-dashboard">SSH Outside of the RightScale Dashboard</h3>
+
+<p>The following sections describe how to SSH into an instance using a third party SSH client installed on your machine <em>without</em> launching the SSH session from the RightScale Dashboard. Procedures for using PuTTY on a Windows PC are presented as well as procedures for using SSH from a UNIX, Linux, or Mac OSX terminal application.</p>
+
+<p><a name="install-putty"></a></p>
+
+<h4 id="windows---using-putty">Windows - Using PuTTY</h4>
+
+<p>If you need to SSH into your instances from a Microsoft Windows machine outside of the RightScale Dashboard, we recommend using PuTTY, a widely used free telnet client. Use the following steps to install PuTTY and configure it for use with RightScale-managed servers outside the RightScale Dashboard.</p>
+
+<p><strong>Install the PuTTY Client and Download Private Key from RightScale</strong></p>
+
+<p>First, you need to install the PuTTY client on your Windows PC workstation and download your private SSH key from RightScale.</p>
+
+<ol>
+<li>Browse to PuTTY&#39;s <a href="http://www.putty.org">main page</a> and click the link to the &#39;PuTTY Download Page&#39;.</li>
+<li>On the PuTTY download page, locate and click the Windows installer package and save it to your local drive (e.g., putty-0.68-installer.exe).</li>
+<li>Run the PuTTY installer by double-clicking it.</li>
+<li>From your <a href="#answer-ssh-user-settings">SSH User Settings</a>, click on <q>Download Private Key</q> which will save your private key to your Downloads folder (download location may vary between browsers).</li>
+<li>Move this private key to a safe and secure directory that only you have access to.</li>
+</ol>
+
+<p><a name="convert-key"></a>
+<strong>Convert Private Key to PuTTY-Friendly Format</strong></p>
+
+<p>Now that you have the private key material stored on your local drive, you need to convert it to a format that PuTTY understands. By default, the key is generated by RightScale in openSSH format so it must be converted using PuTTYgen before it can be used in PuTTY.</p>
+
+<ol>
+<li><p>On your workstation, locate and start <strong>PuTTYgen</strong>.  Image below shows typing &#39;puttygen&#39; in the search box in Windows 10.</p>
+
+<p><img src="/img/faq-launch-puttygen.png" alt="faq-launch-puttygen.png" width="406" height="634" /></p></li>
+<li><p>In the PuTTY Key Generator, open the <strong>Conversions</strong> menu and select <strong>Import Key</strong>.</p>
+
+<p><img src="/img/faq-puttygen-import-key.png" alt="faq-puttygen-import-key.png" width="360" height="180" /></p></li>
+<li><p>Browse to the location where you saved the private key, select it, and click <strong>Open</strong>. The private key material is loaded and formatted in the key generator.</p>
+
+<p><img src="/img/faq-puttygen-load-key.png" alt="faq-puttygen-load-key.png" width="800" height="588" /></p></li>
+<li><p>Click <strong>Save Private Key</strong> , then click <strong>Yes</strong> when prompted to save the key without a passphrase.</p>
+
+<p><img src="/img/faq-puttygen-save-key.png" alt="faq-puttygen-save-key.png" width="574" height="549" /></p></li>
+<li><p>Enter a meaningful name for the generated key, browse to a location where you want to store the key and click <strong>Save</strong>. Your generated key will be saved with the *.ppk extension.</p>
+
+<p><img src="/img/faq-puttygen-save-key-2.png" alt="faq-puttygen-save-key-2.png" width="800" height="502" /></p></li>
+<li><p>Close the PuTTY Key Generator.</p></li>
+</ol>
+
+<p><a name="putty-auth"></a>
+<strong>Configure PuTTY to Use SSH Key-based Authentication</strong></p>
+
+<p>There are two ways in which you can configure PuTTY to use the generated key:</p>
+
+<ul>
+<li>By pointing to the location of the key in the Auth Options where it will become the default.</li>
+<li>By loading individual keys as you need them using PuTTY&#39;s SSH authentication agent Pageant.</li>
+</ul>
+
+<p>The first option is simpler as you do not need to load individual keys, but you are limited to using one key at a time until you update the setting in Auth Options. The second option is more flexible but requires that you select and load a key on every startup of the Pageant application. Both options are described here for your reference, but you can elect to use whichever option you prefer.</p>
+
+<p><strong>Option 1 - Using PuTTY Auth Configuration</strong></p>
+
+<ol>
+<li><p>From your Windows workstation, launch the PuTTY client.</p>
+
+<p><img src="/img/faq-putty-start.png" alt="faq-putty-start.png" width="395" height="626" /></p></li>
+<li><p>Under the <strong>Connection</strong> category, select <strong>SSH &gt; Auth</strong>.</p>
+
+<p><img src="/img/faq-putty-config-auth-option-1.png" alt="faq-putty-config-auth-option-1.png" width="452" height="437" /></p></li>
+<li><p>Click <strong>Browse</strong> and navigate to the location of the key you generated using PuTTYgen.</p>
+
+<p><img src="/img/faq-putty-config-auth-option-2.png" alt="faq-putty-config-auth-option-2.png" width="800" height="780" /></p></li>
+<li><p>Select the key and click <strong>Open</strong>.</p>
+
+<p><img src="/img/faq-putty-config-auth-option-3.png" alt="faq-putty-config-auth-option-3.png" width="452" height="437" /></p></li>
+<li><p>Once the key is loaded, select the <strong>Session</strong> category then select <strong>Default Settings</strong> in the <strong>Saved Sessions</strong> list and click <strong>Save</strong>. This will save the current PuTTY settings as a default session.</p>
+
+<p><img src="/img/faq-putty-save-default-session.png" alt="faq-putty-save-default-session.png" width="452" height="437" /></p></li>
+<li><p>Connect to your server by entering the server IP address in the <strong>Host Name</strong> field and clicking <strong>Open</strong>. Make sure <strong>Port 22</strong> is set and the <strong>Connection Type</strong> is set to <strong>SSH</strong>. [Note: If you are connecting to your server for the first time with PuTTY, you may see a security alert dialog asking if you would like to cache the server&#39;s host key in the Windows registry. Choose Yes if your are presented with this dialog.]</p>
+
+<p><img src="/img/faq-putty-launch-session.png" alt="faq-putty-launch-session.png" width="452" height="437" /></p></li>
+<li><p>Once the session starts you will see a <q>login as</q> prompt. From your <a href="#answer-ssh-user-settings">SSH User Settings</a>, enter your &#39;Custom Login Name&#39; or &#39;Default Login Name&#39; and press Enter/Return. After providing your login name, the RightScale agent takes over and authenticates your RightScale username over a key-based exchange without prompting you for a password.</p></li>
+</ol>
+
+<p><strong>Option 2 - Using the Pageant SSH Authentication Agent</strong></p>
+
+<ol>
+<li><p>From your Windows workstation, launch the Pageant application. When you run Pageant, it will place an icon of a computer wearing a hat into the Windows System tray. Initially, it will not display an interface or screen for you to interact with until you load a private key into it. To display the Pageant window, double-click its icon in the System tray.</p>
+
+<p><img src="/img/faq-putty-pageant-taskbar.png" alt="faq-putty-pageant-taskbar.png" width="229" height="126" /></p></li>
+<li><p>Click <strong>Add Key</strong> and browse to the location of the key you generated previously with PuTTYgen.</p>
+
+<p><img src="/img/faq-putty-pageant-1.png" alt="faq-putty-pageant-1.png" width="765" height="872" /></p></li>
+<li><p>Select the key and click <strong>Open</strong>. The selected key is loaded into the Pageant Key List.</p>
+
+<p><img src="/img/faq-putty-pageant-2.png" alt="faq-putty-pageant-2.png" width="497" height="352" /></p></li>
+<li><p>To connect to your server, launch the PuTTY client, enter the server IP address in the <strong>Host Name</strong> field and click <strong>Open</strong>.</p></li>
+<li><p>Once the session starts you will see a <q>login as</q> prompt. From your <a href="#answer-ssh-user-settings">SSH User Settings</a>, enter your &#39;Custom Login Name&#39; or &#39;Default Login Name&#39; and press Enter/Return. After providing your login name, the RightScale agent takes over and authenticates your RightScale username over a key-based exchange without prompting you for a password.</p></li>
+</ol>
+
+<h3 id="answer-tips-for-using-putty">Tips for Using PuTTY</h3>
+
+<p>PuTTY comprises a powerful set of utilities for managing SSH, telnet, and Rlogin connections to multi-user operating systems. PuTTY is an ideal client for use on Windows PCs that require remote console connection to Linux server systems. The more you work with PuTTY the more you will discover how to best manage your particular remote login requirements. Here are a few tips that you might find useful.</p>
+
+<ul>
+<li>In the PuTTY Session view you can create and save multiple session profiles and load/use them as you see fit. For example, if you need to SSH into more than one server you can set up a unique session profile for each server (with a different Host Name/IP address), save it and then load it from the Saved Sessions list.</li>
+<li>You can also configure PuTTY to use both Pageant-managed keys along with <strong>SSH &gt; Auth-managed</strong> keys by creating separate session profiles; some that use Pageant-managed keys and others that use <strong>SSH &gt; Auth-managed</strong> keys.</li>
+</ul>
+
+<h3 id="answer-linux-unix-mac-os-x-terminal">Linux/Unix/Mac OS X Terminal</h3>
+
+<p>To SSH into your instance using a terminal application on a Unix, Linux, or Macintosh machine outside of the RightScale Dashboard use the following steps.</p>
+
+<ol>
+<li>From your <a href="#answer-ssh-user-settings">SSH User Settings</a>, click on <q>Download Private Key</q> which will save your private key to your Downloads folder (download location may vary between browsers).</li>
+<li>Move this private key to a safe and secure location on your local machine where SSH keys are commonly stored. For example, <code>~/.ssh/</code>. In our example we will be moving the file to <code>~/.ssh/test_rightscale_com_id_rsa</code></li>
+<li><p>Open your terminal application and at the command prompt issue the following command to change permissions on the key file:</p>
+<pre class="syntax-highlight plaintext"><code>chmod 400 ~/.ssh/test_rightscale_com_id_rsa
+</code></pre></li>
+<li><p>Issue the following command to add the key file to the SSH authentication agent.</p>
+<pre class="syntax-highlight plaintext"><code>ssh-add ~/.ssh/test_rightscale_com_id_rsa
+</code></pre></li>
+<li><p>Connect to your running server using the <code>-i</code> option to pass the parameter for your ssh private key location.</p>
+
+<p>For RightLink 10.5.0 and later, chose the login name you wish to use from your <a href="#answer-ssh-user-settings">SSH User Settings</a>. In our example we will use the &#39;Default Login Name&#39;:</p>
+<pre class="syntax-highlight plaintext"><code>ssh -i ~/.ssh/test_rightscale_com_id_rsa rightscale54320@&lt;ip_address&gt;
+</code></pre>
+
+<p>For RightLink v5.9 to 10.4.0:</p>
+<pre class="syntax-highlight plaintext"><code>ssh -i ~/.ssh/test_rightscale_com_id_rsa rightscale@&lt;ip_address&gt;
+</code></pre>
+
+<p>For RightLink versions older than v5.9:</p>
+<pre class="syntax-highlight plaintext"><code>ssh -i ~/.ssh/test_rightscale_com_id_rsa root@&lt;ip_address&gt;
+</code></pre></li>
+</ol>
+
+<h3 id="answer-see-also">See Also</h3>
+
+<ul>
+<li><a href="http://support.rightscale.com/06-FAQs/Terminal_Error_after_an_upgrade_to_OS_X_10.10_Yosemite">Terminal Error After an Upgrade to&nbsp;OS X 10.10 Yosemite</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

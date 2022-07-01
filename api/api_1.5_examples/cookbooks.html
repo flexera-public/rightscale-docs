@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Cookbooks</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Cookbooks</h1></div><div class="main-content"><h2 id="follow-cookbook">Follow Cookbook</h2>
+
+<p>Follow a cookbook that has been imported into an account.</p>
+
+<h3 id="follow-cookbook-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>When a cookbook is being followed, the new or updated versions of that cookbook that are fetched into the repositories section will automatically get imported into your account. You can only follow cookbooks that are in the alternate namespace. For more information about alternate namespaces, see <a href="/cm/dashboard/design/repositories/#primary-and-alternate-namespaces">Primary and Alternate Namespaces</a>.</p>
+
+<p>To get a cookbook ID, you need to perform a List Cookbooks.</p>
+
+<p><strong>Note</strong> : Repositories are automatically re-scraped roughly once a day.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d <span class="nv">value</span><span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+    https://my.rightscale.com/api/cookbooks/7460001/follow.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : Truncated XML output without headers included (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 204 No Content
+    Server: nginx/1.0.14
+    Date: Fri, 06 Sep 2013 16:48:48 GMT
+    Connection: keep-alive
+    Status: 204 No Content
+    X-Runtime: 1958
+    X-Request-Uuid: 96817b26fb5649ca9e153ec2f7d86f80
+    Set-Cookie: rs_gbl=eNotkEuPgjAYAP8BzzaxPD5akj2ID1RWWRVFvRhpKayuPLRdReN_X032PjOHeaA9ctGpQS0kLsh9IH1Jz8i1AQzybCHFkUtMh1oUiEFb6Fu86IQIWzJCMXHaCSYkNTEDR2CaCBOAWdSxxaun0n-XmebbfeWRx5cLYVTlQYtQZQOIjVqet3yqVUm7M74IKyYjvcmhd1zhaJmFO7-3scSq0BNoGIHfisttvF4f8O2nHXx61QiLgfKzYixTmTSizL-m88nMO2XNLB2em75_hW1XRUF3dOknsazvd1scp1BrMhzvRDFPwmt9yHpF3sQdfIRJREZ-gPPA63y8l9zeS_acl7pQyHWYbT2ff0DYXdc%3D; domain=.rightscale.com; path=/; HttpOnly
+    Cache-Control: no-cache
+</code></pre>
+
+<h2 id="list-cookbooks">List Cookbooks</h2>
+
+<p>List all cookbooks in an account.</p>
+
+<h3 id="list-cookbooks-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>The following example will list all cookbooks that have been imported into an account from the repositories section. Cookbooks will appear in your account when you import ServerTemplates into your account from the MultiCloud MarketPlace or if you import them into your account from the repositories section. To import your own cookbooks into RightScale, you need create a repository and import cookbooks from the repository. For more information, see <a href="/api/api_1.5_examples/repositories.html">Create Repository</a>.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/cookbooks.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : Truncated XML output without headers included (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;cookbooks&gt;
+      &lt;cookbook&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/cookbooks/580488001"/&gt;
+        &lt;/links&gt;
+        &lt;updated_at&gt;2013/09/04 17:32:00 +0000&lt;/updated_at&gt;
+        &lt;version&gt;2.2.1&lt;/version&gt;
+        &lt;created_at&gt;2013/09/03 17:11:45 +0000&lt;/created_at&gt;
+        &lt;source_info_summary&gt;RightScale&lt;/source_info_summary&gt;
+        &lt;state&gt;normal&lt;/state&gt;
+        &lt;name&gt;yum&lt;/name&gt;
+        &lt;namespace&gt;alternate&lt;/namespace&gt;
+        &lt;id&gt;580488001&lt;/id&gt;
+        &lt;actions&gt;
+          &lt;action rel="freeze"/&gt;
+          &lt;action rel="follow"/&gt;
+          &lt;action rel="obsolete"/&gt;
+        &lt;/actions&gt;
+      &lt;/cookbook&gt;
+      &lt;cookbook&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/cookbooks/580486001"/&gt;
+        &lt;/links&gt;
+        &lt;updated_at&gt;2013/09/04 17:31:59 +0000&lt;/updated_at&gt;
+        &lt;version&gt;1.9.3&lt;/version&gt;
+        &lt;created_at&gt;2013/09/03 17:11:44 +0000&lt;/created_at&gt;
+        &lt;source_info_summary&gt;RightScale&lt;/source_info_summary&gt;
+        &lt;state&gt;normal&lt;/state&gt;
+        &lt;name&gt;apt&lt;/name&gt;
+        &lt;namespace&gt;alternate&lt;/namespace&gt;
+        &lt;id&gt;580486001&lt;/id&gt;
+        &lt;actions&gt;
+          &lt;action rel="freeze"/&gt;
+          &lt;action rel="follow"/&gt;
+          &lt;action rel="obsolete"/&gt;
+        &lt;/actions&gt;
+      &lt;/cookbook&gt;
+    . . .
+</code></pre>
+
+<h2 id="show-cookbook">Show Cookbook</h2>
+
+<p>Show the information of a single cookbook that has been imported into an account.</p>
+
+<h3 id="show-cookbook-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>The following example will show a cookbook in your account. To get a cookbook ID, <a href="/api/api_1.5_examples/cookbooks.html">List Cookbooks</a> and locate the cookbook you would like to display.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/cookbooks/7370041.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : Truncated XML output without headers included (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;cookbook&gt;
+      &lt;links&gt;
+        &lt;link rel="self" href="/api/cookbooks/7350001"/&gt;
+        &lt;link rel="repository" href="/api/repositories/1211"/&gt;
+      &lt;/links&gt;
+      &lt;updated_at&gt;2010/11/11 21:20:55 +0000&lt;/updated_at&gt;
+      &lt;version&gt;0.3.14&lt;/version&gt;
+      &lt;created_at&gt;2010/11/11 21:20:55 +0000&lt;/created_at&gt;
+      &lt;source_info_summary&gt;GitHub - rightscale/cookbooks_public_windows - 4a2b6f7e9b&lt;/source_info_summary&gt;
+      &lt;state&gt;normal&lt;/state&gt;
+      &lt;name&gt;blog_engine&lt;/name&gt;
+      &lt;namespace&gt;alternate&lt;/namespace&gt;
+      &lt;id&gt;7350001&lt;/id&gt;
+      &lt;actions&gt;
+        &lt;action rel="freeze"/&gt;
+        &lt;action rel="follow"/&gt;
+        &lt;action rel="obsolete"/&gt;
+      &lt;/actions&gt;
+    &lt;/cookbook&gt;
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Upgrading a Production Deployment</title><meta content="Whenever you upgrade your Production deployment, it's critical that you have a properly detailed upgrade strategy. Here are the steps for performing software upgrades in a RightScale Production Deployment." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_management_guide cm_management_guide_upgrading_a_production_deployment" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Lifecycle Management</a></p><div class="page-header"><h1>Upgrading a Production Deployment</h1></div><div class="main-content"><p>The following software upgrade strategies provide general guidelines and principles. Please use discretion at all times to develop your own software upgrade strategies that are sufficient for your application and environment.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>Whenever you upgrade your Production deployment, it&#39;s critical that you have a properly detailed upgrade strategy. Although, you have a lot more flexibility in the Cloud, it&#39;s important that you take the necessary precautions to fully protect your site during a major upgrade. The steps below provide general guidelines and upgrade strategies for performing major site upgrades in the Cloud. In all cases, we recommend that you create your own upgrade plan that&#39;s customized for your own deployment.</p>
+
+<h2 id="objective">Objective</h2>
+
+<p>The upgrade procedure below is designed for performing a major software upgrade to a live production deployment. This procedure assumes that you are making changes to your database that would otherwise break your current application. A period of site downtime is mandatory.</p>
+
+<p><img src="/img/cm-major-upgrade-with-staging1.png" alt="cm-major-upgrade-with-staging1.png" width="498" height="325" /></p>
+
+<h2 id="steps">Steps</h2>
+
+<ol>
+<li>Before you perform any changes to your production database, test and make sure backups are working correctly.</li>
+<li>This software upgrade assumes that you&#39;re already following best practices and that you&#39;ve been using a separate Staging Deployment for testing the new software release with all of your upgrades. See <a href="/cm/management_guide/create_a_staging_deployment.html">Create a Staging Deployment</a> <strong>.</strong></li>
+<li>Once you&#39;re convinced that the Staging Deployment has been sufficiently tested, you can start the upgrade process.</li>
+<li>The first step is to prepare your database for the upgrade.</li>
+<li>Create an additional Slave-DB that will serve as a <q>warm</q> backup of your database. Clone the Slave-DB server.
+<img src="/img/cm-major-upgrade-with-staging2.png" alt="cm-major-upgrade-with-staging2.png" width="725" height="256" /></li>
+<li>Make sure that the new slave will initialize to the master at boot time. Under its Inputs tab, set the input variable, INIT_SLAVE_AT_BOOT = true. Be sure to disable backups on the additional <q>warm</q> slave (<q>DB EBS continuous backups</q> RightScript). Launch the new Slave-DB server. It will take several minutes for the new slave to become operational and catch up to the Master-DB.</li>
+<li>In this example, you&#39;re only going to upgrade the application servers. You&#39;re going to keep the old load balancers. In order to test and make sure that the new application server(s) can communicate properly via HAProxy, set up a temporary load balancer inside of your production deployment that will only be used for internal testing of the new application servers. Clone one of the existing dedicated load balancers. Before you launch the cloned load balancer, you&#39;ll need to change the following inputs at the server level in order to isolate it from your production setup.<br>
+LB_APPLISTENER_NAME = test1<br>
+LB_HOSTNAME = test1.mysite.com<br>
+<img src="/img/cm-major-upgrade-with-staging4.png" alt="cm-major-upgrade-with-staging4.png" width="725" height="401" /></li>
+<li>Create new DNS A records that allow you to access the new application servers via the new load balancer directly through HAProxy (but not through &#39;www&#39;). For example, you should create an A record for &#39;test1.mysite.com&#39; that points to the new load balancer (load balancer-3).</li>
+<li>Launch the new load balancer (Load Balancer-3).</li>
+<li>Clone an application server in the production Deployment that you want to upgrade and rename it (e.g. App Server-3). Change the LB_HOSTNAME input at the server level (e.g. test1.mysite.com) to ensure that the new application server connects to the temporary load balancer and not to your production load balancers. Modify any of the server&#39;s configurations that you want to change (except the application code). For example, change the ServerTemplate revision, select a different RightImage, change the instance type, etc.<br>
+<img src="/img/cm-major-upgrade-with-staging9.png" alt="cm-major-upgrade-with-staging9.png" width="725" height="400" /><br></li>
+<li>Launch the <q>App Server-3</q> server (with the old application code) and test to make sure that it can connect to the database correctly. Use the new DNS A record (e.g. test1.mysite.com) to view the new application server via HAProxy.</li>
+<li>Once the server&#39;s configuration is stable, you can now update the application code. Modify the <q>App Server-3</q> server&#39;s inputs at the Server level so that it grabs the new application code. (e.g. SVN_APP_REPOSITORY, APPLICATION, etc.) Run the appropriate code update/checkout RightScript (e.g. WEB app svn code checkout, RB rails svn code update) to load the new application code. It&#39;s now ready to talk to the database once you finish the migration of the database. Most likely you will no longer be able to test the new application server because the new application is probably incompatible with the current database schema.</li>
+<li>If the new application server looks stable, clone the upgraded server (<q>App Server-3</q>) until you have equal number of new servers as old servers. Launch and test the new servers. If everything looks good, lock the servers so you don&#39;t accidentally terminate the wrong application servers at the end of the upgrade.<br>
+<img src="/img/cm-major-upgrade-with-staging5.png" alt="cm-major-upgrade-with-staging5.png" width="598" height="423" /><br></li>
+<li>If you have a Server Array, you should create a new one with a different name. This way, you can simply disable the old server array and enable the new one. Create a new Server Array that uses the new ServerTemplate so that it has the same configuration settings as the new application servers. Since you do not want new instances to inherit the old input parameters from the Deployment level, you will need to overwrite some inputs at the server array level. (e.g. SVN_APP_REPOSITORY, APPLICATION, etc.) The new Server Array should mirror the configurations and changes of the new application servers in the Deployment.</li>
+<li>Disable database backups on both the master and slave database servers since it doesn&#39;t make sense to take a backup of your database during a migration.</li>
+<li>Disconnect the new application servers from the temporary (cloned) load balancer by running the <q>LB Application to HA proxy disconnect</q> Operational Script on each application server.</li>
+<li>==BEGIN SITE DOWNTIME==</li>
+<li>Put up a maintenance page on the frontend load balancer servers. You can add our <q>WEB rails maintenance start/stop</q> RightScripts to the load balancers as Operational Scripts. When you run the <q>start</q> script on the servers, it will add an Apache rewrite rule that forces new requests to the maintenance page.</li>
+<li>Stop old server processes on any production server (including any servers in the array). Check the monitoring graphs of the master database server to make sure that there are no more writes to the database.</li>
+<li>Before you start any of your database migrations create a manual backup (EBS Snapshot) of your Master-DB by running the <q>DB EBS backup</q> Operational Script. If the upgrade is not successful, you can always revert back to the original state of your database before the upgrade began by promoting the new slave (<q>warm</q> backup) to master. And if there&#39;s a problem with the <q>warm</q> backup, you also have a snapshot of the master database as a secondary backup.</li>
+<li>Check to make sure that a slave is in-sync with the master, you can SSH into the instance and run the following MySQL command.
+
+<ul>
+<li><code>mysql&gt; show slave status\G</code></li>
+<li>You must wait for the <q>warm</q> slave to be in-sync with the master ( <q>`Seconds_Behind_Master: 0`</q>) before continuing to the next step.</li>
+</ul></li>
+<li>Stop database replication with the master, but do not shut it down. The new slave will serve as the <q>warm</q> backup.<br>
+<img src="/img/cm-major-upgrade-with-staging3.png" alt="cm-major-upgrade-with-staging3.png" width="356" height="259" /><br></li>
+<li>You can now change to your database schema. Go ahead and run your database migrations. Be sure to test your new application servers and make sure that they can still talk to the modified database.</li>
+<li>It&#39;s now time to replace your old application servers with the new ones. Disconnect the old application servers from the load balancers by running the <q>LB Application to HA proxy disconnect</q> Operational Script on each application server. No application server should be connected to a load balancer.<br>
+<img src="/img/cm-major-upgrade-with-staging6.png" alt="cm-major-upgrade-with-staging6.png" width="613" height="428" /></li>
+<li>Connect the new application servers to the old load balancers. Change the LB_HOSTNAME input at the server level on all new application servers so that it matches what is defined at the deployment level. Run the <q>LB Application to HA proxy connect</q> Operational Script on each new application server at the Deployment level. Make sure that no input is defined under the <q>Next</q> server launch of the new application servers that will incorrectly overwrite an input that should be inherited from the Deployment level. Later, you will need to clean up your input overrides that you&#39;ve defined at the Server level.
+<img src="/img/cm-major-upgrade-with-staging7.png" alt="cm-major-upgrade-with-staging7.png" width="612" height="430" /></li>
+<li>If necessary, restart your application. (e.g. Rails, TomCat)</li>
+<li>Disable the old server array. (if applicable)</li>
+<li>Enable the new server array. (if applicable) Launch the minimum number of server instances into the array that are required prior to making the site live.</li>
+<li>Restart server processes on the new production servers (including any servers in the array).</li>
+<li>Test the site. If there&#39;s a problem and you need to revert back, you can always use the original <q>warm</q> slave and promote it to master. If the changes are small, you can still make minor software upgrades in-place at your own discretion.</li>
+<li>Once everything looks solid and you&#39;re ready to make the site <q>live</q> again, you can take down the maintenance pages. Run the <q>WEB rails maintenance stop</q> RightScript on the load balancers so that any new incoming requests will be forwarded to the new application servers.</li>
+<li>Now that you&#39;ve finished the upgrade, take another snapshot of your Master-DB to capture all of your changes.</li>
+<li>==END SITE DOWNTIME==</li>
+<li>Enable database backups on master and slave servers. Do not enable backups on the <q>warm</q> slave.</li>
+<li>Check to make sure that the Alerts and Server Array are working as expected.</li>
+<li>The inputs that are defined at the Deployment level are old. It&#39;s time to clean up your inputs. During the upgrade you had to define some inputs at the Server and Server Array levels. However, now that the new site is live, you need to make sure that the correct inputs will once again be inherited at the Deployment level for future server launches/relaunches. Check the inputs (<q>Current</q> Server -&gt; Inputs) for all new application servers and add any of those input parameters that you want to be inherited to the Deployment level. Remove any inputs that are defined at the Server level. i.e. No inputs should be defined for the <q>Next</q> server. Make sure none of these inputs are defined for the <q>Next</q> server. If you have a new Server Array, you will also need to make the same modifications at the Server Array level. Basically, you want all new/relaunched servers to once again inherit their inputs from the Deployment level.
+
+<ul>
+<li>SVN_APP_REPOSITORY, APPLICATION, LB_HOSTNAME, LB_APPLISTENER_NAME</li>
+</ul></li>
+<li>Terminate old application servers and <q>warm</q> Slave-DB when convenient. Terminate the new, temporary load balancer. You no longer need it for testing purposes. Terminate servers in the old (disabled) Server Array. Always use discretion before terminating servers. Remember, if you terminate a server, you will end any active sessions. You can check a server&#39;s Apache monitoring graphs for active sessions or safely terminate the server after its TTL has expired.<br>
+<img src="/img/cm-major-upgrade-with-staging8.png" alt="cm-major-upgrade-with-staging8.png" width="612" height="431" /></li>
+<li>Remove any terminated (unnecessary) servers from your Deployment.</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Tips for Using API Examples</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Tips for Using API Examples</h1></div><div class="main-content"><p>This document contains helpful tips and tricks that are global in nature, applying to most every API 1.5 example. Although the examples in this document are Unix shell specific, the principles apply in general as well.</p>
+
+<p><em><strong>Disclaimer:</strong></em>  Although <a href="/api/api_1.5_examples/oauth.html">OAuth</a> is preferred for production environments, the <em>Examples</em> section of the RightScale API Guide uses primarily standard user/pass authentication for simplicity sake.</p>
+
+<h2 id="general-information">General Information</h2>
+
+<h3 id="general-information-example-formats">Example Formats</h3>
+
+<p>The top of each API example provides an actionable page table of contents (TOC) that lists the specific example formats available.</p>
+
+<ul>
+<li><strong>Shell/curl</strong> - Ideal for learning, exploring and quick tests. (Unix users.)</li>
+<li><strong>right_api_client</strong> - RightScale developed Ruby API client that is easy to use, and often preferred by Ruby developers.</li>
+<li><strong>PowerShell</strong> - Ideal for learning, exploring and quick tests. (Windows Users)</li>
+<li><strong>POST</strong> MAN - Chrome browser plugin is a more graphical, visual tool. Ideal for those who have little to no development experience.</li>
+<li><strong>Supplemental</strong> - Some examples may contain a <em>Supplemental</em> section. Supplemental information is typically a filter, view, or simply additional thoughts for triggering new ideas.</li>
+</ul>
+
+<h3 id="general-information-api-endpoints-and-redirects">API Endpoints and Redirects</h3>
+
+<p>If you make an API call to an endpoint that doesn&#39;t match that of the account you&#39;re operating on, you may receive a 301 Redirect response.</p>
+
+<p><strong>Important!</strong>_  Be sure to use the correct API endpoint in accord with your account when using the API. If your Account is located in US-3, then you use US-3 API endpoint. Same applies when your account is in US-4.</p>
+
+<h3 id="general-information-obtaining-account-and-other--non-cloud-resource--information">Obtaining Account and Other (non Cloud Resource) Information</h3>
+
+<p>When learning and exploring using the API, the simplest way to obtain resource ID&#39;s for account, deployment, servers, etc. is simply to log into the RightScale Dashboard and navigate about gaining information of interest from the URL. For example, navigating to the Info tab of an operational server within one of your deployments, your URL will look similar to:</p>
+
+<p>https://us-3.rightscale.com/acct/<strong>411</strong>/servers/<strong>527725001</strong></p>
+
+<p>From this example URL you know that:</p>
+
+<ul>
+<li>Account ID is <strong>411</strong></li>
+<li>Server ID is <strong>527725001</strong></li>
+</ul>
+
+<h3 id="general-information-obtaining-cloud-resource-information">Obtaining Cloud Resource Information</h3>
+
+<p><em><strong>Important!</strong></em> Some information must be queried from the API, you cannot discover it by navigating in the Dashboard. <em>All</em> Cloud resource information is this way. That is, <em>don&#39;t</em> use the URL information when navigating to <strong>Clouds &gt; <em>CloudName</em> &gt; <em>CloudResource</em></strong> (where <em>CloudResource</em> is any resource supported by that cloud, such as Instances, Instance Types, Security Groups, etc.) Cloud resource ID&#39;s must be obtained from the API. Either write your own API calls, or use/leverage the various examples provided in this guide. (<em>Note</em>: See List Deployments, List Servers, List Inputs, etc.)</p>
+
+<h3 id="general-information-using-multiple-accounts-and-session-cookies">Using Multiple Accounts and Session Cookies</h3>
+
+<p>Because the API is account based, not user based, you can establish multiple sessions for more than one account at a time. For example, if your RightScale User ( <a href="mailto:gregdoe@example.com">gregdoe@example.com</a>) has been invited to several accounts (such as Test with account ID 1234 and Dev with account ID 5678), you can establish a session with each account, at the same time. For example:</p>
+
+<ul>
+<li>Authenticate with the Test account and save your session cookie in a file: mycookie.1234</li>
+<li>Authenticate with the Dev account and save your session cookie in a file : mycookie.5678</li>
+<li>Then run various scripts specifying the correct version of <q>mycookie</q> and setting your environment variables appropriately, etc.</li>
+<li>The output from your API requests will reflect the specified account. For example, the Deployment Listing will show all deployments for either the Test or Dev accounts, depending on the session cookie used.</li>
+</ul>
+
+<p>See the <a href="/api/api_1.5_examples/authentication.html">Authentication</a> example for more information.</p>
+
+<h3 id="general-information-json-viewer">JSON Viewer</h3>
+
+<p>If you have difficulties viewing the response back directly, you will find the XML format more readable. However, if testing JSON format you can copy/paste the response and view using the following web based JSON viewing tool: <a href="http://jsonviewer.stack.hu/">http://jsonviewer.stack.hu/</a></p>
+
+<ul>
+<li>Copy the JSON output from the RightScale API</li>
+<li>Visit the <a href="http://jsonviewer.stack.hu/">jsonviewer</a> website</li>
+<li>Paste the JSON into the <strong>Text</strong> tab (everything including and in between the begin/end square brackets <q>[</q> . . . <q>]</q>)</li>
+<li>Switch to the <strong>Viewer</strong> tab</li>
+<li>Expand and view as needed...</li>
+</ul>
+
+<p><strong>Note</strong> : There are many JSON viewers freely available on the web. This one is listed as a matter of example only. Use which ever one you like the most. For example, if you have a new enough version of Python installed (2.6 or newer), you can try formatting the text based output of your shell script based on Python&#39;s JSON toolkit/library:</p>
+<pre class="syntax-highlight plaintext"><code>    YourAPIscript | python -mjson.tool
+</code></pre>
+
+<h2 id="curl">Curl</h2>
+
+<h3 id="curl-help-pages">Help Pages</h3>
+
+<p><em>Tip</em>: Don&#39;t forget the manual pages! If not familiar with any Unix commands contained in this document, most every Unix/Linux installation includes <q>manual pages</q>. For example, if interested in setting up an optional alias for the <q>curl</q> command (discussed below), yet you are unfamiliar with the alias command, try the following command to learn more: <strong>man alias</strong></p>
+
+<p>Similarly, to learn more about the <q>curl</q> command used in so many examples, type: <strong>man curl</strong></p>
+
+<h3 id="curl-authenticating-and--optionally--setting-up-a-curl-alias">Authenticating and (optionally) Setting up a Curl Alias</h3>
+
+<p>Remember you must be authenticated first before using the API. Many might find it useful to authenticate, save the authentication cookie in a file (such as <q>mycookie</q>) then setting an alias for the curl command. For example:</p>
+
+<ul>
+<li><a href="/api/api_1.5_examples/authentication.html">Authenticate</a> and save your cookie</li>
+<li>Set an alias for <q>curl</q> when using API 1.5 similar to the command shown below. (<em>Note</em>: Setting up an alias is <em>optional</em>.)</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    alias mycurl='curl -i -H X_API_VERSION:1.5 -b mycookie -X'
+</code></pre>
+
+<ul>
+<li>Then use the alias similar to:</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    mycurl GET https://us-3.rightscale.com/api/...
+</code></pre>
+
+<p><strong>Notes:</strong></p>
+
+<ul>
+<li>The TTL (time to live) for a session cookie is 2 hours. If your authentication expires, you will get HTTP <q>403 Forbidden</q> error and a message <q>Session cookie is expired or invalid</q>.</li>
+<li>There are different ways to set up and implement an alias. You can set it up in each script and simply use the alias, or set it up in your Unix shell environment and export it such that is is <q>known</q> to all of your scripts. Details depend on personal preferences and what shell you are using.</li>
+</ul>
+
+<h3 id="curl-curl-examples">Curl Examples</h3>
+
+<p>Curl examples are wrapped in a basic Unix shell script which includes environment variables for specifying critical information, such as account, deployment and server numbers. Feel free to copy, paste and set environment variable values tied to your cloud assets. Its an easy entry point for using the RightScale API. For example (after authentication saved a cookie to the file <q>mycookie</q>), list all Servers within a specific Deployment:</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"123456789"</span> <span class="c"># Set the Deployment to "12346789"</span>
+
+
+
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://us-3.rightscale.com/api/deployments/<span class="nv">$DEPLOYMENT</span>/servers
+</code></pre>
+
+<p>You can copy, paste, and set your own value for the DEPLOYMENT variable. From there, experiment with different filters, views, etc. by manipulating the URL in accord with the <a href="http://reference.rightscale.com/api1.5/index.html">API 1.5 Reference</a> information.</p>
+
+<h3 id="curl-response-format">Response Format</h3>
+
+<p>By default, output is JSON. Add a <q>.xml</q> suffix to the URL in your request for XML output. Example URL:</p>
+<pre class="syntax-highlight plaintext"><code>    GET https://us-3.rightscale.com/api/deployments.xml
+</code></pre>
+
+<p>Follow this simple trick for an easy method to switch back and forth between XML and JSON format. Don&#39;t specify either <q>.xml</q> or <q>.json</q> in your URL, rather append <q>$1</q> to the end of the URL string in your script. For example the URL from the previous example above:</p>
+<pre class="syntax-highlight plaintext"><code>    GET https://us-3.rightscale.com/api/deployments$1
+</code></pre>
+
+<p>Then invoke the script (&#39;myscript&#39;) with or without a command line parameter specifying the output type you want. For example:</p>
+<pre class="syntax-highlight plaintext"><code>    $ myscript # Will default to JSON output
+
+    $ myscript .json # Also JSON output, explicit in the URL based on the command line parameter ($1)
+
+    $ myscript .xml # Output in XML format
+</code></pre>
+
+<h2 id="right_api_client">right_api_client</h2>
+
+<h3 id="right_api_client-installing-right_api_client">Installing right_api_client</h3>
+
+<p>Basic installation instructions for the RightScale REST API client (right_api_client).</p>
+<pre class="syntax-highlight plaintext"><code>    # sudo -i # switch to root user for installing the Ruby gem
+
+    # gem install right_api_client
+
+    Building native extensions. This could take a while...
+
+    Successfully installed json-1.7.3
+
+    Successfully installed mime-types-1.18
+
+    Successfully installed rest-client-1.6.7
+
+    Successfully installed right_api_client-1.5.9
+
+    4 gems installed
+
+    Installing ri documentation for json-1.7.3...
+
+    Installing ri documentation for mime-types-1.18...
+
+    Installing ri documentation for rest-client-1.6.7...
+
+    Installing ri documentation for right_api_client-1.5.9...
+
+    Installing RDoc documentation for json-1.7.3...
+
+    Installing RDoc documentation for mime-types-1.18...
+
+    Installing RDoc documentation for rest-client-1.6.7...
+
+    Installing RDoc documentation for right_api_client-1.5.9...
+
+
+
+    $ exit # logout from root user, create/run ruby scripts using right_api_client from a non-root user login.
+</code></pre>
+
+<p><strong>Note</strong> : make sure you have the appropriate server permissions to perform these actions. For more information, see <a href="/cm/rs101/server_login_control.html">Server Login Control</a>.</p>
+
+<h4 id="installation-on-mac-osx">Installation on Mac OSX</h4>
+
+<p>When installing the right_api_client on Mac OSX, it also installs the rest-client gem. This gem includes <q>ruby extents</q> which is low level code written in &#39;C&#39; language to interface with time-critical functions in the host OS (such as networking). The &#39;extent&#39; code is compiled during installation through calls to the &#39;make&#39; and &#39;gcc&#39; commands from the command line by the installation package.</p>
+
+<p>For this reason, installation on Mac OSX will commonly fail. The solution is to download XCode from the Apple Developer site, however this does not install the XCode Command Line Tools, which are also needed. In order to download the XCode Command Line Tools, you will need to:</p>
+
+<ol>
+<li>Create an account at <a nocheck href="[https://developer.apple.com">https://developer.apple.com</a> and login to that account</li>
+<li>Navigate to the free Apple Developer download center. This can usually be found here:
+
+<ul>
+<li><a nocheck href="https://developer.apple.com/downloads/index.action">https://developer.apple.com/downloads/index.action</a></li>
+</ul></li>
+<li>Once you land there, filter by the term &#39;xcode&#39; to locate the XCode Command Line Tools for your particular version of XCode and/or OSX:</li>
+</ol>
+
+<p><img src="/img/api_apple_xcode_cltools.png" alt="api_apple_xcode_cltools.png" width="725" height="280" /></p>
+
+<p>Once these command line tools are downloaded and installed, the right_api_client gem should now successfully install.</p>
+
+<h3 id="right_api_client-logging">Logging</h3>
+
+<p>There are two ways to setup logging when using the right_api_client.</p>
+
+<ol>
+<li>Log to a file</li>
+<li>Log to STDOUT (Standard output. That is, log to the screen)</li>
+</ol>
+
+<p>When logging to a specified file, simply add a line similar to the following after creating your client object:</p>
+
+<p><code>@client.log(&#39;/tmp/right_api_client.log&#39;)</code></p>
+
+<p>In the <a href="/api/api_1.5_examples/servers.html">List Servers right_api_client example</a>, placing this line after the <q>@client = RightApi::Client.new . . .</q> line results in HTTP response information being logged to the /tmp/right_api_client.log file. (Assuming you have permissions to write to the /tmp directory.) Example output after runing the List Servers script:</p>
+<pre class="syntax-highlight plaintext"><code>RestClient.get " [https://us-3.rightscale.com/api/servers](https://us-3.rightscale.com/api/servers)", "Accept"=&gt;"application/json",
+"Accept-Encoding"=&gt;"gzip, deflate",  
+"Cookie"=&gt;"_session_id=deadbeef0badf00dfeedfacec0ffee24; domain=.rightscale.com; rs_gbl=eNo1kEFvgAARBYW . . . ", "X_API_VERSION"=&gt;"1.5" # =&gt; 200 OK | application/vnd.rightscale.server+json 254379 bytes
+</code></pre>
+
+<p><em>Note</em>: Above output truncated and partially formatted for readability.</p>
+
+<p>To log to standard output, a slightly different line of code is placed below the <q>@client = RightAPI . . .</q> call. For example:</p>
+
+<p><code>@client.log(STDOUT)</code></p>
+
+<h2 id="powershell">PowerShell</h2>
+
+<h3 id="powershell-getting-started">Getting Started</h3>
+
+<p>Using Windows PowerShell is another excellent way to learn and explore using the RightScale API. Its best suited for those familiar with Windows or don&#39;t have access to a Linux box (and don&#39;t wish to spin one up in the cloud in order to get started using the RS API). In some ways its like the <q>Windows</q> equivalent of the http/curl Linux examples - Get started using the API quickly without requiring additional installations. In other ways, its a bit more like the right_api_client. Authentication is closer related to the right_api_client than http/curl, and PowerShell is a more full-featured object oriented language, unlike Unix shell scripts.</p>
+
+<p>Windows PowerShell ships native to the 32-bit (x86) and 64-bit operating system from Windows 2008 and on. It can be installed on some earlier versions of Windows 2003 as well. Select one of the following in order to start Windows PowerShell.</p>
+
+<p>For 64-bit Windows operating systems:</p>
+
+<ol>
+<li><strong>Command line based</strong> - Start &gt; All Programs &gt; Accessories &gt; Windows PowerShell &gt; <strong>Windows PowerShell</strong></li>
+<li><strong>GUI (Integrated Scripting Environment (ISE))</strong> - Start &gt; All Programs &gt; Accessories &gt; Windows PowerShell &gt; <strong>Windows PowerShell ISE</strong></li>
+</ol>
+
+<p>For 32-bit Windows operating systems:</p>
+
+<ol>
+<li><strong>Command line based</strong> - Start &gt; All Programs &gt; Accessories &gt; Windows PowerShell &gt; <strong>Windows PowerShell (x86)</strong></li>
+<li><strong>GUI</strong> - Start &gt; All Programs &gt; Accessories &gt; Windows PowerShell &gt; <strong>Windows PowerShell ISE (x86)</strong></li>
+</ol>
+
+<p><em><strong>Important!</strong></em> Although you can invoke the x86 version on a 64-bit Windows installation, when running PowerShell scripts you may receive incorrect responses and errors, including ugly timeouts. (It could appear that the API is non-responsive when actually it is fully operational.)</p>
+
+<p><em>Note</em>: From a PowerShell window you can also start the ISE by simply typing: ise</p>
+
+<h3 id="powershell-getting-help">Getting Help</h3>
+
+<ul>
+<li>PowerShell Window (text based help), type: get-help</li>
+<li>PowerShell ISE (Windows compiled help format): F1 <em>or</em> Help &gt; Windows PowerShell Help</li>
+</ul>
+
+<h3 id="powershell-authentication">Authentication</h3>
+
+<p>Authentication credentials are stored in an in-memory container for subsequent use. (Note this is different than when using http/curl which saves credentials in a cookie file.) You can include authentication explicitly within each of your PowerShell scripts. However, those learning and exploring on the fly will find this basic method helpful:</p>
+
+<ul>
+<li>Invoke the PowerShell ISE</li>
+<li><a href="/api/api_1.5_examples/authentication.html">Authenticate</a> (in one tab)</li>
+<li>Use a additional tabs (^N) to create and explore other API operations. Additional tabs will not need to authenticate because the first tab properly authenticated and the credentials are used for subsequent API requests.</li>
+</ul>
+
+<h3 id="powershell-checking-a-variable-or-authentication">Checking a Variable or Authentication</h3>
+
+<p>It can be helpful for troubleshooting efforts to check the value of a variable in your PowerShell script. For example, to make sure authentication related variables are <q>set</q> correctly. As a quick check, for the email setting on your Authentication script, type in the ISE bottom window:</p>
+<pre class="syntax-highlight plaintext"><code>    PS C:\Users\GregD&gt; $emailgreg.doe@example.com
+</code></pre>
+
+<p>Similarly, to check your in-memory authentication container:</p>
+<pre class="syntax-highlight plaintext"><code>    PS C:\Users\GregD&gt; $cookieContainerCapacity Count MaxCookieSize PerDomainCapacity
+
+    -------- ----- ------------- -----------------
+
+    300 2 4096 20
+</code></pre>
+
+<p><em><strong>Important!</strong></em> If the <q>Count</q> is zero, authentication has failed hence subsequent API invocations will fail too. In the above example, the Count correctly equals two.</p>
+
+<h3 id="powershell-script-execution-and-security">Script Execution and Security</h3>
+
+<p>Once you have a working tab you can save that as a PowerShell script. For example, save your Authentication, List Clouds, etc. as scripts so you can use them again without having to determine account numbers, deployment ID&#39;s, ... Simply click the disk icon in the upper left and save the .ps1 file with a descriptive name.</p>
+
+<p>Important! If you do save PowerShell scripts to your local drive and then try to run them, you will receive a security related error similar to the following:</p>
+<pre class="syntax-highlight plaintext"><code>    PS C:\Users\GregDoe&gt; C:\Users\GregDoe\...\RS API PowerShell\Auth.ps1
+
+    File C:\Users\GregDoe\...\RS API PowerShell\Auth.ps1 cannot be loaded because the execution of scripts is disabled
+
+    on this system. Please see "get-help about_signing" for more details.
+
+    At line:0 char:0
+</code></pre>
+
+<p>Issue the <q>get-help about_signing</q> command from your PowerShell window which details how to set privileges such that you can run your script one time, many times, etc.</p>
+
+<p><em>Note</em>: As a work-around, you can simply copy/paste the contents of your script into a new tab (^N) and execute that.</p>
+
+<h2 id="postman">Postman</h2>
+
+<p>Postman is a free Google Chrome browser plugin. This is the easiest way to get started learning the RightScale API, especially suited for those with little to no development experience, who are more <q>visual</q> learners. With Postman, a basic understanding of the RightScale platform and the online reference documentation you can get started using our API!</p>
+
+<h2 id="common-http-errors">Common HTTP Errors</h2>
+
+<p>Although HTTP errors are not specific to a specific operating system or API format, most of the following are more likely to occur when running under Linux... hence that is the context provided in the examples.</p>
+
+<h3 id="common-http-errors-unprocessible-entity">Unprocessible Entity</h3>
+
+<p>Wrong cloud! Don&#39;t forget, API 1.5 supports non EC2 clouds only! If trying to query cloud assets in AWS EC2 you will get a response similar to:</p>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 422 Unprocessable Entity
+
+    . . .
+
+    UnsupportedResource: The current api version does not support resources belonging to aws cloud
+</code></pre>
+
+<h3 id="common-http-errors-unauthorized">Unauthorized</h3>
+
+<p>When authenticating, if using a shell script with a basic variable for your user password and it includes a <q>$</q> it will get interpreted by the shell and produce undesired results (HTTP 401 Unauthorized). However, you can escape the meaning of the <q>$</q> by preceding it with a <q>\</q>. For example, if your password is literally <q>John$Doe</q>:</p>
+<pre class="syntax-highlight plaintext"><code>    PASS="John$Doe" # Will fail later in the script when trying to authenticate via your curl command
+
+    PASS="John\$Doe" # Will work in subsequent curl command when using variable substitution for $PASS.
+</code></pre>
+
+<h3 id="common-http-errors-internal-server-error">Internal Server Error</h3>
+
+<p>Although a HTTP 500 Internal Server error can mean many things, some of which requiring reaching Support at RightScale.com, there is a benign circumstance that is easily remedied that can result in this error. For example, similar to the Unauthorized section above, a <q>$%</q> sign in your password will cause this error as the variable substitution in the shell thinks you are attempting to work with job control (background/foreground jobs). You can attempt to fix this by preceding both characters with a <q>\</q> (e.g. <q>\$\%</q>) or making sure the special characters are not run together. (<em>Note</em>: Password generators can run these characters together, resulting with the HTTP 500 error if the password is not changed or characters escaped correctly.)</p>
+
+<h3 id="common-http-errors-permission-denied">Permission Denied</h3>
+
+<p><q>Permission Denied</q> when running a script means it does not have executable permissions set on the file. When creating various scripts to run against the API, its common to forget to set the script so it is executable. If its not executable you will receive a <q>Permission denied</q> message. For example, use the change mode (chmod) command to configure proper permissions before you run a Unix shell script named &#39;myscript&#39;:</p>
+<pre class="syntax-highlight plaintext"><code>    chmod 755 myscript
+</code></pre>
+
+<p>Then re-run your script and it should execute fine. (<em>Note</em>: The command <q>ls -l</q> shows a long listing of all files in the current directory. A long listing includes (r)ead, (w)rite and e(x)ecute permissions for the owner, group and world (everybody else) on each file.)</p>
+
+<p><em>Tip</em>: The above chmod command uses a binary format to set the permissions on the &#39;myscript&#39; file so it is executable. Some may prefer to use a different format. For example: $ chmod +x myscript To learn more about chmod: $ man chmod</p>
+
+<h3 id="common-http-errors-command-not-found">Command not Found</h3>
+
+<p>Another common mistake is trying to run your script when the current directory is not in your executable path. If the command <q>echo $PATH</q> does not show a <q>.</q> in it you need to either add it or run your script and include the current directly implicitly. For example:</p>
+<pre class="syntax-highlight plaintext"><code>    ./myscript
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

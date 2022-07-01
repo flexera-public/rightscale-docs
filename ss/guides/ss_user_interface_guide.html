@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>User Interface Guide</title><meta content="This guide provides the information needed to effectively use the Self-Service web-based graphical user interface." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="ss ss_guides ss_guides_ss_user_interface_guide" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><div class="page-header"><h1>User Interface Guide</h1></div><div class="main-content"><p>This guide provides the information needed to effectively use the Self-Service web-based graphical user interface (UI). The Self-Service UI is an intuitive interface providing access to all the functionality required by administrators, designers, and end-users. The Self-Service UI comprises four different <q>views</q> that allow you to work with the various components and aspects of the product. The Admin View, Designer View, Catalog View, and CloudApps View are described in the following sections. It is important to note that each of the views may or may not be accessible depending on User Type. In addition, User Settings are accessible by all User Types and provide a way to define user-specific items such as time zone and notification preferences.</p>
+
+<h2 id="account-selection">Account Selection</h2>
+
+<p>For Admins, Designers, and other users that may have access to multiple accounts, the Self-Service user interface provides controls for selecting which account is currently active. If you have access to multiple accounts and log into Self-Service you are presented with the Account Selection panel where you can choose which account you want to log into.</p>
+
+<p><img src="/img/ss-account-selection-panel.png" alt="ss-account-selection-panel.png" width="402" height="236" /></p>
+
+<p>In addition, once you are logged in, the Self-Service Account Selector is available in the upper right corner of the user interface to provide a convenient method for switching between the Self-Service enabled accounts you have access to.</p>
+
+<p><img src="/img/ss-account-selector.png" alt="ss-account-selector.png" width="400" height="201" /></p>
+
+<p><br></p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If you are working in either RightScale Cloud Management or Optima and use the Product Selector to switch to Self-Service, you will see different behavior depending on the account you are currently working in. If your currently active account is Self-Service enabled, you will be placed into Self-Service in that same account. If, however, your currently active account is <em>not</em> Self-Service enabled, then you will be presented with the Account Selection panel from which you can choose which account you want to view in Self-Service.</p>
+</div>
+
+<h2 id="user-settings">User Settings</h2>
+
+<p>As a Self-Service end-user you can set your local time zone and customize email notification. The User Settings page provides a variety of controls you can use to set your time zone preferences and customize the manner in which email notification is handled for your user profile. The various controls found on the User Settings page along with the steps to set your time zone and configure email notification are described below.</p>
+
+<h3 id="user-settings-accessing-the-user-settings-page">Accessing the User Settings Page</h3>
+
+<p>Access the User Settings page using the drop-down control located in the upper right-hand portion of the user interface.</p>
+
+<p><img src="/img/ss-user-settings-menu.png" alt="User Settings Menu Image" width="155" height="73" /></p>
+
+<h3 id="user-settings-setting-your-time-zone-preferences">Setting Your Time Zone Preferences</h3>
+
+<p>Use the following procedure to set your preferred time zone. The time zone you select will be used in email notifications that you receive.</p>
+
+<ol>
+<li>Open the User Settings page as described above.</li>
+<li>Open the Time Zone drop-down control and choose your preferred time zone setting. The control provides a suggested local time zone based on your operating system locale settings.</li>
+</ol>
+
+<p><img src="/img/ss-timezone.png" alt="Timezone List Image" width="598" height="331" /></p>
+
+<h3 id="user-settings-customizing-your-email-notification-settings">Customizing Your Email Notification Settings</h3>
+
+<p>Email Notification within Self-Sevice can be configured in two ways. First, you can set up default notification settings for any CloudApp that you launch or other users in your organization launch. Secondly, you can tailor individual notification settings for CloudApps that are already running. The following procedures outline the steps to configure your email notification settings for Self-Service CloudApps.</p>
+
+<p><strong>Note</strong>: Not all Self-Service users are able to view or configure email notification settings for CloudApps that other users in their organization have launched. Your user type (admin, designer, or end-user) and the Self-Service permissions granted to you (shared or private) determine whether or not you can view and configure email notification for CloudApps other than your own.</p>
+
+<ul>
+<li>Admins and designers can always view and configure notification on CloudApps other than their own.</li>
+<li>End-users must have <strong>shared</strong> permissions in order to view and configure notification on CloudApps other than their own.</li>
+<li>End-users with <strong>private</strong> permissions are only allowed to view and configure notification on their own CloudApps.</li>
+</ul>
+
+<h4 id="navigate-to-the-email-notifications-view">Navigate to the Email Notifications View</h4>
+
+<ol>
+<li>Open the User Settings page as described above.</li>
+<li>Click the Email Notifications tab to expose the email notification configuration controls. Note that the Email Notifications view includes a top section used to specify your default email notification settings along with a second section used to configure or modify settings for running CloudApps that have already subscribed to notifications.</li>
+</ol>
+
+<p><img src="/img/ss-email-notification-basic.png" alt="Notification Basic Image" width="602" height="493" /></p>
+
+<h4 id="configure-default-email-notification-settings">Configure Default Email Notification Settings</h4>
+
+<p>To configure the default email notification settings for your CloudApps, use the <strong>CloudApps I Launch</strong> drop-down list to define how you want email notifications to be handled for the CloudApps that you yourself will launch. Here you have the following choices for receiving notification.</p>
+
+<ul>
+<li><strong>All Activity</strong> - get notified of all CloudApp activities such as launches, failures, when an operation executes, or scheduled operations.</li>
+<li><strong>All Activity Except Scheduled Actions</strong> - get notified of all CloudApp activity except Scheduled Actions. (default)</li>
+<li><strong>Failures</strong> - only get notified when a CloudApp fails.</li>
+<li><strong>Never</strong> - do not get notified regarding any CloudApp activities.</li>
+</ul>
+
+<p>Next, use the CloudApps Launched by Others drop-down list to define how you want email notifications to be handled for the CloudApps that other users will launch. Note that only admins, designers, and end-users with shared permissions have access to this control. This control is not visible to end-users with private permissions. Here you have the following choices for receiving notification.</p>
+
+<ul>
+<li><strong>All Activity</strong> - get notified of all CloudApp activities such as launches, failures, when an operation executes, or scheduled operations.</li>
+<li><strong>All Activity Except Scheduled Actions</strong> - get notified of all CloudApp activity except Scheduled Actions.</li>
+<li><strong>Failures</strong> - only get notified when a CloudApp fails.</li>
+<li><strong>Never</strong> - do not get notified regarding any CloudApp activities. (default)</li>
+</ul>
+
+<h4 id="configure-email-notification-settings-for-running-cloudapps">Configure Email Notification Settings for Running CloudApps</h4>
+
+<p>To configure individual email notification settings for running CloudApps (launched either by you or other users in your organization), use the controls in the bottom portion of the Email Notifications view.</p>
+
+<ol>
+<li>Select one or more CloudApps in the available list. You can use the filter controls to help manage the number of displayed CloudApps. Note that the All CloudApps selection in the Show drop-down is only available to admins, designers, and end-users with <em>shared</em> permissions.</li>
+<li>Use the Selected Actions drop-down to define notification settings for the selected CloudApp(s). Here you have the following choices for receiving notification.</li>
+</ol>
+
+<ul>
+<li><strong>All Activity</strong> - get notified of all CloudApp activities such as launches, failures, when an operation executes, or scheduled operations.</li>
+<li><strong>All Activity Except Scheduled Actions</strong> - get notified of all CloudApp activity except Scheduled Actions.</li>
+<li><strong>Failures</strong> - only get notified when a CloudApp fails.</li>
+<li><strong>Never</strong> - do not get notified regarding any CloudApp activities.</li>
+<li><strong>Revert to Default</strong> - re-set email notification to the default configuration.</li>
+</ul>
+
+<p><strong>Note:</strong> The Notification Settings column displays the currently defined setting for each CloudApp listed.</p>
+
+<p>For notifications of upcoming scheduled operations on your running CloudApps. Self-Service will send notification one hour before a <q>stop</q> operation and two days before a <q>terminate</q> operation.</p>
+
+<h4 id="overriding-default-notification-settings">Overriding Default Notification Settings</h4>
+
+<p>You can override your default email notification configuration on individual CloudApps using the Notifications drop-down control.</p>
+
+<p><img src="/img/ss-notification-override.png" alt="Notification Override Image" width="602" height="198" /></p>
+
+<p>You can choose to be notified of all activity related to the selected CloudApp, only failures of the selected CloudApp, or you can elect to receive no notification at all.</p>
+
+<h2 id="the-admin-view">The Admin View</h2>
+
+<p>The Admin View provides commands and functionality you use to administer the Self-Service portal for your organization. This includes customizing the color scheme and branding for your portal as well as specifying the permissions settings. Each of these functions is described in the following sections. To access the Admin View, click on the <strong>Admin</strong> icon in the navigation pane on the left-hand side of the Self-Service user interface. Note that the Admin View is only visible to users with administrator privileges in the associated RightScale Cloud Management (CM) account.</p>
+
+<h3 id="the-admin-view-customizing-the-user-interface">Customizing the User Interface</h3>
+
+<p>The UI and emails for Self-Service are fully customizable from the standpoint of branding and color scheme. To access the controls for customizing your Self-Service UI and emails, click the <strong>UI Customization</strong> tab in the Admin View. The user making these changes must have &#39;admin&#39; role permissions on the account in Cloud Management.</p>
+
+<p><img src="/img/ss-ui-customization.png" alt="Customization Image" width="592" height="476" /></p>
+
+<p>The UI Customization page provides a variety of controls to help you brand your Self-Service UI and emails for your organization. A convenient Live Color Preview allows you to see what your color selections will look like in the UI before you save and apply them.</p>
+
+<ul>
+<li><strong>Primary UI Color</strong> - Specify the color for the top navigation bar, primary buttons, the active left-hand navigation element, and the header in emails. Enter the hexidecimal value representing the desired color or use the color picker by clicking the right corner of the control.</li>
+<li><strong>Primary Gradient Color</strong> - Apply a gradient to the primary color by entering a hexidecimal value representing the desired gradient color or use the color picker by clicking the right corner of the control. Alternately, you can use the None, Auto, and Custom buttons to specify zero gradient, an automatic 10 percent gradient, or a custom color gradient respectively.</li>
+<li><strong>Table Header Color</strong> - Define the color for all table headers in the Self-Service UI. Enter the hexidecimal value representing the desired color or use the color picker by clicking the right corner of the control.</li>
+<li><strong>Primary Logo Image URL</strong> - Enter the URL pointing to the primary image for your company logo. This will be shown in the upper-left of the UI and will be centered in a header in emails.</li>
+<li><strong>Secondary Logo Image URL</strong> - Enter the URL pointing to the secondary image for your company logo.</li>
+<li><strong>Favicon Image URL</strong> - Enter the URL to the image that you want to use as the favicon that shows up in browser tabs and URL bars.</li>
+</ul>
+
+<p><strong>NOTES:</strong></p>
+
+<ul>
+<li>HTTPS URLs are recommended to avoid &#39;insecure&#39; warnings displayed in your browser.</li>
+<li>Limit the height of Primary and Secondary Logo images to 40 pixels to avoid image distortion due to re-sizing.</li>
+<li>Changes are applied immediately for all users in your organization.</li>
+</ul>
+
+<h3 id="the-admin-view-setting-permissions">Setting Permissions</h3>
+
+<p>In the future, Self-Service will allow you to organize your users into teams and give you the power to specify granular permissions to cloud resources. In the meantime, there is a simple permission setting that will allow you to restrict access to CloudApps for end-users in your organization. The user making these changes must have &#39;admin&#39; role priveleges on the account in Cloud Management.</p>
+
+<p>The <strong>Shared</strong> permissions option allows end-users and observers to view and access all CloudApps in the CloudApps View. The <strong>Private</strong> permissions option allows end-users and observers to only view and access the CloudApps that they have launched. Use the following steps to set the Permissions option.</p>
+
+<ol>
+<li>In the Admin View, click the <strong>Permissions</strong> tab.</li>
+<li>Select either the <strong>Shared</strong> or <strong>Private</strong> option.</li>
+<li>Click Save and Apply to store your permissions setting.</li>
+</ol>
+
+<p><strong>NOTE</strong>: The above permissions do not apply to users with &#39;designer&#39; or &#39;admin&#39; role on your account -- those users will have full visibility and control over all running CloudApps.</p>
+
+<h3 id="the-admin-view-managing-self-service-only-end-users">Managing Self-Service Only End Users</h3>
+
+<p>The <code>Self-Service Only End Users</code> tab allows you to view and manage users that have access to Self-Service on the given account but have no other permissions in Cloud Management or Optima. This can be leveraged to provide users with only access to the Self-Service app. In order for users to be eligible to be granted this special role, they must have <strong>no roles</strong> for the account in Cloud Management. For details on this functionality, see the <a href="/ss/getting_started/ss_user_types.html#granting-permissions">Getting Started guide to Granting Permissions</a>.</p>
+
+<h2 id="the-designer-view">The Designer View</h2>
+
+<p>The <em>Designer View</em> is where you manage CAT files and schedule options used when publishing CAT files to the catalog. See <a href="/ss/guides/ss_creating_schedules.html">Creating Schedules</a> for more information on managing schedules.</p>
+
+<p>The main Designer View shows a list of all the CAT files that have been uploaded and compiled into CloudApps through the Self-Service UI. Each entry in the list shows the CloudApp name, the CAT file name, who uploaded the CAT, when the CAT was last uploaded, whether or not the CloudApp has been published, who it was published by, and when it was last published. </p>
+
+<p><img src="/img/ss-designer-view.png" alt="ss-designer-view.png" width="1866" height="1047" /></p>
+
+<p>Use the <strong>Show/Hide Columns</strong> control to specify which columns are shown in the Designer View.</p>
+
+<p><img src="/img/ss-designer-columns.png" alt="Designer Columns Image" width="186" height="265" /></p>
+
+<p>The contents of the Designer View can be filtered. Filtering choices in the <strong>Show</strong> drop-down include <strong>Published</strong>, <strong>Not Published</strong>, and <strong>Uploaded</strong> By Me.</p>
+
+<p><img src="/img/ss-designer-show-filter.png" alt="Designer Show Filter Image" width="272" height="150" /></p>
+
+<p>In addition to filtering using the <strong>Show</strong> drop-down, a text field is provided for further refinement of the filter.</p>
+
+<p>From the Designer View a number of single and bulk actions can be initiated on one or more selected CloudApps including <strong>Launch CloudApp</strong>, <strong>View CAT File</strong>, <strong>Download CAT File</strong>, <strong>Publish to Catalog</strong>, <strong>Remove from Catalog</strong>, and <strong>Delete CAT</strong>.</p>
+
+<h3 id="the-designer-view-additional-designer-view-actions">Additional Designer View Actions</h3>
+
+<p>In addition to the actions described above, there are several other tasks that CAT designers can accomplish in the Design view. These actions are shown below and described in the following sections. Also note that most of the single actions available in the Design view are accessible by left-clicking a CAT file entry.</p>
+
+<p><img src="/img/ss-additional-designer-actions.png" alt="Designer Additional Actions Image" width="470" height="456" /></p>
+
+<h4 id="remove-from-catalog">Remove from Catalog</h4>
+
+<p>If you wish to remove a CloudApp from the CloudApp Catalog after it has already been published, select the CAT for the CloudApp and choose <strong>Selected Actions &gt; Remove From Catalog</strong>.</p>
+
+<p>It is not always possible for Self-Service to track the connection between a CloudApp in the Catalog and the CAT in Designer, so you can also navigate to the Catalog and select the <q>Delete</q> button on any CloudApp to remove it.</p>
+
+<h4 id="delete-cat">Delete CAT</h4>
+
+<p>To delete a CAT file from the Design view, select the CAT file and choose <strong>Selected Actions &gt; Delete CAT</strong>.</p>
+
+<h4 id="view-cat-file">View CAT File</h4>
+
+<p>If you need to quickly examine the contents of a CAT from within the Design view, select the CAT file and choose <strong>Selected Actions &gt; View CAT File</strong>.</p>
+
+<h4 id="download-cat-file">Download CAT File</h4>
+
+<p>You can download a copy of the CAT file to your local drive by selecting the CAT and choosing <strong>elected Actions &gt; Download CAT File</strong>.</p>
+
+<h4 id="combined-actions">Combined Actions</h4>
+
+<p>For your convenience the Design view also provides a way to combine some common actions. You can upload and directly launch a CAT (which may be helpful during a test phase), or upload and directly publish a CAT. To access these combined actions, click the disclosure triangle on the <strong>Upload a CAT</strong> button.</p>
+
+<p><img src="/img/ss-combo-actions.png" alt="Designer Combo Actions Image" width="227" height="107" /></p>
+
+<h2 id="catalog-view">Catalog View</h2>
+
+<p>The Catalog View is where the majority of Self-Service portal users will go to see what CloudApps are available and to select a CloudApp to launch. Clicking <strong>Catalog</strong> in the left-hand navigation pane brings up the Catalog View.</p>
+
+<p><img src="/img/ss-cloudapps-catalog-view.png" alt="Catalog View Image" width="1429" height="752" /></p>
+
+<h3 id="catalog-view-setting-the-display-mode">Setting the Display Mode</h3>
+
+<p>There are two display modes for the Catalog View - <strong>List View</strong> which shows the standard tabular view of the available CloudApps and <strong>Card View</strong> which displays each CloudApp as a tile. Toggle between the two display modes using the pair of buttons in the upper right-hand side of the UI.</p>
+
+<p><img src="/img/ss-catalog-mode-buttons.png" alt="Display Mode Buttons Image" width="82" height="38" /></p>
+
+<h3 id="catalog-view-examining-cloudapp-details">Examining CloudApp Details</h3>
+
+<p>You can examine the details regarding a given CloudApp by clicking the <strong>Details</strong> link in List View or the <strong>Details</strong> button in Card View.</p>
+
+<h3 id="catalog-view-launching-a-cloudapp">Launching a CloudApp</h3>
+
+<p>Launching a CloudApp is easily accomplished by either clicking the <strong>Launch</strong> link in List View or the <strong>Launch</strong> button in Card View. The following dialog displays with fields for entering the name you want to use for your launched CloudApp as well as a description. You can also specify a runtime schedule and an end date for the CloudApp using the <strong>Schedule</strong> and <strong>End CloudApp On</strong> controls. In addition, any parameters that are specified in the CAT are presented in the dialog as drop-downs or text fields.</p>
+
+<p><img src="/img/ss-catalog-launch-dialog.png" alt="Catalog Launch Dialog Image" width="602" height="435" /></p>
+
+<p>Click <strong>Launch CloudApp</strong> to start the launch.</p>
+
+<h3 id="catalog-view-viewing-cloudapp-details">Viewing CloudApp Details</h3>
+
+<p>Once the CloudApp has launched successfully, a screen similar to the following appears showing various information about the running CloudApp including run status, uptime statistics, a log of recent activity, and output values grouped by category. Each section or &#39;card&#39; on this page is explained in greater detail in the following sections.</p>
+
+<p><img src="/img/ss-details-page-full.png" alt="CloudApp Running Image - Full" width="719" height="612" /></p>
+
+<p><strong>CloudApp Header</strong></p>
+
+<p><img src="/img/ss-details-page-header.png" alt="CloudApp Running Image - Header" width="722" height="131" /></p>
+
+<p>The Header lists a number of operational aspects of your running CloudApp:</p>
+
+<ul>
+<li><strong>CloudApp Name</strong> - the name of the running CloudApp</li>
+<li><strong>Current Status</strong> - running, terminated, etc.</li>
+</ul>
+
+<p>You can also take a number of actions using the controls in the Header:</p>
+
+<ul>
+<li>Terminate the CloudApp</li>
+<li>Initiate any custom actions that the CloudApp may have</li>
+<li>View the CloudApp in the Cloud Management Dashboard</li>
+<li>Change Notification Settings</li>
+</ul>
+
+<p><strong>CloudApp Outputs Card</strong></p>
+
+<p><img src="/img/ss-details-page-outputs-panel.png" alt="CloudApp Running Image - Outputs" width="727" height="197" /></p>
+
+<p>The Outputs card lists and describes the available outputs from the CloudApp and is divided into two tabs.</p>
+
+<ul>
+<li><strong>Public Info</strong> - displays the public IP Addresses of the one or more Instances that have been launched by the CloudApp.</li>
+<li><strong>Server Details</strong> - displays a variety of information on the CloudApp resources including Name, Cloud, Datacenter, Instance Type, etc.</li>
+</ul>
+
+<p><strong>CloudApp Details Card</strong></p>
+
+<p><img src="/img/ss-details-page-details-panel.png" alt="CloudApp Running Image - Details" width="727" height="329" /></p>
+
+<p>The Details card provides additional information on the CloudApp and divided into three tabs.</p>
+
+<ul>
+<li><strong>CloudApp Info</strong> - lists information on the CAT the CloudApp was launched from as well as who launched the CloudApp and what Schedule it was launched with. In addition, you can view the CAT source for the CloudApp and launch a new test version of the CloudApp from this tab.</li>
+<li><strong>Configuration Options</strong> - lists the Cloud/Region for the CloudApp as well as the instance size, operating system, etc.</li>
+<li><strong>Resources</strong> - lists the various resources (instances, server arrays, servers, volumes, etc.) launched by the CloudApp.</li>
+</ul>
+
+<p><strong>CloudApp Schedule Events</strong></p>
+
+<p><img src="/img/ss-details-page-launched-panel.png" alt="CloudApp Running Image - Launch Schedule" width="500" height="180" /></p>
+
+<p>The Schedule Events card displays the launch date/time for the CloudApp as well as the currently configured End Date. You can modify the End Date by clicking the link and selecting a new date/time from the displayed date picker control.</p>
+
+<p><strong>CloudApp Activity Stream</strong></p>
+
+<p><img src="/img/ss-details-page-activity-stream.png" alt="CloudApp Running Image - Activity Stream" width="500" height="638" /></p>
+
+<p>The Activity Stream card displays a chronological history of the various CloudApp events that have fired during the current run period. The most recent events are visible in the card but you can click the <strong>Open Activity Stream</strong> button to see the complete list of events. The Next Action is also displayed at the top of the card and you can change or cancel the Next Action by clicking the link and making your selection from the popup menu.</p>
+
+<h2 id="cloudapps-view">CloudApps View</h2>
+
+<p>Clicking the <strong>CloudApps</strong> icon in the left-hand navigation pane retrieves a list of all the CloudApps that have been launched in your environment. For each CloudApp a variety of useful information is displayed including status (running, terminated, etc.), the execution name of the CloudApp and the CAT file it is based on, the owner and when it was created, and the elapsed runtime. From here you can perform a variety of administrative actions such as launching and terminating CloudApps, viewing details about a CloudApp, examining the source (CAT) for the CloudApp, and viewing the CloudApp Deployment in CM.</p>
+
+<h3 id="cloudapps-view-setting-the-display-mode">Setting the Display Mode</h3>
+
+<p>Similar to the Catalog View there are two display modes for the CloudApps View - <strong>List View</strong> which shows the standard tabular view of the launched CloudApps and <strong>Card View</strong> which displays each CloudApp as a tile. Toggle between the two display modes using the pair of buttons in the upper right-hand side of the UI.</p>
+
+<p><img src="/img/ss-catalog-mode-buttons.png" alt="Display Mode Buttons Image" width="82" height="38" /></p>
+
+<h3 id="cloudapps-view-selected-actions">Selected Actions</h3>
+
+<p>As the Self-Service administrator you can execute actions on individually selected CloudApps or bulk actions on two or more selected CloudApps. Checkboxes on the left-hand side of the view allow to easily select the CloudApps you want to work with. Clicking the <strong>Selected Actions</strong> drop-down exposes the actions available to you for the selected CloudApps.</p>
+
+<p><img src="/img/ss-admin-actions.png" alt="Admin Actions Image" width="226" height="275" /></p>
+
+<p>The following <em>bulk actions</em> are available from the <strong>Selected Actions</strong> drop-down.</p>
+
+<ul>
+<li><strong>Launch</strong> - initiates a launch of selected CloudApps that are currently in the Terminated state.</li>
+<li><strong>Start</strong> - starts selected CloudApps that are currently in the Stopped state.</li>
+<li><strong>Stop</strong> - stops selected CloudApps that are currently in the Running state. NOTE: If the CAT does not have a <code>stop</code> operation defined, the <code>terminate</code> operation will be run instead.</li>
+<li><strong>Terminate</strong> - initiates a termination of selected CloudApps that are currently in the Running state.</li>
+<li><strong>Delete</strong> - deletes selected CloudApps</li>
+</ul>
+
+<p>The following <em>single actions</em> are also available when only a single CloudApp is selected.</p>
+
+<ul>
+<li><strong>Show Source</strong> - displays the CAT source code for the selected CloudApp in a convenient modal viewer.</li>
+<li><strong>Show Configuration</strong> - displays information about the configuration of the CloudApp including parameter values.</li>
+<li><strong>View in CM Dashboard</strong> - launches a separate browser window and displays the CloudApp deployment in RIghtScale CM.</li>
+</ul>
+
+<h3 id="cloudapps-view-filtering-and-columns">Filtering and Columns</h3>
+
+<p>You can configure the display of CloudApps in the CloudApps View by using the <strong>Filter</strong> control, <strong>Date Launched</strong> button, <strong>Name</strong> button, and the <strong>Show/Hide</strong> Column control. The <strong>Filter</strong> drop-down and edit field lets you specify exactly which CloudApps you want to view by providing preset filter groups and free text entry.</p>
+
+<p><img src="/img/ss-admin-filter.png" alt="Admin Filtering Image" width="630" height="311" /></p>
+
+<p>Using the drop-down control you can select any of the standard CloudApp states to filter on. You can also enter a text string in the edit field to provide additional filtering criteria. Within the edit field you can use special syntax to further refine your search as follows:</p>
+
+<ul>
+<li>Use <code>:</code> (colon) to filter on specific columns. For example, <strong>[ColumnHeader]:[value]</strong></li>
+<li>Use <code>|</code> (pipe) to OR multiple values. For example, <strong>Status:Running|Provisioning</strong></li>
+<li>Use <code>;</code> (semicolon) to AND multiple filters. For example, <strong>Status:Running;Linux</strong></li>
+</ul>
+
+<p>You can use the <strong>Show/Hide Columns</strong> control to further tailor the display in the CloudApps view. Click the <strong>Show/Hide Columns</strong> control to open the drop-down list.</p>
+
+<p>Select/de-select the columns that you want to display and click the control again to close the drop-down.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

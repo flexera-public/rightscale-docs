@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Designing Failover Architectures in EC2</title><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="clouds clouds_aws clouds_aws_amazon-ec2 clouds_aws_amazon-ec2_aws_failover_architectures" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="../aws_about.html"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>Amazon Web Services</span></h4></a><a class="list-group-item" href="../aws_quick_start.html">Quick Start</a><a class="list-group-item" href="aws_EC2.html">Amazon EC2</a><a class="list-group-item" href="../aws_tutorials.html">Tutorials</a><a class="list-group-item" href="../../../faq/clouds/aws/">FAQs</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">Supported Clouds</a> &#x2F; <a href="../">Amazon Web Services</a> &#x2F; <a href="./">Amazon EC2</a></p><div class="page-header"><h1>Designing Failover Architectures in EC2</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>The following sections cover the various aspects of designing and implementing EC2 failover architectures in RightScale.</p>
+
+<h2 id="elastic-ips-and-availability-zones---best-practices">Elastic IPs and Availability Zones - Best Practices</h2>
+
+<p>As cloud computing continues to evolve many questions arise around the best way to design a highly reliable site on the cloud with failover and recovery. As a system administrator you must always plan for failure. This document will help explain the best way to create affordable and reliable sites on EC2 using Elastic IPs (EIP) and availability zones.</p>
+
+<p>Elastic IPs (EIP) and availability zones are two key tools for creating stable architectures. An <strong>Elastic IP (EIP)</strong> allows users to allocate an IP address and assign it to an instance of their choice. Elastic IPs are dynamically re mappable IP addresses that make it easier to manage servers in the cloud because each IP address can be reassigned to a different instance when needed. An <strong>availability zone</strong> is essentially a regional data center on EC2. In the Dashboard, you have the flexibility of specifying an EIP and availability zone when you launch a server on EC2, which gives you the ability to create basic to complex site architectures that satisfy your site&#39;s cost and reliability requirements.</p>
+
+<p>There are several factors to consider when designing your site&#39;s architecture</p>
+
+<ul>
+<li><strong>Cost vs. Reliability</strong> - How much are you willing to invest in your site architecture and reliability?</li>
+<li><strong>Performance</strong> - How does your site perform if your deployment is set up across multiple availability zones?</li>
+<li><strong>Site Downtime</strong> - How much downtime am I comfortable with in a failure scenario?</li>
+</ul>
+
+<p>The answers to these questions will help determine how you design your site. But, if you pick the wrong design, don&#39;t worry because you can easily change architectures at any time. That&#39;s the beauty of cloud computing! You are no longer limited by your physical hardware. You only pay for what you use.</p>
+
+<p>The table below highlights the key differences between 3 sample architectures.</p>
+
+<table><thead>
+<tr>
+<th>Architecture</th>
+<th>Cost</th>
+<th>Downtime</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Basic</td>
+<td>$</td>
+<td>5-10 min</td>
+<td>EIPs with 1 Avail. Zone and a backup deployment (ready to launch)</td>
+</tr>
+<tr>
+<td>Intermediate</td>
+<td>$$</td>
+<td>Minimal</td>
+<td>EIPs with 2 Avail. Zones (few instances in zone 2)</td>
+</tr>
+<tr>
+<td>Advanced</td>
+<td>$$$</td>
+<td>None</td>
+<td>EIPs with 2 Avail. Zones (duplicate setup in zone 2)</td>
+</tr>
+</tbody></table>
+
+<h2 id="architecture-cost-considerations">Architecture Cost Considerations</h2>
+
+<p>Remember, you only have to pay for what you want. There are several different ways to design a highly reliable site. However, it depends on how much you&#39;re willing to pay for what level of failover and reliability.</p>
+
+<ul>
+<li>Data transferred between instances in the same availability zone on EC2 costs $0.00 per GB.</li>
+<li>Data transferred between instances across different availability zones on EC2 costs $0.01 per GB.</li>
+<li>Creating a deployment is free. You can always create a clone of your production deployment that is ready to be launched in a different availability zone if the primary availability zone ever fails.</li>
+<li>See Amazon for a breakdown of <a href="http://aws.amazon.com/ec2">Availability Zone Pricing</a>.</li>
+</ul>
+
+<h2 id="basic-failover-architecture">Basic Failover Architecture</h2>
+
+<p>The production deployment runs in a primary availability zone. A backup <q>clone</q> deployment is ready to be launched in a different availability zone if the primary zone fails. This is the most affordable failover option, because deployments are completely free. Simply create a clone of your production deployment and save it as a backup deployment. If the primary zone ever fails, all you will have to do is manually launch the backup deployment. The estimated downtime would be about 5-10 minutes after you launch the backup deployment, plus any additional time that is needed to load the database. When launching the backup deployment, make sure that the appropriate EIPs are associated with the new frontend instances.</p>
+
+<p>In the example diagram below, the production deployment is live and running while the backup (clone) deployment is already configured in the Dashboard and ready to be launched in a different availability zone if there is a failure in the primary zone and your production deployment disappears. The Master and Slave databases will be restored with the same backup file so that they are identical copies. However, since database backups are saved to S3 every 10 minutes, you may lose some data. If you cannot afford to lose data, you should consider using a more advanced failover architecture. Notice that the same EIPs will be used, except they will point to the new instances.</p>
+
+<p><img src="/img/aws-eip-basic.gif" alt="aws-eip-basic.gif" width="627" height="477" /></p>
+
+<p>Follow the instructions below to set up the Basic Failover Architecture. This setup has a production deployment where all of the instances are running in the same availability zone. This is the most affordable failover architecture on EC2 because data transferred between instances in the same availability zone is always free. A backup (clone) deployment is unactivated, but is ready to be launched into the us-east-1b availability zone. If there is a failure in us-east-1a, you must manually launch the backup deployment. As a safety feature you cannot automate the launching of a deployment. Remember, deployments are free. You can create and configure as many deployments as you want and you only have the pay for usage time if those instances are ever launched.</p>
+
+<h3 id="basic-failover-architecture-setup-instructions---basic-failover-architecture">Setup Instructions - Basic Failover Architecture</h3>
+
+<ol>
+<li>Once your production deployment is running as expected, make a duplicate of the production deployment by clicking the the <strong>Clone</strong> button at the deployment level (<strong>Manage &gt; Deployments</strong>).</li>
+<li>Rename the cloned deployment and call it <q>Backup</q>.</li>
+<li>The next step is modify the backup deployment so that it launches the new instances into a different availability zone (us-east-1b). Other than changing the availability zone, everything else should remain unchanged.</li>
+<li>Click on an instance&#39;s nickname and click <strong>Edit</strong>.</li>
+<li>Select <code>us-east-1b</code> (for example) from the Availability Zone dropdown menu and click <strong>Save</strong>.</li>
+<li>Repeat this process for each instance in the backup deployment.</li>
+<li>Check to make sure that your two frontends are using the same Elastic IPs as the production deployment and that the <q>Associate IP at launch?</q> box is checked.</li>
+</ol>
+
+<p><strong>Congratulations!</strong> You now have a backup deployment that is properly configured to launch into a different availability zone for failover situations. All you have to do is click the <q>start all</q> link to launch all the new instances in the deployment.</p>
+
+<h2 id="intermediate-failover-architecture">Intermediate Failover Architecture</h2>
+
+<p>If your production deployment cannot afford a 10 minute downtime and you are willing to invest more for added redundancy, then you can set up a slightly diversified deployment across two availability zones. In this example, we have placed the Slave-DB in a different availability zone. This may be an ideal setup if you do not have a lot of data being transferred between your application and database, and you are willing to pay for the extra instances and usage. Remember, data transferred between instances across different availability zones will costs $0.01 per GB.</p>
+
+<p><img src="/img/aws-intermediate-prod-deployment-setup.gif" alt="aws-intermediate-prod-deployment-setup.gif" width="526" height="429" /></p>
+
+<p>Follow the instructions below to set up an Intermediate Failover Architecture. This setup has a production deployment where instances are running in more than one availability zone. In this setup, there are three front ends using Elastic IPs. If there is a failure in the primary availability zone (us-east-1a), you will still have a running front end instance that is serving content from the secondary availability zone (us-east-1b). Simply promote the Slave-DB to <q>Master</q> and launch your backup deployment in a different availability zone (us-east-1c). Obviously, the performance of the site will suffer proportionally during an availability zone failure, but the site will remain operational until you can launch additional front ends and a new Slave-DB. Remember, if you have instances running in multiple availability zones, you will have to pay for the zone-to-zone transfer fees. Data transferred between instances across different availability zones on EC2 costs $0.01 per GB.</p>
+
+<p>In this example, we will use DNS with multiple A records. One A record is created for each EIP with the same DNS name. The DNS server will provide the rotation of A records.</p>
+
+<h3 id="intermediate-failover-architecture-setup-instructions---intermediate-failover-architecture">Setup Instructions - Intermediate Failover Architecture</h3>
+
+<h4 id="production-deployment">Production Deployment</h4>
+
+<p>If you follow the diagram above as an example, you will use an Elastic IP for each frontend and the Slave-DB and FrontEnd-3 are in a different availability zone. Make sure that you selected the correct Availability Zone for each server.</p>
+
+<p><strong>WARNING!</strong> The current default for a server&#39;s Availability Zone is <q>-any-.</q></p>
+
+<p>Now that you have an operational production deployment distributed across multiple availability zones, you should create backup instances that are ready to be launched in a failure scenario. It is important to be proactive when designing your deployment for quick failover and recovery. Remember, since you only have to pay for instances that are launched, it&#39;s a good idea to create <q>backups</q> for each instance that are properly configured and ready to be launched in a failure scenario.</p>
+
+<p>For an intermediate setup like the diagram above, we recommend creating backups of each type of instance that are ready to be launched with the appropriate Elastic IP and into the appropriate availability zone. Once your deployment is running, simply clone each type of instance. In this example, you should have the following two backups:</p>
+
+<ul>
+<li>Front end server (www-4)</li>
+<li>Slave-DB instance</li>
+</ul>
+
+<p><strong>WARNING!</strong> You should not use the <q>start all</q> link once you&#39;ve added backup instances.</p>
+
+<p>Notice that the backups do not have Elastic IPs or Availability Zones predefined because you do not know where you will launch these instances when problems occur.</p>
+
+<p>You will not have a backup for the Master-DB because you have a redundant MySQL setup. If the Master-DB ever fails, simply promote the Slave-DB to Master-DB and launch a new Slave-DB instance. By configuring these instances ahead of time, you&#39;ll be <q>ready to launch</q> when problems occur.</p>
+
+<h3 id="intermediate-failover-architecture-failover-scenarios">Failover Scenarios</h3>
+
+<h4 id="failure-in-primary-availability-zone-(us-east-1a)">Failure in Primary Availability Zone (us-east-1a)</h4>
+
+<p>In this example, the us-east-1a Availability Zone stops providing service, but your server is still up. You have provided a deployment configuration that is tolerant of a one-zone failure.</p>
+
+<p><img src="/img/aws-eip-fail-1.gif" alt="aws-eip-fail-1.gif" width="477" height="394" /></p>
+
+<h4 id="recipe-for-recovery">Recipe for Recovery</h4>
+
+<p>The first step is to get back to full performance and then add back a zone failure tolerance as a second step. During this recipe, service is never interrupted.</p>
+
+<ol>
+<li>Promote the Slave-DB to Master-DB.</li>
+<li>Launch a new front end server (www-4) in the same zone as the existing server (www-3) and assign one of the Elastic IPs that was used by one of the terminated servers.</li>
+<li>Launch a new front end server (www-5) in a different availability zone (us-east-1c) and assign the other Elastic IP that was used by one of the terminated servers. (WARNING: You will be charged for cross-zone data transfer costs.)</li>
+<li>Launch a new Slave-DB instance in a new availability zone (us-east-1c). Use operational scripts to attach the new Slave-DB to the current Master-DB to restart redundancy and replication.</li>
+<li>After a suitable delay, it would be a good time to take a backup of the Master-DB and examine your backup.</li>
+</ol>
+
+<p>Once again you have a distributed production deployment spread across multiple availability zones. Remember, performance will be affected proportionately if a zone stops, but the important thing is that your service will continue to perform.</p>
+
+<h4 id="failure-in-secondary-availability-zone-(us-east-1b)">Failure in Secondary Availability Zone (us-east-1b)</h4>
+
+<p>In this example, all that has happened is that our redundant zone stopped performing.</p>
+
+<p><img src="/img/aws-eip-fail-3.gif" alt="aws-eip-fail-3.gif" width="487" height="395" /></p>
+
+<h4 id="recipe-for-recovery">Recipe for Recovery</h4>
+
+<p>In this recipe we will replace the failed server to reestablish high reliability. During this recipe, service is never interrupted.</p>
+
+<ol>
+<li>Launch a new front end server in a different availability zone (us-east-1c) using the Elastic IP that was used by the terminated front end server in us-east-1b. See <a href="/cm/dashboard/clouds/aws/actions/ec2_elastic_ips_actions.html#assign-an-elastic-ip-at-launch">Assign an Elastic IP at Launch</a>.</li>
+<li>Launch a new Slave-DB instance in the same availability zone (us-east-1c). Use operational scripts to attach the new Slave-DB to the current Master-DB to restart redundancy and replication.</li>
+<li>After a suitable delay, it would be a good time to take a backup of the Master-DB and examine your backup.</li>
+</ol>
+
+<p>Once again you have a distributed production deployment spread across multiple availability zones. Remember, performance will be affected proportionately if a zone stops, but the important thing is that your service will continue to perform.</p>
+
+<h2 id="advanced-failover-architecture">Advanced Failover Architecture</h2>
+
+<p>If your production deployment requires the highest level of reliability with as close to 100% uptime as possible, you definitely have the flexibility to design an extremely reliable architecture, but you must be willing to pay for the extra redundancy. In this setup, a single instance can be deleted at any time and the site will continue to operate normally and does not require any responsive action. If an availability zone completely fails, you will still have a completely functional site running in a different availability zone. However, the cost of running this type of deployment on EC2 will double, plus the data transfer costs between availability zones. From a performance perspective, your users might experience a slightly slower performance since data is sent across different availability zones, but you&#39;ll have an extremely reliable architecture on the cloud.</p>
+
+<p><img src="/img/aws-eip-advanced.gif" alt="aws-eip-advanced.gif" width="543" height="533" /></p>
+
+<p>If you are using an advanced deployment architecture and the availability zone that contains your Master-DB fails, all incoming requests will automatically be rerouted to load balancer-2 and serve content from Slave-DB in us-east-1b. Visitors to your site might experience slower performance, but your site should remain fully functional. When you are ready, you can promote your Slave-DB to Master-DB and then launch a new load balancer, app servers, and a Slave-DB in a new availability zone. Notice that the EIP that was previously pointing to load balancer-1 (172.168.7.31) is now pointing to load balancer-3 in us-east-1c. When an EIP is reassigned to a different instance, it will take approximately 3 minutes for an EIP address to be transferred to a new instance. The <q>WaitFor</q> feature inside our Run RightScripts ensures that the EIP is fully settled before it receives any requests.</p>
+
+<p><img src="/img/aws-eip-advanced-failover.gif" alt="aws-eip-advanced-failover.gif" width="600" height="364" /></p>
+
+<h3 id="advanced-failover-architecture-setup-instructions---advanced-failover-architecture">Setup Instructions - Advanced Failover Architecture</h3>
+
+<h4 id="production-deployment-(us-east-1a)">Production Deployment (us-east-1a)</h4>
+
+<p>If you follow the diagram above as an example, your production setup will consist of two active deployments with another deployment configured to launch in another zone.  Each deployment will be dedicated to a particular zone. Notice that you&#39;re using an Elastic IP for each frontend load balancer with the same number of application servers in each availability zone.  The clone operation makes this duplication a one-click solution (with a few adjustments later).</p>
+
+<p>For advanced architectures, it&#39;s better to think at the deployment level, instead of at the individual server level. Instead of creating backups for each type of server, you can simply create backup deployments that are ready to be launched in a different availability zone if one of the zones stops. Once you start thinking of collections of servers are a <q>Deployment Unit</q> the move from Zone to Zone is a simple operation. Simply click the Clone button for a deployment and change the availability zones for all servers accordingly.</p>
+
+<p>All of the servers in your account with the same network options are on the same local network even when in distinct deployments.</p>
+
+<h3 id="advanced-failover-architecture-failover-scenarios">Failover Scenarios</h3>
+
+<h4 id="failure-in-availability-zone-(us-east-1a)">Failure in Availability Zone (us-east-1a)</h4>
+
+<p><img src="/img/aws-advanced-failure1a.gif" alt="aws-advanced-failure1a.gif" width="600" height="376" /></p>
+
+<h4 id="recipe-for-recovery">Recipe for Recovery</h4>
+
+<p>In this recipe, you do not want to launch the entire deployment at the same time.  Do not use the <q>launch-all</q> button because it&#39;s important that the servers in the backup deployment are launched in the correct order.</p>
+
+<ol>
+<li>Go to the backup deployment (Production 1c). If the availability zone with the Master-DB fails, promote the Slave-DB to Master-DB. If the Master-DB is still operational, proceed to Step 2.</li>
+<li>Launch the Slave-DB into the new availability zone (us-east-1c).  Use operational scripts to attach the new Slave-DB to the current Master-DB to restart redundancy and replication.</li>
+<li>Launch the application servers (app-5, app-6) into the new availability zone (us-east-1c).</li>
+<li>Launch the frontend load balancers (FrontEnd-3) into the new availability zone (us-east-1c).</li>
+<li>Execute the LB get HA proxy config operational action on the new load balancer (FrontEnd-3) to get the configuration file from the running load balancer in order to establish communication with the application servers.  If this RightScript is not used in your FrontEnd&#39;s ServerTemplate, you can import the latest version of the <q>Rails FrontEnd</q> ServerTemplate from the MultiCloud Marketplace to gain access to this script. You can either add the RightScript as an operational script or run it as an <q>Any Script</q> on the server.</li>
+<li>Associate the unused Elastic IP to the new load balancer (FrontEnd-3).</li>
+</ol>
+
+<h3 id="advanced-failover-architecture-notes">Notes</h3>
+
+<p>If your Master-DB is large and takes a long time to start from backups, one advanced strategy would be to keep a Slave-DB <q>hot</q> by keeping one slave up and running in as many zones as you can afford.</p>
+
+<p>In a failure scenario (or heavy load), the extra backup Slave-DB will already be connected to the load balancers and application servers, and be ready to serve a larger percent of the traffic. Most application servers launch quickly and can be added as needed. These <q>spare slaves</q> make a great place to test backup restore policy and QA new software. Occasionally you can restore a Slave-DB and check to make sure the data is correct. It provides a great place to perform these types of audits.</p>
+
+<p><img src="/img/aws-advanced-hot.gif" alt="aws-advanced-hot.gif" width="600" height="431" /></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

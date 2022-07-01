@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Managing CSP Partnerships and Customers in Optima</title><meta content="This page walks you through the steps to manage your Azure Cloud Solution Provider (CSP) data in RightScale Optima for cost reporting" name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="clouds clouds_azure_resource_manager clouds_azure_resource_manager_getting_started clouds_azure_resource_manager_getting_started_managing_csp_partnerships_and_customers" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="../../azure/azure_about.html"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>Microsoft Azure (Classic)</span></h4></a><a class="list-group-item" href="../../azure/azure_quick_start.html">Quick Start</a><a class="list-group-item" href="../../azure/azure_tutorials.html">Tutorials</a><a class="list-group-item" href="/faq/clouds/azure/">FAQs</a><a class="list-group-item" href="../../azure/Guide_for_Evaluating_Microsoft_Azure.html">Evaluation Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">Supported Clouds</a> &#x2F; <a href="../">Microsoft Azure Resource Manager</a> &#x2F; <a href="./">Getting Started with Azure Resource Manager (ARM)</a></p><div class="page-header"><h1>Managing CSP Partnerships and Customers in Optima</h1></div><div class="main-content"><p>This document is intended for <a href="https://partnercenter.microsoft.com/en-us/partner/cloud-solution-provider">Microsoft Cloud Solutions Provider (CSP)</a> partners. If you are not part of the Azure CSP program, these instructions are not relevant; instead, see <a href="/clouds/azure/azure_connect_azure_enterprise_agreement_to_RightScale_for_cost_reporting.html">Azure Enterprise Agreement</a> for connecting your Microsoft EA for billing purposes or <a href="/clouds/azure_resource_manager/getting_started/register.html">Register an Azure Resource Manager (ARM) account with RightScale</a> for connecting subscriptions for management purposes.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>Azure CSP subscriptions can be visualized and reported on in Optima like other subscriptions, but there are some important differences in the costs and setup that you need be aware of. </p>
+
+<p>RightScale integrates with the <a href="https://docs.microsoft.com/en-us/partner-center/develop/partner-center-rest-api-reference">Microsoft Partner APIs</a> to provide functionality around the CSP program. Each of your customers within the partner portal should have their own <a href="/cm/dashboard/settings/enterprise/#what-is-an-organization">Organization</a> created in RightScale to contain their information and access controls. Detailed setup information for your customers can be found below.</p>
+
+<p>Since Microsoft does not provide granular cost information for subscriptions that are part of the CSP program, RightScale leverages the <a href="https://docs.microsoft.com/en-us/partner-center/develop/get-a-customer-s-utilization-record-for-azure">utilization APIs for CSP subscriptions</a> and combines the usage information with the <a nocheck href="https://azure.microsoft.com/en-us/pricing/">Pay-as-you-Go pricing</a> from Azure to generate cost information for CSP subscriptions. Additional information on this method and its implications is located below.</p>
+
+<h3 id="overview-limitations">Limitations</h3>
+
+<p>At this time, there are certain limitations within the Optima product as it relates to CSP subscriptions. Other than these limitations, all functions of Optima are equivalent to Azure EA and other public clouds. These limitations are as follows:</p>
+
+<ul>
+<li>Recommendations are not generated for CSP subscriptions</li>
+<li>Only Azure Pay-As-You-Go pricing in USD is supported</li>
+<li>Azure Reserved Instance purchases are not shown in Optima</li>
+<li>Discounted usage from the use of Reserved Instances is not supported (all costs are generated at the public rate)</li>
+</ul>
+
+<h2 id="initial-setup">Initial Setup</h2>
+
+<p>As a Microsoft CSP, you must first <a href="/optima/getting_started/bill_connect/azure_csp.html">register your CSP partnership with RightScale</a> so that the platform can offer you the customer management capabilities associated with CSP. Once you have registered your partner information, then you can select which of your customers in CSP you would like to enable in Optima.</p>
+
+<p><a href="/optima/getting_started/bill_connect/azure_csp.html">Follow the CSP registration guide</a> to register your partnership with Optima. This step needs to be performed only one time per partnership (not per CSP customer) and should be performed on the RightScale organization that is affiliated with <strong>your company</strong> (not your customer&#39;s).</p>
+
+<p>Multiple partnerships can be registered with your organization in RightScale.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>Partner portal API keys are set to expire in 6 months by default. Make sure to set a reminder to rotate the key in Microsoft AND RightScale to ensure service continuity. </p>
+</div>
+
+<h2 id="enabling-your-customers-in-optima">Enabling your customers in Optima</h2>
+
+<p>Once your partnership has been registered, you are ready to enable your customers in Optima. First you must create a RightScale organization for your customer, then you can select which customer tenant to associate with that organization. Once you have taken these steps, <strong>all of the subscriptions</strong> within that customer tenant will be available for cost reporting in the specified RightScale organization. Grant your customers access to the RightScale organization to provide them use of Optima on their subscriptions.</p>
+
+<h3 id="enabling-your-customers-in-optima-create-an-organization-for-the-customer">Create an Organization for the customer</h3>
+
+<p>To create an organization for your customer, please email <a href="mailto:support@rightscale.com">support@rightscale.com</a> with a request to create an organization (or multiple). For each organization, please specify:</p>
+
+<ol>
+<li>the initial organization name (you can change this later) </li>
+<li>a user in <strong>your</strong> organization that you would like to be granted the initial <code>enterprise_manager</code> of the organization </li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>When creating the organization, it is important that the initial <code>enterprise_manager</code> of the customer organization already has <code>enterprise_manager</code> in your organization. This is required to enable the customer tenant on the new organization. The privilege can be removed at a later time.</p>
+</div>
+
+<h3 id="enabling-your-customers-in-optima-associate-a-customer-tenant-to-a-rightscale-organization">Associate a customer tenant to a RightScale organization</h3>
+
+<p>Once the customer&#39;s RightScale organization has been created, you can associate the tenant from your partner portal with the organization. This action will associate <strong>all of the subscriptions in the customer tenant</strong> with the given RightScale organization in Optima. There will be no indication in the customer organization that their CSP data is connected -- this information is only available in your organization that has the CSP partnership registered.</p>
+
+<p>Multiple customer tenants can be registered to the same RightScale organization, but please note this should only be done if those tenants represent the same <q>customer</q>.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>If the CSP subscription was transferred into your CSP from another CSP, data will only be available from the transfer date forward.</p>
+</div>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>The user performing this step must have the <code>enterprise_manager</code> role in <em>both</em> your organization as well as the customer organization.</p>
+</div>
+
+<p>In the Azure Partner Center dashboard, select <strong>Customers</strong> and press the drop-down arrow on the right to expose the <code>Microsoft ID</code> -- this is the <q>CSP Customer Tenant ID</q>.</p>
+
+<p><img src="/img/arm-csp-customer-id.png" alt="csp-id" width="1472" height="549" /></p>
+
+<h4 id="ui-registration-instructions">UI Registration Instructions</h4>
+
+<p>To register this customer tenant in the Optima UI, proceed with the following steps:</p>
+
+<ol>
+<li>Navigate to the <q>Settings</q> menu in Optima and select <q>Billing Configuration</q></li>
+<li>On the list of bill connections on the left, select the CSP Partnership that the customer belongs to</li>
+<li>Click on the <q>Tenants</q> tab in the main panel</li>
+<li>Click the <q>Edit Tenants</q> button</li>
+<li>Click the <q>Add Tenant</q> button</li>
+<li><p>Enter the customer tenant ID from the MS partner portal and use the dropdown to select the RightScale organization to associate their billing data to</p>
+
+<p><img src="/img/optima-bill-config-csp-tenants.png" alt="tenants list" width="928" height="619" /></p>
+
+<p><img src="/img/optima-bill-config-csp-add-tenant.png" alt="add tenants" width="810" height="507" /></p></li>
+</ol>
+
+<p>Once these steps are complete, please wait up to 24 hours for data to be populated in Optima. All subscriptions will be populated with data from as far back as there is utilization for the subscription.</p>
+
+<h4 id="api-registration-instructions">API Registration Instructions</h4>
+
+<p>Use the <a href="https://reference.rightscale.com/cost_management/#/AzureCSPCustomers/AzureCSPCustomers_create"><code>Create</code></a> call on the <code>AzureCSPCustomers</code> resource in the <a href="https://reference.rightscale.com/cost_management/#/index.html">Cost Management API</a> with the customer tenant ID and Organization ID in the body as specified.</p>
+
+<p>Once these steps are complete, please wait up to 24 hours for data to be populated in Optima. All subscriptions will be populated with data from as far back as there is utilization for the subscription.</p>
+
+<h3 id="enabling-your-customers-in-optima-grant-customers-access-to-their-rightscale-organization">Grant customers access to their RightScale organization</h3>
+
+<p>Once you have verified that data is being populated in the RightScale organization, you can begin <a href="/cm/dashboard/settings/enterprise/#actions-and-procedures-invite-a-user-to-join-an-organization">inviting customer users to the organization</a> so that they can see their cost data in Optima.</p>
+
+<h2 id="managing-customer-tenants">Managing customer tenants</h2>
+
+<p>Once you have registered your CSP customer tenants with Optima, you can use both the UI and API to manage the configurations. </p>
+
+<h3 id="managing-customer-tenants-using-the-optima-ui">Using the Optima UI</h3>
+
+<p>To see which customer tenants you have configured and what organizations they are associated with, navigate to the <q>Billing Configuration</q> page in the <q>Settings</q> menu in <strong>your</strong> Optima organization. Select your CSP partnership in the list on the left and then click the <q>Tenants</q> tab in the main panel.</p>
+
+<p><img src="/img/optima-bill-config-csp-tenants.png" alt="tenants list" width="928" height="619" /></p>
+
+<p>This panel shows all the customer tenants that have been configured and the organizations they are associated with.</p>
+
+<p>To update any information, add new tenants, or remove associations, click the <q>Edit Tenants</q> button. In the modal that appears, you can update any information or use the trash can icon to remove a tenant configuration. Clicking the <q>Update</q> button will save your changes.</p>
+
+<p><img src="/img/optima-bill-config-csp-edit-tenants.png" alt="edit tenants" width="812" height="461" /></p>
+
+<h3 id="managing-customer-tenants-using-the-api">Using the API</h3>
+
+<p>Using the <a href="https://reference.rightscale.com/cost_management/#/index.html">Cost Management API</a>, the <a href="https://reference.rightscale.com/cost_management/#/AzureCSPCustomers"><code>AzureCSPCustomers</code></a> resource represents each customer tenant that you have registered with an organization in RightScale from your CSP partnership. You can use the <a href="https://reference.rightscale.com/cost_management/#/AzureCSPCustomers/AzureCSPCustomers_index"><code>Index</code></a> action to get a list of all customer tenants that are registered with RightScale organizations and the <a href="https://reference.rightscale.com/cost_management/#/AzureCSPCustomers/AzureCSPCustomers_show"><code>Get</code></a> action to get the details for an individual customer tenant.</p>
+
+<p>If you need to remove a customer&#39;s subscriptions from a RightScale organization, simply use the <a href="https://reference.rightscale.com/cost_management/#/AzureCSPCustomers/AzureCSPCustomers_delete"><code>Delete</code></a> operation on the <code>AzureCSPCustomers</code> resource in the <a href="https://reference.rightscale.com/cost_management/#/index.html">Cost Management API</a></p>
+
+<h2 id="generating-csp-customer-cost-data">Generating CSP customer cost data</h2>
+
+<p>Once a customer has been configured, RightScale will begin generating cost information for that customer&#39;s subscriptions by combining the customer&#39;s <a href="https://docs.microsoft.com/en-us/partner-center/develop/get-a-customer-s-utilization-record-for-azure">subscription utilization records</a> (which contains detailed usage information) with the <a nocheck href="https://azure.microsoft.com/en-us/pricing/">Azure Pay-as-you-Go prices</a> in <strong>USD</strong>. The resulting costs are shown in Optima and can be analyzed like other bill-based costs.</p>
+
+<h3 id="generating-csp-customer-cost-data-historical-data-generation">Historical data generation</h3>
+
+<p>RightScale will generate historical data for as much data is available through the utilization records API in Azure.</p>
+
+<h3 id="generating-csp-customer-cost-data-price-sheets">Price sheets</h3>
+
+<p>At this time only the Pay-As-You-Go prices in USD are supported.</p>
+
+<h3 id="generating-csp-customer-cost-data-billing-periods">Billing periods</h3>
+
+<p>At this time the cost calculations in Optima use the <strong>calendar month</strong> as the billing period start and end. This has implications on how some of the costs are calculated and how reconciliation with the Azure bill can be done</p>
+
+<h4 id="tiered-costs">Tiered costs</h4>
+
+<p>For some costs in Azure, <q>tiered</q> costs apply, where higher usage of a given resource within a given timeframe cause the cost to decrease in a <q>tiered</q> fashion. For example, <a nocheck href="https://azure.microsoft.com/en-us/pricing/details/storage/blobs/">storage in Azure</a> uses a tiered pricing model. </p>
+
+<p>When Optima calculates cost, it also incorporates these tiers, but the usage is calculated using the billing period in effect, which in Optima is currently only <strong>calendar month</strong>. This can cause some differences with the actual prices charged since the tiers in Azure apply to the billing period in effect with Azure.</p>
+
+<h3 id="generating-csp-customer-cost-data-azure-reserved-instances">Azure Reserved Instances</h3>
+
+<p>At this time, Azure RIs are not supported in Optima. Neither the purchase of Azure RIs nor the discounts that they effect will be incorporated into the CSP subscription cost data.</p>
+
+<h3 id="generating-csp-customer-cost-data-reconciliation-with-azure-bills">Reconciliation with Azure bills</h3>
+
+<p>In many cases, your staff may want to reconcile the data being provided to your customers via Optima with the bills provided by Azure to your organization. When performing this reconciliation, there are two primary differences that must be taken into account:</p>
+
+<ol>
+<li>Optima billing periods are calendar month only, so your staff will need to use daily data from Optima and <q>cut</q> the data to whatever period is used by your organization with Microsoft.</li>
+<li>Optima uses the Pay-as-you-Go pricing to generate cost information, while your bills are generated using CSP pricing.</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

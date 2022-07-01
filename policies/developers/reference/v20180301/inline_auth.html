@@ -1,0 +1,620 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Policy Template Inline Authorization</title><meta content="This page outlines the legacy auth block in the policy template language." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="policies policies_developers policies_developers_reference policies_developers_reference_v20180301 policies_developers_reference_v20180301_inline_auth" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/"><h4 class="list-group-heading"><img src="../../../../img/product-governance.svg" /><span>Policies Users Guide</span></h4></a><a class="list-group-item" href="/policies/">About</a><a class="list-group-item" href="/policies/users/getting_started">Getting Started</a><a class="list-group-item" href="/policies/users/guides">Guides</a><a class="list-group-item" href="../../../users/policy_list.html">Flexera Policies</a><a class="list-group-item" href="/policies/users/faq">FAQ</a></nav></aside><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/developers"><h4 class="list-group-heading"><img src="../../../../img/product-governance.svg" /><span>Policies Developers Guide</span></h4></a><a class="list-group-item" href="/policies/developers">Overview</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Policy Automation</a> &#x2F; <a href="../../">Developers Guide</a> &#x2F; <a href="../">Developers Guide</a> &#x2F; <a href="./">Developers Guide</a></p><div class="page-header"><h1>Policy Template Inline Authorization</h1></div><div class="main-content"><h2 id="inline-authorization">Inline Authorization</h2>
+
+<div class="alert alert-warning" role="alert"><strong>Note</strong><p>Inline authorization is deprecated and has been replaced by the <a href="/policies/reference/policy_template_language.html#authorization">credentials</a> declaration. The credentials declaration defers handling of authentication/authorization against external APIs to a centralized credentials store. It is highly recommended to always the <code>credentials</code> declaration for several reasons. First, credential values read-only and more secure. Second, it centralizes authentication against external APIs and makes the same credentials available across the entire suite of Flexera products.</p>
+</div>
+
+<p>For inline authorization, the <code>auth</code> you can define how to authenticate against an API inline in the code itself. <code>auth</code> declarations can be references when describing a datasource in the exact same manner <code>credentials</code> references can. Secrets for this method must be stored in the <q>Cloud Management</q> dashboard under <q>Design -> Credentials</q>. A variety of authorization schemes are supported. The syntax of the <code>auth</code> definition is:</p>
+<pre class="syntax-highlight plaintext"><code>auth &lt;name&gt;, type: &lt;type&gt; do
+   &lt;property&gt; &lt;term&gt;
+   &lt;property&gt; &lt;term&gt;
+   ...
+end
+</code></pre>
+
+<p>Where:</p>
+
+<ul>
+<li><code>&lt;name&gt;</code> is the name of the auth reference.</li>
+<li><code>&lt;type&gt;</code> is the type of the scheme.</li>
+</ul>
+
+<p>The properties used to define a scheme depends on its type. See the <a href="#authorization-reference">Authorization Reference</a> section for a description of
+the available authorization schemes and their properties.</p>
+
+<p>Example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"aws_us_east_1"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"aws"</span> <span class="k">do</span>
+  <span class="n">version</span>    <span class="mi">4</span>
+  <span class="n">service</span>    <span class="s2">"ec2"</span>
+  <span class="n">region</span>     <span class="s2">"us-east-1"</span>
+  <span class="n">access_key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"AWS_ACCESS_KEY_ID"</span><span class="p">)</span>
+  <span class="n">secret_key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"AWS_SECRET_ACCESS_KEY"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="authorization-reference">Authorization Reference</h2>
+
+<p>The following table lists all the authorization schemes supported by the Policy Template Language. For each scheme the table lists the corresponding properties. Required properties are marked with <code>(*)</code>.</p>
+
+<h3 id="authorization-reference-aws">AWS</h3>
+
+<p>AWS authentication provides ways to authenticate against arbitrary AWS services.
+Service and region can be omitted or set to <q>inferred</q> to let the signer determine them automatically from the request URL, allowing a single auth definition to work across multiple AWS services and their regions.</p>
+
+<table><thead>
+<tr>
+<th>Scheme</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>aws</code></td>
+<td><code>version</code>: Signature version, must be 3 or 4 (default).</td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>service</code>: AWS canonical service name.</td>
+<td><code>&quot;ec2&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>region</code>: AWS canonical region name.</td>
+<td><code>&quot;us-east-1&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>access_key(*)</code>: AWS access key ID.</td>
+<td><code>cred(&quot;AWS_ACCESS_KEY_ID&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>secret_key(*)</code>: AWS secret access key.</td>
+<td><code>cred(&quot;AWS_SECRET_ACCESS_KEY&quot;)</code></td>
+</tr>
+</tbody></table>
+
+<p>Example code block:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_aws_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"aws"</span> <span class="k">do</span>
+  <span class="n">version</span> <span class="mi">4</span>
+  <span class="n">service</span> <span class="s2">"ec2"</span>
+  <span class="n">region</span> <span class="s2">"us-east-1"</span>
+  <span class="n">access_key</span> <span class="s2">"AKIAFOOBARBAZ"</span>
+  <span class="n">secret_key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"AWS_SECRET_ACCESS_KEY"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="authorization-reference-aws-sts">AWS STS</h3>
+
+<p>AWS STS authentication provides ways to authenticate against arbitrary AWS services using the <a href="https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html">AWS Security Token Service</a>.
+Service and region can be omitted or set to <q>inferred</q> to let the signer determine them automatically from the request URL, allowing a single auth definition to work across multiple AWS services and their regions.</p>
+
+<table><thead>
+<tr>
+<th>Scheme</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>aws_sts</code></td>
+<td><code>version</code>: Signature version, must be 3 or 4 (default).</td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>service</code>: AWS canonical service name.</td>
+<td><code>&quot;s3&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>region</code>: AWS canonical region name.</td>
+<td><code>&quot;us-east-1&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>access_key(*)</code>: AWS access key ID.</td>
+<td><code>cred(&quot;AWS_ACCESS_KEY_ID&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>secret_key(*)</code>: AWS secret access key.</td>
+<td><code>cred(&quot;AWS_SECRET_ACCESS_KEY&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>role_arn(*)</code>: Amazon Resource Name (ARN) of the role to assume.</td>
+<td><code>&quot;arn:aws:iam::031a1f6c8,:role/test-role&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>role_session_name(*)</code>: Identifier for the assumed role session.</td>
+<td><code>&quot;open_buckets_policy&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>policy_json</code>: Restrictive IAM policy in JSON format.</td>
+<td><code>&quot;{Version: &quot;2012-10-17&quot;...}&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>external_id</code>: Unique identifier that might be required when assuming a role in another account.</td>
+<td><code>&quot;c4202e1830&quot;</code></td>
+</tr>
+</tbody></table>
+
+<p>Example code block:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_aws_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"aws"</span> <span class="k">do</span>
+  <span class="n">version</span> <span class="mi">4</span>
+  <span class="n">service</span> <span class="s1">'s3'</span>
+  <span class="n">access_key</span> <span class="n">cred</span><span class="p">(</span><span class="s1">'AWS_ACCESS_KEY_ID'</span><span class="p">)</span>
+  <span class="n">secret_key</span> <span class="n">cred</span><span class="p">(</span><span class="s1">'AWS_SECRET_ACCESS_KEY'</span><span class="p">)</span>
+  <span class="n">role_arn</span> <span class="s1">'arn:aws:iam::031a1f6c8,:role/test-role'</span>
+  <span class="n">role_session_name</span> <span class="s1">'open_buckets_policy'</span>
+  <span class="n">policy_json</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="sh">
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": "s3:*",
+        "Resource": "*"
+      }
+    ]
+  }
+</span><span class="no">  EOS</span>
+  <span class="n">external_id</span> <span class="s1">'unique_id_assigned_by_example_corp'</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="authorization-reference-basic">Basic</h3>
+
+<p>Basic authentication performs <a href="https://tools.ietf.org/html/rfc2617">basic HTTP authentication</a> using a <code>Authorization: Basic</code> header.</p>
+
+<table><thead>
+<tr>
+<th>Scheme</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>basic</code></td>
+<td><code>username(*)</code>: Username for basic authentication.</td>
+<td><code>&quot;myuser&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>password(*)</code>: Password for basic authentication.</td>
+<td><code>cred(&quot;MY_API_PASSWORD&quot;)</code></td>
+</tr>
+</tbody></table>
+
+<p>Example code block:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_basic_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"basic"</span> <span class="k">do</span>
+  <span class="n">username</span> <span class="s2">"user"</span>
+  <span class="n">password</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"THE_PASSWORD"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="authorization-reference-ntlm">NTLM</h3>
+
+<p>NTLM authentication performs <a href="https://en.wikipedia.org/wiki/NT_LAN_Manager">NTLM v2 HTTP authentication</a>.</p>
+
+<table><thead>
+<tr>
+<th>Scheme</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>ntlm</code></td>
+<td><code>username(*)</code>: Username for basic authentication.</td>
+<td><code>&quot;myuser&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>password(*)</code>: Password for basic authentication.</td>
+<td><code>cred(&quot;MY_API_PASSWORD&quot;)</code></td>
+</tr>
+</tbody></table>
+
+<p>Example code block:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_ntlm_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"auth"</span> <span class="k">do</span>
+  <span class="n">username</span> <span class="s2">"user"</span>
+  <span class="n">password</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"THE_PASSWORD"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="authorization-reference-api-key">API Key</h3>
+
+<p>API Key authentication authenticates using an static API Key. It can set a header or query parameter on an http request depending on configuration options.</p>
+
+<table><thead>
+<tr>
+<th>Scheme</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>api_key</code></td>
+<td><code>key(*)</code>: API Key.</td>
+<td><code>cred(&quot;MY_SECRET_KEY&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>location(*)</code>: Location of auth field. <q>header</q> or <q>query</q>.</td>
+<td><code>&quot;header&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>field(*)</code>: Header or query param field to set.</td>
+<td><code>&quot;Authorization&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>type(*)</code>: Type of authorization header, prefixes the key value.</td>
+<td><code>&quot;Bearer&quot;</code></td>
+</tr>
+</tbody></table>
+
+<p>Example code block:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_api_key_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"api_key"</span> <span class="k">do</span>
+  <span class="n">location</span> <span class="s2">"header"</span>
+  <span class="n">field</span> <span class="s2">"Authorization"</span>
+  <span class="n">type</span> <span class="s2">"Bearer"</span>
+  <span class="n">key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"MY_API_KEY"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="authorization-reference-jwt">JWT</h3>
+
+<p>JWT authenticates using a <a href="https://jwt.io/">Java web token</a> retrieved from a login endpoint. Either basic auth or an
+API key can be used to retrieve the JWT. Set the basic_auth_username and basic_auth_password fields
+to use basic auth or the api_key field to use an API key. It is an error to specify
+both. If neither is specified then the request to retrieve the token is not signed.</p>
+
+<table><thead>
+<tr>
+<th>Scheme</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>jwt</code></td>
+<td><code>token_url(*)</code>: URL from which to retrieve the token. Either basic_auth or API key will be used.</td>
+<td><code>&quot;https://web.url/login&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>additional_headers</code>: Additional headers to send with the request to retrieve the jwt token.</td>
+<td><code>additional_headers do {&lt;br&gt; &quot;API-Version&quot;: &quot;1.0&quot;&lt;br&gt; &quot;X-Account&quot;: &quot;700&quot;&lt;br&gt; }</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>api_key</code>: API Key, if used.</td>
+<td><code>cred(&quot;MY_SECRET_KEY&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>location</code>: Location of authorization if API Key is used. Allowed values: <q>header</q>, <q>query</q>.</td>
+<td><code>&quot;header&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>field</code>: Header or query param field to set if API Key is used.</td>
+<td><code>&quot;Authorization&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>type</code>: Type of authorization header, prefixes the key value, if API Key is used</td>
+<td><code>&quot;Bearer&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>basic_auth_username</code>: Username for basic authentication, if used.</td>
+<td><code>&quot;myuser&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>basic_auth_password</code>: Password for basic authentication, if used.</td>
+<td><code>cred(&quot;MY_API_PASSWORD&quot;)</code></td>
+</tr>
+</tbody></table>
+
+<p>Example code block:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_jwt_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"jwt"</span> <span class="k">do</span>
+  <span class="n">api_key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"MY_API_KEY"</span><span class="p">)</span>
+  <span class="n">token_url</span> <span class="s2">"https://web.url/login"</span>
+  <span class="n">location</span> <span class="s2">"header"</span>
+  <span class="n">field</span> <span class="s2">"Authorization"</span>
+  <span class="n">type</span> <span class="s2">"Bearer"</span>
+  <span class="n">additional_headers</span> <span class="k">do</span> <span class="p">{</span>
+    <span class="s2">"X-Account"</span><span class="p">:</span> <span class="nb">to_s</span><span class="p">(</span><span class="n">rs_project_id</span><span class="p">),</span>
+    <span class="s2">"User-Agent"</span><span class="p">:</span> <span class="vg">$user_agent_from_param</span><span class="p">,</span>
+    <span class="s2">"Accept"</span><span class="p">:</span> <span class="s2">"text/plain"</span>
+  <span class="p">}</span> <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="authorization-reference-oauth2">OAuth2</h3>
+
+<p>OAuth2 authenticates using a OAuth2 access token retrieved from a login endpoint. OAuth endpoints can be authenticated using <a href="https://tools.ietf.org/html/rfc6749#section-1.3.4">Client Credentials</a>, a <a href="https://tools.ietf.org/html/rfc6749#section-1.5">Refresh Token</a>, or JWT token set in the Bearer field.</p>
+
+<table><thead>
+<tr>
+<th>Scheme</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>oauth2</code></td>
+<td><code>token_url(*)</code>: OAuth 2 endpoint.</td>
+<td><code>&quot;https://web.url/login/oauth2&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>grant type(*)</code>: <q>client_credentials</q> or <q>jwt_bearer</q> or <q>refresh_token</q></td>
+<td><code>grant type:&quot;client_crendentials&quot;</code> do<br>params...<br>end</td>
+</tr>
+</tbody></table>
+
+<h4 id="oauth2-client-credentials">OAuth2 Client Credentials</h4>
+
+<p>OAuth2 client credentials can use either a client_id/client_secret combo which client_id and client_secret form parameters, or a client_user, client_password combo which sets a basic authentication header. Client credential authentication can be used to authenticate against various Azure APIs.</p>
+
+<table><thead>
+<tr>
+<th>Scheme</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>client_credentials</code></td>
+<td><code>client_id</code>: Client ID sent as form parameter, if used.</td>
+<td><code>&quot;abc123&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>client_secret</code>: Client Secret sent as form parameter, if used</td>
+<td><code>cred(&quot;OAUTH2_SECRET&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>client_user</code>: Username for basic authentication, if used.</td>
+<td><code>&quot;myuser&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>client_password</code>: Password for basic authentication, if used.</td>
+<td><code>cred(&quot;MY_API_PASSWORD&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>additional_headers</code>: Additional headers to send with authentication request.</td>
+<td><code>additional_headers do {&lt;br&gt; &quot;API-Version&quot;: &quot;1.0&quot;&lt;br&gt; &quot;X-Account&quot;: &quot;700&quot;&lt;br&gt; }</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>additional_params</code>: Additional form params to send with authentication request.</td>
+<td><code>additional_params do {&lt;br&gt; &quot;resource&quot;: &quot;https://management.azure.com/&quot;&lt;br&gt; }</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>scopes</code>: List of scopes used to create access token.</td>
+<td><code>[&quot;api:read&quot;, &quot;api:write&quot;]</code></td>
+</tr>
+</tbody></table>
+
+<p>Example code block:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_oauth2_client_credentials_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"oauth2"</span> <span class="k">do</span>
+  <span class="n">token_url</span> <span class="vg">$token_url</span>
+  <span class="n">grant</span> <span class="ss">type: </span><span class="s2">"client_credentials"</span> <span class="k">do</span>
+    <span class="n">additional_headers</span> <span class="k">do</span> <span class="p">{</span>
+      <span class="s2">"X-Account"</span> <span class="o">=&gt;</span> <span class="s2">"60073"</span>
+    <span class="p">}</span> <span class="k">end</span>
+    <span class="n">additional_params</span> <span class="k">do</span> <span class="p">{</span>
+      <span class="s2">"please"</span> <span class="o">=&gt;</span> <span class="s2">"yes"</span>
+    <span class="p">}</span> <span class="k">end</span>
+    <span class="n">client_id</span> <span class="s2">"123"</span>
+    <span class="n">client_secret</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"JWT_CLIENT_SECRET"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Example Azure ARM <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-protocols-oauth-code">client credentials</a>:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"tenant"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"string"</span>
+  <span class="n">label</span> <span class="s2">"Tenant"</span>
+  <span class="n">description</span> <span class="s2">"ARM Tenant ID"</span>
+  <span class="n">default</span> <span class="s2">"mytenantname.onmicrosoft.com"</span>
+<span class="k">end</span>
+
+<span class="n">auth</span> <span class="s2">"azure_arm"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"oauth2"</span> <span class="k">do</span>
+  <span class="n">token_url</span> <span class="n">join</span><span class="p">([</span><span class="s2">"https://login.windows.net/"</span><span class="p">,</span><span class="vg">$tenant</span><span class="p">,</span><span class="s2">"/oauth2/token"</span><span class="p">],</span><span class="s2">""</span><span class="p">)</span>
+  <span class="n">grant</span> <span class="ss">type: </span><span class="s2">"client_credentials"</span> <span class="k">do</span>
+    <span class="n">additional_params</span> <span class="k">do</span> <span class="p">{</span>
+      <span class="s2">"resource"</span><span class="p">:</span>  <span class="s2">"https://management.azure.com/"</span>
+    <span class="p">}</span> <span class="k">end</span>
+    <span class="n">client_id</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"ARM_CLIENT_ID"</span><span class="p">)</span>
+    <span class="n">client_secret</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"ARM_CLIENT_SECRET"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4 id="oauth2-refresh-token">OAuth2 Refresh Token</h4>
+
+<p>OAuth2 refresh token fetches access token using a refresh token and client credentials set via a basic auth header.</p>
+
+<table><thead>
+<tr>
+<th>Scheme</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>refresh_token</code></td>
+<td><code>token(*)</code>: Refresh token to use.</td>
+<td><code>cred(&quot;MY_REFRESH_TOKEN&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>client_user</code>: Client user for basic authentication.</td>
+<td><code>&quot;abc123&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>client_password</code>: Client password for basic authentication.</td>
+<td><code>cred(&quot;CLIENT_PASSWORD&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>additional_headers</code>: Additional headers to send with authentication request.</td>
+<td><code>additional_headers do {&lt;br&gt; &quot;API-Version&quot;: &quot;br&gt; &quot;X-Account&quot;: &quot;700&quot;&lt;br&gt; }</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>scopes</code>: List of scopes used to create access token.</td>
+<td><code>[&quot;api:read&quot;, &quot;api:write&quot;]</code></td>
+</tr>
+</tbody></table>
+
+<p>Example code block:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_oauth2_refresh"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"oauth2"</span> <span class="k">do</span>
+  <span class="n">token_url</span> <span class="s2">"https://us-3.rightscale.com/api/oauth2"</span>
+  <span class="n">grant</span> <span class="ss">type: </span><span class="s2">"refresh_token"</span> <span class="k">do</span>
+    <span class="n">additional_headers</span> <span class="k">do</span> <span class="p">{</span>
+      <span class="s2">"X-Account"</span><span class="p">:</span> <span class="nb">to_s</span><span class="p">(</span><span class="n">inc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="p">}</span> <span class="k">end</span>
+    <span class="n">client</span> <span class="vg">$my_basic_auth</span>
+    <span class="n">token</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"MY_TOKEN"</span><span class="p">)</span>
+    <span class="n">scopes</span> <span class="s2">"read"</span><span class="p">,</span> <span class="s2">"write"</span><span class="p">,</span> <span class="s2">"update"</span><span class="p">,</span> <span class="s2">"delete"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4 id="oauth2-jwt-bearer">OAuth2 JWT Bearer</h4>
+
+<p>OAuth2 JWT Bearer crafts and signs <a href="https://jwt.io/">Java web tokens</a> and sets the resulting token in <code>Authorization: Bearer</code> header.</p>
+
+<table><thead>
+<tr>
+<th>Scheme</th>
+<th>Properties</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>jwt_bearer</code></td>
+<td><code>iss(*)</code>: Issuer of token</td>
+<td><code>&quot;1234@developer.gserviceaccount.com&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>signing_key(*)</code>: Key used to sign JWT token</td>
+<td><code>cred(&quot;MY_SIGNING_KEY&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>sub</code>: Subject of token</td>
+<td><code>&quot;1234@developer.gserviceaccount.com&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>aud</code>: Intended audience, defaults to token_url</td>
+<td><code>&quot;myuser&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>alg</code>: Crytographic algorithm used.</td>
+<td><code>&quot;RS256&quot;</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>max_minutes</code>: Max minutes before refreshing token.</td>
+<td><code>60</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>additional_headers</code>: Additional headers to send with authentication request.</td>
+<td><code>additional_headers do {&lt;br&gt; &quot;API-Versi0&quot;&lt;br&gt; &quot;X-Account&quot;: &quot;700&quot;&lt;br&gt; }</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>additional_claims</code>: Additional claims to put in the JWT.</td>
+<td><code>additional_claims do {&lt;br&gt; &quot;scope&quot;:&quot;https://www.googleapis.com/auth/prediction&quot;&lt;br&gt; }</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>scopes</code>: List of scopes used to create JWT token.</td>
+<td><code>[&quot;api:read&quot;, &quot;api:write&quot;]</code></td>
+</tr>
+</tbody></table>
+
+<p>Example code block:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_oauth2_jwt_bearer_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"oauth2"</span> <span class="k">do</span>
+  <span class="n">token_url</span> <span class="s2">"https://www.googleapis.com/oauth2/v4/token"</span>
+  <span class="n">grant</span> <span class="ss">type: </span><span class="s2">"jwt_bearer"</span> <span class="k">do</span>
+    <span class="n">iss</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"GC_ACCOUNT_EMAIL"</span><span class="p">)</span>
+    <span class="n">signing_key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"GC_PRIVATE_KEY"</span><span class="p">)</span>
+    <span class="n">alg</span> <span class="s2">"RS512"</span>
+    <span class="n">max_minutes</span> <span class="mi">90</span>
+    <span class="n">aud</span> <span class="s2">"https://www.googleapis.com/oauth2/v4/token"</span>
+    <span class="n">additional_headers</span> <span class="k">do</span> <span class="p">{</span>
+      <span class="s2">"Some-Header"</span> <span class="o">=&gt;</span> <span class="s2">"Some Value"</span>
+    <span class="p">}</span> <span class="k">end</span>
+    <span class="n">additional_claims</span> <span class="k">do</span> <span class="p">{</span>
+      <span class="s2">"scope"</span><span class="p">:</span> <span class="s2">"https://www.googleapis.com/auth/prediction"</span>
+    <span class="p">}</span> <span class="k">end</span>
+    <span class="n">scopes</span> <span class="p">[</span><span class="s2">"https://www.googleapis.com/auth/admin.datatransfer.readonly"</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

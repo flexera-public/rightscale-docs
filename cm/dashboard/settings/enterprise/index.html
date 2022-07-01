@@ -1,0 +1,211 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightScale Organization</title><meta content="RightScale organization enables larger companies to manage all of the RightScale accounts under the same umbrella." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_settings cm_dashboard_settings_enterprise cm_dashboard_settings_enterprise_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Settings</a></p><div class="page-header"><h1>RightScale Organization</h1></div><div class="main-content"><h2 id="what-is-an-organization">What is an Organization</h2>
+
+<p>In RightScale, the <strong>Organization</strong> (<em>formerly known as an Enterprise</em>) concept was introduced in early 2017 with the release of <a href="/gov/">Governance module</a>. An <strong>Organization</strong> is a container for users, permissions, RightScale accounts, cloud accounts, and allows customers to monitor the cloud related activity across all RightScale accounts.  All RightScale accounts belong to an organization. </p>
+
+<p>The RightScale organization allows you to:</p>
+
+<ul>
+<li>Aggregates RightScale and cloud accounts</li>
+<li>Manage Bill data from public cloud providers</li>
+<li>Manage security and access controls</li>
+<li>Implement managed SSH login</li>
+<li>Leverage audit trails for governance and compliance</li>
+<li>Chargeback and showback via Billing Centers</li>
+</ul>
+
+<p>A typical RightScale organization:</p>
+
+<p><img src="/img/organization_example.png" alt="organization_example.png" width="477" height="652" /></p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Master account is the very first account that gets created automatically when you join RightScale. It does not have any other specific significance but it&#39;s important to note that Master account can not be moved between RightScale organizations.</p>
+</div>
+
+<h3 id="what-is-an-organization-organization-access">Organization Access</h3>
+
+<p>The user with <code>enterprise_manager</code> role is responsible for managing all the above mentioned features and has complete control of the organization and all its accounts. The organization must have at least one <code>enterprise_manager</code> user. Enterprise Managers access organization settings in Cloud Management under <strong>Settings</strong> &gt; <strong>Organization</strong>. They will also have access to the Governance module for IAM.</p>
+
+<p>Read more about our <a href="/gov/">Governance module</a> to learn more about how to manage users, groups, and roles.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You must be very careful when granting another person <code>enterprise_manager</code> role because they will have the ability to change your permissions, including removing you from the organization.</p>
+</div>
+
+<h2 id="how-to-setup-your-organization">How to setup your organization</h2>
+
+<p>It is really important to plan out your RightScale organizational structure before configuring your cloud setup. The following is a set of best practices recommended by RightScale based on various real world scenarios that we see. <em>Please don&#39;t hesitate to discuss this with our support or sales team.</em></p>
+
+<h3 id="how-to-setup-your-organization-general-approach">General approach</h3>
+
+<p><strong>The general approach is to create a RightScale organization for every business entity that will be using RightScale</strong>. In most cases, this means that each Organization maps to one <em>Company</em>. No <em>RightScale organization</em> should contain data or accounts from multiple companies. </p>
+
+<p>A payer account and all its linked <em>cloud accounts</em> should be connected to same RightScale organization.</p>
+
+<h3 id="how-to-setup-your-organization-scenario--single-payer-account">Scenario: Single payer account</h3>
+
+<p>This is the most basic scenario for a customer with payer accounts from any of the public cloud providers (AWS, Azure or Google). It gives you complete control and visibility, including creating <strong>Billing Centers</strong> for chargeback and showback, in the same organization.</p>
+
+<p><img src="/img/enterprise_single_org_single_bill_v3.png?s=200" alt="enterprise_single_org_single_bill_v3.png" /></p>
+
+<h3 id="how-to-setup-your-organization-scenario--multiple-payer-accounts">Scenario: Multiple payer accounts</h3>
+
+<p>This scenario applies to large company that has multiple business units (or departments), with separate payer accounts. In this scenario, we recommend having a single RightScale Organization that contains all these payer accounts to ensure not only central management but also ability to do chargeback and showback via Billing Centers. </p>
+
+<p><img src="/img/enterprise_multi_organization_multi_bill_v3.png" alt="enterprise_multi_organization_multi_bill_v3.png" width="552" height="645" /></p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If you have a use case to connect separate payer accounts in separate RightScale organizations, you can choose to do so but please note that it creates minor management overhead (e.g.: SSO) and you will not be able to create Billing Centers across multiple organizations. </p>
+</div>
+
+<h3 id="how-to-setup-your-organization-scenario--resellers--partners-">Scenario: Resellers (partners)</h3>
+
+<p>For cases where a reseller (MSP, SP etc) is managing or reselling RightScale to their clients, each client should have their own <em>RightScale organization</em>. Doing so creates a minor management overhead (e.g.: SSO), but ensures that the platform will behave as expected in most cases. </p>
+
+<p><img src="/img/enterprise_msp_v3.png" alt="enterprise_msp_v3.png" width="817" height="495" /></p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>A future roadmap capability will provide features that will allow large enterprises and MSP&#39;s to manage multiple RightScale organizations seamlessly.</p>
+</div>
+
+<h2 id="setting-up-an-organization">Setting up an Organization</h2>
+
+<p>Please contact our sales team at <a href="mailto:sales@rightscale.com">sales@rightscale.com</a> or by phone at <strong>(866) 787-2253</strong>. </p>
+
+<h2 id="actions-and-procedures">Actions and Procedures</h2>
+
+<h3 id="actions-and-procedures-connect-cloud-billing-accounts">Connect cloud billing accounts</h3>
+
+<p><a href="/ca/ca_getting_started.html">Learn about the data sources for Optima, how to connect bills for other clouds, and how to connect usage data.</a></p>
+
+<h3 id="actions-and-procedures-create-a-new-account">Create a new Account</h3>
+
+<ol>
+<li><strong>RightScale API</strong>: Our v1.5 API offers a <a href="/api/api_1.5_examples/childaccounts.html">Child Accounts API</a> controller which can be used to create a new account within your Organization. General examples of API 1.5 use can be found in the <a href="/api/api_1.5_examples/index.html">API 1.5 Examples Guide</a>.</li>
+<li><strong>Cloud Management</strong>: You can create accounts from within Cloud Management by accessing <strong>Settings</strong> &gt; <strong>Organization</strong> &gt; <strong>Account</strong>. </li>
+<li>Contact your <strong>Account Manager</strong> or our <strong>Sales team</strong> at <a href="mailto:sales@rightscale.com">sales@rightscale.com</a> or by phone at <strong>(866) 787-2253</strong></li>
+</ol>
+
+<h3 id="actions-and-procedures-invite-a-user-to-join-an-organization">Invite a User to Join an Organization</h3>
+
+<p>Follow the instructions to <a href="/cm/dashboard/settings/account/invite_users_to_a_rightscale_account.html">Invite users to RightScale</a></p>
+
+<h3 id="actions-and-procedures-manage-ip-whitelists-for-the-organization">Manage IP Whitelists for the Organization</h3>
+
+<p>You can manage IP whitelists by adding, modifying, or deleting Dashboard and API IP access rules that have been created on Rightscale accounts. All account holders of an organization have the ability to create a range of IP Whitelists. This feature is beneficial if account administrators would like to enable access to RightScale through a company&#39;s IP address, essentially blocking traffic from any other IP address. For more information, see <a href="/cm/dashboard/settings/account/add_an_ip_whitelist_range.html">Add an IP Whitelist Range</a>.</p>
+
+<p>To be able to properly manage this feature, Enterprise account managers can modify, add, or delete an IP Whitelist range that has been set from accounts of the Organization. The instructions below explain how to use this feature.</p>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<ul>
+<li>Requires <code>admin</code> and <code>enterprise_manager</code> user role privileges Enterprise Edition account to configure this feature. Contact your account manager or <a href="mailto:sales@rightscale.com">sales@rightscale.com</a> for more details.</li>
+</ul>
+
+<h4 id="steps">Steps</h4>
+
+<ul>
+<li>Go to <strong>Settings</strong> &gt; <strong>Organization</strong> &gt; <strong>IP</strong>  <strong>Whitelists</strong></li>
+</ul>
+
+<p><img src="/img/cm-enterprise-ip-white-list.png" alt="cm-enterprise-ip-white-list.png" width="725" height="407" /></p>
+
+<p><strong>Add a New Rule</strong></p>
+
+<ul>
+<li>To add a new IP Range, click on <strong>New Rule</strong><br></li>
+</ul>
+
+<p><img src="/img/cm-enterprise-whitelist-new-rule.png" alt="cm-enterprise-whitelist-new-rule.png" width="617" height="448" /></p>
+
+<ul>
+<li>Enter in the following details:
+
+<ul>
+<li><strong>IP Range (CIDR)</strong>: Specify the IP Range in CIDR notation to control the range of IP addresses that will be allowed access for your account. 0.0.0.0/0 (default) allows access to any IP address whereas 0.0.0.0/32 denies access to all IP addresses. If you enter a range that does not include your own IP address, you may be denied access to your account.</li>
+<li><strong>Description (Optional)</strong>: This is a user-defined description to help describe the purpose of the IP Range.</li>
+<li><strong>Accounts</strong>: A collection of one or more accounts to which the IP Whitelist will apply. Users with IP addresses outside of the whitelist range will not be able to access these accounts.</li>
+</ul></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>When you add an IP Whitelist Range, it will be viewable from the Access Controls tab (Settings &gt; Account Settings &gt; Access Controls).</p>
+</div>
+
+<p><strong>Edit an IP Whitelist Range</strong></p>
+
+<p>When accont memebers of the Organization add an IP Whitelist Range from the <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Access Controls</strong> , the range will be viewable from the Enterprise IP Whitelists section. If you would like to modify this range, select the IP Whitelist Range and click <strong>Edit</strong> in the <strong>Selected Item</strong> window.  </p>
+
+<p><img src="/img/cm-enterprise-ip-whitelist-edit.png" alt="cm-enterprise-ip-whitelist-edit.png" width="725" height="309" /></p>
+
+<p>You will have the ability to modify the <strong>IP Range (CIDR)</strong>, <strong>Description</strong> , and the <strong>Accounts</strong> of the selected range.</p>
+
+<p><strong>Delete an IP Whitelist Range</strong></p>
+
+<p>Additionally, if you would like to remove this range, you can do this by selected the IP Whitelist Range, clicking <strong>Actions</strong>, and then <strong>Delete</strong>.  </p>
+
+<p><img src="/img/cm-enterprise-ip-whitelist-delete.png" alt="cm-enterprise-ip-whitelist-delete.png" width="725" height="212" /></p>
+
+<p>Once you delete an IP Whitelist Range, it will be removed from the Access Controls tab (<strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Access Controls</strong>) of the account user that has access to view the tab.</p>
+
+<h3 id="actions-and-procedures-update-organization-name">Update Organization name</h3>
+
+<p>Ensure the name of your organization is meaningful to your users. You need to have <code>enterprise_manager</code> role in order to perform this action.</p>
+
+<h4 id="steps">Steps</h4>
+
+<ol>
+<li><p>Select any account in the Organization that you wish to update from the account selector.
+<img src="/img/gov_find_enterprise.png" alt="gov_find_enterprise.png" width="1183" height="788" /></p></li>
+<li><p>Under <strong>Settings</strong>, select <strong>Organization</strong>
+<img src="/img/gov_enterprise_settings.png" alt="gov_enterprise_settings.png" width="1556" height="419" /></p></li>
+<li><p>At the top, click anywhere on the <strong>existing name</strong> above the dotted line
+<img src="/img/gov_update_org_name.png" alt="gov_update_org_name.png" width="1241" height="425" /></p></li>
+<li><p>Enter new name and click OK to save
+<img src="/img/gov_update_org_name_save.png" alt="gov_update_org_name_save.png" width="1242" height="423" /></p></li>
+<li><p>The new name will now be displayed
+<img src="/img/gov_update_org_name_display.png" alt="gov_update_org_name_display.png" width="1240" height="419" /></p></li>
+</ol>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+<li><a href="/faq/Why_am_I_getting_a_warning_that_cookbooks_could_not_be_found.html">Why am I getting a warning that cookbooks could not be found?</a></li>
+<li><a href="/ca/using_account_tags.html">Using Account Tags</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

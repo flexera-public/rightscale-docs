@@ -1,0 +1,688 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>CAT File Language</title><meta content="A Cloud Application Template (CAT) file comprises a sequence of fields and declarations. It describes the structure and behavior of a Cloud Application (CloudApp)." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="20131202" name="docsearch:version_major" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="ss ss_reference ss_reference_cat ss_reference_cat_v20131202 ss_reference_cat_v20131202_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Self-Service Docs</a> &#x2F; <a href="../../">Reference</a> &#x2F; <a href="../">Cloud Application Templates</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>20131202&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/ss/reference/cat/v20161221/index.html">20161221</a></li><li><a href="/ss/reference/cat/v20160622/index.html">20160622</a></li><li><a href="/ss/reference/cat/v20131202/index.html">20131202</a></li></ul></div></div><div class="page-header"><h1>CAT File Language</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>A Cloud Application Template (CAT) file comprises a sequence of <em>fields</em> and <em>declarations</em>. It describes the structure and behavior of a Cloud Application (CloudApp).</p>
+
+<h3 id="overview-declarations">Declarations</h3>
+
+<p>There are 8 different types of declarations listed below.</p>
+
+<ul>
+<li><strong>Parameters</strong> - used to get input to a CloudApp from an end user</li>
+<li><strong>Mappings</strong> - used to abstract detail away from an end-user</li>
+<li><strong>Resources</strong> - declaratively describe the cloud resources needed for this CloudApp</li>
+<li><strong>Conditions</strong> - boolean values based on the environment of the CloudApp</li>
+<li><strong>Outputs</strong> - used to show running CloudApp information to end users</li>
+<li><strong>Operations</strong> - define the behaviors that apply to this CloudApp during its lifecycle</li>
+<li><strong>Definitions</strong> - reusable code components written in a cloud-focused workflow language (RightScale Cloud Workflow)</li>
+<li><strong>Permissions</strong> - used to specify any additional permissions required to run the CloudApp</li>
+</ul>
+
+<p>Declarations all require a name that can be used to reference them in other areas of the template. Names are required to begin with an underscore or lowercase alphabetic character (&#39;a&#39; - &#39;z&#39;), followed by any combination of underscores or alpha-numeric characters.</p>
+
+<p>The language also provides many built-in methods that can be used.</p>
+
+<!-- NEED DIAGRAM HERE -->
+
+<h2 id="fields">Fields</h2>
+
+<p>The four fields that can be defined in a CAT are:</p>
+
+<ul>
+<li><code>name</code> (required): Name of the Cloud Application Template. Must be unique, and must not be whitespace-only.</li>
+<li><code>rs_ca_ver</code> (required): Version of the engine used to parse the CAT. (This reference describes version 20131202)</li>
+<li><code>short_description</code> (required): Short description (shown to users in Catalog view on the front of the card). Must not be whitespace-only. The rendering of this content supports markdown syntax for formatting, lists, code blocks, image insertion, and more.</li>
+<li><code>long_description</code> (optional): Long description (shown to users when they click <q>Details</q> on a catalog item). Must not be whitespace-only. The rendering of this content supports markdown syntax for formatting, lists, code blocks, image insertion, and more.</li>
+</ul>
+
+<h2 id="parameters">Parameters</h2>
+
+<p>Parameters allow you to get input from end users that can be passed to your cloud resources, used to make decisions on what to configure/launch, and used in custom operation logic. A parameter declaration has a name, a type and other optional fields that let you define things like a default value, or a set of potential values.</p>
+
+<p>Parameters can be referred to in a CAT using the syntax <code>$&lt;parameter_name&gt;</code> where <code>parameter_name</code> is the string following the <code>parameter</code> keyword.</p>
+
+<p>Here is an example of a parameter declaration defining a <q>performance</q> parameter which can take one of two values (<q>low</q> or <q>high</q>):</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"performance"</span> <span class="k">do</span>  
+  <span class="n">type</span> <span class="s2">"string"</span>  
+  <span class="n">label</span> <span class="s2">"Application Performance"</span>  
+  <span class="n">description</span> <span class="s2">"Application performance profile"</span>  
+  <span class="n">allowed_values</span> <span class="s2">"low"</span><span class="p">,</span> <span class="s2">"high"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="parameters-fields">Fields</h3>
+
+<p>The available fields are:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>yes</td>
+<td>string</td>
+<td>The name of the parameter, declared in-line, such as <code>parameter &quot;my_param_name&quot; do</code></td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>yes</td>
+<td>string</td>
+<td>Defines whether the parameter is a string, a number or a comma separated list of values. The possible values for this field are <code>string</code>, and <code>number</code>.</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>yes</td>
+<td>string</td>
+<td>The display name shown to the user. Must not be whitespace-only.</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>no</td>
+<td>string</td>
+<td>An optional category used to group parameters in the UI.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>no</td>
+<td>string</td>
+<td>A description shown in the launch UI</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>no</td>
+<td></td>
+<td>Default value for parameter if none is specified. Note this must meet the requirements of the other fields (such as max_length, allowed pattern, etc).</td>
+</tr>
+<tr>
+<td><code>no_echo</code></td>
+<td>no</td>
+<td>boolean</td>
+<td>Whether the value of the parameter should be hidden in UIs and API responses. The possible values for this field are <code>true</code> and <code>false</code> (default).</td>
+</tr>
+<tr>
+<td><code>allowed_values</code></td>
+<td>no</td>
+<td>array</td>
+<td>A comma-separated list of allowed values. Not valid when <code>allowed_pattern</code> is specified.</td>
+</tr>
+<tr>
+<td><code>min_length</code> and <code>max_length</code></td>
+<td>no</td>
+<td>number</td>
+<td>The minimum and maximum number of characters in the parameter value. Only valid when <code>type</code> is one of <code>string</code> or <code>list</code>.</td>
+</tr>
+<tr>
+<td><code>min_value</code> and <code>max_value</code></td>
+<td>no</td>
+<td>number</td>
+<td>The smallest and largest numeric value allowed for the parameter. Only valid when <code>type</code> is <code>number</code>.</td>
+</tr>
+<tr>
+<td><code>allowed_pattern</code></td>
+<td>no</td>
+<td></td>
+<td>May be a string or a Regexp. If a string is given then it will look for matches of the string in parameter values. Not valid when &#39;allowed_values&#39; is specified. Note: the Ruby Regexp engine (a PCRE engine) is used to process and validate Regexp values, but there are a few unsupported features. These include modifiers other than &#39;m&#39; and &#39;i&#39;, modifier groups (such as <code>/(?mi)example/</code>), and modifier spans (such as <code>/(?mi:example)/</code>). A helpful tool for developing PCRE regular expressions <a href="https://regex101.com/#pcre">can be found here</a>.</td>
+</tr>
+<tr>
+<td><code>constraint_description</code></td>
+<td>no</td>
+<td>string</td>
+<td>Message displayed when any of the constraint is violated. The system generates default error messages, this field allows overriding these to provide a clearer message to the user.</td>
+</tr>
+<tr>
+<td><code>operations</code></td>
+<td>no</td>
+<td>array</td>
+<td>Used to specify during which operations to show this parameter to the user (when using the UI). This will override the default behavior of when to show parameters.</td>
+</tr>
+</tbody></table>
+
+<p>Notes:</p>
+
+<ul>
+<li>Parameters are displayed in the UI in the same order as they are defined in the template.</li>
+<li>If a default value is set for a parameter, this value will be pre-populated in the UI. For example, for a parameter with allowed values of true/false and a default value of <code>true</code>, the resulting checkbox on the UI would be enabled. Additional information on UI behavior is provided below.</li>
+</ul>
+
+<h3 id="parameters-usage">Usage</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"db_dump_bucket"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"string"</span>
+  <span class="n">label</span> <span class="s2">"Database S3 bucket"</span>
+  <span class="n">category</span> <span class="s2">"Database"</span>
+  <span class="n">description</span> <span class="s2">"URL to S3 bucket that contains MySQL database dump"</span>
+  <span class="n">min_length</span> <span class="mi">3</span>
+  <span class="n">max_length</span> <span class="mi">63</span>
+  <span class="n">allowed_pattern</span> <span class="s2">"[a-z0-9]+[a-z0-9</span><span class="se">\.</span><span class="s2">-]*"</span>
+  <span class="n">constraint_description</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="sh">
+    Bucket names must be at least 3 and no more than 63 characters long. Bucket names must be a series of one or more labels. Adjacent labels are separated by a single period (.). Bucket names can contain lowercase letters, numbers, and dashes. Each label must start and end with a lowercase letter or a number. Bucket names must not be formatted as an IP address (e.g., 192.168.5.4).
+</span><span class="no">    EOS</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Parameters can be used in other declarations using the <code>$</code> operator, for example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"cloud"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"string"</span>
+  <span class="n">label</span> <span class="s2">"Cloud server should be launched in"</span>  
+  <span class="n">allowed_values</span> <span class="s2">"AWS US-East"</span><span class="p">,</span> <span class="s2">"Google"</span>
+<span class="k">end</span>
+
+<span class="n">resource</span> <span class="s2">"server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span> <span class="k">do</span>  
+  <span class="nb">name</span> <span class="s2">"My server"</span>  
+  <span class="n">cloud</span> <span class="vg">$cloud</span>  
+  <span class="n">server_template_href</span> <span class="s2">"/api/server_templates/123"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>In the example above, the <q>server</q> resource declaration uses the value associated with the parameter <q>cloud</q> to initialize the server resource cloud field. See the section below for more information on resources.</p>
+
+<p>It is important to note that parameter values can be specified when launching a CloudApp or when running a custom operation on a running CloudApp. The CAT parser automatically identifies which parameters are required in both cases (in the launch case the parser crawls through all the resource declarations and <q>launch</q>/<q>enable</q> operations to compute all the required parameters). To override the automatic behavior of the parser, use the <code>operations</code> field.</p>
+
+<h3 id="parameters-api-behaviors">API Behaviors</h3>
+
+<p>When using the API to launch a CloudApp, only those parameters that are required for launch and do not have a default value must be specified  (it is allowable to specify values for other parameters - for example, to override the default value - just not required). Also by default, only parameters that do not have a default value and were not set when launching the CloudApp <code>must</code> be set when running a custom operation through the APIs.</p>
+
+<p>So for example, the following CAT defines two operations - <q>enable</q> and <q>pull_code</q> - both using the same definition <q>get_code</q>. The <q>get_code</q> definition accepts one argument <q>code_branch</q>. The parser will infer that this parameter is needed to both launch the CloudApp (since that ends up running the <q>enable</q> operation) and run the custom <q>pull_code</q> operation. Since the parameter definition contains a default value it is acceptable to launch the CloudApp without passing any parameter value and it is also acceptable to run the custom operation <q>pull_code</q> without passing any value. In both cases the parameter may be specified and will be used.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"code_branch"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"string"</span>
+  <span class="n">label</span> <span class="s2">"Branch used to deploy code"</span>
+  <span class="n">default</span> <span class="s2">"master"</span>
+<span class="k">end</span>
+
+<span class="n">operation</span> <span class="s2">"enable"</span> <span class="k">do</span>
+  <span class="n">definition</span> <span class="s2">"get_code"</span>
+<span class="k">end</span>
+
+<span class="n">operation</span> <span class="s2">"pull_code"</span> <span class="k">do</span>
+  <span class="n">definition</span> <span class="s2">"get_code"</span>
+<span class="k">end</span>
+
+<span class="n">define</span> <span class="n">get_code</span><span class="p">(</span><span class="vg">$code_branch</span><span class="p">)</span> <span class="k">do</span>
+  <span class="c1"># Run script to pull code from given branch</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>It is possible to override this default behavior and force a parameter to be passed when launching an operation, even if it has a default or previous value, by using the <code>operations</code> field. The following parameter definition would <em>require</em> the <q>code_branch</q> parameter to be passed in when launching the CloudApp, even though it has a default value in its definition.</p>
+
+<p>Finally, the parameter declaration could also list both operations requiring values to be explicitly specified in both cases.</p>
+
+<h3 id="parameters-user-interface-behavior">User Interface Behavior</h3>
+
+<p>By default the UI will display all parameters that are needed to either launch the CloudApp or run the custom operation. The UI will pre-populate parameter values with either their default value or their previously set value, if one exists.</p>
+
+<p>In the first example above, the UI will present the <q>code_branch</q> parameter to the user both when launching the CloudApp and when running the <q>pull_code</q> custom operation. On launch, the value will be pre-populated with the default value (<q>master</q>), and when launching the custom operation the value will be pre-populated with whatever the value was the last time it was used.</p>
+
+<p>Specifying an explicit list of operations in a parameter declaration will cause the UI to only show that parameter for the corresponding operations (or launch if the string <q>launch</q> appears in that list). In the second example above, the parameter will only be shown on <q>launch</q> and would not be shown when running the <q>pull_code</q> custom operation (in this case it uses the previously set value).</p>
+
+<p>In the example above, an <code>operations</code> field with no elements could be used to never show the parameter in the UI (since it has a default value defined).</p>
+
+<h2 id="mappings">Mappings</h2>
+
+<p>Mappings allow you to lookup values based on other values that may come from parameters, built-in method results or resource fields. Mappings must contain string literals, not resource attributes or other function calls (that is they are static constructs). Also, mappings can only be two-levels deep.</p>
+
+<h3 id="mappings-mappings-usage">Mappings Usage</h3>
+
+<p>Here is an example of a mapping you could use to define resource field values based on parameters:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">mapping</span> <span class="s2">"profiles"</span> <span class="k">do</span> <span class="p">{</span>  
+  <span class="s2">"low"</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="s2">"db_instance_type"</span> <span class="o">=&gt;</span> <span class="s2">"m1.small"</span><span class="p">,</span>
+    <span class="s2">"app_instance_type"</span> <span class="o">=&gt;</span> <span class="s2">"m1.small"</span>  <span class="p">},</span>  
+  <span class="s2">"high"</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="s2">"db_instance_type"</span> <span class="o">=&gt;</span> <span class="s2">"m2.xlarge"</span><span class="p">,</span>
+    <span class="s2">"app_instance_type"</span> <span class="o">=&gt;</span> <span class="s2">"c1.xlarge"</span>  <span class="p">}</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>You can then use the <code>map</code> built-in method to lookup values:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"app_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="s2">"AppServer"</span>
+  <span class="n">cloud</span> <span class="s2">"AWS US-East"</span>  
+  <span class="n">datacenter</span> <span class="s2">"us-east-1a"</span>
+  <span class="n">instance_type</span> <span class="n">map</span><span class="p">(</span><span class="vg">$profiles</span><span class="p">,</span> <span class="vg">$profile</span><span class="p">,</span> <span class="s2">"app_instance_type"</span><span class="p">)</span>
+  <span class="n">security_groups</span> <span class="s2">"ssh"</span><span class="p">,</span> <span class="s2">"app_server"</span>  
+  <span class="n">server_template</span> <span class="n">find</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"PHP App Server (v13.5)"</span><span class="p">,</span> <span class="n">revision</span><span class="p">:</span><span class="mi">187</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This example uses the value of the <q>profile</q> parameter to lookup the application instance type.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>All values defined in a mapping must be string literals.</p>
+</div>
+
+<h2 id="resources">Resources</h2>
+
+<p>Resources represent a RightScale or cloud provider resource which is part of your cloud application. Resources can be referred to elsewhere in the CAT by using the syntax <code>@&lt;resource_id&gt;</code> where <code>resource_id</code> is the string following the <code>resource</code> keyword.</p>
+
+<h3 id="resources-fields">Fields</h3>
+
+<p>The fields used to define a resource differ depending on the resource type. See the <a href="ss_CAT_resources.html">Self-Service Resource Reference</a> for a full list of all available resources and their fields. Additionally, there are some fields that can be used for any resource:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>condition $&lt;condition name&gt;</code></td>
+<td>no</td>
+<td>Only instantiate this resource if the conditiion resolves to true.</td>
+</tr>
+<tr>
+<td><code>like @&lt;resource_name&gt;</code></td>
+<td>no</td>
+<td>Inherit all of the field values from the specified resource. Additional fields can be specified and will override the inherited values. Note: if you override a field, it replaces the inherited value(s) (inputs are not appended for example, the original inputs simply aren&#39;t used).</td>
+</tr>
+</tbody></table>
+
+<p>Many fields in a Resource can take either a string which will be used to find the resource, or the resource <code>href</code> itself. For details see <a href="ss_CAT_resources.html">Self-Service Resource Reference</a>.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>In every CloudApp there is one global resource that is made available and can be used in your CAT, which is <code>@@deployment</code>. This resource represents the deployment that is created to contain this CloudApp and it can be used in custom operations.</p>
+</div>
+
+<h3 id="resources-usage">Usage</h3>
+
+<p>Here is an example of a <q>server</q> resource:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"database_slave"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="s2">"Database Slave"</span>  
+  <span class="n">cloud</span> <span class="s2">"AWS US-East"</span>
+  <span class="n">server_template_href</span> <span class="s2">"/api/server_templates/123"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="conditions">Conditions</h2>
+
+<p>A condition consists of a name and a condition function that returns a boolean value. You can attach a condition to a resource, output, or operation to conditionally create the object depending on the result of the condition function.</p>
+
+<h3 id="conditions-usage">Usage</h3>
+
+<p>Here is an example of a condition that returns true if the <code>profile</code> parameter value is <q>high</q>:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">condition</span> <span class="s2">"high_profile"</span> <span class="k">do</span>
+  <span class="n">equals?</span><span class="p">(</span><span class="vg">$profile</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Conditions can then be used when declaring resources, outputs, or operations. The following example illustrates the use of a condition when declaring a resource.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"database_slave"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="s2">"Database Slave"</span>
+  <span class="n">condition</span> <span class="vg">$high_profile</span>
+  <span class="n">cloud</span> <span class="s2">"AWS US-East"</span>  
+  <span class="n">server_template</span> <span class="n">find</span><span class="p">(</span><span class="ss">name: </span><span class="s2">"Database Manager with MySQL 5.5 (v13.5)"</span><span class="p">,</span> <span class="n">revision</span><span class="p">:</span><span class="mi">139</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The functions available to define conditions are described in the <a href="#built-in-methods-and-other-keywords">Built-in methods and keywords</a> section below. They consist of <code>equals?</code>, <code>logic_or</code>, <code>logic_and</code>, and <code>logic_not</code>.</p>
+
+<h2 id="permissions">Permissions</h2>
+
+<p>CAT designers use <code>permissions</code> declarations to specify additional end-user permissions (in addition to those automatically generated by Self-Service) required to use a CloudApp. For a detailed discussion, see <a href="/ss/guides/ss_permissions.html">CloudApp Permissions</a>.</p>
+
+<p>Permission declarations are named sets of resource types and actions performed on those resource types.</p>
+
+<h3 id="permissions-fields">Fields</h3>
+
+<p>Permission declarations have two fields:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>actions</code></td>
+<td>yes</td>
+<td>array</td>
+<td>A list of namespace-scoped actions which can be performed on resources</td>
+</tr>
+<tr>
+<td><code>resources</code></td>
+<td>yes</td>
+<td>array</td>
+<td>A list of resource types which the specified actions may be performed on</td>
+</tr>
+</tbody></table>
+
+<p>Resources and actions are both scoped to namespaces using the syntax <code>namespace.resource_or_action</code>. All RightScale resources have a namespace of <code>rs</code>.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>RightScale resources specified in the <code>resources</code> field should match the plurality of the <code>Resources</code> names in the <a href="http://reference.rightscale.com/api1.5/index.html">CM API 1.5 docs</a>.</p>
+</div>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>In general actions specified in the &#39;actions&#39; field match those described in the <a href="http://reference.rightscale.com/api1.5/index.html">CM API 1.5 docs</a>. In addition to those actions the <code>rs.ssh_keys</code> and <code>rs.credentials</code> resources support the special actions <code>rs.index_sensitive</code> and <code>rs.show_sensitive</code> which should be specified if a designer makes use of the <code>index</code> or <code>show</code> actions on those resources and requests the sensitive view.</p>
+</div>
+
+<h3 id="permissions-usage">Usage</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">permission</span> <span class="s2">"manage_sgs"</span> <span class="k">do</span>                 <span class="c1"># The name of the permission</span>
+  <span class="n">actions</span>   <span class="s2">"rs.create"</span><span class="p">,</span> <span class="s2">"rs.destroy"</span>      <span class="c1"># Actions which may be taken</span>
+                                           <span class="c1">#  on the resources</span>
+  <span class="n">resources</span> <span class="s2">"rs.security_groups"</span>           <span class="c1"># Resources which may be used</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>You can simplify a permission declaration by using the wildcard character <code>*</code> in the <code>actions</code> field as shown below.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">permission</span> <span class="s2">"serverz_4_dayz"</span> <span class="k">do</span>
+  <span class="n">actions</span>   <span class="s2">"rs.*"</span>                <span class="c1"># Any action</span>
+  <span class="n">resources</span> <span class="s2">"rs.servers"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Actions you specify in a permission declaration must each apply to at least one of the resources defined in the permission. Likewise, each resource you specify in a permission declaration must have at least one corresponding applicable action defined. Failing either of these requirements will result in a parser error.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">permission</span> <span class="s2">"unused_action"</span> <span class="k">do</span>
+  <span class="n">actions</span>   <span class="s2">"rs.launch"</span><span class="p">,</span> <span class="s2">"rs.create"</span>      <span class="c1"># Error: rs.launch doesn't apply</span>
+                                          <span class="c1">#  to any resources</span>
+  <span class="n">resources</span> <span class="s2">"rs.security_groups"</span><span class="p">,</span> <span class="s2">"rs.security_group_rules"</span>
+<span class="k">end</span>
+
+<span class="n">permission</span> <span class="s2">"unused_resource"</span> <span class="k">do</span>
+  <span class="n">actions</span>   <span class="s2">"rs.launch"</span><span class="p">,</span> <span class="s2">"rs.terminate"</span>
+  <span class="n">resources</span> <span class="s2">"rs.instances"</span><span class="p">,</span> <span class="s2">"rs.sessions"</span> <span class="c1"># Error: there aren't any actions</span>
+                                          <span class="c1">#  applicable to rs.sessions</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="outputs">Outputs</h2>
+
+<p>Outputs provide a mechanism to expose the result of running an Operation on the CloudApp; they are shown in the UI to your users. Output values may be explicitly returned from Operations or a <code>default_value</code> can be specified which is computed after running the <q>auto_launch</q> operation (see below). An output declaration consists of a <code>name</code>, a <code>label</code>, an optional <code>category</code>, <code>description</code>, and an optional default value. For common attributes that are available for resources, see Self-Service Output Reference.</p>
+
+<h3 id="outputs-fields">Fields</h3>
+
+<p>The following fields are available for Outputs:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>yes</td>
+<td>string</td>
+<td>The name of the output, declared in-line, such as <code>output &quot;my_output_name&quot; do</code></td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>yes</td>
+<td>string</td>
+<td>The label of the Output to show in the UI</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>no</td>
+<td>string</td>
+<td>Category to group related outputs together in the UI</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>no</td>
+<td>string</td>
+<td>Description shown in the UI</td>
+</tr>
+<tr>
+<td><code>default_value</code></td>
+<td>no</td>
+<td></td>
+<td>The default value of this output, calculated after the <q>auto_launch</q> operation is run</td>
+</tr>
+</tbody></table>
+
+<p>The fields available to show resource information in the <code>default_value</code> field differ depending on the resource type. See the <a href="ss_CAT_outputs.html">Self-Service Output Reference</a> for a full list of all available resources and their outputs.</p>
+
+<p>The example below shows an output listing the public IP addresses of a running Cloud Application from the <q>front_end</q> resource:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">output</span> <span class="s1">'ip_address'</span> <span class="k">do</span>
+  <span class="n">label</span> <span class="s2">"IPs"</span>
+  <span class="n">category</span> <span class="s2">"Connect"</span>
+  <span class="n">default_value</span> <span class="n">join</span><span class="p">([</span><span class="s2">"Public IP address: "</span><span class="p">,</span> <span class="vi">@front_end</span><span class="p">.</span><span class="nf">public_ip_address</span><span class="p">])</span>
+  <span class="n">description</span> <span class="s2">"Service public IPs"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The value of an Output can be overwritten by using an <code>output_mapping</code> in an <code>operation</code> declaration (<a href="#operations-fields">see below</a>).</p>
+
+<h3 id="outputs-user-interface-behavior">User Interface Behavior</h3>
+
+<p>The <code>category</code> is used to group outputs in the UI and has no other effect. On the main CloudApp <q>index</q> page in card view (showing multiple CloudApps), the UI shows the first 6 outputs from the first category. Other categories are shown as tabs in the detail view of the CloudApp.</p>
+
+<p>Any output will be hidden that either: is an empty string, is set to <code>null</code> in an <code>output_mapping</code>, or contains a reference to a resource that doesn&#39;t exist. For example, if your output value is defined as <code>@server.name</code> but <code>@server</code> is not a resource (perhaps is was excluded by use of a condition), the output will not be shown in the UI.</p>
+
+<h2 id="operations">Operations</h2>
+
+<p>Operations describe the tasks that happen to your application across its lifecycle. There are five special operations listed below, but any number of custom operations are supported. Custom operations can be made available to end-users through the Self-Service user interface. The operation <code>name</code> is shown to end-users as allowable operations on their CloudApps.</p>
+
+<p>Operations can update the resources and outputs that make up a CloudApp by explicitly mapping return values from a definition to the resource/output in the CloudApp.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Important:</strong><p>If you don&#39;t explicitly <code>return</code> a resource, Self-Service will be unaware of its state, so always make sure to return resources that you modify in an operation.</p>
+</div>
+
+<h3 id="operations-fields">Fields</h3>
+
+<p>Each operation contains fields that define the operation and mappings that map return values from a definition back to the outputs/resources of a CloudApp:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td>yes</td>
+<td>string</td>
+<td>The name of the operation, declared in-line, such as <code>operation &quot;my_operation_name&quot; do</code></td>
+</tr>
+<tr>
+<td><code>definition</code></td>
+<td>yes</td>
+<td>string</td>
+<td>The Cloud Workflow definition name that will be run when this operation is triggered</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>no</td>
+<td>string</td>
+<td>A textual description of what the operations does. This is shown to the user when selecting an operation</td>
+</tr>
+<tr>
+<td><code>resource_mappings</code></td>
+<td>no</td>
+<td>hash</td>
+<td>Overwrites a resource in the CloudApp with a new resource that has been returned by the definition</td>
+</tr>
+<tr>
+<td><code>output_mappings</code></td>
+<td>no</td>
+<td>hash</td>
+<td>Overwrites an output value of a CloudApp with a value returned by the definition</td>
+</tr>
+</tbody></table>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You can hide an Output in the UI by setting its value to <code>null</code> in an <code>output_mapping</code>.</p>
+</div>
+<pre class="syntax-highlight ruby"><code><span class="n">operation</span> <span class="s2">"Backup Primary Database"</span> <span class="k">do</span>
+  <span class="n">description</span> <span class="s2">"Creates a backup of the primary database"</span>
+  <span class="n">definition</span> <span class="s2">"create_database_backup"</span>
+
+  <span class="c1"># Updates the 'my_server' resource in the CloudApp with the 'new_server'</span>
+  <span class="c1"># resource returned by the associated definition</span>
+  <span class="n">resource_mappings</span> <span class="k">do</span> <span class="p">{</span>
+    <span class="vi">@my_server</span> <span class="o">=&gt;</span> <span class="vi">@new_server</span>
+  <span class="p">}</span> <span class="k">end</span>
+
+  <span class="c1"># Updates the 'ip_address' Output value to the new string defined by</span>
+  <span class="c1"># 'new_ip' after being returned by the associated definition</span>
+  <span class="n">output_mappings</span> <span class="k">do</span> <span class="p">{</span>
+    <span class="vg">$ip_address</span> <span class="o">=&gt;</span> <span class="n">join</span><span class="p">([</span><span class="s2">"IP:"</span><span class="p">,</span><span class="vg">$new_ip</span><span class="p">])</span>
+  <span class="p">}</span> <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="operations-special-operations">Special Operations</h3>
+
+<p>When a user <strong>Launches</strong> a CloudApp, Self-Service will run operations in the following order:</p>
+
+<ol>
+<li><code>launch</code> operation as defined in the CAT, if one exists</li>
+<li><code>auto_launch</code> operation built into Self-Service</li>
+<li><code>enable</code> opeartion as defined in the CAT, if one exists</li>
+</ol>
+
+<p>If the <code>launch</code> or <code>enable</code> operations are not defined in the CAT, those steps are skipped -- <code>auto_launch</code> is always run (its behavior is defined below).</p>
+
+<p>When a user <strong>Terminates</strong> a CloudApp, Self-Service will run operations in the following order:</p>
+
+<ol>
+<li><code>terminate</code> operation as defined in the CAT, if one exists</li>
+<li><code>auto_terminate</code> operation built into Self-Service</li>
+</ol>
+
+<p>If the <code>terminate</code> operation is not defined in the CAT, that step is skipped -- <code>auto_terminate</code> is always run (its behavior is defined below).</p>
+
+<p>When a user <strong>Stops</strong> a CloudApp, Self-Service will run operations as follows:</p>
+
+<ul>
+<li><code>stop</code> operation as defined in the CAT, <em>if one exists</em></li>
+<li>If no <code>stop</code> operation is defined, Self-Service runs the <strong>Terminate</strong> sequence as defined above</li>
+</ul>
+
+<p>When a user <strong>Starts</strong> a CloudApp, Self-Service will run operations as follows:</p>
+
+<ul>
+<li><code>start</code> operation as defined in the CAT, <em>if one exists</em></li>
+<li>If no <code>start</code> operation is defined, Self-Service runs the <strong>Launch</strong> sequence as defined above</li>
+</ul>
+
+<p>These special operations describe the basic start and stop operations of your application. To use them, simply create an operation with the appropriate name.</p>
+
+<ul>
+<li><code>launch</code> - used to launch all the services of the application</li>
+<li><code>enable</code> - used to apply the steps necessary to configure your resources as needed (for example, connect the app servers to the load balancers)</li>
+<li><code>stop</code> - used to stop the CloudApp. This operation is called by the scheduler if the CloudApp has a schedule.</li>
+<li><code>start</code> - used to start the CloudApp. This operation is called by the scheduler if the CloudApp has a schedule.</li>
+<li><code>terminate</code> - used to terminate all resources associated with a CloudApp</li>
+</ul>
+
+<p>The built-in operations have the following behavior:</p>
+
+<ul>
+<li><code>auto_launch</code> - will sequentially provision all resources defined in the CAT that a) were not passed in to the <code>launch</code> operation, and b) do not have a condition statement that evaluates to <code>false</code>. This operation cannot be overridden.</li>
+<li><code>auto_terminate</code> - terminate and destroy all associated resources defined in the CAT as well as any new cloud resources that have been created as a result of the behavior of the CloudApp (except Volume Snapshots) which are associated with the deployment. This operation cannot be overridden.</li>
+</ul>
+
+<p><strong>Note:</strong> If any resources provisioned via launch/auto_launch have dependencies, terminate/auto_terminate will delete them in the correct order so they are deleted without any error. For example, deleting a security group used by a server will not cause any error as the server will be deleted before the security group is deleted.</p>
+
+<h2 id="definitions">Definitions</h2>
+
+<p>Definitions are collections of cloud workflow code written using <a href="../../rcl/v1/index.html">RightScale Cloud Workflow language</a>. Resources and variables from the CAT must be explicitly passed in to definitions. Return values from definitions can be used to update Output values or resources in a CloudApp (see <a href="#outputs">Outputs</a> above).</p>
+
+<p>Example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">define</span> <span class="n">create_front_end_tier</span><span class="p">(</span><span class="vi">@front_end1</span><span class="p">,</span> <span class="vi">@front_end2</span><span class="p">)</span> <span class="ss">task_label: </span><span class="s2">"Setup Load Balancer"</span> <span class="k">do</span>
+  <span class="n">provision</span><span class="p">(</span><span class="vi">@front_end1</span><span class="p">)</span>
+  <span class="n">provision</span><span class="p">(</span><span class="vi">@front_end2</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="definitions-returning-information-from-definitions">Returning Information from Definitions</h3>
+
+<p>By using <code>output_mappings</code> and <code>resource_mappings</code> in Operations, you can return information from RCL back to the CloudApp in Self-Service. To return a variable or resource, simply add it to the return statement of the definition.</p>
+
+<p>For example, if you were to write a custom <code>launch</code> operation which launched the <code>@my_server</code> resource, you would need to do it like so:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">define</span> <span class="n">launch</span><span class="p">(</span><span class="vi">@my_server</span><span class="p">)</span> <span class="k">return</span> <span class="vi">@my_server</span> <span class="k">do</span>  
+  <span class="n">provision</span><span class="p">(</span><span class="vi">@my_server</span><span class="p">)</span>  <span class="c1"># Do something else with the server</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Note: if the name of the resource returned by a definition is the same as the resource in the CAT, that resource will be automatically updated without requiring the use of a <code>resource_mappings</code> block.</p>
+
+<h2 id="built-in-methods-and-other-keywords">Built-in Methods and Other Keywords</h2>
+
+<p>On top of simple values and parameters you may also use any of the following built-in methods to define a resource field, condition declarations, and output values.</p>
+
+<ul>
+<li><code>null</code>: A keyword which indicates that a resource field should be excluded from those sent during the provisioning step. May be used in a resource or mapping.</li>
+<li><code>find(filter_1: ..., filter_2: ...)</code>: Look up resource given a list of filters (e.g. name and revision for published resources like ServerTemplates, RightScripts etc.). Useful to prevent hard-coding hrefs in fields (for example so that the same Cloud Application Template can be used across multiple RightScale accounts). ** See note below</li>
+<li><code>map(mapping_name, key_name, value_name)</code>: Look up value from mapping, see the <a href="#mappings">Mappings</a> declaration section above.</li>
+<li><code>join([string1, string2, .., stringn], sep)</code>: Join multiple strings together with given separator. sep is optional, the default value is the empty string.</li>
+<li><code>uuid()</code>: Return a guid in standard notation.</li>
+<li><code>tag_value(resource, string)</code>: Given a resource and the namespace/predicate of a tag, return the value of that tag on that resource. (e.g. tag_value(@server, <q>ec2:Name</q>)</li>
+<li><code>split(string, sep_or_regexp)</code>: Split a string by either a string or by using a regular expression.</li>
+<li><code>first([elem1, elem2, .., elemn])</code>: Extract first element of list.</li>
+<li><code>last([elem1, elem2, .., elemn])</code>: Extract last element of list.</li>
+<li><code>get(index, [val1, val2, .., valn])</code>: Extract element at given index from list.</li>
+<li><code>switch(condition, a, b)</code>: Return <code>b</code> if condition is a condition that evaluates to false, <code>a</code> otherwise. This method allows you to set a field conditionally depending on the value of a condition declaration. The associated values may in turn be simple values or built-in methods. The condition <strong>must refer to a condition declaration</strong> and may not be an inline expression, e.g. <code>switch($high_profile, &quot;c3.xlarge&quot;, &quot;m1.small&quot;)</code>.</li>
+<li><code>equals?(a, b)</code>: Condition that evaluates to <code>true</code> if <code>a</code> and <code>b</code> are the same.</li>
+<li><code>logic_or(condition1, condition2)</code>: Apply logical or operator to values of two conditions (see the <a href="#conditions">Conditions section</a> above). This returns a condition, so calls can be nested.</li>
+<li><code>logic_and(condition1, condition2)</code>: Apply logical  and operator to values of two conditions (see the <a href="#conditions">Conditions section</a> above). This returns a condition, so calls can be nested.</li>
+<li><code>logic_not(condition)</code>: Apply logical not operator to value of condition. This returns a condition, so calls can be nested.</li>
+</ul>
+
+<p>You may also refer to other resources defined in the CAT using the <code>@</code> operator, for example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"master"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+
+<span class="n">resource</span> <span class="s2">"master_volume"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"volume"</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+
+<span class="n">resource</span> <span class="s2">"master_xvdb"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"volume_attachment"</span> <span class="k">do</span>
+  <span class="n">device</span> <span class="s2">"/dev/xvdb"</span>
+  <span class="n">instance</span> <span class="vi">@master</span>       <span class="c1"># Refers to "master" server defined above</span>
+  <span class="n">volume</span> <span class="vi">@master_volume</span>  <span class="c1"># Refers to "master_volume" volume defined above</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>When setting the value of a field which represents a resource, you have two options: you can use the resource href, or you can use the <code>find</code> function to locate a resource using it&#39;s name. When using <code>find</code>, the engine makes an index request on all resources of the corresponding type in the RightScale account using the filters given and picks the first match.</p>
+
+<p>Note: Using <code>find</code> should be done carefully as creating a new resource with the same name in RightScale could end up affecting future executions of the CAT. Using a resource name can be useful for resources with static names (such as clouds, datacenters, instance types) and for building a CAT that works across multiple RightScale accounts (since the same named resource will have different hrefs in different accounts).</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

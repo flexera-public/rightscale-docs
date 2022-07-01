@@ -1,0 +1,596 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>CloudAccounts</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>CloudAccounts</h1></div><div class="main-content"><p>In RightScale, a <strong>Cloud Account</strong> represents a specific account (or subscription, project, etc) in a cloud vendor. Such accounts can be registered with the RightScale Cloud Management platform to provide visibility and management of resources in that account.</p>
+
+<p>This API allows you to list, register, and update cloud accounts with the RightScale platform.</p>
+
+<p>Not all clouds support API-based registration and credential update. The following table lists the supported clouds and the relevant parameters. Note that for many clouds, each region must be registered separately and must be the same cloud account.</p>
+
+<h2 id="supported-clouds-and-parameters">Supported clouds and parameters</h2>
+
+<h3 id="supported-clouds-and-parameters-aws">AWS</h3>
+
+<table><thead>
+<tr>
+<th>Create</th>
+<th>Update</th>
+<th><strong>Cloud</strong></th>
+<th><strong>cloud_href value</strong></th>
+<th><strong>Required Parameters</strong></th>
+<th><strong>Optional Parameters</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS US-East</td>
+<td>/api/clouds/1</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS EU</td>
+<td>/api/clouds/2</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS US-West</td>
+<td>/api/clouds/3</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS AP-Singapore</td>
+<td>/api/clouds/4</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS AP-Tokyo</td>
+<td>/api/clouds/5</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS US-Oregon</td>
+<td>/api/clouds/6</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS SA-Sao Paulo</td>
+<td>/api/clouds/7</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS AP-Sydney</td>
+<td>/api/clouds/8</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS EU-Frankfurt</td>
+<td>/api/clouds/9</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS China</td>
+<td>/api/clouds/10</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS US-Ohio</td>
+<td>/api/clouds/11</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS AP-Seoul</td>
+<td>/api/clouds/12</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS EU-London</td>
+<td>/api/clouds/13</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+<tr>
+<td>x</td>
+<td></td>
+<td>AWS CA-Central</td>
+<td>/api/clouds/14</td>
+<td>aws_account_number, aws_access_key_id, aws_secret_access_key</td>
+<td>ec2_key, ec2_cert</td>
+</tr>
+</tbody></table>
+
+<p>Note: The AWS China region is not yet supported as a public cloud. Customers who wish to use AWS resources in China are required to create an AWS (China) Account which includes a set of credentials that are distinct and separate from other global AWS Accounts. Only customers with an AWS (China) Account will be able to use resources operated in the AWS China (Beijing) region.</p>
+
+<h3 id="supported-clouds-and-parameters-google">Google</h3>
+
+<table><thead>
+<tr>
+<th>Create</th>
+<th>Update</th>
+<th><strong>Cloud</strong></th>
+<th><strong>cloud_href value</strong></th>
+<th><strong>Required Parameters</strong></th>
+<th><strong>Optional Parameters</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>Google</td>
+<td>/api/clouds/2175</td>
+<td>project (create only)</td>
+<td>client_email &amp; private_key <strong>or</strong> json</td>
+</tr>
+</tbody></table>
+
+<h3 id="supported-clouds-and-parameters-microsoft-azure">Microsoft Azure</h3>
+
+<table><thead>
+<tr>
+<th>Create</th>
+<th>Update</th>
+<th><strong>Cloud</strong></th>
+<th><strong>cloud_href value</strong></th>
+<th><strong>Required Parameters</strong></th>
+<th><strong>Optional Parameters</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM West US</td>
+<td>/api/clouds/3518</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Japan East</td>
+<td>/api/clouds/3519</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Southeast Asia</td>
+<td>/api/clouds/3520</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Japan West</td>
+<td>/api/clouds/3521</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM East Asia</td>
+<td>/api/clouds/3522</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM East US</td>
+<td>/api/clouds/3523</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM West Europe</td>
+<td>/api/clouds/3524</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM North Central US</td>
+<td>/api/clouds/3525</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Central US</td>
+<td>/api/clouds/3526</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Canada Central</td>
+<td>/api/clouds/3527</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM North Europe</td>
+<td>/api/clouds/3528</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Brazil South</td>
+<td>/api/clouds/3529</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Canada East</td>
+<td>/api/clouds/3530</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM East US 2</td>
+<td>/api/clouds/3531</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM South Central US</td>
+<td>/api/clouds/3532</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Australia East</td>
+<td>/api/clouds/3537</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Australia Southeast</td>
+<td>/api/clouds/3538</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM West US 2</td>
+<td>/api/clouds/3546</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM West Central US</td>
+<td>/api/clouds/3547</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM UK South</td>
+<td>/api/clouds/3567</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM UK West</td>
+<td>/api/clouds/3568</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM West India</td>
+<td>/api/clouds/3569</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Central India</td>
+<td>/api/clouds/3570</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM South India</td>
+<td>/api/clouds/3571</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Korea Central</td>
+<td>/api/clouds/3749</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>AzureRM Korea South</td>
+<td>/api/clouds/3756</td>
+<td>client_id, client_secret, tenant_id, subscription_id</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="supported-clouds-and-parameters-softlayer">Softlayer</h3>
+
+<table><thead>
+<tr>
+<th>Create</th>
+<th>Update</th>
+<th><strong>Cloud</strong></th>
+<th><strong>cloud_href value</strong></th>
+<th><strong>Required Parameters</strong></th>
+<th><strong>Optional Parameters</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td></td>
+<td>SoftLayer</td>
+<td>/api/clouds/1869</td>
+<td>api_key, username</td>
+<td>&nbsp;</td>
+</tr>
+</tbody></table>
+
+<h2 id="index">Index</h2>
+
+<h3 id="index-api-1-5">API 1.5</h3>
+
+<p><a href="https://reference.rightscale.com/api1.5/resources/ResourceCloudAccounts.html#index">CM 1.5 Cloud Accounts API</a> lists all the cloud accounts available in our RightScale account. The API requires <code>observer</code> role.</p>
+
+<p><strong>Sample Response</strong></p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018/06/18 17:47:49 +0000"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018/06/18 17:47:49 +0000"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"rel"</span><span class="p">:</span><span class="s2">"self"</span><span class="p">,</span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"/api/cloud_accounts/7773"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"rel"</span><span class="p">:</span><span class="s2">"cloud"</span><span class="p">,</span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"/api/clouds/888"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"rel"</span><span class="p">:</span><span class="s2">"account"</span><span class="p">,</span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"/api/accounts/69444075"</span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="index-api-1-6">API 1.6</h3>
+
+<p><a href="https://reference.rightscale.com/api1.6/index.html#/1.6/controller/V1_6-Definitions-CloudAccounts/index">CM 1.6 Cloud Accounts API</a> is the upgraded version and exposes all cloud accounts registered in the RightScale account. The index call will return the subscription-id for Azure, Account id for AWS, and Project name for Google in the <code>tenant_uid</code> field of the response. The API requires <code>observer</code> role on any account. We recommend using API 1.6 over 1.5.</p>
+
+<p><strong>Sample Response</strong></p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/cloud_accounts/123"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cm#cloud_account"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tenant_uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123412341234"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"timestamps"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-10T16:15:22+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-10T16:15:23+00:00"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"cloud"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/clouds/1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EC2 us-east-1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cm#cloud"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cloud_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amazon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us-east-1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/accounts/123"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestAccount"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cm#account"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h2 id="create">Create</h2>
+
+<h3 id="create-azure-resource-manager">Azure Resource Manager</h3>
+
+<p>The below demonstrates registering an Azure Resource Manager subscription with a RightScale account using cookie-based auth -- it is possible to use OAuth as well.</p>
+
+<h4 id="curl">curl</h4>
+<pre class="syntax-highlight plaintext"><code>curl --request POST "https://us-3.rightscale.com/api/cloud_accounts" \
+--data-urlencode cloud_account[creds][client_id]=&lt;client_id&gt; \
+--data-urlencode cloud_account[creds][client_secret]=&lt;client_secret&gt; \
+--data-urlencode cloud_account[creds][tenant_id]=&lt;tenant_id&gt; \
+--data-urlencode cloud_account[creds][subscription_id]=&lt;subscription_id&gt; \
+--include \
+-d "cloud_account[cloud_href]=&lt;cloud href&gt;" \
+-H "X-API-Version:1.5" \
+-b mycookie"
+</code></pre>
+
+<h3 id="create-google">Google</h3>
+
+<p>When registering a Google project, you can either provide the JSON key content file directly, or provide the individual credential components as separate attributes. When providing separate attributes, they can either be in a JSON hash, or can be individual URL parameters.</p>
+
+<p>The below demonstrates 3 different methods for registering a GCE project with a RightScale account.</p>
+
+<h4 id="curl">curl</h4>
+<pre class="syntax-highlight shell"><code><span class="c">#!/bin/sh -e</span>
+<span class="nv">PROJECT_ID</span><span class="o">=</span><span class="s2">"project_id"</span>
+<span class="nv">CLIENT_EMAIL</span><span class="o">=</span><span class="s2">"service account email"</span> 
+<span class="nv">PRIVATE_KEY</span><span class="o">=</span><span class="s2">"private key</span><span class="se">\n</span><span class="s2">content"</span>
+<span class="nv">CLOUD_HREF</span><span class="o">=</span><span class="s2">"/api/clouds/2175"</span>
+
+<span class="c"># Using the JSON key file </span>
+curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+-d cloud_account[cloud_href]<span class="o">=</span><span class="nv">$CLOUD_HREF</span> <span class="se">\</span>
+—data-urlencode cloud_account[creds][project]<span class="o">=</span><span class="nv">$PROJECT_ID</span> <span class="se">\</span>
+—data-urlencode cloud_account[creds][json]@credentials.json <span class="se">\</span>
+-X POST https://my.rightscale.com/api/cloud_accounts
+
+<span class="c"># Specifying the JSON manually </span>
+curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+-d cloud_account[cloud_href]<span class="o">=</span><span class="nv">$CLOUD_HREF</span> <span class="se">\</span>
+—data-urlencode cloud_account[creds][project]<span class="o">=</span><span class="nv">$PROJECT_ID</span>
+—data-urlencode cloud_account[creds][json]<span class="o">=</span><span class="s1">'{"client_email": $CLIENT_EMAIL, "private_key": "$PRIVATE_KEY"}'</span> <span class="se">\</span>
+-X POST https://my.rightscale.com/api/cloud_accounts
+
+<span class="c"># Specifying the values manually  </span>
+curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+-d cloud_account[cloud_href]<span class="o">=</span><span class="nv">$CLOUD_HREF</span> <span class="se">\</span>
+—data-urlencode cloud_account[creds][project]<span class="o">=</span><span class="nv">$PROJECT_ID</span> <span class="se">\</span>
+—data-urlencode cloud_account[creds][client_email]<span class="o">=</span><span class="nv">$CLIENT_EMAIL</span> <span class="se">\</span>
+—data-urlencode cloud_account[creds][private_key]<span class="o">=</span><span class="s2">"</span><span class="nv">$PRIVATE_KEY</span><span class="s2">"</span> <span class="se">\</span>
+-X POST https://my.rightscale.com/api/cloud_accounts
+</code></pre>
+
+<h2 id="update">Update</h2>
+
+<h3 id="update-azure-resource-manager">Azure Resource Manager</h3>
+
+<p>When updating a registration, you may only update the credentials for an already registered subscription. If you need to register a different subscription, first <strong>delete</strong> the CloudAccount, and then re-create one with the new subscription (all resources in RightScale will be removed).</p>
+
+<p>When updating a registration that was previously registered using <a href="/clouds/azure_resource_manager/getting_started/register_using_ad_application.html">an Azure AD Application via the API</a>, at least one of the credential attributes must be provided.</p>
+
+<p>When updating a registration that was previously registered using <a href="/clouds/azure_resource_manager/getting_started/register.html">the RightScale Service Principal via the UI</a>, <strong>all</strong> of the credential attributes must be provided.</p>
+
+<h4 id="curl">curl</h4>
+<pre class="syntax-highlight plaintext"><code>curl -i -X PUT https://us-3.rightscale.com/api/cloud_accounts/&lt;cloud_account_id&gt; \
+--data-urlencode cloud_account[creds][client_id]=&lt;client_id&gt; \
+--data-urlencode cloud_account[creds][client_secret]=&lt;client_secret&gt; \
+--data-urlencode cloud_account[creds][tenant_id]=&lt;tenant_id&gt; \
+-H X_API_VERSION:1.5 \
+-b mycookie"
+</code></pre>
+
+<h3 id="update-google">Google</h3>
+
+<p>When updating a registration, you may only update the credentials for an already registered project. If you need to register a different project, first <strong>delete</strong> the CloudAccount, and then re-create one with the new project (all resources in RightScale will be removed).</p>
+
+<p>The below demonstrates 3 different methods for updating GCE project credentials associated with a RightScale account. </p>
+
+<h4 id="curl">curl</h4>
+<pre class="syntax-highlight shell"><code><span class="c">#!/bin/sh -e</span>
+<span class="nv">CLIENT_EMAIL</span><span class="o">=</span><span class="s2">"service account email"</span>
+<span class="nv">PRIVATE_KEY</span><span class="o">=</span><span class="s2">"private_key</span><span class="se">\n</span><span class="s2">content"</span>
+<span class="nv">CLOUD_ACCOUNT_ID</span><span class="o">=</span><span class="s2">"cloud account id"</span>
+
+<span class="c"># Using the JSON key file </span>
+curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+—data-urlencode cloud_account[creds][json]@credentials.json <span class="se">\</span>
+-X PUT https://my.rightscale.com/api/cloud_accounts/<span class="nv">$CLOUD_ACCOUNT_ID</span>
+
+<span class="c"># Specifying the JSON manually </span>
+curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+—data-urlencode cloud_account[creds][json]<span class="o">=</span><span class="s1">'{"client_email": $CLIENT_EMAIL, "private_key": "$PRIVATE_KEY"}'</span> <span class="se">\</span>
+-X PUT https://my.rightscale.com/api/cloud_accounts/<span class="nv">$CLOUD_ACCOUNT_ID</span>
+
+<span class="c"># Specifying the value manually </span>
+curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+—data-urlencode cloud_account[creds][client_email]<span class="o">=</span><span class="nv">$CLIENT_EMAIL</span> <span class="se">\</span>
+—data-urlencode cloud_account[creds][private_key]<span class="o">=</span><span class="s2">"</span><span class="nv">$PRIVATE_KEY</span><span class="s2">"</span> <span class="se">\</span>
+-X PUT https://my.rightscale.com/api/cloud_accounts/<span class="nv">$CLOUD_ACCOUNT_ID</span>
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

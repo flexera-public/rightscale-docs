@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Launching Servers</title><meta content="Guidelines for launching your virtual machine instances (servers) in RightScale using Amazon Machine Images (AMIs), RightScale ServerTemplates, or the RightScale API." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_management_guide cm_management_guide_launching_servers" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Lifecycle Management</a></p><div class="page-header"><h1>Launching Servers</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>There are several different ways that you can launch servers with RightScale.</p>
+
+<h2 id="launch-a-server-from-an-ami">Launch a Server from an AMI</h2>
+
+<p>Many Clouds offer self-service tools where anyone can launch and terminate servers on-demand. Perhaps you&#39;ve already launched a server on EC2 using one of the public AMIs (Amazon Machine Image) or bundled an image before. So, you might be wondering, <em><q>How does RightScale make my life easier and better?</q></em></p>
+
+<p>To truly understand the value of RightScale, let&#39;s compare the two most popular ways of launching instances in the Cloud.</p>
+
+<h3 id="launch-a-server-from-an-ami-option-1--bundle-and-hack-images">Option 1: Bundle and Hack Images</h3>
+
+<p>Although it&#39;s pretty easy to launch a new instance on EC2 using one of Amazon&#39;s AMIs, you&#39;ll soon discover that you will waste a lot of time and effort trying to maintain this process going forward, not to mention the fact that it&#39;s very prone to human error. At RightScale, we strongly believe that Option 2 is a far better solution for launching servers in the Cloud.</p>
+
+<ol>
+<li>Find an AMI of your choice and launch a new instance. Wait for the instance to boot and become operational.</li>
+<li>Modify the instance. Keep track of your changes. Test.</li>
+<li>Bundle the instance to create a new image. Wait for the bundling to complete.</li>
+<li>Launch an instance using the new image. Wait for the instance to boot and become operational.</li>
+<li>Test again. If something is wrong, go back to Step 1 or 2. If things look good, go to Step 6.</li>
+<li>Launch additional instances for all servers that use the new image.</li>
+<li>Move data from old instances to new instances and switch over your DNS.</li>
+</ol>
+
+<p>This process may seem tolerable initially, but it&#39;s definitely not the most reliable, reproducible, or scalable process. It&#39;s a very manual process that will waste a lot of time, as well as cause a lot of headaches and frustrations. Imagine trying to keep track of all your changes, revert back to older versions, update software versions, etc. Images are also very static. Even if you need to make a small change to your code, you&#39;ll have to repeat the whole process all over again. As you can see, performing even the smallest change can easily consume several hours of your day. So, at the end of the day, what is going to yield the highest ROI? Spending the majority of your time configuring your system or developing new features for your application?</p>
+
+<p>If you want to run a solid production-level deployment in the Cloud, you&#39;ll need tools that will provide a higher level of control, flexibility, and automation.</p>
+
+<h3 id="launch-a-server-from-an-ami-option-2--rightscale-with-servertemplates">Option 2: RightScale with ServerTemplates</h3>
+
+<p>RightScale developed ServerTemplates to be a real world solution for designing and managing production-level deployments in the Cloud. In the Cloud, it&#39;s important to think of servers as dynamic objects that you can configure and multiply automatically, instead of as static boxes.</p>
+
+<p>Our ServerTemplates are designed to give you the control and flexibility that you need to create a system in the Cloud that is</p>
+
+<ul>
+<li>Dynamic</li>
+<li>Modular</li>
+<li>Automated</li>
+<li>Configurable</li>
+<li>Reproducible</li>
+<li>Scalable</li>
+<li>Transparent</li>
+</ul>
+
+<h2 id="launch-a-server-from-a-servertemplate">Launch a Server from a ServerTemplate</h2>
+
+<p>A <strong>ServerTemplate</strong> is a preconfigured &#39;template&#39; that is used to launch new servers in the Cloud, where each server is configured to satisfy a particular &#39;role&#39; or perform a specific task (database server, application server, load balancer, etc.). See <a href="/cm/dashboard/design/server_templates/index.html">ServerTemplates</a> for more information.</p>
+
+<h3 id="launch-a-server-from-a-servertemplate-what-happens-when-you-launch-a-server-using-a-servertemplate-">What happens when you launch a Server using a ServerTemplate?</h3>
+
+<p>When you launch a server directly from a ServerTemplate it will automatically be associated with the <q>Default</q> deployment in your account. Typically, you will want to add servers to a specific deployment before launching a server. See Launch a Server in a Deployment below. However, if you launch a server directly from a ServerTemplate, you will be taken through a series of steps where you will need to define a few server configurations. See diagram below for details.</p>
+
+<p><img src="/img/cm-server-launch-template.png" alt="cm-server-launch-template.png" width="725" height="373" /></p>
+
+<p>It&#39;s important to understand what type of information is defined inside of a ServerTemplate and what information is user-defined. ServerTemplates are designed to be cloud agnostic. (That is, you can use the same ServerTemplate to launch servers into multiple cloud infrastructures.) By default, all of the ServerTemplates that are published by RightScale use our RightImages<sup>TM  </sup>and are already designed to launch servers in both Amazon EC2 regions (EC2-US, EC2-EU). However, if you have valid cloud credentials for additional cloud infrastructures such as a private cloud, you must manually add support for those clouds to a ServerTemplate under its Clouds tab. When you add a cloud, you will need to select a specific machine image that will be used for the server&#39;s base OS installation.</p>
+
+<p><strong>Note</strong>: You can only launch one server directly from a ServerTemplate into the Default deployment. Before you can launch another server directly from a ServerTemplate, you must first delete the previous server from the Default deployment.</p>
+
+<h2 id="launch-a-server-in-a-deployment">Launch a Server in a Deployment</h2>
+
+<p>As a best practice, you should always try to launch servers in the context of a deployment. Unless you&#39;re launching a server for demo purposes only, you&#39;ll most likely want to launch servers in the context of a deployment where it&#39;s linked and related to other servers in the setup. For example, you&#39;re application servers will need to communicate with the master database and the load balancers will need to communicate with the application servers. Deployments provide a way of grouping these related servers together so that you can configure them in a single place and share common configurations such as inputs. A deployment consists of a cluster or group of servers that work together and share common input variables and cloud configurations. In a deployment, you can manage a group of servers in the same way that you would manage a single server. You can define common input variables, execute RightScripts on some or all servers, as well as create multiple server environments for production, development, staging, and maybe even failover scenarios. When you add a server to a deployment with a ServerTemplate, the server will inherit any inputs that are defined at the deployment level. See <a href="/cm/rs101/understanding_inputs.html">Understanding Inputs</a>.</p>
+
+<p>In the diagram below, we&#39;ve added two FrontEnd PHP servers using the same ServerTemplate. In this example, we&#39;ve defined the APPLICATION input at the deployment level so any server in the deployment will use &#39;myapp&#39; for the APPLICATION input value. This way, we only have to set this value once (at the deployment level) instead of worrying about setting it in each individual server. In the example below, the ADMIN_EMAIL and APACHE_MPM inputs were not defined at the Deployment level so the server naturally inherited the value that was set at the ServerTemplate level.</p>
+
+<p><img src="/img/cm-server-launch-deployment.png" alt="cm-server-launch-deployment.png" width="725" height="314" /></p>
+
+<h2 id="launch-a-server-with-the-rightscale-api">Launch a Server with the RightScale API</h2>
+
+<p>The RightScale API uses standard REST conventions when possible. See the <a href="/api/general_usage.html">RightScale API General Usage Overview</a> or <a href="/api/api_1.5_examples/index.html">RightScale API Examples</a> for more information.</p>
+
+<h2 id="launch-servers-automatically--autoscaling-">Launch Servers Automatically (Autoscaling)</h2>
+
+<p>Automation is one of the key advantages of the RightScale Management Platform. Configure a deployment with the necessary alerts and alert escalations so that a server array can automatically scale up or down based upon the metrics and thresholds that you define. See <a href="/cm/dashboard/manage/arrays/index.html">How do I set up Autoscaling?</a></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>AWS Metadata</title><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="clouds clouds_aws clouds_aws_amazon-ec2 clouds_aws_amazon-ec2_aws_metadata" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="../aws_about.html"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>Amazon Web Services</span></h4></a><a class="list-group-item" href="../aws_quick_start.html">Quick Start</a><a class="list-group-item" href="aws_EC2.html">Amazon EC2</a><a class="list-group-item" href="../aws_tutorials.html">Tutorials</a><a class="list-group-item" href="../../../faq/clouds/aws/">FAQs</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">Supported Clouds</a> &#x2F; <a href="../">Amazon Web Services</a> &#x2F; <a href="./">Amazon EC2</a></p><div class="page-header"><h1>AWS Metadata</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>RightScale will automatically download the metadata for your instance into <code>/var/spool/cloud</code> (/var/spool/ec2 for RightLink =&lt; 5.6). The data can then be used by your scripts by simply sourcing the metadata files in this directory.</p>
+
+<p><strong>Note</strong>: For a complete description of EC2 metadata, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">EC2 Developer Guide: Instance Metadata</a>.</p>
+
+<h2 id="sourcing-the-metadata">Sourcing the Metadata</h2>
+
+<p>The code samples below show how to source the metadata file. It performs a real-time refresh of an instance&#39;s metadata before including them in your environment. Since metadata can change, you might want to make sure that you always use the latest metadata.</p>
+
+<p>However, if you prefer to use the cached value of the metadata from a previous fetch, you can source <code>/var/spool/meta-data-cache</code> directly.</p>
+
+<h3 id="sourcing-the-metadata-ruby-example">Ruby Example</h3>
+<pre class="syntax-highlight ruby"><code><span class="c1">#! /usr/bin/ruby</span>
+<span class="nb">require</span> <span class="s1">'/var/spool/cloud/meta-data.rb'</span>
+</code></pre>
+
+<h3 id="sourcing-the-metadata-bash-example">Bash Example</h3>
+<pre class="syntax-highlight shell"><code><span class="c">#! /bin/bash</span>
+<span class="nb">source</span> /var/spool/ec2/meta-data.sh
+</code></pre>
+
+<h2 id="metadata-as-environment-variables">Metadata as Environment Variables</h2>
+
+<p>After sourcing the file as shown above, all of the metadata downloaded from AWS will be made available as ENVIRONMENT variables. However, they are named slightly different than the raw response from the API (see below).</p>
+
+<ul>
+<li>Ruby example - <code>ENV[&#39;EC2_PUBLIC_HOSTNAME&#39;]</code></li>
+<li>Bash example - <code>$EC2_PUBLIC_HOSTNAME</code></li>
+</ul>
+
+<p>The naming convention used for these environment variables is as follows. Each variable is prepended with an <q>EC2_</q> prefix. Also, any variables that exist in a lower level of the &#39;tree&#39; such as &#39;block-device-mapping&#39; will be flattened into a single name using underscores. For example, block-device-mapping/root becomes <strong>$EC2_BLOCK_DEVICE_MAPPING_ROOT</strong>.</p>
+
+<p>Here is an example of metadata that was downloaded for a 32bit small EC2 instance. (Sensitive values have been removed.)</p>
+<pre class="syntax-highlight plaintext"><code>EC2_KERNEL_ID='aki-9b00e5f2'
+EC2_SECURITY_GROUPS='default'
+EC2_AMI_ID='ami-d8a347b1'
+EC2_BLOCK_DEVICE_MAPPING_ROOT='/dev/sda1'
+EC2_INSTANCE_TYPE='m1.small'
+EC2_ANCESTOR_AMI_IDS='ami-08f41161 ami-af3bdec6 ami-5c08ed35'
+EC2_PLACEMENT_AVAILABILITY_ZONE='us-east-1a'
+EC2_LOCAL_IPV4='10.254.111.17'
+EC2_INSTANCE_ID='i-f4c86d9d'
+EC2_BLOCK_DEVICE_MAPPING_AMI='sda1'
+EC2_BLOCK_DEVICE_MAPPING_EPHEMERAL0='sda2'
+EC2_RESERVATION_ID='r-6d8f5804'
+EC2_LOCAL_HOSTNAME='domU-12-31-39-00-68-E3.compute-1.internal'
+EC2_PUBLIC_KEYS_0_OPENSSH_KEY='xxxx'
+EC2_PUBLIC_HOSTNAME='ec2-75-101-250-179.compute-1.amazonaws.com'
+EC2_HOSTNAME='domU-12-31-39-00-68-E3.compute-1.internal'
+EC2_AMI_MANIFEST_PATH='rightscale_images/CentOS5_0V3_0_0.img.manifest.xml'
+EC2_AMI_LAUNCH_INDEX='0'
+EC2_PUBLIC_IPV4='75.101.250.179'
+EC2_BLOCK_DEVICE_MAPPING_SWAP='sda3'
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

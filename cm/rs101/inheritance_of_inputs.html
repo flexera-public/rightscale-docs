@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Inheritance of Inputs</title><meta content="Inputs in RightScale can be defined at several different levels and each level has its own set of input tabs. The enforced input hierarchy rules help you more efficiently manage server configurations across a deployment." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_inheritance_of_inputs" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>Inheritance of Inputs</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Inputs can be defined at several different levels and each level has its own set of input tabs. The enforced input hierarchy rules help you more efficiently manage server configurations across a deployment. It&#39;s important to understand the input hierarchy rules and how they&#39;re applied to servers so that you can control which values will ultimately be inherited and used when a script is executed.</p>
+
+<p><strong>Important!</strong> Input hierarchy rules are only evaluated and applied to a server at launch time. Once a server is operational, the input values are saved locally to the current server. If you want to change the input on a running server, you need to modify the input value under the <q>current</q> server&#39;s Inputs tab and run the associated script. Any changes to a <q>current</q> server will not affect future launches or relaunches of that server unless the setting is preserved at one of the input hierarchy levels.</p>
+
+<p><img src="/img/cm-input-hierarchy.png" alt="cm-input-hierarchy.png" width="261" height="179" /></p>
+
+<ul>
+<li><strong>RightScript / Chef Recipe</strong> - The lowest level of precedence is at the script level.</li>
+<li><strong>ServerTemplate</strong> - Define commonly used generic values for inputs at the ServerTemplate level. Inputs defined at the ServerTemplate level overwrite values set at the script level.</li>
+<li><strong>Deployment</strong> - Define inputs that you want all servers in your deployment (or associated server arrays) to use at the deployment level. Inputs defined at the deployment level overwrite inputs defined at the ServerTemplate or script level.</li>
+<li><strong>Server / Server Array</strong> - The highest level of precedence is the server or server array level. Inputs defined at this level overwrite inputs defined at any other level.</li>
+</ul>
+
+<h2 id="servertemplate-level">ServerTemplate Level</h2>
+
+<p>Typically, most servers inherit their input values from their ServerTemplates. Many of the ServerTemplates published by RightScale already have default values that are predefined for many of the more generic inputs, which helps streamline and simplify the setup process for end users. Only application-specific inputs should be left undefined since they are unique to each setup. To improve the usability of your ServerTemplate, keep the number of undefined inputs at the ServerTemplate to a minimum. Setting values for your Inputs is arguably the most difficult part of becoming proficient using the RightScale Dashboard to manage your cloud assets. Using our ServerTemplates as a starting point for what you build and manage in the cloud facilitates using sensible settings for your inputs. Although you can change or override the default inputs of a ServerTemplate, making unnecessary changes increases the risk of entering incorrect or invalid input settings.</p>
+
+<p><img src="/img/cm-input-inheritance-template.png" alt="cm-input-inheritance-template.png" width="725" height="264" /></p>
+
+<h2 id="deployment-level">Deployment Level</h2>
+
+<p>Input values defined at the deployment level take precedence over any input values defined at the ServerTemplate level. When you edit and define input values at the deployment level, they are inherited by <em>all</em> servers in the deployment and overwrite <em>any</em> input values that are inherited from ServerTemplates or scripts. It&#39;s useful to define inputs at the deployment level if you have multiple deployments that use the same ServerTemplate revision. For example, your &#39;staging&#39; deployment might use the same ServerTemplates as your &#39;production&#39; deployment. In such cases, you can modify inputs for the &#39;staging&#39; deployment in order to isolate it from the &#39;production&#39; deployment so that you do not accidentally overwrite data on your production database. In the following example, we changed the ADMIN_EMAIL input at the deployment level.</p>
+
+<p><img src="/img/cm-input-inheritance-deployment.png" alt="cm-input-inheritance-deployment.png" width="725" height="264" /></p>
+
+<h2 id="server---server-array-level">Server / Server Array Level</h2>
+
+<p>Lastly, inputs that are defined at the individual server or server array level overwrite input values that are defined at the script, ServerTemplate or deployment levels. In the following diagram, notice that the values that are set at the server level are inherited by the server.</p>
+
+<p>As a general rule, you should always define inputs at either the ServerTemplate or deployment levels for configuration settings or changes that you want to persist across your current deployment, as well as for future server launches/relaunches. You should only define inputs at the server level for making temporary changes. The ability to define inputs at the server level should only be used in unique situations or for performing quick tests on a single server. In a production environment, it&#39;s important to define inputs at a higher level for organizational and consistency reasons. For example, let&#39;s say you define the location of your SVN repository for application code (Input: SVN_APP_REPOSITORY) at the deployment level. Now, when you need to perform an update to your application and point to the latest branch, all you have to do is change the value in one location and then run the code update script (RightScript: WEB app svn code checkout) across all servers in the deployment. In a single action you just updated all of your application servers, performing code pushes easily.</p>
+
+<p><img src="/img/cm-input-inheritance-server.png" alt="cm-input-inheritance-server.png" width="725" height="264" /></p>
+
+<h2 id="best-practices-for-inputs">Best Practices for Inputs</h2>
+
+<h3 id="best-practices-for-inputs-servertemplate-end-user">ServerTemplate End User</h3>
+
+<ul>
+<li>Set any application-specific inputs at the deployment level. You must provide values for any missing inputs that are required by boot scripts prior to launching a server. At the deployment level you can also override any inputs set at either the Script or ServerTemplate levels. Missing inputs that are required for operational scripts can be left unset prior to launching a server (since the inputs are not used by any of the boot scripts). You will be prompted to provide values for any missing inputs (that are required) before an operational script can be executed.</li>
+<li>If possible, do not override any inputs at the server or server array level so that the deployment&#39;s Inputs tab will show the values that are used by all servers in the deployment to promote configuration consistency across all the servers. If you override inputs at the server level, it will be difficult to troubleshoot configuration inconsistencies across all servers in the deployment.</li>
+<li>Since the input inheritance rules are only applied when a server is launched, if you want to change the inputs on a <q>current</q> running server you must change the input(s) under the current server&#39;s Inputs tab and run a script that uses the modified input(s). Values are only applied when you run an associated script; they are not instantly applied to the instance when you change the value under the <q>current</q> server&#39;s Inputs tab.</li>
+</ul>
+
+<h3 id="best-practices-for-inputs-servertemplate-developer">ServerTemplate Developer</h3>
+
+<ul>
+<li>Leave application-specific inputs unset at the ServerTemplate level so that end users will be forced to provide their own values that are unique to their application. (e.g. Database Backup Lineage, Database Master FQDN, Application Name, etc.)</li>
+<li>If you can provide an acceptable value for an input that will satisfy most configurations, you should set a default value for the input at either the script or ServerTemplate levels. For example, setting the &#39; <strong>Database DNS TTL Limit</strong>&#39; input to 60 (seconds) is an acceptable default value for a database server&#39;s DNS record.</li>
+<li>Provide helpful tooltip descriptions for each input that you add to a script. It&#39;s also helpful to provide a sample value with the correct syntax.</li>
+<li>If an input requires the use of a sensitive value such as a password, select a credential for the input to encourage best practices for passing sensitive values via inputs. (e.g. Database Admin Password) <em>Note</em>: The ServerTemplate&#39;s documentation should tell users to create any required credentials as a prerequisite.</li>
+</ul>
+
+<h2 id="see-also">See also</h2>
+
+<ul>
+<li><a href="/faq/How_do_RightScript_inputs_work.html">How do RightScript inputs work?</a></li>
+<li><a href="/cm/rs101/understanding_inputs.html">Understanding Inputs</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

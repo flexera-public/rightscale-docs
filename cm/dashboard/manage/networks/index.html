@@ -1,0 +1,750 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Networks - Actions and Procedures</title><meta content="Common procedures for working with Networks in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_manage cm_dashboard_manage_networks cm_dashboard_manage_networks_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Manage</a></p><div class="page-header"><h1>Networks - Actions and Procedures</h1></div><div class="main-content"><h2 id="create-a-network">Create a Network</h2>
+
+<h3 id="create-a-network-overview">Overview</h3>
+
+<p>Creating a network with Network Manager allows you to specify network resources to help manage the infrastructure you create in RightScale. You can add subnets, create security groups, and view the audit entries of your network (as well as the audit entries of each network resource). Additionally, you can view a map of your network to visually see the security group rules and the deployments associated to your network.</p>
+
+<h3 id="create-a-network-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="create-a-network-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong>.</li>
+<li>Click <strong>New Network</strong>.<br>
+<img src="/img/cm-create-a-network.png" alt="cm-create-a-network.png" width="566" height="436" /><br>
+
+<ul>
+<li><strong>Select a cloud to create you network</strong> : A network is created in a single cloud. Currently only AWS and OpenStack clouds are supported.</li>
+<li><strong>Name</strong>: The user-defined name of the network.</li>
+<li><strong>Description</strong>: (Optional) a user-defined description of the network.</li>
+</ul></li>
+<li>Click <strong>Next</strong>.<br>
+<img src="/img/cm-create-a-network-2.png" alt="cm-create-a-network-2.png" width="565" height="492" /><br>
+
+<ul>
+<li><strong>CIDR Block</strong>: IP Range for your network. A network can contain 16 to 65,536 (eg : 10.0.0.0/16) IP addresses. You cannot change the size of a network after you have created it.</li>
+<li><strong>Instance Tenancy</strong>: Instance Tenancy indicates whether an instance launched in this network will run on a single-tenant or shared hardware.</li>
+</ul></li>
+<li>Click <strong>Create</strong>.</li>
+<li>You will be taken to Networks where you will see a list of Networks (if there are more than one) and by default you will see the Name of your network, the Cloud it is in, and the CIDR Block. These are the default columns that are displayed. You can adjust which columns appear for your network by select the gear icon next to <strong>New Network</strong>.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>When you create a network, a default security group will automatically be created. When you add a ServerTemplate to a deployment, you will see a default(name_of_network) under security groups. This allows a server on the default security group to connect to any external server.</p>
+</div>
+
+<h2 id="edit-a-network">Edit a Network</h2>
+
+<h3 id="edit-a-network-overview">Overview</h3>
+
+<p>Editing a network allows you to modify the name and description of the network. You cannot modify any of the network information -- such as the cloud, Resource UID, or CIDR Block -- after the network has been created.</p>
+
+<h3 id="edit-a-network-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="edit-a-network-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> and find your network.</li>
+<li>Select your network and click <strong>Edit</strong>. You can make changes to the networks name and description.<br>
+<img src="/img/cm-edit-a-network.png" alt="cm-edit-a-network.png" width="725" height="225" /><br>
+
+<ul>
+<li><strong>Name</strong>: The user-defined name of the network.</li>
+<li><strong>Description</strong>: A user-defined description for the network. Optional.</li>
+<li><strong>Cloud</strong>: The cloud to which the network belongs. Corresponding cloud resources (network, etc) will be created in the cloud you select.</li>
+<li><strong>Resource</strong>  <strong>UID</strong>: The unique id for this resource assigned by the cloud provider.</li>
+<li><strong>Instance</strong>  <strong>Tenancy</strong>: Instance Tenancy indicates whether an instance launched in this network will run on a single-tenant or shared hardware.</li>
+<li><strong>CIDR</strong>  <strong>Block</strong>: IP Range for your network. Network can contain 16 to 65,536 (eg : 10.0.0.0/16) IP addresses. You cannot change the size of a network after you have created it.</li>
+</ul></li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h2 id="view-a-network-map">View a Network Map</h2>
+
+<h3 id="view-a-network-map-overview">Overview</h3>
+
+<p>A Network Map shows all the security group rules in a network. Each rule allows a source to connect to the ports of a destination security group, which allows access to servers running in deployments. The left-most column shows the CIDR ranges, or sources. The second column shows the ports open on the network. The destination security group shows the security group that have those ports open. The fourth column shows the deployments with the running servers that are connected to the security groups on the network.</p>
+
+<h3 id="view-a-network-map-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="view-a-network-map-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong>.</li>
+<li>Click on your network and you will be taken to the <strong>Info</strong> tab which provides information about the network.</li>
+<li>Go to the <strong>Map</strong> tab.<br>
+<img src="/img/cm-network-map-2.png" alt="cm-network-map-2.png" width="725" height="392" /></li>
+<li>The map above shows a network with a ports 80 and 22 open on the security group that is configured for a server that is running in a NetworksExamples deployment.
+
+<ul>
+<li><strong>Source</strong> - The CIDR range of the network.</li>
+<li><strong>Ports</strong> - The ports open on the network. Ports can connect to multiple security groups on a network. For example, in the image above, port 80 is used in two security groups on the network, test1 and test2.</li>
+<li><strong>Destination</strong>  <strong>Security</strong>  <strong>Groups</strong> - The security group of the network with the ports that are open connected to them.</li>
+<li><strong>Deployments</strong> - The running deployments that are using the security groups of the network.</li>
+</ul></li>
+<li>You can click on the color of a destination security group a network is connected to and all the ports and sources that the servers in the deployment rely on will be highlighted. Additionally, you can click on a port number or color and it will highlight which security groups have those ports open. You can click on the name of a security group and it will take you to that security group in the network.</li>
+</ol>
+
+<p><img src="/img/cm-network-map-selected-dest-security-group.png" alt="cm-network-map-selected-dest-security-group.png" width="725" height="395" /></p>
+
+<h2 id="delete-a-network">Delete a Network</h2>
+
+<h3 id="delete-a-network-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>You need the &#39;security_manager&#39; user role privilege in your RightScale account.</li>
+</ul>
+
+<h3 id="delete-a-network-overview">Overview</h3>
+
+<p>When you delete a network, you are removing the ability for instances to interact with the network and network resources. You cannot remove a network if you have instances that are associated to the network (whether the instances are operational or not).</p>
+
+<h3 id="delete-a-network-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> and locate the network or networks you would like to remove.</li>
+<li><p>From the <strong>Actions</strong> drop-down, select Delete.  </p>
+
+<p><img src="/img/cm-delete-a-network.png" alt="cm-delete-a-network.png" width="725" height="88" /></p></li>
+<li><p>A confirmation will appear asking if you are sure you will want to remove the selected network or networks.</p></li>
+<li><p>Click <strong>Delete</strong>.</p></li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You can only remove a network if it does not have any instances associated to it. You will need to modify the Subnets and Security Groups used by an instance before this can be removed. If the instances is operational, you will need to terminate it before you can modify the instance. Additionally, will will need to remove the Subnets and Security Groups that were created in the network before the network can be deleted.</p>
+</div>
+
+<h2 id="view-audit-entries-of-a-network">View Audit Entries of a Network</h2>
+
+<h3 id="view-audit-entries-of-a-network-overview">Overview</h3>
+
+<p>The <strong>Audit Entries</strong> tab in the Network Manager lists the information of the actions taken on the network, such as when the network was created or modified. It displays the date and time an action was made, the summary of the action, and the user who performed the action. This section does not display the actions taken on security groups or subnets. Security groups and subnets have their own audit entries field.</p>
+
+<h3 id="view-audit-entries-of-a-network-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="view-audit-entries-of-a-network-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> and select a network.</li>
+<li>Click on the <strong>Audit Entries</strong> tab.</li>
+<li>You will see a list of information about the actions performed on a network.</li>
+</ol>
+
+<h2 id="add-a-network-to-a-network-gateway">Add a Network to a Network Gateway</h2>
+
+<h3 id="add-a-network-to-a-network-gateway-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A Unified Cloud Platform account</li>
+<li>A previously created network gateway</li>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="add-a-network-to-a-network-gateway-overview">Overview</h3>
+
+<p>When you attach a network to a network gateway, you are joining two networks together. In RightScale, you have the choice of creating an internet gateway or a VPN gateway. An internet gateway allows public internet access to you private network. A VPN gateway allows connectivity to another private network that is either on premises or in another Virtual Private Cloud (VPC).</p>
+
+<h3 id="add-a-network-to-a-network-gateway-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> &gt; <strong>Network Gateways</strong> and find your network gateway. You can only attach one network to a network gateway. If a network is already connected to a network gateway, you will see it in the <strong>Network</strong> column of the list of network gateways.</li>
+<li>Click Edit and next to <strong>Network</strong> select the network you would like to attach to the network gateway. You will only be able to select networks that are in the same cloud as your network gateway.<br>
+<img src="/img/cm-attach-network-gateway.png" alt="cm-attach-network-gateway.png" width="437" height="371" /><br></li>
+<li>Click <strong>Save</strong>. It can take several moments for the network to get connected to the network gateway.</li>
+</ol>
+
+<h2 id="create-a-subnet">Create a Subnet</h2>
+
+<h3 id="create-a-subnet-overview">Overview</h3>
+
+<p>A subnet is a range of IP addresses within your network. Instances that you launch can be contained within a subnet in your network. After setting up a network, you can configure multiple subnets. Then you can launch an instance in any subnet that you have created. Security groups can be applied to subnets to add an additional layer of security for instances in a network.</p>
+
+<h3 id="create-a-subnet-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="create-a-subnet-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Network</strong> &gt; <em>select a Network</em>.</li>
+<li>Click on the <strong>Subnets</strong> tabs.</li>
+<li>Click <strong>New Subnet</strong>.<br>
+<img src="/img/cm-new-subnet.png" alt="cm-new-subnet.png" width="556" height="436" /><br>
+
+<ul>
+<li><strong>Name</strong>: Name of the subnet. You can create up to 20 subnets in a VPC.</li>
+<li><strong>Description</strong>: A user-defined description for the subnet. Optional.</li>
+<li><strong>Datacenter</strong>: This corresponds to Availability Zone in AWS. Resources in Datacenters are logically grouped and are fault isolated from other resources in other Datacenters.</li>
+<li><strong>Network</strong>: The name of the network and CIDR block of your network.</li>
+<li><strong>CIDR Block</strong>: IP Range for the subnet. The subnets CIDR block can be the same as the VPC&#39;s CIDR block or a subset of VPC&#39;s CIDR block. If you create more than one subnet in a VPC, the subnets CIDR blocks must not overlap. The smallest subnet you can create uses a /28 netmast (16 IP addresses) and the largest uses a /16 netmask (65,536 IP addresses).</li>
+</ul></li>
+<li>Click <strong>Create</strong>.</li>
+<li>The subnet will be created. It&#39;s state will be <q>pending</q> and, after a few moments, will be <q>available</q> which means you can assign the subnet to an instance.</li>
+</ol>
+
+<p>When creating a subnet, you have to specify a subnet within the range of the CIDR block of the network or you will receive an error. For example, if your network is 10.0.0.0/16, the range of subnets you create should be between 10.0.0.0/16 - 10.0.255.240/28. If you already have a CIDR block range defined, you cannot create a subnet with a range that overlaps. So if you have a subnet with a CIDR block of 10.0.0.0/16, you will not be able to create a CIDR block of 10.0.3.0/24.</p>
+
+<h2 id="view-a-subnet">View a Subnet</h2>
+
+<h3 id="view-a-subnet-overview">Overview</h3>
+
+<p>A subnet is a range of IP addresses within your network. Instances that you launch can be contained within a subnet in your network. After setting up a network, you can configure multiple subnets. Then you can launch an instance in any subnet that you have created.</p>
+
+<h3 id="view-a-subnet-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="view-a-subnet-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage &gt; Network</strong> and click on a network with the Subnet you would like to modify.</li>
+<li>Click on the <strong>Subnets</strong> tab.</li>
+<li>A list of subnets will display. If there are no subnets, you can Create a Subnet.</li>
+<li>Drop-downs will appear that contain information about the subnet: <strong>Info</strong> and <strong>Audit Entries</strong>.</li>
+</ol>
+
+<h3 id="view-a-subnet-info">Info</h3>
+
+<p>The Info section shows information of the subnet that was defined when the subnet was created.  </p>
+
+<p><img src="/img/cm-edit-a-subnet.png" alt="cm-edit-a-subnet.png" width="725" height="123" /></p>
+
+<ul>
+<li><strong>Name</strong>: Name of the subnet. You can create up to 20 subnets in a VPC.</li>
+<li><strong>Resource UID</strong>: The unique ID for this resource assigned by the cloud provider.</li>
+<li><strong>Network</strong>: The unique ID for this resource assigned by the cloud provider.</li>
+<li><strong>Datacenter</strong>: This corresponds to Availability Zone in AWS. Resources in Datacenters are logically grouped and are fault isolated from other resources in other Datacenters.</li>
+<li><strong>CIDR Block</strong>: IP Range for the subnet. The subnets CIDR block can be the same as the VPC&#39;s CIDR block or a subset of VPC&#39;s CIDR block. If you create more than one subnet in a VPC, the subnets CIDR blocks must not overlap. The smallest subnet you can create uses a /28 netmast (16 IP addresses) and the largest uses a /16 netmask (65,536 IP addresses).</li>
+<li><strong>State</strong>: Describes the current state of the subnet. The state of the subnet may be either pending or available.</li>
+<li><strong>Description</strong>: A user-defined description for the subnet. Optional.</li>
+</ul>
+
+<h4 id="edit-info">Edit Info</h4>
+
+<ol>
+<li>In the upper-right corner, click <strong>Edit</strong>.</li>
+<li>The table highlights yellow and the Name and Description field can be edited. Currently, these are the only fields that can be changed. Make the changes you need. <em>Note</em>: Once the description field been populated with text and saved, you cannot edit the field and leave a blank description.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h4 id="audit-entries">Audit Entries</h4>
+
+<ul>
+<li>From the Audit Entries section, you can see information about the actions performed on the subnet. It list the time, summary, and user that perform an action, such as creating, removing, or modifying the subnet. <em>Note</em>: the audit information in this section is different from the Audit Entries tab of the network.</li>
+</ul>
+
+<p><img src="/img/cm-subnet-audit-entries.png" alt="cm-subnet-audit-entries.png" width="725" height="443" /></p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>When you select a specific audit entry, you can see various information about the audit entry, including the Network Href of the subnet. This can be be beneficial if you are using the Networks API. For more information, see the <a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkGateways.html">API 1.5 Reference</a> information.</p>
+</div>
+
+<h2 id="delete-a-subnet">Delete a Subnet</h2>
+
+<h3 id="delete-a-subnet-overview">Overview</h3>
+
+<p>Deleting a subnet will remove the range of IP addresses that have been allocated to a network.</p>
+
+<h3 id="delete-a-subnet-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege in your RightScale account.</li>
+</ul>
+
+<h3 id="delete-a-subnet-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> and select the network with the subnet you would like to remove.</li>
+<li>Go to the <strong>Subnets</strong> tab and select the subnet you would like to remove.</li>
+<li>From the <strong>Actions</strong> drop-down, select Delete.</li>
+<li>A confirmation will display asking if you want to delete the subnet. You will not be allowed to delete a subnet if it is being used by a running instance. You will need to terminate the instance to remove it. When a non-running instance has a subnet and that subnet is removed, the instance will point to another subnet in the network. If your network does not have any subnets, the instance will reference the default network settings of the cloud.</li>
+<li>Click <strong>Delete</strong>.</li>
+</ol>
+
+<h2 id="create-a-new-security-group">Create a New Security Group</h2>
+
+<h3 id="create-a-new-security-group-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="create-a-new-security-group-overview">Overview</h3>
+
+<p>Security groups act as firewalls in your network. A security group defines which ports are open to allow incoming connections to a server. They are designed to control who can communicate (or initiate communication) with a server.</p>
+
+<p>With the Network Manager, you can define multiple security groups within a network from a particular cloud provider. Your instances can access any security group that has been created in Network Manager. For example, if you create two different networks in AWS US-East, with their own security groups, your instances in US-East can access any of the security groups from both networks.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You can assign multiple security groups in a cloud to a server. Permissions defined in a security group are additive in nature. So if a server has two security groups where one group has port 80 open and the other group has port 80 closed, port 80 will be open to the server.</p>
+</div>
+
+<h3 id="create-a-new-security-group-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> and select the network you would like to use.</li>
+<li>When you click on your network, you will be taken to the <strong>Info</strong> tab which provides information about your network.</li>
+<li>Go to the <strong>Security Groups</strong> tab.</li>
+<li>Select <strong>New Security Group</strong>.<br>
+<img src="/img/cm-network-manager-new-security-group.png" alt="cm-network-manager-new-security-group.png" width="550" height="424" /><br>
+
+<ul>
+<li><strong>Name</strong>: The user-defined name of the Security Group</li>
+<li><strong>Description</strong>: (Optional) The user-defined description of the Security Group.</li>
+<li><strong>Network</strong>: The network which contains this security group.</li>
+<li><strong>Common ports (inbound)</strong>: This displays the most common used inbound (ingress) ports. Inbound ports accept traffic that comes into a server from remote locations.
+
+<ul>
+<li>SSH (22): This enables port 22 which grants SSH access into the server.</li>
+<li>HTTP (80): This enables HTTP access to servers.</li>
+<li>HTTPS (443): This enables HTTPs access to servers.</li>
+<li>Remote Desktop (3389): This allows you to use to RDP into a Windows server.</li>
+</ul></li>
+</ul></li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h2 id="delete-a-security-group">Delete a Security Group</h2>
+
+<h3 id="delete-a-security-group-overview">Overview</h3>
+
+<p>Deleting a security group removes the security group from the network as well as from the non-operational servers that are have their security group value set to the network&#39;s security group.</p>
+
+<h3 id="delete-a-security-group-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="delete-a-security-group-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> and select the network you would like to use.</li>
+<li>Go to the <strong>Security Groups</strong> tab and select the security group or groups you would like to remove.</li>
+<li>From the <strong>Actions</strong> drop-down, select Delete.<br>
+<img src="/img/cm-delete-security-group-2.png" alt="cm-delete-security-group-2.png" width="725" height="153" /></li>
+<li>A confirmation will display asking if you want to delete the security group. When a security group is deleted, it is removed from the instances it was associated to. You cannot delete a security group if it is in use by a running server. You will need to terminate the server. If the server is terminated, the security group will be removed. You will not be able to launch a server without a security group.</li>
+<li>Click <strong>Delete</strong>.</li>
+</ol>
+
+<h2 id="add-a-security-group-to-another-security-group">Add a Security Group to another Security Group</h2>
+
+<p>In some clouds, you can specify another security group, or set of security groups, as the source to which the rule applies. The following describes only the group-specific options; for a list of all rule options see <a href="#create-a-new-security-group-firewall-rule">create a new security group firewall rule</a>.</p>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> and select the network you would like to use.</li>
+<li>Select a security group and go to its <strong>Security Groups</strong> tab.</li>
+<li>Click <strong>New Rule</strong> and make the appropriate selections for your firewall rule.<br>
+<img src="/img/cm-new-rule-group.png" alt="cm-new-rule-group.png" width="247" height="386" /><br>
+
+<ul>
+<li><strong>Protocol</strong> - Select any of the <q>Group</q> protocols for group options</li>
+<li><strong>Owner</strong> - Be sure to specify the appropriate value based upon the chosen cloud.​ Typically, you will grant access to security groups within the same cloud account, however you can grant access to a security group in a different cloud account, if desired.
+
+<ul>
+<li><strong>AWS</strong> - Use your 12-digit AWS account number (without spaces). Click <strong>My Account</strong> to prepopulate the field with the AWS account number that&#39;s associated with the current RightScale account.
+
+<ul>
+<li>For an Amazon Elastic Load Balancer (ELB), use the following: amazon-elb</li>
+</ul></li>
+<li><strong>OpenStack</strong> - Specify either the username that was used to create the OpenStack cloud account. (e.g. my-company) or the Tenant ID. To locate the Tenant ID, log in to the cloud console and go to Settings &gt; OpenStack API, and copy the suffix at the end of the Nova Service Endpoint. (e.g. http://50.162.234.224:8774/v1/8a2e587052628a2e587df155d8a2e587)</li>
+</ul></li>
+<li><strong>Group</strong> - Specify the appropriate name or ID of the security group for which the firewall rule applies. 
+
+<ul>
+<li><strong>AWS</strong> - You can either specify the name of the security group (e.g. mySG) or the security group&#39;s Resource UID (e.g. sg-0a1b3456) located under the Info tab.
+
+<ul>
+<li>For an Amazon Elastic Load Balancer (ELB), use the following: amazon-elb-sg</li>
+<li>Remember, you can either specify a different security group or the same security group itself. You can also give a security group from a different cloud account access.</li>
+<li><em>Note</em>: You can only create a group-based firewall rule for a security group that&#39;s within the same cloud/region because the private network must be accessible. For example, in Amazon EC2, you cannot add a security group from &#39;us-east&#39; to a security group in &#39;us-west&#39;.</li>
+</ul></li>
+<li><strong>Google</strong> - Traffic is allowed only from sources with these tags</li>
+<li><strong>OpenStack</strong> - Enter the &#39;Resource UID&#39; of the security group you wish to add. (e.g. 91) You cannot use the security group&#39;s name for this field.</li>
+</ul></li>
+<li><strong>Tag</strong> - Apply the firewall rule to groups with this tag.
+
+<ul>
+<li><strong>Azure</strong> - Default tags are predefined identifiers that represent a category of IP addresses. The VirtualNetwork tag denotes all virtual and local network address spaces. The AzureLoadBalancer tag denotes the IP addresses from where Azure load balancer health probes will originate. The Internet tag denotes the public IP address space.</li>
+</ul></li>
+</ul></li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h2 id="assign-multiple-security-groups-to-an-instance">Assign Multiple Security Groups to an Instance</h2>
+
+<h3 id="assign-multiple-security-groups-to-an-instance-objective">Objective</h3>
+
+<p>Assign multiple security groups to an EC2 server.</p>
+
+<h3 id="assign-multiple-security-groups-to-an-instance-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An unlaunched server. After you launch a server, you cannot add additional security groups to it or remove assigned security groups from it.</li>
+<li>Assigning security groups requires the &#39;actor&#39; role.</li>
+</ul>
+
+<h3 id="assign-multiple-security-groups-to-an-instance-overview">Overview</h3>
+
+<p>Security group ingress rules are additive in nature. For example, if you assign two security groups—&#39;A&#39; and &#39;B&#39;—to a server, and security group &#39;A&#39; has ports 22 and 80 open and security group &#39;B&#39; has ports 22 and 443 open, the server will have ports 22, 80, and 443 open, as shown in the diagram below.</p>
+
+<p><img src="/img/cm-multiple-security-groups.png" alt="cm-multiple-security-groups.png" width="352" height="152" /></p>
+
+<h3 id="assign-multiple-security-groups-to-an-instance-steps">Steps</h3>
+
+<h4 id="servers">Servers</h4>
+
+<p>Provided that a server is not running, you can edit its security groups by opening its properties and clicking <strong>Edit</strong>. In the <q>Server Details</q> screen that displays, use the <q>Security Group(s)</q> drop-down list to select a security group to assign to the server, or click the <strong>New</strong> button to create a new security group for the server.</p>
+
+<p>Clicking the <img src="/img/cm-delete-sec-grp-button.png" alt="cm-delete-sec-grp-button.png" width="18" height="18" /> button next to a security group name removes the server from the security group.</p>
+
+<p><img src="/img/cm-assign-multiple-security-groups.png" alt="cm-assign-multiple-security-groups.png" width="351" height="136" /></p>
+
+<p>When you launch the server, it is included in all security groups specified in its properties.</p>
+
+<h4 id="server-arrays">Server Arrays</h4>
+
+<p>You can also add multiple security groups to a server array under using the same process described in the previous section. All servers launched in the server array are assigned the security groups specified.</p>
+
+<h2 id="create-a-new-security-group-firewall-rule">Create a New Security Group Firewall Rule</h2>
+
+<h3 id="create-a-new-security-group-firewall-rule-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+<li>RightScale account with valid AWS and/or OpenStack credentials</li>
+</ul>
+
+<h3 id="create-a-new-security-group-firewall-rule-overview">Overview</h3>
+
+<p>After you have created a Security Group, you can create different types of firewall rules to control both the <strong>inbound</strong> (requests to the instance) and <strong>outbound</strong> (requests from the instance) firewall permissions. Remember, any instance that is launched into a cloud infrastructure (e.g. AWS EC2), must be assigned at least one security group. And it&#39;s the individual firewall permissions defined within those security groups that determines whether or not an inbound/outbound request will be denied. Although changes to a security group&#39;s firewall rules will immediately affect all running instances (using that security group) it&#39;s recommended that you define a security group&#39;s firewall rules prior to launching instances with that security group.</p>
+
+<p>You can create two different types of firewall rules.</p>
+
+<ul>
+<li><strong>IP-based</strong> - Firewall permissions are granted to either any IP address (e.g. 0.0.0.0/0), a range of IP addresses (e.g. 173.0.0.0/8), or a specific IP address (e.g. 225.0.12/32) using CIDR notation.</li>
+<li><strong>Group-based</strong> - Defines firewall rules that are granted to another security group or to a security group itself.</li>
+</ul>
+
+<p>The following clouds support the use of security groups:</p>
+
+<ul>
+<li>Amazon EC2</li>
+<li>Google Compute Engine</li>
+<li>Microsoft Azure</li>
+<li>OpenStack</li>
+</ul>
+
+<h3 id="create-a-new-security-group-firewall-rule-steps">Steps</h3>
+
+<h4 id="create-an-ip-based-firewall-rule">Create an IP-based Firewall Rule</h4>
+
+<ol>
+<li>Go to <strong>Manage</strong>  &gt; <strong>Networks</strong> and select the network you would like to use.</li>
+<li>Select a security group and go to its <strong>Security Groups</strong> tab.</li>
+<li>Click <strong>New Rule</strong> and make the appropriate selections for your firewall rule.<br>
+<img src="/img/cm-new-rule-ip.png" alt="cm-new-rule-ip.png" width="247" height="386" /><br>
+
+<ul>
+<li><strong>Direction</strong> - Defines if the firewall rule applies to inbound or outbound requests to/from instances.
+
+<ul>
+<li><strong>Inbound</strong> - Requests to instances using the security group.</li>
+<li><strong>Outbound</strong> - Requests from instances using the security group.</li>
+</ul></li>
+<li><strong>Protocol</strong> - Defines the protocol(s) to which the rule applies. (TCP/UDP/ICMP) Several of the most common firewall are predefined for your convenience. (Note: the create rule will allow any &#39;0.0.0.0/0&#39; IP address.
+
+<ul>
+<li><strong>All Protocols - IPs</strong> - Create a rule that allows requests to/from any &#39;0.0.0.0/0&#39; IP address for all TCP and UDP ports, and ICMP 0..0 (depending on the specified direction).</li>
+<li><strong>All Protocols - Group</strong> - Create a rule that allows requests to/from another security group or itself (if specified) over the private network.</li>
+<li><strong>TCP IPs</strong> - Create a rule for a TCP port or range of ports.</li>
+<li><strong>UDP IPs</strong> - Create a rule for a UDP port or range of ports.</li>
+<li><strong>ICMP IPs</strong> - Create a rule for the ICMP protocol.</li>
+<li><strong>Common Rules</strong>
+
+<ul>
+<li>FTP (TCP:21) - This enables standard FTP access to servers.</li>
+<li>SSH (TCP:22): This enables port 22 which grants SSH access into the server.</li>
+<li>HTTP (TCP:80): This enables HTTP access to servers.</li>
+<li>HTTPS (TCP:443): This enables HTTPs access to servers.</li>
+<li>Remote Desktop (3389): This allows you to use to RDP into a Windows server.</li>
+</ul></li>
+</ul></li>
+<li><strong>Ports</strong> - Specify a port or range of ports for the firewall rule. See examples below:
+
+<ul>
+<li><strong>Single Port</strong> : 80 to 80</li>
+<li><strong>Range of Ports</strong> : 8000 to 8050</li>
+</ul></li>
+<li><strong>IP Range</strong> - Specify the IP address or range of IP addresses that will be allowed access. Use the My IP button to populate the field with your machine&#39;s own public IP address. For example, you may want to only give access to your own personal development machine or to your company&#39;s network.
+
+<ul>
+<li><strong>My IP</strong> - 173.225.0.12/32</li>
+</ul></li>
+<li><strong>Priority</strong> (Azure only) - Rules are evaluated based in priority order until a matching rule is found. Once a rule is found, no further rules are evaluated. The lower the value, the higher the priority. If left blank, RightScale will set a high priority with a gap of 100 from the previous priority.</li>
+<li><strong>Action</strong> (Azure only) - Whether to allow or deny if rule matches. Default to Allow.</li>
+</ul></li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h2 id="edit-a-security-group-firewall-rule">Edit a Security Group Firewall Rule</h2>
+
+<h3 id="edit-a-security-group-firewall-rule-overview">Overview</h3>
+
+<p>A security group defines which ports are open to allow incoming or outgoing connections to a server within a network. Security groups essentially act as firewalls in the cloud. They are designed to control who can communicate (i.e., initiate communication) with a server.</p>
+
+<p>Security groups give you a flexible way to restrict server access, allowing you to set restrictions specific to particular protocols, ports, IP addresses, or combinations of these. Permissions defined in a security group are additive in nature; so, if a server has two security groups where one group has port 80 open and the other group has port 80 closed, port 80 will be <em>open</em> (not closed) on the server.</p>
+
+<h3 id="edit-a-security-group-firewall-rule-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="edit-a-security-group-firewall-rule-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> &gt; <em>Select Network</em> &gt; <strong>Security Groups</strong> tab &gt; Select your security group.</li>
+<li>From the Rules section, select the rule with the description you would like to modify. <em>Note</em>: you can only modify the description of one rule at a time. You can select multiple rules and edit the description. The field will be grayed out.
+<img src="/img/cm-security-group-edit-description.png" alt="cm-security-group-edit-description.png" width="725" height="124" /><br></li>
+<li>The description will appear in a new display so it can be modified. <em>Note</em>: Once the description field been populated with text and saved, you cannot edit the field and leave a blank description.</li>
+<li>Once the new description is entered, click Update.</li>
+</ol>
+
+<h2 id="delete-a-security-group-firewall-rule">Delete a Security Group Firewall Rule</h2>
+
+<h3 id="delete-a-security-group-firewall-rule-overview">Overview</h3>
+
+<p>A security group defines which ports are open to allow incoming or outgoing connections to a server within a network. Security groups essentially act as firewalls in the cloud. They are designed to control who can communicate (i.e., initiate communication) with a server.</p>
+
+<p>Security groups give you a flexible way to restrict server access, allowing you to set restrictions specific to particular protocols, ports, IP addresses, or combinations of these. Permissions defined in a security group are additive in nature; so, if a server has two security groups where one group has port 80 open and the other group has port 80 closed, port 80 will be <em>open</em> (not closed) on the server.</p>
+
+<h3 id="delete-a-security-group-firewall-rule-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="delete-a-security-group-firewall-rule-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> &gt; <em>Select Network</em> &gt; <strong>Security Groups</strong> tab &gt; <em>Select Security Group</em>.</li>
+<li>From the Rules section, select the rule or rules you would like to remove.<br>
+<img src="/img/cm-delete-a-security-group.png" alt="cm-delete-a-security-group.png" width="725" height="162" /><br></li>
+<li>Select <strong>Actions</strong> and click <strong>Delete</strong>. A confirmation will display asking if you would like to remove the security group rule or rules.</li>
+<li>Click <strong>Delete</strong>.</li>
+</ol>
+
+<h2 id="view-the-audit-entry-of-a-security-group">View the Audit Entry of a Security Group</h2>
+
+<h3 id="view-the-audit-entry-of-a-security-group-overview">Overview</h3>
+
+<p>A security group defines which ports are open to allow incoming or outgoing connections to a server within a network. Security groups essentially act as firewalls in the cloud. They are designed to control who can communicate (i.e., initiate communication) with a server.</p>
+
+<p>Security groups give you a flexible way to restrict server access, allowing you to set restrictions specific to particular protocols, ports, IP addresses, or combinations of these. Permissions defined in a security group are additive in nature; so, if a server has two security groups where one group has port 80 open and the other group has port 80 closed, port 80 will be <em>open</em> (not closed) on the server.</p>
+
+<h3 id="view-the-audit-entry-of-a-security-group-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h3 id="view-the-audit-entry-of-a-security-group-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> &gt; <em>Select Network</em> &gt; <strong>Security Groups</strong> tab &gt; <em>Select security group</em>.</li>
+<li>From the Audit Entries section, you can see information about the actions performed on the security group. It lists the time, summary, and user that performs an action, such as creating, removing, or modifying the security group. <em>Note</em>: the audit information in this section is different from the Audit Entries tab of the network.
+<img src="/img/cm-security-group-audit-entries.png" alt="cm-security-group-audit-entries.png" width="725" height="219" /></li>
+</ol>
+
+<h2 id="create-a-route-table">Create a Route Table</h2>
+
+<h3 id="create-a-route-table-objective">Objective</h3>
+
+<p>To create a route table that determines the destination of your network traffic.</p>
+
+<h3 id="create-a-route-table-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>You need the &#39;security_manager&#39; role in your RightScale account.</li>
+<li>Currently, route tables can only be created in AWS VPCs.</li>
+</ul>
+
+<h3 id="create-a-route-table-overview">Overview</h3>
+
+<p>A route table contains information that helps direct network traffic to other locations such as another instance or a network gateway. A route table is a database that keeps track of paths of data -- controlling where traffic is coming from and where it is going to.</p>
+
+<p>When a network is creating in the Network Manager, a route table is created by default and directs traffic to the CIDR range of the network. This default route table cannot be modified or deleted. If you would like to direct traffic to either an IP address, instance, or network gateway, you can do so by creating a new route table and creating routes within the table. Subnets, which are smaller CIDR portions of a network, can be associated to a route table. If the route is not specified for a subnet when the subnet is created, it will use the default route table.</p>
+
+<h3 id="create-a-route-table-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> and select the network where you would like to create a route table.</li>
+<li>Go to the <strong>Route</strong>  <strong>Tables</strong> tab and select <strong>New Route</strong>  <strong>Table</strong>.<br>
+<img src="/img/cm-create-new-route-table.png" alt="cm-create-new-route-table.png" width="550" height="424" /><br></li>
+<li>Enter the following:
+
+<ul>
+<li><strong>Network</strong>: The network that this route table is associated with.</li>
+<li><strong>Name</strong>: The user-defined name of the routing table.</li>
+<li><strong>Description</strong>: (Optional) The user-defined description for the route table.</li>
+</ul></li>
+<li>Click <strong>Create</strong>.</li>
+</ol>
+
+<h2 id="create-a-new-route-for-a-route-table">Create a New Route for a Route Table</h2>
+
+<h3 id="create-a-new-route-for-a-route-table-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>You need the &#39;security_manager&#39; role in your RightScale account.</li>
+<li>Currently, route tables can only be created in AWS VPCs.</li>
+</ul>
+
+<h3 id="create-a-new-route-for-a-route-table-overview">Overview</h3>
+
+<p>By default, a route table is created for a network and traffic is directed to the CIDR block address of the network. The default route cannot be modified. If you would like traffic routed outside of the network, such as to an Internet gateway or another network, you will need to create a new route from within a route table. You can create a route in either the default route table or another route table. When you create a route, you will need to specify where the traffic is coming from (the destination CIDR) and where it will be going to (the next hop).</p>
+
+<h3 id="create-a-new-route-for-a-route-table-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Network</strong> &gt; <em>select network</em> &gt; <strong>Route Tables</strong> and select your route table.</li>
+<li>Click <strong>New Route</strong>.<br>
+<img src="/img/cm-create-new-route-for-route-table.png" alt="cm-create-new-route-for-route-table.png" width="550" height="423" /><br></li>
+<li>Enter or select the following:
+
+<ul>
+<li><strong>Destination CIDR</strong>: The CIDR address block of the incoming traffic.</li>
+<li><strong>Next Hop</strong>: The location where the network traffic will be directed. It can either be an internet gateway attached to the network or a NAT instance in a VPC. For example, traffic coming from a CIDR address block of 172.0.0.0/24 will be directed to one of the <strong>Next Hop</strong> options. You can select one of the following:
+
+<ul>
+<li>Local - The default route of the network. When instances are launched within the network, the local route covers those instances by default. The local route cannot be modified.</li>
+<li>IP Address - Route to an individual IP address.</li>
+<li>Instance - Route to an individual instance.</li>
+<li>Network Gateway - Route to an internet gateway or a VPN gateway.</li>
+</ul></li>
+<li><strong>Description</strong>: (Optional) The description of the route.</li>
+</ul></li>
+<li>Click <strong>Create</strong>.</li>
+</ol>
+
+<h2 id="edit-a-route-in-a-route-table">Edit a Route in a Route Table</h2>
+
+<h3 id="edit-a-route-in-a-route-table-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>You need the &#39;security_manager&#39; role in your RightScale account.</li>
+<li>Currently, route tables can only be created in AWS VPCs.</li>
+</ul>
+
+<h3 id="edit-a-route-in-a-route-table-overview">Overview</h3>
+
+<p>Editing a route table allows you to modify the destination CIDR address block, Next Hop, or description of a route within a route table.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You cannot modify the default route that is created for your network.</p>
+</div>
+
+<h3 id="edit-a-route-in-a-route-table-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> &gt; <em>select network</em> &gt; <strong>Route Tables</strong> and find your route table.</li>
+<li>Select your route table and from the <strong>Routes</strong> tab, click <strong>Edit</strong>. You can change a number of settings as described below.<br>
+<img src="/img/cm-edit-a-route.png" alt="cm-edit-a-route.png" width="725" height="312" /><br>
+
+<ul>
+<li><strong>Destination CIDR</strong>: The CIDR location where the network traffic will be directed.</li>
+<li><strong>Next Hop</strong>: The location where the network traffic will be directed. It can either be an internet gateway attached to the network or a NAT instance in a VPC. For example, traffic coming from a CIDR address block of 172.0.0.0/24 will be directed to one of the <strong>Next Hop</strong> options. You can select one of the following:
+
+<ul>
+<li>Local -The default route of the network. When instances are launched within the network, the local route covers those instances by default. The local route cannot be modified.</li>
+<li>IP Address - Route to an individual IP address.</li>
+<li>Instance - Route to an individual instance.</li>
+<li>Network Gateway - Route to an internet gateway or a VPN gateway.</li>
+</ul></li>
+<li><strong>Description</strong>: (Optional) The description of the route.</li>
+<li><strong>Status</strong>: Describes the status of the route.</li>
+<li><strong>Created at</strong>: The date and time that the route was created.</li>
+<li><strong>Last Updated at</strong> :The date and time that the route was updated.</li>
+</ul></li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h2 id="delete-a-route-from-a-route-table">Delete a Route from a Route Table</h2>
+
+<h3 id="delete-a-route-from-a-route-table-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>You need the &#39;security_manager&#39; role in your RightScale account.</li>
+<li>Currently, route tables can only be created in AWS VPCs.</li>
+</ul>
+
+<h3 id="delete-a-route-from-a-route-table-overview">Overview</h3>
+
+<p>Deleting a route will remove the network traffic path of to a specific destination.</p>
+
+<h3 id="delete-a-route-from-a-route-table-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Networks</strong> &gt; <em>select network</em> &gt; <strong>Route Table</strong> and locate the route table you&#39;d like to remove.</li>
+<li>Select your route table and click <strong>Actions</strong> and <strong>Delete</strong>.</li>
+<li>A confirmation will display asking if you want to delete the route. You cannot delete the default local route of the route table.</li>
+<li>Click <strong>Delete</strong>.</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

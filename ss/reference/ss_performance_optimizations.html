@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Performance Optimizations</title><meta content="This page lists some performance optimizations that can be made to make CWF processes run more efficiently." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="ss ss_reference ss_reference_ss_performance_optimizations" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><div class="page-header"><h1>Performance Optimizations</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>The Cloud Workflow system, which is the engine behind RightScale Self-Service, is a complex system backed by several technologies offering high availablility and reliability for running orchestration tasks in the cloud. As such, there are some optimizations that can be made that may not be obvious, but can make processes run more efficiently due to how code is compiled, parsed, and run in the system.</p>
+
+<h2 id="optimizations">Optimizations</h2>
+
+<h3 id="optimizations-limit-api-call-response-sizes">Limit API call response sizes</h3>
+
+<p>When making API calls to external systems, including RightScale Self-Service and Cloud Management, try to minimize response sizes to only the information that is required for processing. This saves time when processing and storing the response in the backend.</p>
+
+<p>For example, many API calls to RightScale systems allow the specification of different <q>views</q>, each of which provide a different set of information in the response. Many calls also allow for <q>filters</q> in order to limit the response only to those resources that are needed.</p>
+
+<p><strong>Ensure that all API calls being made are returning only the minimal amount of information required by leveraging filters and views in the request.</strong></p>
+
+<h4 id="example">Example</h4>
+
+<p>For example, the <a href="http://reference.rightscale.com/selfservice/manager/index.html#/1.0/controller/V1::Controller::Execution">Self-Service Execution index</a> API supports 5 different views -- make sure you are using the minimal view that contains the data you need.</p>
+
+<p><strong>Note:</strong> At this time there is a bug such that the <code>Execution.show</code> call can not be used with the <code>tiny</code> view, instead make an <code>Execution.index</code> call using both the view and the filter to specify the execution.</p>
+
+<p>The following code gets the name of the CAT that this CloudApp was created from using this approach.</p>
+<pre class="syntax-highlight ruby"><code>  <span class="vg">$id</span> <span class="o">=</span> <span class="vc">@@execution</span><span class="p">.</span><span class="nf">id</span>
+  <span class="vi">@execution_data</span> <span class="o">=</span> <span class="n">rs_ss</span><span class="p">.</span><span class="nf">executions</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">ids: </span><span class="p">[</span><span class="vg">$id</span><span class="p">],</span> <span class="ss">view: </span><span class="s2">"tiny"</span><span class="p">)</span>
+  <span class="vg">$execution_json</span> <span class="o">=</span> <span class="n">to_object</span><span class="p">(</span><span class="vi">@execution_data</span><span class="p">)</span>
+  <span class="vg">$ss_cat_name</span> <span class="o">=</span> <span class="vg">$execution_json</span><span class="p">[</span><span class="s2">"details"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"launched_from_summary"</span><span class="p">][</span><span class="s2">"value"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>  
+</code></pre>
+
+<h3 id="optimizations-work-with-large-hashes-datasets-inside-of-definitions">Work with large hashes/datasets inside of definitions</h3>
+
+<p>Whenever you work with large datasets, whether they are variables internal to your CAT or they are responses from an external API, do the work in a small definition isolated only to that work. This helps because sometimes the CWF system needs to save the <q>state</q> of the process, which includes any variables that are part of the CAT. If there are massive variables <q>in-scope</q> when a state save occurs, this can cause performance issues or hit limits internal to the system. If this work is done within a definition, then the variable is only in scope for a limited amount of time and there is less likelihood of a state save occuring when interacting with the variable.</p>
+
+<h4 id="example">Example</h4>
+
+<p>For example, if you are working with a large response from an API, create a definition to <strong>only</strong> do that, keeping the large response in scope for a limited time.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">define</span> <span class="n">get_image_id</span><span class="p">()</span> <span class="k">return</span> <span class="vg">$image_href</span><span class="p">,</span> <span class="vg">$image_name</span> <span class="k">do</span>
+  <span class="c1"># Big API call</span>
+  <span class="vg">$all_images</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">images</span><span class="p">.</span><span class="nf">get</span><span class="p">()</span>
+
+  <span class="c1"># Very large response stored in @image - don't keep it around very long</span>
+  <span class="vi">@image</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span><span class="nb">select</span><span class="p">(</span><span class="n">sort</span><span class="p">(</span><span class="vi">@all_images</span><span class="p">,</span> <span class="s1">'name'</span><span class="p">,</span> <span class="s1">'desc'</span><span class="p">),</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"scoobydoo"</span><span class="p">}))</span>
+  <span class="vg">$image_href</span> <span class="o">=</span> <span class="vi">@image</span><span class="p">.</span><span class="nf">href</span>
+  <span class="vg">$image_name</span> <span class="o">=</span> <span class="vi">@image</span><span class="p">.</span><span class="nf">name</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="optimizations-with-giant-hashes,-use-json-instead">With giant hashes, use JSON instead</h3>
+
+<p>If you have a need to work with overly large hashes for any reason (many hundreds/thousands of characters), the CWF backend is more efficient at parsing and referencing the hash if it is a JSON string and then loaded into a hash using the <a href=""><code>from_json</code></a> function. This is due to the internals of CWF, and while not intuitive, will increase performance.</p>
+<pre class="syntax-highlight ruby"><code>  <span class="c1"># Less efficient</span>
+  <span class="vg">$massive_hash</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"key1"</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s2">"keysub1"</span> <span class="o">=&gt;</span> <span class="s2">"some value"</span><span class="p">,</span> <span class="s2">"keysub2"</span> <span class="o">=&gt;</span> <span class="s2">"some other value"</span><span class="p">},</span> <span class="s2">"key2"</span> <span class="o">=&gt;</span> <span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">.</span><span class="o">.</span> <span class="p">}</span>
+
+  <span class="c1"># More efficient</span>
+  <span class="vg">$massive_hash</span> <span class="o">=</span> <span class="n">from_json</span><span class="p">(</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">key1</span><span class="se">\"</span><span class="s2">: { </span><span class="se">\"</span><span class="s2">keysub1</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">some value</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">keysub2</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">some other value</span><span class="se">\"</span><span class="s2">}, </span><span class="se">\"</span><span class="s2">key2</span><span class="se">\"</span><span class="s2">: }"</span><span class="p">)</span>
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

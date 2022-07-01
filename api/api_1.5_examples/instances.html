@@ -1,0 +1,524 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Instances</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Instances</h1></div><div class="main-content"><h2 id="list-inputs-for-current-and-next-instance">List Inputs for Current and Next Instance</h2>
+
+<p>List all the Inputs for both the <q>current</q> and <q>next</q> instance. Capture the inputs to an XML file for later comparison.</p>
+
+<h3 id="list-inputs-for-current-and-next-instance-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p><strong>Note</strong> : Two invokations of the API. XML output saved in a file named <em><ThisScriptName>_Current.xml and &lt;</em>ThisScriptName_&gt;<em>Next.xml</em></p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">CLOUD</span><span class="o">=</span><span class="s2">"2112"</span>
+    <span class="nv">CURRENT</span><span class="o">=</span><span class="s2">"734PUMJGR7QNF"</span> <span class="c"># Set Current instance ID. Get from the API, listing/showing a Server or Instance.</span>
+    <span class="nv">NEXT</span><span class="o">=</span><span class="s2">"B469CS55K5VRQ"</span> <span class="c"># Set the Next instance ID. Also obtained from the API.</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+    -X GET https://my.rightscale.com/api/clouds/<span class="nv">$CLOUD</span>/instances/<span class="nv">$CURRENT</span>/inputs.xml &gt; <span class="nv">$0_Current</span>.xml
+    curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+    -X GET https://my.rightscale.com/api/clouds/<span class="nv">$CLOUD</span>/instances/<span class="nv">$NEXT</span>/inputs.xml &gt; <span class="nv">$0_Next</span>.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : The example script above saves all output to an XML file. A sample output file is shown below (without HTTP headers).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;inputs&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:any&lt;/value&gt;
+        &lt;name&gt;sys_firewall/rule/ip_address&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;rightscale/process_match_list&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:tcp&lt;/value&gt;
+        &lt;name&gt;sys_firewall/rule/protocol&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;logging/remote_server&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;rightscale/process_list&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:time.rightscale.com, ec2-us-east.time.rightscale.com, ec2-us-wes
+    t.time.rightscale.com&lt;/value&gt;
+        &lt;name&gt;sys_ntp/servers&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:enable&lt;/value&gt;
+        &lt;name&gt;sys_firewall/rule/enable&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:&lt;/value&gt;
+        &lt;name&gt;sys_firewall/rule/port&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:/mnt/ephemeral/swapfile&lt;/value&gt;
+        &lt;name&gt;sys/swap_file&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:0.5&lt;/value&gt;
+        &lt;name&gt;sys/swap_size&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:UTC&lt;/value&gt;
+        &lt;name&gt;rightscale/timezone&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:enabled&lt;/value&gt;
+        &lt;name&gt;sys_firewall/enabled&lt;/name&gt;
+      &lt;/input&gt;
+    &lt;/inputs&gt;
+</code></pre>
+
+<h4 id="supplemental">Supplemental</h4>
+
+<p>Some might find running a simple diff command on the Current and Next XML output files helpful. The following will display differences in the Inputs for the Current and Next server instances.</p>
+
+<p>$ diff Current.xml Next.xml # Where <q>Current</q> and <q>Next</q> are the actual full file names to be compared.</p>
+
+<p>Note that this will report differences in the date, runtime, cookie and request. Perhaps not elegant, but that can be easily stripped away with the following command pipeline. What is left are legitimate input differences.</p>
+
+<p>$ diff Current.xml Next.xml | grep -v Date | grep -v Runtime | grep -v Cookie | grep -v Request</p>
+
+<h3 id="list-inputs-for-current-and-next-instance-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call---current">Example Call - Current</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+
+    $CLOUD = '2175' # Set the Cloud ID
+    $CURRENT = '34NM8MNFGPE45' # Set Current instance ID. Get from the API,listing/showing a Server or Instance.
+                               # For example, See the "List All Servers in a Deployment" example.
+
+    $webRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/clouds/$CLOUD/instances/$CURRENT/inputs.xml")
+    $webRequest.Method = "GET"
+    $webRequest.CookieContainer = $cookieContainer
+    $webRequest.Headers.Add("X_API_VERSION", "1.5");
+
+    [System.Net.WebResponse] $listInstanceTypesResponse = $webRequest.GetResponse()
+    $listInstanceTypesResponseStream = $listInstanceTypesResponse.GetResponseStream()
+    $listInstanceTypesResponseStreamReader = New-Object System.IO.StreamReader -argumentList $listInstanceTypesResponseStream
+    [string]$listInstanceTypesResponseString = $listInstanceTypesResponseStreamReader.ReadToEnd()
+    write-host $listInstanceTypesResponseStrin
+</code></pre>
+
+<h4 id="sample-output---current">Sample Output - Current</h4>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;inputs&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:UTC&lt;/value&gt;
+        &lt;name&gt;SYS_TZINFO&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;env:RS_INSTANCE_UUID&lt;/value&gt;
+        &lt;name&gt;SERVER_UUID&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;env:RS_SKETCHY&lt;/value&gt;
+        &lt;name&gt;SKETCHY&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;MON_PROCESSMATCH&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;MON_PROCESSES&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:disable&lt;/value&gt;
+        &lt;name&gt;SECURITY_UPDATES&lt;/name&gt;
+      &lt;/input&gt;
+    &lt;/inputs&gt;
+</code></pre>
+
+<h4 id="example-call---next">Example Call - Next</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+
+    $CLOUD = '2175' # Set the Cloud ID.
+    $NEXT ='3PLSU71PF2BJS' # Set the Next instance ID. Also obtained from the API. See the List All Servers in a Deployment.
+
+    $webRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/clouds/$CLOUD/instances/$NEXT/inputs.xml")
+    $webRequest.Method = "GET"
+    $webRequest.CookieContainer = $cookieContainer
+    $webRequest.Headers.Add("X_API_VERSION", "1.5");
+
+    [System.Net.WebResponse] $listInstanceTypesResponse = $webRequest.GetResponse()
+    $listInstanceTypesResponseStream = $listInstanceTypesResponse.GetResponseStream()
+    $listInstanceTypesResponseStreamReader = New-Object System.IO.StreamReader -argumentList $listInstanceTypesResponseStream
+    [string]$listInstanceTypesResponseString = $listInstanceTypesResponseStreamReader.ReadToEnd()
+    write-host $listInstanceTypesResponseString
+</code></pre>
+
+<h4 id="sample-output---next">Sample Output - Next</h4>
+
+<p>Note that the Next Instance Input values have been altered from the Current Instance (previous example). See <strong>sshd</strong> and <strong>crond</strong> in bold below.</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;inputs&gt;
+      &lt;input&gt;
+        &lt;value&gt;env:RS_SKETCHY&lt;/value&gt;
+        &lt;name&gt;SKETCHY&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;env:RS_INSTANCE_UUID&lt;/value&gt;
+        &lt;name&gt;SERVER_UUID&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;MON_PROCESSMATCH&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:sshd crond&lt;/value&gt;
+        &lt;name&gt;MON_PROCESSES&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:disable&lt;/value&gt;
+        &lt;name&gt;SECURITY_UPDATES&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:UTC&lt;/value&gt;
+        &lt;name&gt;SYS_TZINFO&lt;/name&gt;
+      &lt;/input&gt;
+    &lt;/inputs&gt;
+</code></pre>
+
+<h2 id="multi-run-executable">Multi-Run Executable</h2>
+
+<p>Runs a RightScript or Chef Recipe on multiple active RightScale Servers.</p>
+
+<h3 id="multi-run-executable-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="basic-example">Basic Example</h4>
+
+<p><strong>Note</strong> :</p>
+
+<ul>
+<li>This is similar to <a href="/api/api_1.5_examples/instances.html">Run Executable</a>, but instead of running on a single active running server, this script updates multiple active servers, which is beneficial for running a script or recipe on server arrays.</li>
+<li>When specifying RightScale input(s), you must declare both the name and value.</li>
+<li>The example below runs a recipe.</li>
+</ul>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">cloud_id</span><span class="o">=</span><span class="s2">"3"</span>
+    curl -i -H X_API_Version:1.5 -b mycookie -X POST <span class="se">\</span>
+     -d <span class="nv">recipe_name</span><span class="o">=</span><span class="s2">"sys_firewall::setup_rule"</span> <span class="se">\</span>
+     -d inputs[][name]<span class="o">=</span><span class="s2">"sys_firewall/rule/enable"</span> <span class="se">\</span>
+     -d inputs[][value]<span class="o">=</span><span class="s2">"text:enable"</span> <span class="se">\</span>
+     -d inputs[][name]<span class="o">=</span><span class="s2">"sys_firewall/rule/ip_address"</span> <span class="se">\</span>
+     -d inputs[][value]<span class="o">=</span><span class="s2">"text:any"</span> <span class="se">\</span>
+     -d inputs[][name]<span class="o">=</span><span class="s2">"sys_firewall/rule/port"</span> <span class="se">\</span>
+     -d inputs[][value]<span class="o">=</span><span class="s2">"text:22"</span><span class="se">\</span>
+     -d inputs[][name]<span class="o">=</span><span class="s2">"sys_firewall/rule"</span> <span class="se">\</span>
+     -d inputs[][value]<span class="o">=</span><span class="s2">"text:tcp"</span> <span class="se">\</span>
+    https://my.rightscale.com/api/clouds/<span class="nv">$cloud_id</span>/instances/multi_run_executable.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 202 Accepted
+    Server: nginx/1.0.14
+    Date: Fri, 15 Mar 2013 18:02:56 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 202 Accepted
+    Location: /api/clouds/3/instances/6A5PGI1SG74RN/live/tasks/ae-160056990003
+    X-Runtime: 2862
+    X-Request-Uuid: bf9159a6497440f3be3ec6c7e0f16a3e
+    Set-Cookie:
+    Cache-Control: no-cache
+</code></pre>
+
+<h3 id="multi-run-executable-right_api_client">Right_api_client</h3>
+
+<h4 id="basic-example">Basic Example</h4>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>This example runs an executable on multiple instances, even if they are outside of a Server Array</li>
+<li>This is similar to <a href="/api/api_1.5_examples/instances.html">Run Executable</a>, but instead of running on a single active running server, this script updates multiple active servers.</li>
+<li>By default, the executable will be run on every instance specified in the cloud unless additional filters are given.</li>
+<li>When specifying RightScale input(s), you must declare both the name and value.</li>
+<li>To run this script, you must know your Cloud ID as well as the Chef recipe name or Rightscript HREF, which are both obtainable from the Rightscale dashboard or using other API 1.5 calls.</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    ## Example that runs a Rightscript on all cloud instances in a single cloud with a single input
+    ## Also stores the returned task object as 'task,' which in turn can be used to check summary/status
+
+    task = @client.clouds.index(:id =&gt; 3).show.instances.multi_run_executable(:right_script_href =&gt; '/api/right_scripts/500272003', :inputs =&gt; {'INPUT1' =&gt; "text:TestValue1"})
+
+    ## Same command, only runs a Chef recipe by name instead of a Rightscript by HREF
+
+    task = @client.clouds.index(:id =&gt; 3).show.instances.multi_run_executable(:recipe_name =&gt; 'sys_firewall::setup_rule', :inputs =&gt; {'INPUT1' =&gt; "text:TestValue1"})
+</code></pre>
+
+<h4 id="advanced-examples">Advanced Examples</h4>
+
+<h4 id="filtering-for-specific-instances">Filtering for Specific Instances</h4>
+
+<p>This example is similar to the above example, however many people may not wish to run the recipe or Rightscript on every instance in a single cloud. The below example allows you to run the recipe or Rightscript on specific instances defined with filters, such as:</p>
+
+<ul>
+<li>In a specific cloud</li>
+<li>Within a specific Deployment</li>
+<li><p>Contains a specific string in it&#39;s Nickname</p>
+<pre class="syntax-highlight plaintext"><code>## Uses deployment_href and name filters to specify only instances within a Deployment that contain a specific string in their name
+
+@client.clouds.index(:id =&gt; 3).show.instances.multi_run_executable(:filter =&gt; ['deployment_href==/api/deployments/434815003','name==#2'], :right_script_href =&gt; '/api/right_scripts/500272003', :inputs =&gt; {'INPUT1' =&gt; "text:TestValue1"})
+</code></pre></li>
+</ul>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>Sample output below comes from interactive Ruby shell (IRB) and uses sample script and server IDs. Your script HREF and server ID would be different in your own output.</li>
+<li>Sample output includes commands issued from example above.</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    ## IRB Output from Rightscript run with one input.
+
+    irb(main):025:0&gt; task = @client.clouds.index(:id =&gt; 3).show.instances.multi_run_executable(:right_script_href =&gt; '/api/right_scripts/500272003', :inputs =&gt; {'INPUT1' =&gt; "text:TestValue1"})
+    =&gt; #&lt;RightApi::Resource resource_type="task"&gt;
+
+    ## IRB Output from Chef recipe run
+
+    irb(main):017:0&gt; task = @client.clouds.index(:id =&gt; 3).show.instances.multi_run_executable(:recipe_name =&gt; 'sys_firewall::setup_rule', :inputs =&gt; {'INPUT1' =&gt; "text:TestValue1"})
+    =&gt; {"links"=&gt;[], "summary"=&gt;"0%: Multi run executable action for instances through API.", "actions"=&gt;[]}
+
+    ## Follows up on the task status
+
+    irb(main):029:0&gt; task.show.summary
+    =&gt; "completed: Multi run executable action for instances through API."
+</code></pre>
+
+<p>Navigating to any affected instance, then clicking on the <strong>Audit Entries</strong> tab will also give you status of the script/recipe run from the right_api_client or Curl command, as seen here:</p>
+
+<p><img src="/img/api_right_api_client_multi_run_output.png" alt="api_right_api_client_multi_run_output.png" width="725" height="317" /></p>
+
+<h2 id="run-executable">Run Executable</h2>
+
+<p>Runs a RightScript or Chef Recipe on an active RightScale Server.</p>
+
+<h3 id="run-executable-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="basic-example">Basic Example</h4>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>This is similar to <a href="/api/api_1.5_examples/instances.html">Multi-Run Executable</a>, but instead of running on a multiple active servers, this script updates only one server.</li>
+<li>This can only be executed on a RightScale Server with an active instance (the INSTANCEID variable is the instance ID which can be retrieved from a call such as <a href="/api/api_1.5_examples/servers.html">List Servers</a>).</li>
+<li>When specifying RightScale input(s), you must declare both the name and value.</li>
+<li>The example below runs a RightScript.</li>
+</ul>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">CLOUD</span><span class="o">=</span><span class="s2">"232"</span>
+    <span class="nv">INSTANCEID</span><span class="o">=</span><span class="s2">"9AOF4L3DC3IV4"</span> <span class="c"># Instance ID of the running instance. Obtain from the API</span>
+    <span class="nv">RIGHTSCRIPT</span><span class="o">=</span><span class="s2">"416366"</span> <span class="c"># RightScript ID to run. Can get this from the API or the UI/URL.</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d <span class="nv">right_script_href</span><span class="o">=</span>/api/right_scripts/<span class="nv">$RIGHTSCRIPT</span> <span class="se">\</span>
+    -d inputs[][name]<span class="o">=</span><span class="s2">"DNS_DOMAIN_ID"</span> <span class="se">\</span>
+    -d inputs[][value]<span class="o">=</span><span class="s2">"text:9623906"</span> <span class="se">\</span>
+    -d inputs[][name]<span class="o">=</span><span class="s2">"DNS_RECORD_ID"</span> <span class="se">\</span>
+    -d inputs[][value]<span class="o">=</span><span class="s2">"text:ExampleRightAPI"</span> <span class="se">\</span>
+    -d inputs[][name]<span class="o">=</span><span class="s2">"DNS_RECORD_IP"</span> <span class="se">\</span>
+    -d inputs[][value]<span class="o">=</span><span class="s2">"text:public"</span> <span class="se">\</span>
+    https://my.rightscale.com/api/clouds/<span class="nv">$CLOUD</span>/instances/<span class="nv">$INSTANCEID</span>/run_executable
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 202 Accepted
+    Server: nginx/1.0.15
+    Date: Fri, 21 Dec 2012 00:05:26 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 202 Accepted
+    Location: /api/clouds/232/instances/9AOF4L3DC3IV4/live/tasks/ae-110022913001
+    X-Runtime: 2959
+    X-Request-Uuid: 31b3ee03337143b596fd70f457f47f82
+    Set-Cookie:
+    Cache-Control: no-cache
+</code></pre>
+
+<h4 id="advanced-example">Advanced Example</h4>
+
+<p>This example from <a href="https://github.com/flaccid/rs_api_examples">rs_api_examples</a> demonstrates running a recipe (also supports usage of API 1.0 from the CLI).</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/bash -e</span>
+
+    <span class="c"># rs-run-recipe.sh &lt;server_or_instance_id&gt; &lt;recipe_name&gt; [[extra curl post params]]</span>
+
+    <span class="c"># e.g. rs-run-recipe.sh 516031001 "rightscale::default" "server[ignore_lock]=true"</span>
+    <span class="c">#</span>
+    <span class="c"># For API 1.5:</span>
+    <span class="c"># rs_api_version=1.5 rs_cloud_id=1869 rs-run-recipe.sh 1SR4O53A7PLFA "rightscale::setup_timezone" "inputs[][name]=rightscale/timezone" "inputs[][value]=text:Australia/Sydney"</span>
+
+    <span class="o">[[</span>! <span class="nv">$1</span><span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'No server_id ID provided, exiting.'</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1
+    <span class="o">[[</span>! <span class="nv">$2</span><span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'No recipe name provided, exiting.'</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1
+
+    . <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.rightscale/rs_api_config.sh"</span>
+    . <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.rightscale/rs_api_creds.sh"</span>
+
+    <span class="nv">server_id</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+    <span class="nv">recipe</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+    <span class="nb">shift</span>; <span class="nb">shift
+    </span><span class="k">for </span>arg <span class="k">in</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>; <span class="k">do
+        </span>args+<span class="o">=(</span>-d <span class="s2">"</span><span class="nv">$arg</span><span class="s2">"</span><span class="o">)</span>
+    <span class="k">done</span>
+
+    <span class="c"># needs all common public cloud IDs inserted or substitute with API call if possible</span>
+    <span class="k">case</span> <span class="s2">"</span><span class="nv">$rs_cloud_id</span><span class="s2">"</span> <span class="k">in
+      </span>1<span class="p">)</span>
+        <span class="nv">rs_cloud</span><span class="o">=</span><span class="s2">"AWS US-East"</span>
+      <span class="p">;;</span>
+      1869<span class="p">)</span>
+        <span class="nv">rs_cloud</span><span class="o">=</span><span class="s2">"Softlayer"</span>
+      <span class="p">;;</span>
+      <span class="k">*</span><span class="p">)</span>
+        <span class="nv">rs_cloud</span><span class="o">=</span><span class="s2">"</span><span class="nv">$rs_cloud_id</span><span class="s2">"</span>
+      <span class="p">;;</span>
+    <span class="k">esac</span>
+
+    <span class="k">case</span> <span class="nv">$rs_api_version</span> <span class="k">in</span>
+        <span class="k">*</span>1.0<span class="k">*</span><span class="p">)</span>
+        <span class="nv">api_url</span><span class="o">=</span><span class="s2">"https://my.rightscale.com/api/acct/</span><span class="nv">$rs_api_account_id</span><span class="s2">/servers/</span><span class="nv">$server_id</span><span class="s2">/current/run_executable"</span>
+        <span class="nb">echo</span> <span class="s2">"Running Chef recipe [</span><span class="nv">$recipe</span><span class="s2">] on Server [</span><span class="nv">$server_id</span><span class="s2">]."</span>
+        <span class="nb">echo</span> <span class="s2">"[API </span><span class="nv">$rs_api_version</span><span class="s2">] POST: </span><span class="nv">$api_url</span><span class="s2">"</span>
+        <span class="nv">api_result</span><span class="o">=</span><span class="k">$(</span>curl -s -S -i -X POST -b <span class="s2">"</span><span class="nv">$rs_api_cookie</span><span class="s2">"</span> -H X-API-VERSION:<span class="s2">"</span><span class="nv">$rs_api_version</span><span class="s2">"</span> -d server[recipe]<span class="o">=</span><span class="s2">"</span><span class="nv">$recipe</span><span class="s2">"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">args</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$api_url</span><span class="s2">"</span><span class="k">)</span>
+        <span class="k">case</span> <span class="s2">"</span><span class="nv">$api_result</span><span class="s2">"</span> <span class="k">in</span>
+          <span class="k">*</span>Status:<span class="se">\ </span>201<span class="k">*</span><span class="p">)</span>
+            <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$api_result</span><span class="s2">"</span> | awk <span class="s1">'/^Location:/ { print $2 }'</span>
+          <span class="p">;;</span>
+          <span class="k">*</span><span class="p">)</span>
+            <span class="nb">echo</span> <span class="s2">"FAILED: </span><span class="nv">$api_result</span><span class="s2">"</span>
+          <span class="p">;;</span>
+        <span class="k">esac</span>
+        <span class="p">;;</span>
+      <span class="k">*</span>1.5<span class="k">*</span><span class="p">)</span>
+        <span class="nv">instance_id</span><span class="o">=</span><span class="s2">"</span><span class="nv">$server_id</span><span class="s2">"</span>
+        <span class="nv">api_url</span><span class="o">=</span><span class="s2">"https://my.rightscale.com/api/clouds/</span><span class="nv">$rs_cloud_id</span><span class="s2">/instances/</span><span class="nv">$instance_id</span><span class="s2">/run_executable"</span>
+        <span class="nb">echo</span> <span class="s2">"Running Chef recipe [</span><span class="nv">$recipe</span><span class="s2">] on Instance [</span><span class="nv">$server_id</span><span class="s2">] in cloud [</span><span class="nv">$rs_cloud</span><span class="s2">]."</span>
+        <span class="nb">echo</span> <span class="s2">"[API </span><span class="nv">$rs_api_version</span><span class="s2">] POST: </span><span class="nv">$api_url</span><span class="s2">"</span>
+        <span class="nv">api_result</span><span class="o">=</span><span class="k">$(</span>curl -s -S -i -X POST -b <span class="s2">"</span><span class="nv">$rs_api_cookie</span><span class="s2">"</span> -H X-API-VERSION:<span class="s2">"</span><span class="nv">$rs_api_version</span><span class="s2">"</span> -d <span class="nv">recipe_name</span><span class="o">=</span><span class="s2">"</span><span class="nv">$recipe</span><span class="s2">"</span> <span class="s2">"</span><span class="k">${</span><span class="nv">args</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$api_url</span><span class="s2">"</span><span class="k">)</span>
+        <span class="k">case</span> <span class="s2">"</span><span class="nv">$api_result</span><span class="s2">"</span> <span class="k">in</span>
+          <span class="k">*</span>Status:<span class="se">\ </span>202<span class="se">\ </span>Accepted<span class="k">*</span><span class="p">)</span>
+            <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$api_result</span><span class="s2">"</span> | awk <span class="s1">'/^Location:/ { print $2 }'</span>
+          <span class="p">;;</span>
+          <span class="k">*</span><span class="p">)</span>
+            <span class="nb">echo</span> <span class="s2">"FAILED: </span><span class="nv">$api_result</span><span class="s2">"</span>
+          <span class="p">;;</span>
+        <span class="k">esac</span>
+        <span class="p">;;</span>
+    <span class="k">esac</span>
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>(includes the command issued)</p>
+<pre class="syntax-highlight plaintext"><code>    $ rs_api_version=1.5 rs_cloud_id=1869 ./rs-run-recipe.sh 1SR4O53A7PLFA "rightscale::setup_timezone" "inputs[][name]=rightscale/timezone" "inputs[][value]=text:Australia/Sydney"
+    Running Chef recipe [rightscale::setup_timezone] on Instance [1SR4O53A7PLFA] in cloud [Softlayer].
+    [API 1.5] POST: https://my.rightscale.com/api/clouds/1869/instances/1SR4O53A7PLFA/run_executable
+    /api/clouds/1869/instances/1SR4O53A7PLFA/live/tasks/ae-123025717001
+</code></pre>
+
+<h3 id="run-executable-right_api_client">right_api_client</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> using right_api_client.</p>
+
+<h4 id="basic-example">Basic Example</h4>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>This can only be executed on a RightScale Server with an active instance (the SERVERID variable is the server ID which can be retrieved from a call such as <a href="/api/api_1.5_examples/servers.html">List Servers</a> or by viewing the dashboard URL of the server).</li>
+<li>The example below runs a RightScript.</li>
+<li>When specifying RightScale input(s), you must declare both the name and value.</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    ## Sets necessary variables for right_script_href and server ID and sets input names and values
+    script_href = "right_script_href=/api/right_scripts/500272003"
+    serverid = 920583003
+    ## replace "INPUT1/2" and "VALUE1/2" with the name/value of your input accordingly
+    inputs = "&amp;inputs[][name]=INPUT1&amp;inputs[][value]=text:VALUE1&amp;inputs[][name]=INPUT2&amp;inputs[][value]=text:VALUE2"
+
+    ## Runs the actual script/executable designated in script_href variable on the server
+    task = @client.servers(:id =&gt; serverid).show.current_instance.show.run_executable(script_href + inputs)
+
+    ## Shows the task summary, which is the same as the audit entry summary in the dashboard (failed, completed, etc.)
+    task.show.summary
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>Sample output below comes from interactive Ruby shell (IRB) and uses sample script and server IDs. Your script HREF and server ID would be different in your own output.</li>
+<li>task.show.summary is run 3 times to show the various <q>phases</q> of the script&#39;s execution on the server</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    script_href = "right_script_href=/api/right_scripts/500272003"
+    =&gt; "right_script_href=/api/right_scripts/500272003"
+    serverid = 920583003
+    =&gt; 920583003
+    inputs = "&amp;inputs[][name]=INPUT1&amp;inputs[][value]=text:VALUE1"
+    =&gt; "&amp;inputs[][name]=INPUT1&amp;inputs[][value]=text:VALUE1"
+    task = @client.servers(:id =&gt; serverid).show.current_instance.show.run_executable(script_href)
+    =&gt; #&lt;RightApi::Resource resource_type="task"&gt;
+    task.show.summary
+    =&gt; "Querying tags"
+    task.show.summary
+    =&gt; "Preparing execution"
+    task.show.summary
+    =&gt; "completed: GB API Test"
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

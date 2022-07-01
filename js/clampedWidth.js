@@ -1,0 +1,1 @@
+$(document).ready(function(){$("[data-clampedwidth]").each(function(){var t=$(this),e=t.data("clampedwidth"),n=function(){var n=$(e).width()-parseInt(t.css("paddingLeft"))-parseInt(t.css("paddingRight"))-parseInt(t.css("marginLeft"))-parseInt(t.css("marginRight"))-parseInt(t.css("borderLeftWidth"))-parseInt(t.css("borderRightWidth"));t.css("width",n)};n(),$(window).resize(n)})});

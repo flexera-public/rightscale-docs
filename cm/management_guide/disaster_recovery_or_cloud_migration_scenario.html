@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Disaster Recovery or Cloud Migration Scenario</title><meta content="Guidelines and procedures for Cloud Migration and Disaster Recovery using the RightScale Cloud Management Platform including database backup, deployment cloning, load balancer tier setup, and other helpful topics." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_management_guide cm_management_guide_disaster_recovery_or_cloud_migration_scenario" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Lifecycle Management</a></p><div class="page-header"><h1>Disaster Recovery or Cloud Migration Scenario</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To recreate a 3-tier website architecture in a different cloud to simulate a disaster recovery scenario or deployment migration.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li><q>actor</q> and <q>designer</q> user role privileges</li>
+<li>Valid cloud credentials associated with the RightScale account for the cloud that you are going to use to recreate the 3 tier setup.</li>
+<li>An operational 3-tier deployment.</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>What would happen if there was a major failure in the cloud where your site is currently deployed? Or perhaps your cloud credentials were compromised and now you have to redeploy your site in a different cloud. Or perhaps you simply need to migrate to a different cloud for other non-critical reasons. The following tutorial will explain how you can easily redeploy your website architecture in a different cloud infrastructure with RightScale&#39;s multi-cloud ServerTemplates.</p>
+
+<p><img src="/img/cm-3tier-dr.png" alt="cm-3tier-dr.png" width="725" height="381" /></p>
+
+<p>In the diagram above, the original deployment (on the left) in <em>Cloud X</em> (e.g. AWS) supports the use of volumes for data storage. Therefore, primary backups are saved as volume snapshots. For disaster recovery purposes, a secondary backup of the database is saved to a Remote Object Storage (ROS) location of a different cloud provider (e.g. Rackspace Cloud Files). The secondary backup becomes the key component in a disaster recovery scenario. In the event of a catastrophic cloud failure where servers are no longer functional or become inaccessible, and you need to rapidly redeploy your site in a different cloud infrastructure, you can use the secondary backup for disaster recovery purposes.</p>
+
+<p>Similarly, you could also follow the same procedure outside of a disaster recovery scenario for safely migrating your deployment across two different clouds or regions. For example, you would need to follow the procedure outlined below to move a site architecture across different AWS-regions (e.g. &#39;us-east&#39; to &#39;us-west&#39;) since volume snapshots are cloud-specific.</p>
+
+<p>In the diagram, <em>Cloud Y</em> is the <q>failover</q> cloud (i.e. the cloud where you will recreate the site architecture by launching new servers). In order to set up the database tier in the <q>failover</q> cloud, you will use the secondary backup to restoration purposes.</p>
+
+<p>Fortunately, you can restore your database and recreate your architecture in a different cloud with just a few clicks in the RightScale dashboard.</p>
+
+<p><strong>Note</strong>: Currently, you must manually create a secondary backup by running the <strong>db::do_secondary_backup</strong> operational script on either the master or slave database server.</p>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-take-a-secondary-backup">Take a Secondary Backup</h3>
+
+<p>The first step is to create a secondary backup in the <q>failover</q> cloud. For example, if you want to failover from an AWS region to Rackspace Open Cloud, you will neeed to create and save a secondary backup in a Rackspace Cloud Files container. Similarly, if your servers are currently deployed in AWS &#39;us-east&#39; and you want to migrate to servers in AWS &#39;us-west&#39; instead, create and save a secondary backup to an S3 bucket.</p>
+
+<p>Since you do not want to impact the <q>master</q> database server, it&#39;s recommended that you use the <q>slave</q> database server to create the secondary backup. Go to the <q>slave</q> database server&#39;s (current) <strong>Inputs</strong> tab and provide values for the following inputs.</p>
+
+<h4 id="block_device">BLOCK_DEVICE</h4>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Secondary Backup Storage Cloud (default)</td>
+<td>The name of the ROS service that will be used to store the secondary backup(s). (e.g. Rackspace Cloud Files)</td>
+<td>text: cloudfiles</td>
+</tr>
+<tr>
+<td>Secondary Backup Secret (default)</td>
+<td>Provide valid cloud credentials so that you can create a secondary database backup in the specified ROS location.<br>For <strong>Amazon S3</strong> , select the &#39;AWS Secret Access Key&#39; credential.<br>For <strong>Rackspace Cloud Files</strong> , set to your Rackspace account&#39;s API key.</td>
+<td>cred: RACKSPACE_AUTH_KEY</td>
+</tr>
+<tr>
+<td>Secondary Backup User (default)</td>
+<td>For <strong>Amazon S3</strong> , select the &#39;AWS Access Key ID&#39; credential.<br>For <strong>Rackspace Cloud Files</strong> , set to your Rackspace account&#39;s username.</td>
+<td>cred: RACKSPACE_USERNAME</td>
+</tr>
+<tr>
+<td>Secondary Backup Storage Container (1)</td>
+<td>The name of the ROS container (e.g. S3 bucket or Cloud Files container) that will be used to store the secondary backup(s).</td>
+<td>text: my-container-name</td>
+</tr>
+</tbody></table>
+
+<p>Go to the <q>slave</q> database server&#39;s (current) <strong>Scripts</strong> tab and run the <strong>db::do_secondary_backup</strong> operational script.</p>
+
+<h3 id="steps-clone-the-deployment">Clone the Deployment</h3>
+
+<ol>
+<li>Go to the deployment that contains the servers of the currently deployed 3-tier architecture. In the example screenshot below, all of the servers are currently deployed in the AWS &#39;us-east&#39; cloud.<br>
+<img src="/img/cm-operational-servers-aws.png" alt="cm-operational-servers-aws.png" width="550" height="271" /></li>
+<li>Click the <strong>Clone</strong> button and rename the deployment. <strong>Note</strong>: You will see a notification window that reminds you that all aspects of a deployment will be reused or recreated, if necessary. Click OK.</li>
+</ol>
+
+<h3 id="steps-replace-the-existing-servers">Replace the Existing Servers</h3>
+
+<p>The next step is to replace each server with an equivalent server that&#39;s configured to launch a server in the <q>failover</q> cloud.</p>
+
+<ol>
+<li>Go to the ServerTemplate of a server. Add a server to the <q>failover</q> deployment. Be sure to select the appropriate cloud as well.<br>
+<img src="/img/cm-clickst.png" alt="cm-clickst.png" width="550" height="185" /><br></li>
+<li>Once you have created equivalent servers in the <q>failover</q> cloud, you can delete the old servers.<br>
+<img src="/img/cm-duplicate-servers.png" alt="cm-duplicate-servers.png" width="550" height="400" /></li>
+</ol>
+
+<h3 id="steps-modify-inputs">Modify Inputs</h3>
+
+<p>Now that your <q>failover</q> deployment is configured to launch servers into a different cloud, you may need to modify the following inputs. There are two types of primary storage options.</p>
+
+<ul>
+<li>Volumes</li>
+<li>Remote Object Storage (ROS)</li>
+</ul>
+
+<p>If the <q>failover</q> cloud supports the use of volumes (e.g. AWS, Rackspace Open Cloud, etc.), volumes will be used for storing primary backups. However, if you&#39;re going to use a cloud that does not support volumes (e.g. SoftLayer), you will need to provide values for the following inputs so that primary backups can be saved in an ROS location (e.g. Rackspace Cloud Files container or Amazon S3 bucket).</p>
+
+<p>Go to the <q>failover</q> deployment&#39;s <strong>Inputs</strong> tab, click <strong>Edit</strong> and define the appropriate inputs.</p>
+
+<h4 id="block_device">BLOCK_DEVICE</h4>
+
+<p><strong>Note</strong> : To view all of the inputs listed below, you will need to expand the inputs view to display the <q>Advanced</q> inputs.</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Backup Primary Secret (default)</td>
+<td>Provide valid cloud credentials so that you can create a primary database backup in the specified <q>failover</q> cloud. If you are using an AWS region as the <q>failover</q> cloud, set this input to &#39;ignore&#39;. If the <q>failover</q> cloud does not support volumes, you can use one of the supported ROS options.<br>For <strong>Amazon S3</strong> , select the &#39;AWS Secret Access Key&#39; credential.<br>For <strong>Rackspace Cloud Files</strong> , enter the Rackspace account&#39;s API key.</td>
+<td>cred: RACKSPACE_AUTH_KEY</td>
+</tr>
+<tr>
+<td>Backup Primary User (default)</td>
+<td>For <strong>Amazon S3</strong> , set to set to your AWS Access Key ID.<br>For <strong>Rackspace Cloud Files</strong> , enter the Rackspace account&#39;s username.</td>
+<td>cred: RACKSPACE_USERNAME</td>
+</tr>
+<tr>
+<td>Primary Backup Storage Cloud (default)</td>
+<td>If the <q>failover</q> cloud supports volumes, this input is ignored because volumes are used for data storage and primary backups are saved as snapshots.<br>If the <q>failover</q> cloud does not support volumes, select the type of ROS service that will be used for primary backups.</td>
+<td>text: cloudfiles</td>
+</tr>
+</tbody></table>
+
+<h4 id="db">DB</h4>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Database Backup Lineage</td>
+<td>You must keep the same lineage name as the other deployment so that the secondary backup can be properly located and retrieved from the specified ROS location. If you are using Rackspace as the <q>failover</q> cloud, this input is used to create subsequent primary database backups. If a Cloud Files container with a matching name does not exist, a new container will be created and named using this input. The primary backup files will also have this input as a prefix.</td>
+<td>text: mysqlbackup</td>
+</tr>
+</tbody></table>
+
+<h3 id="steps-database-tier-setup">Database Tier Setup</h3>
+
+<ol>
+<li>Check the ROS location where you created the secondary backup. You must wait for the secondary backup to be complete before proceeding to the next step. <strong>Note</strong>: Secondary backups are saved as binary backups and not as a <em>gzip</em> dump file. In the example screenshot below, a secondary backup was saved to a Rackspace Cloud Files container (&#39;3tier-backup&#39;) where the files were named using the value specified for the <strong>Database Backup Lineage</strong> input (&#39;do&#39;).<br>
+<img src="/img/cm-cloud-files-2nd-backup.png" alt="cm-cloud-files-2nd-backup.png" width="335" height="177" /><br>
+If you are using an AWS region as a failover cloud, you can create a secondary backup in an existing S3 bucket.<br>
+If you are using a cloud that does not support volumes, you can create secondary backups in either Amazon S3 or Rackspace Cloud Files.</li>
+<li>Launch the server that will eventually become your <q>master</q> database server. (e.g. do-db1)</li>
+<li>Once the server is operational, run the <strong>db::do_secondary_restore_and_become_master</strong> operational script, which will restore the database using the secondary backup, update the DNS record that points to the <q>master</q> database server with the new server&#39;s private IP address, and create a primary backup. <strong>Note</strong> : If the script fails, you will need to run the <strong>db::do_force_reset</strong> before attempting to rerun the previous script.</li>
+<li><p>Check the <q>master</q> database server&#39;s DNS record to make sure it was properly updated with the IP address of the new <q>master</q> database server. If you do not have access to the DNS account, you can also SSH into the instance and run the following command.</p>
+<pre class="syntax-highlight plaintext"><code># dig +short master-database-hostname
+
+EXAMPLE
+# dig +short do-master.rightscaleuniversity.com
+10.179.123.44
+</code></pre></li>
+<li><p>Verify that the primary backup of the <q>master</q> database server is complete and available. If you are using Rackspace, the value specified for the <strong>Database Backup Lineage</strong> input (e.g. do) will be used to create a new Cloud Files container (unless it already exists) with the same name and create a primary backup in that container.
+<img src="/img/cm-cloud-files-1st-backup.png" alt="cm-cloud-files-1st-backup.png" width="367" height="244" />
+<br>If you are using a cloud that supports volumes (e.g. Amazon EC2), primary backups will be stored as snapshots. Go to Clouds &gt; [<em>Cloud Name</em>] &gt; Snapshots. <em>Note</em>: The backup snapshot(s) will be named using the value specified for the <strong>Nickname (1)</strong> input.</p></li>
+<li><p>Launch the other (slave) database server.</p></li>
+<li><p>Once the second database server is operational, run the <strong>db::do_primary_init_slave</strong> script to make it a <q>slave</q> of the new <q>master</q> database server.</p></li>
+</ol>
+
+<h3 id="steps-load-balancer-tier-setup">Load Balancer Tier Setup</h3>
+
+<ol>
+<li>Launch the load balancer servers.</li>
+</ol>
+
+<h3 id="steps-application-tier-setup">Application Tier Setup</h3>
+
+<ol>
+<li>Wait for all the load balancer servers to become operational.</li>
+<li>Launch the application servers.</li>
+</ol>
+
+<h3 id="steps-test-the-deployment">Test the Deployment</h3>
+
+<ol>
+<li>Once all of the servers are operational, test the connectivity of the site by clicking the public DNS host name or public IP address of each load balancer server.<br>
+<img src="/img/cm-operational-servers-rax.png" alt="cm-operational-servers-rax.png" width="641" height="316" /></li>
+<li>If the servers in the different tiers appear to be connected properly, update the DNS records that point to your front-end load balancer servers with the public IP addresses of the new load balancer servers.</li>
+<li>Test the FQDN that&#39;s associated with the load balancers. (e.g. do-www.rightscaleuniversity.com)</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

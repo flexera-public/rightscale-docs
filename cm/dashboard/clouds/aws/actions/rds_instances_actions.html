@@ -1,0 +1,379 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RDS Instances - Actions</title><meta content="Common procedures for working with RDS Instances in RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_aws cm_dashboard_clouds_aws_actions cm_dashboard_clouds_aws_actions_rds_instances_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../../">Cloud Management</a> &#x2F; <a href="../../../">Dashboard User's Guide</a> &#x2F; <a href="../../">clouds</a> &#x2F; <a href="../">Amazon Web Services (AWS)</a> &#x2F; <a href="./">AWS Actions</a></p><div class="page-header"><h1>RDS Instances - Actions</h1></div><div class="main-content"><h2 id="create-a-new-rds-instance">Create a New RDS Instance</h2>
+
+<h3 id="create-a-new-rds-instance-overview">Overview</h3>
+
+<p>Use the following procedure to create a new RDS instance using the RDS Browser in the CM dashboard.</p>
+
+<h3 id="create-a-new-rds-instance-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>AWS Account with RDS support. You must <a href="http://aws.amazon.com/rds/">Sign Up for Amazon RDS</a> before you can launch RDS instances.</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="create-a-new-rds-instance-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS region</em> &gt; <strong>RDS</strong> or <strong>Clouds</strong> &gt; <em>AWS region</em> &gt; <strong>RDS Instances</strong>.</li>
+<li><p>Click <strong>New Instance</strong>.</p>
+
+<p><img src="/img/cm-new-RDS-instance-details.png" alt="cm-new-RDS-instance-details.png" width="725" height="716" /></p></li>
+<li><p>Enter the information for your new RDS instance:</p>
+
+<ul>
+<li><strong>DB Instance Identifier</strong> - The user-defined name that will identify the database Instance. This unique key will be stored as a lower-case string.</li>
+<li><strong>Instance Class</strong> - Defines the available compute power and memory for the instance.</li>
+<li><strong>Availability Zone</strong> - An availability zone is an isolated set of compute resources. If Multiple Zones are selected, the DB Instance will have a standby in an additional zone.</li>
+<li><strong>Subnet Group</strong> - A collection of subnets in a VPC. DB subnet groups must have a subnet in each availability zone in the region.</li>
+<li><strong>Additional Options</strong>
+
+<ul>
+<li><strong>Automatically apply minor engine version upgrades</strong> - If enabled, the RDS instance will automatically receive and apply minor database upgrades.</li>
+<li><strong>Use Provisioned IOPs</strong> - If enabled, the RDS instance will support a minimum number of I/O operations per second. Provisioned IOPS have to be 1,000 or greater and the IOPS to Allocated Size ratio must be 10 to 1. Thus, the smallest ratio you can have is 1,000 IOPS for 100GB of Allocated Size. And the largest is 10,000 IOPS for 1000GB (or 1024GB) of Allocated Size.</li>
+</ul></li>
+<li><strong>DB Security Group(s)</strong> - One or more DB security groups that control IP and port access to the database instance.</li>
+<li><strong>Engine Versions</strong> - The database engine and version that the RDS instance will use.</li>
+<li><strong>License Model</strong> - License for the selected database engine. Some engines may have only one license available.</li>
+<li><strong>Allocated Storage</strong> - The amount of storage, in gigabytes that will be initially allocated to the database instance. The allocated size must be between 5 and 1024GB.</li>
+<li><strong>Database Name</strong> - An identifier for the database. The exact value that is used depends on the database engine. For Oracle, this is the value of the ORACLE_SID.</li>
+<li><strong>Master Username</strong> - The username for the database.</li>
+<li><strong>Master Password</strong> - The password for the database.</li>
+<li><strong>Database Port</strong> - The port used to communicate with the database.</li>
+<li><strong>DB Option Group</strong> - A set of options for the selected database engine. If no compatible option groups are available, a default option group will be created when the DB instance is launched.</li>
+<li><strong>DB Parameter Group</strong> - A set of key-value pairs associated with the database. If you do not have a custom parameter group, the default settings will be used.</li>
+</ul></li>
+<li><p>If you would like to make changes to how you would like your RDS Instance backed up, click <strong>Backup and Maintenance</strong>.</p>
+
+<p><img src="/img/cm-new-RDS-instance-backup-and-maintenance.png" alt="cm-new-RDS-instance-backup-and-maintenance.png" width="725" height="478" /></p>
+
+<ul>
+<li><strong>Backup Window</strong></li>
+<li><strong>Enable Automatic Backup</strong> - If selected, automatic backups will be made for your DB instance. Automated backups are only supported for the InnoDB storage engine.
+
+<ul>
+<li><strong>Backup Retention Period</strong> - If selected, automatic backups will be made for your DB instance. Automated backups are only supported for the InnoDB storage engine.</li>
+<li><strong>Configure a specific window</strong> - Select this box to indicate a specific window in which backups will be made.</li>
+<li><strong>Start Time</strong> - The beginning of the window in which automated backups will be created.</li>
+<li><strong>Duration of Window</strong> - The number of hours from the start time in which system maintenance will occur.</li>
+</ul></li>
+<li><strong>Maintenance Window</strong></li>
+<li><strong>Configure a specific window</strong> - Select this box to indicate a specific window in which maintenance will be made.
+
+<ul>
+<li><strong>Start Time</strong> - The beginning of the window in which automated backups will be created.</li>
+<li><strong>End Time</strong> - The ending of the window in which automated backups will be created.</li>
+</ul></li>
+</ul></li>
+<li><p>Click <strong>Create</strong>.</p></li>
+</ul>
+
+<h2 id="view-detailed-rds-information">View Detailed RDS Information</h2>
+
+<p>Once an RDS Instance is launched you can view more detailed information by clicking on the instance in the RDS Instances page. The following table describes each of the RDS Instance fields.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Name</td>
+<td>The unique name/identifier for the RDS instance.</td>
+</tr>
+<tr>
+<td>Engine</td>
+<td>The version of the MySQL or Oracle engine of the RDS instance.</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>The current operational status of the RDS instance.</td>
+</tr>
+<tr>
+<td>Endpoint address</td>
+<td>The DNS name of a DB instance. The endpoint address includes the RDS instance&#39;s name (AWS ID) and EC2 region. (e.g. myrds.chxspydgchoo.us-east-1.rds.amazonaws.com)</td>
+</tr>
+<tr>
+<td>Endpoint port</td>
+<td>The RDS instance&#39;s endpoint port. If you leave this field blank (recommended), the default port for MySQL (3306) will be used.</td>
+</tr>
+<tr>
+<td>Allocated storage in GB</td>
+<td>The size of the RDS instance in GB that&#39;s allocated for storage. Valid Range: 5-1024GB. (Default: 25)</td>
+</tr>
+<tr>
+<td>Instance class</td>
+<td>The compute and storage classification for the RDS instance.</td>
+</tr>
+<tr>
+<td>Availability Zone</td>
+<td>The availability zone into which the RDS instance will be created and launched. The default is <q>any</q>, meaning an availability zone is selected at random from the correct region. For billing purposes, you might want to use the same availability zone as the Server instances that will be connecting to it.</td>
+</tr>
+<tr>
+<td>Multi-AZ</td>
+<td>Indicates that the RDS instance will be used in a multiple availability zone configuration. If true (checked) then the Availability Zone must <em>not</em> be selected. If checked, Amazon will create a redundant copy of the instance in a different availability zone however, you will only have access to the main instance and not the copy.</td>
+</tr>
+<tr>
+<td>License model</td>
+<td>The options available are &#39;bring-your-own-licence&#39; which means it&#39;s an existing Oracle Database license, &#39;license-is-included&#39; means it&#39;s a Windows SQL database, and &#39;general-public-license&#39; means it&#39;s a MySQL database.</td>
+</tr>
+<tr>
+<td>DB name</td>
+<td>This is the name for the Oracle System ID (SID) you&#39;re connected to. The default is &#39;oracle&#39;. Note if you are connected to an instance other than Oracle, this field may be left blank.</td>
+</tr>
+<tr>
+<td>Auto minor version upgrade</td>
+<td>If this field was checked when created, Amazon automatically upgraded the instance&#39;s version of MySQL. For example, if your instance is using MySQL v5.1.50 and Amazon later supports v5.1.51 for RDS instances, your instance&#39;s MySQL engine will automatically be upgraded at that time during one of the maintenance windows.</td>
+</tr>
+<tr>
+<td>Create at</td>
+<td>The date and time the RDS instance was created.</td>
+</tr>
+<tr>
+<td>Preferred maintenance window</td>
+<td>AWS will periodically perform maintenance on your RDS instance. Specify a 4-hour window (GMT timezone) during non peak time that&#39;s ideal for maintenance purposes. (Day:HH:MM-Day:HH:MM) If this field is left blank, the default window will be used (sun:05:00-sun:09:00).</td>
+</tr>
+<tr>
+<td>Preferred backup window</td>
+<td>AWS will automatically perform a daily backup your database during your predefined backup window. Specify a 2-hour window (GMT timezone) for backups (HH:MM-HH:MM). If this field is left blank, the default window will be used (03:00-05:00).</td>
+</tr>
+<tr>
+<td>Backup retention period</td>
+<td>AWS performs regular backups of the RDS instance. For typical workloads, you should be able to restore your database to any point in time within your retention period, up to the last five minutes. Specify the desired length of your retention period in number of days. Valid Range: 1-8 (Default: 1)</td>
+</tr>
+<tr>
+<td>Master username</td>
+<td>The username to log into MySQL.</td>
+</tr>
+<tr>
+<td>Master user password</td>
+<td>The password to log into MySQL.</td>
+</tr>
+<tr>
+<td>RDS Security Group(s)</td>
+<td>The name of the RDS security group. Multiple security groups can be associated to an RDS instance.</td>
+</tr>
+<tr>
+<td>RDS Parameter Group</td>
+<td>The RDS Parameter. Only one RDS Parameter can be associated to an RDS instance.</td>
+</tr>
+</tbody></table>
+
+<p><strong>Action Buttons</strong></p>
+
+<p>While viewing the details of a selected RDS instance you can also execute a number of operations on the instance using the following action buttons.</p>
+
+<ul>
+<li><strong>Snapshot</strong> - Create a manual snapshot of the RDS Instance at this point in time. (Note: You cannot create a snapshot of a Read Replica.)</li>
+<li><strong>Restore</strong> - AWS gives you the ability to restore the RDS Instance using to a particular point in time within the specified retention period. For typical workloads, you should be able to restore your database up to the last five minutes.</li>
+<li><strong>Modify</strong> - Once an RDS Instance is available, you can still modify some of its configuration settings.</li>
+<li><strong>Reboot</strong> - Reboots the RDS Instance. Performing this action will not change the endpoint address.</li>
+<li><strong>Launch Read Replica</strong> - If you&#39;re viewing a source RDS instance, you can launch a Read Replica RDS instance.</li>
+<li><strong>Terminate</strong> - Shuts down the RDS Instance. When you terminate an RDS Instance an RDS Snapshot will automatically be created before the instance actually shuts down. (e.g. myrds-final-snapshot-timestamp)</li>
+</ul>
+
+<h2 id="modify-an-rds-instance">Modify an RDS Instance</h2>
+
+<h3 id="modify-an-rds-instance-overview">Overview</h3>
+
+<p>Currently, there is no way to modify an RDS instance&#39;s configuration settings <em>without</em> rebooting it. When a Read Replica instance is launched for the first time it will inherit the remainder of its configuration settings from its source DB instance (e.g. RDS Security Groups, RDS Parameter Groups, etc.). Use the following procedure to modify an RDS Instance&#39;s configuration.</p>
+
+<h3 id="modify-an-rds-instance-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>AWS Account with RDS support. You must <a href="http://aws.amazon.com/rds/">Sign Up for Amazon RDS</a> before you can launch RDS instances.</li>
+<li>&#39;actor&#39; user role privileges</li>
+<li>An &#39;available&#39; RDS instance (Source or Read Replica)</li>
+</ul>
+
+<h3 id="modify-an-rds-instance-steps">Steps</h3>
+
+<ul>
+<li>Select a running RDS instance. If there is a link under the Source instance column, that means it is a Read Replica of the source instance.</li>
+</ul>
+
+<p><img src="/img/cm-RDS-read-replica.png" alt="cm-RDS-read-replica.png" width="538" height="325" /></p>
+
+<ul>
+<li>Click the <strong>Modify</strong> action button. The following fields are editable:</li>
+</ul>
+
+<p>The following table lists the configuration settings of an RDS instance can be modified:</p>
+
+<table><thead>
+<tr>
+<th>Configuration Setting</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Deployments</td>
+<td>Specify a Deployment to associate with your RDS Instance, where it will be viewable at the bottom of the Deployment&#39;s Servers tab.</td>
+</tr>
+<tr>
+<td>Allocated storage in GB</td>
+<td>Specify a new storage size for the instance that will be allocated for storing data.</td>
+</tr>
+<tr>
+<td>Master user password</td>
+<td>For security purposes, in order to make changes to a Read Replica, you must provide the user password for the Master (Source) RDS instance.</td>
+</tr>
+<tr>
+<td>Instance Class</td>
+<td>If you select a different instance type, the existing instance will be terminated and new RDS instance will be launched.</td>
+</tr>
+<tr>
+<td>Backup retention period</td>
+<td>The number of days for which system snapshots and point in time restore are available. Specified in days. (e.g. 0-3) (Configuration only applies to Source, not Read Replica instances)</td>
+</tr>
+<tr>
+<td>IOPS</td>
+<td>You can specify a minimum of 1,000 IOPS with 100GB up to a maximum of 10,000 IOPS with 1TB of storage for MySQL and Oracle databases at a rate of 1,000 IOPS per 100GB (for example, 1,000 IOPS per 100GB, 2,000 IOPS per 200GB, 3,000 IOPS per 300GB, etc.). If you are using SQL Servers, then the maximum IOPS you can provision is 7,000 IOPS. Note: only specify this value if you are going to use IOPS. Otherwise, leave this blank.</td>
+</tr>
+<tr>
+<td>Preferred backup window</td>
+<td>A two hour window when complete backups of the database will be taken.</td>
+</tr>
+<tr>
+<td>Preferred maintenance window</td>
+<td>AWS will periodically perform maintenance on your RDS Instance. Specify a 4-hour window (GMT timezone) during non peak time that&#39;s ideal for maintenance purposes. (Day:HH:MM-Day:HH:MM) If this field is left blank, the default window will be used (sun:05:00-sun:09:00).</td>
+</tr>
+<tr>
+<td>RDS Security Group(s)</td>
+<td>The security group(s) that will be used by the instance.</td>
+</tr>
+<tr>
+<td>RDS Parameter Group</td>
+<td>The parameter group that will be used by the instance.</td>
+</tr>
+<tr>
+<td>Multi-AZ</td>
+<td>If checked, the instance will have a redundant instance in a different availability zone as the source instance. You can only use the multi-availability zone option for sources instances. (Configuration only applies to Source, not Read Replica instances)</td>
+</tr>
+<tr>
+<td>Engine</td>
+<td>The version of MySQL that will be installed on the instance. Note: Read Replicas can only be launched with version &#39;mysql 5.1.50&#39; and above.</td>
+</tr>
+<tr>
+<td>Allow major version upgrade</td>
+<td>If checked, Amazon will automatically upgrade the instance&#39;s major MySQL version. For example, if the instance is using MySQL v5.1.50 and Amazon later supports v5.2.01 for RDS instances, your instance&#39;s MySQL engine will automatically be upgraded during one of the maintenance windows. Keep this box unchecked unless you&#39;ve already tested and verified that your database is compatible with the latest supported version of MySQL.</td>
+</tr>
+<tr>
+<td>Auto minor version upgrade</td>
+<td>If checked, Amazon will automatically upgrade the instance&#39;s MySQL version. For example, if the instance is using MySQL v5.1.50 and Amazon later supports v5.1.51 for RDS instances, your instance&#39;s MySQL engine will automatically be upgraded during one of the maintenance windows.</td>
+</tr>
+<tr>
+<td>Apply immediately</td>
+<td>Select &#39;Yes&#39; if you want the changes to take effect immediately. Select &#39;No&#39; if you want to apply the changes at a later time.</td>
+</tr>
+</tbody></table>
+
+<div class="alert alert-info*Note:* With **Backup retention period** and **Multi-AZ" role="alert"><strong></strong><p>, configuration only applies to Source (not Read Replica) instances.</p>
+</div>
+
+<p>When you are satisfied with your changes, click <strong>Modify</strong>. If the changes were set to be applied immediately, the RDS instance will enter a &#39;modifying&#39; state while the specified changes are applied. If you specified a different instance class, a new RDS instance will be launched. Once all changes have been applied, the instance&#39;s state will change to &#39;available&#39;.</p>
+
+<h2 id="launch-a-read-replica">Launch a Read Replica</h2>
+
+<h3 id="launch-a-read-replica-overview">Overview</h3>
+
+<p>Read Replicas are a type of RDS instance that is used for taking read-requests off of the source <q>master</q> RDS instance. Read Replicas are ideal for read-heavy database applications. Updates to the MySQL database on the source DB Instance will be replicated using MySQL’s native, asynchronous replication.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Replication lag can vary significantly. Use the following procedure to launch a Read Replica RDS Instance.</p>
+</div>
+
+<h3 id="launch-a-read-replica-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>AWS Account with RDS support. You must <a href="http://aws.amazon.com/rds/">Sign Up for Amazon RDS</a> before you can launch RDS instances.</li>
+<li>&#39;actor&#39; user role privileges</li>
+<li>An &#39;available&#39; source RDS instance</li>
+</ul>
+
+<h3 id="launch-a-read-replica-steps">Steps</h3>
+
+<ul>
+<li>Navigate to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>RDS Instances</strong>.</li>
+<li>Select a source DB instance for which you want to create a Read Replica.</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You can only create a Read Replica instance if you have a source DB instance that will serve as the Master-DB.</p>
+</div>
+
+<ul>
+<li>Click the <strong>Launch Read Replica</strong> button. This button will only be visible if the source RDS instance is available since a Read Replica will serve as a copy of the source <q>master</q> RDS instance for.</li>
+</ul>
+
+<p><img src="/img/cm-RDS-read-replica.png" alt="cm-RDS-read-replica.png" width="538" height="325" /></p>
+
+<ul>
+<li>Fill out the following fields appropriately.</li>
+<li>To launch a Read Replica RDS Instance, provide the following information:
+
+<ul>
+<li><strong>Name</strong> - Enter the name of the Read Replica instance that you&#39;re going to launch. Note: By default, a name will be automatically generated where the name of the source (<q>master</q>) RDS instance will be used as a prefix. If you plan to launch more than one Read Replica for the source instance (max=5), you might want to add a number in the name for differentiation purposes.</li>
+<li><strong>Instance Class</strong> - Select the instance type that you want to use for launching the new Read Replica RDS instance.</li>
+<li><strong>Endpoint Port</strong> - Enter which port will be used by MySQL. By default, if you leave this field blank, port 3306 will be used.</li>
+<li><strong>Availability Zone</strong> - Select the availability zone where the instance will be launched. If the &#39;any&#39; option is selected, Amazon will randomly pick an availability zone for you.</li>
+<li><strong>Auto minor version upgrade</strong> - If checked, Amazon will automatically upgrade the instance&#39;s MySQL version. For example, if the instance is using MySQL v5.1.50 and Amazon later supports v5.1.51 for RDS instances, your instance&#39;s MySQL engine will automatically be upgraded during one of the maintenance windows.</li>
+<li><strong>IOPS</strong> - Enter the IOPS for your Read Replica. Note the value of your IOPS depends on the instance in use. Leave blank if you are not using IOPS.</li>
+</ul></li>
+</ul>
+
+<p>A Read Replica instance will inherit the remainder of its configuration settings from its source DB instance (e.g. RDS Security Groups, RDS Parameter Groups, etc.). To change any of these settings you will first need to launch the instance, wait for it to become &#39;available&#39; and editable, edit its configurations, and then reboot the instance.</p>
+
+<div class="alert alert-info" role="alert"><strong>Tip:</strong><p>Use the (<u>?</u>) to display a tooltip for additional help on specific fields when available.</p>
+</div>
+
+<ul>
+<li>Click the <strong>Launch</strong> action button when ready.</li>
+</ul>
+
+<div class="alert alert-info*Note:* Currently, there is no way to save a new RDS Instance's configuration settings " role="alert"><strong>without</strong><p>launching it.</p>
+</div>
+
+<ul>
+<li>Once its status becomes &#39;available&#39; the RDS Instance will be accessible.</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

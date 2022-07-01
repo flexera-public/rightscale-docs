@@ -1,0 +1,417 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Server Array</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Server Array</h1></div><div class="main-content"><h2 id="create-server-array">Create Server Array</h2>
+
+<p>Create a Server Array in a specified deployment.</p>
+
+<h3 id="create-server-array-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-calls">Example Calls</h4>
+
+<h4 id="single-cloud-and-datacenter">Single Cloud and Datacenter</h4>
+
+<p>The following example will create a server array for a single cloud using a single default datacenter/zone. The script below should be copied and pasted into a Bash script file and made executable if needed (chmod +x /path/to/script.sh). You will want to replace the Deployment ID, ServerTemplate ID, Cloud ID, Instance Type ID, and MCI (MultiCloud Image) ID with the IDs from your own account.</p>
+
+<p><strong>Note</strong> : A <q>\</q> character has been added to allow a single curl command to continue for several lines in the editor. This is for readability sake. The shell will interpret the script&#39;s curl command as a single line.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"310625001"</span> <span class="c"># Deployment to add Server Array to</span>
+    <span class="nv">ST</span><span class="o">=</span><span class="s2">"246686001"</span> <span class="c"># Set the ServerTemplate the Server Array will be based on</span>
+    <span class="nv">CLOUD</span><span class="o">=</span><span class="s2">"232"</span> <span class="c"># Specify the Cloud to add the Server Array to</span>
+    <span class="nv">ITYPE</span><span class="o">=</span><span class="s2">"80"</span> <span class="c"># Set the Instance Type for this Sever Array, this cloud, ...</span>
+    <span class="nv">MCI</span><span class="o">=</span><span class="s2">"240699001"</span> <span class="c"># Set MultiCloud Image (MCI)</span>
+
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d server_array[name]<span class="o">=</span>my_array_server <span class="se">\</span>
+    -d server_array[description]<span class="o">=</span>my_app_server_description <span class="se">\</span>
+    -d server_array[deployment_href]<span class="o">=</span>/api/deployments/<span class="nv">$DEPLOYMENT</span> <span class="se">\</span>
+    -d server_array[array_type]<span class="o">=</span>alert <span class="se">\</span>
+    -d server_array[state]<span class="o">=</span>disabled <span class="se">\</span>
+    -d server_array[instance][server_template_href]<span class="o">=</span>/api/server_templates/<span class="nv">$ST</span> <span class="se">\</span>
+    -d server_array[instance][cloud_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span> <span class="se">\</span>
+    -d server_array[instance][multi_cloud_image_href]<span class="o">=</span>/api/multi_cloud_images/<span class="nv">$MCI</span> <span class="se">\</span>
+    -d server_array[elasticity_params][alert_specific_params][decision_threshold]<span class="o">=</span>51 <span class="se">\</span>
+    -d server_array[elasticity_params][bounds][min_count]<span class="o">=</span>2 <span class="se">\</span>
+    -d server_array[elasticity_params][bounds][max_count]<span class="o">=</span>3 <span class="se">\</span>
+    -d server_array[elasticity_params][pacing][resize_calm_time]<span class="o">=</span>5 <span class="se">\</span>
+    -d server_array[elasticity_params][pacing][resize_down_by]<span class="o">=</span>1 <span class="se">\</span>
+    -d server_array[elasticity_params][pacing][resize_up_by]<span class="o">=</span>1 <span class="se">\</span>
+    https://my.rightscale.com/api/server_arrays
+</code></pre>
+
+<h4 id="multiple-datacenters-within-a-single-cloud">Multiple Datacenters within a Single Cloud</h4>
+
+<p>The following example will create a server array for a single cloud using two datacenters for the server allocation policy. Each datacenter will accept a max of 3 instances with a 50% weight, and the total max for the array is 6 instances. The script below should be copied and pasted into a Bash script file and made executable if needed (chmod +x /path/to/script.sh). You will want to replace the Deployment ID, ServerTemplate ID, Cloud ID, Instance Type ID, MCI (MultiCloud Image) ID and Datacenter IDs with the IDs from your own account.</p>
+
+<p><strong>Note</strong> : A <q>\</q> character has been added to allow a single curl command to continue for several lines in the editor. This is for readability sake. The shell will interpret the script&#39;s curl command as a single line.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"310625001"</span>  <span class="c"># Deployment to add Server Array to</span>
+    <span class="nv">ST</span><span class="o">=</span><span class="s2">"246686001"</span>          <span class="c"># Set the ServerTemplate the Server Array will be based on</span>
+    <span class="nv">CLOUD</span><span class="o">=</span><span class="s2">"232"</span>            <span class="c"># Specify the Cloud to add the Server Array to</span>
+    <span class="nv">ITYPE</span><span class="o">=</span><span class="s2">"80"</span>             <span class="c"># Set the Instance Type for this Sever Array, this cloud, ...</span>
+    <span class="nv">MCI</span><span class="o">=</span><span class="s2">"240699001"</span>         <span class="c"># Set MultiCloud Image (MCI)</span>
+    <span class="nv">DC1</span><span class="o">=</span><span class="s2">"9GFSQIVUU642M"</span> <span class="c"># Set first datacenter for server allocation policy, see datacenters in API 1.5 reference for more info</span>
+    <span class="nv">DC2</span><span class="o">=</span><span class="s2">"2MNLNDTP253CB"</span> <span class="c"># Set second datacenter for server allocation policy, see datacenters in API 1.5 reference for more info</span>
+
+    curl -v -i -H <span class="s2">"X-API-VERSION:1.5"</span> -b myCookie -X POST <span class="se">\</span>
+    -d <span class="s2">"server_array[name]=Test Array Multi-Datacenter"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[description]=Testing Multiple datacenters in an array via API 1.5"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[deployment_href]=/api/deployments/</span><span class="nv">$DEPLOYMENT</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[array_type]=alert"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[state]=disabled"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[instance][server_template_href]=/api/server_templates/</span><span class="nv">$ST</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[instance][cloud_href]=/api/clouds/</span><span class="nv">$CLOUD</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[instance][multi_cloud_image_href]=/api/multi_cloud_images/</span><span class="nv">$MCI</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[elasticity_params][alert_specific_params][decision_threshold]=51"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[elasticity_params][bounds][min_count]=1"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[elasticity_params][bounds][max_count]=6"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[elasticity_params][pacing][resize_calm_time]=5"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[elasticity_params][pacing][resize_down_by]=1"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[elasticity_params][pacing][resize_up_by]=1"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[datacenter_policy][][datacenter_href]=/api/clouds/</span><span class="nv">$CLOUD</span><span class="s2">/datacenters/</span><span class="nv">$DC1</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[datacenter_policy][][max]=3"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[datacenter_policy][][weight]=50.0"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[datacenter_policy][][datacenter_href]=/api/clouds/</span><span class="nv">$CLOUD</span><span class="s2">/datacenters/</span><span class="nv">$DC2</span><span class="s2">"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[datacenter_policy][][max]=3"</span> <span class="se">\</span>
+    -d <span class="s2">"server_array[datacenter_policy][][weight]=50.0"</span> <span class="se">\</span>
+    https://my.rightscale.com/api/server_arrays
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : There is no XML/JSON content, just headers.</p>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 201 Created
+    Server: nginx/1.0.15
+    Date: Mon, 19 Nov 2012 19:21:24 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 201 Created
+    Location: /api/server_arrays/214996001
+    X-Runtime: 528
+    X-Request-Uuid: 14936a5d6bd24baaae0d22ff7b16cede
+    Set-Cookie: rs_gbl=eNotkMuOgjAARf-la0n6AEpJZuEDFRRREZUVYdo62lhnUDqCxn8fTGZ3F_ecxXmCEvhAt6AHxA34T2Bu8gp8x3UxevVAzYGPiEOIgz3P7oGT6N4cUkcghC2CKbQQkthisOwWJogI5EmG7M5Xy3_WhfDNdnowGGfrH6VOKy2nw3k_XB3xdHefOkMaMa74YtKqx8LoUdXMImuQsVDBRT_kjTA2PrpV69XnUlOSXw9BoArdFttZss0y_jWA5rRMw-R3P5e5utBDXc7S8-RhNpjmh1E8ni_jrTbL82eUX4pxEB_tza7ScRKktyYhgu0y676vyiYKJDNcqPDjnaR5Jyk5_zaXGviUOfbr9QfiEVxu; domain=.rightscale.com; path=/; HttpOnly
+    Cache-Control: no-cache
+</code></pre>
+
+<h2 id="delete-server-array">Delete Server Array</h2>
+
+<p>Deletes a Server Array based on its server array ID.</p>
+
+<h3 id="delete-server-array-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">SERVER_ARRAY</span><span class="o">=</span><span class="s2">"214835001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X DELETE https://my.rightscale.com/api/server_arrays/<span class="nv">$SERVER_ARRAY</span>
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Notes</strong> : There is no XML/JSON content, just headers.</p>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 204 No Content
+    Server: nginx/1.0.15
+    Date: Fri, 12 Oct 2012 16:25:00 GMT
+    Connection: keep-alive
+    Status: 204 No Content
+    X-Runtime: 1390
+    X-Request-Uuid: 6c1eb0c8c21b4835ad425d1bb6fb2b59
+    Set-Cookie: _session_id=92ede080c999a3e5734035f582d11b0e; path=/; Secure; HttpOnly
+    Cache-Control: no-cache
+</code></pre>
+
+<h2 id="launch-server-array">Launch Server Array</h2>
+
+<p>Launch a Server Array that has already been added to a deployment.</p>
+
+<h3 id="launch-server-array-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">SERVER_ARRAY</span><span class="o">=</span><span class="s2">"532922001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST https://my.rightscale.com/api/server_arrays/<span class="nv">$SERVER_ARRAY</span>/launch.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : There is no XML/JSON content, just headers.HTTP/1.1 201 Created</p>
+<pre class="syntax-highlight plaintext"><code>    Server: nginx/1.0.15
+    Date: Fri, 16 Nov 2012 22:55:48 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 201 Created
+    Location: /api/clouds/232/instances/480QO2LAL7NDL
+    X-Runtime: 10239
+    X-Request-Uuid: df5dca35268644749112a077f774bf15
+    Set-Cookie: rs_gbl=eNotkElvgkAYQP_Ld3aSGWZBSHpARKmCNWpRvJhhWGoFFxYFjf-9mvT-3ju8B0gwoeigB3EF5gOaKinB5EJo5NmDWoFJKKcEC870HuzjFx3FRGEqBaKYEkRIoiFDkxQZPMIyNlhf9fuvXp38u4Tqb_eVh3RoV1k4pcElu1vBCuf79W6Q2Id5_FuuZROo6TzUiT1j56j2B7vGkSW9FoEab9LthqMVknFyPRanLRmXwqGT9lR5YfHZacXC71Zfo6vLpNjwg9u103yfD9vJGk0yT7heTceX0pkv8IylP-HWWhYHzz6LwS36vjmaxfwR9iNhJcLPs1Kie_XxXtK-l0ilTs2xBlM3OHs-_wCus1xi; domain=.rightscale.com; path=/; HttpOnly
+    Cache-Control: no-cache
+</code></pre>
+
+<h2 id="list-server-arrays">List Server Arrays</h2>
+
+<p>List all Server Arrays owned by the current account.</p>
+
+<h3 id="list-server-arrays-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/server_arrays.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>Truncated XML output without headers included (to save space).</li>
+<li>Only one server array is listed in this example (also to save space).</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;server_arrays&gt;
+      &lt;server_array&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/server_arrays/12030"/&gt;
+          &lt;link rel="deployment" href="/api/deployments/80051"/&gt;
+          &lt;link rel="current_instances" href="/api/server_arrays/12030/current_instances"/&gt;
+          &lt;link rel="next_instance" href="/api/clouds/232/instances/6CNISESVS3MUL"/&gt;
+          &lt;link rel="alert_specs" href="/api/server_arrays/12030/alert_specs"/&gt;
+        &lt;/links&gt;
+        &lt;instances_count&gt;0&lt;/instances_count&gt;
+        &lt;actions&gt;
+          &lt;action rel="launch"/&gt;
+          &lt;action rel="clone"/&gt;
+        &lt;/actions&gt;
+        &lt;description&gt;&lt;/description&gt;
+        &lt;name&gt;Windows IIS array&lt;/name&gt;
+        &lt;elasticity_params&gt;
+          &lt;pacing&gt;
+            &lt;resize_calm_time&gt;5&lt;/resize_calm_time&gt;
+            &lt;resize_up_by&gt;1&lt;/resize_up_by&gt;
+            &lt;resize_down_by&gt;1&lt;/resize_down_by&gt;
+          &lt;/pacing&gt;
+          &lt;schedule_entries&gt;&lt;/schedule_entries&gt;
+          &lt;alert_specific_params&gt;
+            &lt;voters_tag_predicate&gt;windows firefox template array&lt;/voters_tag_predicate&gt;
+            &lt;decision_threshold&gt;51&lt;/decision_threshold&gt;
+          &lt;/alert_specific_params&gt;
+          &lt;bounds&gt;
+            &lt;max_count&gt;20&lt;/max_count&gt;
+            &lt;min_count&gt;0&lt;/min_count&gt;
+          &lt;/bounds&gt;
+        &lt;/elasticity_params&gt;
+        &lt;array_type&gt;alert&lt;/array_type&gt;
+        &lt;state&gt;enabled&lt;/state&gt;
+      &lt;/server_array&gt;
+</code></pre>
+
+<h4 id="supplemental">Supplemental</h4>
+
+<h4 id="show-only-server-arrays-in-a-specific-deployment">Show only Server Arrays in a Specific Deployment</h4>
+
+<p>The following supplemental example includes a <q>filter</q> so only servers arrays from the specified deployment are listed.</p>
+
+<p><strong>Important!</strong>  When using a filter (or view) the computation is done on the server side. This results in a lighter response (less content) returned to the client. The server essentially fetches all content and returns it to the client.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"316795001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -d filter[]<span class="o">=</span><span class="s2">"deployment_href==/api/deployments/</span><span class="nv">$DEPLOYMENT</span><span class="s2">"</span> -X GET https://my.rightscale.com/api/server_arrays.xml
+</code></pre>
+
+<h4 id="filter-by-the-server-array-name">Filter by the Server Array Name</h4>
+
+<p>The following example locates a specific Server Array by name.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -d filter[]<span class="o">=</span><span class="s2">"name==Base ServerTemplate for Linux"</span> -X GET https://my.rightscale.com/api/server_arrays.xml
+</code></pre>
+
+<h3 id="list-server-arrays-right_api_client">right_api_client</h3>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    require 'rubygems'
+    require 'pp' # Require pretty print Ruby gem
+    require 'right_api_client' # RightScale API client gem
+
+    user = 'greg.doe@example.com' # Set user email address for using the Dashboard
+    acct = '1234' # Set the account ID
+    pass = 'SomePassword' # Set the password for the user. Create client object so you can use the API.
+    @client = RightApi::Client.new(:email =&gt; user, :password =&gt; pass, :account_id =&gt; acct)
+    #
+    # Setup and authenticate above. Set and use additional variables below, display output, etc.
+    #
+    pp @client.server_arrays.index # Output all Server Arrays owned by account '1234'
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    [#&lt;RightApi::ResourceDetail resource_type="server_array", name="Moon Unit Rho"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server_array", name="TS RackArray"&gt;,
+    . . . truncated output . . .
+     #&lt;RightApi::ResourceDetail resource_type="server_array", name="dano cs 306 array"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server_array", name="Base ServerTemplate for Linux (RSB) (v12.11.3-LTS)"&gt;]
+</code></pre>
+
+<h2 id="multi-terminate-server-array">Multi-Terminate Server Array</h2>
+
+<p>Terminate the multiple running instance of a server array.</p>
+
+<h3 id="multi-terminate-server-array-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">SERVER_ARRAY</span><span class="o">=</span><span class="s2">"214837001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST https://my.rightscale.com/api/server_arrays/<span class="nv">$SERVER_ARRAY</span>/multi_terminate
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> :</p>
+
+<ul>
+<li>There is no XML/JSON content from a Multi-Terminate Server Array (or instance).</li>
+<li>This call only terminates a single running Server Array.</li>
+<li>If you are terminating a Server Array that is enabled, servers will spin up again. Set the status to disabled if you do not want this to happen.</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 202 Accepted
+    Server: nginx/1.0.15
+    Date: Thu, 15 Nov 2012 22:10:28 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 202 Accepted
+    Location: /api/clouds/232/instances/8NHV15LGBQEAV/live/tasks/ae-94103945001
+    X-Runtime: 952
+    X-Request-Uuid: bcce68a1d92141609d0d6b8f190c61cf
+    Set-Cookie:
+    Cache-Control: no-cache
+</code></pre>
+
+<h2 id="show-server-array">Show Server Array</h2>
+
+<p>Show the information on a single server array.</p>
+
+<h3 id="show-server-array-curl">Curl</h3>
+
+<h4 id="example-call">Example Call</h4>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">SERVER_ARRAY</span><span class="o">=</span><span class="s2">"214837001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/server_arrays/<span class="nv">$SERVER_ARRAY</span>.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : Truncated XML output without headers included (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;server_array&gt;
+      &lt;links&gt;
+        &lt;link rel="self" href="/api/server_arrays/214837001"/&gt;
+        &lt;link rel="deployment" href="/api/deployments/322064001"/&gt;
+        &lt;link rel="current_instances" href="/api/server_arrays/214837001/current_instances"/&gt;
+        &lt;link rel="next_instance" href="/api/clouds/2327/instances/SK5VB5HAHM3H"/&gt;
+        &lt;link rel="alert_specs" href="/api/server_arrays/214837001/alert_specs"/&gt;
+      &lt;/links&gt;
+      &lt;instances_count&gt;0&lt;/instances_count&gt;
+      &lt;actions&gt;
+        &lt;action rel="launch"/&gt;
+        &lt;action rel="clone"/&gt;
+      &lt;/actions&gt;
+      &lt;description&gt;&lt;/description&gt;
+      &lt;name&gt;Demo PHP App&lt;/name&gt;
+      &lt;elasticity_params&gt;
+        &lt;pacing&gt;
+          &lt;resize_calm_time&gt;12&lt;/resize_calm_time&gt;
+          &lt;resize_up_by&gt;3&lt;/resize_up_by&gt;
+          &lt;resize_down_by&gt;1&lt;/resize_down_by&gt;
+        &lt;/pacing&gt;
+        &lt;schedule_entries&gt;&lt;/schedule_entries&gt;
+        &lt;alert_specific_params&gt;
+          &lt;voters_tag_predicate&gt;Demo PHP App&lt;/voters_tag_predicate&gt;
+          &lt;decision_threshold&gt;51&lt;/decision_threshold&gt;
+        &lt;/alert_specific_params&gt;
+        &lt;bounds&gt;
+          &lt;max_count&gt;10&lt;/max_count&gt;
+          &lt;min_count&gt;2&lt;/min_count&gt;
+        &lt;/bounds&gt;
+      &lt;/elasticity_params&gt;
+      &lt;array_type&gt;alert&lt;/array_type&gt;
+      &lt;state&gt;disabled&lt;/state&gt;
+    &lt;/server_array&gt;
+</code></pre>
+
+<h2 id="update-the-datacenter-policy-for-a-server-array">Update the Datacenter Policy for a Server Array</h2>
+
+<p>Update the Datacenter Policy for a Server Array. This example illustrates how to define Server Allocation Policy settings (max and weight) individually for different datacenters.</p>
+
+<h3 id="update-the-datacenter-policy-for-a-server-array-right_api_client">right_api_client</h3>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>The following example sets the maximum number of instances to 7 for the us-west-1a datacenter and to 3 for the us-west-1b datacenter. The instance allocation weighting is left unchanged at 50 percent for each datacenter. Note that the datacenter_href values used in the example are entered explicitly but can easily be queried and stored in a variable using a call similar to... @client.clouds(:id =&gt; 1).show.datacenters.index[0].show.href.</p>
+<pre class="syntax-highlight plaintext"><code>    require 'rubygems'
+    require 'pp' # Require pretty print Ruby gem
+    require 'right_api_client' # RightScale API client gem
+
+    user = 'greg.doe@example.com' # Set user email address for using the Dashboard
+    acct = '1234' # Set the account ID
+    pass = 'SomePassword' # Set the password for the user. Create client object so you can use the API.
+    @client = RightApi::Client.new(:email =&gt; user, :password =&gt; pass, :account_id =&gt; acct)
+    #
+    # Setup and authenticate above. Set and use additional variables below, display output, etc.
+    #
+    @client.server_arrays(:id =&gt; 244962003).show.update(:server_array =&gt; {:datacenter_policy =&gt; [{:weight=&gt;'50.0', :datacenter_href=&gt;'/api/clouds/3/datacenters/531RIVS8UVE2K', :max=&gt;'7'},{:weight=&gt;'50.0', :datacenter_href=&gt;'/api/clouds/3/datacenters/5GQTD1L1BGD73', :max=&gt;'3'}]})
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>The results of the example call above can be verified by examining the Info tab view for the server array in the dashboard as illustrated below.</p>
+
+<p><img src="/img/api-server-alloc.png" alt="api-server-alloc.png" width="446" height="241" /></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Instances and Servers</title><meta content="The Instances and Servers page in the RightScale Cloud Management Dashboard provides an overview of all instances in your account, whether they are associated with servers, server arrays or stand-alone." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_manage cm_dashboard_manage_instances_and_servers cm_dashboard_manage_instances_and_servers_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Manage</a></p><div class="page-header"><h1>Instances and Servers</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>The Instances and Servers page provides an overview of all instances in your account, whether they are associated with servers, server arrays or stand-alone. Specifically:</p>
+
+<ul>
+<li>For each running <strong>server</strong> , the instances provisioned in the cloud are shown (there can be multiple instances while relaunching) and the ‘next instance’ used when relaunching the server is shown. For each inactive server only the ‘next instance’ is shown.</li>
+<li>For each <strong>server array</strong> all the provisioned instances are shown and the ‘next instance’ used for the next launch is shown</li>
+<li>All <strong>stand-alone instances</strong> are also shown.</li>
+</ul>
+
+<p>The Instances and Servers page looks similar to the following:</p>
+
+<p><img src="/img/cm-instances-servers-manage.png" alt="cm-instances-servers-manage.png" width="1410" height="767" /></p>
+
+<p>The Instances and Servers page presents a tabular view of the instances in your account. By default, this view displays instances and servers whether they are active or inactive. However, you can customize your view using the controls described below.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The result set displayed in the Instances and Servers page is limited to the most recently updated 1000 compute objects (instances, servers, and server arrays). If you only have instances (no servers or arrays), then the 1000 most recently updated instances are retrieved. Otherwise, the result set displayed on the page is a combination of the most recently updated instances, servers (running or not), and arrays (running or not). In addition, the contents of the result set depend on any filtering you may have selected. For example, if you choose to filter by Running Instances then any instances that are not running will be excluded from the result set. Similarly, if you filter by Next Servers or Next Arrays then any server or array instances that are running would be excluded from the result set.</p>
+</div>
+
+<h2 id="filters">Filters</h2>
+
+<p>In addition to the <strong>Active</strong> and <strong>Inactive</strong> tabs, there are several filters available for you to further fine tune the results displayed in the table.</p>
+
+<p><strong>Free text filter</strong> - you can enter any string of characters (multiple words will be considered one string). All visible columns will be matched against your filter, including tags that are collapsed. For columns that contain icons, the tooltip value will be filtered upon.</p>
+
+<p><strong>Item type drop-down filter</strong></p>
+
+<ul>
+<li><strong>Running Instances</strong> - All instances are shown, save those in a stopped state. This includes current server instances and server array instances.</li>
+<li><strong>Next Servers</strong> - All servers have a &#39;next&#39; state, which contains configuration values used for future instances when the server is launched or relaunched. Active and current server instances are not shown.</li>
+<li><strong>Next Arrays</strong> - All autoscaling server arrays which contain configuration values used for instances launched by the server array. Instances launched by server arrays are not shown.</li>
+<li><strong>Everything</strong> - All instances, servers (next and current instances), and server arrays will be shown.</li>
+</ul>
+
+<h2 id="show-hide-columns">Show/Hide Columns</h2>
+
+<p>The column layout of the table view in the Instances and Servers page can be tailored to your needs using the <strong>Show/Hide Columns</strong> button. Clicking the button presents a context menu from which you can select or deselect the columns that you want to have displayed in the table. You can also re-set your column selections by clicking <strong>Restore default columns</strong>.</p>
+
+<p><img src="/img/cm-show-hide-cols-instances.png" alt="cm-show-hide-cols-instances.png" width="352" height="432" /></p>
+
+<p>The following table provides descriptions of the available column headings.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Name of the instance, server, server instance, array, or array instance</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Type</td>
+<td>Displays an icon indicating the resource type (Ar=array, AI=array instance, In=instance, S=server, SI=server instance),</td>
+</tr>
+<tr>
+<td>Resource ID</td>
+<td>A unique identifier for the resource</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>Indicates the RightScale deployment(s) a resource belongs to (if any). Clicking the hyperlink takes you to the Deployments &gt; Servers tab.</td>
+</tr>
+<tr>
+<td>Container</td>
+<td>Displays the container for the selected server. Clicking the hyperlink takes you to the Info tab for the selected item.</td>
+</tr>
+<tr>
+<td>ServerTemplate</td>
+<td>The ServerTemplate from which the resource originated from. Clicking the hyperlink takes you to the Info tab for the ServerTemplate of the selected item.</td>
+</tr>
+<tr>
+<td>MCI</td>
+<td>The RightScale MultiCloud Image associated with the resource. Clicking the hyperlink takes you to the Info tab for the MCI.</td>
+</tr>
+<tr>
+<td>Image</td>
+<td>The machine image associated with the instance.</td>
+</tr>
+<tr>
+<td>Cloud</td>
+<td>The Cloud the resource is associated with (ex: AWS US-Oregon, Azure West US, Google, etc)</td>
+</tr>
+<tr>
+<td>SSH Key</td>
+<td>The unique identifier for the security component used by some cloud providers to secure client connections to servers in the cloud over SSH or Remote Desktop Protocol (RDP). Clicking the hyperlink takes you to the SSH Key Info page for the selected item.</td>
+</tr>
+<tr>
+<td>Security Groups</td>
+<td>The name(s) of the Security Group(s) associated with the resource. A Security Group is a collection of access rules governing which server IP addresses and network protocols and ports a server can access. Clicking the hyperlink takes you to the Security Groups tab in Network Manager.</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>Displays an icon indicating the current state of the CPU, such as pending, booting, operational, etc.</td>
+</tr>
+<tr>
+<td>State</td>
+<td>Displays the current server state. (e.g., pending, booting, operational, terminated, etc.)</td>
+</tr>
+<tr>
+<td>Instance Type</td>
+<td>The Instance Type associated with the resource. Each Cloud has varying levels of compute capability. RightScale uses &#39;Instance Types&#39; to categorize and normalize these offerings.</td>
+</tr>
+<tr>
+<td>Public IP</td>
+<td>Denotes the Public IP Address associated with the resource</td>
+</tr>
+<tr>
+<td>Private IP</td>
+<td>Denotes the Private IP Address associated with the resource</td>
+</tr>
+<tr>
+<td>Elastic IPs</td>
+<td>Identifies any Elastic IP Addresses associated with the resource. Elastic IPs are typically used on frontend servers in the AWS cloud.</td>
+</tr>
+<tr>
+<td>Public DNS</td>
+<td>The Public DNS name associated with the resource</td>
+</tr>
+<tr>
+<td>Private DNS</td>
+<td>The Private DNS name associated with the resource</td>
+</tr>
+<tr>
+<td>Networks</td>
+<td>Displays the network(s) an operational server is associated with. Clicking the hyperlink takes to the Manage Networks view.</td>
+</tr>
+<tr>
+<td>Subnets</td>
+<td>The subnet(s) (or logically visible subdivision of the IP Network) the resource resides in. Clicking the hyperlink takes you to the Subnets tab for the Network the selected item is associated with.</td>
+</tr>
+<tr>
+<td>Datacenter</td>
+<td>The regional datacenter (also referred to as a zone) in which the resource resides. Clicking the hyperlink takes you to the Info page for the Datacenter the item is associated with.</td>
+</tr>
+<tr>
+<td>Tags</td>
+<td>The descriptive metadata (defined by RightScale or the user) associated with the resource.</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td>Indicates the runtime duration in minutes.</td>
+</tr>
+<tr>
+<td>Operations</td>
+<td>Displays icons indicating valid operations for the selected resource, such as Terminate, Launch, etc.</td>
+</tr>
+<tr>
+<td>SSH/RDP</td>
+<td>Displays buttons that can be clicked to launch either an SSH session for Linux servers or a Remote Desktop Connection (RDP) for Windows servers allowing root level console access to the server.</td>
+</tr>
+</tbody></table>
+
+<h2 id="actions">Actions</h2>
+
+<p>The <strong>Actions</strong> drop-down provides you with a number of commands that can be executed on items in the table depending on the context of your selection. Each of these actions is described in the following sections.</p>
+
+<ul>
+<li><a href="/cm/dashboard/manage/instances_and_servers/instances_and_servers_actions.html">Instances and Servers Actions</a></li>
+</ul>
+
+<h2 id="new-instance">New Instance</h2>
+
+<p>You can use the <strong>New Instance</strong> drop-down to create a new Instance, new Server, or new Server Array in a selected Cloud. Opening the drop-down exposes menu selections for the available cloud providers and sub-menus for compute regions as depicted below.</p>
+
+<p><img src="/img/cm-msa-new-instance-drop-down.png" alt="cm-msa-new-instance-drop-down.png" width="371" height="286" /></p>
+
+<p>Choosing a cloud provider and compute region from the drop-down displays the modal dialog shown below.</p>
+
+<p><img src="/img/cm-msa-new-instance-modal.png" alt="cm-msa-new-instance-modal.png" width="725" height="312" /></p>
+
+<p>From this dialog you can elect to create an Instance, a Server, or an Array.</p>
+
+<ul>
+<li>Clicking <strong>Create Instance</strong> will take you to the Instance Provisioner as described in <a href="/cm/dashboard/clouds/generic/instances_actions.html#create-a-new-instance-using-the-instance-provisioner">Create New Instance with the Instance Provisioner</a>.</li>
+<li>Selecting an existing deployment and clicking <strong>Create Server</strong> will take you to the Add Server Assistant as described in <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#add-server-assistant">Add Server Assistant</a>.</li>
+<li>Selecting an existing deployment and clicking <strong>Create Array</strong> will take you to the Add Server Array Assistant as described in <a href="/cm/dashboard/manage/arrays/arrays_actions.html#add-server-array-assistant">Add Server Array Assistant</a>.</li>
+</ul>
+
+<h2 id="concepts">Concepts</h2>
+
+<ul>
+<li><a href="/cm/dashboard/manage/instances_and_servers/instances_and_servers_concepts.html">Instances and Servers Concepts</a></li>
+</ul>
+
+<h2 id="related-faqs">Related FAQs</h2>
+
+<ul>
+<li><a href="/faq/What_is_HAProxy_and_how_does_it_work.html">What is HAProxy and how does it work?</a></li>
+<li><a href="/faq/How_can_I_use_OpenVPN_with_RightScale.html">How can I use OpenVPN with RightScale?</a></li>
+<li><a href="http://support.rightscale.com/06-FAQs/FAQ_190_-_What_is_the_difference_between_the_Launch_option_and_Save_and_Launch_option%3F/index.html">FAQ 190 - What is the difference between the Launch option and Save and Launch option?</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

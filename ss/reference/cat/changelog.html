@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>CAT Changelog</title><meta content="Change log for the CAT language" name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="ss ss_reference ss_reference_cat ss_reference_cat_changelog" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><div class="page-header"><h1>CAT Changelog</h1></div><div class="main-content"><h2 id="version-20161221">Version 20161221</h2>
+
+<p>Released February 2017</p>
+
+<h3 id="version-20161221-new-features">New Features</h3>
+
+<ul>
+<li>Introduced the notion of <a href="v20161221/index.html#resources-bulk-resources">bulk resources</a>, allowing N number of a given resource to be defined and launched automatically. Also introduced <a href="v20161221/index.html#output-sets">Output Sets</a> to help show output values from bulk resources.</li>
+<li>Introduced the notion of <a href="v20161221/index.html#resources-custom-provision">custom provision functions</a> on resource declarations allowing for custom logic when provisioning resources.</li>
+<li><a href="./v20161221/ss_CAT_resources.html#resources-ip_address_binding">IP Address Binding</a> and <a href="./v20161221/ss_CAT_resources.html#resources-volume_attachment">Volume Attachment</a> resources in CAT now have a <code>server</code> field which can reference a server directly. The old <code>instance</code> field should now only be used for referencing an instance.</li>
+<li>Mapping values may now be string, integer, boolean, or <code>null</code> values.</li>
+<li><a href="./v20161221/index.html#built-in-methods-and-other-keywords">New CAT methods</a> are added: <code>copy_index</code>, <code>dec</code>, <code>div</code>, <code>field</code>, <code>get</code>, <code>ljust</code>, <code>mod</code>, <code>prod</code>, <code>rjust</code>, <code>to_s</code>.</li>
+<li>Some <a href="v20161221/index.html#built-in-methods-and-other-keywords-using-cat-methods-on-attributes">methods can now be used on declaration attributes</a> to satisfy common use cases for bulk resources.</li>
+<li> Integrate your CloudApps with external services using <a href="/ss/guides/ss_plugins.html">CAT Plugins</a> (added April 2017).</li>
+</ul>
+
+<h3 id="version-20161221-breaking-changes">Breaking Changes</h3>
+
+<ul>
+<li><p>Any <code>ip_address_binding</code> that has a <code>instance</code> field that references a <code>server</code> declaration must be changed to use the new <code>server</code> field instead. </p>
+
+<p>Old syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"my_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.server"</span> <span class="k">do</span>
+  <span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">stuff</span>
+<span class="k">end</span>
+<span class="n">resource</span> <span class="s2">"binding"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.ip_address_binding"</span> <span class="k">do</span>
+  <span class="n">instance</span> <span class="vi">@my_server</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>New syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"my_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.server"</span> <span class="k">do</span>
+  <span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">stuff</span>
+<span class="k">end</span>
+<span class="n">resource</span> <span class="s2">"binding"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.ip_address_binding"</span> <span class="k">do</span>
+  <span class="n">server</span> <span class="vi">@my_server</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>Any <code>volume_attachment</code> that has a <code>instance</code> field that references a <code>server</code> declaration must be changed to use the new <code>server</code> field instead. </p>
+
+<p>Old syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"my_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.server"</span> <span class="k">do</span>
+  <span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">stuff</span>
+<span class="k">end</span>
+<span class="n">resource</span> <span class="s2">"binding"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.volume_attachment"</span> <span class="k">do</span>
+  <span class="n">instance</span> <span class="vi">@my_server</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>New syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"my_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.server"</span> <span class="k">do</span>
+  <span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">stuff</span>
+<span class="k">end</span>
+<span class="n">resource</span> <span class="s2">"binding"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.volume_attachment"</span> <span class="k">do</span>
+  <span class="n">server</span> <span class="vi">@my_server</span>
+<span class="k">end</span>
+</code></pre></li>
+</ul>
+
+<h2 id="version-20160622">Version 20160622</h2>
+
+<p>Released June 2016</p>
+
+<h3 id="version-20160622-breaking-changes">Breaking Changes</h3>
+
+<ul>
+<li><p><a href="/ss/reference/cat/v20161221/index.html#overview-declarations">Naming restrictions</a> are now enforced on <code>permission</code> and <code>operation</code> declarations. Use the new &#39;label&#39; field for human-friendly UI labels. </p>
+
+<p>Old syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">permission</span> <span class="s2">"manage sgs"</span> <span class="k">do</span> 
+  <span class="n">label</span> <span class="s2">"Manage SGs"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>New syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">permission</span>  <span class="s2">"manage_sgs"</span> <span class="k">do</span> 
+  <span class="n">label</span> <span class="s2">"Manage SGs"</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>Actions and resources for Permission declarations have been moved from the <code>rs</code> namespace to the <code>rs_cm</code> namespace to match the new <a href="../rcl/v2/index.html">RCL v2</a> syntax. Here is an example:</p>
+
+<p>Old syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">permission</span> <span class="s2">"manage_sgs"</span> <span class="k">do</span>
+  <span class="n">actions</span> <span class="s2">"rs.create"</span><span class="p">,</span> <span class="s2">"rs.destroy"</span>
+  <span class="n">resources</span> <span class="s2">"rs.security_groups"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>New syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">permission</span> <span class="s2">"manage_sgs"</span> <span class="k">do</span>
+  <span class="n">actions</span>   <span class="s2">"rs_cm.create"</span><span class="p">,</span> <span class="s2">"rs_cm.destroy"</span>
+  <span class="n">resources</span> <span class="s2">"rs_cm.security_groups"</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>Short descriptions and labels on <code>parameter</code> declarations must not be an empty string or a whitespace-only string. Here is an example:</p>
+
+<p>Old syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"performance"</span> <span class="k">do</span>  
+  <span class="n">type</span> <span class="s2">"string"</span>  
+  <span class="n">label</span> <span class="s2">" "</span>
+  <span class="n">description</span> <span class="s2">""</span>
+  <span class="n">allowed_values</span> <span class="s2">"low"</span><span class="p">,</span> <span class="s2">"high"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>New syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"performance"</span> <span class="k">do</span>  
+  <span class="n">type</span> <span class="s2">"string"</span>  
+  <span class="n">label</span> <span class="s2">"Application Performance"</span>
+  <span class="n">description</span> <span class="s2">"Application performance profile"</span>
+  <span class="n">allowed_values</span> <span class="s2">"low"</span><span class="p">,</span> <span class="s2">"high"</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>The <code>rs_ca_ver</code> CAT field must be an integer value. Here is an example:</p>
+
+<p>Old syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">rs_ca_ver</span> <span class="s1">'20131202'</span>
+</code></pre>
+
+<p>New syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">rs_ca_ver</span> <span class="mi">20131202</span>
+</code></pre></li>
+<li><p>All CAT fields must appear before any declarations or definitions. Here is an example:</p>
+
+<p>Old syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"database_slave"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="s2">"Database Slave"</span>  
+  <span class="n">cloud</span> <span class="s2">"AWS US-East"</span>
+  <span class="n">server_template_href</span> <span class="s2">"/api/server_templates/123"</span>
+<span class="k">end</span>
+
+<span class="nb">name</span> <span class="s1">'My CloudApp'</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20131202</span>
+<span class="n">short_description</span> <span class="s1">'This is a CloudApp that does something great'</span>
+</code></pre>
+
+<p>New syntax:</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s1">'My CloudApp'</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">short_description</span> <span class="s1">'This is a CloudApp that does something great'</span>
+
+<span class="n">resource</span> <span class="s2">"database_slave"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="s2">"Database Slave"</span>  
+  <span class="n">cloud</span> <span class="s2">"AWS US-East"</span>
+  <span class="n">server_template_href</span> <span class="s2">"/api/server_templates/123"</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>Definitions now use <a href="../rcl/v2/index.html">RCL v2</a> syntax.</p></li>
+</ul>
+
+<h3 id="version-20160622-new-features">New Features</h3>
+
+<ul>
+<li><a href="../../guides/ss_packaging_cats.html">CAT Imports</a></li>
+<li>Added label field to operations and permissions which will be displayed in the UI</li>
+</ul>
+
+<h2 id="version-20131202">Version 20131202</h2>
+
+<p>Released December 2013</p>
+
+<ul>
+<li><a href="v20131202/index.html">First release</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

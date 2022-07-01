@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>About RightLink 6</title><meta content="RightLink is the ruby-based agent pre-installed on every RightImage-based server running in RightScale and it supports the latest automation and monitoring features." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="rl6 rl6_rl6_about" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl6"><h4 class="list-group-heading"><span>RightLink 6</span></h4></a><a class="list-group-item" href="rl6_about.html">About</a><a class="list-group-item" href="rl6_getting_started.html">Getting Started</a><a class="list-group-item" href="../release-notes/right-link-6.html">Releases</a><a class="list-group-item" href="rl6_installing.html">Installing RightLink 6</a><a class="list-group-item" href="rl6_enabling.html">Enabling Running Instances</a><a class="list-group-item" href="rl6_using.html">Using RightLink 6</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">About RightLink 6</a></p><div class="page-header"><h1>About RightLink 6</h1></div><div class="main-content"><div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>RightLink 6 <a href="/faq/end_of_life_end_of_service.html#schedule-images-rightlink">has been EOL&#39;d</a> - please refer to the <a href="/rl10">RightLink 10 documentation</a></p>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>RightLink is the ruby-based agent pre-installed on every RightImage-based server running in RightScale and it supports the latest automation and monitoring features. It uses HTTPS as its RightNet communication mode and configuration via RightScripts or Chef. RightLink is preinstalled on all RightImages (Version 5 and above) published by RightScale.</p>
+
+<p>RightLink 6 comes available in standard OS packages (.rpm, .deb, .msi) you can use to create custom RightImages within RightScale. Additionally, you can use RightScale more easily in your private cloud with operating systems that we support but cannot distribute, such as Microsoft Windows® and Red Hat Enterprise Linux (RHEL).</p>
+
+<p>For a list of all the new features added to RightLink in version 6.x (as well as bug fixes), refer to the <a href="https://github.com/rightscale/right_link/blob/master/RELEASES.rdoc">RightLink 6 Release Notes on GitHub</a>.</p>
+
+<p><strong>Important!</strong> - Custom images that are built with RightLink 5.9 and higher are fully supported by RightScale. If you choose to create your own custom images instead of using the ones included in ServerTemplates published by RightScale, please refer to the following documents for best practices and recommended procedures. See <a href="rl6_installing.html#creating-rightlink-6-enabled-images">Create RightLink 6 Enabled Images</a>.</p>
+
+<h2 id="advantages-of-rightlink">Advantages of RightLink</h2>
+
+<p>There are several general advantages of using RightLink-enabled RightImages (Version 5 RightImages and later).</p>
+
+<ul>
+<li><strong>Performance</strong> - Real-time execution of scripts as opposed to periodic polling. Loosely defined, the technology is closer to push technology than pull (polling).</li>
+<li><strong>Discovery</strong> - RightLink supports our machine tags, allowing discovery amongst Servers that can be used very pragmatically. For example, application Servers that automatically register with the load balancer upon boot, or slaves locating a master based on machine tags.</li>
+<li><strong>Robustness</strong> - The architecture that supports RightLink is more reliable because it does not rely on SSH to perform crucial system tasks. The v5 architecture uses a reliable queuing service so no messages are dropped.</li>
+</ul>
+
+<h2 id="rightlink-6-features">RightLink 6 Features</h2>
+
+<p>Features of version 6 include:</p>
+
+<ul>
+<li>Support for integration with VMware vSphere cloud using the RightScale cloud appliance for vSphere.</li>
+<li>Updated to use Ruby 1.9 and Chef 11. This supports better integration with community cookbooks.</li>
+<li>You can bring your custom images to RightScale</li>
+<li>You can build custom images for any supported operating system and cloud, instead of relying exclusively on RightScale-published RightImages.</li>
+<li>Full source packages for RightLink are provided for RPM and deb formats. You can easily rebuild RightLink to support alternate distros, such as Open SUSE 13.</li>
+<li>You can bundle running cloud instances into RightScale-enabled images.</li>
+<li>Firewall friendliness: Uses HTTPs for communication with the RightScale core site. Mirrors, NTP, and patching will now also go through island load balancers.</li>
+<li>Modified NTP resolution algorithm where instances attempt to perform an NTP time sync with RightLink before they enroll with RightNet brokers. See <a href="rl6_using.html#ntp-time-synchronization">NTP Time Synchronization</a>.</li>
+</ul>
+
+<h2 id="supported-clouds">Supported Clouds</h2>
+
+<p>RightLink 6 Supports the following cloud types:</p>
+
+<table><thead>
+<tr>
+<th>Cloud Type</th>
+<th>Nickname</th>
+<th>Support Package</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Microsoft Azure</td>
+<td>azure</td>
+<td>rightlink6-cloud-azure</td>
+</tr>
+<tr>
+<td>Amazon EC2</td>
+<td>ec2</td>
+<td>rightlink6-cloud-ec2</td>
+</tr>
+<tr>
+<td>Google Compute Engine</td>
+<td>gce</td>
+<td>rightlink6-cloud-gce</td>
+</tr>
+<tr>
+<td>OpenStack</td>
+<td>openstack</td>
+<td>rightlink6-cloud-openstack</td>
+</tr>
+<tr>
+<td>SoftLayer</td>
+<td>softlayer</td>
+<td>rightlink6-cloud-softlayer</td>
+</tr>
+<tr>
+<td>vSphere Cloud Appliance (VMware)</td>
+<td>vsphere</td>
+<td>rightlink6-cloud-vsphere</td>
+</tr>
+</tbody></table>
+
+<h2 id="supported-platforms">Supported Platforms</h2>
+
+<p>RightLink 6 is built for and tested with the following platforms. An additional column (<q>Known working/best effort</q>) is provided for platforms known to work but are not supported officially; RightSale will provide a best-effort in terms of defect resolution on the specified platforms.</p>
+
+<p><strong>Note</strong>: Only 64 bit packages are built and published by RightScale.</p>
+
+<table><thead>
+<tr>
+<th>Platform Release</th>
+<th>Supported by RS</th>
+<th>Tested by RS</th>
+<th>Known working/best effort</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Ubuntu 14.04 (trusty)</td>
+<td>X</td>
+<td>X</td>
+<td>Ø</td>
+</tr>
+<tr>
+<td>Ubuntu 12.04 (precise)</td>
+<td>X</td>
+<td>X</td>
+<td>Ø</td>
+</tr>
+<tr>
+<td>CentOS 6 and Red Hat Enterprise Linux 6</td>
+<td>X</td>
+<td>X</td>
+<td>Ø</td>
+</tr>
+<tr>
+<td>CentOS 7 and Red Hat Enterprise Linux 7</td>
+<td>X</td>
+<td>X</td>
+<td>Ø</td>
+</tr>
+<tr>
+<td>SUSE Linux Enterprise Server 11 SP3</td>
+<td>X</td>
+<td>X</td>
+<td>Ø</td>
+</tr>
+<tr>
+<td>SUSE Linux Enterprise Server 11 SP2</td>
+<td>X</td>
+<td>X</td>
+<td>Ø</td>
+</tr>
+<tr>
+<td>OpenSUSE 13</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Debian 7 (wheezy)</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Debian 6 (squeeze)</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Microsoft Windows 2012R2</td>
+<td>X</td>
+<td>X</td>
+<td>Ø</td>
+</tr>
+<tr>
+<td>Microsoft Windows 2012</td>
+<td>X</td>
+<td>X</td>
+<td>Ø</td>
+</tr>
+<tr>
+<td>Microsoft Windows 2008 R2 SP1</td>
+<td>X</td>
+<td>X</td>
+<td>Ø</td>
+</tr>
+<tr>
+<td>Microsoft Windows 2008 (other versions)</td>
+<td>X</td>
+<td>Ø</td>
+<td>Ø</td>
+</tr>
+<tr>
+<td>Microsoft Windows 2008 (all versions)</td>
+<td>X</td>
+<td>Ø</td>
+<td>Ø</td>
+</tr>
+</tbody></table>
+
+<p>Legend:
+X - Supported feature
+Ø - Not supported</p>
+
+<h2 id="chef-integration-and-support">Chef Integration and Support</h2>
+
+<p>As part of our integrated configuration management system, you have the option to use Chef cookbooks or scripts to configure your RightScale servers. When using the integrated Chef system, the RightLink agent executes chef-solo using a built-in Chef executable. RightLink also provides additional utilities on top of the integrated Chef executable, exposing Chef resources and providers that are specific to the RightScale management system. The RightLink agent on the running instance can run Chef recipes that install software at boot time and perform operational tasks, such as restarting services or reconfiguring software. When using the integrated Chef implementation, you must use a v5 RightImage or later.</p>
+
+<p>As an alternative to the integrated Chef in RightScale, you can use a standard Chef client on any server. This approach allows you to use any Chef server and version of your choice, but will not have the built in convenience operations that come with the integrated Chef implementation. If you prefer to run Chef natively, you should consider using our <a href="http://www.rightscale.com/library/server_templates/Chef-Client-Beta-v13-5-/lineage/20349">Chef Client ServerTemplate</a>.</p>
+
+<p>The advantages of using Chef include:</p>
+
+<ul>
+<li><strong>Remote Recipes</strong> - Enables you to run a Chef Recipe on a remote instance (either by tag or a specific instance ID). You can also create (or delete) a tag in a Recipe run on a remote instance</li>
+<li><strong>Chef Resources</strong> - RightLink provides several Chef resources that can be used to implement a discovery service by advertising and querying tags. See <a href="http://support.rightscale.com/12-Guides/Chef_Cookbooks_Developer_Guide/04-Developer/06-Development_Resources/Chef_Resources/index.html">Chef Resources</a> for more information</li>
+</ul>
+
+<p>For additional information on developing Chef recipes see the <a href="http://support.rightscale.com/12-Guides/Chef_Cookbooks_Developer_Guide/index.html">Chef Cookbooks Developer Guide</a>.</p>
+
+<h2 id="source-code">Source Code</h2>
+
+<p>We’ve open-sourced the RightLink codebase to enable others to inspect what we ask them to put on their servers and to be able to leverage all the code that we put in to provide a more efficient and dynamic messaging system. Currently, RightLink may have some RightScale-specific code in it, but we’re open to factoring that out such that others can use the same codebase in other contexts. RightLink is published under the MIT license. See the LICENSE file in the source code.</p>
+
+<p>The source code and license agreement for RightLink can be found at:</p>
+
+<p><a href="http://github.com/rightscale/right_link">http://github.com/rightscale/right_link</a></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

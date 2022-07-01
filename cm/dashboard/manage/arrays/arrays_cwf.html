@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Setup Array Autoscaling Using Cloud Workflow</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_manage cm_dashboard_manage_arrays cm_dashboard_manage_arrays_arrays_cwf" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Manage</a> &#x2F; <a href="./">Arrays</a></p><div class="page-header"><h1>Setup Array Autoscaling Using Cloud Workflow</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>ServerArrays can be configured to leverage the Cloud Workflow engine to control the orchestration required to scale up and scale down. The integration also makes it possible for Cloud Workflow processes to run periodically -- potentially triggering scaling events either directly or by creating voting tags on instances that are running in the deployment.</p>
+
+<p>For a refresher on ServerArrays and how voting tags affect autoscaling please consult the <a href="/cm/dashboard/manage/arrays/arrays_concepts.html">Arrays Concepts</a> for alert based ServerArrays. For a refresher on Cloud Workflow and details on the RCL syntax please consult the <a href="/ss/reference/rcl/v2/#rcl">Cloud Workflow Language</a>.</p>
+
+<h2 id="key-concepts">Key Concepts</h2>
+
+<p>Alert based ServerArrays scale up and down based on the alert conditions being met in the array definition. The default behavior of these arrays is to simply launch/terminate more of the specified instances. In some cases, you might want to customize the launch/terminate behavior or modify the server specification before launching more. Such use cases might include: checking and leveraging spot pricing, modifying an instance to utilize an existing Reserved Instance, or having more control over which instance(s) are terminated when scaling down.</p>
+
+<p>To provide you with more control over the launch/terminate behavior of server arrays, you can optionally create the array with an escalation workflow template that controls the launch/terminate logic. If a template is provided then the default autoscaling orchestration is overridden -- it is possible to overwrite either the scale up orchestration, the scale down orchestration or both.  </p>
+
+<p>When provided the system parses the given template and looks for RCL definitions with the following names:</p>
+
+<ul>
+<li><p><code>scale_up</code>: the definition run when a scale up event triggers. The definition should accept one argument which is the number of instances to be launched (as defined in the ServerArray elasticity parameters).</p></li>
+<li><p><code>scale_down</code>: the definition run when a scale down event triggers. The definition should accept one argument which is the number of instances to be terminated (as defined in the ServerArray elasticity parameters).</p></li>
+<li><p><code>monitor</code>: a definition run roughly every minute when the ServerArray is enabled. The definition accepts no parameter and can be used to monitor an array that is not currently undergoing scaling.</p></li>
+</ul>
+
+<p>All these definitions have access to the underlying ServerArray object via the built-in <code>@@array</code> global reference. The RCL code can inspect the reference to figure out how many instances are currently running or to inspect the elasticity parameters. The <a href="http://reference.rightscale.com/api1.5/media_types/MediaTypeServerArray.html">API reference</a> lists the fields available on the ServerArray object. Relationships can easily be followed using the RCL link syntax. For example retrieving the current instances in the ServerArray can be done with:</p>
+<pre class="syntax-highlight ruby"><code><span class="vi">@instances</span> <span class="o">=</span> <span class="vc">@@array</span><span class="p">.</span><span class="nf">current_instances</span><span class="p">()</span>
+</code></pre>
+
+<h2 id="helper-definitions">Helper definitions</h2>
+
+<p>The ServerArray escalation template definitions also have access to a few built-in definitions that provide additional control.</p>
+
+<p>The <code>rs__log</code> and <code>rs__update_audit_summary_status</code> helper definitions can be used to append additional information to the audit associated with the server array and to create new audit sections respectively:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">call</span> <span class="n">rs__update_audit_summary_status</span> <span class="p">(</span><span class="s2">"Launching new instances"</span><span class="p">)</span>
+<span class="n">call</span> <span class="n">rs__log</span><span class="p">(</span><span class="n">join</span><span class="p">([</span><span class="s2">"instance count"</span><span class="p">,</span> <span class="nb">to_s</span><span class="p">(</span><span class="vg">$count</span><span class="p">)],</span> <span class="s2">": "</span><span class="p">))</span>
+</code></pre>
+
+<p>These definition are especially useful during development to help debug the RCL code. The corresponding audit entries are attached to the server array and are readily available in the dashboard.</p>
+
+<p>The <code>rs__cancel_process</code> definition makes it possible to cancel a current Cloud Workflow process. The argument indicates which process to cancel: it can be either <code>scale_down</code> or <code>scale_up</code>.</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">sub</span> <span class="ss">timeout: </span><span class="mi">2</span><span class="n">m</span><span class="p">,</span> <span class="ss">on_timeout: </span><span class="n">rs__cancel_process</span><span class="p">(</span><span class="s2">"scale_down"</span><span class="p">)</span> <span class="k">do</span>
+  <span class="c1"># …</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="example-rightscale-cloud-workflow-language--rcl--definitions">Example RightScale Cloud Workflow Language (RCL) Definitions</h2>
+
+<h4 id="basic-example">Basic Example</h4>
+
+<p>The example below reproduces the same behavior as the built-in orchestration:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">define</span> <span class="n">scale_up</span><span class="p">(</span><span class="vg">$count</span><span class="p">)</span> <span class="k">do</span>
+    <span class="c1"># Launch $count instances in the array</span>
+    <span class="n">concurrent</span> <span class="n">foreach</span> <span class="vg">$i</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="vg">$count</span><span class="p">]</span> <span class="k">do</span>
+        <span class="vc">@@array</span><span class="p">.</span><span class="nf">launch</span><span class="p">()</span> <span class="c1"># Launches 1 instance </span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">define</span> <span class="n">scale_down</span><span class="p">(</span><span class="vg">$count</span><span class="p">)</span> <span class="k">do</span>
+    <span class="c1"># Terminate $count instances in the array</span>
+    <span class="vg">$i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="vi">@instances</span> <span class="o">=</span> <span class="vc">@@array</span><span class="p">.</span><span class="nf">current_instances</span><span class="p">()</span>
+    <span class="k">while</span> <span class="vg">$i</span> <span class="o">&lt;=</span> <span class="vg">$count</span> <span class="k">do</span>
+        <span class="vi">@instance</span> <span class="o">=</span> <span class="vi">@instances</span><span class="p">[</span><span class="n">size</span><span class="p">(</span><span class="vi">@instances</span><span class="p">)</span><span class="o">-</span><span class="vg">$i</span><span class="p">]</span>
+        <span class="vi">@instance</span><span class="p">.</span><span class="nf">terminate</span><span class="p">()</span>
+        <span class="vg">$i</span> <span class="o">=</span> <span class="vg">$i</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Additional examples available in our GitHub repository <a href="https://github.com/rs-services/serverarray-rcl-definitions">rs-services/serverarray-rcl-definitions</a></p>
+
+<h2 id="enabling-cwf-scaling-and-uploading-rcl-definitions">Enabling CWF Scaling and Uploading RCL Definitions</h2>
+
+<p>To enable CWF Scaling, the Array Type must be set to <code>alert</code> and the <code>server_array[elasticity_params][workflow_specific_params][template]</code> parameter must be defined and include the RCL definitions that you wish to override. Please note that creating a worklow-based server array <a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#create">is only possible using the API</a>.</p>
+
+<p>Below is an example for updating an existing array by setting the workflow template parameter, which also enables CWF Autoscaling. To disable CWF Autoscaling -- unset or empty the <code>server_array[elasticity_params][workflow_specific_params][template]</code> parameter value.</p>
+
+<p><em>Update Array using rsc</em>:</p>
+<pre class="syntax-highlight shell"><code>rsc cm15 update https://us-3.rightscale.com/api/server_arrays/12345678790 server_array[array_type]<span class="o">=</span>alert server_array[elasticity_params][workflow_specific_params][template]@/path/to/rcl_definitions.rb 
+</code></pre>
+
+<p>or</p>
+
+<p><em>Update Array using curl</em>:</p>
+<pre class="syntax-highlight shell"><code>curl -i -H <span class="s2">"Cookie: </span><span class="nv">$rs_gbl</span><span class="s2">"</span> -H X_API_VERSION:1.5 -X PUT <span class="se">\</span>
+    -d server_array[array_type]<span class="o">=</span>alert <span class="se">\</span>
+    --data-urlencode server_array[elasticity_params][workflow_specific_params][template]@/path/to/rcl_definitions.rb <span class="se">\</span>
+    https://us-3.rightscale.com/api/server_arrays/12345678790
+</code></pre>
+
+<p>See official API docs for <a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html">ServerArray Resources</a> for detailed API spec.</p>
+
+<h2 id="testing-the-scaling-definitions">Testing the Scaling Definitions</h2>
+
+<p>If an array has workflow-based scaling enabled, you can trigger a scale up or down by calling the <a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#scale_up">scale_up</a> or <a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#scale_down">scale_down</a> actions of the array via Cloud Management API 1.5. These are the same actions that are triggered when an alert-based array determines that scaling must occur.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

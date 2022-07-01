@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Infrastructure Audits</title><meta content="In the RightScale Cloud Management Dashboard, Infrastructure Audits provide a quick overview of the usage of cloud resources within your RightScale account." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_reports cm_dashboard_reports_infrastructure_audits cm_dashboard_reports_infrastructure_audits_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Reports</a></p><div class="page-header"><h1>Infrastructure Audits</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Infrastructure Audits provide a quick overview of the usage of cloud resources within your RightScale account. The audits focus on security aspects and cover all EC2 regions available to your RightScale account. Create audit reports that summarize your account usage of Security Groups or SSH Keys. You may keep up to 10 historical audits. Beyond that, the oldest audit will be rotated out (deleted). You may lock audits to prevent them from being deleted in the rotation, which will allow you to keep an old report as a baseline for performing differentials.</p>
+
+<p><strong>Note</strong>: Under the source tab, which can either represent a range of public IP addresses or Security Groups, an IP address may have <q>!!</q> after it. This denotes that the entire world can view that IP.</p>
+
+<h2 id="actions-and-procedures">Actions and Procedures</h2>
+
+<h3 id="actions-and-procedures-download-an-infrastructure-audit-report">Download an Infrastructure Audit Report</h3>
+
+<h4 id="objective">Objective</h4>
+
+<p>To download an Infrastructure Audit Report for either Security Groups or SSH Keys.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Currently you can only create Infrastructure Audits Reports for EC2. Also, under the source tab, which can either represent a range of public IP addresses or Security Groups, an IP address may have <q>!!</q> after it. This denotes that the entire world can view that IP.</p>
+</div>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<ul>
+<li>An existing Infrastructure Audit Report.</li>
+<li>&#39;security_manager&#39; or &#39;admin&#39; user role privileges</li>
+</ul>
+
+<h4 id="steps">Steps</h4>
+
+<p>You can either download the audit report as a text (.txt) or json (.json) file.</p>
+
+<h5 id="download-a-text-file-audit-report">Download a Text file Audit Report</h5>
+
+<ol>
+<li>Go to <strong>Reports</strong> &gt; <strong>Infrastructure Audit.</strong> Select an audit report.</li>
+<li>Click the <strong>Download Text</strong> button and specify where to save the file on your local machine. The filename will include the timestamp of when the report was created. (e.g. SecurityGroupAudit_2012-09-06 20_46_43.txt)</li>
+</ol>
+
+<h5 id="download-an-json-file-audit-report">Download an JSON file Audit Report</h5>
+
+<ol>
+<li>Go to <strong>Reports</strong> &gt; <strong>Infrastructure Audit</strong>. Select an audit report.</li>
+<li>Click the <strong>Download JSON</strong> button and specify where to save the file on your local machine. The filename will include the timestamp of when the report was created. (e.g. SecurityGroupAudit_2012-09-06 20_46_43.json)</li>
+<li>Once a report is downloaded you can use a JSON parser to get back a specific object (e.g. Ruby object or java object). You can have different JSON object parsers for different objects.</li>
+</ol>
+
+<h3 id="actions-and-procedures-perform-an-infrastructure-audit-report">Perform an Infrastructure Audit Report</h3>
+
+<h4 id="objective">Objective</h4>
+
+<p>To perform an Infrastructure Audit for either Security Groups or SSH Keys usage in your RightScale account.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Currently you can only create Infrastructure Audits Reports for EC2. Also, under the source tab, which can either represent a range of public IP addresses or Security Groups, an IP address may have <q>!!</q> after it. This denotes that the entire world can view that IP.</p>
+</div>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<ul>
+<li>&#39;admin&#39; or &#39;security_manager&#39; user role privileges</li>
+</ul>
+
+<h4 id="steps">Steps</h4>
+
+<p>You can create an Infrastructure Audit Report for the following EC2 cloud resources:</p>
+
+<ul>
+<li>EC2 Security Groups</li>
+<li>EC2 SSH Keys</li>
+</ul>
+
+<h5 id="ec2-security-groups">EC2 Security Groups</h5>
+
+<ul>
+<li>Navigate to <strong>Reports</strong> &gt; <strong>Infrastructure Audit</strong>. Then click the <strong>Security Groups</strong> tab.</li>
+<li>Click <strong>Perform New Audit.</strong> You will be prompted with the option of performing an Infrastructure Audit on &#39;Public Ports&#39; or &#39;All Ports&#39;.
+
+<ul>
+<li><strong>Public Ports</strong> - Create a report on all ports that are highly accessible to the public, meaning ports that allow access from subnets larger than a /24 (i.e. /0 through /23).Ports that only allow access from other security groups or from subnets of size /24 or smaller (i.e. /24 through /32) are not reported.</li>
+<li><strong>All Ports</strong> - Create a report on all ports to which any access is allowed. This is the most comprehensive report.</li>
+</ul></li>
+</ul>
+
+<h5 id="ec2-ssh-keys">EC2 SSH Keys</h5>
+
+<ul>
+<li>Navigate to: <strong>Reports</strong> &gt; <strong>Infrastructure Audit</strong> &gt; <strong>SSH Keys</strong></li>
+<li>Click <strong>Perform New Audit.</strong> You be prompted with the option of performing an Infrastructure Audit on &#39;Running servers&#39; or &#39;All keys&#39;.
+
+<ul>
+<li><strong>Running servers</strong> - Create a report on all SSH keys that are used by running servers. SSH Keys that are associated to inactive Servers will not be listed.</li>
+<li><strong>All keys</strong> - Create a report on all SSH keys. This is the most comprehensive report.</li>
+</ul></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

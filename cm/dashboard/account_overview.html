@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Dashboard Landing Page - Account Overview</title><meta content="The RightScale Account Overview gives you a near real-time overview of cloud resource activity allowing you to see at a glance what is currently happening in your account." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_account_overview" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Dashboard User's Guide</a></p><div class="page-header"><h1>Dashboard Landing Page - Account Overview</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>The Dashboard Users Guide provides technical end-user documentation on using the RightScale Cloud Management (CM) Dashboard.</p>
+
+<p>When you first launch the RightScale Cloud Management Dashboard you are presented with the Account Overview page. The Account Overview is divided into three parts: <em>compute</em>, <em>network,</em> and <em>storage</em>, that give you a near real-time overview of cloud resource activity allowing you to see at a glance what is currently happening in your account. From this view, you can navigate to other pages in the CM platform to take actions and resolve issues as needed. Here is an illustration showing a typical Account Overview page.</p>
+
+<p><img src="/img/cm-dashboard-ao-landing.png" alt="cm-dashboard-ao-landing.png" width="725" height="362" /></p>
+
+<p>Using Account Overview you can...</p>
+
+<ul>
+<li>Ensure critical application infrastructure is healthy</li>
+<li>Identify network security issues</li>
+<li>Check for abnormal system behavior</li>
+<li>Verify underlying cloud performance</li>
+<li>Reduce costs by locating wasteful resources</li>
+</ul>
+
+<p>The various components of the Account Overview page are described below.</p>
+
+<h3 id="-compute">Compute</h3>
+
+<p>The Compute component shows operational information related to the computing resources launched in cloud such as instance/core usage, stranded servers, server states, and alerts.</p>
+
+<p><strong>Compute Graph</strong></p>
+
+<p>At the top of the Compute component is a <em>Compute Graph</em> depicting instance/core usage by deployment/cloud over time. The Compute Graph is helpful in that it gives you a sense of your usage patterns and allows you to quickly determine if there has been any abnormal usage of your account. Using this information you can begin to answer questions such as &quot;Does it make sense that I scale up in the evening every day?”. Using the available drop-down you can configure the graph to view <strong>Instances By Deployment</strong> (default), <strong>Instances By Cloud</strong>. <strong>Cores By Deployment</strong> , or <strong>Cores By Cloud</strong>. You can also specify the timeline axis to be either one day or one week. Hovering your mouse over the graph reveals the detailed breakdown of data at any point along the timeline.</p>
+
+<p><strong>Stranded Servers</strong></p>
+
+<p>Below the Compute Graph is a listing of the four most recent <em>Stranded Servers</em> across all deployments in your account. This allows to quickly deternine any potential problem areas. Each server name is listed along with the amount of time the server has been stranded. Clicking the <strong>More</strong> button displays a modal dialog where any additional stranded servers are shown (if any) along with details.</p>
+
+<p><strong>Server States</strong></p>
+
+<p>The <em>Server States</em> area shows the three largest deployments in your account. The various states of the servers in each deployment is depicted using a color-coded circle that also indicates the number of running servers. Links are provided to each deployment listed so you can easily navigate to them to address any concerns or gather additional information. Clicking the <strong>More</strong> button displays a modal dialog that shows a comprehensive listing of all deployments in your account along with the total number of servers in each deployment and each server state.</p>
+
+<p><strong>Active Alerts</strong></p>
+
+<p>The <em>Active Alerts</em> area shows the three most recently triggered alerts across all deployments in your account. For each alert listed, the instance name and alert condition is displayed along with the elapsed time since the alert first occured. A button is provided so you can quickly navigate to the associated server page to address issues as needed. Clicking the <strong>More</strong> button displays a modal dialog showing all triggered alerts and the associated server, deployment, alert condition, and alert age.  </p>
+
+<p><strong>Active Alerts by Deployments</strong></p>
+
+<p>The <em>Active Alerts by Deployments</em> area shows all active alerts in your account, sorted by the deployment with the most active alerts. Color-coding shows the alert classification (critical, warning, other) and a link to the alerts tab of the displayed deployment is provided for ease of navigation.</p>
+
+<h3 id="-network">Network</h3>
+
+<p>The Network component displays operational information related to network performance, security groups, and ports.</p>
+
+<p><strong>Network Graph</strong></p>
+
+<p>At the top of the Network component is a <em>Network Graph</em> showing network traffic in Megabits/second (Mbps) by deployment/cloud. The graph includes all network transmission across all deployments in your account including both inbound and outbound traffic. The Network Graph can aid you in identifying network traffic patterns and locating chatty services/traffic that may be needlessly increasing costs. Using the available drop-down you can configure the graph to view <strong>Mbps by Deployment</strong> (default) or <strong>Mbps by Cloud</strong>. You can also specify the timeline axis to be either one day or one week. Hovering your mouse over the graph reveals the detailed breakdown of data at any point along the timeline.</p>
+
+<p><strong>Recent Security Group Changes</strong></p>
+
+<p>Below the Network Graph is a listing of <em>Recent Security Group Changes</em> which shows who made the most recent changes to security groups used in the account. This helps you maintain security by ensuring only authorized users are making network changes. Each changed security group is listed along with the responsible user and the elapsed time since the change was made. Links are provided so you can quickly navigate to the associated security group page. Clicking the <strong>More</strong> button brings up a comprehensive list of all security groups and when they where last changed.</p>
+
+<p><strong>Publicly Accessible Ports</strong></p>
+
+<p>The <em>Publicly Accessible Ports</em> area shows all ports open to the internet and in which deployments they are used. The listing includes up to 15 ports in reverse order that are open to all IP addresses. These ports are in one or more security groups that are in use in one or more of the deployments in your account. This list helps you verify that only known ports are actually open and provides a quick way to make sure nobody entered a CIDR port incorrectly. For each port listed, one or more buttons take you to the corresponding deployment page(s).</p>
+
+<h3 id="-storage">Storage</h3>
+
+<p>The Storage component displays operational information related to the data storage resources accessible in your account.</p>
+
+<p><strong>Storage Graph</strong></p>
+
+<p>At the top of the Storage component is a <em>Storage Graph</em> showing total IOPS (disk input/output operations - a measure of disk performance) by deployment/cloud across your account. Using the Storage Graph you can verify expected disk performance at-a-glance. Using the available drop-down you can configure the graph to view <strong>IOPS by Deployment</strong> (default) or <strong>IOPS by Cloud</strong>. You can also specify the timeline axis to be either one day or one week. Hovering your mouse over the graph reveals the detailed breakdown of data at any point along the timeline.<br>
+ <strong>Volumes Overview</strong></p>
+
+<p>Below the Storage Graph is the <em>Volumes Overview</em> where you can view a high level summary of the storage volume usage in your account. This helps ensure that you are not overspending on storage volumes you do not use. Volume usage is broken down into Attached Volumes With Snapshots, Attached Volumes Without Snapshots, Unattached Volumes, and Total Volumes. Clicking the <strong>More</strong> button displays a modal dialog showing a comprehensive list of all storage volumes in your account along with size, age, and other meaningful data.</p>
+
+<p><strong>Attached Volumes Without Snapshots</strong></p>
+
+<p>The <em>Attached Volumes Without Snapshots</em> area shows the most recently created volumes without snapshots. This information helps you ensure your disaster recovery plan is viable by making sure new volumes are getting snapshotted appropriately. Each volume listed is linked for convenient navigation to the corresponding page in CM. The age of each volume without a snapshot is also indicated. Clicking the <strong>More</strong> button displays a modal dialog showing a comprehensive list of all attached storage volumes without snapshots in your account along with size, age, and other meaningful data.</p>
+
+<p><strong>Unattached Volumes</strong></p>
+
+<p>The <em>Unattached Volumes</em> area shows the most recently created volumes in your account that are not attached to a server. This information helps you identify wasteful volumes that are being utilized. Each volume listed is linked for convenient navigation to the corresponding page in CM. The age of each unattached volume is also indicated. Clicking the <strong>More</strong> button displays a modal dialog showing a comprehensive list of all unattached storage volumes in your account along with size, age, and other meaningful data.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

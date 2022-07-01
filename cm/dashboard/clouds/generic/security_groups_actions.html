@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Security Groups - Actions</title><meta content="Common procedures for working with Security Groups in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_generic cm_dashboard_clouds_generic_security_groups_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">clouds</a> &#x2F; <a href="./">Generic Cloud Services</a></p><div class="page-header"><h1>Security Groups - Actions</h1></div><div class="main-content"><h2 id="create-a-new-security-group">Create a New Security Group</h2>
+
+<h3 id="create-a-new-security-group-overview">Overview</h3>
+
+<p><em>Security groups</em> are essentially firewalls for servers in the cloud. They define which ports are open to allow incoming connections to a server via specific protocols. Security groups only affect ingress (incoming) communications and do not prevent a server from initiating outbound communications.</p>
+
+<p>Each server must have at least one security group assigned. By default, a new security group set up with no associated rules will deny all access to its associated servers. You must add rules in order to allow inbound traffic to the servers.</p>
+
+<p>Security groups give you a flexible way to restrict server access, allowing you to set restrictions specific to particular protocols, ports, IP addresses, or combinations of these. Permissions defined in a security group are additive in nature; so, if a server has two security groups where one group has port 80 open and the other group has port 80 closed, port 80 will be <em>open</em> (not closed) on the server.</p>
+
+<p>Use the following procedure to create a new security group (or groups) to use with servers in deployments.</p>
+
+<h3 id="create-a-new-security-group-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>Adding and editing security groups requires the <q>security_manager</q> role. See <a href="/cm/ref/user_roles.html">User Roles</a>.</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The <q>security_manager</q> role also enables you to run Infrastructure Audit reports (which include security group audit trail information).</p>
+</div>
+
+<h3 id="create-a-new-security-group-steps">Steps</h3>
+
+<h4 id="create-a-new-security-group">Create a New Security Group</h4>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <em>Networks</em> &gt; <em>Select a Network</em> &gt; <em>Security Groups Tab</em> &gt; <strong>New Security Group</strong>.</li>
+<li><p>Provide the following information about the security group.</p>
+
+<p><img src="/img/cm-create-new-sec-group.png" alt="cm-create-new-sec-group.png" width="619" height="271" /></p></li>
+</ol>
+
+<ul>
+<li><strong>Name</strong> - Enter a descriptive name for the security group. (e.g. ProjectX)</li>
+<li><strong>Description</strong> - Provide a helpful description. (Note: Required for OpenStack)</li>
+<li><strong>Permissions</strong> - Use the checkboxes to create firewall permissions for some of the common TCP ports. The created rule will allow ingress communication from <em>any</em> public IP address. (0.0.0.0/0) <em>Note</em>: You can create additional firewall rules in the next few steps.</li>
+</ul>
+
+<p>3. Click <strong>Create</strong>.</p>
+
+<h4 id="add-ip-based-permissions">Add IP-based Permissions</h4>
+
+<p>All firewall permissions apply to ingress communication. Create a rule for a specific port or range of ports. Create additional rules as necessary.</p>
+
+<ol>
+<li>If you are building a 3-tier deployment, see <a href="/cm/dashboard/clouds/generic/security_groups_actions.html#configuring-multiple-security-groups-for-a-multi-tiered-deployment">Configuring Multiple Security Groups for a Multi-Tiered Deployment</a> to verify that you are creating the appropriate firewall rules for your type of reference architecture.</li>
+<li><p>Go to the <strong>Info</strong> tab of the security group. Create a new firewall rule under the <q>Permissions</q> section.</p>
+
+<p><img src="/img/cm-add-IP-rule.png" alt="cm-add-IP-rule.png" width="725" height="199" /></p></li>
+</ol>
+
+<ul>
+<li>Select the IP <strong>protocol</strong> (TCP, UDP, ICMP). <em>Note</em>: For ICMP, use <strong>-1</strong> as a wildcard (that is, all ICMP Types and Codes).</li>
+<li>Define the level of <strong>IP</strong> access using CIDR notation. For example, to allow <em>any</em> IP addresses, enter: <code>0.0.0.0/0</code>.</li>
+<li>Define the <strong>port</strong> or range of ports. To open a single port, enter the port number in both fields. (<em>Note</em>: For OpenStack, the port must be greater than zero.)</li>
+<li>Provide a helpful <strong>description</strong> for the firewall rule.</li>
+</ul>
+
+<p>3. Click <strong>Add</strong>. <strong>Warning!</strong> - Changes to firewall permissions are applied immediately and will affect any running instances that are using the security group.<br>
+    4. Repeat the steps above to add additional firewall rules, as necessary.</p>
+
+<h4 id="add-group-based-permissions">Add Group-Based Permissions</h4>
+
+<p>Use the <q>Add Group</q> feature to add security groups to other security groups or to add a security group to itself. This feature grants group-wide access permissions that apply to all servers in the added group. See <a href="/cm/dashboard/clouds/generic/security_groups_actions.html#add-a-security-group-to-another-security">Add a Security Group to Another Security Group</a> or <a href="/cm/dashboard/clouds/generic/security_groups_actions.html#add-a-security-group-to-itself">Add a Security Group to Itself</a>.</p>
+
+<h4 id="troubleshooting-security-groups">Troubleshooting Security Groups</h4>
+
+<p>When experiencing communications issues with servers in a deployment, you may need to troubleshoot your security group settings. The following is a list of common issues often associated with the setup and configuration of security groups.</p>
+
+<ul>
+<li>Ports not opened correctly
+
+<ul>
+<li>No website access? Port 80 may be closed.</li>
+<li>SSH sessions fail? Port 22 may be closed. (For non-RightLink-enabled machine images, incorrect or absent SSH keys can affect operational and decommissioning RightScripts also.)</li>
+<li>No SSL support? Port 443 may be closed.</li>
+</ul></li>
+<li>Accidental use of /32 in CIDR IP address notation, instead of a less restrictive /0.</li>
+<li>If too many ports are open on your server, you may have specified a <em>range</em> of ports when trying to specify a single port in your security group (e.g., ports 80 <em>through</em> 8000 instead of only ports 80 and 8000).</li>
+<li>If servers within a security group are not communicating correctly, you may need to either explicitly open the communications ports to all IP addresses, or add the security group to itself, which allows <em>all</em> servers in the security group to communicate with each other.</li>
+</ul>
+
+<h2 id="add-a-security-group-to-itself">Add a Security Group to Itself</h2>
+
+<h3 id="add-a-security-group-to-itself-overview">Overview</h3>
+
+<p>Servers in the same security group can communicate with each other over both private and public IP addresses, on the ports that are explicitly open to those addresses in the servers&#39; security groups.</p>
+
+<p>In general, it is best to set up servers in your configuration to communicate with each other only over <em>private</em> IP addresses. To allow communication across all ports over private IP addresses for all servers in a security group, you can add the security group to itself. This is similar to adding a security group to another security group, except that it applies to servers in the <em>same</em> security group rather than another, external security group.</p>
+
+<p>Use the following procedure to add a security group to itself so servers in that group can communicate with each other using all protocols and ports, on private IP addresses.</p>
+
+<h3 id="add-a-security-group-to-itself-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A security group.</li>
+<li>Adding and editing security groups requires the <q>security_manager</q> role. See <a href="/cm/ref/user_roles.html">User Roles</a>.</li>
+</ul>
+
+<h3 id="add-a-security-group-to-itself-steps">Steps</h3>
+
+<ul>
+<li>Open the security group that you need to edit (Clouds &gt; <em>CloudName</em> &gt; Security Groups) and click <strong>Edit</strong>.</li>
+<li>Select <q>Group</q> in the <strong>New Permission</strong> dropdown (<strong>IPs</strong> is the default). You must <em>manually</em> enter the security group name in the <q>Group</q> field in order to add it to itself.<br></li>
+</ul>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>This is different than selecting the <q>default</q> security group, which is pre-populated in the <q>Group</q> field. Leaving <q>Group</q> set to <q>default</q> will likely produce undesired results in your deployment.</p>
+</div>
+
+<ul>
+<li>In the example below, the group <q>Standard</q> is used. <em>Warning</em>: Ensure that the group name is spelled correctly.</li>
+</ul>
+
+<p><img src="/img/cm-SG-add-group-services.png" alt="cm-SG-add-group-services.png" width="725" height="104" /></p>
+
+<ul>
+<li>Click <strong>Add</strong>. The security group is added to itself and displayed in the Permissions section, as in the screen shot below. (<q>Standard</q> in our example, along with default values for all other fields.)</li>
+</ul>
+
+<p><img src="/img/cm-security-group-add-group-perms.png" alt="/img/cm-security-group-add-group-perms.png" width="554" height="194" /></p>
+
+<p>After you add the <q>Standard</q> security group to itself, all servers in the <q>Standard</q> security group can establish connections (i.e., send requests) to other servers in that security group, on <em>any</em> ports that security group <q>Standard</q> instances are listening on. Connections are established over private IP addresses.</p>
+
+<h2 id="add-a-security-group-to-another-security-group">Add a Security Group to Another Security Group</h2>
+
+<h3 id="add-a-security-group-to-another-security-group-overview">Overview</h3>
+
+<p>When you add a security group to another security group (including to itself), you create a firewall rule that will allow servers of the other security group to communicate on the private IP network. Typically, server-server communication on the private IP network is only available if both servers are located in the same cloud/region. Whereas communication between two servers located in different clouds/regions must be performed over the public IP network.</p>
+
+<p>If you are setting up an application stack in a cloud infrastructure that consists of multiple tiers and servers, use the <q>Add Group</q> option for additional security. Instead of opening a port to <em>any</em> IP address, you can use a more restrictive setting that only allows a designated group(s) of servers to make successful requests, as well as ensure that they communicate with each other over the private (not public) IP network for faster and more secure communication.</p>
+
+<p>For example, if you have separate application and database server tiers, the database tier should only be accessible by other database servers (e.g. mirroring/synchronization) and to application servers that need to connect to the database.</p>
+
+<p>The following clouds support the use of security groups:</p>
+
+<ul>
+<li>Amazon EC2*</li>
+<li>OpenStack*</li>
+<li>Google Compute Engine</li>
+</ul>
+
+<p>* Security groups for these clouds are configured with Network Manager.</p>
+
+<h3 id="add-a-security-group-to-another-security-group-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>Adding and editing security groups requires the &#39;security_manager&#39; role. See <a href="/cm/ref/user_role_privs.html">User Role Privileges</a>.</li>
+<li>RightScale account with valid cloud credentials for Google</li>
+<li>In order to add a security group, you must know the <q>owner</q> that created the security group as well as the exact name.</li>
+<li>An existing security group. If you need to create one, see <a href="/cm/dashboard/clouds/generic/security_groups_actions.html#create-a-new-security-group">Create a New Security Group</a>.</li>
+</ul>
+
+<h3 id="add-a-security-group-to-another-security-group-steps">Steps</h3>
+
+<h4 id="determine-which-servers-can-initiate-communications">Determine Which Servers Can Initiate Communications</h4>
+
+<p>First, you must determine which types of communications are necessary between servers in your configuration. The following sample scenario includes one security group with public-facing web servers and another security group containing MySQL database servers that are not publicly accessible. The web servers must make requests to the MySQL database; however, the database servers <em>never</em> need to initiate communications with the web servers.</p>
+
+<h4 id="add-group-rule">Add Group Rule</h4>
+
+<ol>
+<li>Open the security group that you need to edit (Clouds &gt; <em>CloudName</em> &gt; Security Groups) and go to the <q>Permissions</q> section under the <strong>Info</strong> tab.</li>
+</ol>
+
+<p><img src="/img/cm-add-group-TCP-rule.png" alt="cm-add-group-TCP-rule.png" width="725" height="65" /></p>
+
+<ul>
+<li><strong>Owner</strong> - The cloud account user. For AWS, the &#39;owner&#39; is defined by the AWS account number (e.g. 1234-1234-1234). If you do not know the &#39;user&#39; name, contact the cloud&#39;s system administrator.
+
+<ul>
+<li><strong>Google</strong> - N/A</li>
+</ul></li>
+<li><strong>Group</strong> - The security group you want to add a rule for in the current security group. <em>Note</em>: You can add a security group to itself.
+
+<ul>
+<li><strong>Google</strong> - Enter the &#39;Resource UID&#39; of the security group you wish to add. (e.g. sg-5e60afa31)</li>
+</ul></li>
+<li><strong>Protocol</strong> - Select the IP protocol (TCP, UDP) for the firewall rule.</li>
+<li><strong>Ports</strong> - Enter the port or range of ports that you wish to open to the added security group. To open all ports, use 0..60000.</li>
+</ul>
+
+<h2 id="configuring-multiple-security-groups-for-a-multi-tiered-deployment">Configuring Multiple Security Groups for a Multi-Tiered Deployment</h2>
+
+<h3 id="configuring-multiple-security-groups-for-a-multi-tiered-deployment-overview">Overview</h3>
+
+<p>Using a single Security Group for a multiple Server, multi-tiered Deployment is fine during the test and development phase of a project, but it is not recommended for production environments. This section discusses a possible implementation using multiple Security Groups for a typical 3-tiered Deployment in the cloud. For example, a Deployment with the following 3 tiers:</p>
+
+<ol>
+<li>Front end load balancers</li>
+<li>Application Servers (one or more, possibly even a Server Array)</li>
+<li>Back end database Servers (master/slave)</li>
+</ol>
+
+<p><img src="/img/cm-3tiered-security-groups.png" alt="cm-3tiered-security-groups.png" width="725" height="270" /></p>
+
+<h3 id="configuring-multiple-security-groups-for-a-multi-tiered-deployment-implementation">Implementation</h3>
+
+<p>Create a Security Group for each tier:</p>
+
+<ul>
+<li><strong>Tier one - Front Ends (Load Balancers)</strong>
+
+<ul>
+<li>Open ports 22 and 80</li>
+<li>Open port 443 if you require SSL (optional)</li>
+<li>Open ICMP if you want to ping the server (optional)</li>
+</ul></li>
+<li><strong>Tier two - Application Servers</strong>
+
+<ul>
+<li>Open port 22</li>
+<li>Add the tier 1 front end Security Group to the application Security Group. Open up port 8000 for the HAproxy listener.</li>
+<li>Open application specific ports (if any). For example, a port used for administrative purposes or dedicated communications port.</li>
+</ul></li>
+<li><strong>Tier three - Database Servers</strong>
+
+<ul>
+<li>Open ports 22</li>
+<li>Add the tier 2 application Security Group to the database Security Group. Open up port 3306 for MySQL.</li>
+<li><em>Note</em>: The Dashboard allows you to configure port level security. That is, only application Servers can communicate to database Servers, and that only on a specific port (e.g. 3306).</li>
+</ul></li>
+</ul>
+
+<p>Although changes to existing Security Groups that are being used by running Servers are dynamic and take effect immediately for new connections, you cannot change which Security Groups are assigned to a running Server. Security Groups can only be assigned to an instance at launch time and cannot be changed once a launch request has been made. Therefore, in order to assign a different Security Group to a running server you must either terminate the existing server and launch a new one or use the relaunch option to launch the <q>Next</q> server with the modified configuration. Remember, you can only modify which Security Group(s) will be assigned to a server before it is launched.</p>
+
+<p>Follow the guidelines below to modify your Security Group configurations.</p>
+
+<ul>
+<li>For each Server, select the <q>next</q> in the Server Timeline.</li>
+<li>Edit the Server configuration
+
+<ul>
+<li>Remove the <q>old</q> (wide open) Security Group</li>
+<li>Add the new Security Group (for the appropriate tier 1, 2 or 3)</li>
+<li>Save your changes</li>
+</ul></li>
+<li>Terminate running Servers
+
+<ul>
+<li>If required by your application, you may need to terminate servers in a specific order</li>
+<li>Otherwise, disable your Server Array (if you have one), then terminate your front end Servers, application Servers (or Array) and then database Servers</li>
+</ul></li>
+<li>Launch Servers
+
+<ul>
+<li>Launch new Servers in a specific order if called for by your application</li>
+<li>Otherwise, launch your Master (once operational, launch your Slave*), launch your front ends, launch your application servers. Remember to enable and then launch if using a Server Array for your application servers.</li>
+</ul></li>
+</ul>
+
+<p>Make sure your Deployment is up, running and functioning properly.</p>
+
+<p>The primary benefit of deploying multiple Security Groups tailored to your specific Deployment is increased security. Certainly there is no reason to have a database port potentially opened up to the world. The scenario above increases security, particularly with respect to tiers 2 and 3.</p>
+
+<p>* Make sure the INIT_SLAVE_AT_BOOT Input is set to <q>true</q> when you launch your slave database Server.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

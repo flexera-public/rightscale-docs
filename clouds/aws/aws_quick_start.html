@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>AWS Quick Start</title><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="clouds clouds_aws clouds_aws_aws_quick_start" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="aws_about.html"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Amazon Web Services</span></h4></a><a class="list-group-item" href="aws_quick_start.html">Quick Start</a><a class="list-group-item" href="amazon-ec2/aws_EC2.html">Amazon EC2</a><a class="list-group-item" href="aws_tutorials.html">Tutorials</a><a class="list-group-item" href="../../faq/clouds/aws/">FAQs</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Supported Clouds</a> &#x2F; <a href="./">Amazon Web Services</a></p><div class="page-header"><h1>AWS Quick Start</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To provide you with quick start instructions for managing basic Amazon Web Services (AWS) assets in the RightScale Cloud Management Dashboard.</p>
+
+<ul>
+<li><strong>Add AWS</strong> - Register AWS with the RightScale Dashboard</li>
+<li><strong>Import</strong> - Import a base ServerTemplate from the MultiCloud Marketplace</li>
+<li><strong>Launch</strong> - Launch a Server</li>
+</ul>
+
+<h2 id="add-aws">Add AWS</h2>
+
+<p>First you will need to register your AWS cloud account with RightScale so that you can use the RightScale Cloud Management Dashboard to manage your AWS cloud resources.</p>
+
+<p><strong>Note</strong>: If you have never signed up for an AWS account, you will need to carry out that one-time pre-requisite step. To do so, please visit <a href="https://aws.amazon.com/">https://aws.amazon.com/</a>.</p>
+
+<p><strong>Prerequisite</strong>:  In order to register an AWS cloud account with RightScale, you must be an &#39;admin&#39; user of the RightScale account.</p>
+
+<h3 id="add-aws-add-aws-account-credentials">Add AWS Account Credentials</h3>
+
+<p>Use the following steps to add access to the AWS public cloud so that you can launch instances in EC2.</p>
+
+<ol>
+<li>Navigate to <strong>Settings &gt; Account Settings &gt; Clouds</strong>. Click <strong>Connect to a Cloud</strong>. Then click Amazon Web Services and click the (+) icon next to Add AWS Cloud.</li>
+<li>Next, you will need to provide the following AWS Credentials. You can find your credentials when you are logged into your AWS account. </li>
+</ol>
+
+<p><strong>Note</strong> If you are using IAM, be sure to use the security credentials associated with the &#39;RightScale&#39; user. <a href="/faq/How_do_I_use_Amazon_IAM_with_RightScale.html">Connect to RightScale using IAM</a></p>
+
+<ul>
+<li>AWS Account Number</li>
+<li>AWS Access Key ID</li>
+<li>AWS Secret Access Key
+
+<ol>
+<li>Enter the information and click <strong>Continue</strong>.</li>
+<li>Next, RightScale will query AWS for all of the cloud resources that currently exist for your AWS Account Number (if available). You will then be prompted to create a couple AWS resources that are prerequisites in order to launch an EC2 instance (EC2 SSH Key and EC2 Security Group). It is recommended that you keep the default names for these cloud resources and click <strong>Continue</strong> to create each cloud resource.</li>
+<li>After the default resources have been created you should have valid AWS cloud credentials associated with your RightScale account.</li>
+</ol></li>
+</ul>
+
+<h3 id="add-aws--optional--add-x-509-certificates">(Optional) Add x.509 Certificates</h3>
+
+<p>If you plan to bundle instances to create Amazon Machine Images (AMIs) using the RightScale Cloud Management Dashboard, you will also need to upload your AWS Account&#39;s x.509 Key and Certificate using the following steps.</p>
+
+<ol>
+<li>Click one of the edit (pencil) icons under the Action column for one of the AWS Regions.</li>
+<li><p>Expand the <q>Show Advanced</q> section and enter your key and certificate information.</p></li>
+<li><p>Copy and paste your x509 Certificate and Key values. Click <strong>Continue</strong>.</p></li>
+</ol>
+
+<h2 id="import-a-servertemplate">Import a ServerTemplate</h2>
+
+<p>Although many ServerTemplates from the Multi-Cloud Marketplace work in AWS, for this tutorial please use the <q>LAMP All-In One Trial with MySQL 5.5</q>. That ServerTemplate is the <q>blueprint</q> for the Server you will launch in the next and final step. Log into the Dashboard and follow the steps below.</p>
+
+<ol>
+<li>Go to <strong>Design &gt; MultiCloud Marketplace &gt; ServerTemplates</strong></li>
+<li>Find and select the appropriate ServerTemplate.Browse by categories, perform a keyword search, or use the filter options to find the correct ServerTemplate.</li>
+<li>Click <strong>Import</strong>.</li>
+</ol>
+
+<p>Once imported, the ServerTemplate and associated RightScripts are considered part of your <q>local</q> collection.</p>
+
+<h2 id="launch-server">Launch Server</h2>
+
+<p>Add and launch the Server that is based on the ServerTemplate you just imported. Click the <q>Add Server</q> action button. This will start the Add Server Assistant.</p>
+
+<h3 id="launch-server-new-server">New Server</h3>
+
+<ol>
+<li>Select an AWS region from the Cloud drop-down menu (e.g. AWS AP-Singapore... AWS US West)</li>
+<li>Select <q>**Default**</q> from the Deployment drop-down menu (<em>Tip</em>: Alternatively, you could of course select an existing Deployment name. Deployments are simply containers to organize your cloud assets. See <a href="/cm/dashboard/manage/deployments/deployments_actions.html#create-a-new-deployment">Create a New Deployment</a> in the <em>Dashboard Users Guide</em> for more information.)</li>
+<li> Click <q>**Continue**</q></li>
+</ol>
+
+<h3 id="launch-server-server-details">Server Details</h3>
+
+<p>The Server Details dialog is split into two windows: <strong>Hardware</strong> on the left, and <strong>Networking</strong> on the right. Provide the following information for each:</p>
+
+<ol>
+<li><strong>Hardware</strong> - Leave the default values. (Server Name, MultiCloud Image, Instance Type and Pricing.)</li>
+<li><strong>Network</strong>
+
+<ul>
+<li>Select a SSH Key. If you have none, click the New button. Provide an SSH Key Name (e.g. LAMP SSH Test)</li>
+<li>Select the <q>default</q> Security Group. All other Network settings you can leave at their default settings.</li>
+</ul></li>
+<li>Click the <q>**Confirm**</q> action button when ready.</li>
+</ol>
+
+<h3 id="launch-server-confirm">Confirm</h3>
+
+<p>The <strong>Confirm</strong> tab provides a detailed summary of the server you&#39;re about to create in the cloud. If you are satisfied with your selections, click <strong>Finish</strong> to create the server.</p>
+
+<h3 id="launch-server-launch">Launch</h3>
+
+<p>After confirming your server creation, you are automatically placed in the correct deployment, viewing the server you just created.</p>
+
+<ol>
+<li>Click the <strong>Launch</strong> action button</li>
+<li><em>Note</em>: With more complicated server setups you would have the opportunity to set Inputs (server variables). Your server is already configured for you however, so you can simply click the <strong>Launch</strong> action button one last time.</li>
+<li>The server is launched and you should see a message in the blue banner near the top of the Dashboard similar to:</li>
+</ol>
+
+<p>Launched server LAMP All-In-One Trial</p>
+
+<p><strong>Congratulations!</strong> You just launched your first server in AWS using the RightScale Dashboard... in 3 easy steps! In approximately 5-10 minutes your server state should progress from <q>pending</q> to <q>operational</q>. Don&#39;t forget to terminate your server when finished using it to avoid any unneccessary charges.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

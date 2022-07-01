@@ -1,0 +1,362 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Database Manager for MySQL for Chef Server (RightLink 10) - Tutorial</title><meta content="Use this RightLink 10 ServerTemplate tutorial to set up two MySQL 5.1/5.5 database servers running in an asynchronously replicated (master/slave) configuration in a single deployment." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="st st_rl10 st_rl10_mysql st_rl10_mysql_tutorial" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/st"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>ServerTemplates</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="/st/rl10">Version RL10</a><a class="list-group-item" href="../../open-source/">Open Source</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">ServerTemplates</a> &#x2F; <a href="../">Version RightLink 10 ServerTemplates</a> &#x2F; <a href="./">Database Manager for MySQL for Chef Server (RightLink 10)</a></p><div class="page-header"><h1>Database Manager for MySQL for Chef Server (RightLink 10) - Tutorial</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To set up two MySQL 5.1/5.5 database servers running in an asynchronously replicated (master/slave) configuration in a single deployment in a public or private cloud environment with data stored on a logical volume made up of two volumes set to backup on the slave every hour.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>You must log in under a RightScale account with &#39;actor,&#39; &#39;designer&#39;, &#39;security manager,&#39; and &#39;library&#39; user roles in order to complete the tutorial.</li>
+<li>For Amazon EC2, and other clouds that support security groups, you must have a security group defined with TCP port 22 open for SSH access, and any other ports required by the server (for example, the default MySQL port, TCP port 3306), for the required security groups and IP addresses.</li>
+<li>We strongly recommend that you set up credentials for password values and any other sensitive data used for script/recipe inputs. To learn how to create credentials see <a href="http://support.rightscale.com/ServerTemplates/Archive/11H1/Tutorials/2._Deployment_Setup/6._Create_Credentials_for_Common_Inputs/index.html">Create Credentials for Common Inputs</a>.</li>
+<li>This tutorial installs a blank MySQL database and uses a mysql dump file stored in a Github repository to restore a single database.</li>
+<li>You must have a <a href="../chef-server/overview.html">Chef Server</a> or use Hosted Chef to use this ServerTemplate.<br></li>
+<li>You must upload the <a href="https://github.com/rightscale-cookbooks/rs-mysql">rs-mysql</a> cookbook to your Chef Server.</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>This tutorial describes the steps for launching MySQL database servers running in an asynchronously replicated (master/slave) configuration in the cloud. Before starting the tutorial it is strongly recommended that you read the <a href="/st/rl10/mysql/overview.html">Technical Overview of the ServerTemplate</a> which describes its overall functionality.</p>
+
+<h2 id="volumes">Volumes</h2>
+
+<p>Database data will be stored on volumes. Backups will be done using the volume snapshots feature of the cloud being used. It is strongly recommended that you use volumes to store the contents of the MySQL database for greater efficiency and optimal performance.</p>
+
+<h2 id="create-dns-records">Create DNS Records</h2>
+
+<p>In a typical 3-tier architecture setup, DNS A records are used to create fully qualified domain names (FQDNs) that map to a particular server or tier of servers. The diagram below shows a typical example of a 3-tier website architecture.</p>
+
+<p>In this type of architecture, the application servers locate the <q>master</q> database server by using Master-DB&#39;s FQDN (e.g. db-master.example.com), which resolves to the Master-DB&#39;s IP address. Since the IP address of an instance in the cloud is often dynamically assigned at launch time, you are required to use a DNS provider that supports dynamic DNS (i.e. the ability to dynamically update the IP address of an A record) for the Master-DB server (at a minimum).</p>
+
+<p><strong>Time to Live (TTL) Setting</strong></p>
+
+<p>When you create the DNS records, it&#39;s important to set appropriate TTLs to ensure that servers will not stay connected to an old IP address that is no longer assigned to a functional server. For example, the DNS record that points to the <q>master</q> database server should have a low TTL to ensure that the application servers will connect to the correct server within a reasonable amount of time. It&#39;s strongly recommended that you use a TTL of 60 seconds for the DNS record that points to the <q>master</q> database server.</p>
+
+<p><img src="/img/st-3tier-ga.png" alt="st-3tier-ga.png" width="727" height="310" /></p>
+
+<p>The current version of the ServerTemplate has default support for DNSMadeEasy.  ‘A’ records are created or updated if they already exist.  You will need to provide your “API key” in the “DNS User Key” input and the “Secret key” in the “DNS Secret Key” input.  It is strongly recommended that Credentials are used to store and use these keys.</p>
+
+<h2 id="steps">Steps</h2>
+
+<p>If you are setting up a database server for testing purposes or if you do not have your own dump file, you can use the following sample MySQL dump file to complete the tutorial. The sample is a bzip2 compressed file (.bz2) file.</p>
+
+<ul>
+<li><a href="https://github.com/rightscale/examples/raw/unified_php/app_test.sql.bz2">app_test.sql.bz2</a></li>
+</ul>
+
+<h3 id="steps-add-a-server">Add a Server</h3>
+
+<p>Follow these steps to add a database server to the deployment.</p>
+
+<ol>
+<li>Go to the MultiCloud Marketplace (Design &gt; MultiCloud Marketplace &gt; ServerTemplates) and import the most recently published revision of the following ServerTemplate into the RightScale account.
+
+<ul>
+<li><a href="http://www.rightscale.com/library/server_templates/Database-Manager-for-MySQL-for/lineage/57417">Database Manager for MySQL  (RightLink 10)</a></li>
+</ul></li>
+<li>From the imported ServerTemplate&#39;s show page, click the <strong>Add Server</strong> button.</li>
+<li>Select the cloud and the deployment for the new server and click <strong>Continue</strong>.</li>
+<li>Next, the Add Server Assistant wizard will walk you through the remaining steps that are required to create a server based on the selected cloud.
+
+<ul>
+<li><strong>Server Name</strong> - Provide a nickname for your new database server (e.g., mysql-db1). Do not include <q>master</q> or <q>slave</q> in the name, because a database server&#39;s role can change in the future.</li>
+<li>Select the appropriate cloud-specific resources (e.g. Datacenter/Zone, Security Group, etc.) that are required in order to launch a server into the chosen cloud. The required cloud resources may differ depending on the type of cloud infrastructure. If the cloud supports multiple datacenters/zones, select a specific zone. Later, when you create the other database server you will use a different datacenter/zone to ensure high-availability. For more information, see <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#add-server-assistant">Add Server Assistant</a>.</li>
+<li><strong>Important!</strong> If you are not using volumes to store the database, you must select an instance type that has disk space that&#39;s at least twice as large as your database because LVM snapshots are performed locally on the instance before they are gzipped and saved to the specified ROS location. Also, although these ServerTemplates will work with any instance size, you may experience degraded performance with small instance sizes (such as EC2 micro) due to lack of system resources. We do not recommend smaller instance types for production use.</li>
+</ul></li>
+<li>Click <strong>Confirm</strong>, review the server&#39;s configuration and click <strong>Finish</strong> to create the server.</li>
+</ol>
+
+<h3 id="steps-initial-setting-of-inputs-at-the-deployment-level">Initial Setting of Inputs at the Deployment Level</h3>
+
+<p>The following inputs should be set at the deployment level. Go to the deployment&#39;s Inputs tab (Manage &gt; Deployments &gt; <em>your deployment</em> &gt; Inputs) and click <strong>Edit</strong>.</p>
+
+<p>Although you can enter values for missing inputs as text values, it&#39;s strongly recommended that you set up credentials for passing sensitive information to scripts such as passwords or any other sensitive data.</p>
+
+<h4 id="chef-inputs">Chef Inputs</h4>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CHEF_ENVIRONMENT</td>
+<td>The chef environment name to use</td>
+<td>text: _default</td>
+</tr>
+<tr>
+<td>CHEF_SERVER_URL</td>
+<td>The url of your chef server</td>
+<td>text:https://chef-server.example.com</td>
+</tr>
+<tr>
+<td>CHEF_VALIDATION_KEY</td>
+<td>The chef orgainization validation key.</td>
+<td>cred:CHEF_VALIDATION_KEY</td>
+</tr>
+<tr>
+<td>CHEF_VALIDATION_NAME</td>
+<td>The chef validator name</td>
+<td>text:example-validator</td>
+</tr>
+<tr>
+<td>LOG_LEVEL</td>
+<td>Chef client log level</td>
+<td>text:info</td>
+</tr>
+<tr>
+<td>VERSION</td>
+<td>The version of chef client to install</td>
+<td>text:12.16</td>
+</tr>
+</tbody></table>
+
+<h4 id="database-inputs">Database Inputs</h4>
+
+<p><strong>Required</strong></p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>BACKUP_LINEAGE</td>
+<td>The prefix that will be used to name/locate the backup of the MySQL database server.</td>
+<td>text: mysql_test_lineage</td>
+</tr>
+<tr>
+<td>DEVICE_COUNT</td>
+<td>The number of devices to create and use in the Logical Volume.</td>
+<td>text: 2</td>
+</tr>
+<tr>
+<td>DEVICE_VOLUME_SIZE</td>
+<td>Size of the volume or logical volume to create (in GB).</td>
+<td>text: 10</td>
+</tr>
+<tr>
+<td>SERVER_ROOT_PASSWORD</td>
+<td>The root password for MySQL server.</td>
+<td>cred: MYSQL_ROOT_PASSWORD</td>
+</tr>
+<tr>
+<td>SERVER_USAGE</td>
+<td>The Server Usage method. It is either &#39;dedicated&#39; or &#39;shared&#39;. In a &#39;dedicated&#39; server all server resources are dedicated to MySQL. In a &#39;shared&#39; server, MySQL utilizes only half of the resources. Example: &#39;dedicated&#39;</td>
+<td>text:dedicated</td>
+</tr>
+</tbody></table>
+
+<p><strong>Advanced</strong></p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MYSQL_SERVER_VERSION</td>
+<td>MySQL Server Version</td>
+<td>text: 5.5</td>
+</tr>
+<tr>
+<td>APPLICATION_DATABASE_NAME</td>
+<td>The name of the application database.</td>
+<td>text: app_db</td>
+</tr>
+<tr>
+<td>APPLICATION_PASSWORD</td>
+<td>The password of the application database user. The Application Username and Password will allow access to the database in a restricted fashion.</td>
+<td>cred: MYSQL_APP_PASSWORD</td>
+</tr>
+<tr>
+<td>APPLICATION_USERNAME</td>
+<td>Username to access the application database.</td>
+<td>cred: MYSQL_APP_USERNAME</td>
+</tr>
+<tr>
+<td>DNS_MASTER_FQDN</td>
+<td>The fully qualified domain name of the MySQL master database server.</td>
+<td>text: db.example.com</td>
+</tr>
+<tr>
+<td>DNS_SECRET_KEY</td>
+<td>The secret key to access/modify the DNS records. In our example, this will be set to the ‘Secret Key’ from DNSMadeEasy.</td>
+<td>cred: DNSMADEEASY_SECRET_KEY</td>
+</tr>
+<tr>
+<td>DNS_SECRET_KEY</td>
+<td>The user key to access/modify the DNS records. In our example, this will be set to the ‘API Key’ from DNSMadeEasy.</td>
+<td>cred: DNSMADEEASY_API_KEY</td>
+</tr>
+<tr>
+<td>SERVER_REPL_PASSWORD</td>
+<td>The replication password set on the master database and used by the slave to authenticate and  connect. If not set, ‘MySQL Root Password’ will be used.</td>
+<td>cred: MYSQL_REPLICATION_PASSWORD</td>
+</tr>
+</tbody></table>
+
+<p><strong>Optional</strong></p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RESTORE_TIMESTAMP</td>
+<td>The timestamp (in seconds since UNIX epoch) to select a backup to restore from. The backup selected will have been created on or before this timestamp. Example: 1391473172</td>
+<td></td>
+</tr>
+<tr>
+<td>SCHEDULE_ENABLE</td>
+<td>Enable or disable periodic backup schedule.</td>
+<td>text: true</td>
+</tr>
+<tr>
+<td>SCHEDULE_HOUR</td>
+<td>The hour to schedule the backup on. This value should abide by crontab syntax. Use &#39;*&#39; for taking backups every hour.</td>
+<td>text: *</td>
+</tr>
+<tr>
+<td>SCHEDULE_MINUTE</td>
+<td>The minute to schedule the backup on. This value should abide by crontab syntax.</td>
+<td>text: 30</td>
+</tr>
+</tbody></table>
+
+<h3 id="steps-launch-the-master-database-server">Launch the Master Database Server</h3>
+
+<p>After configuring your deployment inputs, launch your newly configured master database server.</p>
+
+<p>Go to the deployment&#39;s Servers tab and launch the database server. When you view the input confirmation page, there should not be any missing values (highlighted in red) for inputs that are required by any of the server&#39;s boot scripts. If there are any inputs highlighted in red, cancel the launch and add the missing values at the deployment level before launching the server again. Refer to the instructions in <a href="/cm/dashboard/manage/instances_and_servers/instances_and_servers_actions.html#launch-a-server">Launch a Server</a> if you are not familiar with this process. Click the Launch (not &#39;Save and Launch&#39;) button at the bottom of the input confirmation page.</p>
+
+<h3 id="steps-initialize-the-master-database-server">Initialize the Master Database Server</h3>
+
+<p>Wait for the server to reach the <q>operational</q> state before proceeding. To view the status of a script run, go to the “current” server’s Audit Entries tab. Go to the “current” server’s Scripts tab, look in Operational Scripts, and run the following scripts, in order, to initialize the master database server.</p>
+
+<ol>
+<li><strong>MySQL Server Stripe - chef</strong> - creates and attaches the volumes, sets up a striped logical volume, and uses it for the database data location.
+
+<ul>
+<li>Variant: rs-mysql::volume - run this instead to use a single volume.</li>
+</ul></li>
+<li><strong>MySQL Server master - chef</strong> - registers it as the “master” database server and assigns appropriate replication privileges and machine tags.  This also creates/updates the DNS record with the IP information of the server.</li>
+<li><strong>MySQL Server Backup - chef</strong> - Creates a backup of the volumes holding the database data. This backup will be used to setup a ‘slave’ database server.</li>
+</ol>
+
+<p>It is strongly recommended to not run scheduled backups on your ‘master’ database server. Backups involves locking the database and freezing the filesystem. This will usually cause issues with applications writing to the database. Backups should only be done on the ‘slave’ database servers.
+Final Setting of Inputs at the Deployment Level</p>
+
+<p>Since the Master-DB is up and running, and an initial backup was made, one more input should be set at the deployment level to be used by new Slave-DB servers. Go to the deployment&#39;s Inputs tab (Manage &gt; Deployments &gt; your deployment &gt; Inputs) and click Edit.</p>
+
+<h3 id="steps-final-setting-of-inputs-at-the-deployment-level">Final Setting of Inputs at the Deployment Level</h3>
+
+<p>Since the Master-DB is up and running, and an initial backup was made, one more input should be set at the deployment level to be used by new Slave-DB servers. Go to the deployment&#39;s Inputs tab (Manage &gt; Deployments &gt; <em>your deployment</em> &gt; Inputs) and click <strong>Edit</strong>.</p>
+
+<h4 id="rs-mysql">RS-MYSQL</h4>
+
+<p><strong>Required</strong></p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Restore Lineage</td>
+<td>The lineage name to restore backups.</td>
+<td>text: mysql_test_lineage</td>
+</tr>
+</tbody></table>
+
+<h3 id="steps-add-a-slave-database-server">Add a Slave Database Server</h3>
+
+<p>Create a slave server in your deployment.</p>
+
+<ol>
+<li>Clone the Master-DB server.</li>
+<li>Rename the server accordingly. (e.g. mysql-db2) Remember, you do not want to include the word <q>slave</q> in the nickname because this server may become the <q>master</q> server during a failover scenario. You don&#39;t want the server&#39;s nickname to potentially cause any confusion.</li>
+<li>Under the server&#39;s Info tab, click Edit and change the server&#39;s availability zone. In order to ensure high availability, it&#39;s strongly recommended that you launch the Slave-DB server in a different availability zone as the Master-DB.  Note: Cross-zone data transfer costs may apply.</li>
+</ol>
+
+<h3 id="steps-launch-the-database-server">Launch the Database Server</h3>
+
+<p>Make sure the following conditions are true before you launch the second database server.</p>
+
+<ul>
+<li>The master database server state is <q>operational.</q></li>
+<li>The initial primary backup of the master database server is 100% complete. You can track the status in the dashboard (Clouds &gt; <em>region</em> &gt; Snapshots). The time required to complete the initial primary backup will vary based on factors such as storage type, volume size, etc.</li>
+</ul>
+
+<p>Because the inputs are configured in the deployment level for slave database servers, there is no need to alter the inputs.</p>
+
+<p>Go to the deployment&#39;s <strong>Servers</strong> tab and launch the “slave” database server. When you view the input confirmation page, there should not be any missing values (highlighted in red) for inputs that are required by any of the server&#39;s boot scripts. If there are any inputs highlighted in red, cancel the launch and add the missing values at the deployment level before launching the server again. Refer to the instructions in <a href="/cm/dashboard/manage/instances_and_servers/instances_and_servers_actions.html#launch-a-server">Launch a Server</a> if you are not familiar with this process. Click the <strong>Launch</strong> (not &#39;Save and Launch&#39;) button at the bottom of the input confirmation page.</p>
+
+<h3 id="steps-initialize-the-slave-database-server">Initialize the Slave Database Server</h3>
+
+<p>Wait for the server to reach the <q>operational</q> state before proceeding.  To view the status of a script run, go to the “current” server’s <strong>Audit Entries</strong> tab.  Go to the “current” server’s <strong>Scripts</strong> tab, look in <strong>Operational Scripts</strong>, and run the following scripts, in order, to initialize the slave database server.</p>
+
+<ol>
+<li><strong>MySQL Server Stripe - chef</strong> - as a result of ‘Restore Lineage’ being set at the deployment level, restores the volumes from the latest backup, attaches them to the server, re-enables the striped logical volume, and sets it as database data location.
+
+<ul>
+<li>Variant: <strong>MySQL Server Volume - chef</strong> - run this instead if this recipe was used on the master database.  This will restore the single volume if a single volume was used on the master database.</li>
+</ul></li>
+<li><strong>MySQL Server Slave - chef</strong> - registers it as a “slave” database server, connects and syncs with the ‘master’ database server using the appropriate replication privileges, and sets machine tags.</li>
+<li><strong>MySQL Server Backup - chef</strong> - Creates a backup of the volumes holding the database data.</li>
+<li><strong>MySQL Server Schedule - chef</strong> - Adds the crontab entry for taking backups periodically.</li>
+</ol>
+
+<p>Periodic backups should be done on a slave database since locking a slave database for writing should have little or no impact on applications that should be accessing the master database.  Once the backup completes, the filesystem is unfrozen, and the databases is unlocked, the slave database will catchup with the master.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Can I rename a VM or a template (image) using the vSphere Client?</title><meta content="When I use the vSphere Client to rename a VM or a template, the Dashboard does not appear to update the corresponding Instance or Image name." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="faq faq_clouds faq_clouds_vmware faq_clouds_vmware_Can_I_rename_a_VM_or_a_template_using_the_vSphere_Client" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightScale General FAQs</a> &#x2F; <a href="../">Cloud Providers</a> &#x2F; <a href="./">VMware</a></p><div class="page-header"><h1>Can I rename a VM or a template (image) using the vSphere Client?</h1></div><div class="main-content"><h2 id="question-">Question:</h2>
+
+<p>When I use the vSphere Client to rename a VM or a template, the Dashboard does not appear to update the corresponding Instance or Image name.</p>
+
+<p>Is this a known behavior with a fix or should I just get the name right first time and not rename things?</p>
+
+<h2 id="resolution">Resolution</h2>
+
+<p>As of this time, renaming Template (images) from the vSphere Client does not update the image in RightScale.</p>
+
+<p>If you want to rename an existing template, here&#39;s a way to do it:</p>
+
+<ol>
+<li>Find the Template (image) that you want to rename using the vSphere Client</li>
+<li>Right click and choose, <q>Convert to Virtual Machine</q></li>
+<li>Go to <strong>RightScale dashboard &gt; Clouds &gt; Images</strong></li>
+<li>At the bottom of the page that says <q>..you can manually query if something positively looks out of date</q>, click the query link.</li>
+<li>Wait for a while and refresh the page until the image disappear from the list</li>
+<li>Now back to vSphere Client, select the VM, right-click and select <strong>Template &gt; Convert to Template</strong></li>
+<li>Once the VM has been converted into a Template again, go back to the RightScale dashboard cloud image and do the re-query again</li>
+<li>It should take a few seconds to a couple minutes to discover the new image</li>
+</ol>
+
+<p>In summary, to rename the image, convert first to VM, do a RightScale force query, make sure the image was remove from the list, convert the image to template and do a force re-query again. Doing a re-query is not required since there is a scheduled process to discover the resources in the cloud including templates (images) but it will make the discovery faster. But doing so, you may need to re-associate the image to any MCI if you manually added it.</p>
+
+<p>As for VMs, instance that was provisioned using RightScale dashboard (or API), we do not recommend renaming the instance name and this is not supported operation. If you want to rename the instance name, you can rename the server name instead and relaunch the server. The new instance will be provision using the new server name.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

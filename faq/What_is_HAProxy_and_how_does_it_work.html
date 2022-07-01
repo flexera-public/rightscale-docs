@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>What is HAProxy and how does it work?</title><meta content="HAProxy, or High Availability Proxy is used by RightScale for load balancing in the cloud. HAProxy is installed with RightScale load balancer ServerTemplates." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="faq faq_What_is_HAProxy_and_how_does_it_work" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">RightScale General FAQs</a></p><div class="page-header"><h1>What is HAProxy and how does it work?</h1></div><div class="main-content"><h2 id="background-information">Background Information</h2>
+
+<p>HAProxy, or High Availability Proxy is used by RightScale for load balancing in the cloud.</p>
+
+<p>HAProxy is installed with RightScale <em>load balancer</em> ServerTemplates. Load-balancer servers are also known as <em>front-end servers</em>. Generally, their purpose is to direct users to available application servers. A load-balancer server may have <em>only</em> the load balancer application (HAProxy) installed or, in rare cases, it may be an application server in addition to a load balancer, which is not a recommended configuration.</p>
+
+<p>Each load-balancer server has its own public IP address (typically an <em>Elastic IP address</em> in the case of Amazon EC2 clouds), but shares the same fully qualified domain name (e.g. host.domain.tld) as the other load-balancer servers in your configuration.</p>
+
+<p><em>Example:</em> Server A: loadbalancer.example.com (IP address: 174.11.45.13), Server B: loadbalancer.example.com (IP address: 174.11.68.201).</p>
+
+<p>HAProxy can be used with HTTP and HTTPS traffic.</p>
+
+<p>Get more details in our white paper: <a href="http://www.rightscale.com/lp/load-balancing-in-the-cloud-whitepaper.php">Load Balancing in the Cloud: Tools, Tips, and Techniques</a>.</p>
+
+<hr>
+
+<h2 id="answer">Answer</h2>
+
+<h3 id="answer-http-using-port-80">HTTP Using Port 80</h3>
+
+<ol>
+<li>The user&#39;s web browser sends a request to the load balancer over port 80, using the fully qualified domain name/URI (e.g. <code>http://host.domain.tld:80</code>).</li>
+<li><p>The Domain Name System (DNS) resolves the URI to one of the static IP addresses associated with that fully qualified domain name. (All load-balancer servers share the <em>same</em> fully qualified domain name but have unique static IP addresses.) <em>Example:</em> There are two load balancers, <em>Server A</em> and <em>Server B</em>. DNS directs the first client request to Server A, the second to Server B, the third to Server A, and so on.</p></li>
+<li><p>If a load-balancer server is unavailable, the request to that server will time out. However, when this happens, most browsers resend the client request to DNS, and the request is directed to the second load balancer in this case. Thus, if one of your two load-balancer servers is unavailable, it will result in half of the traffic to your site having a slower initial load time.</p></li>
+<li><p>Because each load-balancer server has the Apache HTTP Server configured to monitor port 80, Apache processes all incoming client requests to your load-balancer servers.</p></li>
+<li><p>Apache&#39;s virtual host configuration has a rewrite rule that sends the request to <code>http://127.0.0.1:85</code> (that is, localhost on port 85).</p></li>
+<li><p>HAProxy is configured to monitor <code>http://127.0.0.1:85</code>, and receives the request.</p></li>
+<li><p>Referencing the load-balancer pool in its configuration file, HAProxy determines the application server to route the client request to, based on&nbsp;a round-robin system. This server receiving the request is generally part of an auto-scaling array consisting of dedicated application servers. HAProxy forwards the request to the server port referenced in its configuration file (generally port 80).</p></li>
+</ol>
+
+<h3 id="answer-https-using-port-443">HTTPS Using Port 443</h3>
+
+<p>When you configure a server to use HTTP Secure (HTTPS), the load-balancer server performs SSL termination for incoming client connections as described in the FAQ titled <a href="http://support.rightscale.com/06-FAQs/FAQ_0007_-_How_do_I_set_up_SSL%3F">How do I set up SSL?</a>.</p>
+
+<h3 id="answer-required-boot-scripts">Required Boot Scripts</h3>
+
+<p><strong>LB HA proxy install.</strong> Installs HAProxy. The following inputs are used with this RightScript.</p>
+
+<p><strong>Note</strong>: Inputs prefixed by <q>OPT\_</q> are typically optional, not mandatory.</p>
+
+<p><strong>HEALTH_CHECK_URI</strong></p>
+
+<p>Optional for testing, but required for production. This references a path from www root to a web page that should return an OK 200 response. The contents of the page are not important, but its name should be unique (preferably containing a random number). The same page is used for <em>all</em> application servers to determine whether the server is running (<em>up</em>). The page contents can be as simple as the text, <q>OK.</q> For example, if the page were http://www.mydomain.com:80/hlthchk378923.html and its content was just two letters, <q>OK,</q> you would simply specify a HEALTH_CHECK_URI of: /hlthchk378923.html. While you can use index.html as the health-check page, this is not recommended. This is because most web sites have an index.html page which creates the risk that your load balancer will direct client traffic to a web site other than your own in the cloud.</p>
+
+<p><em>Example:</em> The Amazon EC2 cloud recycles IP addresses so if one server was terminated and another launched for a different site—with the same IP address and page name as your health-check page name—HAProxy could consider the server to be running even though it is someone else&#39;s, and direct traffic to it.</p>
+
+<p>For this reason, you should always use a health-check URI with a unique file name. This value displays in the HAProxy configuration file as:</p>
+<pre class="syntax-highlight plaintext"><code>  # When internal servers support a status page
+  option httpchk GET /hlthchk378923.html
+</code></pre>
+
+<p><strong>LB_APPLISTENER_NAME</strong><br>
+Name of a pool of HAProxy load-balancer servers; for example, <em>www</em>. Load-balancer servers with the same LB_LISTENER_NAME become part of the same pool. The HAProxy configuration file includes this value in the configuration block:</p>
+<pre class="syntax-highlight plaintext"><code>  # Example: listen myapp 0.0.0.0:80
+  listen www 127.0.0.1:85
+  mode http
+  balance roundrobin
+</code></pre>
+
+<p><strong>LB_BIND_ADDRESS</strong><br>
+This is the IP address that HAProxy listens on, which is normally the localhost specified by IP address: 127.0.0.1.</p>
+
+<p><strong>LB_BIND_PORT</strong><br>
+This is the port that HAProxy listens on, which is normally 85.</p>
+
+<p><strong>LB_TEMPLATE_NAME</strong><br>
+This is the name of the base HAProxy configuration file that will be used.&nbsp; This file is modified according to the defined input values. The current values are:</p>
+<pre class="syntax-highlight plaintext"><code>  haproxy_fullssl
+  haproxy_http
+  haproxy_tcp
+</code></pre>
+
+<p><em>Note:</em> Do <em>not</em> use the haproxy_fullssl option to enable SSL for your load-balancer server. This function is performed using a RightScript (<code>&quot;WEB apache FrontEnd https vhost&quot;</code>) as described in the FAQ titled <a href="http://support.rightscale.com/06-FAQs/FAQ_0007_-_How_do_I_set_up_SSL%3F">How do I set up SSL?</a></p>
+
+<p><strong>OPT_LB_STATS_PASSWORD</strong><br>
+Used to set a password for the HAProxy status report (<q>stats</q>) page.</p>
+
+<p><strong>OPT_LB_STATS_URI</strong><br>
+Normally set to haproxy-status, this setting defines how to access the HAProxy status report web page, which provides information about which servers are running and listening as part of the load-balancer pool. For example, if you set this value to haproxy-status, you would use http://host.domain.tld/haproxy-status to access the status report page. You can change this URI. This value displays in the HAProxy configuration file as:</p>
+<pre class="syntax-highlight plaintext"><code>  # Haproxy status page
+  stats uri /haproxy-status
+</code></pre>
+
+<p><strong>OPT_LB_STATS_USER</strong><br>
+This can be used to set a user name for the HAProxy status page.</p>
+
+<p><strong>LB Apache reverse proxy configure.</strong> Sets up the Apache web server as a reverse proxy, and includes the /etc/httpd/rightscale.d folder, which contains vhost files for Apache. There are no inputs.</p>
+
+<h2 id="required-application-server-scripts">Required Application Server Scripts</h2>
+
+<p>The following scripts must run on the application servers in your configuration to enable interaction with your HAProxy load balancer servers.</p>
+
+<p><strong>LB Application to HAProxy connect.</strong> Connects the instance to the servers running HAProxy. This script must run on each application server that will join the load-balancer pool.</p>
+
+<p><strong>LB_HOSTNAME</strong><br>
+The fully qualified hostname for all servers with HAProxy installed on them. For example, if loadbalancer.example.com has two associated load-balancer servers with static IP addresses, you would enter <em>loadbalancer.example.com</em> as the LB_HOSTNAME. These hosts must be registered with DNS so that the script can locate all HAProxy servers and update their configuration files.</p>
+
+<p><strong>OPT_SESSION_STICKINESS</strong><br>
+When set to <q>True</q> HAProxy will reconnect sessions to the last server they were connected to (<q>session stickiness</q>), via a cookie.</p>
+
+<p><strong>LB Application to HAProxy disconnect.</strong> Disconnects the instance from the servers running HAProxy (i.e. removes it from the load-balancer pool), typically on server shutdown. This is generally run as a decommission script on application servers.</p>
+
+<h2 id="configuration-files">Configuration Files</h2>
+
+<p>The <code>/etc/haproxy/haproxy.cfg</code> file is the primary configuration file for HAProxy.</p>
+
+<p>The last lines in this file list the application servers in the load-balancer pool. When <q>LB Application to HAProxy connect</q> runs on an application server, it adds that server to all the HAProxy configuration files on all load-balancer servers with the same LB_HOSTNAME.</p>
+
+<p><code>#server srv3.0 10.253.43.224:8888 cookie srv03.0 check inter 2000 rise 2 fall 3</code></p>
+
+<p><code>server i-b70793de 10.251.26.177:8888 cookie i-b70793de check inter 3000 rise 2 fall 3 maxconn 255</code></p>
+
+<p>The <em>/etc/httpd/rightscale.d</em> directory contains the vhost files for the Apache web server. For example:</p>
+
+<p><code>http-80-yoursite.vhost</code><br>
+  <code>http-8888-yoursite.vhost</code><br>
+  <code>https-443-yoursite.vhost</code></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Setting Up an AWS Virtual Private Cloud (VPC)</title><meta content="Steps for setting up an AWS Virtual Private Cloud (VPC) using the Network Manager in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_manage cm_dashboard_manage_networks cm_dashboard_manage_networks_setting_up_AWS_VPC" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Manage</a> &#x2F; <a href="./">Networks - Actions and Procedures</a></p><div class="page-header"><h1>Setting Up an AWS Virtual Private Cloud (VPC)</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>The Amazon Virtual Private Cloud (Amazon VPC) feature lets you define a virtual network in the cloud that you can launch AWS resources into. An Amazon VPC is dedicated to your AWS account and is logically isolated from other virtual networks in the AWS cloud. You can configure your VPC to suit your particular needs by defining its IP address range, subnets, route tables, network (Internet) gateways, and other security settings.</p>
+
+<p>An Amazon VPC offers the benefit of a scalable infrastructure while providing capabilities similar to a traditional network that you would operate in your own premises. Before proceeding with VPC setup in RightScale, we recommend you review the following documentation on the Amazon AWS website.</p>
+
+<ul>
+<li><a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html">What is Amazon VCP?</a></li>
+<li><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#concepts-vpc">Benefits of Using a VPC</a></li>
+<li><a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Security.html">Security in Your VPC</a></li>
+</ul>
+
+<p>This document describes how to set up a Virtual Private Cloud (VPC) in Amazon Web Services (AWS) using the RightScale Network Manager. It is important to note that the network scenario described below has been simplified for demonstration purposes and that your particular VPC requirements may differ. For instance, only a single public subnet is included in this example, whereas multiple subnets (both public and private) may be required for your needs. In addition, AWS network Access Control Lists (ACLs) are not discussed or included in this example. We encourage you to examine the <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Scenarios.html">various scenarios documented by AWS</a> in determining the proper configuration for your VPC.</p>
+
+<p>The following sections outline the procedure for creating and configuring a simple Amazon VPC using RightScale.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>&#39;security_manager&#39; user role privilege</li>
+</ul>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-create-a--vpc--network">Create a (VPC) Network</h3>
+
+<p>The first step in setting up an Amazon VPC using RightScale is to create a network using the Network Manager. Creating a VPC includes specifying the set of IP addresses for the VPC in the form of a Classless Inter-Domain Routing (CIDR) block (for example, 10.0.0.0/16).</p>
+
+<ol>
+<li>In the RightScale Dashboard, navigate to <strong>Manage</strong> &gt; <strong>Networks</strong>.</li>
+<li>Click <strong>New Network</strong>. The New Network dialog displays.<br>
+<img src="/img/cm-network-manager-vpc-new.png" alt="cm-network-manager-vpc-new.png" width="567" height="438" /><br></li>
+<li>Select a cloud and enter a name for the new VPC along with a short description. For this example, we will use &#39;my-vpc-example&#39; as the network name. Click <strong>Next</strong>.<br>
+<img src="/img/cm-network-manager-vpc-new2.png" alt="cm-network-manager-vpc-new2.png" width="569" height="491" /></li>
+<li>Enter a value for the <strong>CIDR Block</strong> (10.0.0.0/16 in this example) and use the <strong>Default</strong> setting for <strong>Instance Tenancy</strong>. Click <strong>Create</strong>. You should see a &#39;growler&#39; message near the top of the Dashboard indicating that the network was created successfully.</li>
+</ol>
+
+<h3 id="steps-create-and-attach-an-internet-vpc-gateway">Create and Attach an Internet VPC Gateway</h3>
+
+<p>Next, we create an <em>internet gateway</em> and attach it to the network you created in the previous step. The role of the internet gateway is to enable your servers to connect to the Internet from within the VPC.</p>
+
+<ol>
+<li>Under <strong>Select Resource</strong> click <strong>Network Gateways</strong> , then click <strong>New Network Gateway</strong>. The following dialog displays.<br>
+<img src="/img/cm-network-manager-vpc-gw.png" alt="cm-network-manager-vpc-gw.png" width="568" height="437" /><br></li>
+<li>Select the same <strong>Cloud</strong> you used for creating the network, enter a <strong>Name</strong> and <strong>Description</strong> and select <strong>Internet</strong> for <strong>Type</strong>. Click <strong>Create</strong>. You should see a &#39;growler&#39; message near the top of the Dashboard indicating that the network gateway was created successfully.</li>
+<li>In the Network Gateways list, click the entry for the gateway you just created, then click <strong>Edit</strong>. The following dialog displays.<br>
+<img src="/img/cm-network-manager-vpc-gw-assoc.png" alt="cm-network-manager-vpc-gw-assoc.png" width="464" height="455" /></li>
+<li>Open the <strong>Network</strong> drop-down and select the network you created earlier (my-vpc-example). This associates the gateway with your network. Click <strong>Save</strong>.</li>
+<li>Navigate back to the Network Manager view. Under Select Resource click <strong>Networks</strong>.</li>
+</ol>
+
+<h3 id="steps-create-a-public-subnet">Create a Public Subnet</h3>
+
+<p>A <em>subnet</em> is a range of IP addresses within your VPC. When you configure a server in your VPC using RightScale, you specify a subnet into which that server will launch. You should create a public subnet for resources that must have access to the Internet, and a private subnet for resources that will not be connected to the Internet.</p>
+
+<ol>
+<li>Click the entry for your new network then click the <strong>Subnets</strong> tab. Click <strong>New Subnet</strong>. The following dialog displays.<br>
+<img src="/img/cm-network-manager-vpc-subnet.png" alt="cm-network-manager-vpc-subnet.png" width="569" height="438" /></li>
+<li>For this example we will create a public subnet. Enter a <strong>Name</strong> and <strong>Description</strong> for the new public subnet. Enter a value for the <strong>CIDR Block</strong>. In this example we will use 10.0.0.0/24. Click <strong>Create</strong>.</li>
+</ol>
+
+<h3 id="steps-create-security-group-for-nat-server">Create Security Group for NAT Server</h3>
+
+<p>A <em>security group</em> can be thought of as a firewall for the RightScale servers running in your VPC. Security groups control inbound as well as outbound traffic at the instance level. Here we create a security group for the Network Address Translation (NAT) server that we will launch in a subsequent step.</p>
+
+<ol>
+<li>Click the <strong>Security Groups</strong> tab then click <strong>New Security Group</strong>. The following dialog displays.<br>
+<img src="/img/cm-network-manager-vpc-secg.png" alt="cm-network-manager-vpc-secg.png" width="569" height="438" /></li>
+<li>In this example, we will use &#39;my-nat-secg&#39; for <strong>Name</strong>. Click <strong>Save</strong> to create the new security group.</li>
+<li>Next, create a new Rule for the &#39;NAT&#39; security group (my-nat-secg). Click the entry for &#39;my-nat-secg&#39; then click <strong>New Rule</strong>. The following dialog displays.<br>
+<img src="/img/cm-network-manager-natrule.png" alt="cm-network-manager-natrule.png" width="237" height="428" /></li>
+<li>Enter field values as shown above. This creates a rule allowing inbound HTTP access from anywhere to the NAT server. Click <strong>Save</strong>.</li>
+<li>Now create a second inbound rule to allow traffic from TCP port 443 within the 0.0.0.0/0 IP range. This allows inbound HTTPS traffic from anywhere to the NAT server. Click <strong>Save</strong>.</li>
+<li>Create a third inbound rule to allow traffic from TCP port 22 for the 0.0.0.0/0 IP range. This will allow inbound SSH access to the NAT instance from the Internet gateway.</li>
+<li>Next, create an outbound rule allowing egress traffic on TCP port 80 for IP range 0.0.0.0/0. This will allow outbound HTTP access to the Internet.</li>
+<li>Create one final outbound rule allowing egress traffic on TCP port 443 for IP range 0.0.0.0/0. This will allow outbound HTTPS access to the Internet.</li>
+<li>You should end up with a set of rules as follows.<br>
+<img src="/img/cm-network-manager-vpc-natrules.png" alt="cm-network-manager-vpc-natrules.png" width="725" height="190" /></li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>In addition to the above-mentioned security group rules, you may wish to temporarily add inbound/outbound rules for the Internet Control Message Protocol (IMCP) which will allow you to use tools like PING for testing and diagnostic purposes. For example, if you add an outbound ICMP rule with a CIDR of &#39;0.0.0.0/0&#39; to the NAT security group, you can then log in to the NAT server using SSH from RightScale and then use PING to determine accessibility to the internet from the NAT. Additionally, you could add an inbound rule for TCP port 22 (SSH) with an IP range that includes your corporate network as a source. This would allow inbound SSH access directly from your network. Finally, to handle inbound traffic from other instances assigned to this security group you will need to create a rule for all inbound traffic for all protocols originating from the &#39;my-nat-secg&#39; security group ID.</p>
+</div>
+
+<h3 id="steps-create-a-custom-route-table">Create a Custom Route Table</h3>
+
+<p>Next, we modify the default route table to route traffic through the internet gateway.</p>
+
+<ol>
+<li>Navigate to the <strong>Route Tables</strong> tab. Click the default route table, navigate to the <strong>Info</strong> tab and click <strong>Edit</strong>.</li>
+<li>Rename the route table as &#39;my-custom-route-table&#39;. Click <strong>Save</strong>.</li>
+<li>Click <strong>New Route</strong>. For <strong>Destination CIDR</strong> enter &#39;0.0.0.0/0&#39;. For <strong>Next Hop</strong> select &#39;Network Gateway&#39;. In the <strong>Network Gateway</strong> drop-down select the internet gateway you created above. Click <strong>Create</strong>.</li>
+</ol>
+
+<h3 id="steps-create-an-elastic-ip-address-for-the-nat">Create an Elastic IP Address for the NAT</h3>
+
+<p>Next, we create an Elastic IP address, which enables the NAT instance to be reached from the Internet.</p>
+
+<ol>
+<li>In the RightScale dashboard, navigate to <strong>Clouds &gt; [AWS Region you selected for your VPC] &gt; IP Addresses</strong>. Click <strong>New</strong>. The following screen displays.<br>
+<img src="/img/cm-network-manager-vpc-eip.png" alt="cm-network-manager-vpc-eip.png" width="481" height="233" /><br></li>
+<li>Enter &#39;my-vpc-nat-eip&#39; for <strong>Name</strong> , choose the <strong>VPC</strong> option and click <strong>Create</strong>.</li>
+</ol>
+
+<h3 id="steps-create-and-launch-a-nat-host-instance">Create and Launch a NAT Host Instance</h3>
+
+<p>We now need to create and launch a NAT host within the public subnet so we can test our VPC and communicate with the external world.</p>
+
+<ol>
+<li>Navigate to the MulitCloud Marketplace and import the following AWS NAT ServerTemplate into your deployment. <a href="http://www.rightscale.com/library/server_templates/AWS-VPC-NAT-ServerTemplate-v14/lineage/50465">http://www.rightscale.com/library/server_templates/AWS-VPC-NAT-ServerTemplate-v14/lineage/50465</a><br></li>
+<li>Click <strong>Add Server</strong>. Select your <strong>Cloud</strong> (AWS region) and desired <strong>Deployment</strong> and click <strong>Create</strong>.</li>
+<li>In the Server Details screen, choose your public subnet in the <strong>Subnets</strong> drop-down.</li>
+<li>Select your NAT security group in the <strong>Security Groups</strong> drop-down.</li>
+<li>Select the NAT elastic IP address in the <strong>Elastic IP Address</strong> drop-down.</li>
+<li>Select the <strong>IP Forwarding Enabled</strong> option.</li>
+<li>Click <strong>Finish</strong> , then click <strong>Launch</strong>.</li>
+<li>Review your server inputs in the pre-launch screen as address missing inputs as needed, then click <strong>Launch</strong>. (<em>Note</em>: You may need to specify a key value for the AWS access key inputs)</li>
+<li>Wait until the NAT host goes operational before proceeding with the next step.</li>
+</ol>
+
+<h3 id="steps-build-out-the-rest-of-your-vpc">Build Out the Rest of Your VPC</h3>
+
+<p>Now that you have the basic VPC set up and configured, you can add additional resources to the public subnet such as a web application server. Or, you can expand your VPC to include a private subnet for securing additional back-end resources such as non-publicly accessible database servers. We encourage you to explore the <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Scenarios.html">variety of VPC scenarios</a> documented on the AWS site.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

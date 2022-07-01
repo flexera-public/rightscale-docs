@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>EC2 Images - Actions</title><meta content="Common procedures for working with EC2 Images in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_aws cm_dashboard_clouds_aws_actions cm_dashboard_clouds_aws_actions_ec2_images_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../../">Cloud Management</a> &#x2F; <a href="../../../">Dashboard User's Guide</a> &#x2F; <a href="../../">clouds</a> &#x2F; <a href="../">Amazon Web Services (AWS)</a> &#x2F; <a href="./">AWS Actions</a></p><div class="page-header"><h1>EC2 Images - Actions</h1></div><div class="main-content"><h2 id="replicate-an-image-to-different-ec2-regions">Replicate an Image to Different EC2 Regions</h2>
+
+<h3 id="replicate-an-image-to-different-ec2-regions-overview">Overview</h3>
+
+<p>Images are AWS region-specific. For example, you cannot use an AMI that stored in &#39;AWS US-East&#39; to launch a server instance in the &#39;AWS US-West&#39; region. In order to use the same AMI in multiple regions, you must migrate/replicate the image to the new cloud or AWS region.  </p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>At this time only replication of instance-store (S3) AMIs is supported (EBS AMIs unsupported).</p>
+</div>
+
+<h3 id="replicate-an-image-to-different-ec2-regions-prerequisites">Prerequisites</h3>
+
+<p>Before you can replicate an image to a different EC2 region, you must already have an S3 bucket (in that region) into which you can replicate an image.&nbsp; The example below assumes you&#39;re replicating an image from AWS US-East to AWS-EU, but the same steps are the same regardless of which region you&#39;re replicating an image into.</p>
+
+<p>To replicate an image into AWS-EU, you must create an S3 bucket in Europe.</p>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <strong>AWS Global</strong> &gt; <strong>S3 Browser</strong>. Create a new bucket and be sure to specify <q>Europe</q> as its location.</li>
+</ul>
+
+<p><img src="/img/cm-create-bucket.png" alt="cm-create-bucket.png" width="394" height="174" /></p>
+
+<h3 id="replicate-an-image-to-different-ec2-regions-steps">Steps</h3>
+
+<p>Use the following procedure to replicate (copy) a machine image to another AWS region (e.g. &#39;us-east&#39; to &#39;us-west&#39;) so that you can use it to launch instances in that region. You are essentially creating a new image in a different AWS region that&#39;s a duplicate of an existing image.</p>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <strong>AWS US-East</strong> &gt; <strong>Images</strong>. Under the Personal tab, select an image that you would like to make available in the EC2-EU region.</li>
+<li>Click the <strong>Replicate</strong> button.</li>
+</ul>
+
+<p><img src="/img/cm-replicate-image.png" alt="cm-replicate-image.png" width="540" height="220" /></p>
+
+<ul>
+<li>Next, specify the S3 bucket where you would like to store the image. Notice that the S3 bucket is EU.</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Some kernels and ramdisks cannot be copied over to different EC2 regions, therefore you may need to select a different kernel. Only kernels that can be copied over will be listed.</p>
+</div>
+
+<p><img src="/img/cm-create-replication.png" alt="cm-create-replication.png" width="647" height="337" /></p>
+
+<ul>
+<li>Click the <strong>Replicate</strong> action button.</li>
+</ul>
+
+<p>Your image will not be available immediately. The length of time needed to replicate the image to a different region depends on how busy the queue is, and the size of the data to transfer for your image. You will see a flash message similar to the following: <q>Your EC2 image replication task has been placed to a queue. The EC2 images list will be updated soon.</q></p>
+
+<h3 id="replicate-an-image-to-different-ec2-regions-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<p>Once your image is available for use in the EC2-EU region, you can select it when you add the EC2-EU cloud to your ServerTemplate.</p>
+
+<h2 id="create-a-custom-rightimage--ami-">Create a Custom RightImage (AMI)</h2>
+
+<!-- !!warning*Warning!* We encourage you to use our ServerTemplates and RightImages. However, if you do create custom images and would like to RightLink-enable them, please see [Creating RightScale-enabled Images with RightLink - linux](/rl10/reference/rl10_install.html) and [Creating RightScale-enabled Images with RightLink - Windows](/rl10/reference/rl10_install_windows.html). -->
+
+<h3 id="create-a-custom-rightimage--ami--overview">Overview</h3>
+
+<p>RightScale regularly publishes updated RightImages for CentOS and Ubuntu. If possible, we recommend using one of our published RightImages. However, we do realize that we can&#39;t create and support a RightImage that satisfies the requirements for every type of application. As a result, we&#39;ve provided a way to create your own custom <q>RightImage</q> where you can specify different combinations of operating systems or software package versions. Although this document is best suited for making minor modifications to a CentOS or Ubuntu image, you can also use it as a model for creating other types of images.</p>
+
+<!-- !!info*Note:* The following steps apply to creating v4 RightImages. To create v5 RightImages (with RightLink installed), see [Creating RightScale-enabled Images with RightLink - linux](/rl10/reference/rl10_install.html) and [Creating RightScale-enabled Images with RightLink - Windows](/rl10/reference/rl10_install_windows.html). -->
+
+<h3 id="create-a-custom-rightimage--ami--disclaimer">Disclaimer</h3>
+
+<p>RightScale is not responsible for supporting custom RightImages. In theory, you should be able to use a custom RightImage that was created following this tutorial with ServerTemplates published by RightScale, but we cannot make any guarantees. If you choose to create a custom RightImage using this method, you are responsible for properly testing its functionality.</p>
+
+<h3 id="create-a-custom-rightimage--ami--prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;actor&#39; and &#39;library&#39; user role privileges</li>
+<li>This feature is reserved for advanced users.</li>
+</ul>
+
+<h3 id="create-a-custom-rightimage--ami--steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>ServerTemplates</strong>. Use the filter tool to find the following ServerTemplates:
+
+<ul>
+<li>RightImage Creator - CentOS (Beta)</li>
+<li>RightImage Creator - Ubuntu (Beta)</li>
+</ul></li>
+<li>Import the ServerTemplate that will best suit your needs.</li>
+<li>Create an S3 bucket that will be used to store the files for the custom AMI. It will be easier to find the files if you create a new S3 bucket, but if you want to use an existing S3 bucket instead, you can proceed to the next step.</li>
+<li>Create a new Deployment (e.g. Image Creator)</li>
+<li>Clone the ServerTemplate if you wish to add scripts to the boot sequence to install/configure additional components for the image</li>
+<li>Add a Server into the Deployment using the ServerTemplate (imported or cloned). Be sure to add the Server in the AWS region (e.g. AWS US-East) where you want to create the AMI. Remember, images are region-specific.</li>
+<li>If you cloned the template to add customization, add any scripts before the last script in the boot scripts of the template for any modifications.<br>
+When running commands to modify the image, ensure you use <code>chroot</code> with the location of the image. Here is an example that installs an additional package (Ubuntu): <code>#!/bin/sh chroot &quot;$ROOT&quot; apt-get -y install joe</code><br></li>
+<li>Launch the Server.</li>
+<li>Specify the following Input parameters:
+
+<ul>
+<li>AWS_BUCKET - Enter the name of the S3 bucket where the image files will be stored.</li>
+<li>IMAGE_NAME - Enter the name of the custom AMI that you are about to create.</li>
+<li>ARCH - Select either <strong>i386</strong> for a 32-bit architecture or <strong>x86_64</strong> for a 64-bit architecture.</li>
+</ul></li>
+<li>If the Server becomes operational, the custom AMI was created successfully. You will find the new AMI in the specified S3 bucket.</li>
+<li>To test its functionality, see <a href="/cm/dashboard/clouds/aws/actions/ec2_images_actions.html#Test%20a%20Custom%20RightImage%20(AMI)">Test a Custom RightImage (AMI)</a>.</li>
+</ol>
+
+<h2 id="test-a-custom-rightimage--ami-">Test a Custom RightImage (AMI)</h2>
+
+<p>Use the following procedure tp perform a functional test on a custom AMI that was built following the <a href="/cm/dashboard/clouds/aws/actions/ec2_images_actions.html#Create_a_Custom_RightImage_(AMI)">Create a Custom RightImage (AMI)</a> tutorial.</p>
+
+<h3 id="test-a-custom-rightimage--ami--prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A RightScale account where you have &#39;actor&#39; user role privileges.</li>
+<li>This document assumes that you successfully created a custom AMI following the <a href="/cm/dashboard/clouds/aws/actions/ec2_images_actions.html#Create_a_Custom_RightImage_(AMI)">Create a Custom RightImage (AMI)</a> tutorial.</li>
+</ul>
+
+<h3 id="test-a-custom-rightimage--ami--steps">Steps</h3>
+
+<ol>
+<li>Create a MultiCloud Image for the custom AMI that you previously created. In order to test the custom RightImage, you will need to create a MultiCloud Image that points to it. See <a href="/cm/dashboard/design/multicloud_images/multicloud_images_actions.html">Create a New MultiCloud Image</a>.</li>
+<li>The next step is to modify a ServerTemplate and use the new MultiCloud Image. For example, you could clone an existing ServerTemplate that uses one of our published MultiCloud Images that&#39;s referencing RightImages published by RightScale and swap out the MultiCloud Image with the one that uses your custom AMI. It&#39;s important to use a ServerTemplate that you know works as expected with one of our RightImages. This way, if there&#39;s a problem launching a server, you know that the custom RightImage was not built properly.</li>
+<li>It&#39;s also important that the ServerTemplate uses software repositories that are just as new as the custom image itself. Under the ServerTemplate&#39;s Scripts tab, freeze the repositories to a date that is either the same day as when the image was created or more recent.</li>
+<li>Create a new Deployment or use the Deployment that was used to create the custom AMI (e.g. Image Creator)</li>
+<li>Add a Server into the Deployment using the cloned ServerTemplate. Be sure to add the Server in the AWS region (e.g. AWS US-East) where you created the custom RightImage.</li>
+<li>Launch the Server.</li>
+<li>If the Server becomes operational, the custom RightImage has successfully passed a basic functional test. You will most likely be able to replace a ServerTemplate&#39;s MultiCloud Image with the one that uses your custom RightImage.</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

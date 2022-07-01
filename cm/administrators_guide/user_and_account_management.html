@@ -1,0 +1,614 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>User and Account Management</title><meta content="Overview of User and Account Management in RightScale including configuring accounts, setting up multiple accounts, and collaborating within your organization." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_administrators_guide cm_administrators_guide_user_and_account_management" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">RightScale Administrator's Guide</a></p><div class="page-header"><h1>User and Account Management</h1></div><div class="main-content"><h2 id="set-up-multiple-rightscale-accounts">Set up Multiple RightScale Accounts</h2>
+
+<h3 id="set-up-multiple-rightscale-accounts-single-vs--multiple​-rightscale-accounts">Single vs. Multiple​ RightScale Accounts</h3>
+
+<p>Although you can use a single RightScale account for managing all aspects of your company&#39;s cloud deployments there are a lot of advantages of using multiple RightScale accounts. As a best practice, it&#39;s recommended that you use at least two different RightScale accounts, although you may choose to have multiple RightScale accounts depending on your organization&#39;s IT cloud requirements.</p>
+
+<h4 id="example:-using-a-single-rightscale-account">Example: Using a Single RightScale Account</h4>
+
+<p>If you only use a single RightScale account, each user will have the same permissions across all deployments. Since you&#39;ll most likely have multiple projects organized into different deployments, you&#39;ll be forced to rely on users to essentially govern themselves since permissions cannot be granted on a per deployment basis. Although smaller teams may find one RightScale account sufficient for managing all aspects of their cloud infrastructure(s), most organizations will benefit from the extra control of using multiple accounts for better governance and compliance. Hopefully the examples below will clearly explain the advantages and disadvantages of each type of setup. Every team and organization has a unique set of requirements and objectives. You can either mimic one of the setups below or create your own setup based on the considerations and guidelines highlighted below.</p>
+
+<p><img src="/img/cm-one-account.png" alt="cm-one-account.png" width="715" height="365" /></p>
+
+<p><strong>Pros</strong></p>
+
+<ul>
+<li><strong>Easier to Manage</strong> - It is easier to manage a single RightScale and/or cloud account than multiple accounts.</li>
+<li><strong>Sharing is Optional</strong> - Since everyone is using the same RightScale account (that&#39;s associated with the same set of cloud credentials), you no longer need to share RightScale-specific assets such as ServerTemplates and RightScripts, or cloud-specific assets such as images and volume snapshots.</li>
+</ul>
+
+<p><strong>Cons</strong></p>
+
+<ul>
+<li><strong>Limited User Access Control</strong> - Deployment-specific user role permissions are not supported. For example, a user with &#39;actor&#39; user role privileges will be able to launch or terminate a server in any deployment in a RightScale account, which may be problematic if users should only be allowed to manage the deployment(s) that are related to their project.</li>
+<li><strong>Vulnerable Production Environment</strong> - If the same RightScale account is used for both development and production environments, any user could unintentionally make a mistake that has global, account-wide ramifications (assuming they have the required user permissions) that may negatively affect a production application. For example, a user with &#39;security_manager&#39; permissions could unknowingly change a firewall rule in a security group that accidentally opens up a port to any IP address. An easy way to protect your production environment is to simply use a separate RightScale account where a minimum set of user that have access to the account and its resources.</li>
+</ul>
+
+<h4 id="example:-using-two-rightscale-accounts">Example: Using Two RightScale Accounts</h4>
+
+<p><img src="/img/cm-multiple-accounts.png" alt="cm-multiple-accounts.png" width="725" height="377" /></p>
+
+<p><strong>Key Takeaways</strong></p>
+
+<ul>
+<li>Use multiple accounts and user permissions to control your various cloud deployments.</li>
+<li>The diagram above is designed to highlight some of the key user role permissions that a particular group of users might have in a RightScale account depending on their individual roles and responsibilities.</li>
+<li>Currently, you cannot create group-based permissions in the RightScale Dashboard where a user&#39;s permissions are defined by the group(s) that he/she belongs to; user role privileges are set on a per-user basis and are defined on a per-account basis. (i.e. a user may have &#39;actor&#39; privileges in one RightScale account but not in another.)</li>
+<li>The &#39;Ops-2&#39; group might consist of your CTO and/or VP of Engineering. You should only grant &#39;server_superuser&#39; privileges in your Production account to a very select and trusted set of users.</li>
+<li>Depending on the level of access that you want to grant your Developer and QA teams, you may not want to grant them &#39;security_manager&#39;, &#39;server_superuser&#39;, and/or &#39;library&#39; user permissions.</li>
+<li>Users with &#39;admin&#39; privileges can grant themselves any user role permissions within that RightScale account.</li>
+<li>The Project Management group might be responsible for granting user permissions for the Dev &amp; Test account, import approved design components from the MultiCloud Marketplace (e.g. ServerTemplates), set up the network and security groups, as well as publish and share tested components that are safe to use in the Production account. <em>Note</em>: Only committed, immutable ServerTemplates that are properly tested should be used in the Production account.</li>
+</ul>
+
+<p><strong>Key Benefits</strong></p>
+
+<ul>
+<li>Isolate your production environment with strict network firewall permissions and limited user access. For example, you might want to restrict the number of users who have access to the Production account to a smaller subset of trusted users. The users that are developing and testing ServerTemplates probably do not need access to your production servers.</li>
+<li>More granular billing reports, which will help you more accurately track the actual cloud usage costs related to your production environment.</li>
+<li>Create and use credentials that leverage production-specific values that should not be visible or accessible to anyone outside of the RightScale account. For example, you can create ServerTemplates in the Dev &amp; Test account that are configured to use the same credential. (e.g. DB_ADMIN_PASSWORD) You can create a credential with the same name in each RightScale account where different values are actually being used based on an account, in order to ensure that only the Operations team knows the actual value that&#39;s being used in the production environment, which means that you can use the same committed ServerTemplate in both accounts while still passing in different values depending on the account in which a server is launched and scripts are executed. See <a href="user_and_account_management.html">Manage Credentials</a>.</li>
+<li>Currently, you cannot set up deployment-specific user roles. For example, you cannot grant a user &#39;actor&#39; privileges in deployment A, but not in deployment B (within the same RightScale account). Therefore, the best and easiest way to control a user&#39;s permissions in such a manner is to simply use multiple RightScale accounts.</li>
+</ul>
+
+<p><strong>Things to Consider</strong></p>
+
+<ul>
+<li>Each RightScale account must use unique cloud credentials. Therefore, you will need to create multiple cloud accounts/credentials for each RightScale account. (<em>Note</em>: If you are using AWS, you can consolidate your monthly AWS bill so that you only receive a single AWS bill at the end of the month. See <a href="http://aws.amazon.com/about-aws/whats-new/2010/02/09/announcing-consolidated-billing-for-aws-accounts/" title="http://aws.amazon.com/about-aws/whats-new/2010/02/09/announcing-consolidated-billing-for-aws-accounts/">Consolidated Billing for AWS Accounts</a>.)</li>
+<li>Currently, you cannot set deployment-specific user roles within a RightScale account. Therefore, if you want a user to only have &#39;actor&#39; user role privileges for a single deployment instead of across all deployments in a RightScale account, you can create a separate RightScale account for that particular deployment for more granular user access control. In other situations, you may want a user to have &#39;server_login&#39; and &#39;server_superuser&#39; privileges in one RightScale account but not another.</li>
+<li>If you are following best practices, you should only use committed ServerTemplates in a production deployment. Therefore, you will need to share committed ServerTemplates with your production RightScale account using the MultiCloud Marketplace, which will involve more coordination between your development, testing, and production teams. For more information on privately sharing RightScale components, see <a href="/cm/pas/sharing_rightscale_components.html">Sharing RightScale Components</a>.</li>
+<li>If you are using custom-built machine images, be sure to make those images available to the other account(s) by sharing the cloud resources accordingly. For example, you can share AMIs and Snapshots in EC2. See <a href="/cm/pas/sharing_cloud_resources.html">Sharing Cloud Resources</a>.</li>
+</ul>
+
+<h4 id="example:-using-3+-rightscale-accounts">Example: Using 3+ RightScale Accounts</h4>
+
+<p>Use additional RightScale accounts for more granular user access control.</p>
+
+<p><img src="/img/cm-three-accounts.png" alt="cm-three-accounts.png" width="725" height="436" /></p>
+
+<h2 id="configure-a-rightscale-account">Configure a RightScale Account</h2>
+
+<p>The configurations below apply to a single RightScale account. If you are using multiple RightScale accounts, you should follow the guidelines below for each account.</p>
+
+<h3 id="configure-a-rightscale-account-naming-convention">Naming convention</h3>
+
+<p>The appropriate answer to this question depends on your overall setup. The name of your account might be inconsequential to you, especially if you only have access to a single RightScale account. However, if you are managing multiple RightScale accounts, which is the preferred setup for many companies, you may find it useful to devise a more logical naming convention to clearly distinguish accounts from one another. Be sure to keep names short and simple. </p>
+
+<p><strong>Example</strong></p>
+
+<ul>
+<li>Dev1</li>
+<li>Dev2</li>
+<li>Staging</li>
+<li>Production</li>
+</ul>
+
+<h3 id="configure-a-rightscale-account-how-to-rename-your-rightscale-account-">How to rename your RightScale account?</h3>
+
+<p>Renaming your RightScale account is easy and can be done from <strong>Cloud Management</strong>. You will need to have <code>admin</code> or <code>enterprise_manager</code> role to perform this action.</p>
+
+<ol>
+<li>Navigate to <strong>Cloud Management</strong> and select the account you wish to rename. </li>
+<li>Click <strong>Settings</strong> from the top menu options and then click <strong>Account Settings</strong>. </li>
+<li>Simply click on the account name, highlighted in green, and type the new name.</li>
+<li>Hit <strong>Ok</strong> to save the new name.</li>
+</ol>
+
+<p><img src="/img/account_rename.png" alt="account_rename.png" width="1301" height="592" /></p>
+
+<h3 id="configure-a-rightscale-account-who-is-the-owner-of-the-rightscale-account-">Who is the owner of the RightScale account?</h3>
+
+<p>The person who created the RightScale account is designated as the initial <q>owner</q> of the account. However, it can be changed if a different person is maintaining the account going forward. Users with <code>observer</code> access may look up the <q>owner</q> of the account in order to request additional privileges or to change an account-wide preference.</p>
+
+<p>Other than being designated as a primary contact person for end-users, an account&#39;s owner has no special privilege; anyone with the <code>admin</code> role is capable of performing all administrative functions within the account.</p>
+
+<ol>
+<li>Go to <strong>Settings &gt; Account &gt; Info</strong>.</li>
+<li>Click <strong>Edit</strong>.</li>
+<li>Select a different user to be the new owner of the account. <em>Note</em>: You can only select another user of the account. You may need to add a new user to the account before you can select the correct user. If you want to use an email alias (e.g. ops@example.com) you will need to add a user to the account with that email address. See <a href="/cm/dashboard/settings/account/invite_users_to_a_rightscale_account.html">Invite Users to a RightScale Account</a>.</li>
+<li>If you change the account owner, you should also consider updating the pre-configured alert escalations. See <a href="/cm/dashboard/design/alert_escalations/alert_escalations_actions.html#update-default-alert-escalations">Update Default Alert Escalations</a>.</li>
+</ol>
+
+<p><em>Note</em>: The <q>Organization Name</q> is set in a different section of the Dashboard. If you have &#39;publisher&#39; user role privileges, you can set the name under <strong>Design &gt; Account &gt; Library &gt; Your Publishing Organization</strong>.</p>
+
+<h3 id="configure-a-rightscale-account-who-should-receive-email-notifications-when-new-instances-become-operational-">Who should receive email notifications when new instances become operational?</h3>
+
+<p>This service is enabled by default and sends the email notifications to the account owner. If you do not want anyone to receive email notifications when an instance becomes available, you can disable this setting. If you want the emails to go to an email alias instead of one person (e.g. ops@example.com) you will need to make ops@example.com a user of the RightScale account and make ops@example.com the owner of the account. (See the previous section.)</p>
+
+<ol>
+<li>Go to <strong>Settings &gt; Account Settings &gt; Preferences</strong>.</li>
+<li>Make your selection for the <q>Instance Available</q> setting.
+
+<ul>
+<li>Enabled (default) - The designated &#39;owner&#39; will receive email notifications.</li>
+<li>Disabled</li>
+</ul></li>
+</ol>
+
+<h3 id="configure-a-rightscale-account-should-a-server-s-tags-only-be-usable-to-its-deployment-or-be-made-usable-account-wide-">Should a server's tags only be usable to its deployment or be made usable account-wide?</h3>
+
+<p>Before you can answer that question you may be wondering, <em><strong><q>What are server tags and how are they used?</q></strong></em></p>
+
+<p>RightLink-managed cloud instances can perform various automation tasks involving tags. Some example use cases for tags:</p>
+
+<ul>
+<li>Query RightScale (via the <em><strong>rs_tag</strong></em> utility or API 1.5) to determine which instances have a certain tag and retrieve related information about that resource.</li>
+<li>Run an operational script or recipe (via the <em><strong>rs_run_right_script</strong></em> and <em><strong>rs_run_recipe</strong></em> utilities) on all instances that have a certain tag.</li>
+</ul>
+
+<p>The tag scope for a deployment determines how the tags of its instances can be accessible and used by other instances located inside or outside of its deployment. By default, the scope is set to <q>deployment,</q> which means that only the instances within that deployment will be returned in query results. Similarly, scripts that are executed on instances based on tags can only be performed by other instances within the same deployment.</p>
+
+<p>If you change the tag scope to <q>account,</q> instances within the deployment become accessible to instances located in <strong>all other deployments</strong> within the account, both for purposes of executing scripts and querying tags. Tag scope is a powerful but advanced setting that should only be changed by an experienced RightScale user who has a strong understanding about how tags are used in the context of the RightScale account.</p>
+
+<h4 id="sample-misuse-case-for-account-wide-tags">Sample Misuse Case for Account-wide Tags</h4>
+
+<p>You clone a production deployment to create a staging one for testing purposes. If the production deployment had a server array configured for auto-scaling purposes and you didn&#39;t change the voter tag for the staging deployment&#39;s server array, the server tag scope setting could potentially affect the production deployment&#39;s ability to auto-scale. If the tag scope is set to <q>deployment</q> (default), servers launched within the cloned deployment cannot affect auto-scaling in the production deployment. If the server tag scope of either deployment is set to <q>account,</q> the production and staging arrays will influence each other&#39;s scaling decisions!</p>
+
+<h4 id="sample-use-case-for-account-wide-tags​">Sample Use Case for Account-wide Tags​</h4>
+
+<p>You have a deployment that contains servers that perform some global function in your multi-deployment application, such as system log aggregation. You set the deployment&#39;s tag scope to <q>global,</q> and instances in <em>any</em> deployment can query for the log aggregator&#39;s IP address, run scripts to register themselves as log senders, etc.</p>
+
+<p><strong>Important!</strong> Any changes to the server tag scope setting will immediately be applied to any running servers. Be sure to understand the implications of an update prior to changing this setting.</p>
+
+<ol>
+<li>Go to <strong>Settings &gt; Account Settings &gt; Preferences</strong>.</li>
+<li>Click <strong>Edit</strong>.
+
+<ul>
+<li> <strong>deployment</strong> (default) - If selected, a server&#39;s tags will only be accessible to servers and/or resources within its deployment.</li>
+<li> <strong>account</strong> - If selected, a server&#39;s tags will be accessible to servers and/or resources outside of its deployment. This is an advanced option and should only be selected in specific use cases.</li>
+</ul></li>
+</ol>
+
+<h3 id="configure-a-rightscale-account-who-should-be-allowed-to-view-cloud-usage-costs-">Who should be allowed to view cloud usage costs?</h3>
+
+<p>Users with role <code>ca_user</code> can view billing related information and much more in the <a href="https://analytics.rightscale.com">RightScale Optima</a> site. This type of information is especially useful for users who want to keep track of their estimated infrastructure costs in order to stay within the allotted budget. </p>
+
+<h3 id="configure-a-rightscale-account-should-users-always-see-the-inputs-confirmation-page-when-they-run-operational-scripts-on-servers-">Should users always see the Inputs Confirmation page when they run operational scripts on servers?</h3>
+
+<p>By default, when you manually execute an operational script from the RightScale Dashboard (not API) you will be presented with an Inputs Confirmation page which displays the inputs and values that will be used by the script. The Inputs Confirmation page gives you an opportunity to verify what value will be used by an input, as well as the option to change its value prior to a script&#39;s execution. Typically, you should find that values for most inputs were previously set using input inheritance rules at either the ServerTemplate or Deployment levels. (See <a href="/cm/rs101/inheritance_of_inputs.html">Inheritance of Inputs</a>.) However, there may be situations when an input is unspecified or it may need to use a different value for a particular run. If a value for an input is required and missing, you will not be able to execute the script until you&#39;ve specified an acceptable value. (<em>Note</em>: You can only select the &#39;No value/Ignore&#39; option for an input that&#39;s not required (i.e. Recommended or Optional).</p>
+
+<p><img src="/img/cm-input-confirmation.png" alt="cm-input-confirmation.png" width="497" height="550" /></p>
+
+<p>If you are using versions of ServerTemplates published by RightScale, it&#39;s recommended that you keep the default setting, which shows you the Inputs Confirmation page because there are some scripts that are designed with the assumption that the end user sees the confirmation page. For example, the recommended way to safely terminate a database server that&#39;s launched using a version of RightScale&#39;s &#39;Database Manager for MySQL 5.x&#39; ServerTemplates is to run the <strong>db::do_delete_volumes_and_terminate_server</strong> operational script instead of using the <strong>Terminate</strong> button to ensure that detached volumes are properly deleted upon instance termination instead of simply being detached and left in an orphaned (and potentially billable) state. When you run the terminate script, you have the option to manually remove the <q>terminate safety lock</q> which prevents the data volumes from being permanently deleted after they are detached from the instance being terminated.</p>
+
+<p>Follow the steps below to specify the desired behavior for displaying the Inputs Confirmation screen for the RightScale account.</p>
+
+<ol>
+<li>Go to <strong>Settings &gt; Account Settings &gt; Preferences</strong>.</li>
+<li>Make your selection for the <q>Verify inputs</q> setting.
+
+<ul>
+<li><strong>Enabled</strong> (default) - Users will always see the Inputs Confirmation page when they manually execute an operational script even if there are no required inputs with unspecified values.</li>
+<li><strong>Disabled</strong> - Users will only see the Inputs Confirmation page when they manually execute an operational script if there are required inputs with unspecified values. Otherwise, if there are no required inputs with missing values, the Inputs Confirmation screen will not be shown.</li>
+</ul></li>
+</ol>
+
+<h3 id="configure-a-rightscale-account-who-should-have-access-to-the-rightscale-account-and-what-should-they-be-allowed-to-do-">Who should have access to the RightScale account and what should they be allowed to do?</h3>
+
+<h4 id="user-roles-and-permissions">User Roles and Permissions</h4>
+
+<p>RightScale uses role-based authorization to determine who can perform which actions in an account. Our platform has a fixed number of named roles, each of which confer a bundle of related capabilities on users who have that role. For example, the &#39;server_login&#39; role allows people to log in to instances via SSH or RDP.</p>
+
+<p>Roles are always held by a specific user, with respect to a specific RightScale account; we call each (user, account, role) trio a <strong>permission</strong>.  Permissions can be granted or revoked by anyone with the &#39;admin&#39; permission on an account. A user with one or more permissions in an account is considered to belong to that account; if their last permission is revoked as they no longer belong to the account.</p>
+
+<p>It&#39;s important to understand the capabilities that each role bestows upon a user; capabilities are almost always disjoint (non-overlapping) between roles. For example, only someone with the &#39;actor&#39; permission can launch and terminate servers; only someone with the &#39;designer&#39; permission can modify ServerTemplates.</p>
+
+<p>We suggest that you review the following pages before you begin inviting new users or granting additional permissions to existing users:</p>
+
+<ul>
+<li><a href="/cm/ref/user_roles.html">User Roles Descriptions</a> - Basic descriptions of each user role.</li>
+<li><a href="/cm/ref/user_role_privs.html">User Role Privileges Matrix</a> - A table that provides a more granular breakdown of the capabilities associated with each row.</li>
+</ul>
+
+<h3 id="configure-a-rightscale-account-inviting-users">Inviting Users</h3>
+
+<p>When you are ready to add users to a RightScale account, you can send them an invitation to the account. Invitations are sent via email and must be accepted by the user before they can log in to the Dashboard and view the RightScale account. <a href="/cm/dashboard/settings/account/invite_users_to_a_rightscale_account.html">You can find the step by step guide here</a>.</p>
+
+<p>From the time an invitation is sent, it must be accepted within six days or it expires. You can also cancel an existing invitation at any time before it is accepted. </p>
+
+<h3 id="configure-a-rightscale-account-managing-existing-users">Managing Existing Users</h3>
+
+<p>If a user has already accepted an invitation to your account, you can grant them new permissions or revoke existing permissions at any time, in any combination from <a href="https://governance.rightscale.com">Governance</a></p>
+
+<p>You can also grant temporary access to a user (such as a short-term consultant) or grant an existing user an additional permission(s) that will automatically expire after a specified amount of days. For example, you may want to give additional permissions to developers during a site upgrade.</p>
+
+<h3 id="configure-a-rightscale-account-permission-management-example">Permission Management Example</h3>
+
+<p>Let&#39;s say your company has two RightScale accounts.</p>
+
+<p><img src="/img/cm-account-scenarios.png" alt="cm-account-scenarios.png" width="489" height="339" /></p>
+
+<p>In this example, Ben&#39;s position within the company entitles him to interact with both accounts; however, his level of access in each account is very different. Although he can view the Production account, he cannot launch any servers or create any scripts. But in the Dev &amp; Test account, he can modify ServerTemplates, launch and terminate servers, and login to running servers for troubleshooting purposes. We would enact this access policy by granting Ben the following permissions:</p>
+
+<p><img src="/img/cm-user-roles.png" alt="cm-user-roles.png" width="541" height="82" /></p>
+
+<h3 id="configure-a-rightscale-account-can-i-use-aws-identity-and-access-management--iam--to-further-restrict-user-access-">Can I use AWS Identity and Access Management (IAM) to further restrict user access?</h3>
+
+<p><em>(For Amazon Web Services EC2 only)</em></p>
+
+<p>Yes, absolutely. It&#39;s important to remember that IAM restrictions are tied to a specific set of user security credentials. (i.e. AWS Access Key ID and AWS Secret Access Key) Since you can only apply a single set of security credentials to a RightScale account, the restrictions are enforced at the account level and not at the individual user level. Therefore, if you create an IAM user role that&#39;s only allowed to launch and terminate instances and use its security credentials with a RightScale account, users will only be able to launch and terminate instances from the RightScale Dashboard/API (assuming they have &#39;actor&#39; user permissions) and will not be able to create/modify security groups even if they have &#39;security_manager&#39; user permissions in the RightScale account.</p>
+
+<p>For more information, see <a href="/faq/How_do_I_use_Amazon_IAM_with_RightScale.html">How do I use Amazon IAM with RightScale?</a></p>
+
+<h3 id="configure-a-rightscale-account-how-do-i-control-who-can-ssh-or-rdp-into-running-servers-">How do I control who can SSH or RDP into running servers?</h3>
+
+<p>There are several different ways that you can protect your running servers. You should use some or all of the available tools to satisfy the requirements of your company&#39;s SLA and related security policies.</p>
+
+<ul>
+<li><a href="user_and_account_management.html">User Role Privileges</a></li>
+<li><a href="user_and_account_management.html">Mandatory Server Login Control</a></li>
+<li><a href="user_and_account_management.html">Network Firewall Permissions</a></li>
+</ul>
+
+<h4 id="login-related-roles">Login-Related Roles</h4>
+
+<p>Use the following user role permissions to control who has remote access to running servers in an account.</p>
+
+<ul>
+<li><strong>&#39;server_login&#39;</strong> - This permission is required in order to SSH (Linux) or RDP (Windows) into a running instance. If users do not have this permission they will not see the SSH or RDP action buttons in the RightScale Dashboard.
+
+<ul>
+<li><strong>Linux</strong> - RightLink actively manages the system&#39;s SSH configuration to control who may log in and what privileges they possess. See <a href="/cm/dashboard/settings/user/index.html#user-settings---ssh">User Settings - SSH</a> for how different versions of RightLink handle SSH logins.</li>
+<li><strong>Windows</strong> - RightLink does not manage RDP access policy. Users may learn the correct username and password defined by the following RightScript inputs:</li>
+<li><strong>ADMIN_PASSWORD</strong> - Typically you will use a credential to specify and hide the actual password value. (e.g. WINDOWS_ADMIN_PASSWORD) If a user did not create the credential being used, he/she must have &#39;admin&#39; user role privileges in order to see the actual value in the RightScale Dashboard. Therefore, you will need to provide the sensitive value in a different manner if you do not want all users with &#39;admin&#39; access to view the actual value.</li>
+<li><strong>ADMIN_ACCOUNT_NAME</strong> - This is an advanced input. If left undefined (default), a user must start a Remote Desktop Connection by logging in as the Windows &#39;Administrator&#39; user. If you want to RDP into the instance as a different user, specify the new username using this input. In all cases, the value specified for the ADMIN_PASSWORD input will serve as the matching password.</li>
+</ul></li>
+<li><strong>&#39;server_superuser&#39;</strong> - (For Linux only) If a user has this permission, he/she will be able to use &#39;sudo&#39; and SSH into a running instance as the &#39;root&#39; user. <em>Note</em>: Even if a user has the &#39;server_superuser&#39; user role privilege he/she will still need the &#39;server_login&#39; permission in order to SSH into an instance.</li>
+</ul>
+
+<p><strong>Warning!</strong> Only trusted users should be given the &#39;server_superuser&#39; permission. It&#39;s ultimately your responsibility to protect your infrastructure from any type of malicious activity. Once a user has this permission, he/she can &#39;root&#39; the filesystem and install malicious code that may go unnoticed or be undetectable. If you need to revoke this permission from a user or remove a user from a RightScale account that had the &#39;server_superuser&#39; permission at one point in time past, see <a href="/gov/getting_started/gov_remove_all_roles.html">Remove Users from RightScale</a> in order to mitigate the risk of having a compromised server.</p>
+
+<h4 id="mandatory-server-login-control">Mandatory Server Login Control</h4>
+
+<p><strong>(For Linux only)</strong></p>
+
+<p>For clouds that support the use of SSH Keys (e.g. AWS), those keys can still be used to SSH into an instance by anyone who possesses the private key material. Moreover, cloud-provided SSH keys are installed in the root user&#39;s authorized_keys file, making these keys very powerful indeed! However, you can disable the use of the cloud&#39;s SSH key by enabling the <q>Mandatory Server Login Control</q> setting on your account.</p>
+
+<p><img src="/img/cm-ssh-login-disabled.png" alt="cm-ssh-login-disabled.png" width="725" height="362" /></p>
+
+<p>There are several reasons why you should consider enabling this setting for your account.</p>
+
+<ul>
+<li>SSH Keys are not used by all cloud infrastructures</li>
+<li>Some clouds (e.g. AWS) use cloud/region-specific SSH Keys that can only be used in their respective region.</li>
+<li>Users can use a cloud&#39;s SSH Key to log into a running instance as a &#39;root&#39; user.</li>
+<li>Users are anonymous. It&#39;s difficult to determine who is actually using a cloud&#39;s SSH Key in order to log in to an instance.</li>
+</ul>
+
+<p>Enabling Server Login Control will give you the following benefits.</p>
+
+<ul>
+<li>The cloud&#39;s SSH Key can no longer be used for authentication purposes to SSH into an instance from either the RightScale Dashboard or from a third party SSH client. (Supported by images with RightLink v5.6+)</li>
+<li>Users will only be allowed to SSH into an instance using their managed SSH Key that&#39;s tied to their RightScale user profile. (Navigate to <strong>Settings &gt; User Settings &gt; SSH</strong> to view your own public key.)</li>
+<li>Only users with &#39;server_login&#39; privileges can SSH into a running instance.</li>
+<li>Only users with &#39;server_superuser&#39; privileges can SSH into a running instance as a &#39;root&#39; user. (Supported by images with RightLink v5.9+)</li>
+<li>Users can no longer be anonymous. Users who SSH into an instance will be identified by their email address.</li>
+<li>A user with &#39;admin&#39; privileges can revoke a user&#39;s SSH access at any time by removing &#39;server_login&#39; privileges from a user. <em>Note</em>: When a user loses the &#39;server_login&#39; privilege, every running RightLink-enabled instance in the account is automatically updated to remove that user&#39;s (public) SSH Key from the instance, thereby locking him/her out of any running instance.</li>
+</ul>
+
+<p>When you log in to the RightScale Dashboard for the first time you may not have noticed that RightScale automatically generated a unique SSH keypair for you that&#39;s used for authentication purposes when you initiate SSH sessions from the RightScale Dashboard. RightScale&#39;s server login control is designed to provide a secure and cloud-agnostic method for allowing remote access to running instances via SSH.</p>
+
+<p>Go to <strong>Settings &gt; User Settings &gt; SSH</strong> tab to view your public SSH key. If you want to use a third party client to SSH into an instance you can download the matching private key.</p>
+
+<p>RightScale&#39;s Server Login Control policy is a user setting and cannot be enforced at the account level. Users have the option to either use the unique keypair that RightScale generated for them or create their own SSH keypair and manage it themselves. (See <a href="/cm/dashboard/settings/user/index.html#actions-and-procedures-managing-your-own-ssh-key-pair">Manage an SSH Key Pair</a>.) If your users are required to use their own SSH keypair in order to comply with your company&#39;s security policies and procedures, it&#39;s recommended that each user generate and manage their own keypair. SSH keys should only be known to an individual user for security reasons.</p>
+
+<p><img src="/img/cm-ssh-login-enabled.png" alt="cm-ssh-login-enabled.png" width="725" height="362" /></p>
+
+<ol>
+<li>Go to <strong>Settings &gt; Account Settings &gt; SSH</strong>.</li>
+<li>Specify the Server Login Control policy for the RightScale account.
+
+<ul>
+<li><strong>Disabled</strong> (default) - The cloud&#39;s SSH Key that was used to launch the server (if applicable) can still be used to SSH into the instance using a third party SSH client.</li>
+<li><strong>Enabled</strong> - The cloud&#39;s SSH Key that was used to launch the server (if applicable) is disabled.* It can no longer be used to create an authenticated SSH session. Enable Server Login Control to ensure that only users with &#39;server_login&#39; privileges in a RightScale account will be able to SSH into a running instance. Only users with &#39;server_superuser&#39; login privileges will be able to use sudo to log into a Linux instance as the &#39;root&#39; user.**</li>
+</ul></li>
+</ol>
+
+<p>* Supported in images using RightLink v5.9+.</p>
+
+<p>** Supported in images using RightLink v5.8+.</p>
+
+<p><strong>Important!</strong> You are the only person who should know or have access to your SSH keypair (matching public and private keys). If you think your keypair has been compromised in any way you should create a new SSH keypair immediately.</p>
+
+<p><em>Note</em>: RightScale will not generate a new SSH keypair for you. If you re-enable the Server Login Policy setting, you will be granted the same SSH keypair.</p>
+
+<h4 id="network-firewall-permissions">Network Firewall Permissions</h4>
+
+<p>Another way that you can control who can SSH/RDP into an instance is by using more restrictive cloud-level and OS-level network firewall rules, as applicable. The first layer of security is at the cloud infrastructure level using security groups. For Linux instances, you can also use <em>iptables</em> to create an additional (and optional) layer of firewall security that&#39;s enforced at the instance level. For clouds that do not support the use of security groups, you must rely on <em>iptables</em> for firewall security.</p>
+
+<p><strong>Security Groups</strong></p>
+
+<p>If a cloud supports the use of security groups (e.g. EC2, Google, OpenStack, etc.) you can use security groups to define more restrictive port permissions that are IP-specific instead of allowing access from any IP (0.0.0.0/0)</p>
+
+<p>For example, you could create a security group permission that only allows SSH access from a specified subnet mask (e.g. CIDR 54.197.0/16). Or perhaps you only want users to SSH into an instance from company provisioned laptops.  </p>
+
+<ul>
+<li><p>Linux (SSH)</p>
+
+<ul>
+<li>direction: inbound &nbsp;| &nbsp;protocol: TCP &nbsp;| &nbsp;port: 22 &nbsp;|&nbsp;&nbsp;IPs: 0.0.0.0/0 &nbsp;(any IP; no restrictions) &nbsp; &nbsp; &nbsp;&nbsp;[Least Restrictive]</li>
+<li>direction: inbound &nbsp;| &nbsp;protocol: TCP &nbsp;| &nbsp;port: 22 &nbsp;|&nbsp;&nbsp;IPs: 54.0.0.0/8</li>
+<li>direction: inbound &nbsp;| &nbsp;protocol: TCP &nbsp;| &nbsp;port: 22 &nbsp;|&nbsp;&nbsp;IPs: 54.197.0.0/16</li>
+<li>direction: inbound &nbsp;| &nbsp;protocol: TCP &nbsp;| &nbsp;port: 22 &nbsp;|&nbsp;&nbsp;IPs: 54.197.22.0/24</li>
+<li>direction: inbound &nbsp;| &nbsp;protocol: TCP &nbsp;| &nbsp;port: 22 &nbsp;|&nbsp;&nbsp;IPs: 54.197.22.136/32 (single IP) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[Most Restrictive]</li>
+</ul></li>
+<li><p>Windows (RDP)</p>
+
+<ul>
+<li>direction: inbound &nbsp;| &nbsp;protocol: TCP &nbsp;| &nbsp;port: 3389&nbsp; |&nbsp;&nbsp;IPs: 0.0.0.0/0 &nbsp;(any IP; &nbsp;no restrictions) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;[Least Restrictive]</li>
+<li>direction: inbound &nbsp;| &nbsp;protocol: TCP &nbsp;| &nbsp;port: 3389 &nbsp;|&nbsp;&nbsp;IPs: 54.0.0.0/8</li>
+<li>direction: inbound &nbsp;| &nbsp;protocol: TCP &nbsp;| &nbsp;port: 3389 &nbsp;|&nbsp;&nbsp;IPs: 54.197.0.0/16</li>
+<li>direction: inbound &nbsp;| &nbsp;protocol: TCP &nbsp;| &nbsp;port: 3389 &nbsp;|&nbsp;&nbsp;IPs: 54.197.22.0/24</li>
+<li>direction: inbound &nbsp;| &nbsp;protocol: TCP &nbsp;| &nbsp;port: 3389 &nbsp;|&nbsp;&nbsp;IPs: 54.197.22.136/32 (single IP) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;[Most Restrictive]</li>
+</ul></li>
+</ul>
+
+<p><strong>iptables</strong></p>
+
+<p>(For Linux only)</p>
+
+<p>ServerTemplates published by RightScale (v12+) include support for <em>iptables.</em> Each ServerTemplate uses tags and <em>iptables</em> ​to create IP-specific firewall rules, which are typically used to set up isolated tier-to-tier communication depending on the desired functionality of the server. For example, an <em>iptables</em> rule can be dynamically created on a master database server which allows ingress communication from an application server&#39;s private IP address that was just launched (assuming it&#39;s been assigned an IP address).</p>
+
+<p>Refer to the individual technical overviews for a ServerTemplate for a better understanding of how <em>iptables</em> are used to create firewall rules.</p>
+
+<h3 id="configure-a-rightscale-account-how-do-i-add-public-and-or-private-clouds-to-a-rightscale-account-">How do I add public and/or private clouds to a RightScale account?</h3>
+
+<p>The RightScale Management Platform (Dashboard and API) supports the infrastructure-as-a-service (<q>IaaS</q> or <q>compute</q>) capabilities of the following clouds:</p>
+
+<ul>
+<li>Public Clouds
+
+<ul>
+<li>Amazon Web Services (EC2, S3, etc.)</li>
+<li>Google Compute Platform (Compute Engine, Cloud Storage, etc.)</li>
+<li>Microsoft Windows Azure</li>
+<li>SoftLayer</li>
+</ul></li>
+<li>Private Clouds
+
+<ul>
+<li>OpenStack (Juno)</li>
+<li>OpenStack (Kilo)</li>
+<li>OpenStack (Liberty)</li>
+<li>VMware vSphere</li>
+</ul></li>
+</ul>
+
+<p>You should only add clouds that you plan to use in your RightScale account. You can only add a cloud with a unique set of cloud credentials. A set of cloud credentials cannot be shared across multiple RightScale accounts. Therefore, if you are using multiple RightScale accounts you must use different and unique cloud credentials for each account. Although you can build hybrid cloud deployments that are spread across multiple clouds for high availability and disaster recovery scenarios, you will experience the most optimal performance if your software stack is deployed within the same cloud infrastructure and region. Obviously, this rule doesn&#39;t apply to datacenters/zones within a cloud/region as spreading your site&#39;s architecture across multiple zones/datacenters is a recommended best practice in the cloud.</p>
+
+<p><strong>Example</strong></p>
+
+<ul>
+<li>&#39;Production&#39; RightScale Account
+
+<ul>
+<li>AWS Account Number: 1234-1234-1234</li>
+</ul></li>
+<li>&#39;Staging&#39; RightScale Account
+
+<ul>
+<li>AWS Account Number: 7777-8888-9999</li>
+</ul></li>
+</ul>
+
+<p>Only users with &#39;admin&#39; user role privileges can associate a cloud account with a RightScale account.</p>
+
+<ol>
+<li>Go to <strong>Settings &gt; Account Settings &gt; Clouds tab</strong>.</li>
+<li>Click <strong>Connect to a Cloud</strong>.</li>
+<li>See <a href="/cm/dashboard/settings/account/add_a_cloud_account_to_a_rightscale_account.html">Add a Cloud Account to a RightScale Account</a> to find more detailed instructions that are specific to the chosen cloud.</li>
+</ol>
+
+<h4 id="pick-the-cloud-that&#39;s-best-for-you!">Pick the cloud that&#39;s best for you!</h4>
+
+<p>Remember, each application that you deploy in the cloud has a unique set of cost and performance requirements. Cloud infrastructures are equally unique and offer a wide range of resources and services. Ultimately, you should pick the cloud that&#39;s best suited for your application.</p>
+
+<p><img src="/img/cm-multicloud-server-template.png" alt="cm-multicloud-server-template.png" width="613" height="325" /></p>
+
+<p>One of the key advantages of using the RightScale platform is that you can build cloud-agnostic ServerTemplates for your application. Launch and test your application in multiple clouds. Perform all of the necessary benchmark tests so that you can confidently select and deploy your software stack in the cloud that gives you the best performance and ROI. And if the net results ever change, you&#39;ll have the flexibility to easily migrate those applications to a different cloud of your choice.</p>
+
+<p><img src="/img/cm-pick-cloud.png" alt="cm-pick-cloud.png" width="725" height="125" /></p>
+
+<h3 id="configure-a-rightscale-account-how-do-i-control-how-a-user-accesses-a-rightscale-account-">How do I control how a user accesses a RightScale account?</h3>
+
+<p>By default, users can access a RightScale account (via the web Dashboard or API) using their email and password from any location (i.e. public IP address). However, there are a few different ways that you can enforce stricter login policies. For example, you can control <em><strong>how</strong></em> a user accesses a RightScale account as well as <strong><em>from where</em></strong> he/she is allowed to access it.</p>
+
+<ul>
+<li>Login Preference (Authentication)
+
+<ul>
+<li>E-mail/Password (default)</li>
+<li>Single Sign-on</li>
+</ul></li>
+<li>Location Restrictions
+
+<ul>
+<li>Unrestricted (default) - Users can log in from any IP address.</li>
+<li>Restricted - Users/Services can only access the RightScale account from an authorized (public) IP address, as defined by an IP Whitelist.</li>
+</ul></li>
+</ul>
+
+<h4 id="login-preferences">Login Preferences</h4>
+
+<p><strong>E-mail and Password</strong></p>
+
+<p>By default, users must use their email and password to log in to the RightScale Dashboard or authenticate a RightScale API call.</p>
+
+<p><strong>Single Sign-On (SSO)</strong></p>
+
+<p>RightScale supports the use of Security Assertion Markup Language (SAML) for using a Single Sign-on (SSO) identifier/token for accessing a RightScale account via the Dashboard and/or API. RightScale supports both types of SAML providers.</p>
+
+<ul>
+<li>Hosted SaaS</li>
+<li>On-premise SaaS</li>
+</ul>
+
+<p>All users can specify how they want to authenticate themselves with the RightScale Dashboard and/or API under <strong>Settings &gt; User Settings &gt; Authentication</strong>. By default, you will use your email and password for authentication purposes. However, if you prefer to use SAML-based authentication, you can change the default authentication method to use Single Sign-on instead where an SSO Identifier is used for authentication purposes instead of your regular password.</p>
+
+<p><em><strong>Important!</strong></em> If you enable SSO, you must also <a href="user_and_account_management.html">Enable OAuth</a>_ to authenticate API calls.</p>
+
+<p><strong>Enforce Single Sign-on (SSO) for Dashboard Access</strong></p>
+
+<p>If you want to disable a user&#39;s ability to log in to the RightScale Dashboard or authenticate an API call using their email and password, you can contact your RightScale Account Manager and request that the <q>Mandatory Single Sign-on</q> preference be &#39;Enabled&#39; for your RightScale account, which effectively disallows a user from being able to use their email and password for authentication purposes. If enabled at the account level, all users will also be required to <a href="user_and_account_management.html">Enable OAuth</a> for API access.</p>
+
+<p><img src="/img/cm-sso-setup.png" alt="cm-sso-setup.png" width="725" height="379" /></p>
+
+<h4 id="api-access">API Access</h4>
+
+<p>There are several different ways that you can control access to your RightScale account an its resources via the API.</p>
+
+<ol>
+<li><strong>User Permissions</strong> - The same user role permissions are enforced by the RightScale Dashboard and API. For example, a user will need &#39;actor&#39; user role privileges to launch a server via the Dashboard or API.</li>
+<li><strong>API Credentials</strong> - Typically a user will authenticate an API call using the same email and password that he/she uses to log in to the RightScale Dashboard. However, a user also has the ability to set up and use an OAuth token for authentication purposes. See <a href="user_and_account_management.html">Enable OAuth</a>.</li>
+<li><strong>Access Controls</strong> - Define an IP Whitelist Range to control where users are allowed to make API calls. See <a href="user_and_account_management.html">Location Restrictions</a>.</li>
+</ol>
+
+<p><strong>Enable OAuth</strong></p>
+
+<p>By default, you can construct a RightScale API call using your email and password for authentication purposes. However, if you prefer to use an OAuth token instead of your email and password, you can enable the OAuth feature. See <a href="/api/api_1.5_examples/oauth.html">OAuth</a>.</p>
+
+<p>The ability to authenticate your RightScale API calls using an OAuth 2.0 token is a user setting that can enabled on a per account basis.</p>
+
+<ol>
+<li>Go to <strong>Settings &gt; Account Settings &gt; API Credentials</strong>.</li>
+<li>Click <strong>Enable / Disable</strong>.
+
+<ul>
+<li>If <strong>Enabled</strong>, you can use your OAuth token for authentication purposes when making a RightScale API call for the specified RightScale account. <em>Note</em>: You will still be allowed to make an API call using your email and password for authentication purposes unless the RightScale account has been configured to only allow OAuth tokens for API access. ( i.e. the <q>Mandatory Single Sign-on</q> account preference is &#39;Enabled&#39;)<br>
+<strong>Warning!</strong> Be sure to keep your OAuth token in a safe location. If someone else knows your OAuth token, they can make API calls on your behalf, with all of your permissions. If your OAuth token is ever compromised you should create a new token by disabling this feature and then re-enabling it (to generate a new token).</li>
+<li>If <strong>Disabled</strong> (default), you can cannot use an OAuth token for authentication purposes when making a RightScale API call for the specified RightScale account; you must use your email and password.</li>
+</ul></li>
+</ol>
+
+<p><strong>Enforce OAuth for API Access</strong></p>
+
+<p>If you want to disable a user&#39;s ability to make API calls using their email and password for authentication purposes, you can contact your RightScale Account Manager and request that the <q>Mandatory Single Sign-on</q> preference be &#39;Enabled&#39; for your RightScale account, which effectively disallows users from using their email and password to make API calls. If enabled at the account level, all users will also need to set up SSO (SAML) and use their SSO Identifier to log in to the RightScale Dashboard.</p>
+
+<p><img src="/img/cm-oauth-setup.png" alt="cm-oauth-setup.png" width="725" height="379" /></p>
+
+<h4 id="location-restrictions">Location Restrictions</h4>
+
+<p><strong>IP Whitelists</strong></p>
+
+<p>If your users should only be allowed to access the RightScale Dashboard from on-premise laptops, you can use a set of IP Whitelists to define a valid list of IP addresses or range of IPs. In such cases, you can can restrict access to your RightScale account by enforcing a list of approved IP addresses or IP range(s) using CIDR rules.</p>
+
+<p>Define a specific range of (public) IP addresses from which users or services can access a RightScale account and its managed resources. For example, perhaps users should only be allowed to access the RightScale Dashboard from a specific on-premise location or maybe a service running inside your local infrastructure needs to issue RightScale API calls.</p>
+
+<ol>
+<li>Go to <strong>Settings &gt; Account Settings &gt; Access Controls</strong>.</li>
+<li>Add an IP Whitelist Range(s). (e.g. 125.15.8.0/24)</li>
+<li>Click <strong>Add</strong>.</li>
+<li>Create additional rules, as necessary.</li>
+</ol>
+
+<p><strong>Example</strong></p>
+
+<p><img src="/img/cm-ip-whitelist-example.png" alt="cm-ip-whitelist-example.png" width="687" height="188" /></p>
+
+<h3 id="configure-a-rightscale-account-should-i-set-default-configurations-for-servers-">Should I set default configurations for servers?</h3>
+
+<p>If your RightScale account has multiple users who are creating and launching servers, you may find it useful to set some account-wide default settings. Currently, you can specify default settings for adding servers to a deployment. For example, maybe you want to minimize your cloud infrastructure costs by encouraging your users to only use the &#39;small&#39; instance types for development and testing purposes because they are cheaper and sufficient to perform the required software quality assurance tests. Or perhaps you purchased a block of discounted instances (e.g. EC2 Reserved Instances). Therefore, it&#39;s in your best interest to encourage your users to launch instances at the discounted rate in order to optimize your cloud infrastructure usage and related costs. In such cases, you can specify various default configurations that will be inherited (i.e. pre-selected) when a user creates a new server/array and adds it to a deployment.</p>
+
+<p>The example screenshots below demonstrate how two server defaults for the &#39;AWS US-West&#39; cloud are inherited and pre-selected when you use the Add Server wizard to create a server.</p>
+
+<p><img src="/img/cm-server-defaults.png" alt="cm-server-defaults.png" width="725" height="267" /></p>
+
+<p>Server defaults are cloud-specific and are designed to encourage (not enforce) server configurations. The server defaults are only applied when a user creates a new server. The settings are not retroactive and will not affect any previously defined servers that are active or inactive. Server defaults can only be applied to servers that are created using ServerTemplates using the Add Server wizard in the Dashboard.</p>
+
+<p><strong>Important!</strong> A user will still be able to override a server default setting and make a different selection. However, you can use server defaults to define your preferred server configuration settings and then enforce these preferences using your own set of internal policies and procedures to ensure that your users are using the predefined server defaults, as necessary. Be sure to perform account-wide audits on a regular basis to enforce your configuration guidelines.</p>
+
+<p>Only users with &#39;admin&#39; user role privileges can define server defaults for a RightScale account.</p>
+
+<ol>
+<li>Go to <strong>Settings &gt; Account Settings &gt; Server Defaults</strong> tab.</li>
+<li>Select a cloud. (Remember, server defaults are cloud-specific.)</li>
+<li>Click <strong>Edit</strong>.</li>
+<li>Select desired resources and/or values that you want to use as default selections for any new servers that will be launched into the specified cloud.</li>
+<li>Determine if and how you will enforce the proper use of these default settings for your organization.</li>
+</ol>
+
+<h2 id="collaboration-between-rightscale-accounts">Collaboration Between RightScale Accounts</h2>
+
+<p>If you are using multiple RightScale accounts for your organization, read the sections below to understand how you can properly set up multiple RightScale accounts so that you can effectively share and reuse assets between them for effective collaboration. For example, you might need to share account-specific assets (e.g. ServerTemplates, Images, etc.) across different accounts because you&#39;re developing ServerTemplates in one account and deploying them in your production environment that&#39;s in a different account. In such cases, you can set up your accounts so that the ServerTemplate functions in a slightly different way depending on the account in which it&#39;s used, which is especially useful for hiding sensitive values such as passwords that are only used in your production environment. Each scenario will be described in more detail below.</p>
+
+<h3 id="collaboration-between-rightscale-accounts-share-account-specific-assets">Share Account-specific Assets</h3>
+
+<p>Things you can share between RightScale accounts:</p>
+
+<ul>
+<li>ServerTemplates</li>
+<li>RightScripts</li>
+<li>Images*</li>
+<li>Snapshots*</li>
+</ul>
+
+<p>* If supported by the cloud. For example, images and snapshots can be shared between AWS accounts. Since cloud credentials can only be mapped to a single RightScale account, these types of cloud resources can be considered account-specific assets similar to ServerTemplates.</p>
+
+<p>Determine who is in charge of the sharing process and make sure they have &#39;publisher&#39; user role privileges, which is required in order to facilitate the sharing process between multiple RightScale accounts.</p>
+
+<p>To learn how you can share RightScale components and Cloud resources, see our <a href="/cm/pas/index.html">Publishing and Sharing</a> guide.</p>
+
+<h3 id="collaboration-between-rightscale-accounts-manage-credentials">Manage Credentials</h3>
+
+<p>As a best practice, you should use credentials (<strong>Design &gt; Credentials</strong>) to hide sensitive values from being visible to your users while still making the value accessible to your configuration scripts. If you are managing multiple RightScale accounts (e.g. Production, Development &amp; Testing, etc.) a helpful way to use credentials is to create ones with the same name across all RightScale accounts, which will allow you to use the same immutable, committed revision of a ServerTemplate across multiple accounts, where different values are used in each account.</p>
+
+<p><img src="/img/cm-use-creds.png" alt="cm-use-creds.png" width="725" height="326" /></p>
+
+<p>For example, you can use a different password value in the Production account than in the Dev &amp; Test account, which is especially useful if you&#39;re developing and testing ServerTemplates in a different account than the account you&#39;re using for your production environment. Remember, user role permissions are account-specific. Therefore, custom ServerTemplates can be developed in the Dev &amp; Test account where your software developers can create and use credentials with their own passwords for development and testing purposes. But once those same ServerTemplates are locked down, tested, and ready for production-use, you can share committed revisions of those templates with the Production account for deploying your production servers. Except when they&#39;re used in the Production account (where the software engineers do not have access), the ServerTemplates use credentials with secure passwords that are only known to you and your Operations team.</p>
+
+<ol>
+<li>Create Credentials with the same name across all RightScale accounts.</li>
+<li><p>Configure each custom ServerTemplate to use the same credentials. In the example screenshot above, a script uses a password that is defined by the DBADMIN_PASSWORD credential. Notice that the actual values for the same credential are different depending on the type of account.</p>
+
+<ul>
+<li><strong>Dev &amp; Test Account</strong> : DBADMIN_PASSWORD = MyPass123!</li>
+<li><strong>Production Account</strong> :DBADMIN_PASSWORD = DgU4!pmH8</li>
+</ul></li>
+<li><p>Share the committed revision of a ServerTemplate that passed final testing with your Production account.</p></li>
+<li><p>Use the shared ServerTemplate to launch servers in the Production account.</p></li>
+</ol>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>See <a href="network_and_firewall_management.html">Network and Firewall Management</a>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

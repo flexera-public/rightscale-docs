@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Example memory_buffers collectd exec plugin</title><meta content="Here is an example of a memory_buffers collectd exec plugin for the RightScale Cloud Management Platform." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_example_memory_buffers_collectd_exec_plugin" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>Example memory_buffers collectd exec plugin</h1></div><div class="main-content"><p>The following custom collectd exec plugin uses Bash and the used/free buffers values from the Linux command, <code>free</code>.</p>
+
+<h3 id="-rightscript--install-memory_buffers-collectd-plugin">RightScript: Install memory_buffers collectd plugin</h3>
+
+<p>Create a RightScript with the following code and ensure that you set SERVER_UUID as an input with a dropdown default value of RS_INSTANCE_UUID.</p>
+<pre class="syntax-highlight shell"><code><span class="c">#!/bin/bash -e</span>
+
+
+
+<span class="nv">interval</span><span class="o">=</span>20
+
+
+
+<span class="c"># Determine the collectd plugin path, based on the architecture of the machine.</span>
+
+<span class="nv">collectd_dir</span><span class="o">=</span><span class="s2">"/usr/lib/collectd"</span>
+
+<span class="o">[</span><span class="s2">"</span><span class="k">$(</span>uname -m<span class="k">)</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"x86_64"</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">collectd_dir</span><span class="o">=</span><span class="s2">"/usr/lib64/collectd"</span>
+
+
+
+<span class="c"># Create the plugin directory if needed, and copy the script into it.</span>
+
+mkdir -p <span class="s2">"</span><span class="nv">$collectd_dir</span><span class="s2">"</span>/plugins
+
+cp -f <span class="s2">"</span><span class="nv">$RS_ATTACH_DIR</span><span class="s2">"</span>/memory_buffers.bash <span class="s2">"</span><span class="nv">$collectd_dir</span><span class="s2">"</span>/plugins/memory_buffers.bash
+
+chmod +x <span class="s2">"</span><span class="nv">$collectd_dir</span><span class="s2">"</span>/plugins/memory_buffers.bash
+
+chmod 775 <span class="s2">"</span><span class="nv">$collectd_dir</span><span class="s2">"</span>/plugins/memory_buffers.bash
+
+
+
+<span class="k">if</span> <span class="o">[</span><span class="s2">"</span><span class="nv">$RS_DISTRO</span><span class="s2">"</span> <span class="o">=</span> <span class="s1">'ubuntu'</span><span class="o">]</span>; <span class="k">then
+
+    </span><span class="nv">config</span><span class="o">=</span><span class="s2">"/etc/collectd/collectd.conf"</span>
+
+    <span class="nv">plugin_dir</span><span class="o">=</span><span class="s2">"/etc/collectd/conf"</span>
+
+<span class="k">elif</span> <span class="o">[</span><span class="s2">"</span><span class="nv">$RS_DISTRO</span><span class="s2">"</span> <span class="o">=</span> <span class="s1">'centos'</span><span class="o">]</span>; <span class="k">then
+
+    </span><span class="nv">config</span><span class="o">=</span><span class="s2">"/etc/collectd.conf"</span>
+
+    <span class="nv">plugin_dir</span><span class="o">=</span><span class="s2">"/etc/collectd.d"</span>
+
+<span class="k">fi
+
+</span><span class="nv">exec_plugin_conf</span><span class="o">=</span><span class="s2">"</span><span class="nv">$plugin_dir</span><span class="s2">/memory_buffers.conf"</span>
+
+
+
+<span class="k">if</span> ! grep memory_buffers <span class="s2">"</span><span class="nv">$exec_plugin_conf</span><span class="s2">"</span> &gt;/dev/null 2&gt;&amp;1; <span class="k">then
+
+</span>cat <span class="sh">&lt;&lt;EOF&gt;&gt; $exec_plugin_conf
+
+&lt;Plugin exec&gt;
+
+  # userid plugin executable plugin args
+
+  Exec "nobody" "$collectd_dir/plugins/memory_buffers.bash" "$SERVER_UUID" "$interval"
+
+&lt;/Plugin&gt;
+
+EOF
+
+</span><span class="k">fi</span>
+
+
+
+/etc/init.d/collectd restart
+
+
+
+<span class="nb">echo</span> <span class="s1">'Done.'</span>
+</code></pre>
+
+<h3 id="-memory_buffers-bash">memory_buffers.bash</h3>
+
+<p>Copy and paste the following into a new text file on your computer. Save it as memory_buffers.bash and upload it as an attachment to the RightScript.</p>
+<pre class="syntax-highlight plaintext"><code>: ${id:="$SERVER_UUID"}
+
+: ${id:="$1"}
+
+: ${id:=$(&lt; /var/spool/ec2/meta-data/instance-id)}
+
+
+
+while true; do
+
+    start_run=$(date +%s)
+
+    data_used=$(free | grep "buffers/cache" | awk '{ print $3 }')
+
+    data_free=$(free | grep "buffers/cache" | awk '{ print $4 }')
+
+    echo 'PUTVAL '"$id"'/memory_buffers/gauge-used '"$start_run"':'"$data_used"
+
+    echo 'PUTVAL '"$id"'/memory_buffers/gauge-free '"$start_run"':'"$data_free"
+
+    sleep 10
+
+done
+</code></pre>
+
+<h3 id="-example-output-of-plugin">Example Output of Plugin</h3>
+
+<p>After you running the RightScript on the server successfully, its also possible to test it manually within shell:</p>
+<pre class="syntax-highlight plaintext"><code>root@sandbox:~# "/usr/lib/collectd/plugins/memory_buffers.bash" "00-0BIJPUB"PUTVAL 00-0BIJPUB/memory_buffers/gauge-used 1299043002:99288PUTVAL 00-0BIJPUB/memory_buffers/gauge-free 1299043002:1606424PUTVAL 00-0BIJPUB/memory_buffers/gauge-used 1299043012:99380PUTVAL 00-0BIJPUB/memory_buffers/gauge-free 1299043012:1606292PUTVAL 00-0BIJPUB/memory_buffers/gauge-used 1299043022:99364PUTVAL 00-0BIJPUB/memory_buffers/gauge-free 1299043022:1606308
+</code></pre>
+
+<h3 id="-example-alert-specification">Example Alert Specification</h3>
+
+<p>Add an alert to your ServerTemplate, such as:</p>
+<pre class="syntax-highlight plaintext"><code>if memory_buffers/gauge-free.value &lt; '100' for 1 min then escalate to 'critical'
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

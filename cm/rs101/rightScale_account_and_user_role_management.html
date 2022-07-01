@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightScale Account and User Role Management</title><meta content="Detailed descriptions of Accounts, Users, and Roles as these terms pertain to the RightScale Cloud Management Platform." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_rightScale_account_and_user_role_management" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>RightScale Account and User Role Management</h1></div><div class="main-content"><p>The terms &#39;accounts&#39;, &#39;user&#39;, and &#39;roles&#39; are used throughout the documentation and can cause some confusion. This page contains detailed descriptions of these terms and provides details about their appropriate usage/application.</p>
+
+<h2 id="accounts">Accounts</h2>
+
+<p>An account provides a layer of tenancy for various features in the platform. An account contains integrations to clouds and can only contain 1 account from each public cloud provider but any number of private cloud accounts. Accounts can belong to one and only one RightScale organization.</p>
+
+<p>Each user will likely have two types of accounts.</p>
+
+<ul>
+<li><p><strong>RightScale Account</strong> - Create a RightScale Account to log in to the RightScale Dashboard. Registration requires an email and password. To view information about your RightScale Account in the Dashboard, go to <strong>Settings</strong> &gt; <strong>Account</strong>. Click the <strong>Plan</strong> tab to view information about the type of RightScale Plan that is associated with a RightScale Account (Standard, Enterprise, etc.) <strong>Note</strong>: Unless otherwise specified, the word &#39;account&#39; in the documentation refers to your RightScale Account.</p></li>
+<li><p><strong>Cloud Account</strong> - Before you can use the RightScale Dashboard to manage your server instances in the Cloud, you must first create an account with your cloud provider. You need to enter valid cloud credentials into the Dashboard in order to launch and manage resources in your cloud through the RightScale Dashboard or API. For example, in order to launch EC2 instances, you must have valid AWS Credentials. Each RightScale account can only use a single set of cloud credentials per cloud infrastructure. For example, if you&#39;re managing two sets of AWS credentials, you need to create two RightScale accounts to manage both cloud infrastructure accounts.</p></li>
+</ul>
+
+<p>In the following diagram, there are three separate users. John set up the &#39;Site1.com&#39; RightScale account and invited Ben (who has his own RightScale account) to be a user of the &#39;Site1.com&#39; RightScale account. Ben set up his own RightScale account, which he&#39;s enabled to manage resources across multiple cloud providers. Greg is new to RightScale and has never set up his own RightScale account, however Ben invited him to be a user of his &#39;Site2.com&#39; RightScale account.</p>
+
+<p><img src="/img/cm-account-scenarios.png" alt="cm-account-scenarios.png" width="489" height="339" /></p>
+
+<p>Keep in mind that a RightScale Account is separate from a Cloud Account. You can register multiple cloud accounts with a single RightScale account. However, you will be responsible for paying for all cloud and cloud-related cloud usage costs. If you are a paying customer of RightScale, your cloud usage costs are separate charges from your RightScale Edition subscription fee.</p>
+
+<p><img src="/img/cm-billing-model.png" alt="cm-billing-model.png" width="725" height="262" /></p>
+
+<h2 id="user">User</h2>
+
+<p>RightScale users are identified by their email address. Each user can have access to multiple RightScale Accounts. Create your own RightScale Account or accept invitations to be a user of other RightScale Accounts. To view information about your User settings across all of the RightScale account to which you have access to use in the Dashboard, go to <strong>Settings</strong> &gt; <strong>User</strong>. For an exhaustive list of each role and their associated permissions, see <a href="/cm/ref/user_role_privs.html">User Role Privileges</a>.</p>
+
+<p>In the diagram below, John Doe is identified as <a href="mailto:&#x27;john@mysite.com">&#39;john@mysite.com</a>&#39; in the RightScale platform. He currently has access to three RightScale Accounts and has different user role privileges in each of those accounts.</p>
+
+<p><img src="/img/common-user.png" alt="common-user.png" width="495" height="80" /></p>
+
+<p>Each user is identified and distinguished from other users by his/her email. In the RightScale system, your email address is used as your username or unique identifier. Email addresses are used in audit entries, changelogs, and histories to identify which user performed a particular action(s) within a RightScale Account. Therefore, it&#39;s important that login credentials (email/password) are never shared or used by multiple users, otherwise it will be impossible to determine who is responsible for tracking user actions within the Dashboard.</p>
+
+<h2 id="managing-your-rightscale-account">Managing your RightScale Account</h2>
+
+<p>If you are an <strong>Admin</strong> user of a RightScale account, you can use the various user roles to control the permissions of all invited users in order to control their level of access and functionality. Only &#39;admin&#39; users can send account invitations. If you are an &#39;admin&#39; user, you must specify a user&#39;s roles before sending an account invitation. Later, you can change a user&#39;s roles under the <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Users</strong>.</p>
+
+<p><strong>Note</strong>: Only an &#39;admin&#39; user can revoke another user&#39;s &#39;admin&#39; privileges.</p>
+
+<p>It&#39;s important that you never share the email/password that you use to log into the RightScale Dashboard. For example, if an account (e.g. &#39;Site1.com&#39;) has multiple users, each user should create their own RightScale account. Later, the &#39;admin&#39; user of the &#39;Site1.com&#39; account can invite additional users to that account. This is the only way that you can have user accountability within an account. If you share the same email/password with multiple users, there is no way to determine who launched or terminated a server. It&#39;s important that each action can be attributed to a single user.</p>
+
+<p><img src="/img/cm-user-roles-2.png" alt="cm-user-roles-2.png" width="453" height="242" /></p>
+
+<h2 id="-user--roles">(User) Roles</h2>
+
+<p>To view your own user role privileges across all of your accounts, go to <strong>Settings</strong> &gt; <strong>User</strong> &gt; <strong>Info</strong>. Remember, user roles are account-specific.</p>
+
+<p>For a complete matrix of what you can/cannot do inside the Dashboard based with your user role privileges, see <a href="/cm/ref/user_role_privs.html">User Role Privileges</a>.</p>
+
+<p>The available user roles include:
+<br>
+<br>
+<strong>Cloud Management</strong></p>
+
+<ul>
+<li>actor</li>
+<li>observer</li>
+<li>designer</li>
+<li>library</li>
+<li>security_manager</li>
+<li>server_login</li>
+<li>server_superuser</li>
+<li>publisher</li>
+<li>credential_viewer
+<br>
+<br>
+<strong>Optima</strong></li>
+<li>ca_user</li>
+<li>billing_center_viewer</li>
+<li>billing_center_admin
+<br>
+<br>
+<strong>Governance</strong></li>
+<li>admin</li>
+<li>enterprise_manager</li>
+<li>policy_publisher</li>
+<li>policy_designer</li>
+<li>policy_manager</li>
+<li>policy_viewer
+<br>
+<br>
+<strong>Self-Service</strong></li>
+<li>ss_end_user</li>
+<li>ss_observer</li>
+<li>ss_designer</li>
+</ul>
+
+<p>For a detailed description of the permissions associated with each of the roles, see <a href="/cm/ref/user_roles.html">User Roles</a>.</p>
+
+<h2 id="-server--roles">(Server) Roles</h2>
+
+<p>Sometimes the word &#39;role&#39; refers to a server&#39;s role or configuration. For example, when you launch an instance on a cloud infrastructure like Amazon EC2 you are provisioning a <q>blank</q> piece of hardware that you can configure to fulfill a specific type of server role. Additionally, you can use different ServerTemplates to configure instances to fulfill certain roles such as dedicated load balancers, application servers, database servers, etc.</p>
+
+<p><img src="/img/cm-server-roles.png" alt="cm-server-roles.png" width="598" height="299" /></p>
+
+<h2 id="see-also">See also</h2>
+
+<ul>
+<li><a href="/cm/ref/user_role_privs.html">User Role Privileges</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

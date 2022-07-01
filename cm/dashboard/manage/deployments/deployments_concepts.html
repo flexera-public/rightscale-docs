@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Deployment - Concepts</title><meta content="A RightScale Deployment consists of a group of Servers that work together. A typical web site Deployment consists of two front-end application Servers and two back-end, master/slave database Servers." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_manage cm_dashboard_manage_deployments cm_dashboard_manage_deployments_deployments_concepts" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Manage</a> &#x2F; <a href="./">Deployments</a></p><div class="page-header"><h1>Deployment - Concepts</h1></div><div class="main-content"><h2 id="about-deployments">About Deployments</h2>
+
+<h3 id="what-is-a-rightscale-deployment?">What is a RightScale Deployment?</h3>
+
+<p>A RightScale <strong>Deployment</strong> consists of a group of Servers that work together. A typical web site Deployment consists of two front-end application Servers and two back-end, master/slave database Servers.</p>
+
+<div class="media media-video-wide">
+  <iframe class="media-video-item" src="https://www.youtube.com/v/hYj_fY95DTA&amp;hl=en_US&amp;fs=1&amp;"></iframe>
+  <div class="media-caption">
+    <small>Manage servers in the cloud with RightScale deployments</small>
+  </div>
+</div>
+
+<p>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong>. Deployments represent the highest level view of your account. You can create and clone Deployments, start and stop all servers in a Deployment, define Deployment-wide Input variables, and much more.</p>
+
+<p><img src="/img/cm-deployment-list.png" alt="cm-deployment-list.png" width="725" height="233" /></p>
+
+<p>Select a specific Deployment to see more specific information.</p>
+
+<p><img src="/img/cm-view-deployment.png" alt="cm-view-deployment.png" width="725" height="632" /></p>
+
+<p>There are a variety of tabs that provide more detailed information about all aspects of a Deployment.</p>
+
+<ul>
+<li><strong>Servers</strong> - Provides a high-level overview of all servers of a deployment. Select a server to view more specific information including its Public/Private DNS name, ASW id, instance type, and more.</li>
+<li><strong>Inputs</strong> - List of input variables that are defined at the deployment level. If a server is running and you want to change its inputs, run a script under the “Scripts” tab.</li>
+<li><strong>Monitoring</strong> - View real-time graphical data for any server in your deployment.</li>
+<li><strong>Scripts</strong> - List of all RightScripts that are used by one or more servers in the deployment.</li>
+<li><strong>Volumes</strong> - List of Elastic Block Store (EBS) volumes.</li>
+<li><strong>Alert Escalations</strong> - List of alert escalations and their associated deployments.</li>
+<li><strong>Audit</strong> - Shows the audit trail for all the servers in the deployment. Audit records reflect user triggered actions, boot activity, as well as any automatic actions that are performed by RightScale.</li>
+<li><strong>History</strong> - Provides detailed information about all terminated instances of a deployment including launch date/time, termination date/time, runtime length, instance ID, and more.</li>
+<li><strong>Xref</strong> - Cross-references and displays all uses of input variables in the deployment across all existing servers and RightScripts. It also calculates and shows the final value for each input variable according to the inheritance rules.</li>
+<li><strong>Changes</strong> - A changelist log of all changes made to the deployment. (For example, changing the deployment name.)</li>
+</ul>
+
+<h2 id="benefits-of-using-deployments">Benefits of Using Deployments</h2>
+
+<h3 id="define-common-input-parameters">Define Common Input Parameters</h3>
+
+<p>Deployments provide a useful way of managing a common group of instances. For example, if you set common input parameters at the deployment level, all servers in the deployment will inherit the same parameters unless they are overwritten at the server level. (Input parameters that are defined at the deployment level will overwrite the values that are defined at the ServerTemplate level. It&#39;s useful to define common input parameters at the deployment level for all servers such as AWS and database credentials. You cannot define Inputs for the Default deployment. You can only define deployment-wide inputs for a deployment that you create.</p>
+
+<h3 id="multiple-deployments">Multiple Deployments</h3>
+
+<p>Deployments are especially useful for creating unique or identical work environments. Remember, deployments are free; you only have to pay for server usage. Therefore, you might want to use deployments to organize custom server environments (production, staging, testing, backup, marketing, etc.). Each deployment can have different users with different permission rights. See <a href="/cm/management_guide/create_a_staging_deployment.html">Create a Staging Deployment</a>.</p>
+
+<h3 id="clone-deployments">Clone Deployments</h3>
+
+<p>The ability to instantly clone a deployment with one click is a very simple, but very powerful feature. Now you can create an exact copy of an existing deployment. For example, clone your <q>staging</q> deployment for your quality assurance team so they can perform GUI and regression tests without impacting the developers&#39; environment. Create a clone of your production-ready deployment as a backup that will be ready to launch in a different availability zone if problems arise. See <a href="/clouds/aws/amazon-ec2/aws_failover_architectures.html">Designing Failover Architectures on EC2</a>. Remember that in the cloud you are not limited by hardware resources and can create working environments that are always available for you on demand.</p>
+
+<h3 id="lock-a-deployment">Lock a Deployment</h3>
+
+<p>You should lock a deployment in order to prevent a deployment from being deleted. It also prevents servers from being removed from a deployment, but it does not prevent a user from adding servers or performing actions on any existing servers, such as launching/stopping servers.</p>
+
+<h3 id="additional-considerations">Additional Considerations</h3>
+
+<ul>
+<li>Each Amazon EC2 deployment must use the same AWS Credentials (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY).</li>
+</ul>
+
+<h2 id="lock-down-an-entire-deployment">Lock Down an Entire Deployment</h2>
+
+<h3 id="overview">Overview</h3>
+
+<p>You should <em>lock down</em> your running production Deployment to protect it from inadvertent actions, and guarantee that future launches of Servers use the exact same software and configurations. This will provide predictable, repeatable results for the future. Note this goes beyond simply locking the Deployment, as discussed below.</p>
+
+<h3 id="freeze-the-repository">Freeze the Repository</h3>
+
+<p>Freeze the software repository for all ServerTemplates used by your Deployment.</p>
+
+<ul>
+<li>Navigate to the <strong>ServerTemplate</strong> &gt; <strong>Repos</strong> tab</li>
+<li>Although you can pick and choose which repositories to freeze, selecting them all is common practice (simple and effective). <em>Tip</em>: Click the checkbox in the OS Distribution Repositories table header to <q>select all</q>.
+
+<ul>
+<li>Select the <strong>Frozen</strong> radio button, then select the appropriate date to freeze the repos at.. <strong>Important!</strong> - Although you can select <q>current</q>, it is not considered best practice. It is better to set the date when you know the ServerTemplate was no longer in flux, and has produced a solid running Server.</li>
+<li>click the <strong>Apply</strong> action button when ready</li>
+</ul></li>
+</ul>
+
+<p>!!info*Note:* It is likely that you will need to repeat this process for more than one ServerTemplate used by your Deployment.</p>
+
+<h3 id="commit-head-revisions">Commit HEAD revisions</h3>
+
+<p>Commit all HEAD revisions of all ServerTemplates and RightScripts that your Deployment uses.</p>
+
+<ul>
+<li>Navigate to the Deployment you wish to lock down</li>
+<li>Check the Servers in your Deployment to see if they are using HEAD revision ServerTemplates. If so, select the ServerTemplate and...</li>
+<li>Click the <strong>Commit</strong> action button
+
+<ul>
+<li>Enter a descriptive Message</li>
+<li>Each RightScript in the ServerTemplate that is a HEAD revision is flagged. There is a checkbox that is selected by default to commit HEAD RightScripts too.</li>
+<li>Click the Commit action button when ready</li>
+</ul></li>
+<li>A new revision of the ServerTemplate is created</li>
+</ul>
+
+<p>!!info*Reminder:* Your Deployment may have more than one HEAD revision ServerTemplates. For example, your application Servers and front end Load Balancers may use customized ServerTemplates. If so, remember to commit those ServerTemplates in a similar manner.</p>
+
+<h3 id="lock-the-deployment-and-servers">Lock the Deployment and Servers</h3>
+
+<ul>
+<li>Navigate to the Deployment. Lock it by selecting the <q>lock</q> icon next to its name.</li>
+<li>Select each individual Server in the Deployment and lock it as well.</li>
+</ul>
+
+<h3 id="shutdown-and-restart-(if-needed)">Shutdown and Restart (if needed)</h3>
+
+<p>If this is a new Deployment that (after proper development and testing) is ready to be launched in a production environment, you may need to shut it down and restart it as a final test. For example, if you have made several iterative changes to a Server, ServerTemplate or RightScript, and finally got things just right, and have committed all HEAD revisions, the temptation may be to leave that Server running. This is not a great idea. It is recommended that you shutdown and then start up the entire Deployment using the newly committed revisions as a final test before locking it. This will guarantee that future restarts are favorable, as well as protect you from someone else making changes to a running HEAD revision.</p>
+
+<h2 id="shutting-down-a-multi-tiered-deployment">Shutting Down a Multi-Tiered Deployment</h2>
+
+<h3 id="overview">Overview</h3>
+
+<p>Whether or not your RightScale-managed Deployment in the cloud is designed to scale or not, it is very common to configure it with multiple tiers. For example, the following three tiers are typical:</p>
+
+<ol>
+<li>Front-end tier that services (and load-balances) requests</li>
+<li>Middle application tier</li>
+<li>Back-end database tier</li>
+</ol>
+
+<p>There are two common configurations of the above multi-tiered Deployment model as well. One has the first two tiers completely separate; that is, tier one is strictly for load balancers, and tier two is strictly for the application (usually a scalable Server Array with a minimum instance count of two). The other combines your application and front-end services for two Servers (and adds a scalable Server Array as well).</p>
+
+<p>In this example, the application is being served by both the FrontEnd Servers and Servers in the Server Array.</p>
+
+<p><img src="/img/cm-4-server-array.png" alt="cm-4-server-array.png" width="582" height="381" /></p>
+
+<p>In this example, the application is only being served by Servers in the Server Array.</p>
+
+<p><img src="/img/cm-6-server-array.png" alt="cm-6-server-array.png" width="458" height="372" /></p>
+
+<p>Depending on your specific configuration, how you shut down or start up your Deployment could differ somewhat.</p>
+
+<p>The key for determining the order in which to shut down or start up your Deployment components is dependencies--for example, what do the Servers running your application depend on to start up or shut down correctly?</p>
+
+<h3 id="disclaimer">Disclaimer</h3>
+
+<p>Because each specific application and Deployment for that application is different, there is not a strict set of rules for shutting down or starting up a multi-tiered Deployment that applies in every scenario. For that reason, please consider the information in this document as guidelines (and not strict rules).</p>
+
+<p>Remember to implement reboot-safe RightScripts (and/or Chef Recipes), and test out your Boot- and Decommission-phase scripts thoroughly.</p>
+
+<h3 id="shutting-down">Shutting Down</h3>
+
+<p>!!warning*Important!* Rarely (if ever) will you shut down an entire production Deployment. However, you may want to shut down an entire staging or test Deployment at night or over a weekend to save on usage costs.</p>
+
+<p>Shutting down a multi-tiered Deployment is usually more straightforward than starting it back up. A common shutdown order by tier is as follows:</p>
+
+<ul>
+<li>Shut down the front-end load balancer tier first. This will prevent future requests--which may or may not require additional computation at the application (middle) tier and read/write actions on the database tier--from being serviced.</li>
+<li>Shut down the application tier. If you are using a scalable Server Array, remember to disable the array first. If you forget to do this and terminate all running instances, new instances will automatically be launched (in accordance with the minimum count for Servers in your Array).</li>
+<li>Once the application tier has shut down, shut down the database tier.</li>
+</ul>
+
+<h2 id="starting-up-a-multi-tiered-deployment">Starting Up a Multi-Tiered Deployment</h2>
+
+<h3 id="overview">Overview</h3>
+
+<p>Whether or not your RightScale-managed Deployment in the cloud is designed to scale or not, it is very common to configure it with multiple tiers. For example, the following three tiers are typical:</p>
+
+<ol>
+<li>Front-end tier that services (and load-balances) requests</li>
+<li>Middle application tier</li>
+<li>Back-end database tier</li>
+</ol>
+
+<p>There are two common configurations of the above multi-tiered Deployment model as well. One has the first two tiers completely separate; that is, tier one is strictly for load balancers, and tier two is strictly for the application (usually a scalable Server Array with a minimum instance count of two). The other combines your application and front-end services for two Servers (and adds a scalable Server Array as well).</p>
+
+<p>In this example, the application is being served by both the FrontEnd Servers and Servers in the Server Array.</p>
+
+<p><img src="/img/cm-4-server-array.png" alt="cm-4-server-array.png" width="582" height="381" /></p>
+
+<p>In this example, the application is only being served by Servers in the Server Array.</p>
+
+<p><img src="/img/cm-6-server-array.png" alt="cm-6-server-array.png" width="458" height="372" /></p>
+
+<p>Depending on your specific configuration, how you shut down or start up your Deployment could differ somewhat.</p>
+
+<p>The key for determining the order in which to shut down or start up your Deployment components is dependencies--for example, what do the Servers running your application depend on to start up or shut down correctly?</p>
+
+<h3 id="disclaimer">Disclaimer</h3>
+
+<p>Because each specific application and Deployment for that application is different, there is not a strict set of rules for shutting down or starting up a multi-tiered Deployment that applies in every scenario. For that reason, please consider the information in this document as guidelines (and not strict rules).</p>
+
+<p>Remember to implement reboot-safe RightScripts (and/or Chef Recipes), and test out your Boot- and Decommission-phase scripts thoroughly.</p>
+
+<h3 id="starting-up">Starting Up</h3>
+
+<p>Although your specific application and Deployment could have certain dependencies that dictate a different start order, the following is typically considered best practice for a start order of a multi-tiered Deployment.</p>
+
+<ul>
+<li>Begin by starting up your database tier.
+
+<ul>
+<li>First start your master database.</li>
+<li>Once operational, you will want to restore from the most recent backup and update your DNS entries. This is done for you when you run the operational RightScript: DB EBS restore and become master (See the scripts Info tab and the contents of the RightScript itself for additional details.)</li>
+<li><em>Note</em>: The last thing this RightScript does is start a backup. Let the snapshot finish before booting your Slave Server(s). See Clouds &gt; <em>CloudName</em> &gt; EBS Snapshots (Status == 100% Completed)</li>
+<li>Boot your slave (or slaves, if you have them). Remember that the Input specifying to initialize the slave at boot (e.g. INIT_SLAVE_AT_BOOT) should be set to <q>false</q> for the master, and <q>true</q> for the slave(s).</li>
+</ul></li>
+<li>Start the Servers in your load balancing tier.
+
+<ul>
+<li><em>Note</em>: If you have any ancillary Servers you should start them now as well before starting your application Servers. For example, caching Servers (memcached) or load testers (httperf).</li>
+</ul></li>
+<li>Start your application tier Servers (or Server Array)</li>
+</ul>
+
+<p>!!warning*Important!* Several other considerations may come into play, depending on your specific situation and context:</p>
+
+<ul>
+<li>If some time has elapsed since you last shut down your Deployment you probably discarded your EIPs in order to save on costs. Don&#39;t forget you will have to create new EIPs and replace the old ones previously used by your Load Balancers as well as update DNS A Record information.</li>
+<li>If you start your application Servers before your load balancers are on line, you will need to manually run an operational (or <q>any script</q>) to register the application Servers with your load balancers. If they are not registered with the load balancers than they will not be able to service incoming requests. An example boot or operational RightScript that does this for Deployments using HAproxy to load balance is: LB app to HA proxy connect.</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

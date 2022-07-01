@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>How do I set up auto-failover on MySQL databases?</title><meta content="RightScale does not recommend or provide autofailover for MySQL databases. There are too many variables in implementing autofailover to recommend it as a viable solution." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="faq faq_How_do_I_set_up_auto-failover_on_MySQL_databases" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">RightScale General FAQs</a></p><div class="page-header"><h1>How do I set up auto-failover on MySQL databases?</h1></div><div class="main-content"><h2 id="background-information">Background Information</h2>
+
+<p>Is it possible to set up auto-failover for MySQL databases? What is involved in setting it up?</p>
+
+<hr>
+
+<h2 id="answer">Answer</h2>
+
+<p>RightScale does not recommend or provide autofailover for MySQL databases for a number of reasons. Let&#39;s begin by looking at some of the possible causes of database failure:</p>
+
+<ol>
+<li>The application has a bad MySQL query that causes the server to become slow and unresponsive.</li>
+<li>Mysqld crashes due to a bug in the code.</li>
+<li>The Master server is out of hard drive space.</li>
+<li>There is a memory leak caused by some modifications or application installed on the server.</li>
+<li>There is a problem with the cloud infrastructure that the server is on that causes the instance to become unresponsive.</li>
+<li>The data on the master gets corrupted.</li>
+</ol>
+
+<p>Of course, there could also be a problem with the monitoring system that could have caused it to not receive data (for example, collectd dies or the monitoring server or monitoring daemons are not running or running slow).</p>
+
+<p>With so many possible causes of database failure it is difficult to pinpoint a cure that will solve all of them. For example if mysqld dies because the server ran out of hard drive space then a new slave will get promoted to master with the same issue. So a chain of slaves will get promoted one after the other. If collectd dies, it may fix the problem for that server but if it&#39;s a problem with the monitoring servers themselves or a configuration issue then again, a chain of slaves will be promoted. In no case can autofailover fix the problem with a bad query. The same query will be in the application and the new master will again be brought down when the query is executed again. Remember, if data is corrupted on the master, it will propagate to the slave and will still be there in the new master. Given all of these possible causes for database failure, autofailover is not rendering a cure (at best) and could possibly make things worse.</p>
+
+<p>Now it comes down to detecting a few specific cases where one could use autofailure such as item 5 - a problem with the cloud causing an unresponsive server. The real question is how to distinguish this from any of the other issues. And what if you are getting a false positive where the server is running fine, but there is a communication problem between the server and the monitoring system? Now you are blindly promoting slaves one after the other on a false positive when in fact there is nothing wrong with the database.</p>
+
+<p>So even if you were able to predict all of the possible outcomes and the cases where autofailover would work and a new slave is launched correctly, it still does not resolve the underlying problem if there is a false positive by the monitoring server. And even if you had a perfect monitoring server that never failed and could predict all possible outcomes, it could still not tell you if your slave is worth promoting. What if your only good database is your master and your slave is not replicating or is corrupted?&nbsp; In this case, you would blindly promote the slave and possibly lose your good master database that has your good, uncorrupted data.</p>
+
+<p>In summary, there are too many variables in implementing autofailover to recommend it as a solution to the age old problem of the database going down at 3am. And even if you did autofailover, you could not trust that it fixed the problem so the DBA would still have to get up and look into the situation to be sure things were working. It is far more prudent to look at the causes and facts before blindly promoting a slave.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

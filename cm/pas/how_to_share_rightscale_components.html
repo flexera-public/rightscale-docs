@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>How to Share RightScale Components</title><meta content="Guidelines and steps for sharing RightScale components (ServerTemplates, RightScripts, etc.) either publicly or privately." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_pas cm_pas_how_to_share_rightscale_components" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Publishing and Sharing</a></p><div class="page-header"><h1>How to Share RightScale Components</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To publicly or privately share RightScale components (ServerTemplates, RightScripts, etc.).</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>The ability to privately share RightScale components with other RightScale accounts is only supported for accounts with an enterprise structure. To upgrade your plan type, please contact <a href="mailto:sales@rightscale.com">sales@rightscale.com</a>. In order to create Account Groups and share RightScale components you will also need &#39;publisher&#39; user role privileges.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>If you attempt to publish a MCI or ServerTemplate (either publically or privately), where the MCI itself or one of the MCIs in the ServerTemplate has at least one machine image that is private, you must go to the AWS console to set that image as public. Otherwise, you will not be able to successfully publish your RightScale component.</p>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>The ability to share RightScale components with other users can help increase productivity and efficiency within an organization or the RightScale community. To learn more about the different types of sharing within the RightScale platform, see <a href="/cm/pas/sharing_rightscale_components.html">Sharing RightScale Components</a>.</p>
+
+<h2 id="steps">Steps</h2>
+
+<p>RightScale&#39;s Publishing Assistant wizard will walk you through the process of publishing your component(s).</p>
+
+<h3 id="steps-publish-to-multicloud-marketplace">Publish to MultiCloud Marketplace</h3>
+
+<p>The first step in the sharing process is to determine which RightScale component you want to publish to the MultiCloud Marketplace. Users will need to have access to the MultiCloud Marketplace (&#39;library&#39; user role privileges) in order to view and import/subscribe to a shared component. You can only publish private components to the MultiCloud Marketplace. (i.e. You cannot import a premium ServerTemplate that&#39;s published by a different account and then re-publish it to the MultiCloud Marketplace.)</p>
+
+<ol>
+<li>Go to the private component in your local collection that you want to share. (e.g. Design &gt; ServerTemplates &gt; View Local)</li>
+<li>Be sure to select the correct revision of that component that you want to share. As a best practice, you should only share committed (static) revisions of a component. Also make sure that you haven&#39;t previously published it. The component should be listed as <q>unpublished</q> under the component&#39;s Info tab. You should only share a HEAD version under certain circumstances. The ability to publish a HEAD version is only supported for RightScale accounts that are enabled for private sharing. You cannot publicly share a HEAD version of a component. When you publish a component to the MultiCloud Marketplace, only the selected revision or HEAD version will be published. (i.e. Previous revisions of that component will not be published.)</li>
+<li>Click the <strong>Publish to MultiCloud Marketplace</strong> action button. (<em>Note</em>: If this button is not displayed, you do not have the &#39;publisher&#39; User Role Privilege in the RightScale account <em>or</em> if you are looking at a HEAD revision and your account does not support private sharing.)
+<img src="/img/cm-publish-to-library.png" alt="cm-publish-to-library.png" width="584" height="208" /></li>
+<li>You must read and agree to RightScale&#39;s EULA before continuing the publishing process.</li>
+<li>Next, you will need to specify the visibility of your component. This selection controls who can browse and find your component in the MultiCloud Marketplace. (In a later step you will specify which accounts have access to import the component.)<br>
+<img src="/img/cm-publish-to-marketplace.png" alt="cm-publish-to-marketplace.png" width="431" height="181" />
+
+<ul>
+<li><strong>Publish to the Public MultiCloud Marketplace Catalog</strong> - Make this component publicly visible to everyone in the MultiCloud Marketplace. Unless your account is enabled for private publishing, only committed revisions can be publicly shared. (Note: Components will be indexed by search engines.)</li>
+<li><strong>Share privately</strong> - Make this component only visible in the MultiCloud Marketplace to specific RightScale accounts with whom you&#39;ve granted access via Account Group Invitations. Users will be able to view the component in the MultiCloud Marketplace under <strong>Categories -&gt; Shared</strong>. <em>Note</em>: You must have a Premium account (or better) for private sharing.</li>
+</ul></li>
+</ol>
+
+<ul>
+<li> You must read and agree to <a href="/cm/pas/rightscale_publisher_agreement.html">RightScale&#39;s Publishing Agreement</a> before continuing the publishing process.</li>
+<li> Click the <strong>Sharing</strong> action button to proceed to the next step.</li>
+</ul>
+
+<h3 id="steps-organization">Organization</h3>
+
+<p>If you are publishing for the first time, you must provide the following information about your publishing organization. Later, you can edit this information under Design -&gt; Account Library -&gt; Your Publishing Organization. The &#39;Organization&#39; tab appears the first time a user publishes from your account.</p>
+
+<ul>
+<li><strong>Organization Name (required)</strong> - In the MultiCloud Marketplace, the organization name will denote who published the component. Each account can only have one defined publishing organization. Several characters are not allowed in the namespace: ; \ / &gt; &lt; &amp; , .</li>
+<li><strong>Organization Email (required)</strong> - When someone leaves a comment on one of your shared components, notifications will be sent to this email address (if enabled).</li>
+<li><strong>Logos</strong> - Depending on the view in the MultiCloud Marketplace, large and small logos will appear next to the component.</li>
+<li><strong>Support Information</strong> - Publishers are responsible for supporting their shared components. Be sure to provide helpful links and contact information that will be useful for your users. The provided support information will be displayed for each shared component regardless of the account group.</li>
+<li><strong>Welcome Message</strong> - The welcome message will be shown when an Account Group Invitation is accepted.</li>
+</ul>
+
+<h3 id="steps-sharing">Sharing</h3>
+
+<p><img src="/img/cm-pub-assist-st-sharing.png" alt="cm-pub-assist-st-sharing.png" width="725" height="394" /></p>
+
+<p>The <q>Sharing</q> section allows you to control who can import your component.</p>
+
+<p>Specify your sharing preferences. Remember, when you publish a ServerTemplate, any (unpublished) private RightScripts, MultiCloud Images, and RepoPaths that are used by the ServerTemplate are implictly shared to guarantee the usability of the template itself. Click the <strong>View ServerTemplate components</strong> link to see what other components will be implicitly published.</p>
+
+<ul>
+<li><strong>All RightScale Accounts</strong> - The component can be imported into any RightScale account. Note: Public publishing must be enabled in the publishing account. Contact your RightScale account manager to enable public publishing for your account.</li>
+<li><strong>Specific Accounts</strong> - The component can only be imported into specified RightScale accounts. You can either select an existing Account Group(s) or create a New Account Group. Note: You must select at least one Account Group, however it can be empty. (i.e. Specific RightScale accounts have not been added to the Account Group.)
+
+<ul>
+<li><strong>Publishing Only for RightScale Paid Accounts</strong> - If your account is enabled for private publishing, you can also select the <q>RightScale Paid Customers</q> Account Group which makes the component importable ONLY into paid RightScale accounts (Standard and above). Only users with credit cards on file are able to import ISV templates that require payment (contact your account manager or <a href="mailto:sales@rightscale.com">sales@rightscale.com</a> for clarification).<br> <strong>Note</strong>: Select this option if you are an ISV publishing a pay-per-use RightScale ServerTemplate unless otherwise instructed by your RIghtScale account contact.</li>
+</ul></li>
+</ul>
+
+<p>The <q>Comments</q> section allows you to control the comment feature in the MultiCloud Marketplace.</p>
+
+<ul>
+<li><strong>Allow users to leave comments on this ServerTemplate</strong> - If checked, users will be able to leave comments about your component in the MultiCloud Marketplace. Only users who are logged into the Dashboard can leave comments.</li>
+<li><strong>Email me when a user comments on this ServerTemplate</strong> - If checked, an email notification will be sent to the provided Organization Email address. (Design &gt; Account Library &gt; Your Publishing Organization)</li>
+</ul>
+
+<p>Click the <strong>Descriptions</strong> action button to proceed to the next step.</p>
+
+<h3 id="steps-descriptions">Descriptions</h3>
+
+<p><img src="/img/cm-pub-assist-st-descriptions.png" alt="cm-pub-assist-st-descriptions.png" width="725" height="647" /></p>
+
+<p>Fill out the Short and Long Descriptions for the component. For your convenience, both description fields are pre-populated with the ServerTemplate&#39;s current description. If you have published an earlier revision, the fields are pre-populated with the previously entered short and long descriptions. However, since these description fields will be saved in the MultiCloud Marketplace&#39;s database, you can actually provide different descriptions. <em>Note</em>: The provided descriptions will appear in the MultiCloud Marketplace for all previously shared revisions of that component.</p>
+
+<p>You can update the <q>New Revision Notes</q> as well, which are prepopulated with the component&#39;s Commit message for the selected revision.</p>
+
+<p>Revision Notes are similar to commit messages in the Dashboard. They will be seen at the bottom of the shared component in the MultiCloud Marketplace. As a best practice, you should provide useful information about any changes, bug fixes, new features, especially if there&#39;s a previously published revision of that component in the MultiCloud Marketplace.</p>
+
+<p>Categories allow users to more easily search for your publication in the MultiCloud Marketplace. The selected categories will be applied to all revisions of your publication. You can add multiple categories.</p>
+
+<p><strong>Notes</strong>:</p>
+
+<ul>
+<li>Markdown syntax is supported</li>
+<li>Hover over the blue information icon for additional help</li>
+<li>Character limitations are updated in real time as the fields are populated</li>
+</ul>
+
+<p>Click the <strong>EULAs</strong> action button to proceed to the next step.</p>
+
+<h3 id="steps-eulas">EULAs</h3>
+
+<div class="alert alert-warning" role="alert"><strong>Reminder!</strong><p>EULAs currently apply to ServerTemplates only. This phase is not part of the Publishing Assistant when publishing other RightScale components (RightScripts or MCIs).</p>
+</div>
+
+<p><img src="/img/cm-pub-assist-st-eulas.png" alt="cm-pub-assist-st-eulas.png" width="725" height="539" /></p>
+
+<ul>
+<li>EULAs can be managed outside of the Publishing Assistant. Simply select which EULA(s) should be attached to the ServerTemplate you are going to publish.</li>
+<li>You can also create and add a new EULA directly from within the Publishing Assistant.
+
+<ul>
+<li>Click the <strong>New EULA</strong> action button</li>
+<li>Fill out the EULA Name and Text. Markdown Syntax is supported.</li>
+<li>Preview the EULA. Don&#39;t forget to select <strong>Save &amp; Attach</strong> prior to continuing.</li>
+</ul></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>EULAs are not required when publishing RightImages or RightScripts indepdendently from a ServerTemplate._</p>
+</div>
+
+<p>Click the <strong>Preview</strong> action button to proceed to the next step.</p>
+
+<h3 id="steps-preview">Preview</h3>
+
+<p><img src="/img/cm-pub-assist-st-preview.png" alt="cm-pub-assist-st-preview.png" width="725" height="521" /></p>
+
+<p>If everything looks correct, click the <strong>Publish</strong> action button.</p>
+
+<h3 id="steps-notes">Notes</h3>
+
+<ul>
+<li>Shared RightScale components will appear in the MultiCloud Marketplace for accounts that have access to those components. In the MultiCloud Marketplace, click the <q>Shared</q> link under Categories.</li>
+<li>A shared component will continue to appear in the RightScale account&#39;s Local collection of the <q>publishing</q> account since you are the publisher.</li>
+<li>If you are sharing a HEAD version of a component, you can still make changes to the HEAD version in your local collection. When you want those changes to be propagated to the HEAD copy that&#39;s in the MultiCloud Marketplace and subsequently pass those changes to any RightScale accounts that are subscribing to that component, click the <strong>Republish to MultiCloud Marketplace</strong> button when viewing the published HEAD version. Currently, the accounts that are subscribing to the HEAD version and are using it in their local accounts do not have the ability to push their changes to the MultiCloud Marketplace to similarly update the HEAD version. If any changes are made to HEAD RightScripts, you need to republish them in order to be shared. These changes will be included in the HEAD ServerTemplate and affect any ServerTemplates using those RightScripts.</li>
+<li>Add Categories - You also have the option of categorizing your component so that it is easier to find in the MultiCloud Marketplace. Go to Design -&gt; Account Library -&gt; Your Publications. A component&#39;s categories can be managed under its Info tab. Simply select a category from the dropdown and click the Add button. Although, you can add your component to multiple categories, please make sure that they are relevant for each topic.</li>
+</ul>
+
+<p><img src="/img/cm-add-categories.png" alt="cm-add-categories.png" width="480" height="319" /></p>
+
+<h2 id="invite-users-to-a-private-account-group">Invite Users to a Private Account Group</h2>
+
+<p>(For private sharing only)</p>
+
+<p>To grant access to a private Account Group, you must send an Account Group Invitation (email) to an &#39;admin&#39; user of the RightScale account you wish to share your components with. Remember, a user accepts an invitation on behalf of a RightScale account. Once an invitation has been accepted, users of that RightScale account will be able to import any shared components of that Account Group in the MultiCloud Marketplace. A user must accept an Account Group Invitation within 6 days. An invitation can only be accepted once. If a user has &#39;admin&#39; role privileges on multiple accounts, he/she must be sure to accept the invitation while being logged into the desired RightScale account.</p>
+
+<p><img src="/img/cm-accept-invitation.png" alt="cm-accept-invitation.png" width="580" height="128" /></p>
+
+<p>To send an Account Group Invitation, you will need &#39;publisher&#39; role privileges.</p>
+
+<p>Go to <strong>Design</strong> &gt; <strong>Account Library</strong> &gt; <strong>Your Account Groups</strong> and click the <strong>Invitations</strong> tab. Click the <strong>New</strong> link.</p>
+
+<p>Add user email addresses, select the appropriate Account Group(s) that you want to grant access to and click the Send Invitations link.</p>
+
+<p>You may cancel a pending invitation at any time by clicking the <strong>cancel invitation</strong> action link. However, if an invitation has already been accepted, you can always revoke their access by changing their access under <strong>Design</strong> &gt; <strong>Account Library</strong> &gt; <strong>Your Account Groups</strong> &gt; <strong>Account Groups</strong> tab.</p>
+
+<p>Users must use the membership code in order to confirm their membership. See <a href="/cm/pas/accept_an_invitation_to_an_account_group.html">How do I accept an Account Group Invitation?</a></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

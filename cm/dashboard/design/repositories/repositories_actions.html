@@ -1,0 +1,333 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Repositories - Actions and Procedures</title><meta content="Common procedures for working with Repositories in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_design cm_dashboard_design_repositories cm_dashboard_design_repositories_repositories_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Design</a> &#x2F; <a href="./">Repositories</a></p><div class="page-header"><h1>Repositories - Actions and Procedures</h1></div><div class="main-content"><h2 id="add-a-repository">Add a Repository</h2>
+
+<h3 id="add-a-repository-overview">Overview</h3>
+
+<p>This allows you to enter all the information necessary to add a new repository to your account.</p>
+
+<h3 id="add-a-repository-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Repositories</strong>.</li>
+<li>Select <strong>Add Repository</strong>.<br>
+<img src="/img/cm-add-repository.png" alt="cm-add-repository.png" width="725" height="212" /></li>
+<li>A screen will display with the fields that define your repository information.<br>
+<img src="/img/cm-add-repository-2.png" alt="cm-add-repository-2.png" width="636" height="418" /><br></li>
+<li>Select the <strong>Type</strong> to choose the repository you would like to use. Select <em>just one</em> of the following depending on the repository you are using:
+
+<ul>
+<li><strong>Add a Git Repository</strong></li>
+<li><strong>Add a Subversion Repository</strong></li>
+<li><strong>Add a Compressed File</strong> (this is for .tar, .gzip, and .tgz files that contain your cookbooks)</li>
+</ul></li>
+<li>Once the information has been entered, click <strong>OK</strong>.</li>
+<li>Once added, RightScale will fetch the information from the repository and the cookbooks from that repository will appear when you refresh the page.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If you notice the cookbooks are not appearing after a few minutes, you can click on the repository and go to the Info tab. The Last fetch output section will notify you if there were errors occurred during the fetch.</p>
+</div>
+
+<h2 id="add-a-compressed-file-to-repositories">Add a Compressed File to Repositories</h2>
+
+<h3 id="add-a-compressed-file-to-repositories-overview">Overview</h3>
+
+<p>You can upload a compressed file of a cookbook to your Repositories section. As an example, if there is a cookbook that you see in RightScale, you can download it, and make changes to that file and upload it back to RightScale so you can use those cookbook recipes with a ServerTemplate.</p>
+
+<h3 id="add-a-compressed-file-to-repositories-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>For additional information about adding repositories to RightScale, see the Add a Repository section above.</li>
+</ul>
+
+<h3 id="add-a-compressed-file-to-repositories-steps">Steps</h3>
+
+<p>When you select compressed file as the <strong>Type</strong>, you will need to enter the following information:</p>
+
+<p><img src="/img/cm-add-a-compressed-file-to-repository.png" alt="cm-add-a-compressed-file-to-repository.png" width="638" height="478" /></p>
+
+<ul>
+<li><strong>Name</strong> - The name that will display for your repository.</li>
+<li><strong>Description</strong> - (Optional) The description for your repository.</li>
+<li><strong>Type</strong> - This is the type of repository you would like to create. Select Subversion</li>
+<li><strong>URL</strong> - The URL where the repository is located. In the example above, the compressed file is being pulled from an S3 bucket.</li>
+<li><strong>Username</strong> - Select the username to access your compressed file. This is if you require a username and password combination to access the location of the file. You can use your credentials or you can enter the information. In the example above, since we&#39;re pulling from an S3 bucket, a credential that contains the AWS Access Key ID is being used.</li>
+<li><strong>Password</strong> - Select the password to access your compressed file. This is if you require a username and password combination to access the location of the file. You can use your credentials or you can enter the information. In the example above, since we&#39;re pulling from an S3 bucket, a credential that contains the AWS Secret Access Key is being used.</li>
+<li><strong>Cookbooks Paths</strong> - The path (URL) to the cookbooks in your compressed file. You can add multiple paths.</li>
+<li><strong>Automatically import cookbooks to the primary namespace</strong> - This is checked automatically. When selected, it will automatically import your cookbooks into the primary namespace so you can easily attach them to your ServerTemplates.</li>
+</ul>
+
+<h2 id="add-a-git-repository">Add a Git Repository</h2>
+
+<h3 id="add-a-git-repository-overview">Overview</h3>
+
+<p>Git is a free, open source version control system. Git is a structured with a lot of repositories belonging to individual clients. This makes it easier to keep track of changes and allows users to keep track of their code locally without having to push code to an individual server.<br>
+If you are using a git repository, you can add that repository and have RightScale fetch the cookbooks that are contained in that repository. If the git repository you are using is private, you will need to enter an SSH Key.  </p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Since GitHub is a widely used git web service, it is commonly used in documentation examples.</p>
+</div>
+
+<div class="alert alert-warning" role="alert"><strong>Note:</strong><p>Repositories only support the PEM key format. Newer versions of openssh generate keys in the RFC4716 format. Use <code>-m PEM</code> on the command-line with <code>ssh-keygen</code> to use the PEM key format.</p>
+</div>
+
+<h3 id="add-a-git-repository-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>For additional information about adding repositories to RightScale, see the Add a Repository section above.</li>
+</ul>
+
+<h3 id="add-a-git-repository-steps">Steps</h3>
+
+<p>When you select git as the <strong>Type</strong>, you will need to enter the following information:</p>
+
+<p><img src="/img/cm-add-a-git-repository.png" alt="cm-add-a-git-repository.png" width="635" height="466" /></p>
+
+<ul>
+<li><strong>Name</strong> - The name that will display for your repository.</li>
+<li><strong>Description</strong> - (Optional) The description for your repository.</li>
+<li><strong>Type</strong> - This is the type of repository you would like to create.</li>
+<li><strong>Tags/Branch</strong> - The branch of the repository which contains the cookbooks.</li>
+<li><strong>URL</strong> - The URL where the repository is located.
+
+<ul>
+<li>Examples</li>
+<li>Public Repository: https://github.com/username/acme -or- https://github.com/username/acme.git</li>
+<li>Private Repository: git@github.com/username/acme.git</li>
+</ul></li>
+<li><strong>Git SSH Key</strong> - Select your Git SSH Key from the list of credentials, or enter a new SSH Key. If the repository you are connecting to is public, you do not need an SSH Key. Please see the note above about supported key formats.</li>
+<li><strong>Cookbooks Paths</strong> - The path (URL) to the cookbooks in your repository. You can add multiple paths.</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If your cookbooks are in the root of the repository, leave this field blank.</p>
+</div>
+
+<ul>
+<li><strong>Automatically import cookbooks to the primary namespace</strong> - This is checked automatically. When selected, it will automatically import your cookbooks into the primary namespace so you can easily attach them to your ServerTemplates.</li>
+</ul>
+
+<h2 id="add-a-subversion--svn--repository">Add a Subversion (SVN) Repository</h2>
+
+<h3 id="add-a-subversion--svn--repository-overview">Overview</h3>
+
+<p>Subversion (SVN), like git, is a version control system. But, unlike git, it is designed to be more centralized. So instead of having a repository for each client, there is one repository for a lot of clients. SVN is set up so users can track their own edits locally and then push those changes to a server.</p>
+
+<h3 id="add-a-subversion--svn--repository-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>For additional information about adding repositories to RightScale, see the Add a Repository section above.</li>
+</ul>
+
+<h3 id="add-a-subversion--svn--repository-steps">Steps</h3>
+
+<p>When you select the subversion as <strong>Type</strong>, you will need to enter the following information:  </p>
+
+<p><img src="/img/cm-add-a-subversion-repository.png" alt="cm-add-a-subversion-repository.png" width="550" height="451" /></p>
+
+<ul>
+<li><strong>Name</strong> - The name that will display for your repository.</li>
+<li><strong>Description</strong> - (Optional) The description for your repository.</li>
+<li><strong>Type</strong> - This is the type of repository you would like to create. Select Subversion</li>
+<li><strong>Tags/Branch</strong> - The branch of the repository which contains the cookbooks.</li>
+<li><strong>URL</strong> - The URL where the repository is located.</li>
+<li><strong>Username</strong> - Select the SVN username to access your repository from the list of credentials. You can also add a new username.</li>
+<li><strong>Password</strong> - Select the SVN password to access your repository from the list of credentials. You can also add a new password.</li>
+<li><strong>Cookbooks Paths</strong> - The path (URL) to the cookbooks in your repository. You can add multiple paths.</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If your cookbooks are in the root of the repository, leave this field blank.</p>
+</div>
+
+<ul>
+<li><strong>Automatically import cookbooks to the primary namespace</strong> - This is checked automatically. When selected, it will automatically import your cookbooks into the primary namespace so you can easily attach them to your ServerTemplates.</li>
+</ul>
+
+<h2 id="edit-a-repository">Edit a Repository</h2>
+
+<h3 id="edit-a-repository-overview">Overview</h3>
+
+<p>Editing a repository allows you to modify various information about a repository, such as the repository type or location of the repository.</p>
+
+<h3 id="edit-a-repository-steps">Steps</h3>
+
+<ol>
+<li>Go go <strong>Design</strong> &gt; <strong>Repositories</strong> and select the repository you would like to edit.</li>
+<li>Go to the <strong>Info</strong> tab and click <strong>Edit</strong>.
+<img src="/img/cm-edit-repository.png" alt="cm-edit-repository.png" width="725" height="294" /></li>
+<li>The fields you can edit depend the repository type you select. You can edit the following fields:
+
+<ul>
+<li><strong>Name</strong> - The name of the repository.</li>
+<li><strong>Description</strong> - (Optional) A user-supplied description of the repository.</li>
+<li><strong>Type</strong> - The type of repository being added. RightScale supports git, svn or a compressed file (tgz, gzip, or tar).</li>
+<li><strong>Tag/Branch</strong> - (Git only) The branch of the repository which contains the cookbooks.</li>
+<li><strong>Revision</strong> - (Subversion only) The revision of the repository which contains the cookbooks.</li>
+<li><strong>URL</strong> - The URL where the repository is located.</li>
+<li><strong>Git SSH Key</strong> - (Git only) Select your Git SSH key from the list of credentials, or enter a new SSH key.</li>
+<li><strong>Username</strong> - (Subversion or compressed file) Select the username to access your repository from the list of credentials. You can also add a new username.</li>
+<li><strong>Password</strong> - (Subversion or compressed file) Select the password to access your repository from the list of credentials. You can also add a new password.</li>
+<li><strong>Cookbook Paths</strong> - The path (URL) to the cookbooks in your repository. You can add multiple paths.</li>
+</ul></li>
+<li>Make the changes you would lick and click <strong>Save</strong>.</li>
+</ol>
+
+<h2 id="import-cookbooks-from-a-repository">Import Cookbooks from a Repository</h2>
+
+<h3 id="import-cookbooks-from-a-repository-overview">Overview</h3>
+
+<p>Importing a cookbook or cookbooks from a repository is a more granular and advanced way to import cookbooks into RightScale. From this view, you can see the name of all the cookbooks you are importing, the dependencies of the cookbooks, and select which namespace you would like to import to. You can also choose if you want to import dependencies.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You can have a cookbook automatically imported into your primary namespace with the Refetch and Import button.</p>
+</div>
+
+<h3 id="import-cookbooks-from-a-repository-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Repositories</strong>.</li>
+<li>Click on a repository.</li>
+<li>Select the cookbooks in the repository. From the <strong>Action</strong> drop-down, select Import.<br>
+<img src="/img/cm-import-a-cookbook-repository.png" alt="cm-import-a-cookbook-repository.png" width="725" height="333" /></li>
+<li>From here you can choose to:
+
+<ul>
+<li><strong>Import to a Primary or Alternate namespace</strong> - We recommend that if you use your own cookbooks that you import them to the primary namespace, but if you want to use an alternate namespace you can. When you select an alternate namespace, you can choose to follow the cookbook. When you follow a cookbook, the new or updated versions of that cookbook that are refetched into the repositories section will automatically get imported.</li>
+<li><strong>Import Dependencies</strong> - If the cookbook relies on other cookbooks to run recipes, they will have dependencies. You can select this option so the cookbooks that the other cookbooks rely on will be imported. If the dependencies are missing, you will not be able to import them.</li>
+</ul></li>
+<li>When your options are selected, click <strong>Import</strong>.</li>
+</ol>
+
+<h2 id="refetch-and-import-a-repository">Refetch and Import a Repository</h2>
+
+<h3 id="refetch-and-import-a-repository-overview">Overview</h3>
+
+<p>Refetch and importing performs a scrape to see if any changes have been made to repository or repositories added to RightScale and then imports the cookbooks into a primary namespace. If you have recently made changes to cookbooks in a git or subversion repository that you added to RightScale, you can perform a refetch and import to get the repository information into RightScale so you can use your own recipes with ServerTemplates.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>This is similar to the Refect a Repository procedure, but with this option you are automatically importing the cookbooks into a primary namespace.</p>
+</div>
+
+<h3 id="refetch-and-import-a-repository-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Repositories</strong>.</li>
+<li>Select the repository or repositories you would like to refetch and import.</li>
+<li>Select the <strong>Actions</strong> drop-down and click Refetch and Import.<br>
+<img src="/img/cm-refetch-and-import.png" alt="cm-refetch-and-import.png" width="725" height="203" /><br></li>
+<li>This will scrape your repositories for updated information and then import that information into the Cookbooks section. It may take a minute or two to complete. You can click on a repository, go to <strong>Info</strong> tab, and see the <strong>Last fetch output</strong> section to see if errors occurred during the fetch.</li>
+<li>You can refresh the page or select the refresh icon next to <strong>Add Repository</strong> to update the page.</li>
+<li>Once feteched, you can go to the Cookbooks section to see the cookbooks imported into RightScale. The cookbook will automatically be imported into a primary namespace.</li>
+</ol>
+
+<h2 id="refetch-a-repository">Refetch a Repository</h2>
+
+<h3 id="refetch-a-repository-overview">Overview</h3>
+
+<p>Refetching performs a scrape to see if any changes have been made to the source repository. If you have recently made changes to cookbooks in a git or subversion repository that you added to RightScale, you can use this option to update your repositories. You can either perform a <strong>Refetch</strong> to update the information or you can perform a <strong>Refetch and Import</strong> which will refetch your repository information and import your repository cookbooks into RightScale.</p>
+
+<h3 id="refetch-a-repository-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Repositories</strong>.</li>
+<li>Select the repository or repositories you would like to refetch.</li>
+<li>Select the <strong>Actions</strong> drop-down and click Refetch.
+<img src="/img/cm-refetch-a-repository.png" alt="cm-refetch-a-repository.png" width="725" height="203" /></li>
+<li>This will scrape your repositories for updated information. It may take a minute or two to complete. You can click on a repository, select the <strong>Info</strong> tab, and see the <strong>Last fetch output</strong> section to see if errors occurred during the fetch.</li>
+<li>You can refresh the page or select the refresh icon next to <strong>Add Repository</strong> to update the page.</li>
+<li>Once feteched, you can Import a Cookbook from a Repository as described above. This allows you to perform advanced options, such as importing your own cookbooks as alternate namespaces instead of primary namespaces.</li>
+</ol>
+
+<h2 id="remove-a-repository">Remove a Repository</h2>
+
+<h3 id="remove-a-repository-overview">Overview</h3>
+
+<p>You may want to clean-up a RightScale account by removing Repository objects that link to software repositories that you no longer use. However, if you decide to remove a Repository object, you will no longer be able to refetch cookbooks from the referenced software repository.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If you remove a Repository object none of the previously imported cookbooks from that repository will be removed.</p>
+</div>
+
+<h3 id="remove-a-repository-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="remove-a-repository-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Repositories</strong>.</li>
+<li>Select the repository or repositories you would like to remove.</li>
+<li>Click the <strong>Action</strong> drop-down and select Remove.
+<img src="/img/cm-remove-a-repository.png" alt="cm-remove-a-repository.png" width="725" height="203" /><br></li>
+<li>A confirmation will appear asking if you want to remove the repository. When you remove a repository, it will not remove any of the cookbooks that were previously imported into the RightScale account.</li>
+<li>Click <strong>Ok</strong>.</li>
+</ol>
+
+<h2 id="view-a-repository">View a Repository</h2>
+
+<h3 id="view-a-repository-overview">Overview</h3>
+
+<p>This allows you to view various information of your repository. Viewing a repository can helpful in seeing if a repository has successfully been added or refetched.</p>
+
+<h3 id="view-a-repository-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Repositories</strong> and select your repository.</li>
+<li>You will be taken to the <strong>Cookbooks</strong> tab and a list of all the cookbooks in the repository will display.</li>
+<li>Click on the <strong>Info</strong> tab.<br>
+<img src="/img/cm-view-repository.png" alt="cm-view-repository.png" width="725" height="370" /></li>
+<li>The information of the Repository will display:
+
+<ul>
+<li><strong>Name</strong> - The name of the repository.</li>
+<li><strong>Description</strong> (optional) - A user-supplied description of the repository.</li>
+<li><strong>Last fetched at (UCT)</strong> - The time at which the repository was last fetched.</li>
+<li><strong>Last fetched revision</strong> - Revision of the repository that was last fetched.</li>
+<li><strong>Last fetch output</strong> - Additional details on the result of the last fetch.</li>
+<li><strong>Type</strong> - The type of repository being added. RightScale supports git, svn or a compressed file (tgz, gzip, or tar).</li>
+<li><strong>Tag/Branch</strong> - The branch of the repository which contains the cookbooks.</li>
+<li><strong>URL</strong> - The URL where the repository is located.</li>
+<li><strong>Git SSH Key</strong> - The Git SSH key to access your repository.</li>
+<li><strong>Username</strong> - The user name to access your repository. This field will not display if your repository is of type git.</li>
+<li><strong>Password</strong> - The password to access your repository. This field will not display if your repository is of type git.</li>
+<li><strong>Cookbook Paths</strong> - The path (URL) to the cookbooks in your repository. You can add multiple paths.</li>
+</ul></li>
+<li>From this tab, you can edit, refetch, or refetch and import the repository. <em>Note</em>: You can see the same information in the right-navigation window when you select a repository from the repositories section (<strong>Design</strong> &gt; <strong>Repositories</strong>).</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>CloudFront Distributions - Actions</title><meta content="AWS CloudFront reduces web content delivery latency by using a distributed network of servers pushed out to the edge. This tutorial will step you through setting up a CloudFront distribution through the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_aws cm_dashboard_clouds_aws_actions cm_dashboard_clouds_aws_actions_cloudfront_distribution_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../../">Cloud Management</a> &#x2F; <a href="../../../">Dashboard User's Guide</a> &#x2F; <a href="../../">clouds</a> &#x2F; <a href="../">Amazon Web Services (AWS)</a> &#x2F; <a href="./">AWS Actions</a></p><div class="page-header"><h1>CloudFront Distributions - Actions</h1></div><div class="main-content"><h2 id="create-a-new-cloudfront-distribution">Create a New CloudFront Distribution</h2>
+
+<h3 id="create-a-new-cloudfront-distribution-overview">Overview</h3>
+
+<p>AWS CloudFront reduces web content delivery latency by using a distributed network of servers pushed out to the edge. This tutorial will step you through setting up a CloudFront distribution through the RightScale Dashboard.</p>
+
+<p>To create a CloudFront (CF) distribution that will be used to serve objects stored in an S3 bucket. You can either create a <q>basic</q> CF distribution for downloading objects over standard HTTP/HTTPS protocol or a <q>streaming</q> distribution for streaming on-demand media files over <a href="http://en.wikipedia.org/wiki/Real_Time_Messaging_Protocol">RTMP</a>(Real Time Messaging Protocol). Objects can either be shared publicly or privately.</p>
+
+<h3 id="create-a-new-cloudfront-distribution-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>CloudFront is an additional service offering of Amazon&#39;s that you must <a href="http://aws.amazon.com/cloudfront">sign-up</a> in order to use it.</li>
+<li>Before you can create a distribution, you must first sign-up for the Amazon&#39;s CloudFront service. If you have not yet signed up, go to <a href="http://aws.amazon.com/cloudfront">http://aws.amazon.com/cloudfront</a>. Be sure to review their detailed <a href="http://aws.amazon.com/cloudfront/#pricing">pricing</a>information.</li>
+</ul>
+
+<h3 id="create-a-new-cloudfront-distribution-steps">Steps</h3>
+
+<h4 id="configure-the-s3-bucket-and-its-objects">Configure the S3 Bucket and its Objects</h4>
+
+<p>First you must properly create/configure an S3 bucket, as well as set the appropriate access permissions for each object that will be available through the distribution.</p>
+
+<p><strong>Compatible S3 Bucket Names</strong></p>
+
+<p>In order for an S3 bucket to be compatible with CloudFront, it must conform to DNS requirements. Therefore, you may need to create a new S3 bucket. Follow the naming convention guidelines to create a valid S3 bucket for CloudFront. See <a href="/cm/dashboard/clouds/aws/cloudfront_distribution.html#s3-bucket-names-for-cloudfront">S3 Bucket Names for CloudFront</a>.</p>
+
+<p><strong>Serving Public or Private Content</strong></p>
+
+<p>You can either use CloudFront to distribute public or private objects in an S3 bucket.</p>
+
+<ul>
+<li><strong>Public</strong> - If you are planning to set up a CloudFront distribution for serving publicly accessible content, be sure to set an object&#39;s permissions to &#39;public-read&#39;. Go to the S3 bucket that will serve as the <q>origin server</q> for the distribution and change your objects&#39; permissions accordingly.</li>
+<li><strong>Private</strong> - If you are planning to set up a CloudFront distribution for serving private content, see <a href="/cm/dashboard/clouds/aws/actions/cloudfront_origin_access_identities_actions.html#serving-private-content">Serving Private Content</a>.</li>
+</ul>
+
+<h4 id="configure-a-cname-(optional)">Configure a CNAME (optional)</h4>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If you do not want to use a CNAME, you can skip this step. If you wish to use a CNAME, you must first make sure that you register the domain with your DNS provider.</p>
+</div>
+
+<p>CloudFront will create a unique ID and url for accessing a distributed object. (e.g. http://mybucket.s3.amazonaws.com/ssh.png) However, if you want to create a link that uses your domain and hides any reference to CloudFront, you can define a CNAME or domain, which will provide another URL for accessing the object. For example, we could define <q>assets.rightscale.com</q> as a CNAME for the distribution. You can then access the same object with the following URL: http://assets.rightscale.com/ssh.png.&nbsp; If you configure a CNAME, both URLs can be used to access the object.</p>
+
+<p>You can define up to 10 CNAMEs per distribution. CNAMEs are useful for customizing an object&#39;s URL so that it appears as though the file is being served from you and not from AWS.</p>
+
+<h4 id="create-a-cloudfront-distribution">Create a CloudFront Distribution</h4>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <strong>AWS Global</strong> &gt; <strong>CF Distributions</strong>. When creating a new distribution, you must select which type of distribution that you want to create. Click the appropriate action button below that best serves your needs.
+
+<ul>
+<li><strong>New Basic Distribution</strong> - use for downloading content over HTTP or HTPS</li>
+<li><strong>New Streaming</strong> Distribution - use for serving streaming media files over RMTP</li>
+</ul></li>
+<li>Provide the following information:
+
+<ul>
+<li><strong>Nickname</strong> - A short nickname that helps you recognize the distribution.</li>
+<li><strong>Comment</strong> - (optional) Provide a brief description about the distribution. Maximum length of 128 characters. It can be edited at any time.</li>
+<li><strong>Origin Type</strong> - The content that&#39;s delivered by CloudFront is stored on an origin server. You can either use an S3 bucket as the origin server or select &#39;custom&#39; to define a different origin server that exists outside of S3.<br></li>
+<li><strong>S3</strong></li>
+<li><strong>S3 Bucket</strong> - Select the S3 bucket that will serve as the <q>origin server</q> for your CF distribution where master copies of the objects are stored. Once you create a distribution, you can&#39;t change the S3 bucket that&#39;s associated with it. Also, the selected S3 Bucket can only have lower case alphanumeric characters, dots, and dashes in its namespace. By default, only S3 buckets with valid names will be displayed in the dropdown menu.</li>
+<li><strong>Origin Access Identity</strong> - (for serving private content only) The virtual identity that will be used to give your CF distribution permission to fetch a private object from your origin server (S3 bucket). Use the OAI to configure the distribution so that end users can only access objects in an Amazon S3 bucket (origin server) through a CloudFront distribution.</li>
+<li><strong>Custom</strong></li>
+<li><strong>DNS name</strong> - Specify the origin to associate with the CF distribution. You must use a valid DNS name. Ex: www.site.com</li>
+<li><strong>HTTP port</strong> - The HTTP port the custom origin listens on. Ex: 80</li>
+<li><strong>HTTPS port</strong> - The HTTPS port the custom origin listens on. Ex: 443</li>
+<li><strong>Origin protocol policy</strong> - The original protocol policy to apply to your origin.
+
+<ul>
+<li><strong>http-only</strong> - CF will only access and fetch objects from the origin server using HTTP.</li>
+<li><strong>match-viewer</strong> - CF will use either HTTP or HTTPS to access and fetch objects from the origin server based on the protocol of the client request.</li>
+</ul></li>
+<li><strong>CNAME(s)</strong> - (optional) Provide a CNAME(s) to be used to access distributed objects. Associate a CNAME alias with a distribution so that you can include your own domain name in the object&#39;s url instead of the one that Amazon assigns it (ex: http://assets.mysite.com/image.jpg). (<em>Note</em>: You must first register any domain that you specify as a CNAME with your DNS provider.)</li>
+<li><strong>Trusted Signer(s)</strong> - (for serving private content only) Comma-separated list of AWS accounts that have permission to create signed URLs for a given distribution&#39;s content.</li>
+<li><strong>Default root object</strong> - Designates a default root object that will be served when a client request points to your distribution&#39;s root url instead of a specific object in your CF distribution. (Ex: index.html)</li>
+<li><strong>Logging bucket</strong> - If you want logging enabled, specify the location of the S3 bucket where gzipped access log data will be stored. (e.g. mybucket.s3.amazonaws.com) Log data will be saved as a gzipped file in a &#39;logging&#39; folder in the specified S3 bucket. Leave this field blank to disable logging.</li>
+<li><strong>Logging prefix</strong> - An optional prefix that can be prepended to the gzipped file name. (e.g. my/log/path/)</li>
+<li>Example Format: <code>{Bucket}.s3.amazonaws.com/{OptionalPrefixYouChoose}{Distribution ID}.{YYYY}-{MM}-{DD}-{HH}.{Unique ID}.gz</code></li>
+<li>Example: <strong><code>myapplogs</code></strong> <code>.s3.amazonaws.com/myappprefix/EMLARXS993KSTG8.2009-03-17-20.RT4KCN4SGK9.gz</code></li>
+<li><strong>Enabled</strong> - Add a checkmark to enable the distribution and make it active.</li>
+</ul></li>
+<li>Click the <strong>Create</strong> action button when ready.</li>
+</ul>
+
+<h3 id="create-a-new-cloudfront-distribution-troubleshooting">Troubleshooting</h3>
+
+<p>If you see this message... <strong><q>InvalidArgument: The parameter Origin does not refer to a valid S3 bucket.</q></strong> ...you might have to rename your S3 bucket. In order for an S3 bucket to be compatible with CloudFront, it must conform to DNS requirements. See <a href="/cm/dashboard/clouds/aws/cloudfront_distribution.html#s3-bucket-names-for-cloudfront">S3 Bucket Names for CloudFront</a>.</p>
+
+<p>When any changes are made to a distribution, it will take a couple of minutes to take effect. Wait for the status of the distribution to change from <q>InProgress</q> to <q>Deployed.</q></p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Before an object is available through CloudFront, you must enable the distribution.</p>
+</div>
+
+<h2 id="view-cloudfront-distributions">View CloudFront Distributions</h2>
+
+<h3 id="view-cloudfront-distributions-overview">Overview</h3>
+
+<p>Use the following procedures to view individual CloudFront Distributions or all existing CloudFront Distributions</p>
+
+<h3 id="view-cloudfront-distributions-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>CloudFront is an additional service offering of Amazon&#39;s that you must <a href="http://aws.amazon.com/cloudfront">sign-up</a> in order to use.</li>
+</ul>
+
+<h3 id="view-cloudfront-distributions-steps">Steps</h3>
+
+<h4 id="view-all-cloudfront-distributions">View all CloudFront Distributions</h4>
+
+<ul>
+<li>Navigate to <strong>Clouds</strong> &gt; <strong>AWS Global</strong> &gt; <strong>CF Distributions</strong>
+
+<ul>
+<li>All CloudFront Distributions are displayed</li>
+<li>Use the Filter by to help locate a specific distribution if there are many</li>
+</ul></li>
+</ul>
+
+<p><img src="/img/cm-index-cloudfront-distribution.png" alt="cm-index-cloudfront-distribution.png" width="725" height="290" /></p>
+
+<h4 id="view-a-single-cloudfront-distribution">View a Single CloudFront Distribution</h4>
+
+<ul>
+<li>Select a distribution to view more specific details. (That is, select a Nickname link from your CloudFront Distributions (above) to see the detailed distribution information shown and described below.)</li>
+</ul>
+
+<p><img src="/img/cm-cf-distro-details.png" alt="cm-cf-distro-details.png" width="561" height="534" /></p>
+
+<p>This page displays the following CloudFront information:</p>
+
+<ul>
+<li><strong>ID</strong> - Unique ID that is auto-generated by AWS during the creation process.</li>
+<li><strong>Type</strong> - The type of CF distribution (basic or streaming)</li>
+<li><strong>Origin type</strong> - The type of storage that will be used as the origin server, which stores master copies of the assets that will be served by CloudFront. (e.g. S3 or custom)</li>
+<li><strong>Domain</strong> - The CloudFront domain name you need to use when linking to your objects. (e.g. d60472d6047qy9.mysite.com). You will use the domain name to construct a link to an object.</li>
+<li><strong>DNS name</strong> - The DNS name of the origin server. (e.g. For S3, it would be &#39;mybucket.s3.amazonaws.com&#39;)</li>
+<li><strong>S3 Bucket</strong> - Name of the S3 bucket that will serve as the <q>origin server</q> for your distribution. It will contain the master copies of your objects. (e.g. mybucket)</li>
+<li><strong>Origin Access Identity</strong> - The virtual identity that will be used to give your CF distribution permission to fetch a private object from your origin server (S3 bucket). Use the OAI to configure the distribution so that end users can only access objects in an Amazon S3 bucket (origin server) through a CloudFront distribution.</li>
+<li><strong>CNAME(s)</strong> - List of CNAME(s) that will be used for served objects. (e.g. assets.mysite.com)</li>
+<li><strong>Default root object</strong> - The default root object that will be served when a client request points to your distribution&#39;s root url instead of a specific object in your CF distribution. (Ex: index.html)</li>
+<li><strong>Trusted Signer(s)</strong>: Comma-separated list of AWS accounts that have permission to create signed URLs for a given distribution&#39;s content. To add your own AWS account, add &#39;self&#39; to the list. (You cannot create signed URLs in the Dashboard. However, once you create them in the AWS Console, they will be displayed here.)</li>
+<li><strong>Active Trusted Signer(s)</strong>: Only trusted signers with valid keys can create signed URLs. (You cannot create a key pair in the Dashboard. However, once you create them in the AWS Console, they will be displayed here.)</li>
+<li><strong>Logging</strong> - Is logging enabled for this CF distribution? (Enabled or Disabled)</li>
+<li><strong>Status</strong> - Current status of the distribution. Deployed (ready to use) or InProgress (created or updated, but not quite ready for use)</li>
+<li><strong>Enabled</strong> - Enabled (distribution is working and accessible) or Disabled (access to this distribution is no longer available)</li>
+<li><strong>HTTPS only</strong> - If enabled, only HTTPS requests are permitted. If not disabled, both HTTP and HTTPS requests are permitted.</li>
+<li><strong>Locked</strong> - Lock a distribution to prevent any changes from being made to the distribution&#39;s configuration. Objects can still be added to the origin server.</li>
+<li><strong>Last modified</strong> - Date and timestamp when the distribution was last modified.</li>
+<li><strong>Comment</strong> - Optional information about the CF distribution. Maximum length of 128 characters. It can be edited at any time.</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

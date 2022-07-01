@@ -1,0 +1,431 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Self-Service Plugins</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="ss ss_guides ss_guides_ss_plugins" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><div class="page-header"><h1>Self-Service Plugins</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>RightScale provides a plugin framework that allows for any service with an HTTP-based API to be incorporated into the RightScale platform for use in Self-Service CAT files and Cloud Workflow code. This allows the use of many common services, such as cloud provider services, 3rd party vendors, and on-premises systems, within your application lifecycle management in Self-Service.</p>
+
+<p>There are two primary components to the plugins in Self-Service, both of which are represented as <a href="/ss/reference/cat/v20161221/index.html#overview-declarations">declarations</a> within a CAT file. The two declarations are:</p>
+
+<ul>
+<li><code>plugin</code> - describes the external API resources, actions, types, structure, and more. This is a generic definition that can be reused and shared.</li>
+<li><code>resource_pool</code> - references a <code>plugin</code> declaration and provides the usage-specific elements such as endpoint information and credentials</li>
+</ul>
+
+<p>Once a plugin and resource pool have been defined in the CAT, then any resource type defined in the plugin can be used in the CAT definition. Primarily these are used in the CAT language to define new resources that are part of the application. For example, the following declaration defines a DigitalOcean droplet resource using a plugin called <code>do</code>:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"my_droplet"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"do.droplets"</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="s2">"my_droplet"</span>
+  <span class="n">region</span> <span class="s2">"us-east"</span>
+  <span class="n">size</span> <span class="s2">"small"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Additionally, the plugin can define custom actions on any resource that can be leveraged in Cloud Workflow code. For example, if the <q>droplet</q> resource has a custom action defined on it called <code>reboot</code>, that action can be called directly from Cloud Workflow.</p>
+<pre class="syntax-highlight ruby"><code>  <span class="vi">@my_droplet</span><span class="p">.</span><span class="nf">reboot</span><span class="p">()</span>
+</code></pre>
+
+<p>For a comprehensive reference of each plugin declaration please refer to the <a href="/ss/reference/cat/v20161221/ss_plugins.html">CAT Plugins reference</a>.</p>
+
+<p>If a resource provider doesn&#39;t support an HTTP-based mechanism for interacting with it, a <em>Plugin Proxy</em> can be built and deployed to act as the mediator between the RightScale platform and the provider. When building such a service, it is recommended that you use <a href="https://goa.design/">Goa</a> or <a href="http://praxis-framework.io/">Praxis</a> frameworks as this will simplify the definition of the <em>Plugin</em> in RightScale.</p>
+
+<h3 id="overview-plugins">Plugins</h3>
+
+<p>A <em>plugin</em> in RightScale is simply a set of metadata about a service provider that the RightScale system can use to interact with the provider.</p>
+
+<p>For any given provider, the <em>plugin</em> defines a set of resources that the provider has available, defined using the <code>type</code> resource within the plugin. For each resource, the <em>plugin</em> defines:</p>
+
+<ul>
+<li>the fields of the resource that are needed (or optional) to create a new resource</li>
+<li>the structure of the API call needed to interact with this resource type</li>
+<li>the properties of the resource that can be used as <q>outputs</q> once a resource is created</li>
+<li>the logic needed to create and destroy this kind of resource</li>
+<li>the operational actions available on this resource</li>
+<li>any links this resource has to other kinds of resources</li>
+</ul>
+
+<p>In addition to resource information, the <em>plugin</em> also defines common attributes of the service, such as the base HTTP path to use for this service, any HTTP headers that must be sent along with a request, and other HTTP connection information.</p>
+
+<p>Lastly, plugins may optionally contain any number of <q>parameters</q>, configuration items that can be set when the plugin is instantiated.</p>
+
+<h3 id="overview-resource-pools">Resource Pools</h3>
+
+<p>A Resource Pool is simply an instance of a Plugin, tied to a specific <q>account</q> on the provider, made available to the RightScale platform to interact with. Many Resource Pools may be registered for any given plugin.</p>
+
+<p>The Resource Pool defines any parameter values required by the Plugin, specifies the specific URL/host to use for this service, and specifies the authentication information needed to interact with this instance of the plugin.</p>
+
+<h2 id="building-a-plugin">Building a Plugin</h2>
+
+<h3 id="building-a-plugin-the-plugin-declaration">The plugin declaration</h3>
+
+<p>The <code>plugin</code> declaration in CAT is made up of 3 primary sections:</p>
+
+<ul>
+<li><strong>Parameter</strong> - 0 or more configurable variables</li>
+<li><strong>Endpoint</strong> - describes the HTTP endpoint information</li>
+<li><strong>Resource Types</strong> - describe the resources made available by this plugin</li>
+</ul>
+
+<h4 id="parameter">Parameter</h4>
+
+<p>A plugin lists the parameters it uses to describe how to make the action requests. The syntax used to declare each parameter is identical to the CAT parameter syntax.</p>
+
+<p>For more details, see <a href="/ss/reference/cat/v20161221/ss_plugins.html#plugins-parameter">the reference documentation</a>.</p>
+
+<h4 id="endpoint">Endpoint</h4>
+
+<p>The next section is the plugin <em>endpoint</em> section. It defines:</p>
+
+<ul>
+<li>the base path used by all requests made to the service</li>
+<li>the common HTTP headers used by all requests made to the service</li>
+<li>a default host and scheme for the service (the <em>plugin resource pool</em> declaration sets the final values)</li>
+</ul>
+
+<p>Parameters may be used to define the values for any of the properties listed above.</p>
+
+<p>For more details, see <a href="/ss/reference/cat/v20161221/ss_plugins.html#plugins-endpoint">the reference documentation</a>.</p>
+
+<h4 id="resource-types">Resource Types</h4>
+
+<p>Finally, plugins also provide information about the resources made available from the given provider. This is the most powerful and complex part of the plugin definition. Each type declaration provides the following information:</p>
+
+<ul>
+<li>How to make HTTP requests to the type actions (both the CRUD and custom actions)</li>
+<li>How to extract resource hrefs from API responses to build resulting resource collections</li>
+<li>How to provision and delete resources via RCL definitions</li>
+<li>The fields required to build a resource collection of that type</li>
+<li>The fields exposed by the resource collection so that for example CloudApp outputs can use them</li>
+<li>The actions supported by the type and for custom actions the details needed to make the HTTP requests if the default doesn&#39;t work</li>
+<li>The links supported by the type including the information needed to build the link hrefs</li>
+</ul>
+
+<p>An important design goal of the declaration syntax is to make it simple to describe simple cases. In that vein most type fields are optional and only required to override the defaults when they don&#39;t work.</p>
+
+<p>For more details, see <a href="/ss/reference/cat/v20161221/ss_plugins.html#plugins-type">the reference documentation</a>.</p>
+
+<h2 id="creating-an-instance-of-a-plugin">Creating an instance of a plugin</h2>
+
+<p>Actually using the resources defined in a plugin requires the use of the <code>resource_pool</code> declaration. This declaration instantiates a plugin by providing actual values to the parameters and an actual endpoint and associated auth (required only if a default host is not defined in the plugin declaration). The <code>auth</code> declaration allows specifying how requests sent to the service should be signed.</p>
+
+<p>The syntax for a resource pool declaration is:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource_pool</span> <span class="s2">"kube"</span> <span class="k">do</span>
+  <span class="c1"># Name of plugin</span>
+  <span class="n">plugin</span> <span class="s2">"kube"</span>
+
+  <span class="c1"># Values for plugin parameters</span>
+  <span class="n">parameter_values</span> <span class="k">do</span>
+    <span class="n">namespace</span> <span class="s2">"us_east"</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Specify host, potentially overriding template's default host</span>
+  <span class="n">host</span> <span class="s2">"kube-east.example.com"</span>
+
+  <span class="c1"># Service auth, see</span>
+  <span class="n">auth</span> <span class="s2">"key"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"api_key"</span> <span class="k">do</span>
+    <span class="n">key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"KUBE_US_EAST_API_TOKEN"</span><span class="p">)</span>
+    <span class="nb">format</span> <span class="s2">"Bearer $key"</span>
+    <span class="n">location</span> <span class="s2">"header"</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="using-plugins">Using Plugins</h2>
+
+<p>Once the plugin has been declared and a resource pool has been instantiated from the plugin the resources it exposes can be taken advantage of in a CAT and RCL code the same way RightScale resources can.</p>
+
+<h3 id="using-plugins-defining-plugin-packages">Defining plugin packages</h3>
+
+<p>Plugins are intended to be defined inside of packages which are then used by other CATs. Note that in order to contain a <code>plugin</code> declaration, a CAT must be of <code>type &#39;plugin&#39;</code>. These plugin-type CATs can contain other declarations and can be launched only as <a href="/ss/guides/ss_testing_CATs.html#test-cloudapps">Test CloudApps</a> (i.e. from Designer) -- with the intent that launching a <q>plugin</q> type CAT is done during testing to ensure the plugin definition works as intended.</p>
+
+<p>Once a plugin definition is complete, it is common to then <a href="/ss/guides/ss_packaging_cats.html#importing-a-package">import</a> the plugin CAT into an <q>application</q> CAT which can be published to the Catalog.</p>
+
+<p>The following is an example of a <q>plugin</q> CAT that is contained in the <code>plugins/kubernetes</code> package.</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s2">"Kube Plugin"</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">short_description</span> <span class="s2">"A CAT defining the Kubernates plugin"</span>
+<span class="n">type</span> <span class="s1">'plugin'</span>
+<span class="n">package</span> <span class="s2">"plugins/kubernetes"</span>
+
+<span class="n">plugin</span> <span class="s2">"kube"</span> <span class="k">do</span>
+  <span class="c1"># Parameter definitions for the plugin</span>
+  <span class="n">parameter</span> <span class="s2">"namespace"</span> <span class="k">do</span>
+    <span class="n">type</span> <span class="s2">"string"</span>
+    <span class="n">label</span> <span class="s2">"Kubernates Namespace"</span>
+    <span class="n">description</span> <span class="s2">"Namespace used to create all resources"</span>
+    <span class="n">default</span> <span class="s2">"us-east"</span>
+  <span class="k">end</span>
+
+  <span class="n">parameter</span> <span class="s2">"region"</span> <span class="k">do</span>
+    <span class="n">type</span> <span class="s2">"string"</span>
+    <span class="n">label</span> <span class="s2">"Kubernates Region"</span>
+    <span class="n">description</span> <span class="s2">"The region in which the resources are created"</span>
+  <span class="k">end</span>
+
+  <span class="n">parameter</span> <span class="s2">"grouping"</span> <span class="k">do</span>
+    <span class="n">type</span> <span class="s2">"string"</span>
+    <span class="n">label</span> <span class="s2">"Grouping"</span>
+    <span class="n">description</span> <span class="s2">"The grouping"</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Endpoint definition</span>
+  <span class="n">endpoint</span> <span class="k">do</span>
+    <span class="n">default_host</span> <span class="s2">"kube-$region.example.com"</span>  <span class="c1"># `$region` is substituted with the value for the `region` parameter</span>
+    <span class="n">default_scheme</span> <span class="s2">"https"</span>
+    <span class="n">path</span> <span class="s2">"/api/v1/namespaces/$namespace"</span>
+
+    <span class="n">headers</span> <span class="k">do</span> <span class="p">{</span>
+      <span class="s2">"User-Agent"</span> <span class="o">=&gt;</span> <span class="s2">"Kube namespace"</span>
+    <span class="p">}</span> <span class="k">end</span>
+
+    <span class="n">no_cert_check</span> <span class="kp">false</span>
+  <span class="k">end</span>
+
+  <span class="n">type</span> <span class="s2">"pods"</span> <span class="k">do</span>
+    <span class="n">href_templates</span> <span class="s2">"/namespaces/:metadata.namespace:/pods/:metadata.name:"</span><span class="p">,</span>
+      <span class="s2">"/namespaces/:items[*].metadata.namespace:/pods/:items[*].metadata.name:"</span>
+
+    <span class="n">provision</span> <span class="s2">"provision_pod"</span>
+    <span class="n">delete</span> <span class="s2">"delete_pod"</span>
+
+    <span class="n">field</span> <span class="s2">"kind"</span> <span class="k">do</span>
+      <span class="n">type</span> <span class="s2">"string"</span>
+      <span class="n">required</span> <span class="kp">true</span>
+    <span class="k">end</span>
+    <span class="n">field</span> <span class="s2">"metadata"</span> <span class="k">do</span>
+      <span class="n">type</span> <span class="s2">"composite"</span>
+    <span class="k">end</span>
+    <span class="n">field</span> <span class="s2">"spec"</span> <span class="k">do</span>
+      <span class="n">type</span> <span class="s2">"composite"</span>
+    <span class="k">end</span>
+
+    <span class="n">output</span> <span class="s2">"kind"</span><span class="p">,</span> <span class="s2">"apiVersion"</span><span class="p">,</span> <span class="s2">"metadata"</span><span class="p">,</span> <span class="s2">"spec"</span><span class="p">,</span> <span class="s2">"status"</span>
+    <span class="n">output</span> <span class="s2">"namespace"</span> <span class="k">do</span>
+      <span class="n">path</span> <span class="s2">"metadata.namespace"</span>
+    <span class="k">end</span>
+    <span class="n">output</span> <span class="s2">"status_phase"</span> <span class="k">do</span>
+      <span class="n">path</span> <span class="s2">"status.phase"</span>
+    <span class="k">end</span>
+
+    <span class="n">action</span> <span class="s2">"create"</span> <span class="k">do</span>
+      <span class="n">path</span> <span class="s2">"/pods"</span>
+      <span class="n">verb</span> <span class="s2">"POST"</span>
+    <span class="k">end</span>
+    <span class="n">action</span> <span class="s2">"list"</span> <span class="k">do</span>
+      <span class="n">path</span> <span class="s2">"/pods"</span>
+      <span class="n">verb</span> <span class="s2">"GET"</span>
+      <span class="n">output_path</span> <span class="s2">"items"</span>
+    <span class="k">end</span>
+    <span class="n">action</span> <span class="s2">"get"</span>
+    <span class="n">action</span> <span class="s2">"destroy"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">define</span> <span class="n">provision_pod</span><span class="p">(</span><span class="vi">@raw</span><span class="p">)</span> <span class="k">return</span> <span class="vi">@pod</span> <span class="k">do</span>
+  <span class="vg">$raw</span> <span class="o">=</span> <span class="n">to_object</span><span class="p">(</span><span class="vi">@raw</span><span class="p">)</span>
+  <span class="vg">$fields</span> <span class="o">=</span> <span class="vg">$raw</span><span class="p">[</span><span class="s2">"fields"</span><span class="p">]</span>
+  <span class="vi">@pod</span> <span class="o">=</span> <span class="n">kube</span><span class="p">.</span><span class="nf">pods</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="vg">$fields</span><span class="p">)</span>
+  <span class="n">sleep_until</span> <span class="vi">@pod</span><span class="p">.</span><span class="nf">status_phase</span> <span class="o">==</span> <span class="s2">"Running"</span>
+<span class="k">end</span>
+
+<span class="n">define</span> <span class="n">delete_pod</span><span class="p">(</span><span class="vi">@pod</span><span class="p">)</span> <span class="k">do</span>
+  <span class="vi">@operation</span> <span class="o">=</span> <span class="vi">@pod</span><span class="p">.</span><span class="nf">destroy</span><span class="p">()</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="using-plugins-importing-plugin-packages">Importing plugin packages</h3>
+
+<p>Once a plugin has been defined in a package then it can be imported and used within other CATs. Imported plugins are automatically made available -- there&#39;s no need to define a plugin which is <code>like</code> them. They also do not need to be scoped by the imported package name.</p>
+
+<p>Note the example below which imports the above plugin CAT and defines a <code>resource_pool</code> for it. The below CAT is an <q>application</q> CAT by default and can be published to the Catalog.</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s2">"Kube Plugin"</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">short_description</span> <span class="s2">"A CAT defining the Kubernates plugin"</span>
+<span class="n">import</span> <span class="s2">"plugins/kubernetes"</span>
+
+<span class="n">parameter</span> <span class="s2">"kub_region"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"string"</span>
+  <span class="n">label</span> <span class="s2">"Kubernates Region"</span>
+  <span class="n">description</span> <span class="s2">"Region used to create all resources"</span>
+<span class="k">end</span>
+
+<span class="n">mapping</span> <span class="s2">"grouping_map"</span> <span class="k">do</span> <span class="p">{</span>
+  <span class="s2">"grouping"</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="s2">"1-a"</span> <span class="o">=&gt;</span> <span class="s2">"Group 1"</span><span class="p">,</span>
+    <span class="s2">"2-a"</span> <span class="o">=&gt;</span> <span class="s2">"Group 2"</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="k">end</span>
+
+<span class="n">resource_pool</span> <span class="s2">"kube_pool"</span> <span class="k">do</span>
+  <span class="n">plugin</span> <span class="vg">$kube</span> <span class="c1"># $kube is defined in "plugins/kubernetes"</span>
+  <span class="n">host</span> <span class="s2">"mykube.example.com"</span>
+
+  <span class="n">parameter_values</span> <span class="k">do</span>
+    <span class="n">region</span> <span class="vg">$kub_region</span>
+    <span class="n">grouping</span> <span class="n">map</span><span class="p">(</span><span class="vg">$grouping_map</span><span class="p">,</span> <span class="s2">"grouping"</span><span class="p">,</span> <span class="vg">$kub_region</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">auth</span> <span class="s2">"my_basic_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"basic"</span> <span class="k">do</span>
+    <span class="n">username</span> <span class="s2">"user"</span>
+    <span class="n">password</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"MY_PASSWORD"</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">auth</span> <span class="s2">"my_JWT_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"jwt"</span> <span class="k">do</span>
+    <span class="n">basic</span> <span class="vi">@my_basic_auth</span>
+    <span class="n">token_url</span> <span class="s2">"https://www.example.com/tokens"</span>
+    <span class="n">field</span> <span class="s2">"Authorization"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">output</span> <span class="s2">"custom_output"</span> <span class="k">do</span>
+    <span class="n">label</span> <span class="s2">"custom_output"</span>
+    <span class="n">default_value</span> <span class="vi">@my_pod</span><span class="p">.</span><span class="nf">status</span>
+    <span class="n">description</span> <span class="s2">"Pod status from plugin output field"</span>
+<span class="k">end</span>
+
+<span class="n">resource</span> <span class="s2">"my_pod"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"kube.pods"</span> <span class="k">do</span>
+  <span class="n">kind</span> <span class="s2">"Pod"</span>
+  <span class="n">metadata</span> <span class="k">do</span> <span class="p">{</span>
+    <span class="s2">"image"</span> <span class="o">=&gt;</span> <span class="s2">"nginx:latest"</span>
+  <span class="p">}</span> <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="using-plugins-plugins-in-cat">Plugins in CAT</h3>
+
+<p>The syntax consists of using the plugin name followed by a period (<code>.</code>) as prefix to the resource name, taking the droplet resource type as an example:</p>
+<pre class="syntax-highlight ruby"><code><span class="c1"># Assumes "docean" is the name of the plugin</span>
+<span class="n">resource</span> <span class="s2">"my_droplet"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"docean.droplets"</span> <span class="k">do</span>
+  <span class="c1"># "name" field values inherit from the resource name by default</span>
+  <span class="nb">name</span> <span class="s2">"my_droplet"</span>
+  <span class="n">region</span> <span class="s2">"us-east"</span>
+  <span class="n">size</span> <span class="s2">"small"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The resource is created running the corresponding provision definition and deleted using the delete definition. Authentication to the service is done using the information provided in the resource pool declaration auth section.</p>
+
+<p>Other resource fields and outputs in the CAT may use the outputs defined by the plugin resource type, for example the droplet type above defines a memory output so a CAT using that type could define a <code>droplet_memory</code> output as follows:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">output</span> <span class="s2">"droplet_memory"</span> <span class="k">do</span>
+  <span class="n">label</span> <span class="s2">"Droplet RAM"</span>
+  <span class="n">category</span> <span class="s2">"Configuration"</span>
+  <span class="n">default_value</span> <span class="vi">@my_droplet</span><span class="p">.</span><span class="nf">memory</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4 id="xml-support">XML Support</h4>
+
+<p>Simple types (string, number, boolean) can be assumed to be attributes.
+An array can be assumed to be an element and a (hash) map can be assumed to be a complex type (object).
+In order to convert a simple type to be an element instead of an attribute, it would have to be represented as a one-sized array containing only the simple type.</p>
+<pre class="syntax-highlight ruby"><code><span class="c1">#defining a composite plugin field</span>
+<span class="n">field</span> <span class="s2">"create_hosted_zone_request"</span> <span class="k">do</span>
+  <span class="n">alias_for</span> <span class="s2">"CreateHostedZoneRequest"</span>
+  <span class="n">type</span> <span class="s2">"composite"</span>
+  <span class="n">required</span> <span class="kp">true</span>
+  <span class="n">location</span> <span class="s2">"body"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><strong>Example 1:  Resource Declaration</strong></p>
+
+<ul>
+<li><code>xmlns</code>  is a string</li>
+<li><code>Name</code>  is a single item array</li>
+<li><code>CallerReference</code> is a single item array</li>
+</ul>
+<pre class="syntax-highlight ruby"><code><span class="c1"># plugin resource declaration</span>
+<span class="n">resource</span> <span class="s2">"hostedzone"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_aws_route53.hosted_zone"</span> <span class="k">do</span>
+  <span class="n">create_hosted_zone_request</span> <span class="k">do</span> <span class="p">{</span>
+    <span class="s2">"xmlns"</span> <span class="o">=&gt;</span> <span class="s2">"https://route53.amazonaws.com/doc/2013-04-01/"</span><span class="p">,</span> <span class="c1"># Simple type: Attribute</span>
+    <span class="s2">"Name"</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="n">join</span><span class="p">([</span><span class="n">first</span><span class="p">(</span><span class="nb">split</span><span class="p">(</span><span class="n">uuid</span><span class="p">(),</span><span class="s1">'-'</span><span class="p">)),</span> <span class="s2">".rs-example.com"</span><span class="p">])</span> <span class="p">],</span> <span class="c1"># One-Sized Arrays become nested elements</span>
+    <span class="s2">"CallerReference"</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="n">uuid</span><span class="p">()</span> <span class="p">]</span> <span class="c1"># One-Sized Arrays become nested elements</span>
+  <span class="p">}</span> <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><strong>Example 1: Expected Output</strong></p>
+<pre class="syntax-highlight xml"><code><span class="nt">&lt;CreateHostedZoneRequest</span> <span class="na">xmlns=</span><span class="s">"https://route53.amazonaws.com/doc/2013-04-01/"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;CallerReference&gt;</span>c0975dc6-8652-4bd8-9ba2-fc43b5006c79<span class="nt">&lt;/CallerReference&gt;</span>
+  <span class="nt">&lt;Name&gt;</span>3898363a.rs-example.com<span class="nt">&lt;/Name&gt;</span>
+<span class="nt">&lt;/CreateHostedZoneRequest&gt;</span>
+</code></pre>
+
+<p><strong>Example 2: Resource Declaration</strong></p>
+
+<ul>
+<li><code>xmlns</code>  is a string</li>
+<li><code>Name</code>  is a single item array</li>
+<li><code>CallerReference</code> is a single item array</li>
+<li><code>HostedZoneConfig</code> is a hash</li>
+</ul>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"hostedzone1"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_aws_route53.hosted_zone"</span> <span class="k">do</span>
+  <span class="n">create_hosted_zone_request</span> <span class="k">do</span> <span class="p">{</span>
+    <span class="s2">"xmlns"</span> <span class="o">=&gt;</span> <span class="s2">"https://route53.amazonaws.com/doc/2013-04-01/"</span><span class="p">,</span> <span class="c1"># Simple type: Attribute</span>
+    <span class="s2">"Name"</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="n">join</span><span class="p">([</span><span class="n">first</span><span class="p">(</span><span class="nb">split</span><span class="p">(</span><span class="n">uuid</span><span class="p">(),</span><span class="s1">'-'</span><span class="p">)),</span> <span class="s2">".rs-example.com"</span><span class="p">])</span> <span class="p">],</span> <span class="c1"># One-Sized Arrays become nested elements</span>
+    <span class="s2">"CallerReference"</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="n">uuid</span><span class="p">()</span> <span class="p">],</span> <span class="c1"># One-Sized Arrays become nested elements</span>
+    <span class="s2">"HostedZoneConfig"</span> <span class="o">=&gt;</span> <span class="p">{</span>          <span class="c1"># Hash</span>
+      <span class="s2">"Comment"</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">"Test Zone"</span><span class="p">],</span>    <span class="c1"># One-Sized Arrays become nested elements of Hash</span>
+      <span class="s2">"PrivateZone"</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="kp">false</span> <span class="p">]</span>     <span class="c1"># One-Sized Arrays become nested elements of Hash</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><strong>Example 2: Expected Output</strong></p>
+<pre class="syntax-highlight xml"><code><span class="nt">&lt;CreateHostedZoneRequest</span> <span class="na">xmlns=</span><span class="s">\"https://route53.amazonaws.com/doc/2013-04-01/\"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;CallerReference&gt;</span>f4ac75a9-efa9-4731-9920-3c96b8db07fd<span class="nt">&lt;/CallerReference&gt;</span>
+  <span class="nt">&lt;HostedZoneConfig&gt;</span>
+    <span class="nt">&lt;Comment&gt;</span>Test Zone<span class="nt">&lt;/Comment&gt;</span>
+    <span class="nt">&lt;PrivateZone&gt;</span>false<span class="nt">&lt;/PrivateZone&gt;</span>
+  <span class="nt">&lt;/HostedZoneConfig&gt;</span>
+  <span class="nt">&lt;Name&gt;</span>bdf6c3d1.rs-example.com<span class="nt">&lt;/Name&gt;</span>
+<span class="nt">&lt;/CreateHostedZoneRequest&gt;</span>
+</code></pre>
+
+<h3 id="using-plugins-plugins-in-rcl">Plugins in RCL</h3>
+
+<p>All the actions defined on the resource type in the plugin are available to RCL code. This makes it possible to define operations in the CAT that can take advantage of the custom actions, for example a <q>backup</q> operation may take advantage of the <q>snapshot</q> custom action exposed by a <q>volume</q> plugin resource type.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">define</span> <span class="n">main</span><span class="p">(</span><span class="vi">@my_droplet</span><span class="p">)</span> <span class="k">do</span>
+  <span class="vi">@my_droplet</span><span class="p">.</span><span class="nf">operate</span><span class="p">({</span><span class="ss">action_name: </span><span class="s2">"stop"</span><span class="p">})</span>
+<span class="k">end</span>
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

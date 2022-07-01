@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Monitoring and Alerts Management</title><meta content="Use RightScale Monitoring and Alerts Management to support real-time monitoring of your cloud resources using Quick Monitoring Graphs and Deployment-specific Alert Notifications." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_administrators_guide cm_administrators_guide_monitoring_and_alerts_management" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">RightScale Administrator's Guide</a></p><div class="page-header"><h1>Monitoring and Alerts Management</h1></div><div class="main-content"><h2 id="set-up-monitoring">Set Up Monitoring</h2>
+
+<h3 id="set-up-monitoring-how-do-i-set-up-a-server-for-real-time-monitoring-">How do I set up a server for real-time monitoring?</h3>
+
+<p>Any ServerTemplate published by RightScale is automatically pre-configured to support real-time graphical monitoring where you can view <a href="http://oss.oetiker.ch/rrdtool/">RRDtool</a> graphs inside the RightScale Dashboard for a variety of server-level metrics. For a list of all the metrics that are monitored by default, see <a href="/cm/ref/monitored_metrics.html">Monitored Metrics</a>. If you are using a custom ServerTemplate that you either cloned or created yourself, you should make sure that it&#39;s properly configured to support RightScale&#39;s monitoring features, which is why it&#39;s strongly recommended that you use one of RightScale&#39;s <q>Base</q> ServerTemplates to start any custom ServerTemplate development from scratch. See the <a href="/cm/servertemplate_dev_guide/index.html">ServerTemplate Developer Guide</a> to learn how to <a href="/cm/servertemplate_dev_guide/create_custom_servertemplates.html">Create Custom ServerTemplates</a>.</p>
+
+<p>You can also extend RightScale&#39;s default set of monitored metrics by adding additional <a href="http://collectd.org/">collectd</a> plug-ins. See <a href="/cm/rs101/create_custom_collectd_plug-ins_for_linux.html">Custom collectd plug-ins</a>.</p>
+
+<p><strong>Important!</strong> RightScale&#39;s Alert system is built on a server&#39;s monitored metrics. If you do not see graphs under a Server&#39;s Monitoring tab in the RightScale Dashboard, you will not be able to set up any automated alerts for the server. Conversely, if the server is properly configured for graphical monitoring and you do see real-time graphs, you can create alert specifications that trigger an escalation routine which may consist of one or more automated actions such as sending an email, running a script, rebooting the server, etc. And since RightScale&#39;s auto-scaling feature is built upon the Alert system, you will not be able to set up an alert-based scalable server array unless monitoring is properly configured on your running servers.</p>
+
+<p><img src="/img/cm-deployment-servers-highlight.png" alt="cm-deployment-servers-highlight.png" width="725" height="317" /></p>
+
+<p>In the example screenshot above, notice that each server has the &#39; <strong>rs_monitoring:state=active</strong>&#39; tag, which means it&#39;s properly configured for RightScale monitoring support. From the a deployment&#39;s Servers tab you can click on the CPU thumbnail graph to quickly jump to the server&#39;s Monitoring tab where you can see all of its related real-time monitoring graphs.</p>
+
+<h3 id="set-up-monitoring-how-do-i-set-up-monitoring-dashboards-">How do I set up monitoring dashboards?</h3>
+
+<p>You can save the metrics that you want to see on your dashboard. Simply click the metric you want to see and then select the <q>save</q> tab at the upper right of the chart.</p>
+
+<p>That metric will now move below the dotted line and will be visible each time you bring up the monitoring dashboard. Drag and drop to reorder any of the saved charts that are below the dotted line.</p>
+
+<h3 id="set-up-monitoring-how-should-i-use-widgets-">How should I use widgets?</h3>
+
+<p>RightScale <a href="/cm/dashboard/design/widgets/">Widgets</a> (Design &gt; Widgets) are useful for creating a custom view inside the RightScale Dashboard that gives you a high-level overview of all the most relevant metrics related to your account. Widgets are user and account-specific so you can create a unique panel of widgets for each of your accounts that only you will see when you log in to the Dashboard. By default, each account has access to a library of <q>built-in</q> and <q>custom</q> widgets that you can add to your Widgets panel (Dashboard &gt; Overview tab) as-is or customize them for your own purposes. You can also create your own custom Widgets from scratch using Liquid Markup language.</p>
+
+<p>For example, many system administrators find it useful to create widgets that help them monitor all critical alerts across their account so that when you log in to the Dashboard the first thing you&#39;ll see are all the critical issues that should be addressed immediately or prioritized accordingly. The default widgets are highlighted with and <strong>*</strong> below.</p>
+
+<p>Custom</p>
+
+<ul>
+<li><strong>Active Alerts</strong> - View all triggered alerts that are currently active (&#39;red&#39; status ball) on your account.</li>
+<li><strong>Deployment</strong> - View information about deployments for your account.</li>
+<li><strong>Deployments Bar Charts</strong> - View the states of servers in deployments as bar charts.</li>
+<li><strong>Security Updates Available</strong> - Identifies servers with Linux security updates available.</li>
+<li><strong>Server State Pie Chart</strong> - View the states of all servers on your account as a pie chart.</li>
+<li><strong>Servers</strong> - View information about servers for your account.</li>
+</ul>
+
+<p>Built-in</p>
+
+<ul>
+<li><strong>Cloud Credential Status</strong>* - View the status of credentials for clouds that are enabled on your account.</li>
+<li><strong>Cluster Monitor</strong> - View a Heat Map or Stacked Graph for a Deployment Cluster Monitor.</li>
+<li><strong>Launch a Server in your Cloud</strong>* - Launch a server by using one of the several ServerTemplates published by RightScale.</li>
+<li><strong>Review Docs And Tutorials</strong>* - Contains links to videos, documentation, and tutorials for new RightScale users.</li>
+</ul>
+
+<h3 id="set-up-monitoring-how-does-rightscale-use-widgets-">How does RightScale use Widgets?</h3>
+
+<p>Yes, the rumors are true! RightScale runs on RightScale! Our own operations team uses the RightScale Dashboard and API on a daily basis to manage all of the services responsible for supporting the RightScale cloud management platform for all of our users. You may find it quite insightful to learn how we use our own tool internally. For example, here is a screenshot of all the widgets leveraged by one of our staging accounts. When our Operations team logs in to the Dashboard, the first screen they check is the Widgets screen to get a high-level overview about all the critical issues (i.e. active alerts) affecting the servers and deployments within the account so that they can prioritize the issues accordingly.</p>
+
+<p><img src="/img/cm-widgets-dashboard.png" alt="cm-widgets-dashboard.png" width="725" height="339" /></p>
+
+<h3 id="set-up-monitoring-how-should-i-use-quick-monitoring-graphs-">How should I use Quick Monitoring Graphs?</h3>
+
+<p>Quick monitoring graphs are useful for giving you a quick, real-time overview of the most critical graphs across your account. For example, if you&#39;re using HAProxy load balancer servers to distribute traffic across your application tier, you may want to see the graph that shows the number of incoming &#39;apache/apache_requests&#39; requests or maybe you want to always see the &#39;cpu-0/cpu-idle&#39; graph for your master database server.</p>
+
+<p><img src="/img/cm-quick-monitoring-graphs-example.png" alt="cm-quick-monitoring-graphs-example.png" width="226" height="204" /></p>
+
+<p>Use QuickMonitoring to save up to 8 of the most commonly viewed graphs. Graphs are updated every minute and are account and user-specific so you can create different graph thumbnails for each of your accounts. Click on a thumbnail to view a larger version of the graph. Rename graphs and rearrange the order, as desired.</p>
+
+<p>See <a href="/cm/dashboard/settings/account/add_quickmonitoring_graphs.html">Add QuickMonitoring Graphs</a></p>
+
+<h2 id="set-up-alerts">Set Up Alerts</h2>
+
+<h3 id="set-up-alerts-who-should-receive-alert-notifications-">Who should receive alert notifications?</h3>
+
+<h4 id="account-specific-alert-notifications">Account-specific Alert Notifications</h4>
+
+<p>Each RightScale account is pre-configured with three Alert Escalations (default, critical, and warning) that are commonly used by the core set of pre-configured alerts that are used in most ServerTemplates published by RightScale. The user who initially created the RightScale account (a.k.a. the <q>owner</q> of the RightScale account) will receive email notifications related to the account&#39;s pre-configured alert escalations (default, critical, and warning). It&#39;s recommended that you consider changing the email (user) that was initially associated with these alert escalations to a person/group (e.g. <a href="mailto:ops@example.com" title="mailto:ops@example.com">ops@example.com</a>) that&#39;s more appropriate for handling escalations related to your account.</p>
+
+<ol>
+<li>Go to <strong>Design &gt; Alert Escalations</strong>. At a minimum you should see the three, default pre-configured escalations. Notice that these alerts are configured to send emails to the &#39;owner&#39; of the account.<br>
+<img src="/img/cm-alert-escalations-email-original.png" alt="cm-alert-escalations-email-original.png" width="725" height="241" /></li>
+<li>Update the actions within each escalation, as necessary. Typically, most users prefer to update the default escalations to send emails (for triggered alerts) to an email alias instead of to an individual user. For example, perhaps you have an email alias for the operations team ( <a href="mailto:ops@example.com" title="mailto:ops@example.com">ops@example.com</a>) who manages all triggered alert conditions.<br></li>
+</ol>
+
+<h4 id="deployment-specific-alert-notifications">Deployment-specific Alert Notifications</h4>
+
+<p>Additionally, you may want to consider creating deployment-specific alert escalations, which would allow you to leverage the same alert escalations (e.g. critical, warning, etc.) across all of your ServerTemplates, while also giving you the flexibility to create a unique set of actions that&#39;s specific to a particular deployment.</p>
+
+<p>See <a href="/cm/dashboard/design/alert_escalations/alert_escalations_actions.html">Override Alert Escalations</a>.</p>
+
+<h3 id="set-up-alerts-how-can-i-track-and-forecast-cloud-infrastructure-costs-">How can I track and forecast cloud infrastructure costs?</h3>
+
+<p>The best way to manage your actual and projected cloud infrastructure costs is to use RightScale Optima. Read the <a href="http://www.rightscale.com/blog/cloud-cost-analysis/introducing-cloud-analytics-better-way-manage-cloud-costs">Introducing Optima: A Better Way to Manage Cloud Costs</a> blog post to learn how you can use this powerful tool to get a more accurate breakdown of cloud costs across your entire account because at the end of the day, both you and your CFO will sleep better at night knowing where your money is actually being spent in the cloud.</p>
+
+<ul>
+<li><a href="http://www.rightscale.com/products-and-services/products/cloud-analytics">Sign-up for Optima</a></li>
+</ul>
+
+<p><img src="/img/cm-cloud-analytics.png" alt="cm-cloud-analytics.png" width="725" height="403" /></p>
+
+<h2 id="set-up-logging">Set up Logging</h2>
+
+<h3 id="set-up-logging-where-can-i-view-a-server-s-log-files-">Where can I view a server's log files?</h3>
+
+<p>Log files are saved locally on a running server. You can view the logs by opening an SSH session and running the following commands.</p>
+
+<p><em>Note</em>: You will need to switch to the &#39;root&#39; user in order to view the log messages. Only users with &#39;server_login&#39; and &#39;server_superuser&#39; user role privileges will be allowed to view the logs.</p>
+<pre class="syntax-highlight plaintext"><code>sudo -i
+view /var/log/messages
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

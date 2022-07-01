@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RL10 Linux Resource Utilization(CPU,Memory,Network I/O)</title><meta content="RL10 resource utilization on linux." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="0" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.0&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.3/rl10_linux_resource_utilization">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_linux_resource_utilization">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_linux_resource_utilization.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_linux_resource_utilization.html">10.6.0</a></li></ul></div></div><div class="page-header"><h1>RL10 Linux Resource Utilization(CPU,Memory,Network I/O)</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>The intent of this document is to characterize the resource (CPU, memory and network) utilization of the RightLink agent (version 10.6) on Linux.</p>
+
+<h2 id="test-setup">Test Setup</h2>
+
+<ul>
+<li>Cloud - AWS</li>
+<li>OS - Ubuntu 16.04</li>
+<li>Instance - t2.micro with 1gb ram</li>
+<li>RightLink Agent - RL10.6</li>
+</ul>
+
+<h2 id="data-capture">Data Capture</h2>
+
+<p>The resource usage on the Linux server was captured using <code>htop</code> which is an <code>ncurses</code>-based implementation of the standard Linux <code>top</code> utility.  The <code>htop</code> utility was used as it allows all threads of a Linux process to be displayed and also facilitates process sorting which enables less cluttered views of the server’s resource utilization.</p>
+
+<h2 id="results">Results</h2>
+
+<p>The figure below shows the CPU utilization of RightLink (shown as <code>/usr/local/bin/rightlink</code> in the <strong>Command</strong> list) after installation on a quiescent Linux Ubuntu server.</p>
+
+<p><img src="/img/rightlink-10-6-resource-utilization-linux-1.png" alt="rightlink-10-6-resource-utilization-linux-1.png" width="1230" height="895" /></p>
+
+<p>The CPU utilization(<strong>CPU%</strong> column) is negligible (shown as <code>0%</code>) across all RightLink threads. The above image also shows the memory utilization (<strong>MEM%</strong> column) of RightLink on the same quiescent system. Each RightLink thread is shown as using approximately 1.1% of the available system memory. These threads share some memory so the total usage is significantly less than the sum of the threads shown.  When the collapsed view of <code>htop</code> was used (i.e. a single PID displayed per process), the total memory usage was 1.3%, which is approximately 13MB on a t2.micro with 1GB memory.</p>
+
+<p>The image above shows the <strong>normal</strong> state of RightLink when it is installed on a Linux server but is not actively processing any additional user-submitted (or automated) tasks.  To illustrate the resource utilization of RightLink when performing an additional task (in this case, the running of operational scripts, which were manually triggered, but could also be run via automation) two additional scripts were created.  The first runs a CPU-intensive application (<code>cpuburn</code>, in particular the <code>burnP6variant</code>), and the second downloads a very large file (1GB).  The intent here is to show what happens to RightLink from a CPU and memory perspective when running tasks that tax these resources.  The image below shows the <code>htop</code> output for CPU activity with <code>burnP6running</code> (and initiated via RightLink by the running of a RightScript on the server):</p>
+
+<p><img src="/img/rightlink-10-6-resource-utilization-linux-2.png" alt="rightlink-10-6-resource-utilization-linux-2.png" width="1230" height="889" /></p>
+
+<p>Please note that <code>burnP6</code> appears in the <strong>Command</strong> list (i.e. RightLink initiated the execution -- note the <code>rightlink</code> user in the <strong>USER</strong> column -- but RightLink is not the process running <code>burnP6</code>). The image below shows all the RightLink threads in the process table while the <code>burnP6</code> process is executing:</p>
+
+<p><img src="/img/rightlink-10-6-resource-utilization-linux-3.png" alt="rightlink-10-6-resource-utilization-linux-3.png" width="1228" height="891" /></p>
+
+<p>Note that the RightLink threads are all still at 0% CPU utilization.  The previous examples illustrate that the CPU utilization of RightLink on a quiescent system as well as a “busy” system (with that “busyness” initiated via RightLink) is negligible on a Linux server. </p>
+
+<p>The image below is the <code>htop</code> output while a 1GB file is being downloaded (with this download being initiated via RightLink by way of a RightScript manually run on the server):</p>
+
+<p><img src="/img/rightlink-10-6-resource-utilization-linux-4.png" alt="rightlink-10-6-resource-utilization-linux-4.png" width="1227" height="893" /></p>
+
+<p>Please note that red circled region which shows the process performing the download which is consuming approximately 5% of the system memory (as before, the process was initiated by RightLink, but it is not a RightLink thread that is performing the operation).  The next image is the <code>htop</code> output showing just the RightLink processes while the download was being performed: </p>
+
+<p><img src="/img/rightlink-10-6-resource-utilization-linux-5.png" alt="rightlink-10-6-resource-utilization-linux-5.png" width="1236" height="898" /></p>
+
+<p>Please note that the memory utilization of RightLink has not changed significantly and remains at approximately 1.2% (or roughly 12MB on a t2.micro instance). </p>
+
+<p>The two previous images show that the memory footprint of RightLink is fairly small (less than 20MB) and does not increase when memory usage increases via processes it has initiated.</p>
+
+<p>Here is the network utilization for rightlink 10 using native monitoring.</p>
+
+<p><img src="/img/rl10-linux-network-utilization.png" alt="rl10-linux-network-utilization.png" width="703" height="223" /></p>
+
+<p>The above discussion illustrates that the CPU, Memory, Network I/O footprints of RightLink 10.6 on a Linux server are fairly negligible, regardless if the system is quiescent or is under load due to a RightLink-initiated action.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

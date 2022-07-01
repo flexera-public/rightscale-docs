@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Create a Staging Deployment</title><meta content="RightScale makes it easy to create a staging deployment that you can use for development and testing. It should also be a necessary component for any software upgrade strategy." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_management_guide cm_management_guide_create_a_staging_deployment" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Lifecycle Management</a></p><div class="page-header"><h1>Create a Staging Deployment</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>The ability to create an isolated sandbox or <q>staging</q> environment for development and testing is one of the key benefits of working in the cloud. RightScale makes it easy to create a staging deployment that you can use for development and testing. It should also be a necessary component for any software upgrade strategy. The key benefit of a staging deployment is that you can create a duplicate of your production deployment for performing all types of performance tests.</p>
+
+<p>The steps below will walk you through the process of creating a separate staging deployment that&#39;s a working, but completely separate clone of your existing production deployment.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>This tutorial assumes that you&#39;re using <q>MySQL EBS</q> ServerTemplates for your master/slave database servers.</p>
+
+<h2 id="scenario">Scenario</h2>
+
+<p>For example, let&#39;s say you just had a major software release last week and now you need to push out some minor bug fixes. You need to update your application servers so that they use the latest branch in your SVN repository.</p>
+
+<p><img src="/img/cm-create-staging-deployment.png" alt="cm-create-staging-deployment.png" width="725" height="239" /></p>
+
+<h2 id="steps">Steps</h2>
+
+<ol>
+<li>Clone the existing production deployment.</li>
+<li>Create two new Elastic IPs for the staging front ends. (e.g. EIP-3, EIP-4) (If you launched the servers in your cloned deployment as-is, you would steal the Elastic IPs from your your production deployment.) You do not have to create new EIPs for the staging deployment&#39;s front ends, but it is recommended.</li>
+<li>Create four new A-Record entries with your DNS provider (e.g. DNSMadeEasy) that points to the new Staging Deployment:
+
+<ul>
+<li>stage.mysite.com assigned to &#39;EIP-3&#39;</li>
+<li>stage.mysite.com assigned to &#39;EIP-4&#39;</li>
+<li>masterstage.mysite.com on DDNS (You will use this value for setting the MASTER_DB_DNSID input)</li>
+<li>slavestage.mysite.com on DDNS (get the record number you will need it later)</li>
+</ul></li>
+<li>Since you might be using the same ServerTemplates in your cloned deployment, you&#39;ll want to change the inputs at the deployment level to completely isolate the staging deployment from the production deployment. At a minimum, you will need to change the following inputs for your cloned deployment:
+
+<ul>
+<li>DB_EBS_PREFIX or DB_LINEAGE_NAME - e.g. project_stage (<em>Important!</em> You do not want both your Production and Staging Deployments to create backups with the same lineage name. It&#39;s crucial that you isolate your backups from each other.)</li>
+<li>DB_HOST_NAME - e.g. masterstage.mysite.com</li>
+<li>LB_HOSTNAME - e.g. www4.stage.mysite.com</li>
+<li>MASTER_DB_DNSID: e.g. 1234567 (from step 3)</li>
+<li>MASTER_DB_DNSNAME: e.g. masterstage.mysite.com (from step 3)</li>
+<li>SLAVE_DB_DNSID: 7654321 (from step 3)</li>
+<li>WEBSITE_DNS: stage.mysite.com</li>
+</ul></li>
+<li>Create a final backup of the Master-DB in your production deployment by running the <q>DB EBS backup</q> RightScript. You will use this snapshot to build the Master-DB in the staging deployment. If you are not particular about having the most recent backup, you can select and use a previous backup snapshot.</li>
+<li>Once the snapshot is 100% complete you&#39;ll have the latest backup. (e.g. project_production-master-201105131545) Notice that it&#39;s using the DB_EBS_PREFIX or DB_LINEAGE_NAME input parameter (e.g. project_production) that&#39;s set in the production deployment.</li>
+<li>Launch the Master-DB in the staging deployment. When you see the launch inputs confirmation screen, you&#39;ll need to set a couple of inputs to select the desired backup to use build the staging deployment&#39;s database. The override inputs give you the ability to choose a specific EBS snapshot or EBS Stripe.
+
+<ul>
+<li>For <strong>EBS Non Stripe</strong> setups, set the following input:</li>
+<li>DB_RESTORE_PREFIX_OVERRIDE - Enter the full name of the snapshot that you want to use for the database restoration. You can use a master or slave backup. You will most likely use the database prefix that you&#39;re using in your production deployment. (e.g. project_production-master-201105131545)</li>
+<li>For <strong>EBS Stripe</strong> setups, set the following inputs:</li>
+<li>OPT_DB_RESTORE_LINEAGE_OVERRIDE - Enter the lineage name that you&#39;re going to restore from. This is most likely the lineage name that you&#39;re using in your production deployment. (e.g. project_production) If you only set this input, the most recently completed backup (master or slave) will be chosen. However, if you want to select a specific backup, you can specify a timestamp. See input below. You will need to specify the timestamp that&#39;s defined by the snapshot&#39;s tag (not name). (e.g. rs_backup:lineage=otherlineagename)</li>
+<li>OPT_DB_RESTORE_TIMESTAMP_OVERRIDE - Enter a specific timestamp of an existing stripe backup. You cannot provide an arbitrary timestamp value. You will need to specify the timestamp that&#39;s defined by the snapshot&#39;s tag (not name). (e.g. rs_backup:timestamp=1303613371) Leave this input blank if you want to use the most recent backup available (default).</li>
+</ul></li>
+<li>Once the Master-DB is operational, run the <q>DB EBS master restore</q> or <q>DB EBS restore and become master</q> RightScript on the server so that it will become the Master-DB for the staging deployment. The script will also initiate a backup after it&#39;s rebuilt the database on a volume stripe. The backup snapshots will be used when you later launch the Slave-DB. Note: The override inputs were only used by the restore script to initially build the database. However, backups that will be taken of the staging deployment&#39;s database will use the DB_EBS_PREFIX or DB_LINEAGE_NAME (e.g. project_stage) to name all future backup snapshots. Soon you will have separate backups for both your production and staging deployments.</li>
+<li>Once the snapshot of the staging deployment&#39;s Master-DB (e.g. project_stage-master-201105131710) is 100% complete, launch the Slave-DB server in the staging deployment. Since you have a backup of the Master-DB, set the following input: INIT_SLAVE_AT_BOOT = true. In just a few minutes you&#39;ll have a functional master/slave database setup in your staging deployment.</li>
+<li>Next, assign the new Elastic IPs (e.g. EIP-3, EIP-4) to the front end servers in the staging deployment. Configure them to be assigned at boot time. Launch the front end servers.</li>
+<li>Congratulations! You now have a fully functioning staging deployment that you can use for development or testing.</li>
+</ol>
+
+<p>This will give you a totally new, fully functional deployment that doesn&#39;t interfere with your production deployment in any way. It has a separate load balancer, separate database, and separate DNS entries. Use the Staging deployment to perform all of your development and testing. For example, use new/different ServerTemplates, add/modify RightScripts, specify different RightImages<sup>TM</sup>, change instance types, test your application code on the new database schema, etc. Periodically you might want to update your Staging deployment&#39;s Master-DB by using previous snapshots of the production database.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,775 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>End-to-End Examples</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>End-to-End Examples</h1></div><div class="main-content"><p>End-to-end (E2E) examples leverage the shorter more specific API examples, including a more practical, robust description of what is going on each step of the way.</p>
+
+<h2 id="beginner-e2e-api-example">Beginner E2E API Example</h2>
+
+<h3 id="beginner-e2e-api-example-objective">Objective</h3>
+
+<p>Combine several commonly used API calls into a practical end-to-end example that helps facilitate learning the RightScale API.</p>
+
+<h3 id="beginner-e2e-api-example-introduction">Introduction</h3>
+
+<p>This example leverages several stand-alone scripts that invoke the RightScale API via HTTP/curl calls. Each script has a <q>preamble</q> whereby it sets up the type of script and defines environment variables specific to the environment. For example, use the Bourne shell (/bin/sh) and set the Cloud ID to 2112. You may choose to change up your environment. That is, use C or Bash not the Bourne shell, or create a single script with one preamble where you set the shell type and define <em>all</em> required variables for all subsequent API calls. Whether you use a single script or several, your cloud resources are unique and you must identify them correctly. You may either obtain their ID&#39;s from the Dashboard (when available¹) or invoke the API and parse the output.</p>
+
+<p>Note that this format allows you to copy/paste example scripts, set the variables for your environment, and run them as is.</p>
+
+<p><strong>Reminder</strong> : API examples are meant as a learning tool, and should be utilized with the following additional resources:</p>
+
+<ul>
+<li><a href="http://reference.rightscale.com/api1.5/index.html">API on-line reference</a> - Use this as a reference to help construct URL&#39;s for API usage</li>
+</ul>
+
+<p>¹ Although you can discover many resource ID&#39;s by simply navigating the the RightScale Dashboard (helpful for learning and exploring the API), not all resources are available via the Dashboard. <em>Most notably, specific cloud resources must be obtained from API queries.</em> For example, when navigating to <strong>Clouds &gt;</strong> <em>CloudName</em> all resources supported by that cloud must be obtained via API queries. Lifting the number from the URL will not work.</p>
+
+<h3 id="beginner-e2e-api-example-steps">Steps</h3>
+
+<h4 id="authenticate">Authenticate</h4>
+
+<p>Before you can use the RightScale API, you must authenticate yourself as a Dashboard user. It is presumed you already have registered with RightScale, have access to a private or public cloud, and are able to log in ( <a href="https://my.rightscale.com">https://my.rightscale.com</a>) and navigate around the UI. Running the following will authenticate you and deposit a session cookie in the file &#39;mycookie&#39;. This cookie is valid for approximately two hours. Once authenticated, you can run additional API commands without authenticating again (for the life of the session cookie).</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">email</span><span class="o">=</span><span class="s2">"john.doe@example.com"</span> <span class="c"># The email address for your RightScale User in the Dashboard</span>
+    <span class="nv">pswd</span><span class="o">=</span><span class="s2">"SomeSecurePassword"</span> <span class="c"># Your User's password</span>
+    <span class="nv">account</span><span class="o">=</span><span class="s2">"1234"</span> <span class="c"># Account ID, easily obtained from navigation in the Dashboard</span>
+</code></pre>
+<pre class="syntax-highlight plaintext"><code>    curl -i -H X_API_VERSION:1.5 -c mycookie -X POST --data-urlencode "email=$email" --data-urlencode "password=$pswd" -d account_href=/api/accounts/"$account" https://us-3.rightscale.com/api/session
+</code></pre>
+
+<p><em><strong>Note:</strong></em> Although OAuthis preferred for production environments, the <em>Examples</em> section of the API guide uses standard user/pass authentication for simplicity sake.</p>
+
+<p><strong>Important!</strong>_  Be sure to use the correct API endpoint in accord with your account when using the API. If your Account is located in US-3, then you use US-3 API endpoint. Same applies when your account is in US-4.</p>
+
+<p>If you have not registered with RightScale, please contact <a href="mailto:sales@rightscale.com">sales@rightscale.com</a></p>
+
+<h4 id="list-clouds">List Clouds</h4>
+
+<p>Now that you have authenticated, you can tap into the power of the RightScale API. Lets start with a simple query for Cloud ID&#39;s. When you log into the RightScale Dashboard, your RightScale user and account only have access to some clouds, not all clouds. The List Clouds example below lists the Cloud ID&#39;s you have access too. Before you can create and launch a Server, you need to specify which cloud it should run in... hence listing clouds is a good place to start. In addition, listing resources is generally easier than creating them, so this is a good way to ease into using the API.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://us-3.rightscale.com/api/clouds.xml
+</code></pre>
+
+<p><strong>Other Notes:</strong></p>
+
+<ul>
+<li>You can specify the output as either <q>.json</q> or <q>.xml.</q> By default, if you do not specify a URL suffix, the API will respond in JSON format.</li>
+<li>Querying for information (such as listing available clouds) requires an HTTP GET method. Later, you&#39;ll modify resources that require other HTTP methods such as POST or DELETE in the URL construction.</li>
+<li>Select the appropriate Cloud ID from the response. For example, 1234 in the following sample output: <code>&lt;link href=&quot;/api/clouds/1234&quot; rel=&quot;self&quot;/&gt;</code></li>
+</ul>
+
+<h4 id="create-a-deployment">Create a Deployment</h4>
+
+<p>Deployments are a great way to organize your cloud assets. Lets create a deployment that you can later add servers to, launch those servers, etc. Note that a deployment is not cloud-specific, so there is no need to specify the Cloud ID for this example.</p>
+
+<p>Upon receiving a <q>HTTP/1.1 201 Created</q> response, you are ready to start creating cloud assets in your new deployment.</p>
+
+<p><strong>Note</strong> : The example above uses a <q>\</q> as a line continuation character for readability sake. Your scripts can do the same. Either way, Its important to know that the curl command issued must be interpreted by the shell as a single command.</p>
+
+<h4 id="create-a-security-group">Create a Security Group</h4>
+
+<p>Although not all clouds support security groups, they are quite common and a simple way to provide ingress security measures. First, you&#39;ll need to create the security group itself, then add any security group rules that should be enforced. Because security groups are cloud specific, a Cloud ID is required. Again, you can obtain your Cloud ID via the URL in the Dashboard ( <strong>Clouds &gt;</strong> <em>CloudName</em>) or by querying the API for it.</p>
+
+<p><strong>Reminder</strong> : Requires &#39;security_manager&#39; role on the account.</p>
+
+<h4 id="list-security-groups">List Security Groups</h4>
+
+<p>Security groups are cloud specific and a cloud resource who&#39;s ID is not obtainable from navigation within the RightScale Dashboard. In order to create security group rules you will have to provide the security group ID the rules apply to. Hence, listing the security group before creating individual rules is required.</p>
+
+<h4 id="create-a-security-group-rule">Create a Security Group Rule</h4>
+
+<p>In the same way that a deployment is a container for cloud assets, a security group is a container for security group rules. In and of themselves, a deployment does not actually do anything, neither does a security group. Creating a security group rule is done either by group or IP. This example is CIDR IP based. (The <em>Examples</em> section of the <em>RightScale API Guide</em> includes an example of creating one by group.)</p>
+
+<p><strong>Warning</strong> : Although its tempting to specify multiple start/end port combinations to allow access on additional ports, you cannot do that with a single API call.</p>
+
+<p>First, this example will open up port 22 allowing SSH access.</p>
+
+<p>Create Security Group Rules by CIDR IPS</p>
+
+<p>To enable browsing on HTTP port 80 you can simply:</p>
+
+<ul>
+<li>Copy the script above</li>
+<li>Change the start and end ports from 22 to 80</li>
+<li>Run the script</li>
+</ul>
+
+<p>You can add additional ports that should be opened up with similar logic. For example, to enable SSL change the start/stop port of 80 to 443, etc.</p>
+
+<h4 id="list-instance-types">List Instance Types</h4>
+
+<p>At this point its tempting to create and launch a server. However, there are two more parameters we&#39;ll need: the instance type and MCI (Multi Cloud Image). The instance type is a cloud specific resource that you will have to query the API for the correct ID. The MCI can be queried via the API using the MultiCloudImage resource, or using the Dashboard (click the MultiCloud Image link for the ServerTemplate your server is based on).</p>
+
+<p>Example instance types are small, medium and large (referring primarily to the memory and compute power). You&#39;ll need the instance type ID from the output looking similar to: <code>&lt;link href=&quot;/api/clouds/2112/instance_types/8E7KP200RBRU5&quot; rel=&quot;self&quot;/&gt;</code></p>
+
+<p><strong>Note</strong> : Above example output is XML.</p>
+
+<h4 id="create-a-server">Create a Server</h4>
+
+<p>Actually creating the server is arguably one of the more difficult API calls due to the number of parameters specified. Having obtained all of the information needed to create a server from either the API or navigating in the Dashboard, you are ready to invoke the API and create the <q>next instance</q> of the server. <em>Tip</em>: See other <a href="/api/api_1.5_examples/">API Examples</a> to help with your learning and getting additional resource information as needed.</p>
+
+<p><strong>Note</strong> : A <q>\</q> character has been added to allow a single curl command to continue for several lines in the editor. This is for readability sake. The shell will interpret the script&#39;s curl command as a single line.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"306795001"</span> <span class="c"># Deployment to add Server to</span>
+    <span class="nv">CLOUD</span><span class="o">=</span><span class="s2">"2112"</span> <span class="c"># Specify Cloud to add Server to</span>
+    <span class="nv">ST</span><span class="o">=</span><span class="s2">"250769001"</span> <span class="c"># Set the ServerTemplate the Server will be based on</span>
+    <span class="nv">SG</span><span class="o">=</span><span class="s2">"DEU7O32167MJ4"</span> <span class="c"># Set the Security Group</span>
+    <span class="nv">MCI</span><span class="o">=</span><span class="s2">"240802001"</span> <span class="c"># Set MultiCloud Image (MCI)</span>
+    <span class="nv">ITYPE</span><span class="o">=</span><span class="s2">"9F6N6MA39F7E9"</span> <span class="c"># Set the Instance Type for this Sever, this cloud, ...</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d server[name]<span class="o">=</span>my_app_server <span class="se">\</span>
+    -d server[description]<span class="o">=</span>my_app_server_description <span class="se">\</span>
+    -d server[deployment_href]<span class="o">=</span>/api/deployments/<span class="nv">$DEPLOYMENT</span> <span class="se">\</span>
+    -d server[instance][cloud_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span> <span class="se">\</span>
+    -d server[instance][server_template_href]<span class="o">=</span>/api/server_templates/<span class="nv">$ST</span> <span class="se">\</span>
+    -d server[instance][multi_cloud_image_href]<span class="o">=</span>/api/multi_cloud_images/<span class="nv">$MCI</span> <span class="se">\</span>
+    -d server[instance][instance_type_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/instance_types/<span class="nv">$ITYPE</span> <span class="se">\</span>
+    -d server[instance][security_group_hrefs][]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/security_groups/<span class="nv">$SG</span> <span class="se">\</span>
+    https://us-3.rightscale.com/api/servers
+</code></pre>
+
+<p>Although no content is generated, you should recive a <q>HTTP/1.1 201 Created</q> response. If the server cannot be created, API responses are quite good at indicating what the issue is. (Usually this is tied to missing or improperly specified parameters.)</p>
+
+<h4 id="list-all-servers-in-a-deployment">List all Servers in a Deployment</h4>
+
+<p>Its simple to list all servers in a deployment. If there are multiple servers they all get displayed. Note that for each server there will always be a <q>next instance</q>. This is all of the <q>DNA</q> or <q>blueprint</q> of information pertaining to the next server launched. There is also a <q>current instance</q> <em>if</em> the server has an a running instance as well. Although often times the current and next server are effectively the same, they do not have be. Consider any server level input changes... those are based on the next server, not the current one. Hence after server level input changes the current and next servers will differ. Similarly if you change the instance type, MCI, Datacenter / Zone, machine tags, etc.</p>
+
+<h4 id="launch-server">Launch Server</h4>
+
+<p>Now that the server ID is known a server can be launched. Recall that all specifics for a server (including the cloud, deployment, MCI, etc.) are specified when created, so only the server ID is required to launch.</p>
+
+<p>No content is returned just a <q>HTTP/1.1 201 Created</q> message.</p>
+
+<h4 id="run-(rinse-and-repeat)">Run (Rinse and Repeat)</h4>
+
+<p>At this point in the end-to-end example, you have learned how to authenticate, GET (list) information, POST (create) resources, etc. Your API <q>sandbox</q> has a deployment with a server up and running in your cloud of choice. If there are other aspects of the API you want to explore, now is a good time to do that. With these Examples and the Online Reference, you should be able to use the API for most tasks. Recall that several examples include a Supplemental section that often use filters to help narrow in on more specific content in the response. The next steps in this tutorial will shutdown and wrap up the deployment. (<em><strong>Reminder</strong></em> : If you have been creating temporary scripts on a server in the cloud using the servers local (ephemoral) storage, when terminating the server you will lose those scripts. If you want to retain them for future use remember to back them up... even it it&#39;s a simple copy/paste into local files on your PC, or a backup to a remote object store.)</p>
+
+<h3 id="beginner-e2e-api-example-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<h4 id="terminate-server">Terminate Server</h4>
+
+<p><strong>Warning!</strong> If you create shell scripts to test the API using local storage on a server in the cloud, when you terminate the server the scripts <em>will be lost.</em> That is not a permanent storage solution, but only exists for the life of the server. Because the sample scripts are so short, if you do need to terminate your server you can simply copy/paste the contents of the scripts into files stored on your local hard drive for future use.</p>
+
+<p>Of course the one piece of information required to terminate a server is the server ID itself. This can be obtained from either navigating in the Dashboard or querying the API. (See <em>Show Server</em> or <em>List all Servers in a Deployment</em> above for examples.)</p>
+
+<h4 id="delete-deployment">Delete Deployment</h4>
+
+<p><strong>Warning!</strong> You can delete an unlocked deployment, even if it has servers in it (provided the servers are <em>not</em> operational). Non-operational servers will get deleted along with the unlocked deployment.</p>
+
+<p>One use case for deleting a deployment is general cleanup. In fact, a use case for this entire end-to-end example (or something very similar) is automating the spin-up of a basic environment for people to get acquainted with the cloud and using the RightScale Dashboard. Although you could List Deployments in your enterprise training account, parse the output and delete them all programatically when the class is over, this example simply deletes a specific deployment.</p>
+
+<h2 id="create-3tier-servers">Create 3Tier Servers</h2>
+
+<h3 id="create-3tier-servers-objective">Objective</h3>
+
+<p>Use the RightScale API to create servers for a sample 3 tier deployment based on settings in configuration files.</p>
+
+<h3 id="create-3tier-servers-overview">Overview</h3>
+
+<h4 id="introduction">Introduction</h4>
+
+<p>The RightScale Support Portal tutorials and Training exercises often include a familiar production-like 3 tier architecture for running and managing your web servers in the cloud. This tutorial uses the API to create a 3 tier architecture consisting of 6 servers:</p>
+
+<ul>
+<li>2 HA proxy load balancers</li>
+<li>2 PHP application servers</li>
+<li>2 MySQL 5.5 database servers</li>
+</ul>
+
+<h4 id="use-case">Use Case</h4>
+
+<p>A possible use case for automating this procedure is a training environment where the ability to effectively <q>reset</q> the students environment is a simple script/API call away. Perhaps you have already trained your staff on the basics of the RightScale Dashboard. They know how to login, navigate, create a deployment, SSH keys, security groups, etc. However, their training environment often gets broken or muddled, so reconfiguring in an efficient manner to a <q>known</q> starting point is desirable. Then students can configure security group rules, download/configure your application, change deployment inputs, spin up servers in the proper order, lock them, etc.</p>
+
+<h4 id="advantages">Advantages</h4>
+
+<p>There are other potential advantages to using the API in a manner such as discussed in this 3 tier tutorial, such as:</p>
+
+<ul>
+<li>Environment control. Locking down and controlling your training environment, right down to the cloud and ServerTemplates used. In a training environment, using a HEAD version of a published ServerTemplate could sneak up and surprise you. For example, input name or default values could change or the introduction of new inputs could alter the behavior of the ServerTemplate. Programmatically creating your environment quickly and in a repeatable fashion may suit your needs.</li>
+<li>Out of band usage. That is, ability to create this environment external to the RightScale Dashboard. (You could even invoke the script using the API from a smart phone. For example, using a SSH client to access a host and invoke an API/script to create the environment, terminate or relaunch a server, etc.)</li>
+</ul>
+
+<h3 id="create-3tier-servers-steps">Steps</h3>
+
+<h4 id="configure">Configure</h4>
+
+<p>This script uses two very basic configuration files. The settings are read in from these files then used within the script. That way, you can <strong>configure one time</strong> , and run as often as required.</p>
+
+<p><strong><em>Warning!</em></strong> There is no input validation. The correct IDs are assumed, and a space is used for the delimiter.</p>
+
+<ul>
+<li><p><strong>generic.cfg</strong> - Contains three resource IDs <em>on one line</em> separated by white space. They are:</p>
+
+<ul>
+<li><em>&lt; Cloud_ID&gt; &lt; Deployment_ID&gt; &lt; SecurityGroup</em>ID¹&gt;_</li>
+<li>Example: 2117 316785001 DEU7O3167M2J4</li>
+</ul></li>
+<li><p><strong>3tier.cfg</strong> - Contains the ServerTemplate, MCI and Instance Type resource IDs for each tier (load balancer tier (LB), application tier (APP) and database (DB)). The format is also white space delimited <em>on a single line</em>. (<em>Note</em>: Shown on three lines below for readability.)</p>
+
+<ul>
+<li><em>&lt; ServerTemplate_LB&gt; &lt; MCI</em>LB&gt; &lt; Itype_LB&gt;_</li>
+<li><em>&lt; ServerTemplate_App&gt; &lt; MCI</em>App&gt; &lt; Itype_App&gt;_</li>
+<li><em>&lt; ServerTemplate_DB&gt; &lt; MCI</em>DB&gt; &lt; Itype_DB&gt;_</li>
+<li>Ex: 252299001 240802001 9F6N6MA39F7E9 252293001 240802001 9F6N6MA39F7E9 269641001 240802001 9F6N6MA39F7E9</li>
+</ul></li>
+</ul>
+
+<p>Note that if a ServerTemplate in your environment changes for an reason (new image, instance type size, inputs, etc.) you can modify your configuration file and re-run your script. No code changes are necessary once you have your script correct.</p>
+
+<p>¹ <em>Reminder</em>: Not all clouds support the same cloud resources. In our example, security groups are included. Some clouds do not support security groups. If this is the case, simply remove this entry from your generic.cfg file, as well as references to the $SG (security group) variable in the script.</p>
+
+<h4 id="authenticate">Authenticate</h4>
+
+<p>As always, you must be authenticated prior to using the RightScale API.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">email</span><span class="o">=</span><span class="s2">"john.doe@example.com"</span> <span class="c"># The email address for your RightScale User in the Dashboard</span>
+    <span class="nv">pswd</span><span class="o">=</span><span class="s2">"SomeSecurePassword"</span> <span class="c"># Your User's password</span>
+    <span class="nv">account</span><span class="o">=</span><span class="s2">"1234"</span> <span class="c"># Account ID, easily obtained from navigation in the Dashboard</span>
+
+    curl -i -H X_API_VERSION:1.5 -c mycookie -X POST --data-urlencode <span class="s2">"email=</span><span class="nv">$email</span><span class="s2">"</span> --data-urlencode <span class="s2">"password=</span><span class="nv">$pswd</span><span class="s2">"</span> -d <span class="nv">account_href</span><span class="o">=</span>/api/accounts/<span class="s2">"</span><span class="nv">$account</span><span class="s2">"</span> https://us-3.rightscale.com/api/session
+</code></pre>
+
+<p><em><strong>Note:</strong></em> Although OAuth is preferred for production environments, the <em>Examples</em> section of the API guide uses standard user/pass authentication for simplicity sake.</p>
+
+<p>If you have not registered with RightScale, sign up for FREE! <a href="https://www.rightscale.com/s/create-account.php?sd=Free&amp;t=supportal2"><input name="Free Edition" type="button" value="FREE Registration"></a></p>
+
+<h4 id="create-script">Create Script</h4>
+
+<p>Although the contents of our example script to create all the cloud resources is a bit long, the logic used is quite simple. The trick is configuring it correctly, and constructing the URLs appropriately.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="c">#</span>
+    <span class="k">if</span> <span class="o">[</span><span class="nv">$# </span>-ne <span class="s2">"1"</span><span class="o">]</span>; <span class="k">then
+            </span><span class="nb">echo</span> <span class="s2">"Usage: 3tier ServerNamePrefix"</span>
+            <span class="nb">echo</span> <span class="s2">"ServerNamePrefix will get prepended to all created servers"</span>
+            <span class="nb">echo</span> <span class="s2">"Exiting . . ."</span>
+            <span class="nb">exit </span>0
+    <span class="k">fi</span>
+    <span class="c"># CONFIGURATION</span>
+    <span class="nb">echo</span> <span class="s2">"Reading configuration files . . . "</span>
+    <span class="nb">read </span>CLOUD DEPLOYMENT SG &lt; generic.cfg
+    <span class="nb">read </span>ST_LB MCI_LB ITYPE_LB ST_APP MCI_APP ITYPE_APP ST_DB MCI_DB ITYPE_DB &lt; 3tier.cfg
+    <span class="nb">echo</span> <span class="s2">"Done (config)"</span>
+    <span class="nb">echo</span> <span class="s2">"Values set: </span><span class="nv">$ST_LB</span><span class="s2"> </span><span class="nv">$MCI_LB</span><span class="s2"> </span><span class="nv">$ITYPE_LB</span><span class="s2"> </span><span class="nv">$ST_APP</span><span class="s2"> </span><span class="nv">$MCI_APP</span><span class="s2"> </span><span class="nv">$ITYPE_APP</span><span class="s2"> </span><span class="nv">$ST_DB</span><span class="s2"> </span><span class="nv">$MCI_DB</span><span class="s2"> </span><span class="nv">$ITYPE_DB</span><span class="s2">"</span>
+
+    <span class="c"># Create Load Balancers</span>
+    <span class="nb">echo</span> <span class="s2">"Create Load Balancer #1"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d server[name]<span class="o">=</span><span class="nv">$1_load_balancer1</span> <span class="se">\</span>
+    -d server[description]<span class="o">=</span><span class="nv">$1_load_balancer1</span> <span class="se">\</span>
+    -d server[deployment_href]<span class="o">=</span>/api/deployments/<span class="nv">$DEPLOYMENT</span> <span class="se">\</span>
+    -d server[instance][cloud_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span> <span class="se">\</span>
+    -d server[instance][server_template_href]<span class="o">=</span>/api/server_templates/<span class="nv">$ST_LB</span> <span class="se">\</span>
+    -d server[instance][multi_cloud_image_href]<span class="o">=</span>/api/multi_cloud_images/<span class="nv">$MCI_LB</span> <span class="se">\</span>
+    -d server[instance][instance_type_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/instance_types/<span class="nv">$ITYPE_LB</span> <span class="se">\</span>
+    -d server[instance][security_group_hrefs][]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/security_groups/<span class="nv">$SG</span> <span class="se">\</span>
+    https://us-3.rightscale.com/api/servers
+    <span class="nb">echo</span> <span class="s2">"Done (load bal 1)"</span>
+
+    <span class="nb">echo</span> <span class="s2">"Create Load Balancer #2"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d server[name]<span class="o">=</span><span class="nv">$1_load_balancer2</span> <span class="se">\</span>
+    -d server[description]<span class="o">=</span><span class="nv">$1_load_balancer2</span> <span class="se">\</span>
+    -d server[deployment_href]<span class="o">=</span>/api/deployments/<span class="nv">$DEPLOYMENT</span> <span class="se">\</span>
+    -d server[instance][cloud_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span> <span class="se">\</span>
+    -d server[instance][server_template_href]<span class="o">=</span>/api/server_templates/<span class="nv">$ST_LB</span> <span class="se">\</span>
+    -d server[instance][multi_cloud_image_href]<span class="o">=</span>/api/multi_cloud_images/<span class="nv">$MCI_LB</span> <span class="se">\</span>
+    -d server[instance][instance_type_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/instance_types/<span class="nv">$ITYPE_LB</span> <span class="se">\</span>
+    -d server[instance][security_group_hrefs][]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/security_groups/<span class="nv">$SG</span> <span class="se">\</span>
+    https://us-3.rightscale.com/api/servers
+    <span class="nb">echo</span> <span class="s2">"Done (load bal 2)"</span>
+
+    <span class="nb">echo</span> <span class="s2">"Create App Server #1"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d server[name]<span class="o">=</span><span class="nv">$1_app_server1</span> <span class="se">\</span>
+    -d server[description]<span class="o">=</span><span class="nv">$1_app_server1</span> <span class="se">\</span>
+    -d server[deployment_href]<span class="o">=</span>/api/deployments/<span class="nv">$DEPLOYMENT</span> <span class="se">\</span>
+    -d server[instance][cloud_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span> <span class="se">\</span>
+    -d server[instance][server_template_href]<span class="o">=</span>/api/server_templates/<span class="nv">$ST_APP</span> <span class="se">\</span>
+    -d server[instance][multi_cloud_image_href]<span class="o">=</span>/api/multi_cloud_images/<span class="nv">$MCI_APP</span> <span class="se">\</span>
+    -d server[instance][instance_type_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/instance_types/<span class="nv">$ITYPE_APP</span> <span class="se">\</span>
+    -d server[instance][security_group_hrefs][]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/security_groups/<span class="nv">$SG</span> <span class="se">\</span>
+    https://us-3.rightscale.com/api/servers
+    <span class="nb">echo</span> <span class="s2">"Done (app server 1)"</span>
+
+    <span class="nb">echo</span> <span class="s2">"Create App Server #2"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d server[name]<span class="o">=</span><span class="nv">$1_app_server2</span> <span class="se">\</span>
+    -d server[description]<span class="o">=</span><span class="nv">$1_app_server2</span> <span class="se">\</span>
+    -d server[deployment_href]<span class="o">=</span>/api/deployments/<span class="nv">$DEPLOYMENT</span> <span class="se">\</span>
+    -d server[instance][cloud_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span> <span class="se">\</span>
+    -d server[instance][server_template_href]<span class="o">=</span>/api/server_templates/<span class="nv">$ST_APP</span> <span class="se">\</span>
+    -d server[instance][multi_cloud_image_href]<span class="o">=</span>/api/multi_cloud_images/<span class="nv">$MCI_APP</span> <span class="se">\</span>
+    -d server[instance][instance_type_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/instance_types/<span class="nv">$ITYPE_APP</span> <span class="se">\</span>
+    -d server[instance][security_group_hrefs][]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/security_groups/<span class="nv">$SG</span> <span class="se">\</span>
+    https://us-3.rightscale.com/api/servers
+    <span class="nb">echo</span> <span class="s2">"Done (app server 2)"</span>
+
+    <span class="nb">echo</span> <span class="s2">"Create DB Server #1"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d server[name]<span class="o">=</span><span class="nv">$1_db_server1</span> <span class="se">\</span>
+    -d server[description]<span class="o">=</span><span class="nv">$1_db_server1</span> <span class="se">\</span>
+    -d server[deployment_href]<span class="o">=</span>/api/deployments/<span class="nv">$DEPLOYMENT</span> <span class="se">\</span>
+    -d server[instance][cloud_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span> <span class="se">\</span>
+    -d server[instance][server_template_href]<span class="o">=</span>/api/server_templates/<span class="nv">$ST_DB</span> <span class="se">\</span>
+    -d server[instance][multi_cloud_image_href]<span class="o">=</span>/api/multi_cloud_images/<span class="nv">$MCI_DB</span> <span class="se">\</span>
+    -d server[instance][instance_type_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/instance_types/<span class="nv">$ITYPE_DB</span> <span class="se">\</span>
+    -d server[instance][security_group_hrefs][]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/security_groups/<span class="nv">$SG</span> <span class="se">\</span>
+    https://us-3.rightscale.com/api/servers
+    <span class="nb">echo</span> <span class="s2">"Done (db server #1)"</span>
+
+    <span class="nb">echo</span> <span class="s2">"Create DB Server #2"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d server[name]<span class="o">=</span><span class="nv">$1_db_server2</span> <span class="se">\</span>
+    -d server[description]<span class="o">=</span><span class="nv">$1_db_server2</span> <span class="se">\</span>
+    -d server[deployment_href]<span class="o">=</span>/api/deployments/<span class="nv">$DEPLOYMENT</span> <span class="se">\</span>
+    -d server[instance][cloud_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span> <span class="se">\</span>
+    -d server[instance][server_template_href]<span class="o">=</span>/api/server_templates/<span class="nv">$ST_DB</span> <span class="se">\</span>
+    -d server[instance][multi_cloud_image_href]<span class="o">=</span>/api/multi_cloud_images/<span class="nv">$MCI_DB</span> <span class="se">\</span>
+    -d server[instance][instance_type_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/instance_types/<span class="nv">$ITYPE_DB</span> <span class="se">\</span>
+    -d server[instance][security_group_hrefs][]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/security_groups/<span class="nv">$SG</span> <span class="se">\</span>
+    https://us-3.rightscale.com/api/servers
+    <span class="nb">echo</span> <span class="s2">"Done (db server #2)"</span>
+</code></pre>
+
+<h4 id="run-script">Run Script</h4>
+
+<p>Running the script is simple. It does require one command line argument however. Whatever you specify will be prepended to every server&#39;s name in your deployment. (This could be useful if working in a classroom environment. For example, prepend with real names or simply Student1, Student2, etc.)</p>
+
+<p><em>Reminder</em>: Don&#39;t forget to change your script&#39;s permissions so that it is executable. Further, if the current directory <q>.</q> is not in your environment&#39;s PATH variable you must invoke your script explicitly. (As shown below.)</p>
+
+<p>Before running your script:</p>
+
+<ul>
+<li>Navigate to the Deployment you are adding your 3 tier servers too</li>
+<li>Note what servers exist</li>
+</ul>
+
+<p>Now run your script, providing the name to prepend. (<em>Note</em>: Example output truncated.)</p>
+<pre class="syntax-highlight plaintext"><code>    $ ./3tier Bethany
+    Reading configuration file. . .
+    Done (config)
+    Values set: 252299001 240802001 9F6N6MA39F7E9 252293001 240802001 9F6N6MA39F7E9 269641001 240802001 9F6N6MA39F7E9
+    Create Load Balancer #1
+    HTTP/1.1 201 Created
+    Server: nginx/1.0.15
+    Date: Mon, 05 Nov 2012 16:40:17 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 201 Created
+    Location: /api/servers/571162001
+    X-Runtime: 688
+    X-Request-Uuid: f591fd74f1674457964586ee258265af
+    Set-Cookie:
+    Cache-Control: no-cache
+
+    Done (load bal 1)
+    Create Load Balancer #2
+    HTTP/1.1 201 Created
+    Server: nginx/1.0.15
+    Date: Mon, 05 Nov 2012 16:40:18 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 201 Created
+    Location: /api/servers/571163001
+    X-Runtime: 531
+    X-Request-Uuid: 3ab82dfdc84d45079b656ec605d6484a
+    Set-Cookie:
+    Cache-Control: no-cache
+
+    Done (load bal 2)
+
+    . . . .
+    Done (db server #2)
+</code></pre>
+
+<p>Now refresh your browser. You should see all servers created based on the cloud resources you specified in your configuration files. In our example:</p>
+
+<p><img src="/img/api-e2e-create-servers-via-api.png" alt="api-e2e-create-servers-via-api.png" width="663" height="604" /></p>
+
+<h3 id="create-3tier-servers-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<p>There are many ways to configure and accomplish the steps in this tutorial. It is meant as a learning tool and provide ideas that could work in your specific use case. Some may want to explore further or implement slightly different based on their needs.</p>
+
+<ul>
+<li>Convert the script above to a RightScript that uses inputs not configuration files</li>
+<li>Locate a client for your smart phone so you can invoke an API script remotely</li>
+<li>Add more elaborate configuration files and error checking/validation to your script</li>
+</ul>
+
+<h2 id="destroy-deployment">Destroy Deployment</h2>
+
+<p>To delete the deployment and all servers within it, based on information from a configuration file used to originally create the servers in the deployment.</p>
+
+<p><em><strong>Warning!</strong></em> The example script provided deletes all servers and the deployment itself. Please be sure that is the desired outcome before running the script. This script assumes the deployment you wish to delete is specified in the generic.cfg file.</p>
+
+<h3 id="destroy-deployment-overview">Overview</h3>
+
+<p>This tutorial is designed to clean up the example deployment and servers initially created in the Create 3 Tier Servers End to End tutorial. Note that the curl call is identical to the individual <em>Delete Deployment</em> API example. The only difference is the deployment ID is read in from a configuration file.</p>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h3 id="destroy-deployment-steps">Steps</h3>
+
+<h4 id="terminate-servers">Terminate Servers</h4>
+
+<p>Terminate any servers in the deployment if they are currently running. You can do this from the Dashboard or using the API.</p>
+
+<h4 id="verify-configuration">Verify Configuration</h4>
+
+<p>Verify the generic.cfg file contains the correct configuration informaiton. In our example, specify the Cloud ID (2112), Deployment number (306795001) and Security Group seperated by a space.</p>
+
+<p>2112 <strong>306795001</strong> DEU7O32167MJ4</p>
+
+<h4 id="create-script">Create Script</h4>
+
+<p>Create the following script, name it Destroy3tier.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="c"># CONFIGURATION</span>
+    <span class="nb">echo</span> <span class="s2">"Reading configuration files. . . "</span>
+    <span class="nb">read </span>CLOUD DEPLOYMENT SG &lt; generic.cfg
+    <span class="nb">echo</span> <span class="s2">"Done (config)"</span>
+    <span class="nb">echo</span> <span class="s2">"Deleting deployment number </span><span class="k">${</span><span class="nv">DEPLOYMENT</span><span class="k">}</span><span class="s2"> and all servers. . ."</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X DELETE https://us-3.rightscale.com/api/deployments/<span class="nv">$DEPLOYMENT</span>
+    <span class="nb">echo</span> <span class="s2">"Done."</span>
+</code></pre>
+
+<p><em>Reminder</em>: Make sure the script is executable before running it.</p>
+
+<p><code>$ chmod 755 Destroy3tier</code></p>
+
+<h4 id="run-script">Run Script</h4>
+<pre class="syntax-highlight plaintext"><code>    $ ./Destroy3tier
+    Reading configuration files. . .
+    Done (config)
+    Deleting deployment number 306795001 and all servers. . .
+</code></pre>
+
+<h3 id="destroy-deployment-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<ul>
+<li>Note you could also remove other resources, such as the security group (whose ID was also read in from the generic.cfg file)</li>
+<li>More intelligence could be added to this basic script to make it more practical. For example, rather than assuming the servers are shutdown, you could look for operational servers in the deployment and terminate and delete them. That leaves the option of not deleting the deployment itself, just the servers in it, and other cloud resources you do want remove.</li>
+</ul>
+
+<h2 id="saml-provisioning-api-e2e">SAML Provisioning API E2E</h2>
+
+<h3 id="saml-provisioning-api-e2e-objective">Objective</h3>
+
+<p>To become familiar with the basics of RightScale&#39;s Provisioning API through the use of SAML SSO. This includes understanding how to search for SAML identity providers, create users, grant and revoke privileges, and perform other various tasks through the RightScale API.</p>
+
+<h3 id="saml-provisioning-api-e2e-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>You must have an <a href="/cm/dashboard/settings/enterprise/index.html">Enterprise</a> plan</li>
+<li>You must have the &#39;admin&#39; permission enabled for every account whose users and permissions you wish to manage.</li>
+<li>You must have a SAML identity provider configured to a RightScale account. For more information, see our <a href="/platform/saml.html">SAML</a> page.</li>
+</ul>
+
+<h3 id="saml-provisioning-api-e2e-overview">Overview</h3>
+
+<p>This tutorial will outline how to use the RightScale API to create users configured with SAML. This end-to-end tutorial will walk you through how to locate you SAML identity provider information, create a user, and set up permissions for a newly created user via HTTP/curl calls. Additionally, it will explain how to update a current RightScale users with SAML and, at the end of the tutorial, will point to an advanced example that explains how RightScale manages and provisions a large number of internal users.</p>
+
+<p><strong>Note</strong> :</p>
+
+<ul>
+<li>Some code examples below contain a <q>\</q> character to allow a single curl command to continue for several lines in the editor. This is done for readability so the shell will interpret the script&#39;s curl command as a single line.</li>
+<li>Each section that contains a code example starts with a heading that corresponds to the auto-generated reference information of the RightScale API. For example, the section <a href="/api/api_1.5_examples/end-to-end_examples.html">Create Permissions</a> is an example based off of the <a href="http://reference.rightscale.com/api1.5/resources/ResourcePermissions.html#create">Create Permissions</a> reference information. You can use the headings as a way to navigate the <a href="http://reference.rightscale.com/api1.5/index.html">RightScale API Reference</a> information for more information about parameters, filters, or other calls that can be made with a resource.</li>
+<li>If you are using OpenID, you will not be able to use SAML. Disable OpenID before following the steps to set up SAML.</li>
+</ul>
+
+<h3 id="saml-provisioning-api-e2e-steps">Steps</h3>
+
+<h4 id="authenticate">Authenticate</h4>
+
+<p>You must be able to log in to your Enterprise account using SAML. See our <a href="/platform/saml.html">SAML</a> page on how to setup your account with this feature.</p>
+
+<p>Before making any API requests, you should enable OAuth 2.0 API access to each of your accounts.</p>
+
+<p><strong>Note</strong> : You can also login to the API using an email address and password, as described in <a href="/api/api_1.5_examples/authentication.html">Authentication</a>, but for the purposes of this tutorial, it is assumed that you are using SAML and have disabled password-based authentication to RightScale.</p>
+
+<p>Follow the steps below to enable OAuth:</p>
+
+<ol>
+<li>Make sure you&#39;re in the account you want to enable with OAuth.</li>
+<li>Go to <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>API Credentials</strong>.</li>
+<li>In <strong>Status</strong> , click <strong>enable</strong>.</li>
+<li>Obtain the API refresh token in order to make API requests without logging in. It&#39;s important that this token is protected.<br></li>
+</ol>
+
+<p><strong>Note</strong> : The hostname of the <q>Token Enpoint (API 1.5)</q> may vary between RightScale accounts depending on the geographical region in which each account is hosted. Make sure to use the correct endpoint for your account when making API request, both OAuth and otherwise.</p>
+
+<p>Once set up, you can make the following request. Note that this token does not expire until it is <q>disabled.</q> When it is <q>enabled,</q> a new token will be generated.</p>
+
+<p><strong>Warning!</strong> Anyone with this token can log in to the API and perform API requests on your behalf, with all the permissions you have access to. Protect this token appropriately.</p>
+
+<p><strong>Example Call</strong></p>
+<pre class="syntax-highlight plaintext"><code>    curl -i -H X-API-Version:1.5 -X POST \
+     -d refresh_token='cda1fe275610b099d0d901fb2c60512e0f2565e5' \
+     -d grant_type='refresh_token' \
+    https://us-3.rightscale.com/api/oauth2
+</code></pre>
+
+<p><strong>Example Response</strong></p>
+<pre class="syntax-highlight json"><code><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"access_token"</span><span class="p">:</span><span class="s2">"eNotkMuOg...8vf4A2GhbCA=="</span><span class="p">,</span><span class="w"> </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="mi">7200</span><span class="p">,</span><span class="w"> </span><span class="nt">"token_type"</span><span class="p">:</span><span class="s2">"bearer"</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Use the access_token in place of a session cookie when you make API requests. As documented in the <a href="http://reference.rightscale.com/api1.5/resources/ResourceOauth2.html">OAuth 2.0 Reference Documentation</a>, this is a bearer-type token, meaning that you should include it as an Authorization header with every request.</p>
+
+<p><strong>Note</strong> : With the exception of the first example below, the access_token will not be displayed in other examples for readability sake.</p>
+
+<h3 id="saml-provisioning-api-e2e-create-a-rightscale-user-with-saml">Create a RightScale User with SAML</h3>
+
+<h4 id="get-the-saml-identity-provider-href">Get the SAML Identity Provider Href</h4>
+
+<h4 id="list-identity-providers">List Identity Providers</h4>
+
+<p>After SAML is set up for your enterprise account, and you have been authenticated, you have to search for the identity provider associated with your account. This is so you can have the necessary information when creating a RightScale SAML user. The information you need first is the identity_provider_href. The identity_provider_href is the href of your SAML identity provider as known by RightScale.</p>
+
+<p><strong>Note</strong> : There is usually only one identity provider associated with an account.</p>
+
+<p><strong>Example Call</strong></p>
+<pre class="syntax-highlight plaintext"><code>    access_token="eNotkMuOg...8vf4A2GhbCA=="
+    curl -i -H X_API_VERSION:1.5 -H "Authorization: Bearer $access_token" \
+     -X GET https://us-3.rightscale.com/api/identity_providers.xml
+</code></pre>
+
+<p><strong>Example Response</strong></p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;identity_providers&gt;
+      &lt;identity_provider&gt;
+        &lt;created_at&gt;2013/01/04 23:31:06 +0000&lt;/created_at&gt;
+        &lt;discovery_hint&gt;examplecompany.com&lt;/discovery_hint&gt;
+        &lt;updated_at&gt;2013/01/04 23:38:40 +0000&lt;/updated_at&gt;
+        &lt;actions&gt;&lt;/actions&gt;
+        &lt;name&gt;Docs and Ed Test Provider&lt;/name&gt;
+        &lt;links&gt;
+          &lt;link href="/api/identity_providers/64" rel="self"/&gt;
+        &lt;/links&gt;
+      &lt;/identity_provider&gt;
+    &lt;/identity_providers&gt;
+</code></pre>
+
+<p>Make note of the self-link href that is associated with the identity provider you want. You will specify this href when creating users that are linked to this identity provider. The identity provider href never changes after it is created, so discovering your provider is generally a one-time operation.</p>
+
+<h3 id="saml-provisioning-api-e2e-preconfigure-a-new-user-with-saml">Preconfigure a New User with SAML</h3>
+
+<h4 id="create-a-user">Create a User</h4>
+
+<p>Before a user is created in RightScale, make sure the user is set up with an account with your SAML identity provider. You can only create or modify a user&#39;s authentication settings in RightScale when they are connected to your SAML identity provider. Creating a user with SAML access in RightScale is similar to <a href="/api/api_1.5_examples/users.html">creating a non-SAML user</a>, the only difference being the two additional parameters that need to be specified: identity_provider_href and principal_uid. The identity_provider_href is what is returned from the GET identity_providers request. The principal_uid has to be the unique identity information (the SAML NameID or Subject) that your identity provider associates to the user. This is usually an email address, but its format can change depending on how you have configured your identity provider.</p>
+
+<p><strong>Note</strong> :</p>
+
+<ul>
+<li>It&#39;s possible to enable a current RightScale user&#39;s with SAML settings. See <a href="/api/api_1.5_examples/end-to-end_examples.html">Update a Current RightScale User with SAML</a>to do this.</li>
+<li>Be careful using special characters when you input information, for example, adding <q>-</q> or <q>()</q> to the phone number can cause errors.</li>
+</ul>
+
+<p><strong>Example Call</strong></p>
+<pre class="syntax-highlight plaintext"><code>    curl -i -H X_API_VERSION:1.5 -H "Authorization: Bearer $access_token" -X POST \
+     -d user[email]=john.doe@example.com \
+     -d user[company]='Example Company' \
+     -d user[phone]=1234567890 \
+     -d user[first_name]=John \
+     -d user[last_name]=Doe \
+     -d user[identity_provider_href]='/api/identity_providers/64' \
+     -d user[principal_uid]='john.doe@example.com' \
+    https://us-3.rightscale.com/api/users
+</code></pre>
+
+<p><strong>Example Response</strong></p>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 201 Created
+    Server: nginx/1.0.14
+    Date: Tue, 08 Jan 2013 18:07:15 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 201 Created
+    Location: /api/users/64522
+    X-Runtime: 488
+    X-Request-Uuid: 63ddefa1840844a1a2069efb8546270a
+    Set-Cookie:
+    Cache-Control: no-cache
+</code></pre>
+
+<p>Make note of the href of the new user. In the example above, the location specifies the user href: /api/users/64522.</p>
+
+<h3 id="saml-provisioning-api-e2e-manage-permissions-for-a-saml-user">Manage Permissions for a SAML User</h3>
+
+<h4 id="create-permissions">Create Permissions</h4>
+
+<p>Once a user has been created, you should grant some permissions to that user in one or more accounts so the user can access the RightScale Dashboard. The first permission that must be added for a given account is &#39;observer.&#39; Observer allows a user to login to the account and view the Dashboard. Even if an &#39;admin&#39; role is added, the observer role still needs to be set first.</p>
+<pre class="syntax-highlight plaintext"><code>    curl -H X_API_VERSION:1.5 -H "Authorization: Bearer $access_token" \
+     -d permission[user_href]='/api/users/64522' \
+     -d permission[role_title]=observer \
+    -X POST https://us-3.rightscale.com/api/permissions
+</code></pre>
+
+<p>Once a user has the observer role, you can add additional roles as needed. For information on the roles a RightScale user can have, see <a href="/cm/ref/user_role_privs.html">User Roles Privileges</a>.</p>
+
+<p>Note that since each permission is modeled as a distinct REST resource, you can only grant one role per API call. Additionally, you can also manage a user&#39;s permissions through the RightScale Dashboard by going to <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Users</strong>.</p>
+
+<p><strong>Note</strong> : Before you can manage a user&#39;s permissions through the Dashboard, you must first set &#39;observer&#39; on the user so they appear in the Dashboard as a member of that account.</p>
+
+<h4 id="list-permissions">List Permissions</h4>
+
+<p>You can view the permissions available to a specific user by applying a filter on a GET call of the permissions collection. Displaying the permissions assigned to a user is helpful since you need the permission ID to remove an individual permission you previously granted.</p>
+
+<p><strong>Note</strong> : Attempting to show permissions on a user that has no permissions set would yield the same view as attempting to show a user that has not been created. In both cases, the response body will contain an empty list.</p>
+
+<p><strong>Example Call</strong></p>
+<pre class="syntax-highlight plaintext"><code>    curl -i -H X_API_VERSION:1.5 -H "Authorization: Bearer $access_token" \
+     -X GET https://us-3.rightscale.com/api/permissions.xml -d filter[]="user_href==/api/users/64522"
+</code></pre>
+
+<p>You will receive an output of all the permissions available to the specific user.</p>
+
+<p><strong>Example Response</strong></p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;permissions&gt;
+      &lt;permission&gt;
+        &lt;links&gt;
+          &lt;link href="/api/permissions/590219" rel="self"/&gt;
+          &lt;link href="/api/accounts/1234" rel="account"/&gt;
+          &lt;link href="/api/users/64522" rel="user"/&gt;
+        &lt;/links&gt;
+        &lt;created_at&gt;2012/10/04 19:25:29 +0000&lt;/created_at&gt;
+        &lt;role_title&gt;observer&lt;/role_title&gt;
+        &lt;actions&gt;&lt;/actions&gt;
+      &lt;/permission&gt;
+    &lt;/permissions&gt;
+</code></pre>
+
+<h4 id="destroy-permissions">Destroy Permissions</h4>
+
+<p>To remove permissions from an account, you will need to delete each permission using the permission IDs that are returned when showing the permissions of a specific user. You can remove all permissions of a user and they will no longer have access to RightScale. If you ever need to grant access to a user that has had all permissions removed, just <a href="/api/api_1.5_examples/end-to-end_examples.html">create permissions</a> for the user. Note that you will need the user&#39;s href to do this. If you don&#39;t recall the user&#39;s herf, you can create the user again and the href associated to the user&#39;s email will be returned. A new href will not be created for a user that has been previously created in RightScale.</p>
+
+<p><strong>Note</strong> :</p>
+
+<ul>
+<li>You must remove the &#39;observer&#39; permission last or you will receive an error. The observer role allows a user to login and view the RightScale Dashboard.</li>
+<li>Permissions can only be deleted one at a time since you are removing the permission ID associated to the user role.</li>
+</ul>
+
+<h3 id="saml-provisioning-api-e2e-update-a-current-rightscale-user-with-saml">Update a Current RightScale User with SAML</h3>
+
+<p>There are two uses cases that can occur when updating a RightScale user with SAML access.</p>
+
+<ul>
+<li>You can have a user linked to your identity provider. If that is done, you have the capability to update that user&#39;s information. This will include their email address, name, phone number, and SAML settings.</li>
+<li>If a user is <em>not</em> linked to your identity provider, you can find information about the user (by listing the user) and can grant or revoke privileges, but you cannot update their information.</li>
+</ul>
+
+<h4 id="link-a-user-to-your-identity-provider">Link a user to your Identity Provider</h4>
+
+<p>To link a user to your identity provider, you can have the user opt in through Authentication Settings in the RightScale Dashboard.</p>
+
+<p><strong>Note</strong> : You can avoid having to have a user opt in through the dashboard, but that would require having to create an entire new account for them (see <a href="/api/api_1.5_examples/end-to-end_examples.html">Create a RightScale User with SAML</a>).</p>
+
+<h4 id="list-users">List Users</h4>
+
+<p>When a user is linked to your identity provider, you can list them to find their information. When you list users, you will see every user that has any permission on the current account. You can apply a filter to help narrow your search. The example below looks for a particular user email. If a user is linked to your SAML identity provider, the identity provider href will be displayed below the user ID information.</p>
+
+<p><strong>Note</strong> :</p>
+
+<ul>
+<li>A user cannot have an account that uses both OpenID and SAML.</li>
+<li>If a user becomes unlinked from the identity provider, you will no longer be able to update the user information through the provisioning API.</li>
+</ul>
+
+<p><strong>Example Call</strong></p>
+<pre class="syntax-highlight plaintext"><code>    curl -i -H X_API_VERSION:1.5 -H "Authorization: Bearer $access_token" -X GET https://us-3.rightscale.com/api/users.xml -d filter[]="email==john.doe@example.com"
+</code></pre>
+
+<p><strong>Example Response</strong></p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;users&gt;
+      &lt;user&gt;
+        &lt;last_name&gt;Doe&lt;/last_name&gt;
+        &lt;updated_at&gt;2012/12/28 22:51:34 +0000&lt;/updated_at&gt;
+        &lt;links&gt;
+          &lt;link href="/api/users/7825" rel="self"/&gt;
+          &lt;link href="/api/identity_providers/64" rel="identity_provider"/&gt;
+        &lt;/links&gt;
+        &lt;/links&gt;
+        &lt;first_name&gt;John&lt;/first_name&gt;
+        &lt;email&gt;john.doe@example.com&lt;/email&gt;
+        &lt;company&gt;ExampleCompany&lt;/company&gt;
+        &lt;actions&gt;&lt;/actions&gt;
+        &lt;created_at&gt;2008/10/14 23:48:55 +0000&lt;/created_at&gt;
+        &lt;phone&gt;1234567890&lt;/phone&gt;
+      &lt;/user&gt;
+    &lt;/users&gt;
+</code></pre>
+
+<p>Make note of the user ID and identity provider ID.</p>
+
+<h4 id="update-users">Update Users</h4>
+
+<p>The same information is needed for updating a user as it is for creating a user, the only major difference is the call that&#39;s made. Instead of a POST to /api/users, you make a PUT request to /api/users/$user_id. You can update some or all of the user&#39;s attributes.</p>
+
+<p><strong>Note</strong> : Be careful when changing a user&#39;s principal_uid. This could prevent the user from being able to log in with SAML if the wrong value is accidentally provided. Or if you modify a user&#39;s identity_provider_href you can also prevent them from being able to log in or even prevent you from updating their information.</p>
+
+<p>The example below updates the listed user&#39;s company name and SAML identity provider information.</p>
+<pre class="syntax-highlight plaintext"><code>    user_id="7825"
+    curl -i -H X_API_VERSION:1.5 -H "Authorization: Bearer $access_token" -X PUT \
+     -d user[current_email]=john.smith@example.com \
+     -d user[company]='New Company' \
+     -d user[phone]=1234567890 \
+     -d user[first_name]=John \
+     -d user[last_name]=Doe \
+     -d user[identity_provider_href]='/api/identity_providers/76' \
+     -d user[principal_uid]='examplecompany.com' \
+    https://us-3.rightscale.com/api/users/$user_id
+</code></pre>
+
+<p><strong>Note</strong> : You will unable to modify a user that is not linked to your identity provider. If you attempt to, you will receive a 403 Forbidden error.</p>
+
+<h4 id="update-a-current-rightscale-user&#39;s-permissions">Update a Current RightScale User&#39;s Permissions</h4>
+
+<p>You can modify current user&#39;s permissions just like you would a newly created user. See <a href="/api/api_1.5_examples/end-to-end_examples.html">Manage Permissions for a SAML User</a>.</p>
+
+<h3 id="saml-provisioning-api-e2e-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<p>Now that you have been walked through the basics of how to create and provision users through the RightScale API, you may find it beneficial to see how this is done if you need to manage a large amount of users that need varying levels of permissions to RightScale. A RightScale developer created a RubyGem to help automate this for RightScale&#39;s own internal accounts, which can be viewed here: <a href="https://rubygems.org/gems/rs_user_policy">rs_user_policy</a>.</p>
+
+<p>You can also read this blog post for more information regarding this tool: <a href="http://www.rightscale.com/blog/cloud-management-best-practices/managing-large-scale-user-access-control-rightscale-api">Manage Large-Scale User-Access Control with the RightScale API</a>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

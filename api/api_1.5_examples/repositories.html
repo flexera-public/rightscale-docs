@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Repositories</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Repositories</h1></div><div class="main-content"><h2 id="create-repository">Create Repository</h2>
+
+<p>Creates a repository in an account.</p>
+
+<h3 id="create-repository-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>The following example creates a repository in your account and fetches the assets from the repository. It takes a couple moments for the repository assets to be fetched. You can perform a <a href="/api/api_1.5_examples/repositories.html">Show Repository</a> to view the fetch_status and check if the fetch has successfully completed.</p>
+
+<p><strong>Note</strong> :</p>
+
+<ul>
+<li>When adding a git repository, you need to need to use the repository[credentials][ssh_key] parameter. This value cannot be left blank. If the git repository is public and does not need an SSH Key, set the value to text:. If it is private, paste in text:<your SSH Key>. The source_type needs to be set to git. If you are using credentials, use cred:<SSH credential>.</li>
+<li>When adding an svn repository, you need to use the repository[credentials][username] and repository[credentials][password] parameters. If these values are blank, use text:. If it is private, specify text:<svn username> and text:<svn password> for the values of the parameters. The source_type needs to be set to svn. You can also use cred:<SVN username credential> and cred:<SVN password credential>.</li>
+<li>When uploading a compressed file, use the same parameters as you would with an svn repository. The source_type needs to be set to download.</li>
+</ul>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d repository[name]<span class="o">=</span>MyGitRepository <span class="se">\</span>
+    -d repository[source]<span class="o">=</span>https://github.com/rightscale/rightscale_cookbooks.git <span class="se">\</span>
+    -d repository[source_type]<span class="o">=</span>git <span class="se">\</span>
+    -d repository[credentials][ssh_key]<span class="o">=</span>text: <span class="se">\</span>
+    https://my.rightscale.com/api/repositories.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 201 Created
+    Server: nginx/1.0.14
+    Date: Wed, 04 Sep 2013 21:21:35 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 201 Created
+    Location: /api/repositories/239933001
+    X-Runtime: 371
+    X-Request-Uuid: 03c157ff325b4c28bde370f5a46ce79e
+    Set-Cookie:
+    Cache-Control: no-cache
+</code></pre>
+
+<h2 id="list-repositories">List Repositories</h2>
+
+<p>List all repositories of an account.</p>
+
+<h3 id="list-repositories-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>The following example will list all repositories added in an account. If you are looking for a specific repository, you can list all the repositories to locate the repository ID and perform a <a href="/api/api_1.5_examples/repositories.html">Show Repository</a>.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/repositories.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : Truncated XML output without headers included (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;repositories&gt;
+      &lt;repository&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/repositories/13"/&gt;
+        &lt;/links&gt;
+        &lt;updated_at&gt;2013/08/29 05:37:44 +0000&lt;/updated_at&gt;
+        &lt;source_type&gt;git&lt;/source_type&gt;
+        &lt;read_only&gt;false&lt;/read_only&gt;
+        &lt;credentials&gt;
+          &lt;ssh_key&gt;&lt;/ssh_key&gt;
+        &lt;/credentials&gt;
+        &lt;asset_paths&gt;
+          &lt;cookbooks&gt;
+            &lt;cookbook&gt;cookbooks&lt;/cookbook&gt;
+          &lt;/cookbooks&gt;
+        &lt;/asset_paths&gt;
+        &lt;source&gt;git://github.com/rightscale/cookbooks_public.git&lt;/source&gt;
+        &lt;created_at&gt;2009/09/16 05:28:40 +0000&lt;/created_at&gt;
+        &lt;commit_reference&gt;&lt;/commit_reference&gt;
+        &lt;description&gt;From JohnDoe - RightScale&lt;/description&gt;
+        &lt;name&gt;GitHub - rightscale/cookbooks_public&lt;/name&gt;
+        &lt;fetch_status&gt;
+          &lt;succeeded_at&gt;2013/08/29 05:37:44 +0000&lt;/succeeded_at&gt;
+          &lt;succeeded_commit&gt;0f255c3877210f6ece0a9cc8fc410c9c4f974055&lt;/succeeded_commit&gt;
+        &lt;/fetch_status&gt;
+        &lt;id&gt;13&lt;/id&gt;
+        &lt;actions&gt;
+          &lt;action rel="cookbook_import_preview"/&gt;
+          &lt;action rel="cookbook_import"/&gt;
+          &lt;action rel="refetch"/&gt;
+          &lt;action rel="resolve"/&gt;
+        &lt;/actions&gt;
+      &lt;/repository&gt;
+      &lt;repository&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/repositories/120"/&gt;
+        &lt;/links&gt;
+        &lt;updated_at&gt;2013/05/24 03:15:34 +0000&lt;/updated_at&gt;
+        &lt;source_type&gt;svn&lt;/source_type&gt;
+        &lt;read_only&gt;false&lt;/read_only&gt;
+        &lt;credentials&gt;
+          &lt;username&gt;text:jondoe&lt;/username&gt;
+          &lt;password&gt;text:password1&lt;/password&gt;
+        &lt;/credentials&gt;
+    . . .
+</code></pre>
+
+<h2 id="refetch-repository">Refetch Repository</h2>
+
+<p>Scrapes a repository for cookbooks and other RepositoryAssets.</p>
+
+<h3 id="refetch-repository-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>Refetching performs a scrape to see if any changes have been made to the source repository. This action will pull in assets from a repository added to an account. You can then perform an <a href="/api/api_1.5_examples/repositories.html">Import Cookbooks from a Repository</a> to bring cookbooks into your account and attach them when modifying a ServerTemplate. You can perform a <a href="/api/api_1.5_examples/repositories.html">Show Repository</a> to view the fetch_status to see if the refetch completed successfully.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST https://my.rightscale.com/api/repositories/248925001/refetch.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 204 No Content
+    Server: nginx/1.0.15
+    Date: Thu, 05 Sep 2013 20:30:23 GMT
+    Connection: keep-alive
+    Status: 204 No Content
+    X-Runtime: 341
+    X-Request-Uuid: 0c3909a2c4ad4c47930d2df4aed2caee
+    Set-Cookie:
+    Cache-Control: no-cache
+</code></pre>
+
+<h2 id="show-repository">Show Repository</h2>
+
+<p>Shows a single repository that has been added to an account.</p>
+
+<h3 id="show-repository-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>After performing a <a href="/api/api_1.5_examples/repositories.html">List Repositories</a>, you can get the repository ID and view the information of an individual repository. This can be beneficial when checking if a fetch has successfully completed after a repository has been created.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/repositories.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>The output below displays a repository that has not yet performed a fetch after its creation. Note the blank fetch_status.</p>
+
+<p><strong>Note</strong> : The XML output does not have headers (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;repository&gt;
+      &lt;links&gt;
+        &lt;link rel="self" href="/api/repositories/239957001"/&gt;
+      &lt;/links&gt;
+      &lt;updated_at&gt;2013/09/05 21:31:30 +0000&lt;/updated_at&gt;
+      &lt;source_type&gt;git&lt;/source_type&gt;
+      &lt;read_only&gt;false&lt;/read_only&gt;
+      &lt;credentials&gt;
+        &lt;ssh_key&gt;text:&lt;/ssh_key&gt;
+      &lt;/credentials&gt;
+      &lt;asset_paths&gt;
+        &lt;cookbooks&gt;&lt;/cookbooks&gt;
+      &lt;/asset_paths&gt;
+      &lt;source&gt;https://github.com/rightscale/rightscale_cookbooks.git&lt;/source&gt;
+      &lt;created_at&gt;2013/09/05 21:31:30 +0000&lt;/created_at&gt;
+      &lt;name&gt;GitRepositoryAPIExample&lt;/name&gt;
+      &lt;fetch_status&gt;&lt;/fetch_status&gt;
+      &lt;id&gt;239957001&lt;/id&gt;
+      &lt;actions&gt;
+        &lt;action rel="cookbook_import_preview"/&gt;
+        &lt;action rel="cookbook_import"/&gt;
+        &lt;action rel="refetch"/&gt;
+        &lt;action rel="resolve"/&gt;
+      &lt;/actions&gt;
+    &lt;/repository&gt;
+</code></pre>
+
+<p>The output below displays a repository that has successfully performed a fetch moments after the repository was added. Note the information in fetch_status.</p>
+
+<p><strong>Note</strong> : The XML output does not have headers (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;repository&gt;
+      &lt;links&gt;
+        &lt;link rel="self" href="/api/repositories/239957001"/&gt;
+      &lt;/links&gt;
+      &lt;updated_at&gt;2013/09/05 21:33:07 +0000&lt;/updated_at&gt;
+      &lt;source_type&gt;git&lt;/source_type&gt;
+      &lt;read_only&gt;false&lt;/read_only&gt;
+      &lt;credentials&gt;
+        &lt;ssh_key&gt;text:&lt;/ssh_key&gt;
+      &lt;/credentials&gt;
+      &lt;asset_paths&gt;
+        &lt;cookbooks&gt;&lt;/cookbooks&gt;
+      &lt;/asset_paths&gt;
+      &lt;source&gt;https://github.com/rightscale/rightscale_cookbooks.git&lt;/source&gt;
+      &lt;created_at&gt;2013/09/05 21:31:30 +0000&lt;/created_at&gt;
+      &lt;name&gt;GitRepositoryAPIExample&lt;/name&gt;
+      &lt;fetch_status&gt;
+        &lt;output&gt;
+    Cookbooks refresh for GitRepositoryAPIExample completed successfully.
+
+    Saved results
+    &lt;/output&gt;
+        &lt;succeeded_at&gt;2013/09/05 21:33:07 +0000&lt;/succeeded_at&gt;
+        &lt;succeeded_commit&gt;9b6855d69fb0847e925c4747129c552c8c7971d8&lt;/succeeded_commit&gt;
+      &lt;/fetch_status&gt;
+      &lt;id&gt;239957001&lt;/id&gt;
+      &lt;actions&gt;
+        &lt;action rel="cookbook_import_preview"/&gt;
+        &lt;action rel="cookbook_import"/&gt;
+        &lt;action rel="refetch"/&gt;
+        &lt;action rel="resolve"/&gt;
+      &lt;/actions&gt;
+    &lt;/repository&gt;
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

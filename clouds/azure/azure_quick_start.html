@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Azure Quick Start</title><meta content="This page provides you with quick start instructions for managing basic Microsoft Azure assets in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="clouds clouds_azure clouds_azure_azure_quick_start" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="azure_about.html"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Microsoft Azure (Classic)</span></h4></a><a class="list-group-item" href="azure_quick_start.html">Quick Start</a><a class="list-group-item" href="azure_tutorials.html">Tutorials</a><a class="list-group-item" href="/faq/clouds/azure/">FAQs</a><a class="list-group-item" href="Guide_for_Evaluating_Microsoft_Azure.html">Evaluation Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Supported Clouds</a> &#x2F; <a href="./">Microsoft Azure (Classic)</a></p><div class="page-header"><h1>Azure Quick Start</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To provide you with quick start instructions for managing basic Microsoft Azure assets in the RightScale Dashboard.</p>
+
+<ul>
+<li><strong>Add</strong> - Register Azure with the RightScale Dashboard</li>
+<li><strong>Import</strong> - Import a base ServerTemplate from the MultiCloud Marketplace</li>
+<li><strong>Launch</strong> - Launch a Server</li>
+</ul>
+
+<h2 id="add-azure">Add Azure</h2>
+
+<p>First you will need to register your Microsoft Azure cloud account with RightScale so that you can use the RightScale Dashboard to manage your Azure cloud resources.</p>
+
+<p><strong>Note</strong>: If you have never signed up for an Azure account, you will need to carry out that one-time pre-requisite step. To do so, please see <a href="http://support.rightscale.com/09-Clouds/Microsoft_Azure/Tutorials/Sign_up_for_Microsoft_Azure/index.html">Sign up for Microsoft Azure</a> tutorial, then return and carry out the three steps in this tutorial.</p>
+
+<p><strong>Prerequisite</strong>: In order to add Microsoft Azure, you must be an &#39;admin&#39; user of the RightScale account.</p>
+
+<h3 id="add-azure-connect-to-a-cloud">Connect to a Cloud</h3>
+
+<ol>
+<li>After logging into the Dashboard, go to <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Clouds</strong>. Click <strong>Connect to a Cloud.</strong></li>
+<li>Next, click the (+) icon next to Microsoft Azure.</li>
+</ol>
+
+<p><strong>NOTE</strong>: Azure is a cloud with several regions which you can view by clicking the arrow next to its name in the <q>Connect to Public Clouds</q> box. For every region, you must register individually using the same Azure credentials. Only 5 regions can be added to a RightScale account. RightScale requires a virtual network for each region. By default Microsoft Azure subscriptions have a maximum of 5 virtual networks they can create. This means that only up to 5 regions can be added to RightScale by default. Please contact Microsoft to request more virtual networks in your subscription if needed.</p>
+
+<h3 id="add-azure-upload-publish-profile">Upload Publish Profile</h3>
+
+<p><strong>NOTE</strong> : Make sure you are signed up for <a href="http://support.rightscale.com/09-Clouds/Microsoft_Azure/Tutorials/Sign_up_for_Microsoft_Azure/index.html">‘Virtual Machines &amp; Virtual Networks’</a>.</p>
+
+<p>Next, upload your publish profile file.;</p>
+
+<h3 id="add-azure-select-a-subscription-id">Select a Subscription ID</h3>
+
+<p>Select a Subscription ID from the drop-down list. This lists all your Subscription IDs found at <a href="https://account.windowsazure.com/Subscriptions">https://account.windowsazure.com/Subscriptions</a> when logged in. Click on the ‘Subscriptions’ link at the top of your Microsoft Azure portal.</p>
+
+<p><strong>NOTE</strong>: Azure does not currently support specifying the public IP space. They dynamically assign public IPs.</p>
+
+<p>Click <strong>Continue</strong>.</p>
+
+<p>You are going to be registering a Microsoft Azure subscription where you will specify a virtual network and subnet where virtual machines launched via RightScale will be provisioned. If virtual networks already exist within this Microsoft Azure subscription you will be given the option to select a virtual network on the next page. If no virtual networks exist within this Microsoft Azure subscription, RightScale will create one on your behalf. When creating a subnet within that virtual network, we will use the private IP range specified in the Subnet Prefix field on the next page.</p>
+
+<h3 id="add-azure-no-existing-virtual-network">No Existing Virtual Network</h3>
+
+<p><strong>Subnet Prefix:</strong> Specify a Private IP address range in CIDR format for the subnet that will be created on your behalf in Azure.</p>
+
+<h3 id="add-azure-existing-virtual-network">Existing Virtual Network</h3>
+
+<p>If you have an existing virtual network, you must go back into the Azure portal and make sure there’s a subnet within the virtual network with same name as the virtual network itself.</p>
+
+<ul>
+<li>Navigate to Preview.</li>
+<li>Choose Networks on the left panel which will take you to Virtual Networks.</li>
+<li>Click on the name of your virtual network.</li>
+<li>Click Configure.</li>
+</ul>
+
+<p>Add a subnet with the same name as the virtual network.</p>
+
+<p>Once you have an existing virtual network and subnet, you will see the following screen:</p>
+
+<p>Select your virtual network and subnet and click <strong>Continue</strong>.</p>
+
+<p>Once your cloud credentials have been verified, you will see that the Microsoft Azure cloud is enabled under the Clouds tab. You will now see all of your Microsoft Azure resources under the Clouds menu (Clouds <em>&gt;</em> Microsoft Azure). You may need to refresh the tab to view your newly added Azure cloud.</p>
+
+<h3 id="add-azure-check-the-cloud-status">Check the cloud status</h3>
+
+<p>On the same Clouds tab or on the Cloud Credentials widget in the Overview tab, you may check the status of your cloud. Both of these items must be valid and active (green) in order to successfully launch cloud servers:</p>
+
+<p><strong>NOTE</strong> : RightScale could take several hours to discover the instance types before you can launch a server after initially adding a cloud.</p>
+
+<h2 id="import-servertemplate">Import ServerTemplate</h2>
+
+<p>Import a ServerTemplate. Although many ServerTemplates from the Multi-Cloud Marketplace work in Azure, for this tutorial please use the <q>Base ServerTemplate for Windows</q>. That ServerTemplate is the <q>blueprint</q> for the Server you will launch in the next and final step. Log into the Dashboard and follow the steps below.</p>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong></li>
+<li>Find and select the appropriate ServerTemplate. Browse by categories, perform a keyword search, or use the filter options to find the correct ServerTemplate.</li>
+<li>Click <strong>Import</strong>.<br></li>
+</ol>
+
+<p>Once imported, the ServerTemplate and associated RightScripts are considered part of your <q>local</q> collection.</p>
+
+<p><strong>Note</strong> : If you have problems finding the ServerTemplate, here is an example full URL (below). You can click on that URL and import the ServerTemplate instead of the steps above. <a href="http://www.rightscale.com/library/server_templates/Base-ServerTemplate-for-Window/lineage/7210">http://www.rightscale.com/library/server_templates/Base-ServerTemplate-for-Window/lineage/7210</a></p>
+
+<h2 id="launch-server">Launch Server</h2>
+
+<p>Add and launch the Server that is based on the ServerTemplate you just imported. Click the <q>Add Server</q> action button. This will start the Add Server Assistant.</p>
+
+<h3 id="launch-server-new-server">New Server</h3>
+
+<ul>
+<li>Select <q>Azure</q> from the Cloud drop-down menu</li>
+<li>Select <q>**Default**</q> from the Deployment drop-down menu (<em>Tip</em>: Alternatively, you could of course select an existing Deployment name. Deployments are simply containers to organize your cloud assets. See <a href="/cm/dashboard/manage/deployments/deployments_actions.html#create-a-new-deployment">Create a New Deployment</a> in the <em>Dashboard Users Guide</em> for more information.)</li>
+<li>Click <q>**Continue**</q></li>
+</ul>
+
+<h3 id="launch-server-server-details">Server Details</h3>
+
+<p>The Server Details dialog is split into two windows: <strong>Hardware</strong> on the left, and <strong>Networking</strong> on the right. Provide the following information for each:</p>
+
+<ul>
+<li><strong>Hardware</strong> - Leave the default values for Server Name, MultiCloud Image and Instance Type.</li>
+<li>Click the <q>**Confirm**</q> action button when ready</li>
+</ul>
+
+<h3 id="launch-server-confirm">Confirm</h3>
+
+<p>The <strong>Confirm</strong> tab provides a detailed summary of the server you&#39;re about to create in the cloud. If you are satisfied with your selections, click <strong>Finish</strong> to create the server.</p>
+
+<h3 id="launch-server-launch">Launch</h3>
+
+<p>After confirming your server creation, you are automatically placed in the correct deployment, viewing the server you just created.</p>
+
+<ul>
+<li>Click the <q>**Launch**</q> action button</li>
+<li><em>Note</em>: With more complicated server setups you would have the opportunity to set Inputs (server variables). Your server is already configured for you however, so you can simply click the <q>**Launch**</q> action button one last time.</li>
+<li>The server is launched and you should see a message in the blue banner near the top of the Dashboard similar to:</li>
+</ul>
+
+<p>Launched server Base ServerTemplate for Windows</p>
+
+<p>Congratulations! You just launched your first server in Microsoft Azure using the RightScale Dashboard... in 3 easy steps! In approximately 15 minutes your server state should progress from <q>pending</q> to <q>operational</q>. Don&#39;t forget to terminate your server when finished using it to avoid any unnecessary charges.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

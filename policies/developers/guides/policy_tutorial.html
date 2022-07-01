@@ -1,0 +1,302 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Policy Tutorial</title><meta content="This page is a tutorial on developing a custom policy using the fpt tool." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="policies policies_developers policies_developers_guides policies_developers_guides_policy_tutorial" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/"><h4 class="list-group-heading"><img src="../../../img/product-governance.svg" /><span>Policies Users Guide</span></h4></a><a class="list-group-item" href="/policies/">About</a><a class="list-group-item" href="/policies/users/getting_started">Getting Started</a><a class="list-group-item" href="/policies/users/guides">Guides</a><a class="list-group-item" href="../../users/policy_list.html">Flexera Policies</a><a class="list-group-item" href="/policies/users/faq">FAQ</a></nav></aside><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/developers"><h4 class="list-group-heading"><img src="../../../img/product-governance.svg" /><span>Policies Developers Guide</span></h4></a><a class="list-group-item" href="/policies/developers">Overview</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">Policy Automation</a> &#x2F; <a href="../">Developers Guide</a> &#x2F; <a href="./">Developers Guide</a></p><div class="page-header"><h1>Policy Tutorial</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This page walks through the development of a policy using the <a href="https://github.com/rightscale/policy_sdk/tree/master/cmd/fpt"><code>fpt</code> command-line tool</a> to demonstrate the general approach and utilities that can be used when developing custom policies. </p>
+
+<p>It is recommended you store policy template code in a source control system, such as github, with the extension &#39;.pt&#39;. Policies can be developed in any text editor and then uploaded and applied to an account using the policy manager UI or the <code>fpt</code> tool. </p>
+
+<p>For this example we&#39;re going to create a policy that identifies and deletes unattached IP addresses. On AWS, these correspond to elastic IPs and cost money even when not in use. These type of resources can often accumulate if left unchecked and run up cost unnecessarily.</p>
+
+<h2 id="determine-inputs">Determine inputs</h2>
+
+<p>As a policy designer, you will need to determine what inputs you need from users to effectively deploy this policy.</p>
+
+<p>This policy will accept two parameters:</p>
+
+<ul>
+<li><code>param_whitelist</code>: IP addresses to not consider for deletion</li>
+<li><code>param_email</code>: who to email reports to</li>
+</ul>
+
+<h2 id="gathering-data">Gathering data</h2>
+
+<p>The initial policy code we develop will include the inputs we need and then will call any APIs that are needed to gather the data for this policy. Starting with this step ensures that data is being retrieved as expected, and saves the validation and actions until we ensure our data is correct.</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s2">"Unattached IP Addresses"</span>
+<span class="n">rs_pt_ver</span> <span class="mi">20180301</span>
+<span class="n">type</span> <span class="s2">"policy"</span>
+<span class="n">short_description</span> <span class="s2">"Cleanup Unattached IP addresses"</span>
+<span class="n">long_description</span> <span class="s2">"Checks for Unattached IP Addresses and automatically deletes them."</span>
+<span class="n">severity</span> <span class="s2">"low"</span>
+<span class="n">category</span> <span class="s2">"Cost"</span>
+
+<span class="n">permission</span> <span class="s2">"perm_read__ip_addresses"</span> <span class="k">do</span>
+  <span class="n">actions</span>   <span class="s2">"rs_cm.show"</span><span class="p">,</span><span class="s2">"rs_cm.index"</span>
+  <span class="n">resources</span> <span class="s2">"rs_cm.ip_addresses"</span><span class="p">,</span><span class="s2">"rs_cm.clouds"</span>
+<span class="k">end</span>
+
+<span class="n">parameter</span> <span class="s2">"param_whitelist"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"list"</span>
+  <span class="n">label</span> <span class="s2">"White list of IP Addresses to keep"</span>
+<span class="k">end</span>
+
+<span class="n">resources</span> <span class="s2">"clouds"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.clouds"</span>
+
+<span class="n">resources</span> <span class="s2">"addresses"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"rs_cm.ip_addresses"</span> <span class="k">do</span>
+  <span class="n">iterate</span> <span class="vi">@clouds</span>
+  <span class="n">cloud_href</span> <span class="n">href</span><span class="p">(</span><span class="n">iter_item</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">policy</span> <span class="s2">"unattached_ip_addresses"</span> <span class="k">do</span>
+  <span class="n">validate_each</span> <span class="vi">@addresses</span> <span class="k">do</span>
+    <span class="n">summary_template</span> <span class="s2">"Unattached IP addresses to delete"</span>
+    <span class="n">detail_template</span> <span class="o">&lt;&lt;-</span><span class="no">EOF</span><span class="sh">
+# Unattached IP Addresses
+{{ range data -}}
+{{ end -}}
+</span><span class="no">EOF</span>
+    <span class="c1"># check ... TBD -- set to false for now</span>
+    <span class="n">check</span> <span class="kp">false</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>In order to pass syntax checks and ensure that an incident is created with our data, we&#39;ve used a <code>check false</code> in the <code>validate_each</code> statement, which we&#39;ll come back to later to provide a real check.</p>
+
+<p>After saving the file as tutorial.pt you can run it with <code>fpt run tutorial.pt param_whitelist=</code>. Running the command will output the debug log which will show a list of API calls as the policy executes. If you have any IP addresses in this account, you should see them here. If not, you can create them in the RightScale <a href="/cm/dashboard/">Cloud Management dashboard</a> under Clouds -&gt; Cloud name -&gt; IP Addresses -&gt; New. </p>
+
+<p>You can then run the policy again to see how results have updated after adding more IP addresses. Or you can do a <code>fpt retrieve_data tutorial.pt param_whitelist=</code> to download the data to disk for use in later commands. The <code>retrieve_data</code> command will run the policy and extract the datasource data. For this example it will output <code>resources_clouds.json</code> and <code>resources_addresses.json</code>, saving them to disk.</p>
+
+<p>Here&#39;s a sample API response with one sample unattached IP and one sample attached IP:</p>
+<pre class="syntax-highlight shell"><code><span class="o">[</span>
+  <span class="o">{</span>
+    <span class="s2">"address"</span>: <span class="s2">"10.20.30.50"</span>,
+    <span class="s2">"created_at"</span>: <span class="s2">"2018/05/07 22:00:12 +0000"</span>,
+    <span class="s2">"domain"</span>: <span class="s2">"ec2_classic"</span>,
+    <span class="s2">"links"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        <span class="s2">"href"</span>: <span class="s2">"/api/clouds/1/ip_addresses/B41PVJI70FMLO"</span>,
+        <span class="s2">"rel"</span>: <span class="s2">"self"</span>
+      <span class="o">}</span>,
+      <span class="o">{</span>
+        <span class="s2">"href"</span>: <span class="s2">"/api/networks/98IF6IJR1ERIB"</span>,
+        <span class="s2">"rel"</span>: <span class="s2">"network"</span>
+      <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"name"</span>: <span class="s2">"unattached_ip_address"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2018/05/07 22:00:12 +0000"</span>
+  <span class="o">}</span>,
+  <span class="o">{</span>
+    <span class="s2">"address"</span>: <span class="s2">"10.20.30.40"</span>,
+    <span class="s2">"created_at"</span>: <span class="s2">"2014/10/03 17:17:34 +0000"</span>,
+    <span class="s2">"domain"</span>: <span class="s2">"ec2_classic"</span>,
+    <span class="s2">"links"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        <span class="s2">"href"</span>: <span class="s2">"/api/clouds/1/ip_addresses/4C25RVT8G7U3B"</span>,
+        <span class="s2">"rel"</span>: <span class="s2">"self"</span>
+      <span class="o">}</span>,
+      <span class="o">{</span>
+        <span class="s2">"href"</span>: <span class="s2">"/api/networks/C72HP153S3UOF"</span>,
+        <span class="s2">"rel"</span>: <span class="s2">"network"</span>
+      <span class="o">}</span>,
+      <span class="o">{</span>
+        <span class="s2">"href"</span>: <span class="s2">"/api/deployments/454876003"</span>,
+        <span class="s2">"rel"</span>: <span class="s2">"deployment"</span>
+      <span class="o">}</span>,
+      <span class="o">{</span>
+        <span class="s2">"href"</span>: <span class="s2">"/api/clouds/1/ip_addresses/4C25RVT8G7U3B/ip_address_bindings"</span>,
+        <span class="s2">"rel"</span>: <span class="s2">"ip_address_bindings"</span>
+      <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"name"</span>: <span class="s2">"attached_ip_address"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2016/04/05 05:23:04 +0000"</span>
+  <span class="o">}</span>
+<span class="o">]</span>
+</code></pre>
+
+<p>Save these two sample API addresses to disk as a file named <q>mock_addresses.json</q> for now.</p>
+
+<h2 id="processing-data">Processing data</h2>
+
+<p>Note how an an IP address attached to an instance has an entry in the <q>links</q> array of type <code>&quot;rel&quot;: &quot;ip_address_bindings&quot;</code>. An IP address which is not attached has no entry. Therefore, this policy wants to then check that all entries in the datasource have <code>&quot;rel&quot;: &quot;ip_address_binding&quot;</code> entry present, indicating they are all attached and in-use.</p>
+
+<p>While we could have a complicated set of extraction logic in the <code>validate_each</code> statement, it would be easier to do the logic in JavaScript and make a new variable <code>is_attached</code> that can be checked with simple <code>equals</code> statement. Add and save the existing script to your tutorial.pt:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">datasource</span> <span class="s2">"ds_munged_addresses"</span> <span class="k">do</span>
+  <span class="n">run_script</span> <span class="vg">$js_munge_addresses</span><span class="p">,</span> <span class="vi">@addresses</span><span class="p">,</span> <span class="vg">$param_whitelist</span>
+<span class="k">end</span>
+
+<span class="n">script</span> <span class="s2">"js_munge_addresses"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"javascript"</span> <span class="k">do</span>
+  <span class="n">parameters</span> <span class="s2">"addresses"</span><span class="p">,</span> <span class="s2">"ip_whitelist"</span>
+  <span class="n">result</span> <span class="s2">"unattached_ips"</span>
+  <span class="n">code</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="sh">
+    var unattached_ips = []
+
+    // rs_href extracts a hrefs for a RightScale API 1.5 resource
+    // hrefs are stored in an array of link objects with values "rel" and "href"
+    function rs_href(res, rel) {
+      for (var j = 0; j &lt; res["links"].length; j++) {
+        if (res["links"][j]['rel'] == rel) {
+          return res["links"][j]['href']
+        }
+      }
+      return ""
+    }
+
+    console.log("iterating over addresses, count:", addresses.length)
+
+    for (var i = 0; i &lt; addresses.length; i++) {
+      var address = addresses[i]
+      is_attached = false
+      self_href = rs_href(address, "self")
+      binding_href = rs_href(address, "ip_address_bindings")
+      var is_excluded = ip_whitelist.indexOf(address['address']) &gt;= 0
+      var is_attached = binding_href != ""
+
+      unattached_ips.push({
+        address: address['address'],
+        name: address['name'],
+        href: self_href,
+        attached: is_attached,
+        excluded: is_excluded,
+      })
+    }
+</span><span class="no">EOS</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Note a few things about the script: </p>
+
+<ul>
+<li>It has two inputs for addresses obtained earlier and an optional whitelist of IPs to ignore. When running the script from the command line all options must be supplied. Since whitelist is an array supply you just supply a JSON array when supplying this parameter. </li>
+<li>It has one output called <code>unattached_ips</code>. This is the name of the variable that will turn into the script. </li>
+<li>We can also define functions internally and use them later. Functions can also easily be pasted into your browsers JavaScript console to develop a bit more interactively.</li>
+<li>It has a <code>console.log</code> statement for printing out interim results.</li>
+</ul>
+
+<p>Running <code>fpt script tutorial.pt addresses=@mock_addresses.json ip_whitelist=[]</code></p>
+
+<p>Gets output:</p>
+<pre class="syntax-highlight shell"><code>Running script <span class="s2">"js_munge_addresses"</span> from tutorial.pt and writing unattached_ips to out.json
+console.log: <span class="s2">"iterating over addresses, count:"</span> 2
+JavaScript finished, <span class="nv">duration</span><span class="o">=</span>457.244µs
+</code></pre>
+
+<p>Which outputs</p>
+<pre class="syntax-highlight plaintext"><code>[
+  {
+    "address": "10.20.30.50",
+    "attached": false,
+    "excluded": false,
+    "href": "/api/clouds/1/ip_addresses/B41PVJI70FMLO",
+    "name": "unattached_ip_address"
+  },
+  {
+    "address": "10.20.30.40",
+    "attached": true,
+    "excluded": false,
+    "href": "/api/clouds/1/ip_addresses/4C25RVT8G7U3B",
+    "name": "attached_ip_address"
+  }
+]
+</code></pre>
+
+<p>Excellent! We have simplified the output to show only what we need and added an explicit field to indicate whether the IP is attached or not. </p>
+
+<h2 id="adding-the-validations">Adding the validations</h2>
+
+<p>With our processed data, the policy logic validation logic is fairly easy to write. The record should have <code>attached==true</code>. If it isn&#39;t attached, then it&#39;s in violation unless <code>excluded==true</code>. Let&#39;s add the validation logic to check for those conditions.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">policy</span> <span class="s2">"unattached_ip_addresses"</span> <span class="k">do</span>
+  <span class="n">validate_each</span> <span class="vg">$ds_munged_addresses</span> <span class="k">do</span>
+    <span class="n">summary_template</span> <span class="s2">"{{ rs_project_name }} (Account ID: {{ rs_project_id }}): {{ len data }} Unattached IP Addresses"</span>
+    <span class="n">detail_template</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="sh">
+# Unattached IP Addresses
+
+| Name | Address | Href |
+| ---- | ------- | ---- |
+{{ range data -}}
+| {{.name}} | {{.address}} | {{.href}} |
+{{ end -}}
+</span><span class="no">EOS</span>
+    <span class="n">check</span> <span class="n">logic_or</span><span class="p">(</span>
+      <span class="n">val</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s1">'attached'</span><span class="p">),</span> 
+      <span class="n">val</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s1">'excluded'</span><span class="p">)</span>
+    <span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Try out passing in different parameters such as <code>fpt script tutorial.pt addresses=@mock_addresses.json ip_whitelist=[&quot;10.20.30.50&quot;]</code> and seeing how the output changes. Run the script to see the final table of entries printed out by the detail_template block above.</p>
+
+<h2 id="define-the-escalation-actions">Define the escalation actions</h2>
+
+<p>Finally add the escalation and save the file. Data is equal to all the IP addresses violating the policy. This means that you don&#39;t have to check for the excluded or attached fields and can just destroy everything passed in. </p>
+<pre class="syntax-highlight ruby"><code><span class="n">escalation</span> <span class="s2">"delete_addresses"</span> <span class="k">do</span>
+  <span class="n">request_approval</span>  <span class="k">do</span>
+    <span class="n">label</span> <span class="s2">"Delete IP"</span>
+    <span class="n">description</span> <span class="s2">"If approved, automatically deleted unattached IP address"</span>
+    <span class="n">parameter</span> <span class="s2">"approval_reason"</span> <span class="k">do</span>
+      <span class="n">type</span> <span class="s2">"string"</span>
+      <span class="n">label</span> <span class="s2">"Reason for approval"</span>
+      <span class="n">description</span> <span class="s2">"Explain why you are approving the action"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">run</span> <span class="s2">"delete_unattached_addresses"</span><span class="p">,</span> <span class="n">data</span>
+<span class="k">end</span>
+
+<span class="n">define</span> <span class="n">delete_unattached_addresses</span><span class="p">(</span><span class="vg">$data</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">foreach</span> <span class="vg">$item</span> <span class="k">in</span> <span class="vg">$data</span> <span class="k">do</span>
+    <span class="vi">@ip_address</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">href: </span><span class="vg">$item</span><span class="p">[</span><span class="s1">'href'</span><span class="p">])</span>
+    <span class="vi">@ip_address</span><span class="p">.</span><span class="nf">destroy</span><span class="p">()</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The <code>policy</code> block should get a reference to the escalation:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">policy</span> <span class="s2">"unattached_ip_addresses"</span> <span class="k">do</span>
+  <span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">.</span> 
+  <span class="n">escalate</span> <span class="vg">$delete_addresses</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>By default actions are not run. You can pass <code>-r</code> to the <code>fpt run</code> command to run things. Any code in a define block will get run as a Cloud Workflow, a custom orchestration language. The RCL language which powers Cloud Workflow is powerful and outside the scope of this tutorial, see <a href="/policies/getting_started/custom_policy.html">Custom Policies</a> for a bit more info about developing these.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Testing CATs</title><meta content="Once you have designed and implemented your Cloud Application Template you are ready to test it in preparation for publishing to the CloudApp Catalog." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="ss ss_guides ss_guides_ss_testing_CATs" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><div class="page-header"><h1>Testing CATs</h1></div><div class="main-content"><p>Once you have designed and implemented your CAT you are ready to test it in preparation for publishing to the CloudApp Catalog.</p>
+
+<h2 id="test-cloudapps">Test CloudApps</h2>
+
+<p>To help you in the CAT development process, Self-Service provides the notion of <q>Test</q> CloudApps. Any CAT launched from the <strong>Designer</strong> is considered a Test CloudApp, will be labeled as such in the UI, and is hidden from <a href="../getting_started/ss_user_types.html">End Users</a> in Self-Service.</p>
+
+<p>Although these Test CloudApps are hidden from End Users in the UI so that they don&#39;t clutter up the user experience, they are still accessible if a user is provided a direct link. One important distinction between a Test CloudApp and a normal CloudApp is that Test CloudApps do not use <a href="ss_permissions.html">permission delegation</a>.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Any CloudApp launched from the Designer UI or Manager API is considered a Test CloudApp. To launch a normal CloudApp through the API, use <a href="http://reference.rightscale.com/selfservice/catalog/index.html#/1.0/controller/V1::Controller::Application/launch">Application.launch</a></p>
+</div>
+
+<h2 id="uploading-the-cat">Uploading the CAT</h2>
+
+<p>Once you have your CAT constructed it is time to upload it using the Self-Service Portal. The process of uploading includes adding your CAT to the list of templates in the Designer View as well as parsing and compiling the file. Use the following steps to upload your CAT file.</p>
+
+<ol>
+<li>Login to the Self-Service portal and navigate to the Designer view.</li>
+<li>Click <strong>Upload a CAT</strong>.</li>
+<li>Select the CAT you want to upload in the File Upload dialog and click <strong>Open</strong>.</li>
+<li>The selected CAT is parsed and compiled. If your CAT is malformed, an error message will be displayed and the upload will not be successful.</li>
+<li>Once the CAT is parsed and compiled successfully it will be displayed in the list of available CATs in the Designer View.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>CAT files are unique based on the <code>name</code> field inside the CAT, not on filename. If you get a warning that you are overriding an existing CAT, it means that there exists a CAT with the same <code>name</code> value</p>
+</div>
+
+<h2 id="launching-the-cat">Launching the CAT</h2>
+
+<p>Once you have successfully uploaded your CAT you can begin launching and testing your new deployment. Use the following steps to launch your CAT.</p>
+
+<ol>
+<li>In the Designer View, select the CAT you want to test by clicking the check box in the left-hand column.</li>
+<li><p>Choose <strong>Selected Actions &gt; Launch CloudApp</strong> from the menu.</p>
+
+<p><img src="/img/ss-launch-cloudapp.png" alt="Launch CloudApp Image" width="440" height="360" /></p></li>
+<li><p>A dialog similar to the following displays. Parameters specified in the CAT are shown as text fields and drop-down controls grouped by the defined categories. Enter your desired parameter values and an optional <strong>Schedule</strong>, then click <strong>Launch CloudApp</strong>. See <a href="ss_creating_schedules.html">Creating Schedules</a> for additional information on setting up and managing CloudApp runtime schedules.</p>
+
+<p><img src="/img/ss-launch-dialog.png" alt="Launch Dialog Image" width="595" height="522" /></p></li>
+<li><p>The UI switches to the CloudApps view and the launch process initiates. The launch status is displayed in the UI.</p>
+
+<p><img src="/img/ss-launching.png" alt="Launching Image" width="585" height="389" /></p></li>
+<li><p>If the launch is successful, the UI will indicate that the CloudApp has reached the running state. Output values are displayed by category on separate tabs.</p></li>
+</ol>
+
+<p>Once you are satisfied with your CAT testing you can proceed to <a href="ss_publishing_CATs.html">Publishing CATs</a>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

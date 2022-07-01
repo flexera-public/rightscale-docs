@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Monitoring User-Defined Processes</title><meta content="In addition to using the standard set of RightScale monitoring metrics, you can set up monitoring for your own (user-defined) processes. You can accomplish this using either imported RightScale ServerTemplates (easiest) or custom ServerTemplates." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_monitoring_user_defined_processes" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>Monitoring User-Defined Processes</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>In addition to using the standard set of RightScale monitoring metrics, you can set up monitoring for your own (user-defined) processes. You can accomplish this using either imported RightScale ServerTemplates (easiest) or custom ServerTemplates.</p>
+
+<h2 id="setting-up-monitoring-using-a-rightscale-servertemplate">Setting up Monitoring using a RightScale ServerTemplate</h2>
+
+<p>Monitoring your user-defined processes by importing a RightScale ServerTemplate and configuring the correct inputs is the recommended method. You can also use a custom ServerTemplate but it is a more complex process and should only be used if you cannot use an imported RightScale ServerTemplate for whatever reason.</p>
+
+<h3 id="setting-up-monitoring-using-a-rightscale-servertemplate-steps">Steps</h3>
+
+<ol>
+<li>Import any officially supported Rightscale server template from the Multicloud Marketplace by going to the MultiCloud Marketplace (<strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong>) and importing the most recently published revision of the desired ServerTemplate into your RightScale account.</li>
+<li>After importing the ServerTemplate, create your server (click <strong>Add Server</strong>).</li>
+<li>Go to your server&#39;s Inputs tab (<em>your server</em> &gt; <strong>Inputs</strong> ) and click <strong>Edit</strong>.</li>
+<li>Enter a text value for either the &#39;Process List&#39; or &#39;Process Match List&#39; input for the process that you want to monitor.
+
+<ul>
+<li>The Process List input is a space-separated list of processes that you want to monitor in the RightScale Dashboard (for example, sshd crond).</li>
+<li>The Process Match List input is a space-separated list of pairs used to match the names of additional processes to monitor in the RightScale Dashboard. Paired arguments are passed in using the following syntax: &#39;<name>/<regex>&#39; (for example, ssh/ssh* cron/cron*).
+<br><strong>Note:</strong> The <name> portion of this input refers to the monitoring graph&#39;s name, and the <regex> portion should be the regular expression used to match the process name(s). For example, if the value &#39;secure_shell/ssh*&#39; is used instead, then the collectd monitoring graph would be named &#39;processes-secure_shell&#39; accordingly.</li>
+</ul></li>
+<li>Click <strong>Save</strong>. Monitoring of these processes is now enabled on your server when it is launched.</li>
+<li>After launching your server, go to the <strong>Monitoring</strong> tab (<em>your server</em> &gt; <strong>Monitoring</strong> ) and select <strong>processes-<your_process></strong> to display the process monitoring charts and view the monitoring data.</li>
+</ol>
+
+<p><img src="/img/cm-process-monitoring.png" alt="cm-process-monitoring.png" width="725" height="308" /></p>
+
+<h2 id="setting-up-monitoring-using-a-custom-servertemplate">Setting up Monitoring using a Custom ServerTemplate</h2>
+
+<p>Although using an imported RightScale ServerTemplate for setting up your process monitoring is recommended, you can also use a custom ServerTemplate for this purpose, if your situation requires it. The following two sections provide instructions for setting up monitoring for both Chef-based and RightScript based custom ServerTemplates.</p>
+
+<h2 id="setting-up-monitoring-for-a-chef-based-custom-servertemplate">Setting up monitoring for a Chef-based Custom ServerTemplate</h2>
+
+<ol>
+<li>Determine what version of RightLink (preinstalled on every RightImage) or the version of the image that your custom ServerTemplate or MultiCloud image is using by opening the ServerTemplate and clicking on the <strong>Images</strong> tab.</li>
+<li>Add the necessary Chef cookbook(s) to your custom ServerTemplate based on the Rightlink/image version your custom template is using:
+<br>a. Import the &#39; <a href="http://www.rightscale.com/library/server_templates/Base-ServerTemplate-for-Linux-/lineage/46939">Base ServerTemplate for Linux</a>&#39; ServerTemplate that includes the same image and/or Rightlink version that your custom ServerTemplate is using. The ServerTemplate <em>must</em> use the same MultiCloud image and/or Rightlink version as your custom ServerTemplate for compatibility reasons.
+
+<ul>
+<li>For example, if your custom ServerTemplate is using the most recent version of &#39;RightImage_CentOS_6.4_x64_v13.5, import the 13.5 version of the &#39;Base ServerTemplate for Linux&#39; ServerTemplate, which includes this particular version of the image.</li>
+<li>You can always verify and compare exactly which RightLink version and/or image is used by importing a ServerTemplate and then navigating to the template&#39;s <strong>Images</strong> tab
+<br>b. Once imported, navigate to the <em>your ServerTemplate</em> <strong>&gt; Scripts</strong> tab.
+<br>c. Click the <strong>Modify</strong> action button, then click the <strong>Attach Cookbooks</strong> action button.
+<br>d. Within the &#39;Attach Cookbooks&#39; popup box, select the <q>Rightscale</q> cookbook from the &#39;Cookbooks&#39; column.
+<br>e. The available cookbook versions will show in the right side pane of the popup. Ensure that the appropriate version matching your image/Rightlink version is selected, then click <strong>Attach Selected</strong>.
+<br>f. If there are any Dependent Cookbooks listed on the Scripts tab (right pane), ensure that they are also attached to the ServerTemplate. This can be done by using the small magnifying glass icon to the right of the dependent cookbook, which will search for a matching cookbook with that name.</li>
+</ul></li>
+<li>Add the necessary monitoring recipe to your custom ServerTemplate:
+<br>a. On the <strong>Scripts</strong> tab of your ServerTemplate, click the arrow icon next to the <q>Rightscale</q> cookbook to expand the list of available recipes within this cookbook
+<br>b. Locate the <strong>rightscale::default</strong> recipe and click and drag the recipe over to the <q>Boot Sequence</q> section of the scripts tab. Recipe or script additions are saved immediately, so you can now move on to configuring the monitoring inputs in the next section.</li>
+<li>Proceed by creating a new Server from your ServerTemplate.</li>
+</ol>
+
+<h3 id="setting-up-monitoring-for-a-chef-based-custom-servertemplate-configure-user-defined-process-monitoring-inputs">Configure User Defined Process Monitoring Inputs</h3>
+
+<ol>
+<li>Once you have created a server from your custom ServerTemplate, navigate to the <em>your Server</em> &gt; <strong>Inputs</strong> tab.</li>
+<li>Click <strong>Edit</strong> and enter a text value for either the &#39;Process List&#39; or &#39;Process Match List&#39; input for the process that you want to monitor.
+
+<ul>
+<li>The Process List input is a space-separated list of processes that you want to monitor in the RightScale Dashboard (for example, sshd crond).</li>
+<li>The Process Match List input is a space-separated list of pairs used to match the names of additional processes to monitor in the RightScale Dashboard. Paired arguments are passed in using the following syntax &#39;<name>/<regex>&#39; (for example, ssh/ssh* cron/cron*).
+<br><strong>Note:</strong> The <name> portion of this input refers to the monitoring graph&#39;s name, and the <regex> portion should be the regular expression used to match the process name(s). For example, if the value &#39;secure_shell/ssh*&#39; is used instead, then the collectd monitoring graph would be named &#39;processes-secure_shell&#39; accordingly.</li>
+</ul></li>
+<li>Click <strong>Save</strong>. Monitoring your own user defined processes is now enabled on your server when it is launched.</li>
+<li>After launching your server, go to the <strong>Monitoring</strong> tab (<em>your server</em> &gt; <strong>Monitoring</strong> ) and select <strong>processes-<your_process></strong> to display the process monitoring charts and view the monitoring data.</li>
+</ol>
+
+<h2 id="setting-up-monitoring-for-a-rightscript-based-custom-servertemplate">Setting up Monitoring for a RightScript-based Custom ServerTemplate</h2>
+
+<ol>
+<li>Determine what version of RightLink (RightLink is preinstalled on every RightImage) or the version of the image that your custom ServerTemplate or MultiCloud image is using by opening the ServerTemplate and clicking on the <strong>Images</strong> tab.</li>
+<li>Go to the MultiCloud Marketplace ( <strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>RightScripts</strong> ) and determine which version of the &#39;SYS Monitoring Install&#39; RightScript is the correct one to use with your version of RightLink.
+
+<ul>
+<li>For example, if your custom ServerTemplate is using the image &#39;RightImage_CentOS_5.4_x64_v5.6 - 11H1&#39;, then you will want to import the 11H1 version &#39;SYS Monitoring Install&#39; Rightscript.</li>
+<li>You can always verify and compare exactly which RightLink version and/or image is used by importing a ServerTemplate and then navigating to the template&#39;s <strong>Images</strong> tab</li>
+<li>See the following links for the latest corresponding RightScript versions:</li>
+<li><a href="http://www.rightscale.com/library/right_scripts/SYS-Monitoring-install-v13-4/lineage/7299">13.x</a> (Infinity, v13.x and v5.8 RightLink images)</li>
+<li><a href="http://www.rightscale.com/library/right_scripts/SYS-Monitoring-install-v12-11-/lineage/15496">12.11.x</a> (LTS, v12.11-LTS and some v5.8 RightLink images)</li>
+<li><a href="http://www.rightscale.com/library/right_scripts/SYS-Monitoring-install-11H1/lineage/6337">11H1</a> (v5.0-v5.6 RightLink images)</li>
+<li><a href="http://www.rightscale.com/library/right_scripts/SYS-Monitoring-install-v8/lineage/2726">v8</a> (for v4.x non-RightLink images</li>
+</ul></li>
+<li>Click <strong>Import</strong> to import the desired version of the &#39;SYS Monitoring Install&#39; RightScript.</li>
+<li>Configure monitoring for your ServerTemplate using the &#39;SYS Monitoring Install&#39; RightScript:
+
+<ul>
+<li>Go to <em>your ServerTemplate</em> &gt; <strong>Scripts</strong> and click <strong>Modify</strong>.</li>
+<li>In the right side pane, locate the &#39;SYS Monitoring Install&#39; RightScript imported in the previous step.</li>
+<li>Click and drag on the &#39;SYS Monitoring Install&#39; RightScript and drag it to the &#39;Boot Sequence&#39; section</li>
+</ul></li>
+<li>Proceed by creating a new Server from your ServerTemplate.</li>
+</ol>
+
+<h3 id="setting-up-monitoring-for-a-rightscript-based-custom-servertemplate-configure-user-defined-process-monitoring-inputs">Configure User Defined Process Monitoring Inputs</h3>
+
+<ol>
+<li>Once you have created a server from your custom ServerTemplate, navigate to the <em>your Server</em> &gt; <strong>Inputs</strong> tab.</li>
+<li>Click <strong>Edit</strong> and enter a text value for either the &#39;MON_PROCESSES&#39; or &#39;MON_PROCESSMATCH&#39; input for the process that you want to monitor.
+
+<ul>
+<li>The MON_PROCESSES input is a space-separated list of processes that you want to monitor in the RightScale Dashboard (for example, sshd crond).</li>
+<li>The MON_PROCESSMATCH input is a space-separated list of pairs used to match the names of additional processes to monitor in the RightScale Dashboard. Paired arguments are passed in using the following syntax &#39;name/regex&#39; (for example, ssh/ssh* cron/cron*).
+<br><strong>Note:</strong> The <name> portion of this input refers to the monitoring graph&#39;s name, and the <regex> portion should be the regular expression used to match the process name(s). For example, if the value &#39;secure_shell/ssh*&#39; is used instead, then the collectd monitoring graph would be named &#39;processes-secure_shell&#39; accordingly.</li>
+</ul></li>
+<li>Click <strong>Save</strong>. Monitoring custom defined processes is now enabled on your server when it is launched.</li>
+<li>After launching your server, go to the <strong>Monitoring</strong> tab (<em>your server</em> &gt; <strong>Monitoring</strong> ) and select <strong>processes</strong> to display the process monitoring charts and view the monitoring data.</li>
+</ol>
+
+<h2 id="configure-an-optional-alert">Configure an Optional Alert</h2>
+
+<p>If you wish to configure an optional alert for your user defined process, then view the <a href="/cm/rs101/create_a_custom_alert_specification.html">Create a Custom Alert Specification</a> tutorial. The monitoring system tracks multiple metrics with regards to the monitored process, but most importantly you can monitor the number of processes running for the given process. The syntax for the custom alert specification to count the number of processes would be as such:</p>
+
+<ul>
+<li>processes-&lt; <strong><em>your process</em></strong> &gt;/ps_count.processes</li>
+</ul>
+
+<p><strong>Important!</strong> If you used the MON_PROCESSMATCH input (RightScript) or the &#39;Process Match List&#39; input (Chef), then &lt;<em>your process</em>&gt; should be the value of the <name> portion of the input. For example, if I used the value <q>**secure_shell** /ssh\*</q> for the MON_PROCESSMATCH or Process Match List input, then my alert would look like this:</p>
+
+<ul>
+<li>processes- <strong>secure_shell</strong> /ps_count.processes</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

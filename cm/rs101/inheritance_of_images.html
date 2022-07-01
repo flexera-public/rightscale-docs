@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Inheritance of Images</title><meta content="Similar to Inputs, Images in RightScale also conform to an inheritance hierarchy through the use of MultiCloud Images." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_inheritance_of_images" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>Inheritance of Images</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Similar to Inputs, Images also conform to an inheritance hierarchy through the use of MultiCloud Images.</p>
+
+<p>You can influence which image will be used by a Server when it&#39;s launched at the following levels:</p>
+
+<ul>
+<li>ServerTemplate</li>
+<li>Server Array</li>
+<li><q>Next</q> Server</li>
+</ul>
+
+<p>The actual image that will be used when a Server/Instance is launched will depend on where it&#39;s defined. However, once a Server has been launched and there&#39;s a running Instance in the cloud, its image cannot be changed.</p>
+
+<h2 id="servers">Servers</h2>
+
+<p>A <strong>Server</strong> (in a Deployment) first inherits its image from the selected MultiCloud Image (MCI) of its ServerTemplate. A ServerTemplate is published with one or more MCIs. When you add a Server to a Deployment, you must first specify into which cloud/region you want to launch an Instance. Each ServerTemplate is published with a default MCI preselected. However, when you add a Server to a Deployment you can choose a different MCI. The image of the selected MCI will automatically be selected for you based upon your cloud/region selection. ( <strong>Note</strong> : You can only add a Server into a cloud/region that&#39;s supported by the MCI.) You can either inherit the image that will be chosen by the selected MCI, or overwrite the selection and choose a different image. For example, you may want to use an image for testing purposes that&#39;s currently not referenced in an MCI.</p>
+
+<p>Once you&#39;ve defined the Server you can still edit its image settings until you decide to launch the Server and instantiate a running Instance in the cloud. Once a Server has been launched, its image cannot be changed. However, if you have a running <q>Current</q> Server, you can change the image settings for the <q>Next</q> Server, which will be applied to the next time that the Server is launched or relaunched.</p>
+
+<p><img src="/img/cm-images-inheritance-servers.png" alt="cm-images-inheritance-servers.png" width="725" height="287" /></p>
+
+<ol>
+<li>Each ServerTemplate is published with a default MCI preselected. (For example with AWS, the default image is typically a &#39;small&#39; instance type with a 32-bit architecture.)</li>
+<li>If you want to use a different MCI, it&#39;s recommended that you select one of the listed MCIs of that the ServerTemplate to ensure compatibility. For AWS, if you want to launch a &#39;large&#39; or bigger instance type, you need to select an MCI that references 64-bit images.</li>
+<li>You can also select a different image than what&#39;s available through one of the listed MCIs. Perhaps you have a custom image that you just built and you want to test it before you create an MCI for it. This option should only be used by advanced users who have a clear understanding of their chosen image.</li>
+</ol>
+
+<p><strong>Important!</strong> ServerTemplates that are published by RightScale have been thoroughly tested with all of RightScale&#39;s associated MCIs. Although you can choose to use a different MCI (other than the default) or select a different image altogether, it&#39;s important to realize that those combinations were never tested internally by RightScale. In such cases, you may or may not experience problems launching the Server. Therefore, it&#39;s recommended that you keep the <q>Inherit from MultiCloud Image</q> selection once you&#39;ve selected your MCI to ensure instance type and system architecture compatibility.</p>
+
+<h2 id="server-arrays">Server Arrays</h2>
+
+<p>A <strong>Server Array</strong> will also inherit its image from the ServerTemplate&#39;s MCI. Remember, you can&#39;t change the image on a running Instance. It&#39;s important to realize that the image settings at the Server Array level may not always reflect the actual images that were used to launch all of the running Instances in the array. A Server Array&#39;s configuration only controls how the next Instances will be launched; it may or may not reflect how previous Instances were launched.</p>
+
+<p><img src="/img/cm-images-inheritance-arrays.png" alt="cm-images-inheritance-arrays.png" width="636" height="327" /></p>
+
+<h2 id="best-practices">Best Practices</h2>
+
+<p>It&#39;s best to let one of the MCIs that&#39;s referenced by the ServerTemplate select the appropriate image for a Server. If you choose to select a different MCI that is not referenced by the ServerTemplate or select an image from the list of available images for that cloud/region, you may experience problems launching Servers successfully with that ServerTemplate since you&#39;re probably using a ServerTemplate-Image combination that was never tested. However, the flexibility to choose different MCIs or images can prove quite useful especially for testing and development purposes.</p>
+
+<p>For production environments, you should always use MCIs for image selection purposes. If you are using MCIs that you have created using your own custom images, make sure that they have been throughly tested before using them in a production environment. Similarly, you should only publish and share ServerTemplates with MCIs that have been thoroughly tested to make sure that a Server will be launched successfully regardless of which image is used.</p>
+
+<p><strong>Note</strong>: For AWS, the <q>default</q> MCI that&#39;s selected for ServerTemplates published by RightScale will typically select a 32-bit image along with a &#39;small&#39; EC2 instance type.</p>
+
+<h2 id="see-also">See also</h2>
+
+<ul>
+<li><a href="/cm/dashboard/design/multicloud_images/index.html">MultiCloud Images</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

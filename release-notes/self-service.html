@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Release Notes</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="release-notes release-notes_self-service"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/release-notes"><h4 class="list-group-heading">Release Notes</h4></a><a class="list-group-item menu-item-cm" href="cloud-management.html">Cloud Management</a><a class="list-group-item menu-item-ss" href="self-service.html">Self-Service</a><a class="list-group-item menu-item-gov" href="governance.html">Governance</a><a class="list-group-item menu-item-ca" href="https://helpnet.flexerasoftware.com/?product=Optima">Optima</a><a class="list-group-item menu-item-rca" href="rca-v.html">RCA-V</a><a class="list-group-item menu-item-rl10" href="right-link-10.html">RightLink 10</a></nav></aside><div class="callout"><a href="https://support.rightscale.com/18-Release_Notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Archived Release Notes</h4></div><span>View previously published release notes.</span></div></div></a></div><div class="callout"><a href="mailto:support@rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Release Questions?</h4></div><span>Our technical support staff is ready to help.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="clearfix"><div class="main-content"><div class="page-header"><h1>Release Notes</h1><div class="page-subheader category-self-service"></div></div><div class="row release-notes-category"><div class="col-md-8"><div class="article"><div class="article-title"><time datetime="04- 5-2018"> <a href="/release-notes/self-service/2018/04/05.html">April  5, 2018</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Added <code>private_ip_address</code> attribute to the <a href="/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-instance">instance</a> and <a href="/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-server">server</a> resource declarations in cat. </li>
+<li>Allow users with only the <code>ss_end_user</code> role to use <a href="/ss/guides/ss_plugins.html">Self-Service Plugins</a></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="02- 6-2018"> <a href="/release-notes/self-service/2018/02/06.html">February  6, 2018</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Added support for the <code>encrypted</code> field for <a href="/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-volume">volume resources</a> in CAT. </li>
+<li>The cred() function in both <a href="/ss/reference/cat/v20161221/index.html#built-in-methods-and-other-keywords">CAT</a> and <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#miscellaneous-cred">RCL</a> now chooses exact match before failing over to partial match</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11-30-2017"> <a href="/release-notes/self-service/2017/11/30.html">November 30, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#data-conversion-to_base64">methods to base64 encode and decode</a> strings</li>
+<li>Added <a href="/ss/reference/cat/v20161221/ss_plugins.html#plugins-endpoint">request_content_type to plugin endpoint</a> this enables xml support</li>
+<li>Added <a href="/ss/guides/ss_plugins.html#using-plugins-plugins-in-cat">XML Support</a> to CAT plugins</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>You can now <a href="/ss/guides/ss_plugins.html#using-plugins-plugins-in-cat">import multiple plugins</a> in the same CAT.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11-22-2017"> <a href="/release-notes/self-service/2017/11/22.html">November 22, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added a <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#miscellaneous-rand"><code>rand</code> function to Cloud Workflow</a> which generates a random number within a specified range</li>
+<li>Added <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#data-conversion-to_html">methods to HTML encode and decode</a> strings</li>
+<li>Added <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#data-conversion-to_uri">methods to URI encode and decode</a> strings</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11- 3-2017"> <a href="/release-notes/self-service/2017/11/03.html">November  3, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Self-Service is <strong>now enabled</strong> for all RightScale accounts</li>
+<li>Improved the <strong>account selector</strong> to show accounts by Organization</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-17-2017"> <a href="/release-notes/self-service/2017/05/17.html">May 17, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p>Plugin CATs can now be more easily identified in the Designer view with a new column that shows the <code>type</code> of each CAT.</p>
+
+<p><img src="/img/ss-designer-type-column.png" alt="ss-designer-type-column.png" width="441" height="152" /></p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-10-2017"> <a href="/release-notes/self-service/2017/05/10.html">May 10, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><p>Account names in the account picker now have a hover-over effect to show the full name in case the name is truncated in the list</p>
+
+<p><img src="/img/ss-account-selector-tooltip.png" alt="account-selector-tooltip" width="497" height="44" /></p></li>
+<li><p>Bugfix: fixed bug that prevented downloading CAT source for imported packages</p></li>
+<li><p>Bugfix: fixed bug that prevented canceling or postponing a custom scheduled action</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04-21-2017"> <a href="/release-notes/self-service/2017/04/21.html">April 21, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><a href="/ss/guides/ss_plugins.html">Self-Service Plugins</a> are now available, allowing you to <strong>integrate and manage any service</strong> through Self-Service CAT files. Integrate with any service from any cloud or service provider by defining a <code>plugin</code> in your CAT and publishing the application to the Catalog.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03-29-2017"> <a href="/release-notes/self-service/2017/03/29.html">March 29, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>An indicator has been added for the <a href="/faq/end_of_life_end_of_service.html#schedule-cat-versions">deprecation of CAT version 20131202</a>. Anyone impacted has also received an email with additional information</li>
+<li>After publishing a CAT from Designer, the <q>Launch</q> link in the success growler will now launch the CloudApp from Catalog, instead of from Designer</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03-15-2017"> <a href="/release-notes/self-service/2017/03/15.html">March 15, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p>Any modification to a scheduled action, either postponing it or canceling it, will now be tracked in the Activity Feed view of the CloudApp along with the user that performed the action.</p>
+
+<p><img src="/img/ss_sched_action_modification.png" alt="ss_sched_action_modification.png" width="315" height="396" /></p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03- 1-2017"> <a href="/release-notes/self-service/2017/03/01.html">March  1, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for the <a href="/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-resource_group">Resource Group</a> resource introduced in Cloud Management</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="02-15-2017"> <a href="/release-notes/self-service/2017/02/15.html">February 15, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>A <code>Failed</code> CloudApp can now be <q>forced</q> into either the <code>Running</code> or <code>Stopped</code> states by users that have either <code>designer</code> or <code>admin</code> privileges. This can be leveraged when the logic in the CloudApp or some environmental factors cause errors in a CloudApp operation, but the underlying issues can be resolved manually. This action is available in the CloudApp view in the UI and the <a href="http://reference.rightscale.com/selfservice/manager/index.html#/1.0/controller/V1::Controller::Execution/patch">Execution resource <code>patch</code> action</a> in the API.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix: fixed a bug that caused a <q>session expired</q> growler to show in Self-Service on the CWF Console when another browser window changed accounts in Cloud Management</li>
+<li>Bugfix: fixed a bug in custom provision functions that required that the function take an actual named resource as its input parameter -- such functions can now accept a generic resource declaration name</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="02- 9-2017"> <a href="/release-notes/self-service/2017/02/09.html">February  9, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Introducing support for <a href="/ss/guides/ss_bulk_resources.html">bulk resources in CAT</a>, allowing CAT designers to easily specify resources with many <q>copies</q> and efficiently launch and manage them</li>
+<li><a href="/ss/reference/cat/v20161221/index.html#resources-provisioning-resources">Custom provision functions</a> are now available, providing authors with a built-in method for customizing the provisioning of any CAT resource</li>
+<li>The above and more are available in <a href="/ss/reference/cat/changelog.html#version-20161221">a new CAT version</a> (<code>20161221</code>)</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>See the <a href="/ss/reference/cat/changelog.html#version-20161221">new CAT version</a> documentation for changes in the new version - existing versions are unaffected</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="01-11-2017"> <a href="/release-notes/self-service/2017/01/11.html">January 11, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Notification emails are now sent when a CloudApp fails if the launch process was <code>aborted</code> or <code>canceled</code></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12-29-2016"> <a href="/release-notes/self-service/2016/12/29.html">December 29, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Cloud Workflow code debugger is now available</strong> under the Designer menu -&gt; CWF Console. This console provides the ability to execute Cloud Workflow code (RCL) directly in order to help debugging your custom code. This feature is available in Labs.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>The use of <code>sha</code> has been changed to <code>ref</code></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11- 2-2016"> <a href="/release-notes/self-service/2016/11/02.html">November  2, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix that was preventing some column preferences from being saved</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10- 5-2016"> <a href="/release-notes/self-service/2016/10/05.html">October  5, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Improved the support drop-downn (when clicking your name in the UI) to include more information and an easier method to create support tickets</li>
+<li>The <q>Next Action</q> now includes custom scheduled actions, in addition to the lifecycle actions that have always been shown</li>
+<li>Implemented performance improvements for CloudApp runtime operations, particularly impactful when using <code>call</code> frequently to call other definitions</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-21-2016"> <a href="/release-notes/self-service/2016/09/21.html">September 21, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Changed the <code>from</code> email address on Self-Service automated emails to <code>noreply-selfservice@rightscale.com</code></li>
+<li>Updated the CAT parser to throw an error if the <code>rs_ca_ver</code> value is a <code>string</code> (it should be an <code>int</code>)</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09- 8-2016"> <a href="/release-notes/self-service/2016/09/08.html">September  8, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>A <strong>new function to retrieve Credential values</strong> has been added to both Cloud Workflow and CAT. This allows you to more easily leverage sensitive credential values in your CAT/CWF code. Learn how to use the <code>cred()</code> function in both <a href="/ss/reference/cat/v20160622/index.html#built-in-methods-and-other-keywords">CAT files</a> and in <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#miscellaneous-cred">Cloud Workflow code</a>.</li>
+<li>Added the ability to <strong>set schedules and end dates</strong> for Test CloudApp launches from Designer to help your CAT authors save costs when they are developing CloudApps.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix: fixed a bug that prevented checkboxes from rendering properly in the CloudApp launch dialog</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-18-2016"> <a href="/release-notes/self-service/2016/08/18.html">August 18, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Azure Resource Manager Volumes</strong> are now supported in CAT using the <code>volume</code> declaration type</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix: fixed a bug that prevented sleep_until calls from being canceled if the operation/process was canceled</li>
+<li>Bugfix: fixed a problem in RCL when following resource links with the <code>view</code> attribute</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-28-2016"> <a href="/release-notes/self-service/2016/07/28.html">July 28, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>New strftime() function</strong> in RCL allows easy translation of datetimes into various string formats for use with other APIs. <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#data-conversion-strftime">Learn how to use this function</a> in our docs.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>The parser will now throw an error on upload if an operation is missing a <q>definition</q> field</li>
+<li>Redesigned tabs for consistency across fht eplatform</li>
+<li>Bugfix that was causing buttons to appear/disappear and the page to <q>jump</q></li>
+<li>Various other bugfixes and UI improvements</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-20-2016"> <a href="/release-notes/self-service/2016/07/20.html">July 20, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug with using <code>retry</code> and <code>skip</code> keywords in error handlers in RCL v2</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-13-2016"> <a href="/release-notes/self-service/2016/07/13.html">July 13, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Improved performance</strong> on the Manager page when viewing large lists of CloudApps.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug with using <code>import</code> statements in a file with Windows-style line endings</li>
+<li>Improved error messages for some cases</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07- 7-2016"> <a href="/release-notes/self-service/2016/07/07.html">July  7, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug in the <code>tag_value</code> function in RCL version 2</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-29-2016"> <a href="/release-notes/self-service/2016/06/29.html">June 29, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>CAT Imports</strong> is now available, allowing you to create <em>package</em> CATs that can be imported into other CATs, enabling code reuse and best practices implementation. You can read more about how it works on the <a href="/ss/guides/ss_packaging_cats.html">Packaging CATs docs page</a>. Please note that this requires using a new CAT Version and associated RCL Version that both contain <strong>breaking changes</strong>. Details on the changes are listed on the <a href="/ss/reference/cat/changelog.html">CAT Changelog</a> and the <a href="/ss/reference/rcl/changelog.html">RCL Changelog</a> pages.</li>
+<li>Support for escaped characters and shorthand classes in RCL regex</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05- 4-2016"> <a href="/release-notes/self-service/2016/05/04.html">May  4, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that prevented some users from changing their timezone</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04-28-2016"> <a href="/release-notes/self-service/2016/04/28.html">April 28, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><strong>CloudApp Description Change</strong>: the description of a CloudApp is no longer populated with the <code>short_description</code> from the CAT. Previously, if a user launched a CloudApp and didn&#39;t set a description, the system would copy the <code>short_description</code> from the CAT -- this is no longer the case.</li>
+<li>Fixed a bug that sometimes prevented user time zone settings from being saved </li>
+<li>Fixed a bug related to selecting days when editing an existing Schedule in Designer </li>
+<li>Fixed a bug that would sometimes show an error growler when deleting a CloudApp </li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03- 4-2016"> <a href="/release-notes/self-service/2016/03/04.html">March  4, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Self-Service Only Users</strong> - Users can now be granted access only to Self-Service, allowing them to launch and manage infrastructure that has been defined and approved by application designers. These Self-Service only users are not able to log in to either Cloud Management or Optima. Read more about how to add these users here: <a href="/ss/getting_started/ss_user_types.html#granting-permissions-granting-self-service-only-access-to-account">Granting Self-Service only access</a>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12- 9-2015"> <a href="/release-notes/self-service/2015/12/09.html">December  9, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Additional String Functions</strong> - Cloud Workflow now supports many more common string functions to make it easier for you to work with different data sources in RCL. For more information, see the pertinent section of the <a href="/ss/reference/cat">RCL Functions</a> documentation.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12- 2-2015"> <a href="/release-notes/self-service/2015/12/02.html">December  2, 2015</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><strong>to_s Function</strong> - Changed the behavior of the <code>to_s</code> function for hashes to return a correct JSON representation of the hash as documented. It was incorrectly returning a string representation (similar to what <code>inspect</code> does).</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-28-2015"> <a href="/release-notes/self-service/2015/10/28.html">October 28, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Account Selector</strong> - We&#39;ve added an Account Selector control to the header in the Self-Service UI to make it easy to switch to a different Self-Service enabled account in any shard. See <a href="/ss/guides/ss_user_interface_guide.html#account-selection">Account Selection</a> in the Self-Service User Interface Guide for additional information.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that would sometimes select other CloudApps in index view after a period of time.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-21-2015"> <a href="/release-notes/self-service/2015/10/21.html">October 21, 2015</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that prevented using strings as regular expressions in the <code>split()</code> function.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-14-2015"> <a href="/release-notes/self-service/2015/10/14.html">October 14, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>CloudApp Details</strong> - We have revamped the UI when viewing details of a CloudApp based on user feedback and suggestions. The information and styling has been improved for all user types of Self-Service. For additional information, see the <a href="/ss/guides/ss_user_interface_guide.html#catalog-view-viewing-cloudapp-details">Viewing CloudApp Details</a> section of the Self-Service User Interface Guide.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-30-2015"> <a href="/release-notes/self-service/2015/09/30.html">September 30, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Introducing Test CloudApps</strong> - In order to help CAT developers during the design and testing phase of CATs as well as simplify the End User experience, we have introduced the notion of Test CloudApps. Test CloudApps are any CloudApp launched from the Designer UI and they are hidden from End Users. For more details, see <a href="/ss/guides/ss_testing_CATs.html">Testing CATs</a> on our docs site.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-16-2015"> <a href="/release-notes/self-service/2015/09/16.html">September 16, 2015</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><p>It is now easier to use HTTP functions in RCL with RightScale APIs. To make any call to any of the RS APIs, just omit the authentication header and Cloud Workflow will use the existing session to make the call. Note that this means the user running the CloudApp must have the requisite permissions (or have had them delegated to the CloudApp).</p></li>
+<li><p>Fixed a bug where terminating Azure instances sometimes failed due to the boot volumes not having been deleted yet.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-27-2015"> <a href="/release-notes/self-service/2015/08/27.html">August 27, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>New Resource Support</strong> - The CAT language now supports additional resources, including: Networks, NetworkGateways, PlacementGroups, RouteTables, Routes, Subnets, and more. Leveraging these resources gives you the ability to define entire networks as part of your CloudApp. For more information on the resources supported by the CAT language, see our <a href="/ss/reference/cat">reference guide.</a>.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix: fixed the denormalization of HTTP headers in <code>http_</code> function calls in RCL.</li>
+<li>The <q>Next action</q> for CloudApps is now more accurate, showing only actions that apply given the current state of the CloudApp (i.e., we will hide the <q>start</q> action if the CloudApp is already in the <q>Running</q> state).</li>
+<li>Improved the handling of regular expressions for parameter input validation. For more details, and for a link to an interactive, online regex testing tool, read our <a href="/ss/reference/cat">reference guide.</a></li>
+<li>The logic used for the <code>delete()</code> function in RCL (used both in custom code and by the auto_terminate built into Self-Service) has been improved to more accurately determine resource dependencies and ensure that resources are deleted in the correct order.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-19-2015"> <a href="/release-notes/self-service/2015/08/19.html">August 19, 2015</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Improved the error message shown to designers when a server&#39;s <q>launch</q> call fails.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08- 5-2015"> <a href="/release-notes/self-service/2015/08/05.html">August  5, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<p><strong>Permissions Actions</strong> - Added new permissions actions specifically for the <q>sensitive</q> view of Credentials and SSHKeys resources. This means that you no longer need the <q>admin</q> role to publish CATs that contain those resources. The new actions are called <code>index_sensitive</code> and <code>show_sensitive</code>.</p>
+
+<p><strong>Deferred CloudApp Launch</strong> - You can now choose to defer launching of a CloudApp if you&#39;ve selected a schedule that is outside of the current time. Simply choose the <em>Launch CloudApp at next scheduled start</em> option on the <em>Launching CloudApp</em> screen and your CloudApp will be launched at the scheduled start time rather than immediately. For more information, see the <em>Select a Schedule when Launching a CloudApp</em> section in the <a href="/ss/guides/ss_creating_schedules.html">Self-Service Creating Schedules Guide</a>.</p>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that was preventing parameter descriptions from showing on the launch modal.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-22-2015"> <a href="/release-notes/self-service/2015/07/22.html">July 22, 2015</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed the <code>join()</code> function in CAT to take an array as the first argument.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-15-2015"> <a href="/release-notes/self-service/2015/07/15.html">July 15, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<p><strong>New Resource Types</strong> - The CAT language now supports two additional resource types: <strong>Credentials</strong> and <strong>SshKeys</strong> can now be incorporated into a CAT file natively, allowing you easily create these secrets on a per CloudApp basis and leverage them within the other servers, arrays, and other assets.</p>
+
+<p><strong>RCL Enhancement</strong> - We have added the ability to use variables as actions in Cloud Workflow, making the language even more powerful for interacting with the API. For example, you can now do <code>@cloud.$resource_type.create(...)</code>, dynamically calling <code>create</code> based on the value of the variable.</p>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>We have removed the ability for End Users of Self-Service to Delete CloudApps that are in the <q>Failed</q> state. This should prevent instances of users accidentally leaving resources running in Cloud Management. Designers and Admins can still delete those CloudApps, and should always make sure that the deployment is <q>cleaned up</q> in Cloud Management first.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07- 1-2015"> <a href="/release-notes/self-service/2015/07/01.html">July  1, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<p><strong>Introducing CloudApp Permissions</strong> - The permissions required to launch and operate a CloudApp in Self-Service are now captured in the CAT itself and can be delegated to users with lower levels of permission. This allows you to build complex CloudApps that can be launched by anyone on your team without worrying about giving them explicit permissions on all the resources in the CAT. Older CloudApps that use the legacy permissioning model are labeled as such in the Catalog for Designers so that they can be updated. <a href="/ss/guides/ss_permissions.html">Read more about CloudApp permissions here.</a></p>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Text inputs now support multi-line entry. Just hit <code>enter</code> or paste in text and the text input will grow as needed.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-17-2015"> <a href="/release-notes/self-service/2015/06/17.html">June 17, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<p><strong>User Inteface Enhancment</strong> - Introduced a new slideout panel for interactions with large amounts of content (such as launching a CloudApp and viewing a CAT source).</p>
+
+<p><strong>Cloud Workflow Language</strong> - The <code>provision()</code> and <code>delete()</code>` functions have been rewritten in Cloud Workflow RCL language. The definitions used for these functions will be publicly documented in the coming weeks and allow you to inspect their behavior or create your own equivalents.</p>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Improved the <code>auto_terminate</code> behavior so that any resources that fail to be terminated/deleted are skipped and the user is notified, while any resources that can be terminated/deleted, are.</li>
+<li>Bugfix: fixed a bug that prevented users from Terminating a CloudApp that was in the Stopped state.</li>
+<li>Bugfix: fixed a bug that was calling the on_error handler during a <q>cancel</q> rollback.</li>
+<li>Added a timeout to the <code>canceling_operations</code> transition. When a CloudApp is terminated and operations are running, we cancel those operations. There is now a 2-hour timeout for those operations to be canceled, else the operations will be aborted.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-27-2015"> <a href="/release-notes/self-service/2015/05/27.html">May 27, 2015</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix: fixed non-working filters in AccountPreference.index call.</li>
+<li>Bugfix: fixed end-date calendar to not show today if it&#39;s already passed.</li>
+<li>Bugfix: made the system smarter about using an existing session.</li>
+<li>Bugfix: made the UI remember your column visibility and sorting preferences.</li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/Self-Service">Archived Release Notes are Available Here</a></p>
+</div></div><div class="article"><div class="article-title"><time datetime="04-29-2015"> <a href="/release-notes/self-service/2015/04/29.html">April 29, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added new <q>run</q> action to ScheduledActions resource in the API so that any custom operation can be scheduled.</li>
+<li>Improved the login process so that users are redirected to the correct location when they come to Self-Service by way of a link.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that prevented End Users from modifying a running CloudApp schedule and end date.</li>
+<li>Fixed a bug that was causing notification emails to be sent for Terminated CloudApps.</li>
+<li>Added ranges as a first class entity type in RCL, providing an easy method to iterate through numerical or string ranges.</li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/Self-Service">Archived Release Notes are Available Here</a></p>
+</div></div><div class="article"><div class="article-title"><time datetime="04-15-2015"> <a href="/release-notes/self-service/2015/04/15.html">April 15, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Removed the ScheduledOperation resource from the API. This will be re-implemented by using ScheduledAction with the action name of <q>run</q> and additional metadata.</li>
+<li>New publish modal is available that shows a live preview of the card in the Catalog as you&#39;re publishing. You can choose whether to use information from the CAT, from an existing published version, or create your own. Markdown tips are also now embedded in the modal.</li>
+<li>Email notifications from Self-Service are now white labeled using the same settings as the portal. We use the primary background color and the primary logo as a header in your emails.</li>
+<li>CloudApps in card view now load lazily as you scroll down the page - previous search and filtering works just like before.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug where the <q>terminate</q> operation could sometimes go above 100%.</li>
+<li>Changed the HTTP functions to encode spaces as <q>%20</q> instead of <q>+</q> so that they will work with AWS services.</li>
+<li>Fixed a bug where failure messages in the UI would not wrap correctly when using Firefox.</li>
+<li>Fixed a bug where the sleep() function would not take duration style arguments.</li>
+<li>Fixed errors in the behavior of the unary <q>-</q> and <q>!</q> operators.</li>
+<li>Fixed a bug where deleting a CloudApp from the Catalog did not remove it immediately.</li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/Self-Service">Archived Release Notes are Available Here</a></p>
+</div></div></div></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

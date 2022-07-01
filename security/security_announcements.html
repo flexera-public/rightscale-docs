@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Security Announcements</title><meta content="Below is a list of all RightScale security announcements with their original posting dates." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="security security_security_announcements" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/security"><h4 class="list-group-heading"><img src="../img/product-cloud-management.svg" /><span>Security</span></h4></a><a class="list-group-item" href="rightscale_security_program.html">Security Program</a><a class="list-group-item" href="security_announcements.html">Announcements</a><a class="list-group-item" href="standard_practices.html">Standard Practices</a><a class="list-group-item" href="faqs.html">FAQs</a><a class="list-group-item" href="security_resources.html">Security Resources</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">Security</a></p><div class="page-header"><h1>Security Announcements</h1></div><div class="main-content"><p>Below is a list of all RightScale security announcements with their original posting dates.</p>
+
+<h2 id="glibc-vulnerability--cve-2015-7547-">glibc Vulnerability (CVE-2015-7547)</h2>
+
+<p>Original posting date: <strong>February 23, 2016</strong></p>
+
+<h3 id="glibc-vulnerability--cve-2015-7547--overview">Overview</h3>
+
+<p>There was a recent discovery of the CVE-2015-7547 Vulnerability. The information below will assist you in taking the proper steps toward mitigating the security risk.</p>
+
+<h3 id="glibc-vulnerability--cve-2015-7547--impact-mitigation">Impact Mitigation</h3>
+
+<p>Options for Mitigating the CVE-2015-7547 Vulnerability.</p>
+
+<ol>
+<li>If you are an AWS Customer and your are using their DNS infrastructure, you are not affected by this security risk. <a href="https://aws.amazon.com/security/security-bulletins/cve-2015-7547-advisory/">See the AWS customer advisory here</a>.</li>
+<li><p>If you are not using AWS&#39; DNS Infrastructure and are using a different Cloud Provider, then you may do the following.</p>
+
+<ul>
+<li>As a RightScale Customer, you can now patch your Servers by running <code>yum update</code> or <code>apt-get update</code> as the patch package is now available in our mirror. A restart is required for this update.
+Package Name: <code>glibc-2.12-1.166.el6_7.7.i686.rpm</code></li>
+<li><p>You may also follow Google&#39;s recommendation shown below if you are not able to immediately patch your Servers.</p>
+<pre class="syntax-highlight plaintext"><code>Google has found some mitigations that may help prevent exploitation if you are not able to immediately patch your instance of glibc. The vulnerability relies on an oversized (2048+ bytes) UDP or TCP response, which is followed by another response that will overwrite the stack. Our suggested mitigation is to limit the response (i.e., via DNSMasq or similar programs) sizes accepted by the DNS resolver locally as well as to ensure that DNS queries are sent only to DNS servers which limit the response size for UDP responses with the truncation bit set.
+</code></pre></li>
+</ul></li>
+</ol>
+
+<h2 id="openssl---data-encryption-vulnerability--cve-2014-0224-">OpenSSL - Data Encryption Vulnerability (CVE-2014-0224)</h2>
+
+<p>Original posting date: <strong>June 5, 2014</strong></p>
+
+<h3 id="openssl---data-encryption-vulnerability--cve-2014-0224--overview">Overview</h3>
+
+<p>An announcement was recently disclosed about a potential vulnerability related to encrypted SSL/TLS communications that were exposed in the widely used OpenSSL library. To learn more, see <a href="https://www.computerworld.com/article/2490316/data-security/new-openssl-vulnerability-puts-encrypted-communications-at-risk-of-spying.html">New OpenSSL vulnerability puts encrypted communications at risk of spying</a>.</p>
+
+<h3 id="openssl---data-encryption-vulnerability--cve-2014-0224--impact-to-rightscale-users">Impact to RightScale Users</h3>
+
+<p>RightScale users are not vulnerable to the related OpenSSL issues. There was only one potential vulnerability (<strong>CVE-2014-0224</strong>), but RightScale deployed a patch to resolve the issue on June 5, 2014.</p>
+
+<h2 id="rssa-2010-dec-0001-host-ssh-key">RSSA-2010-Dec-0001 Host SSH Key</h2>
+
+<p>Original posting date: <strong>December 29, 2010</strong></p>
+
+<h3 id="rssa-2010-dec-0001-host-ssh-key-summary">Summary</h3>
+
+<p>The following is a RightScale Services Security Announcement. All v4 and v5 Ubuntu RightImages, and some customer built Ubuntu-based images, share the same SSH host key fingerprint.</p>
+
+<h3 id="rssa-2010-dec-0001-host-ssh-key-relevant-releases">Relevant Releases</h3>
+
+<ul>
+<li>All Ubuntu RightImages (v4 and v5)</li>
+<li>Customer-built Ubuntu images (except those that were bundled with the cloudinit package installed)</li>
+</ul>
+
+<h3 id="rssa-2010-dec-0001-host-ssh-key-problem-description">Problem Description</h3>
+
+<div class="alert alert-info*Note:* SSH *host* keys serve as a fingerprint for server identification. These are <u>not</u> related to the *root user keys* that the RightScale Dashboard generates to provide login authentication to servers. No " role="alert"><strong>SSH root user keys</strong><p>are impacted by this advisory and they should not be regenerated.</p>
+</div>
+
+<p>Ubuntu generates host keys when the openssh-server package is installed. This package is installed during the RightImage creation process and not at boot time. Therefore, all Ubuntu RightImages share the same SSH host key, making Ubuntu-based RightImages vulnerable to an active middleperson attack.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>CentOS based images are not impacted by this issue as SSH for CentOS generates keys at boot time.</p>
+</div>
+
+<p>This vulnerability would allow an attacker to hijack an SSH session by interfering with the SSH key exchange protocol, provided:</p>
+
+<p><strong>(a)</strong> they knew the exact RightImage from which an instance was booted</p>
+
+<p><em>and</em></p>
+
+<p><strong>(b)</strong> they could actively hijack the TCP connection between an authorized SSH client and the instance.</p>
+
+<p>Both of these criteria must be satisfied in order for the attack to succeed; a passive middleperson cannot mount an attack, nor can knowledge of a host&#39;s private key alone be used to gain unauthorized access to an instance.</p>
+
+<h3 id="rssa-2010-dec-0001-host-ssh-key-classification">Classification</h3>
+
+<p>The severity of this vulnerability is rated Medium, but because knowledge of server launch parameters <em>and</em> an active middleperson attack are both required to leverage this vulnerability.</p>
+
+<p>RightScale rates the likelihood of this attack as Low in most environments, except in environments where the likelihood of an insider attack is increased.</p>
+
+<h3 id="rssa-2010-dec-0001-host-ssh-key-solution">Solution</h3>
+
+<p>There are three ways to remediate the problem. In order of preference, they are:</p>
+
+<ol>
+<li>Run a specific RightScript as an <q>Any</q> script to apply the hot patch to running servers</li>
+<li>Relaunch affected servers to pick up a hot patch that fixes the issue</li>
+<li>Update your ServerTemplates to use a v5.6 RightImage, which is not vulnerable</li>
+</ol>
+
+<p>The three remediation methods are detailed below.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>Should you need to implement remediation steps, you only need to perform one of the three below.</p>
+</div>
+
+<h4 id="option-1---patching-running-servers-using-a-rightscript">Option 1 - Patching Running Servers Using a RightScript</h4>
+
+<p>We have published a RightScript that will regenerate SSH keys on a running server.</p>
+
+<p>To patch running instances using the RightScript:</p>
+
+<ol>
+<li>Import the RightScript <a href="http://www.rightscale.com/library/right_scripts/SYS-ssh-host-key-freshen/16237">SYS ssh key freshen</a> to your account</li>
+<li>Run it as an <q>Any</q> script on every affected server, deployment, or server array (see <a href="/cm/dashboard/manage/deployments/deployments_actions.html#run--any-script--on-a-server">Run Any Script on a Server</a>)</li>
+<li>Test any operational scripts or procedures that rely on SSH connectivity between hosts to ensure that the changed keys do not cause any problems</li>
+</ol>
+
+<p><em>Patching a running instance has significant drawbacks and should be used with caution.</em> If your deployment uses SSH as a mechanism for inter-server communication and enables strict host checking, you may find that some operational scripts or automation tasks no longer function correctly. This patch does not affect <em>client</em> SSH keys (you will still be able to connect with your current client keys), but if you SSH into an instance for which you have regenerated the <em>host</em> key, you may receive errors from your SSH client like the following:</p>
+<pre class="syntax-highlight plaintext"><code>    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @
+    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+    Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+    It is also possible that the RSA host key has just been changed.
+    Offending key in /Users/joe-user/.rightscale/known_hosts:6 
+</code></pre>
+
+<p>If this happens, you can remove the offending line from the known_hosts file to get rid of the error.</p>
+
+<h4 id="option-2---relaunching-servers">Option 2 - Relaunching Servers</h4>
+
+<p>Relaunching your servers will automatically apply a hot patch which fixes the SSH host key issue. A hotpatch is available for the following Ubuntu RightImage/RightLink versions:</p>
+
+<ul>
+<li>v5.5.9</li>
+<li>v5.4.6</li>
+<li>v5.3.0</li>
+<li>v4.3.7 and v4.5.x</li>
+</ul>
+
+<p>Relaunching is appropriate in the following circumstances</p>
+
+<ul>
+<li>Your server is running a RightImage version for which a patch is available (or your server is running a custom image that uses a RightLink software version for which a patch is available)</li>
+<li>You do not wish to update to the latest RightImage for testing or stability reasons</li>
+<li>You are capable of performing a rolling relaunch of affected servers</li>
+</ul>
+
+<p>To relaunch your servers, simply click <q>Relaunch</q> on the affected server.</p>
+
+<h4 id="option-3---updating-servertemplates-to-use-v5.6-rightimages">Option 3 - Updating ServerTemplates to use v5.6 RightImages</h4>
+
+<p>Updating your ServerTemplates and Servers to RightImage v5.6 is the recommended course of action because the image has numerous stability fixes in addition to fixing the SSH host key issue. Update to v5.6 is appropriate in the following circumstances:</p>
+
+<ul>
+<li>You have authored your own ServerTemplate and have full control over its configuration</li>
+<li>You were previously using RightImage v5.4 - v5.5</li>
+<li>You are capable of testing your ServerTemplate changes in a development or staging environment to ensure they are fully compatible with RightImage v5.6</li>
+</ul>
+
+<p>To update ServerTemplates, perform the following:</p>
+
+<ol>
+<li>Add the appropriate RightImage Ubuntu v5.6 MultiCloudImage to every affected ServerTemplate.</li>
+<li>Commit a new version of the ServerTemplate if necessary (e.g. if your servers are not using HEAD).</li>
+<li>Edit every server making use of the ServerTemplate; change its MCI to the v5.6 MCI you added in the previous step.</li>
+<li>Relaunch every affected server.</li>
+</ol>
+
+<h3 id="rssa-2010-dec-0001-host-ssh-key-references">References</h3>
+
+<p>None.</p>
+
+<h3 id="rssa-2010-dec-0001-host-ssh-key-change-log">Change Log</h3>
+
+<ul>
+<li>Updated script hyperlink to latest CentOS-safe patch. (2010-12-29 16:31 PDT)</li>
+</ul>
+
+<h3 id="rssa-2010-dec-0001-host-ssh-key-contact">Contact</h3>
+
+<p>If you have any additional questions regarding this known issue, please contact <a href="mailto:support@rightscale.com">support@rightscale.com</a> or click on &#39;Support&#39; inside the Dashboard to file a ticket.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Overview</title><meta content="Use RightScale Self-Service to deliver curated, governed cloud services to all the users in your organization. Self-Service provides an easy-to-use portal for automated deployment of cloud applications." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="ss ss_getting_started ss_getting_started_ss_overview" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><div class="page-header"><h1>Overview</h1></div><div class="main-content"><p>Use RightScale Self-Service to deliver curated, governed cloud services to all the users in your organization. By using RightScale Self-Service, you can empower developers with on-demand access to cloud infrastructure to accelerate innovation, streamline development, and reduce costs related to “shadow IT.”  Self-Service provides an easy-to-use portal for automated deployment of cloud applications and policy-based governance over cloud usage.</p>
+
+<h2 id="introduction-to-cloudapps">Introduction to CloudApps</h2>
+
+<p>The following sections provide a brief introduction to CloudApps including descriptions of the various states of the CloudApp lifecycle, operations (both user-defined and system-defined), and details on the CloudApp display in the Self-Service user interface.</p>
+
+<h2 id="what-is-a-cloudapp">What is a CloudApp</h2>
+
+<p>A CloudApp (Cloud Application) is a high-level construct that represents an application running in the cloud. CloudApps are launched and managed via RightScale&#39;s Self-Service portal, using either the Self-Service Catalog in the web user interface or the Self-Service API.</p>
+
+<h2 id="the-cloudapp-lifecycle">The CloudApp Lifecycle</h2>
+
+<p>Throughout its lifecycle, a CloudApp transitions through many states as shown in the following diagram.</p>
+
+<p><img src="/img/ss_lifecycle-2@2x.png" alt="Lifecycle Image" width="1200" height="1136" /></p>
+
+<p>The following table describes the various states in the CloudApp Lifecycle.</p>
+
+<table><thead>
+<tr>
+<th>State</th>
+<th>Type</th>
+<th>Description</th>
+<th>Available Next Actions</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Launching</td>
+<td>Active</td>
+<td>Triggered when a CloudApp is launched from the Catalog or launched from a previously terminated CloudApp.</td>
+<td></td>
+</tr>
+<tr>
+<td>Starting</td>
+<td>Active</td>
+<td>Triggered automatically when a user clicks the Start button, or when a scheduling event occurs. Note that this will call the built-in operation called <q>start</q> defined in the CAT if it exists, otherwise it will call the launch flow (<q>launch</q> then <q>auto_launch</q> then <q>enable</q>).</td>
+<td></td>
+</tr>
+<tr>
+<td>Running</td>
+<td>Static</td>
+<td>Indicates successful completion of the Enable operation.</td>
+<td>Terminate, Stop</td>
+</tr>
+<tr>
+<td>Stopping</td>
+<td>Active</td>
+<td>Triggered when a user clicks the Stop button, or when a scheduling event occurs. Note that this will call the built-in operation called <q>stop</q> defined in the CAT if it exists, otherwise it will call the terminate flow (<q>terminate</q> then <q>auto-terminate</q>).</td>
+<td></td>
+</tr>
+<tr>
+<td>Stopped</td>
+<td>Static</td>
+<td>Indicates successful completion of the Stop operation.</td>
+<td>Terminate, Start</td>
+</tr>
+<tr>
+<td>Terminating (Decommissioning)</td>
+<td>Active</td>
+<td>Triggered when a user clicks the Terminate button.</td>
+<td></td>
+</tr>
+<tr>
+<td>Terminated (Decommissioned)</td>
+<td>Static</td>
+<td>Indicates successful completion of the Decommission/Terminate operation.</td>
+<td>Launch, Delete</td>
+</tr>
+<tr>
+<td>Failed</td>
+<td>Static</td>
+<td>Indicates that a failure has occurred in one of the following operations: launch, auto_launch, terminate, auto_terminate, stop, start</td>
+<td>Terminate, Delete, Force State</td>
+</tr>
+</tbody></table>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>If you delete a CloudApp that is in a Failed state, some cloud resources may not be properly decommissioned and/or removed. Always attempt to Terminate a Failed CloudApp before deleting it.</p>
+</div>
+
+<h2 id="operations">Operations</h2>
+
+<p>Operations describe the actions that can occur on your application across its lifecycle. Operations are further classified as either user-defined or system-defined. There are four special user-defined operations and any number of custom user-defined operations is supported. Custom operations can be made available to the end users through the Self-Service user interface. System-defined operations are built-in.</p>
+
+<h3 id="operations-user-defined-operations">User Defined Operations</h3>
+
+<p>All user-defined operations are optional and are written using the RightScale Cloud Workflow Language (RCL).</p>
+
+<ul>
+<li><strong>Launch</strong> - Defines which actions are executed when a CloudApp is launched (e.g. create a server)</li>
+<li><strong>Enable</strong> - Enables one or more resources or services.</li>
+<li><strong>Start</strong> - Starts the CloudApp. This operation is called by the scheduler if it exists.</li>
+<li><strong>Stop</strong> - Stops the CloudApp. This operation is called by the scheduler if it exists.</li>
+<li><strong>Custom Operation</strong> - Defines a specific set of actions that are designed for execution during a CloudApp&#39;s running state.</li>
+<li><strong>Terminate</strong> - Defines which actions are executed when a CloudApp is terminated (e.g. shutdown a server)</li>
+<li><strong>Force State</strong> - Available only to <code>designer</code> and <code>admin</code> roles, allows the state to be forced to <code>Running</code> or <code>Stopped</code> if the CloudApp is <code>Failed</code></li>
+</ul>
+
+<h3 id="operations-system-defined-operations">System Defined Operations</h3>
+
+<ul>
+<li><strong>Auto-Launch</strong> - Sequentially provisions all resources defined in the CAT that are either not explicitly passed in to the &#39;provision&#39; operation, or do not have a condition statement that evaluates to &#39;false&#39;. This operation cannot be overridden.</li>
+<li><strong>Auto-Terminate</strong> - Deletes all resources defined in the CAT as well as resources (except volume snapshots) associated with the deployment, even if they were not created via the CAT. These resources will be destroyed and will no longer exist. This operation cannot be overridden. If there were any errors during the deletion of resources, they will be recorded and the operation will proceed with deleting as many resources as possible before entering the failed state. These errors can then be seen and rectified before retrying the operation.</li>
+<li><strong>Delete</strong> - Removes the CloudApp from the Self-Service portal so that it can no longer be launched again. However, the CloudApp is not removed from the catalog.  Warning! Once you delete a CloudApp, all of its metadata is permanently removed.</li>
+</ul>
+
+<h2 id="cat-design-concepts">CAT Design Concepts</h2>
+
+<p>The purpose of a CAT is to provide a simplistic and repeatable way of defining resources and operations. A CAT enumerates all the resources used by a Cloud Application (CloudApp) and lists operations that can be used to provision the CloudApp, operate it, and decommission it. You can think of CATs as similar to AWS CloudFormation templates. However, there are some fundamental differences between AWS CloudFormation templates and CATs. The CAT allows you to write code that describes the orchestration for your system as your code is executed. The CAT is fundamentally different than the AWS CloudFormation template in that with a CAT you can specify operations and use imperative code that runs when the service is operational or is being configured. AWS CloudFormation templates are <q>static</q> declarative code in JSON format that do not promote the same level of interaction and configuration as CATs.</p>
+
+<h3 id="cat-design-concepts-anatomy-of-a-cat">Anatomy of a CAT</h3>
+
+<p>RightScale has defined a ruby Domain Specific Language (DSL) to describe CloudApps. Using a DSL means that the full power of the ruby language is available to construct the CloudApp definition (things like date, string, number manipulations are especially useful). Think of ruby in this context as a <q>macro</q> language that gets evaluated on load rather than at runtime. The first step toward creating CAT files is understanding the template structure and format.</p>
+
+<p>Here are the aspects of a CloudApp that are defined in a CAT in two primary categories:</p>
+
+<h4 id="metadata">Metadata</h4>
+
+<p>Descriptive information for the CAT contained in required fields for name, short-description, long-description, and rs_ca_ver (CAT parsing engine version).</p>
+
+<h4 id="declarations">Declarations</h4>
+
+<p>There are 7 different types of declarations that can be used in a CAT.</p>
+
+<ul>
+<li><strong>Parameters</strong> - used to get input to a CloudApp from an end-user</li>
+<li><strong>Mappings</strong> - used to abstract detail away from an end-user</li>
+<li><strong>Resources</strong> - declaratively describe the cloud resources needed for this CloudApp</li>
+<li><strong>Conditions</strong> - boolean values based on the environment of the CloudApp</li>
+<li><strong>Outputs</strong> - used to show running CloudApp information to end-users</li>
+<li><strong>Operations</strong> - define the behaviors that apply to this CloudApp during its lifecycle</li>
+<li><strong>Definitions</strong> - reusable code components written in a cloud-focused workflow language (RightScale Cloud Workflow)</li>
+</ul>
+
+<p>See <a href="../reference/ss_CAT_file_language.html">CAT File Language</a> for detailed information on CAT metadata fields and declarations.</p>
+
+<h3 id="cat-design-concepts-example-cat-file">Example CAT File</h3>
+
+<p>Here is an example of what a CAT looks like. But we do not expect you to use this as your only resource for building your own. This is only for visual reference to help digest all this new information. To find how to start designing CATs, continue reading on.</p>
+
+<p><strong>Simple Single-Server CAT</strong></p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s2">"LAMP AIO"</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20131202</span>
+<span class="n">short_description</span> <span class="s2">"LAMP All-In-One"</span>
+<span class="n">long_description</span> <span class="s2">"A single server running CentOS 6.4, Apache, PHP and MySQL"</span>
+
+<span class="n">resource</span> <span class="s2">"lamp"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="s2">"LAMP AIO"</span>
+  <span class="n">cloud</span> <span class="s2">"EC2 us-west-2"</span>
+  <span class="n">instance_type</span> <span class="s2">"m1.small"</span>
+  <span class="n">security_groups</span> <span class="n">find</span><span class="p">(</span><span class="s2">"front_end"</span><span class="p">),</span> <span class="n">find</span><span class="p">(</span><span class="s2">"ssh"</span><span class="p">)</span>
+  <span class="n">server_template</span> <span class="n">find</span><span class="p">(</span><span class="s2">"LAMP All-In-One with MySQL 5.5 (v13.5 LTS)"</span><span class="p">,</span> <span class="ss">revision: </span><span class="mi">2</span><span class="p">)</span>
+  <span class="n">inputs</span> <span class="k">do</span>
+    <span class="p">{</span> <span class="s2">"app/database_name"</span>                <span class="o">=&gt;</span> <span class="s2">"text:my_app_db"</span><span class="p">,</span>
+      <span class="s2">"db/application/password"</span>          <span class="o">=&gt;</span> <span class="s2">"cred:DBAPPLICATION_PASSWORD"</span><span class="p">,</span>
+      <span class="s2">"db/application/user"</span>              <span class="o">=&gt;</span> <span class="s2">"cred:DBAPPLICATION_USER"</span><span class="p">,</span>
+      <span class="s2">"db/dns/master/fqdn"</span>               <span class="o">=&gt;</span> <span class="s2">"env:PRIVATE_IP"</span><span class="p">,</span>
+      <span class="s2">"db/dump/container"</span>                <span class="o">=&gt;</span> <span class="s2">"text:lamp_bucket"</span><span class="p">,</span>
+      <span class="s2">"db/dump/database_name"</span>            <span class="o">=&gt;</span> <span class="s2">"text:my_app"</span><span class="p">,</span>
+      <span class="s2">"db/dump/prefix"</span>                   <span class="o">=&gt;</span> <span class="s2">"text:dump"</span><span class="p">,</span>
+      <span class="s2">"db/dump/storage_account_id"</span>       <span class="o">=&gt;</span> <span class="s2">"cred:AWS_ACCESS_KEY_ID"</span><span class="p">,</span>
+      <span class="s2">"db/dump/storage_account_provider"</span> <span class="o">=&gt;</span> <span class="s2">"text:s3"</span><span class="p">,</span>
+      <span class="s2">"db/dump/storage_account_secret"</span>   <span class="o">=&gt;</span> <span class="s2">"cred:AWS_SECRET_ACCESS_KEY"</span><span class="p">,</span>
+      <span class="s2">"repo/default/provider"</span>            <span class="o">=&gt;</span> <span class="s2">"text:repo_git"</span><span class="p">,</span>
+      <span class="s2">"repo/default/repository"</span>          <span class="o">=&gt;</span> <span class="s2">"text:git://github.com/rightscale/examples.git"</span><span class="p">,</span>
+      <span class="s2">"repo/default/revision"</span>            <span class="o">=&gt;</span> <span class="s2">"text:unified_tomcat"</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Let&#39;s take a moment to analyze the example above.</p>
+
+<p>First, you will see at the top of the CAT is where we define the metadata for the CloudApp including a <code>name</code> (<q>LAMP AIO</q>), the CAT parser engine version, or <code>rs_ca_ver</code> (20131024), a <code>short_description</code> (<q>LAMP All-In-One</q>), and a <code>long_description</code> (<q>A single server running CentOS 6.4, Apache, PHP and MySQL</q>).</p>
+
+<p>The remaining code block defines a CloudApp <code>resource</code> called <q>lamp</q> which is of <code>type</code> <q>server</q>. Within this block we provide a <code>name</code> for the resource and declaratively specify the <code>cloud</code>, <code>datacenter</code>, <code>instance_type</code>, <code>security_groups</code>, and the <code>server_template</code> from which the server is derived. Finally, we define all the <code>inputs</code> required to successfully launch the server.</p>
+
+<p>Because no user-defined operations are explicitly specified in the CAT, compiling and launching the reference CAT causes the built-in Auto-Launch operation to execute on the <q>lamp</q> resource resulting in an operational LAMP All-in-One server with MySQL 5.5 in RightScale. A corresponding deployment is created and viewable in the RightScale Cloud Management Dashboard.  </p>
+
+<h3 id="cat-design-concepts-how-to-create-cat-files">How to Create CAT Files</h3>
+
+<p>In order to create and edit CAT files you need a basic text editor. We recommend using an editor that supports syntax highlighting for the ruby programming language, however, any text editor will do. There are several ways in which you can create CAT files including using the reference CAT listed above, using the RightScale Deployment Exporter, or creating one from scratch. Each of these options is described in greater detail below.</p>
+
+<h4 id="using-the-reference-cat">Using the Reference CAT</h4>
+
+<p>One of the easiest ways to get up and running in Self-Service is to create a CAT file based on the reference CAT provided above. Leveraging the reference CAT is a great way to become more familiar with the concepts of Self-Service. It is important to note that the CAT we provide for reference is very basic and only describes a single server. In building a CAT for your particular environment you will need to consider things like the number and type of servers required (load balancers, application servers, database servers, etc.), input values appropriate for your environment (database credentials, access keys, repository locations, etc.), and whether to employ Conditions, Mappings, Custom Operations, or other more advanced Self-Service constructs and declarations.</p>
+
+<h4 id="using-the-rightscale-deployment-exporter">Using the RightScale Deployment Exporter</h4>
+
+<p>If you already have existing operational deployments managed by RightScale then the best way to create your CATs is to use the RightScale Deployment Exporter. The Deployment Exporter is a simple ruby command line program that creates an initial CAT version based on a given RightScale deployment. In order to use the Deployment Exporter you will need the following in your development environment.</p>
+
+<ul>
+<li>Ruby v1.8.7 (or higher)</li>
+<li>RightScale API Client v1.5.15 (or higher)</li>
+</ul>
+
+<p>If you do not already have the RightScale API Client v1.5.15 in your development environment you can install the right_api_client gem using the following command.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">gem</span> <span class="n">install</span> <span class="n">right_api_client</span>
+</code></pre>
+
+<p>The Deployment Exporter (export_deployment.rb) is currently available as an open source tool from the following repository.</p>
+
+<p><a href="https://github.com/ryanoleary/rs-selfservice-tools">rs-selfservice-tools</a></p>
+
+<p>Use the Download ZIP button on the GitHub page to save a copy of the rs-selfservice-tools to your local drive.</p>
+
+<p>The command line syntax for the Deployment Exporter is quite simple:</p>
+<pre class="syntax-highlight plaintext"><code>ruby export_deployment.rb &lt;options&gt;
+-d, --deployment ID              Deployment ID
+-e, --email EMAIL_ADDRESS        Email Address
+-p, --password PASSWORD          Password
+-r, --refresh REFRESH_TOKEN      Refresh Token
+-u, --url API_URL                API Endpoint URL
+-c, --concurrent_launch          Set the resources to launch concurrently
+-i, --deployment_inputs          Set inputs at the deployment level
+-a, --account ID                 Account ID
+</code></pre>
+
+<p>Here is an example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">ruby</span> <span class="n">export_deployment</span><span class="p">.</span><span class="nf">rb</span> <span class="o">-</span><span class="n">d</span> <span class="mi">457494003</span> <span class="o">-</span><span class="n">e</span> <span class="n">joe</span><span class="p">.</span><span class="nf">smith</span><span class="vi">@acme</span><span class="p">.</span><span class="nf">com</span> <span class="o">-</span><span class="nb">p</span> <span class="o">&lt;</span><span class="n">joes</span> <span class="n">rs</span> <span class="n">accnt</span> <span class="n">pwd</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">a</span> <span class="mi">1234</span>
+</code></pre>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The <code>--deployment ID</code> and <code>--account ID</code> option values can be quickly retrieved from your RightScale deployment URL. The <code>--email</code> and <code>--password</code> option values must match those associated with your RightScale account. Instead of username and password, you can use the Oauth refresh token by using the <code>--refresh</code> option</p>
+</div>
+
+<p>To run the Deployment Exporter:</p>
+
+<ol>
+<li>Open your terminal application and navigate to the location where you saved the rs-selfservice-tools.</li>
+<li>At the command prompt, run export_deployment.rb using the syntax described above.</li>
+<li>The exported CAT file is saved in the current directory. The filename for the CAT is based on the nickname of your RightScale deployment.</li>
+</ol>
+
+<h4 id="creating-a-cat-from-scratch">Creating a CAT from Scratch</h4>
+
+<p>Once you feel comfortable with the concepts of Self-Service you may be ready to create CAT files from the ground up. Prior to attempting to create a CAT file from scratch we recommend you gain a solid understanding of the CAT language constructs and syntax by reading Cloud Application Template Language. In addition, familiarity with the RightScale Cloud Workflow Language (RCL) is highly advised. We recognize that creating CAT files for the first time can be challenging, especially for complex cloud infrastuctures. Rest assured, our Professional Services team is available to assist you in creating CATs suitable for your particular workload requirements.</p>
+
+<p>Depending on the complexity of your environment, there will be a number of items that will need to be defined in your CAT. See <a href="/ss/guides/ss_writing_your_first_CAT.html">Writing your first CAT</a> for a walkthrough of a CAT file. Or reference the <a href="/ss/reference/ss_CAT_file_language.html">CAT Language Reference</a> for syntax specifics.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

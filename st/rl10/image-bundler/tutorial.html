@@ -1,0 +1,340 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Image Bundler For RightLink 10 - Tutorial</title><meta content="Use this tutorial to create images in your cloud." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="st st_rl10 st_rl10_image-bundler st_rl10_image-bundler_tutorial" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/st"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>ServerTemplates</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="/st/rl10">Version RL10</a><a class="list-group-item" href="../../open-source/">Open Source</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">ServerTemplates</a> &#x2F; <a href="../">Version RightLink 10 ServerTemplates</a> &#x2F; <a href="./">Image Bundler For RightLink 10</a></p><div class="page-header"><h1>Image Bundler For RightLink 10 - Tutorial</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To create private images based on public/official cloud images that will not be removed or deregistered by the cloud provider</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>You must log in under a RightScale account with <q>actor</q> and <q>library</q> user roles in order to complete the tutorial.</li>
+<li>You must have an supported cloud registered with RightScale</li>
+<li>We strongly recommend that you set up credentials for password values and any other sensitive data included as inputs.</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>This tutorial describes the steps for launching one Chef server in the cloud, using the <a href="http://www.rightscale.com/library/server_templates/Image-Bundler-For-RightLink-10/lineage/58435">Image Bundler For RightLink 10</a> ServerTemplate.</p>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-add-a-server">Add a Server</h3>
+
+<p>Follow these steps to add the image builder to the deployment.</p>
+
+<ol>
+<li>Go to the MultiCloud Marketplace (<strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong>) and import the most recently published revision of the <a href="http://www.rightscale.com/library/server_templates/Image-Bundler-For-RightLink-10/lineage/58435">Image Bundler For RightLink 10</a> ServerTemplate into the RightScale account.</li>
+<li>From the imported ServerTemplate&#39;s show page, click the <strong>Add Server</strong> button.</li>
+<li>Select the cloud for which you will configure a server.</li>
+<li>Select the deployment into which the new server will be placed.</li>
+<li>Next, the Add Server Assistant wizard will walk you through the remaining steps that are required to create a server based on the selected cloud.
+
+<ul>
+<li><strong>Server Name</strong> - Provide a nickname for your new server (e.g., ImageBundler - AWS - CentOs).</li>
+<li>Select the appropriate cloud-specific resources that are required in order to launch a server into the chosen cloud. The required cloud resources may differ depending on the type of cloud infrastructure.</li>
+</ul></li>
+<li>Click <strong>Confirm</strong>, review the server&#39;s configuration and click <strong>Finish</strong> to create the server.</li>
+</ol>
+
+<h3 id="steps-configure-inputs">Configure Inputs</h3>
+
+<p>The next step is to define the properties of the packer build and configuration parameter by entering values for inputs. As a best practice, you should define required inputs for the servers at the deployment level. For a detailed explanation of how inputs are defined and used in RightScripts, see <a href="/cm/rs101/inheritance_of_inputs.html">Inheritance of Inputs</a>.</p>
+
+<p>To enter inputs, open the deployment&#39;s <strong>Inputs</strong> tab, click <strong>Edit</strong>, and use the following settings to configure input values. We recommend that you set up credentials for password values and any other sensitive data as shown in the examples.</p>
+
+<h4 id="image-bundler-inputs">Image Bundler Inputs</h4>
+
+<p>The CLOUD Category provides inputs to select which cloud specific parameters.</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CLOUD</td>
+<td>Select the supported target cloud for your image</td>
+<td>text: ec2</td>
+</tr>
+<tr>
+<td>DATACENTER</td>
+<td>The Datacenter or Availability Zone to create the image in.</td>
+<td>text: us-east-1</td>
+</tr>
+<tr>
+<td>IMAGE_NAME</td>
+<td>The name of the image to be created.  Image name must not already exist.</td>
+<td>text: my-image</td>
+</tr>
+<tr>
+<td>INSTANCE_TYPE</td>
+<td>The instance type used to create the image.</td>
+<td>text: m3.medium</td>
+</tr>
+<tr>
+<td>PLATFORM</td>
+<td>The Platform of the target image.  Either Linux or Windows</td>
+<td>text: linux</td>
+</tr>
+<tr>
+<td>SOURCE_IMAGE</td>
+<td>The source image id of the image being copied.  Leave blank for Azure RM.</td>
+<td>text: ami-abc123</td>
+</tr>
+</tbody></table>
+
+<p>The AWS Category provides inputs specific to images created in AWS.</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AWS_ACCESS_KEY</td>
+<td>The AWS Access Key Id</td>
+<td>cred:AWS_ACCESS_KEY_ID</td>
+</tr>
+<tr>
+<td>AWS_SECRET_KEY</td>
+<td>The AWS Secret Access Key</td>
+<td>cred:AWS_SECRET_ACCESS_KEY</td>
+</tr>
+<tr>
+<td>AWS_SUBNET_ID</td>
+<td>The Subnet id used with the VPC. Leave blank for default.</td>
+<td></td>
+</tr>
+<tr>
+<td>AWS_VPC_ID</td>
+<td>The VPC ID of the VPC to use  Leave blank for default</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>The Google Compute Category provides inputs specific to images created in GCE.</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>GOOGLE_ACCOUNT</td>
+<td>The Google Service Account json file</td>
+<td>cred:GOOGLE_SERVICE_ACCOUNT_FILE</td>
+</tr>
+<tr>
+<td>GOOGLE_NETWORK</td>
+<td>The Network name to use when building the image.  Leave blank for default</td>
+<td></td>
+</tr>
+<tr>
+<td>GOOGLE_SUBNETWORK</td>
+<td>The Subnet name used with the Network being used. Leave blank for default.</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>The Azure RM category provides inputs specific to images created on Azure.  Carefully read the <a href="https://www.packer.io/">Packer Documentation</a> to gather the
+credentials needed below.</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>AZURERM_CLIENT_ID</td>
+<td>The Active Directory service principal associated with your builder.</td>
+<td>cred:AZURERM_CLIENT_ID</td>
+</tr>
+<tr>
+<td>AZURERM_CLIENT_SECRET</td>
+<td>The password or secret for your service principal.</td>
+<td>cred:AZURERM_CLIENT_SECRET</td>
+</tr>
+<tr>
+<td>AZURERM_IMAGE_OFFER</td>
+<td>Offer for your base image.CLI example azure vm image list-offers -l westus -p Canonical</td>
+<td>text: UbuntuServer</td>
+</tr>
+<tr>
+<td>AZURERM_IMAGE_PUBLISHER</td>
+<td>PublisherName for your base image. CLI example azure vm image list-publishers -l westus</td>
+<td>text:Canonical</td>
+</tr>
+<tr>
+<td>AZURERM_IMAGE_SKU</td>
+<td>SKU for your base image. CLI example azure vm image list-skus -l westus -p Canonical -o UbuntuServer</td>
+<td>text:14.04.5</td>
+</tr>
+<tr>
+<td>AZURERM_RESOURCE_GROUP</td>
+<td>Resource group under which the final artifact will be stored.</td>
+<td>text:myresourcegroup</td>
+</tr>
+<tr>
+<td>AZURERM_SPN_OBJECT_ID</td>
+<td>Storage account under which the final artifact will be stored.</td>
+<td>cred:AZURERM_SPN_OBJECT_ID</td>
+</tr>
+<tr>
+<td>AZURERM_STORAGE_ACCOUNT</td>
+<td><a href="/clouds/azure_resource_manager/reference/resources.html#storage-accounts">Storage Accounts</a> under which the final artifact will be stored.</td>
+<td>text:mystorageaccount</td>
+</tr>
+<tr>
+<td>AZURERM_SUBSCRIPTION_ID</td>
+<td>Subscription under which the build will be performed. The service principal specified in client_id must have full access to this subscription.</td>
+<td>cred:AZURERM_SUBSCRIPTION_ID</td>
+</tr>
+<tr>
+<td>AZURERM_TENANT_ID</td>
+<td>Azure tenant id</td>
+<td>cred:AZURERM_TENANT_ID</td>
+</tr>
+</tbody></table>
+
+<p>The MISC Category provides inputs to install RightLink on the Image.</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>IMAGE_PASSWORD</td>
+<td>The Windows Administrator password when building windows images.  The password must abide to the Windows Password requirements</td>
+<td>cred: WINDOWS_ADMIN_PASSWORD</td>
+</tr>
+<tr>
+<td>SSH_USERNAME</td>
+<td>The username packer will use to ssh into the new image to run scripts. This is the username provided by the cloud provider or linux distribution.  For example, on CentOS distro the username is &#39;centos&#39;, and ubuntu it&#39;s &#39;ubuntu&#39;</td>
+<td>text: centos</td>
+</tr>
+<tr>
+<td>CUSTOM_SCRIPT_URL</td>
+<td>Public URL to custom script to modify image.  This script will run in the provision section of the packer build, after the image is built.</td>
+<td>text: https://s3.awsamazon.com/mybucket/myscript.sh</td>
+</tr>
+</tbody></table>
+
+<p>The RIGHTLINK Category provides inputs to install RightLink on the Image.</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RIGHTLINK_VERSION</td>
+<td>The version of RightLink 10 to install on image.  Leave blank to NOT add RightLink to image. Enter 10 to get the latest version or RightLink 10, or provide the explicit version, i.e 10.6.0</td>
+<td>text: 10.6.0</td>
+</tr>
+</tbody></table>
+
+<p>The RIGHTSCALE Category provides inputs manage boot time RightScripts.</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>MANAGED_LOGIN</td>
+<td>To enable or disable managed login. Default is &#39;enable&#39;.</td>
+<td>text: enable</td>
+</tr>
+</tbody></table>
+
+<h3 id="steps-launch-the-server">Launch the Server</h3>
+
+<ol>
+<li>Go to the deployment&#39;s <strong>Servers</strong> tab and launch the image builder. When you view the input confirmation page, there should not be any required inputs with missing values. If there are any required inputs that are missing values (highlighted in red) at the input confirmation page, cancel the launch and add values for those inputs at the deployment level before launching the server again. Refer to the instructions in <a href="/cm/dashboard/manage/deployments/deployments_actions.html#launch-a-server">Launch a Server</a> if you are not familiar with this process.</li>
+</ol>
+
+<h3 id="steps-create-or-update-your-multicloud-image--mci--">Create or Update your MultiCloud Image (MCI).</h3>
+
+<p>Now that you have your new Image created you before you can use it you need to create a new or Update an existing (MCI). Refer to the <a href="/cm/dashboard/design/multicloud_images/multicloud_images_actions.html#create-a-new-multicloud-image">Create a new MultiCloud Image</a> document for these details.</p>
+
+<h2 id="more-details">More Details</h2>
+
+<h3 id="bundling-rightlink-10">Bundling RightLink 10</h3>
+
+<p>RightLink 10 on Linux can be installed at <a href="/rl10/reference/rl10_install_at_boot.html">boot time</a> and doesn&#39;t need to be bundled into the image, but it can be if it&#39;s desired.  Windows however can not install RightLink during boot and it must be <a href="/rl10/reference/rl10_install_windows.html">added to the image</a>.  You can use the RIGHTLINK_VERSION input to tell packer to include RightLink on the image.</p>
+
+<h3 id="more-details-networks,-subnets-and-security-groups">Networks, Subnets and Security Groups</h3>
+
+<p>Packer use the default network, subnet unless specific network and subnets are supplied as Inputs for those clouds.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Packer doesn&#39;t create the security group or allow you to specify it in the configuration file.  Instead Google uses the default security group for the network being used.  Add inbound TCP ports 22 and 5986 to the default security group for the network being used.</p>
+</div>
+
+<h3 id="more-details-azure-resource-manager-and-storage-accounts">Azure Resource Manager and Storage Accounts</h3>
+
+<p>When custom images are created in Azure they are placed in <a href="/clouds/azure_resource_manager/reference/resources.html#storage-accounts">Storage Accounts</a>.  When launching a server using custom images they must be launched in the same storage accounts the image is in.  When Launching a server in RightScale select the Storage Account created for the custom images in the Placement Group download list.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+<li><a href="http://packer.io">Packer</a></li>
+<li><a href="https://www.packer.io/docs/builders/amazon.html">Packer EC2</a></li>
+<li><a href="https://www.packer.io/docs/builders/googlecompute.html">Packer Google</a></li>
+<li><a href="https://www.packer.io/docs/builders/azure/arm">Packer Azure Resource Manager</a></li>
+<li><a href="/clouds/azure_resource_manager/reference/resources.html#storage-accounts">RightScale Azure RM Integration</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

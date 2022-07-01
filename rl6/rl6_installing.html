@@ -1,0 +1,461 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Installing RightLink 6</title><meta content="Guide covering installation of RightLink 6 and tips and info for creating RightImages." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="rl6 rl6_rl6_installing" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl6"><h4 class="list-group-heading"><span>RightLink 6</span></h4></a><a class="list-group-item" href="rl6_about.html">About</a><a class="list-group-item" href="rl6_getting_started.html">Getting Started</a><a class="list-group-item" href="../release-notes/right-link-6.html">Releases</a><a class="list-group-item" href="rl6_installing.html">Installing RightLink 6</a><a class="list-group-item" href="rl6_enabling.html">Enabling Running Instances</a><a class="list-group-item" href="rl6_using.html">Using RightLink 6</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">About RightLink 6</a></p><div class="page-header"><h1>Installing RightLink 6</h1></div><div class="main-content"><div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>RightLink 6 <a href="/faq/end_of_life_end_of_service.html#schedule-images-rightlink">has been EOL&#39;d</a> - please refer to the <a href="/rl10">RightLink 10 documentation</a></p>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>This guide is divided into two parts. The first covers installation of RightLink 6 and second has tips and info for creating RightImages.</p>
+
+<h2 id="installing-rightlink-6">Installing RightLink 6</h2>
+
+<p>When installing RightLink you must first select your operating system and then select your cloud.</p>
+
+<ul>
+<li>For Windows, browse the index below, download the MSI, and install it. The MSI installer will prompt you to select a cloud.</li>
+<li>For Linux systems, you will install RightLink using the OS package manager. Paste the repository URL into your package manager configuration below, import the RightScale public key, and install the appropriate cloud package:</li>
+</ul>
+
+<h3 id="installing-rightlink-6-select-an-operating-system">Select an Operating System</h3>
+
+<h4 id="general-availability-channels">General Availability channels</h4>
+
+<table><thead>
+<tr>
+<th>Operating System</th>
+<th>Repository URL</th>
+<th>Index</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Ubuntu</td>
+<td>http://mirror.rightscale.com/rightlink/apt​</td>
+<td><a href="http://mirror.rightscale.com/rightlink/apt/index.html">Browse</a></td>
+</tr>
+<tr>
+<td>CentOS 6 and RHEL 6</td>
+<td>http://mirror.rightscale.com/rightlink/yum/1/el/6/x86_64<br>​http://mirror.rightscale.com/rightlink/yum/1/el/6/SRPMS</td>
+<td><a href="http://mirror.rightscale.com/rightlink/yum/index.html">Browse</a></td>
+</tr>
+<tr>
+<td>CentOS 7 and RHEL 7</td>
+<td>http://mirror.rightscale.com/rightlink/yum/1/el/7/x86_64<br>http://mirror.rightscale.com/rightlink/yum/1/el/7/SRPMS</td>
+<td><a href="http://mirror.rightscale.com/rightlink/yum/index.html">Browse</a></td>
+</tr>
+<tr>
+<td>SLES 11</td>
+<td>http://mirror.rightscale.com/rightlink/zypp/1/suse/11/x86_64<br>http://mirror.rightscale.com/rightlink/zypp/1/suse/11/SRPMS​</td>
+<td><a href="http://mirror.rightscale.com/rightlink/zypp/index.html">Browse</a></td>
+</tr>
+<tr>
+<td>Windows 2008R2 and 2012</td>
+<td>http://mirror.rightscale.com/rightlink/msi</td>
+<td><a href="http://mirror.rightscale.com/rightlink/msi/index.html">Browse</a></td>
+</tr>
+</tbody></table>
+
+<h3 id="installing-rightlink-6-select-your-cloud">Select your cloud</h3>
+
+<p>There are different subpackages for each cloud. The following are supported.</p>
+
+<table><thead>
+<tr>
+<th>Cloud</th>
+<th>Cloud Type</th>
+<th>Package name</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Microsoft Azure</td>
+<td>azure</td>
+<td>rightlink-cloud-azure</td>
+</tr>
+<tr>
+<td>Amazon EC2</td>
+<td>ec2</td>
+<td>rightlink-cloud-ec2</td>
+</tr>
+<tr>
+<td>Google Compute Engine</td>
+<td>google</td>
+<td>rightlink-cloud-google</td>
+</tr>
+<tr>
+<td>OpenStack</td>
+<td>openstack</td>
+<td>rightlink-cloud-openstack</td>
+</tr>
+<tr>
+<td>SoftLayer</td>
+<td>softlayer</td>
+<td>rightlink-cloud-softlayer</td>
+</tr>
+<tr>
+<td>vSphere</td>
+<td>vsphere</td>
+<td>rightlink-cloud-vsphere</td>
+</tr>
+</tbody></table>
+
+<h3 id="installing-rightlink-6-rhel-or-centos-installation">RHEL or CentOS Installation</h3>
+
+<p>Import the RightScale public key:</p>
+<pre class="syntax-highlight shell"><code>rpm --import http://mirror.rightscale.com/rightlink/rightscale.pub
+</code></pre>
+
+<p>Next, write out the repo configuration using the package manager URL selected above. This example sets up installation from the GA channel for CentOS 6 and CentOS 7, respectively:</p>
+<pre class="syntax-highlight shell"><code>cat &gt; /etc/yum.repos.d/RightLink.repo <span class="sh">&lt;&lt;EOF
+[rightlink]
+name=RightLink
+baseurl=http://mirror.rightscale.com/rightlink/yum/1/el/6/x86_64
+gpgcheck=1
+gpgkey=http://mirror.rightscale.com/rightlink/rightscale.pub
+EOF
+</span></code></pre>
+<pre class="syntax-highlight shell"><code>cat &gt; /etc/yum.repos.d/RightLink.repo <span class="sh">&lt;&lt;EOF
+[rightlink]
+name=RightLink
+baseurl=http://mirror.rightscale.com/rightlink/yum/1/el/7/x86_64
+gpgcheck=1
+gpgkey=http://mirror.rightscale.com/rightlink/rightscale.pub
+EOF
+</span></code></pre>
+
+<p>Finally, install the appropriate package for your cloud:</p>
+<pre class="syntax-highlight shell"><code>yum install -y rightlink-cloud-ec2
+</code></pre>
+
+<h3 id="installing-rightlink-6-ubuntu-installation">Ubuntu Installation</h3>
+
+<p>Import the RightScale public key:</p>
+<pre class="syntax-highlight shell"><code>curl http://mirror.rightscale.com/rightlink/rightscale.pub | apt-key add -
+</code></pre>
+
+<p>Create an apt source, ensuring that you specify the right architecture and release code name.
+For instance, on an amd64 system that is running Ubuntu 12.04 and 14.04 respectively using a GA package:</p>
+<pre class="syntax-highlight shell"><code><span class="c"># Ubuntu 12.04 (precise)</span>
+cat &gt; /etc/apt/sources.list.d/rightlink.sources.list <span class="sh">&lt;&lt;EOF
+deb [arch=amd64] http://mirror.rightscale.com/rightlink/apt precise main
+EOF
+</span>apt-get update
+</code></pre>
+<pre class="syntax-highlight shell"><code><span class="c"># Ubuntu 14.04 (trusty)</span>
+cat &gt; /etc/apt/sources.list.d/rightlink.sources.list <span class="sh">&lt;&lt;EOF
+deb [arch=amd64] http://mirror.rightscale.com/rightlink/apt trusty main
+EOF
+</span>apt-get update
+</code></pre>
+
+<p>Finally, install the appropriate package for your cloud:</p>
+<pre class="syntax-highlight shell"><code>apt-get install -y rightlink-cloud-ec2
+</code></pre>
+
+<h3 id="installing-rightlink-6-sles-installation">SLES Installation</h3>
+
+<p>Import the RightScale public key:</p>
+<pre class="syntax-highlight shell"><code>rpm --import http://mirror.rightscale.com/rightlink/rightscale.pub
+</code></pre>
+
+<p>Next, write out the repo configuration using the package manager URL selected above. This example installs from the GA channel for SLES 11:</p>
+<pre class="syntax-highlight shell"><code>cat &gt; /etc/zypp/repos.d/RightLink.repo <span class="sh">&lt;&lt;EOF
+[rightlink]
+name=RightLink
+baseurl=http://mirror.rightscale.com/rightlink/zypp/1/suse/11/x86_64/
+gpgcheck=1
+gpgkey=http://mirror.rightscale.com/rightlink/rightscale.pub
+EOF
+</span></code></pre>
+
+<p>Finally, install the appropriate package for your cloud:</p>
+<pre class="syntax-highlight shell"><code>zypper --non-interactive install rightlink-cloud-ec2
+</code></pre>
+
+<h3 id="installing-rightlink-6-windows-installation">Windows Installation</h3>
+
+<p>The following prerequisites must be installed first:</p>
+
+<ul>
+<li>.NET 3.5 SP1</li>
+<li>Powershell</li>
+</ul>
+
+<p>After prerequisites are met, download and install the MSI from a distribution channel selected above and select your cloud in the dialog box presented.</p>
+
+<h2 id="uninstalling-rightlink--linux-">Uninstalling RightLink (Linux)</h2>
+
+<p>Use the following procedure to uninstall RightLink (v5.6 - v6.3) on Linux</p>
+
+<ol>
+<li><p>Stop RightLink services (RigthLink Agent Controller)</p>
+<pre class="syntax-highlight shell"><code>service rightlink stop
+service rightscale stop
+</code></pre></li>
+<li><p>Remove RightScale and RightLink packages</p>
+
+<p>RightLink 5.6-5.8</p>
+<pre class="syntax-highlight shell"><code><span class="c"># CentOS, RHEL</span>
+yum remove rightscale
+<span class="c"># Debian, Ubuntu</span>
+apt-get remove rightscale
+</code></pre>
+
+<p>RightLink 5.9-6.3</p>
+<pre class="syntax-highlight shell"><code><span class="c"># CentOS, RHEL</span>
+yum remove rightlink6 rightlink6-sandbox
+<span class="c"># Debian, Ubuntu</span>
+apt-get purge rightlink6 rightlink6-sandbox
+</code></pre>
+
+<p><strong>Note</strong>: The uninstaller may show an error while deleting files inside /opt/rightscale/*. This is normal behavior.</p></li>
+<li><p>Remove all RightLink files (RightLink Agent Controller)</p>
+<pre class="syntax-highlight shell"><code>rm -rf /etc/rightscale.d /opt/rightscale /var/lib/rightscale /etc/init.d/rightimage /var/spool/cloud /var/cache/rightscale
+<span class="c"># verify that you have not left any rightscale files (except /usr/share/zoneinfo/right)</span>
+find / -name right<span class="k">*</span>
+</code></pre></li>
+</ol>
+
+<h2 id="creating-rightlink-6-enabled-images">Creating RightLink 6 Enabled Images</h2>
+
+<p><a name="Creating RightLink 6 Enabled Images"></a></p>
+
+<p>Here are some tips for creating your own custom RightLink-enabled images.</p>
+
+<p><strong>Important!</strong> - Custom images that are built with RightLink 5.9 and higher are fully supported by RightScale. If you choose to create your own custom images instead of using the ones included in ServerTemplates published by RightScale, please refer to this document for best practices and recommended procedures.</p>
+
+<h3 id="creating-rightlink-6-enabled-images-rca-v-images">RCA-V Images</h3>
+
+<p>RCA-V images require VMware tools to be installed. Please see <a href="/rcav/v3.0/rcav_image_requirements.html">RCA-V Image Requirements</a>.</p>
+
+<h3 id="creating-rightlink-6-enabled-images-images-built-from-scratch">Images Built from Scratch</h3>
+
+<p>When creating images from scratch, follow <a href="rl6_installing.html#installing-rightlink-6">Installing RightLink 6</a> to include the required packages within your image. Installation of the packages will also enable the system services for RightScale/RightLink on boot. After RightLink installation, there are also meta-packages in the RightScale software mirror to install ServerTemplate dependencies.  These packages are optional and meant to improve boot times. Two flavors of meta package currently exist:</p>
+
+<ul>
+<li><strong>rightimage-extras-base</strong> - Contains optional dependency packages of the v14 Linux Base ServerTemplate.</li>
+<li><strong>rightimage-extras</strong> - Contains required dependency packages for v13 ServerTemplates. This package is deprecated for use with v14 ServerTemplates.  It is now recommended to properly declare all dependencies in configuration management systems such as Chef or RightScripts.</li>
+</ul>
+
+<h4 id="ubuntu-instructions:">Ubuntu Instructions:</h4>
+<pre class="syntax-highlight shell"><code><span class="c"># Import RightScale public key</span>
+curl http://mirror.rightscale.com/rightlink/rightscale.pub | apt-key add
+
+cat &gt; /etc/apt/sources.list.d/rightscale_extra.sources.list <span class="sh">&lt;&lt;-EOF
+deb [arch=amd64] http://mirror.rightscale.com/rightscale_software_ubuntu/latest precise main
+EOF
+
+</span>apt-get update
+apt-get install -y rightimage-extras-base
+</code></pre>
+
+<p>For Ubuntu 14.04 and newer only: RightScale&#39;s monitoring solution for RightLink 6 is not compatible with collectd 5. To use Collectd 5, install the <a href="/rl10/getting_started.html">RightLink 10</a> agent instead. Monitoring is needed for graphs, alerts, and for autoscaling arrays.  rightimage-extras-base depends on collectd &lt; 5. To satisfy this dependency, please place the apt configuration file below in <q>/etc/apt/preferences.d/rightscale-collectd-pin-1001</q>:</p>
+<pre class="syntax-highlight plaintext"><code># Collectd 5 is not currently supported by the RightScale monitoring servers
+# Pin to previous version from "precise" to avoid issues. These packages are
+# available from http://mirror.rightscale.com/rightscale_software_ubuntu
+Package: collectd
+Pin: version 4.10.1-2.1ubuntu7
+Pin-Priority: 1001
+
+Package: collectd-core
+Pin: version 4.10.1-2.1ubuntu7
+Pin-Priority: 1001
+</code></pre>
+
+<h4 id="centos-and-red-hat-enterprise-linux-instructions:">CentOS and Red Hat Enterprise Linux Instructions:</h4>
+<pre class="syntax-highlight shell"><code>cat &gt;/etc/yum.repos.d/RightScale-epel.repo<span class="sh">&lt;&lt;-EOF
+[rightscale-epel]
+name=RightScale Software
+baseurl=http://mirror.rightscale.com/rightscale_software/epel/6/x86_64/archive/latest/
+gpgcheck=1
+enabled=1
+gpgkey=http://mirror.rightscale.com/rightlink/rightscale.pub
+EOF
+
+</span>yum install rightimage-extras-base -y
+</code></pre>
+
+<p>For CentOS/RHEL 7 and newer only: RightScale&#39;s monitoring solution for RightLink 6 is not compatible with collectd 5. To use Collectd 5, install the <a href="/rl10/getting_started.html">RightLink 10</a> agent instead. Monitoring is needed for graphs, alerts, and for autoscaling arrays. rightimage-extras-base depends on collectd &lt; 5. To satisfy this dependency, please <q>yum install -y yum-plugin-versionlock</q> and place the versionlock configuration file below in <q>/etc/yum/pluginconf.d/versionlock.list</q>:</p>
+<pre class="syntax-highlight plaintext"><code># Collectd 5 is not currently supported by the RightScale monitoring servers
+# Use ported version from CentOS 6 to avoid issues. These packages are
+# available from http://mirror.rightscale.com/rightscale_software/epel
+0:collectd-4.10.9-1.el7.*
+0:collectd-rrdtool-4.10.9-1.el7.*
+</code></pre>
+
+<p><strong>Note</strong>: Building a virtual machine image from scratch is out of the scope of this guide, and considered an advanced topic.</p>
+
+<h3 id="creating-rightlink-6-enabled-images-bundling-running-instances">Bundling Running Instances</h3>
+
+<p>Before bundling running instances, you should clean-up your instance by deleting or truncating several files stored on the instance disk to ensure that a new instance does not inherit old data. Security is the main reason for performing these steps, as some files (SSH keys/host keys, for example) can leave your newly-bundled image vulnerable, particularly if you chose to publish or distribute it publicly.</p>
+
+<p>While many of these files can be excluded during the bundling process, this guide takes a preventative approach by recommending some best practices for server/instance clean-up prior to the bundling process. A majority of the file removal is applicable to RightScale-managed servers, however these practices also apply to unmanaged instances after installing RightLink.</p>
+
+<p><strong>Note</strong>: This guide should work with official RightImages that are being rebundled or with custom images built from scratch but it has not been tested with every OS distribution or RightLink version available. If you experience issues, please contact RightScale Support with questions or feedback.</p>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<p>Before working through this section, you should have the following:</p>
+
+<ul>
+<li>A running cloud instance or server that has RightLink installed and configured and is ready for bundling.</li>
+<li>SSH or RDP access to the server or instance</li>
+</ul>
+
+<h4 id="linux-servers-and-instances">Linux Servers and Instances</h4>
+
+<p>The following actions should be taken on all *nix-based instances and servers (CentOS and Ubuntu tested). Each command should be run from the command line within an SSH terminal/session.</p>
+
+<p><strong>Stop Services</strong></p>
+
+<p>Use the following commands to stop NTP and Postfix:</p>
+<pre class="syntax-highlight shell"><code>service ntp stop
+service postfix stop
+</code></pre>
+
+<p><strong>Delete Files</strong></p>
+
+<p>Use the following commands to delete the following files and directories from any *nix instances. Run each command once from the command prompt:</p>
+<pre class="syntax-highlight shell"><code><span class="c"># RightScale specific</span>
+rm -f /var/spool/cloud/<span class="k">*</span>
+rm -f /etc/udev/rules.d/70-persistent-net.rules
+rm -rf /var/lib/rightscale
+rm -rf ~rightscale/.ssh
+
+rm -rf /tmp/<span class="k">*</span>
+rm -rf /tmp/.[^.]<span class="k">*</span>
+rm -rf /tmp/..?<span class="k">*</span>
+rm -rf /var/cache/<span class="k">*</span>
+rm -rf /var/mail/<span class="k">*</span>
+rm -rf /var/lib/ntp/ntp.drift
+rm -f /etc/hosts.backup.<span class="k">*</span>
+rm -rf /etc/pki/tls/private/<span class="k">*</span>
+rm -rf /root/.ssh
+rm -rf /root/.gem
+rm -f /root/<span class="k">*</span>.tar
+rm -rf /root/files
+rm -f /root/<span class="k">*</span>
+rm -f /root/.<span class="k">*</span>_history /root/.vim<span class="k">*</span> /root/.lesshst /root/.gemrc
+rm -rf /root/.cache /root/.vim
+find /etc -name <span class="se">\*</span>~ -exec rm -- <span class="o">{}</span> <span class="se">\;</span>
+find /etc -name <span class="se">\*</span>.backup<span class="k">*</span> -exec rm -- <span class="o">{}</span> <span class="se">\;</span>
+</code></pre>
+
+<p><strong>Truncate and Clear Files</strong></p>
+
+<p>Zero the following files without deleting them. Note that some services will not recreate their log files if they are deleted.</p>
+<pre class="syntax-highlight shell"><code>find /var/spool -type f -exec cp /dev/null <span class="o">{}</span> <span class="se">\;</span>
+find /var/log -type f -exec cp /dev/null <span class="o">{}</span> <span class="se">\;</span>
+find /etc/ssh/ssh_host_<span class="k">*</span> -type f -exec cp /dev/null <span class="o">{}</span> <span class="se">\;</span>
+</code></pre>
+
+<p><strong>Remove Empty Password from Root</strong></p>
+
+<p>The following command removes the empty password from the root user:</p>
+<pre class="syntax-highlight shell"><code>sed -i s/root::/root:<span class="se">\*</span>:/ /etc/shadow
+</code></pre>
+
+<p><strong>Recreate Necessary Directories</strong></p>
+
+<p>Run the commands below to create the necessary directories. (If the directories do not already exist, they will be recreated.)</p>
+<pre class="syntax-highlight shell"><code>mkdir -p /var/cache/logwatch /var/cache/man /var/cache/nscd
+</code></pre>
+
+<p><strong>Centos/RHEL-Specific Actions</strong></p>
+
+<p>Remove any custom CentOS Ruby YUM repository:</p>
+<pre class="syntax-highlight shell"><code>rm -f /etc/yum.repos.d/CentOS-ruby-custom.repo
+</code></pre>
+
+<p>Ensure that PHP packages are not installed and run YUM Clean:</p>
+<pre class="syntax-highlight shell"><code>yum -y remove php<span class="k">*</span>
+yum -y clean all
+</code></pre>
+
+<p><strong>Ubuntu-Specific Actions</strong></p>
+
+<p>Run apt-get clean:</p>
+<pre class="syntax-highlight shell"><code>apt-get clean
+</code></pre>
+
+<p>Create specific directories:</p>
+<pre class="syntax-highlight shell"><code>mkdir -p /var/cache/apt/archives/partial /var/cache/debconf
+</code></pre>
+
+<p>Generate APT caches:</p>
+<pre class="syntax-highlight shell"><code>apt-cache gencaches
+</code></pre>
+
+<p><strong>Generate Man Cache and Other Various Actions</strong></p>
+
+<p>Run the following commands last:</p>
+<pre class="syntax-highlight shell"><code>mandb --create
+updatedb
+sync
+</code></pre>
+
+<h4 id="windows-servers-and-instances">Windows Servers and Instances</h4>
+
+<p>When bundling a Windows server or cloud instance, it is recommended to <a href="https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation">SysPrep a windows installation</a>. This is specifically done to prepare Windows machines for duplication or reuse by removing system specific data from Windows along with other various tasks.</p>
+
+<p>In addition to this, Rightlink 5.8.8 and above provides a SysPrep provider in its code for SysPrep to initiate a cleanup of all disposable Rightlink data as well, so one must only run a SysPrep command to fully prepare the instance for bundling. Once prepared and SysPrepped, the instance should also be shutdown per best practice prior to bundling into a new image (/shutdown included in sysprep command below).</p>
+
+<p><strong>Check Rightlink Version and Upgrade if Needed</strong></p>
+
+<p>This is a <strong>CRUCIAL</strong> step to the process, since the aforementioned SysPrep provider only exists in Rightlink v5.8.8 or higher. If you are running a version of Rightlink prior to this, it is HIGHLY recommended that you upgrade to the latest available stable version of Rightlink.</p>
+
+<p>Newer Rightlink packages can be found on our <a href="http://mirror.rightscale.com/rightlink/msi/index.html">mirror</a>, and directions for upgrading and/or installing the package are found on the <a href="http://support.rightscale.com/12-Guides/RightLink_6/RightLink_Legacy_Versions/RightLink_5.8_and_Lower/Create_RightScale-Enabled_Images_with_RightLink_5.8_and_lower/RightLink_Installer_for_Windows_AMIs/index.html">Rightlink 5.8 Installer Page for Windows</a> and the <a href="http://support.rightscale.com/12-Guides/RightLink_6/RightLink_Legacy_Versions/RightLink_5.8_and_Lower/Create_RightScale-Enabled_Images_with_RightLink_5.8_and_lower/RightLink_Installer_for_Windows_AMIs/Upgrade_RightLink_Version_on_Windows/index.html">Upgrade Rightlink Version on Windows</a> page.</p>
+
+<p><strong>Run SysPrep</strong></p>
+
+<p>Once we&#39;ve validated that we are using Rightlink v5.8.8 or higher, it&#39;s time to run the SysPrep command. This can be run by opening up a command prompt from an remote desktop session and running the command below:</p>
+<pre class="syntax-highlight plaintext"><code>%windir%\system32\Sysprep\sysprep /oobe /generalize /shutdown
+</code></pre>
+
+<p><strong>Note</strong>: Only run this command when you are satisfied with the state of the instance and are ready to bundle the image, as it will shutdown the system in preparation for a bundle action.</p>
+
+<p><strong>Bundle the Instance</strong></p>
+
+<p>At this point, you can now safely bundle or snapshot the running instance into a new image. Consult the given cloud&#39;s documentation on bundling/snapshot capabilities (if supported).</p>
+
+<p><strong>Create or Update a MultiCloud Image</strong></p>
+
+<p>When creating or adding the image to an MCI, be sure to add the provides:rs_agent_type=right_link tag to the MCI prior to adding it to a ServerTemplate. The MCI can then be added to any HEAD version of a SeverTemplate and in turn used with RightScale-managed servers.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Load Balancer with HAProxy for Chef Server (RightLink 10) - Tutorial</title><meta content="Use this RightLink 10 tutorial to set up an HAProxy load balancer server or servers in a public or private cloud environment." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="st st_rl10 st_rl10_lb st_rl10_lb_tutorial" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/st"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>ServerTemplates</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="/st/rl10">Version RL10</a><a class="list-group-item" href="../../open-source/">Open Source</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">ServerTemplates</a> &#x2F; <a href="../">Version RightLink 10 ServerTemplates</a> &#x2F; <a href="./">Load Balancer with HAProxy for Chef Server (RightLink 10)</a></p><div class="page-header"><h1>Load Balancer with HAProxy for Chef Server (RightLink 10) - Tutorial</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To set up an HAProxy load balancer server or servers in a public or private cloud environment.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>You must log in under a RightScale account with <q>actor</q> and <q>library</q> user roles in order to complete the tutorial.</li>
+<li>For Amazon EC2, and other clouds that support security groups, you must have a security group defined with TCP port 22 open for SSH access, the appropriate web port (80 for HTTP or 443 for HTTPS) open for client access, and any other port and protocol access required by your load balancers. Also, remember that iptables is installed by default on all servers, as described under <a href="http://support.rightscale.com/03-Tutorials/HAProxy_Load_Balancer_Server_Setup/index.html">Security</a> below.</li>
+<li>We strongly recommend that you set up credentials for password values and any other sensitive data included as Chef recipe inputs.</li>
+<li>You can use this ServerTemplate to distribute traffic to any application server listening on port 8000 (e.g. Apache+PHP, Tomcat, IIS, JBoss).</li>
+<li>You must have a <a href="../chef-server/overview.html">Chef Server</a> or use Hosted Chef to use this ServerTemplate.<br></li>
+<li>You must upload the <a href="https://github.com/rightscale-cookbooks/rs-haproxy">rs-haproxy</a> and other required cookbooks to your Chef Server.</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>This tutorial describes the steps for launching one or more HAProxy load balancer servers in the cloud, using the <a href="http://www.rightscale.com/library/server_templates/Load-Balancer-with-HAProxy-for/lineage/57421">Load Balancer with HAProxy for Chef Server (RightLink 10)</a>) ServerTemplate. However, in a typical three-tier server architecture there are two dedicated load balancer servers, which is necessary to support redundancy and failover for client communications.</p>
+
+<p>For a technical overview of this ServerTemplate, see <a href="/st/rl10/lb/overview.html">Load Balancer with HAProxy</a>.</p>
+
+<h2 id="create-credentials">Create Credentials</h2>
+
+<p>Although the <strong>Load Balancer</strong> ServerTemplate does not assume that any specific predefined credentials exist, we recommend that you set up the following credentials if you need to enter any of the following input values. This ServerTemplate assumes that all of these credentials are setup if you want to use the desired functionality that these inputs depend on.</p>
+
+<ul>
+<li><strong>LB_STATUS_USERNAME</strong> - Optional user name to require in order to log in to the HAProxy status report page.</li>
+<li><strong>LB_STATUS_PASSWORD</strong> - Optional password corresponding to LB_STATUS_USERNAME.</li>
+<li><strong>HAPROXY_SSL_CERTIFICATE</strong> - Certificate used to enable SSL authentication</li>
+</ul>
+
+<p>For information on setting up credentials, see <a href="/cm/dashboard/design/credentials/credentials.html#create-a-new-credential">Create a New Credential</a>.</p>
+
+<h2 id="create-elastic-ips--aws-only-">Create Elastic IPs (AWS only)</h2>
+
+<p>If you are launching HAProxy load balancer servers in EC2, it is recommended that you use Elastic IPs. Typically, you will have two load balancers for redundancy purposes. If you haven&#39;t already done so, create an Elastic IP for each load balancer. Be sure to create the Elastic IPs in the AWS region (e.g. &#39;us-east&#39;) where you intend to launch the load balancer servers. See <a href="/cm/dashboard/clouds/aws/actions/ec2_elastic_ips_actions.html#create-a-new-elastic-ip--eip-">Create Elastic IPs (EIP)</a>.</p>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-add-a-server">Add a Server</h3>
+
+<p>Follow these steps to add a load balancer server to the deployment.</p>
+
+<ol>
+<li>Go to the MultiCloud Marketplace (<strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong>) and import the most recently published revision of the <a href="http://www.rightscale.com/library/server_templates/Load-Balancer-with-HAProxy-for/lineage/57421">Load Balancer with HAProxy for Chef Server (RightLink 10)</a>)) ServerTemplate into the RightScale account.</li>
+<li>From the imported ServerTemplate&#39;s show page, click the <strong>Add Server</strong> button.</li>
+<li>Select the cloud for which you will configure a server.</li>
+<li>Select the deployment into which the new server will be placed.</li>
+<li>Next, the Add Server Assistant wizard will walk you through the remaining steps that are required to create a server based on the selected cloud.
+
+<ul>
+<li><strong>Server Name</strong> - Provide a nickname for your new load balancer server (e.g., lb1).</li>
+<li>Select the appropriate cloud-specific resources that are required in order to launch a server into the chosen cloud. The required cloud resources may differ depending on the type of cloud infrastructure. If the cloud supports multiple datacenters / zones, select a specific zone. Later, when you create the other load balancer server you will use a different datacenter / zone to ensure high-availability. For more information, see <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#add-server-assistant">Add Server Assistant</a>.</li>
+<li>If you are using Elastic IPs (AWS EC2 only), select an existing Elastic IP from the drop-down, or click New to create a new one.</li>
+</ul></li>
+<li>Click <strong>Confirm</strong>, review the server&#39;s configuration and click <strong>Finish</strong> to create the server.</li>
+</ol>
+
+<h3 id="steps-create-another-load-balancer-server">Create another Load Balancer Server</h3>
+
+<p>For production environments, it&#39;s strongly recommended that you have at least two load balancer servers (preferably in different availability zones or datacenters) for redundancy purposes. The easiest way to create a second load balancer is to simply clone and modify the first load balancer server.</p>
+
+<ol>
+<li>Go to the show page of the load balancer server that you just created and click the <strong>Clone</strong> button.</li>
+<li>Change the name of the server accordingly. (e.g. lb2)</li>
+<li>Under the <strong>Info</strong> tab, click <strong>Edit</strong>.</li>
+<li>Select a different zone/datacenter and Elastic IP (if applicable).</li>
+</ol>
+
+<h3 id="steps-configure-inputs">Configure Inputs</h3>
+
+<p>The next step is to define the properties of your load balancer server or servers by entering values for inputs. As a best practice, you should define required inputs for the servers at the deployment level. For a detailed explanation of how inputs are defined and used in Chef recipes and RightScripts, see <a href="/cm/rs101/inheritance_of_inputs.html">Inheritance of Inputs</a>.</p>
+
+<p>To enter inputs for the Chef recipes that will run on your load balancers, open the deployment&#39;s <strong>Inputs</strong> tab, click <strong>Edit</strong>, and use the following settings to configure input values. We recommend that you set up credentials for password values and any other sensitive data as shown in the examples.</p>
+
+<h4 id="chef-inputs">Chef Inputs</h4>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CHEF_ENVIRONMENT</td>
+<td>The chef environment name to use</td>
+<td>text: _default</td>
+</tr>
+<tr>
+<td>CHEF_SERVER_URL</td>
+<td>The url of your chef server</td>
+<td>text:https://chef-server.example.com</td>
+</tr>
+<tr>
+<td>CHEF_VALIDATION_KEY</td>
+<td>The chef orgainization validation key.</td>
+<td>cred:CHEF_VALIDATION_KEY</td>
+</tr>
+<tr>
+<td>CHEF_VALIDATION_NAME</td>
+<td>The chef validator name</td>
+<td>text:example-validator</td>
+</tr>
+<tr>
+<td>LOG_LEVEL</td>
+<td>Chef client log level</td>
+<td>text:info</td>
+</tr>
+<tr>
+<td>VERSION</td>
+<td>The version of chef client to install</td>
+<td>text:12.16</td>
+</tr>
+</tbody></table>
+
+<h4 id="haproxy-inputs">HAPROXY Inputs</h4>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>POOLS</td>
+<td>Comma-separated list of URIs or FQDNs for which the load balancer will create server pools to answer website requests. The last entry will be the default backend and will answer for all URIs and FQDNs not listed here. A single entry of any name (for example, default) will mimic basic behavior of one load balancer with one pool of application servers. This will be used for naming server pool backends. <strong>Note:</strong> Application servers can provide any number of URIs or FQDNs to join corresponding server pool backends (for example, &nbsp;www.mysite.com, api.mysite.com, /serverid, default). The POOLS should be unique across deployments.</td>
+<td>text: www.mysite.com, api.mysite.com<br><em>For the standalone and 3-tier tutorials, use:</em><br>text:default</td>
+</tr>
+<tr>
+<td>HEALTH_CHECK_URI</td>
+<td>The URI that the load balancer will use to check the health of a server. It is only used for HTTP (not HTTPS) requests. Example: /</td>
+<td>text: /</td>
+</tr>
+<tr>
+<td>BALANCE_ALGORITHM</td>
+<td>Defines which load balancing algorithm is used to establish connections with application servers in the load balancing pool.<br>* <strong>roundrobin</strong> (default) - Incoming requests are distributed in a round-robin fashion. (a-b-c-a-b-...)<br>* l <strong>eastconn</strong> - Incoming requests are sent to the server with the fewest number of active connections.<br>* <strong>source</strong> - Incoming requests from the same client IP address will be sent to the same application server.</td>
+<td>text: roundrobin</td>
+</tr>
+<tr>
+<td>SESSION_STICKINESS</td>
+<td>Determines session stickiness. Set to &#39;True&#39; to use session stickiness, where the load balancer will reconnect a session to the last server it was connected to (via a cookie). Set to &#39;False&#39; if you do not want to use sticky sessions; the load balancer will establish a connection with the next available server.</td>
+<td>text: true</td>
+</tr>
+<tr>
+<td>SSL_CERT</td>
+<td>PEM formatted string containing SSL certificates and keys for SSL encryption. To configure HAProxy without SSL encryption, do not set this input.</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>STATS_PASSWORD</td>
+<td>Password to access HAProxy statistics page</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>STATUS_URI</td>
+<td>HAProxy statistics URI</td>
+<td>text: /haproxy-status</td>
+</tr>
+<tr>
+<td>STATS_USER</td>
+<td>The username that is required to access the load balancer statistics report page</td>
+<td>nil</td>
+</tr>
+</tbody></table>
+
+<h3 id="steps-launch-the-server">Launch the Server</h3>
+
+<ol>
+<li>Go to the deployment&#39;s <strong>Servers</strong> tab and launch all of the load balancer servers. When you view the input confirmation page, there should not be any required inputs with missing values. If there are any required inputs that are missing values (highlighted in red) at the input confirmation page, cancel the launch and add values for those inputs at the deployment level before launching the server again. Refer to the instructions in <a href="/cm/dashboard/manage/deployments/deployments_actions.html#launch-a-server">Launch a Server</a> if you are not familiar with this process.<br></li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Remember that as a best practice for building high-availability sites, you should have two load balancers that you launch in different availability zones or data centers.</p>
+</div>
+
+<h3 id="steps-configure-dns-records">Configure DNS Records</h3>
+
+<p>If you are using Elastic IPs or already know the public IP addresses that will be used by the load balancer servers, you might have already set up the DNS records for the load balancing tier. However, if you do not know the public IP addresses that will be assigned to the load balancer servers, you must manually set up the DNS records after the servers have been launched. Once the servers become operational (and have been assigned their respective public IP addresses), create or update the DNS records with your DNS provider. Each load balancer server should have its own DNS record with the same hostname (e.g. www.example.com) that points to its public IP address.</p>
+
+<p>The DNS records for the HAProxy load balancing tier should direct traffic from the associated hostname (FQDN) (e.g. www.example.com) to the application servers in its load balancing pool.</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<h3 id="next-steps-connect-application-servers">Connect Application Servers</h3>
+
+<p>Launch new application servers that will connect to the HAProxy load balancers or connect any operational application servers using the <strong>rs-haproxy::frontend</strong> operational script.</p>
+
+<h3 id="next-steps-check-haproxy-status">Check HAProxy Status</h3>
+
+<p>The easiest way to check the status of the HAProxy load balancing pool is to view the HAProxy Status page. By default, the <strong>Status URI</strong> input is set to <strong>/haproxy-status</strong>.</p>
+
+<p>If you created DNS A Records for the load balancer servers, you can visit the HAProxy Status page by entering your <FQDN>/haproxy-status in a web browser window. (e.g. josh-www.rightscaleblue.com/haproxy-status)</p>
+
+<p>If DNS A Records are not used, you can also use the public DNS name or IP of a load balancer server. (e.g. <code>http://192.34.456.77/haproxy-status</code> ))</p>
+
+<p><img src="/img/st-3tier-haproxy-status.png" alt="st-3tier-haproxy-status.png" width="727" height="411" /></p>
+
+<p>Each application server that is successfully added to the load balancing pool will be highlighted in green. In the example screenshot above, two application servers are in the load balancing pool and are able to receive requests from the load balancer servers. Notice that each application server is identified by its universally unique identifier (UUID) that RightScale assigns to each instance. You can find the server&#39;s UUID in its machine tags or under its Info tab.</p>
+
+<p>Application servers highlighted in red are not included in the load balancing pool and will not receive any client requests. There are several reasons why an application server may be highlighted in red.</p>
+
+<ul>
+<li>The application server&#39;s firewall permissions are not allowing ingress communication from the load balancers. Check the firewall permissions of the application server (as defined by its security group, if applicable, and/or iptables rules).</li>
+<li>The application server is not operational. Perhaps the application server is in the booting or decommissioning state.</li>
+<li>The health check failed.</li>
+</ul>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+<li><a href="/faq/What_is_HAProxy_and_how_does_it_work.html">What is HAProxy and how does it work?</a></li>
+<li><a href="/cm/management_guide/perform_a_health_check_test.html">Perform a Health Check Test</a></li>
+<li><a href="/faq/How_Do_I_Set_Up_a_Health_Check_Page_for_HAProxy.html">How do I set up a Health Check Page for HAProxy?</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightScript Metadata Comments</title><meta content="RightScale provides an in script RightScript Metadata Comments format for describing everything about a RightScript so it can easily be imported into the platform through tools using the RightScale API." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_design cm_dashboard_design_rightscripts cm_dashboard_design_rightscripts_rightscripts_metadata_comments" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Design</a> &#x2F; <a href="./">RightScripts</a></p><div class="page-header"><h1>RightScript Metadata Comments</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>In order to better support storing RightScripts in external version control systems such as Git or Subversion as well as
+editing with your favorite editor, RightScale provides an in script RightScript Metadata Comments format for describing
+everything about a RightScript so it can easily be imported into the platform through tools using the RightScale API. In
+addition to being supported in the RightScale API, this format is also supported when editing RightScripts on the
+RightScale Dashboard.</p>
+
+<p>You can use open source <a href="https://github.com/rightscale/right_st">Right ST</a> client tool to synchronize RightScripts using this format between the RightScale
+platform and your local development environment or CI system.</p>
+
+<h2 id="syntax">Syntax</h2>
+
+<p>The format of the metadata comment is a multiple line block of comments (usually marked with <code>#</code> since that is supported
+by most scripting languages, but <code>//</code> and <code>--</code> are also supported for languages that support them) which starts with
+<code>---</code> and ends with <code>...</code>; the metadata between is specified as YAML with the comment marker at the beginning of the
+line. For example:</p>
+<pre class="syntax-highlight shell"><code><span class="c">#!/bin/bash</span>
+<span class="c"># ---</span>
+<span class="c"># RightScript Name: RL10 Linux Enable Monitoring</span>
+<span class="c"># Description: &gt;</span>
+<span class="c">#   Chose to either enable built-in RightLink monitoring or install and setup</span>
+<span class="c">#   collectd with basic set of plugins. Both methods work with RightScale TSS</span>
+<span class="c">#   (Time Series Storage), a backend system for aggregating and displaying</span>
+<span class="c">#   monitoring data. Using collectd will sent monitoring data to the RightLink</span>
+<span class="c">#   process on the localhost as HTTP using the write_http plugin, which then</span>
+<span class="c">#   forwards that data to the TSS servers over HTTPS with authentication.</span>
+<span class="c"># Inputs:</span>
+<span class="c">#   MONITORING_METHOD:</span>
+<span class="c">#     Input Type: single</span>
+<span class="c">#     Category: RightScale</span>
+<span class="c">#     Description: &gt;</span>
+<span class="c">#       Determine the method of monitoring to use, either RightLink monitoring</span>
+<span class="c">#       or collectd. Setting to 'auto' will use code to select method.</span>
+<span class="c">#     Required: false</span>
+<span class="c">#     Advanced: true</span>
+<span class="c">#     Default: text:auto</span>
+<span class="c">#     Possible Values:</span>
+<span class="c">#       - text:auto</span>
+<span class="c">#       - text:collectd</span>
+<span class="c">#       - text:rightlink</span>
+<span class="c">#   RS_INSTANCE_UUID:</span>
+<span class="c">#     Input Type: single</span>
+<span class="c">#     Category: RightScale</span>
+<span class="c">#     Default: env:RS_INSTANCE_UUID</span>
+<span class="c">#     Description: If using collectd, the monitoring ID for this server.</span>
+<span class="c">#     Required: false</span>
+<span class="c">#     Advanced: true</span>
+<span class="c">#   COLLECTD_SERVER:</span>
+<span class="c">#     Input Type: single</span>
+<span class="c">#     Category: RightScale</span>
+<span class="c">#     Default: env:RS_TSS</span>
+<span class="c">#     Description: &gt;</span>
+<span class="c">#       If using collectd, the FQDN or IP address of the remote collectd server.</span>
+<span class="c">#     Required: false</span>
+<span class="c">#     Advanced: true</span>
+<span class="c"># ...</span>
+</code></pre>
+
+<p>Currently only the Inputs top level field is used by the RightScale platform while the other fields are used by client
+tools like <a href="https://github.com/rightscale/right_st">Right ST</a> which interface RightScale through the RightScale API in order to synchronize RightScripts from
+the platform to a client file system or to integrate with a source control system such as Git or Subversion.</p>
+
+<h3 id="syntax-top-level-fields">Top Level Fields</h3>
+
+<p>The Inputs field is required if metadata comments are present while the other fields are optional, but RightScript Name and Description are strongly recommended.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>YAML Type</th>
+<th>Acceptable Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RightScript Name</td>
+<td>the name of the RightScript; this is not used directly by RightScale, but client tools can use it to set the name of the RightScript</td>
+<td>string</td>
+<td>single line of text</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>the description of the RightScript; this is not used directly by RightScale, but client tools can use it to set the description of the RightScript</td>
+<td>string</td>
+<td>free form text which can be Markdown</td>
+</tr>
+<tr>
+<td>Inputs</td>
+<td>the inputs for the RightScript</td>
+<td>associative array</td>
+<td>keys are input name strings and values are associative arrays of input fields</td>
+</tr>
+<tr>
+<td>Attachments</td>
+<td>the attachments for the RightScript; this is not used directly by RightScale, but client tools can use it to manage uploading attachments for the RightScript</td>
+<td>array of strings</td>
+<td>each array value can be the name of an attachment file</td>
+</tr>
+</tbody></table>
+
+<h3 id="syntax-input-fields">Input Fields</h3>
+
+<p>All of the fields in the associative array for Inputs are optional, but at least Category and Description are strongly recommended.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>YAML Type</th>
+<th>Acceptable Values</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Category</td>
+<td>the category of the input</td>
+<td>string</td>
+<td>single line of text</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>the description of the input</td>
+<td>string</td>
+<td>free form text</td>
+</tr>
+<tr>
+<td>Input Type</td>
+<td>the type of the input; an input can either be used to pass a single string value or an array of values to a script</td>
+<td>string</td>
+<td><code>single</code> or <code>array</code></td>
+</tr>
+<tr>
+<td>Required</td>
+<td>whether the input is required in order for the script to run successfully</td>
+<td>boolean</td>
+<td><code>true</code> or <code>false</code></td>
+</tr>
+<tr>
+<td>Advanced</td>
+<td>whether the input is hidden by default as an advanced input; it is strongly recommended that you provide an acceptable default value for advanced inputs</td>
+<td>boolean</td>
+<td><code>true</code> or <code>false</code></td>
+</tr>
+<tr>
+<td>Default Value</td>
+<td>the default value for the input</td>
+<td>string</td>
+<td>any valid <a href="http://reference.rightscale.com/api1.5/resources/ResourceInputs.html#multi_update">Inputs 2.0 notation</a> value</td>
+</tr>
+<tr>
+<td>Possible Values</td>
+<td>the possible values for the input which will be displayed in a dropdown menu</td>
+<td>array of strings</td>
+<td>each array value can be any valid <a href="http://reference.rightscale.com/api1.5/resources/ResourceInputs.html#multi_update">Inputs 2.0 notation</a> value</td>
+</tr>
+</tbody></table>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

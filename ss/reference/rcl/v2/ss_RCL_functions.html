@@ -1,0 +1,3721 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Cloud Workflow Functions</title><meta content="Functions are built-in operations that execute inside the Cloud Workflow engine using RightScale Cloud Workflow Language (RCL)." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="2" name="docsearch:version_major" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="ss ss_reference ss_reference_rcl ss_reference_rcl_v2 ss_reference_rcl_v2_ss_RCL_functions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Self-Service Docs</a> &#x2F; <a href="../../">Reference</a> &#x2F; <a href="../">RightScale Cloud Workflow</a> &#x2F; <a href="./">Cloud Workflow Language</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>2&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/ss/reference/rcl/v1/ss_RCL_functions.html">1</a></li><li><a href="/ss/reference/rcl/v2/ss_RCL_functions.html">2</a></li></ul></div></div><div class="page-header"><h1>Cloud Workflow Functions</h1></div><div class="main-content"><h2 id="functions-overview">Functions Overview</h2>
+
+<p>Functions are built-in operations that execute inside the Cloud Workflow engine using RightScale Cloud Workflow Language (RCL). They provide various helpers to address needs like retrieving the current time, generating random numbers, sorting collections and arrays, etc. Functions may operate on values and/or on reference collections and return values and/or reference collections. Arguments passed to functions are read-only. For example, the <code>sort()</code> function will return the result of the sort rather than modify the argument. Functions use the <code>lower_case()</code> notation.</p>
+
+<h2 id="collections-management">Collections Management</h2>
+
+<p>The first category of functions relate to managing resource collections and arrays of values.</p>
+
+<h3 id="collections-management-find">find</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>find($type, $name or $hash[, $revision])</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function is syntactic sugar around the resource type get() action. It is the equivalent of calling the get() action with the given filters. It will return the first resource that matches the argument <strong>exactly</strong>, or if none match exactly, the first resource in the list of resources returned by the get() action.</p>
+
+<p>Filters are specified with a hash or with a string and optional integer. If a string is specified then it is equivalent to a having a hash with a key name and the associated value (i.e. by default filter on name). If a integer is specified then is it equivalent to having a hash with a key revision. So:</p>
+<pre class="syntax-highlight ruby"><code><span class="vi">@servers</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="s2">"servers"</span><span class="p">,</span> <span class="s2">"default"</span><span class="p">)</span>
+<span class="vi">@servers</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="s2">"servers"</span><span class="p">,</span> <span class="p">{</span> <span class="ss">name: </span><span class="s2">"default"</span> <span class="p">})</span>
+</code></pre>
+
+<p>are equivalent to:</p>
+<pre class="syntax-highlight ruby"><code><span class="vi">@servers</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span><span class="n">rs_cm</span><span class="p">.</span><span class="nf">servers</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==default"</span><span class="p">]))</span>
+</code></pre>
+
+<p>and</p>
+<pre class="syntax-highlight ruby"><code><span class="vi">@server_template</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="s2">"server_templates"</span><span class="p">,</span> <span class="s2">"MySQL Database Manager"</span><span class="p">,</span> <span class="mi">137</span><span class="p">)</span>
+<span class="vi">@server_template</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="s2">"server_templates"</span><span class="p">,</span> <span class="p">{</span> <span class="ss">name: </span><span class="s2">"MySQL Database Manager"</span><span class="p">,</span> <span class="ss">revision: </span><span class="mi">137</span> <span class="p">})</span>
+</code></pre>
+
+<p>are equivalent to:</p>
+<pre class="syntax-highlight ruby"><code><span class="vi">@server_template</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span><span class="n">rs_cm</span><span class="p">.</span><span class="nf">server_templates</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==MySQL Database Manager"</span><span class="p">,</span><span class="s2">"revision==137"</span><span class="p">]))</span>
+</code></pre>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td>Resource type, e.g. <code>servers</code>, <code>deployments</code>, etc.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>string <em>or</em> hash</td>
+<td>yes</td>
+<td>none</td>
+<td>Resource name or filters</td>
+</tr>
+<tr>
+<td>3</td>
+<td>string <em>or</em> integer</td>
+<td>no</td>
+<td>none</td>
+<td>Resource revision, if resource is versioned. Not specifying a value for versioned resources returns all resources with the given type and name.</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>A resource collection containing the first resource matching the given filter if any.</p>
+
+<h3 id="collections-management-size">size</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>size($array, $hash, $string or @collection)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function simply returns the size of the resource collection or array of values given as argument.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource collection <em>or</em> array of values <em>or</em> hash of values <em>or</em> string</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>An integer representing the size of the given array, hash, string or collection.</p>
+
+<h3 id="collections-management-first-and-last">first and last</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>first($array or @collection)</code> and <code>last($array or @collection)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>These functions simply retrieve the first or last element of a resource collection or array of values.</p>
+
+<p>Note: For resource collections, the result is a resource collection itself, consisting of a single resource. However, for an array of values, the result is a single value.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<p>The only argument is the collection from which the first or last element should be extracted.</p>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource collection <em>or</em> array of values</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>A resource collection if the argument is a resource collection or a value if the argument is an array of values.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$one</span> <span class="o">=</span> <span class="n">first</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="c1"># $one == 1</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="vi">@servers</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">deployments</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==default"</span><span class="p">]).</span><span class="nf">servers</span><span class="p">()</span>
+<span class="vi">@first</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span><span class="vi">@servers</span><span class="p">)</span> <span class="c1"># size(@first) == 1</span>
+</code></pre>
+
+<h3 id="collections-management-sort">sort</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>sort($array or @collection[, $field][, $order])</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>The <code>sort()</code> function allows sorting resource collections and arrays of values. If sorting an array of values, then all values must be of the same type and the array must not contain <code>null</code>. The ordering follows the same logic as the comparison operators:</p>
+
+<ul>
+<li>Numbers and datetime use the natural order (think of datetime in terms of seconds since the epoch for comparison)</li>
+<li>Strings and arrays follow the lexicographical order</li>
+<li>true &gt; false</li>
+</ul>
+
+<p>Hashes cannot be compared directly, instead the <code>sort()</code> function accepts an argument to specify recursively which key should be used for sorting. That same argument can be used on resource collections to specify which field should be used for sorting. If the field ends up being a hash, then recursively what key of the hash should be used. By default, sorting resource collections is done using the <code>name</code> field.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource collection <em>or</em> array of values</td>
+<td>yes</td>
+<td>none</td>
+<td>collection to be sorted</td>
+</tr>
+<tr>
+<td>2</td>
+<td>string</td>
+<td>only if collection is an array of hashes</td>
+<td><code>name</code> for resource collections</td>
+<td>name of resource field used to order resource collections <em>or</em> name of key of hash to be used to order for array of hashes <br /> the definition is recursive, each key being separated with the character <code>/</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>asc</code> or <code>desc</code></td>
+<td>no</td>
+<td><code>asc</code></td>
+<td>Sorting order (ascendant or descendant)</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>The result type is the same as the first argument: a resource collection or an array of values.</p>
+
+<h4 id="examples">Examples</h4>
+
+<p>Sorting a resource collection by name:</p>
+<pre class="syntax-highlight ruby"><code><span class="vi">@servers</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">deployments</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==default"</span><span class="p">]).</span><span class="nf">servers</span><span class="p">()</span>
+<span class="vi">@sorted_servers</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="vi">@servers</span><span class="p">)</span>
+</code></pre>
+
+<p>Sorting a collection of instances by their user data descending:</p>
+<pre class="syntax-highlight ruby"><code><span class="vi">@instances</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">deployments</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==default"</span><span class="p">]).</span><span class="nf">server</span><span class="p">().</span><span class="nf">current_instance</span><span class="p">()</span>
+<span class="vi">@sorted_instances</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="vi">@instances</span><span class="p">,</span> <span class="s2">"settings/user_data"</span><span class="p">,</span> <span class="s2">"desc"</span><span class="p">)</span>
+</code></pre>
+
+<p>Sorting an array of hashes (using a key called timestamp in this example):</p>
+<pre class="syntax-highlight ruby"><code><span class="vg">$data</span> <span class="o">=</span> <span class="p">[{</span> <span class="s2">"value"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s2">"timestamp"</span><span class="p">:</span> <span class="n">d</span><span class="s2">"1/1/2012 12:32"</span> <span class="p">},</span>
+         <span class="p">{</span> <span class="s2">"value"</span><span class="p">:</span> <span class="mi">43</span><span class="p">,</span> <span class="s2">"timestamp"</span><span class="p">:</span> <span class="n">d</span><span class="s2">"1/1/2012 16:31"</span> <span class="p">}]</span>
+<span class="vg">$sorted_data</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="vg">$data</span><span class="p">,</span> <span class="s2">"timestamp"</span><span class="p">)</span>
+</code></pre>
+
+<h3 id="collections-management-contains">contains</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>contains?($array or @collection, elements)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function checks whether all the elements of a given collection or a specific value are contained in another given collection. The elements may be in different order and they may appear a different number of times, but as long as all elements appear at least once, then the function returns <code>true</code>, otherwise it returns <code>false</code>.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource collection <em>or</em> array of values</td>
+<td>yes</td>
+<td>none</td>
+<td>Container being tested</td>
+</tr>
+<tr>
+<td>2</td>
+<td>resource collection <em>or</em> array of values</td>
+<td>yes</td>
+<td>none</td>
+<td>Elements that must be in container for function to return true</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p><code>true</code> if all elements are contained in given collection, <code>false</code> otherwise.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">contains?</span><span class="p">(</span><span class="vg">$array</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="kp">true</span>
+<span class="n">contains?</span><span class="p">(</span><span class="vg">$array</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">==</span> <span class="kp">false</span>
+<span class="n">contains?</span><span class="p">(</span><span class="vg">$array</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="kp">true</span>
+<span class="n">contains?</span><span class="p">(</span><span class="vg">$array</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span> <span class="o">==</span> <span class="kp">false</span>
+<span class="vi">@servers</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">deployments</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==default"</span><span class="p">]).</span><span class="nf">servers</span><span class="p">()</span>
+<span class="vi">@server</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">href: </span><span class="s2">"servers/123"</span><span class="p">)</span> <span class="c1"># Assume this server belongs to a deployment named 'default'</span>
+<span class="n">contains?</span><span class="p">(</span><span class="vi">@servers</span><span class="p">,</span> <span class="vi">@server</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+</code></pre>
+
+<h3 id="collections-management-empty">empty</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>empty?($array or @collection)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns <code>true</code> if the given collection (resource collection or array of values) is empty, <code>false</code> otherwise.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource collection <em>or</em> array of values</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p><code>true</code> if given collection is empty, <code>false</code> otherwise.</p>
+
+<h3 id="collections-management-any">any</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>any?($array[, $value_or_regexp])</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function checks for the existence of an element in an array of JSON values. When only an array is given then returns <code>true</code> if the array contains a value that is neither <code>null</code> nor <code>false</code>. When both an array and a value are provided then returns <code>true</code> if the array contains at least once the given value. If the value is a regular expression, it will return <code>true</code> if there is a least one value that is a string and that matches the regexp. The syntax used to write a regular expressions is <code>/regexp/</code>.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>array of values</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>value or regular expression</td>
+<td>no</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p><code>true</code> or <code>false</code>.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$array_of_false</span> <span class="o">=</span> <span class="p">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="p">,</span> <span class="n">null</span><span class="p">]</span>
+<span class="n">any?</span><span class="p">(</span><span class="vg">$array_of_false</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span> <span class="c1"># All elements are null or false, result is false</span>
+<span class="vg">$array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"cde"</span><span class="p">]</span>
+<span class="n">any?</span><span class="p">(</span><span class="vg">$array</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span> <span class="c1"># Array contains values that are not either false or null, result is true</span>
+<span class="n">any?</span><span class="p">(</span><span class="vg">$array</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span> <span class="c1"># Array contains the value 1</span>
+<span class="n">any?</span><span class="p">(</span><span class="vg">$array</span><span class="p">,</span> <span class="s2">"cd"</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span> <span class="c1"># Array does not contain value "cd"</span>
+<span class="n">any?</span><span class="p">(</span><span class="vg">$array</span><span class="p">,</span> <span class="s2">"/cd/"</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span> <span class="c1"># Value "cde" matches regular expression "cd"</span>
+</code></pre>
+
+<h3 id="collections-management-all">all</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>all?($array[, $value_or_regexp])</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function checks whether all elements of an array have a given value. When only an array is provided, then it returns <code>true</code> if the array does not contain a value that is either <code>null</code> or <code>false</code>. When both an array and a value is provided, then it returns <code>true</code> if the array values all match the given value. If the value is a regular expression, it will return <code>true</code> if all the values in the array are all strings that match the regular expression. It returns <code>true</code> if the array is empty.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>array of values</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>value or regular expression</td>
+<td>no</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p><code>true</code> or <code>false</code>.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$array_with_one_false</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kp">false</span><span class="p">]</span>
+<span class="n">all?</span><span class="p">(</span><span class="vg">$array_with_one_false</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span> <span class="c1"># One element is null or false, result is false</span>
+<span class="vg">$array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"cde"</span><span class="p">]</span>
+<span class="n">all?</span><span class="p">(</span><span class="vg">$array</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span> <span class="c1"># Array contains no null or false, result is true</span>
+<span class="n">all?</span><span class="p">(</span><span class="vg">$array</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span> <span class="c1"># Not all values are one</span>
+<span class="n">all?</span><span class="p">(</span><span class="vg">$array</span><span class="p">,</span> <span class="s2">"/cd/"</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span> <span class="c1"># Not all values are strings that match regular expression "cd"</span>
+</code></pre>
+
+<h3 id="collections-management-select">select</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>select($array or @collection, $hash)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function extracts the elements of a resource collection or of an array of hashes that have fields or values with a given value. The name of the field or hash key that should be selected for comparison correspond to the keys of the hash given as second argument. The values of that hash are the values that the resource fields or hash entries must be selected. If the resource field or hash values are strings, then the selector hash value can represent regular expressions.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource collection <em>or</em> array of values</td>
+<td>yes</td>
+<td>none</td>
+<td>Container being tested</td>
+</tr>
+<tr>
+<td>2</td>
+<td>hash</td>
+<td>yes</td>
+<td>none</td>
+<td>Resource field names associated with value that should be filtered on <em>or</em> Hash key name associated with value that should be filtered on</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>A resource collection composed of resources that have fields with the given values or an array of hashes that have the given values for given keys.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vi">@servers</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">deployments</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==default"</span><span class="p">]).</span><span class="nf">servers</span><span class="p">()</span>
+<span class="vi">@app_servers</span> <span class="o">=</span> <span class="nb">select</span><span class="p">(</span><span class="vi">@servers</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"/app/"</span> <span class="p">})</span> <span class="c1"># @app_servers contains servers whose name match</span>
+                                                     <span class="c1"># the regular expression "app" (i.e. contain the string "app")</span>
+<span class="vg">$hashes</span> <span class="o">=</span> <span class="p">[{</span> <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"value1"</span> <span class="p">},</span> <span class="p">{</span> <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"value2"</span> <span class="p">}]</span>
+<span class="vg">$hashes_with_value1</span> <span class="o">=</span> <span class="nb">select</span><span class="p">(</span><span class="vg">$hashes</span><span class="p">,</span> <span class="p">{</span> <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"value1"</span> <span class="p">})</span> <span class="c1"># $hashes_with_value1 contains hashes whose values</span>
+                                                           <span class="c1"># stored in key "key" is "value1"</span>
+</code></pre>
+
+<h3 id="collections-management-unique">unique</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>unique($array or @collection)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function traverses the given collection and returns a new collection made of all the unique elements. Two resources are considered identical if they have the same <code>href</code>.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource collection <em>or</em> array of values</td>
+<td>yes</td>
+<td>none</td>
+<td>Container to be traversed and whose unique elements should be extracted</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>A collection composed of the distinct elements in the initial collection. The types of the elements is preserved (so the result is a resource collection or an array of values depending on the argument).</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vi">@servers</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">deployments</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==default"</span><span class="p">]).</span><span class="nf">servers</span><span class="p">()</span>
+<span class="vi">@duplicated_servers</span> <span class="o">=</span> <span class="vi">@servers</span> <span class="o">+</span> <span class="vi">@servers</span>
+<span class="vi">@unique_servers</span> <span class="o">=</span> <span class="n">unique</span><span class="p">(</span><span class="vi">@duplicated_servers</span><span class="p">)</span>
+<span class="n">assert</span> <span class="vi">@servers</span> <span class="o">==</span> <span class="vi">@unique_servers</span>
+</code></pre>
+
+<h2 id="resource-management">Resource Management</h2>
+
+<p>The following functions help you to work with cloud resources. They are helper functions that encapsulate logic to help create and delete resources in a pre-defined way, saving you from having to implement the logic in your code.</p>
+
+<h3 id="resource-management-provision">provision</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>provision(@declaration)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function provisions the resource(s) passed in as a <a href="index.html#resources-resource-declarations">resource declaration</a> and returns a <a href="index.html#resources-resource-collections">resource collection</a> containing the provisioned resources, or raises an error. A <a href="index.html#resources-resource-declarations">resource declaration</a> is a description of what a resource ought to be and consists of a hash which defines the resource <code>namespace</code>, <code>type</code> and <code>fields</code> which characterize the resource.</p>
+
+<p>The general behavior is that this function creates the resource(s) and waits until it is in a usable state -- what exactly that means for each resource is a bit different. The following table lists the behavior of the provision function for each RightScale resource.</p>
+
+<p>For a <a href="/ss/reference/cat/v20161221/index.html#resources-bulk-resources">bulk resource declaration</a>, the general behavior of the <code>provision</code> function is to retry the provision of each resource in the declaration up to 3 times. If after 3 retries, any resource in the bulk declaration has not provisioned successfully, the entire collection is destroyed and an error is raised. In this case, the <code>$_errors</code> <a href="index.html#attributes-and-error-handling-resource-action-errors">array of hashes</a> will contain errors with <code>copy_index</code> fields, indicating which of the resources in the declaration could not be provisioned. See below for resource-specific behavior.</p>
+
+<table><thead>
+<tr>
+<th>Resource</th>
+<th>Behavior</th>
+<th>Failure Behavior</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Server</td>
+<td>Create the Server<br />Launch the Server<br />Wait for the Server to become <q>operational</q><br />For bulk: if after launching the server state is <code>inactive</code>, the launch call will be retried up to 3 times</td>
+<td>Terminate the Server<br />Wait for the Server to terminate<br />Delete the Server</td>
+</tr>
+<tr>
+<td>ServerArray</td>
+<td>Create the ServerArray<br />Enable the ServerArray<br />Launch the ServerArray<br />Wait for at least the <code>min_count</code> number of instances to become <q>operational</q></td>
+<td>Terminate all instances in the ServerArray<br />Wait for all instances to terminate<br />Delete the ServerArray</td>
+</tr>
+<tr>
+<td>Instance</td>
+<td>Create the Instance<br />Launch the Instance<br />Wait for the Instance to become <q>running</q><br />For bulk: if after launching the instance state is <code>inactive</code>, the launch call will be retried up to 3 times</td>
+<td>Terminate the Instance<br />Wait for the Instance to terminate<br />Delete the Instance</td>
+</tr>
+<tr>
+<td>IPAddress</td>
+<td>Create the IPAddress</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>IPAddressBinding</td>
+<td>Create the IPAddressBinding</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Volume</td>
+<td>Create the Volume<br />Wait for the volume to become <q>available</q></td>
+<td>Delete the Volume</td>
+</tr>
+<tr>
+<td>VolumeSnapshot</td>
+<td>Create the VolumeSnapshot</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>VolumeAttachment</td>
+<td>Create the VolumeAttachment</td>
+<td>N/A</td>
+</tr>
+</tbody></table>
+
+<h3 id="resource-management-delete">delete</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>delete(@resource)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function cleans up and deletes the specified resource. Generally speaking, this function will take care to trigger the resource to be decommissioned and then remove the resource altogether -- the specific actions for each resource are a bit different. The following table lists the behavior of the delete function for each RightScale resource.</p>
+
+<table><thead>
+<tr>
+<th>Resource</th>
+<th>Behavior</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Server</td>
+<td>Terminate the Server<br />Wait for the Server to terminate<br />Delete the Server resource</td>
+</tr>
+<tr>
+<td>ServerArray</td>
+<td>Disable the ServerArray<br />Terminate all instances in the ServerArray<br />Wait for all instances to terminate<br />Delete the ServerArray</td>
+</tr>
+<tr>
+<td>Instance</td>
+<td>Terminate the Instance<br />Wait for the Instance to terminate<br />Delete the Instance</td>
+</tr>
+<tr>
+<td>IPAddress</td>
+<td>Delete the IPAddress</td>
+</tr>
+<tr>
+<td>IPAddressBinding</td>
+<td>Delete the IPAddressBinding</td>
+</tr>
+<tr>
+<td>Volume</td>
+<td>Delete the Volume</td>
+</tr>
+<tr>
+<td>VolumeSnapshot</td>
+<td>Delete the VolumeSnapshot</td>
+</tr>
+<tr>
+<td>VolumeAttachment</td>
+<td>Delete the VolumeAttachment</td>
+</tr>
+</tbody></table>
+
+<h3 id="resource-management-copy">copy</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>copy(count, @declaration, [fields])</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>The <code>copy</code> function provides a method to create a <a href="/ss/reference/cat/v20161221/index.html#resources-bulk-resources">bulk resource declaration</a> from a single declaration. The first argument must be a single resource declaration from which the bulk declaration will be based. The second argument specifies how many copies of the declaration to create. The third, optional, argument is a hash whose fields are merged into the fields of the base resource declaration -- the hash may contain a <code>copy_index()</code> function which will return the current iteration in the bulk declaration.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>number</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>declaration</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>hash</td>
+<td>no</td>
+<td>none</td>
+<td>May not contain any direct resource field access (i.e. <code>@server.name</code>) - use <code>field</code> instead</td>
+</tr>
+</tbody></table>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="c1"># Create a bulk resource declaration with 10 @servers in it</span>
+<span class="vi">@servers</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="vi">@server</span><span class="p">)</span>
+
+<span class="c1"># Create a bulk resource declaration based on @server where every name is unique</span>
+<span class="vi">@servers</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="vi">@server</span><span class="p">,</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"My Server #"</span> <span class="o">+</span> <span class="n">copy_index</span><span class="p">()})</span>
+</code></pre>
+
+<h3 id="resource-management-field">field</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>field(@resource, field_name)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Extracts the current value of <code>field_name</code> from the first resource in the <code>@resource</code> collection. Note: this is different behavior than <code>@resource.field_name</code>, which would actually make an API call to get the latest information about the <code>resource</code> before returning the value. </p>
+
+<p>This function is equivalent to: <code>to_object(@resource)[&quot;fields&quot;][0][field_name]</code>.</p>
+
+<p>If the <code>field_name</code> string ends with <code>[]</code>, then an array of values is returned, representing the value of the field for every element in the collection. </p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>declaration</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td>If ending in <code>[]</code> will return an array of values, otherwise will return the first value</td>
+</tr>
+</tbody></table>
+
+<h2 id="boolean-logic">Boolean Logic</h2>
+
+<p>The following set of functions all evaluate to <code>true</code> or <code>false</code>. They provide an alternate notation to using operators that may lend itself better when writing declarative code (e.g. when defining the fields of a declaration).</p>
+
+<h3 id="boolean-logic-equals">equals</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>equals?($left or @left, $right or @right)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function checks whether both arguments are equals, it is equivalent to doing <code>left == right</code>.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource collection <em>or</em> value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>resource collection <em>or</em> value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p><code>true</code> or <code>false</code>.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">$b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">$c</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">equals?</span><span class="p">(</span><span class="vg">$a</span><span class="p">,</span> <span class="vg">$b</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
+<span class="n">equals?</span><span class="p">(</span><span class="vg">$a</span><span class="p">,</span> <span class="vg">$c</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+</code></pre>
+
+<h3 id="boolean-logic-switch">switch</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>switch($condition, @true_exp or $true_exp, @false_exp or $false_exp)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function evaluates the condition and returns either the true expression or false expression based on the value of $condition.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>resource collection <em>or</em> value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>resource collection <em>or</em> value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p><strong>Note:</strong> Both true expression and false expression should be of the same type.</p>
+
+<h4 id="result">Result</h4>
+
+<p>true expression or false expression</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$anything_but_null</span> <span class="o">=</span> <span class="s2">"foobar"</span>
+<span class="vg">$false_or_null</span> <span class="o">=</span> <span class="n">null</span>
+<span class="n">switch</span><span class="p">(</span><span class="vg">$anything_but_null</span><span class="p">,</span> <span class="vg">$var1</span><span class="p">,</span> <span class="vg">$var2</span><span class="p">)</span> <span class="o">==</span> <span class="vg">$var1</span>
+<span class="n">switch</span><span class="p">(</span><span class="vg">$false_or_null</span><span class="p">,</span> <span class="vi">@ec2</span><span class="p">,</span> <span class="vi">@google</span><span class="p">)</span> <span class="o">==</span> <span class="vi">@google</span>
+</code></pre>
+
+<h3 id="boolean-logic-logic_and-and-logic_or">logic_and and logic_or</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>logic_and($left, $right)</code> and <code>logic_or($left, $right)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>These functions apply the logical and or logical or operators respectively to their arguments. They are equivalent to <code>$left &amp;&amp; $right</code> and <code>$left || $right</code> respectively.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p><code>true</code> or <code>false</code>.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$anything_but_null</span> <span class="o">=</span> <span class="s2">"foobar"</span>
+<span class="n">logic_and</span><span class="p">(</span><span class="vg">$anything_but_null</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
+<span class="n">logic_and</span><span class="p">(</span><span class="vg">$anything_but_null</span><span class="p">,</span> <span class="kp">true</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+<span class="n">logic_and</span><span class="p">(</span><span class="vg">$anything_but_null</span><span class="p">,</span> <span class="n">null</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
+<span class="n">logic_and</span><span class="p">(</span><span class="n">null</span><span class="p">,</span> <span class="n">null</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
+
+<span class="n">logic_or</span><span class="p">(</span><span class="vg">$anything_but_null</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+<span class="n">logic_or</span><span class="p">(</span><span class="vg">$anything_but_null</span><span class="p">,</span> <span class="kp">true</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+<span class="n">logic_or</span><span class="p">(</span><span class="vg">$anything_but_null</span><span class="p">,</span> <span class="n">null</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+<span class="n">logic_or</span><span class="p">(</span><span class="n">null</span><span class="p">,</span> <span class="n">null</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
+</code></pre>
+
+<h3 id="boolean-logic-logic_not">logic_not</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>logic_not($value​)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Applies the logical not operator.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p><code>true</code> or <code>false</code>.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="n">logic_not</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
+<span class="n">logic_not</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+<span class="vg">$any_value_but_null</span> <span class="o">=</span> <span class="s2">"foobar"</span>
+<span class="n">logic_not</span><span class="p">(</span><span class="vg">$any_value_but_null</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
+<span class="n">logic_not</span><span class="p">(</span><span class="n">null</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+</code></pre>
+
+<h2 id="data-conversion">Data Conversion</h2>
+
+<p>The following set of functions are used to convert values from one type to another.</p>
+
+<h3 id="data-conversion-to_s">to_s</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_s($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Convert value to string. The semantic for each type is summarized in the following table:</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>no change</td>
+<td><code>to_s(&quot;foo&quot;) == &quot;foo&quot;</code></td>
+</tr>
+<tr>
+<td>number</td>
+<td>string representation of number</td>
+<td><code>to_s(1) == &quot;1&quot;</code></td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>string representation of boolean</td>
+<td><code>to_s(true) == &quot;true&quot;</code></td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>string representation of datetime</td>
+<td><code>to_s(d&quot;1/1/2012 6:59 PM&quot;) == &quot;d\&quot;2012/01/01 18:59\&quot;&quot;</code></td>
+</tr>
+<tr>
+<td>null</td>
+<td>string <q>null</q></td>
+<td><code>to_s(null) == &quot;null&quot;</code></td>
+</tr>
+<tr>
+<td>array</td>
+<td>JSON representation of an array</td>
+<td><code>to_s([1, 2, &quot;3&quot;]) == &quot;[1,2,\&quot;3\&quot;]&quot;</code></td>
+</tr>
+<tr>
+<td>hash</td>
+<td>JSON representation of a hash</td>
+<td><code>to_s({ &quot;one&quot;: 1, &quot;two&quot;: 2, &quot;three&quot;: 3 }) == &quot;{\&quot;one\&quot;:1,\&quot;two\&quot;:2,\&quot;three\&quot;:3}&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-to_n">to_n</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_n($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Convert a value to a number. The only types that can be converted to numbers are strings, booleans, and datetimes. Attempting to convert a value of a different type (e.g. an array) will result in an error.</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>corresponding number or 0 if string does not represent a number</td>
+<td><code>to_n(&quot;1.23123&quot;) == 1.23123</code><br/><code>to_n(&quot;foo&quot;) == 0</code></td>
+</tr>
+<tr>
+<td>number</td>
+<td>no change</td>
+<td><code>to_n(1) == 1</code></td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>1 for true, 0 for false</td>
+<td><code>to_n(true) == 1</code></td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>number of seconds since the epoch</td>
+<td><code>to_n(d&quot;2012/01/26 1:49:35&quot;) == 1327542575</code></td>
+</tr>
+<tr>
+<td>null</td>
+<td>0</td>
+<td><code>to_n(null) == 0</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-to_b">to_b</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_b($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Convert value to boolean. The only types that can be converted to booleans are strings and numbers. Attempting to convert a value of a different type (e.g. an array) will result in an error.</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td><code>true</code> if string is <q>true</q>, <code>false</code> otherwise</td>
+<td><code>to_b(&quot;true&quot;) == true</code><br/><code>to_b(&quot;foo&quot;) == false</code></td>
+</tr>
+<tr>
+<td>number</td>
+<td><code>true</code> if non 0, <code>false</code> otherwise</td>
+<td><code>to_b(42) == true</code><br/><code>to_b(0) == false</code></td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>no change</td>
+<td><code>to_b(true) == true</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-to_d">to_d</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_d($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Convert value to datetime. The only types that can be converted to datetimes are strings and numbers. Attempting to convert a value of a different type (e.g. an array) will result in an error. The accepted syntax for strings representing datetime is:</p>
+
+<p><code>year/month/day [h:m[:s]] [AM|PM]</code></p>
+
+<p>Trying to coerce a string that does not match this syntax to a datetime value results in an error.</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>Corresponding datetime if syntax is correct, error otherwise</td>
+<td><code>to_d(&quot;1/1/2012&quot;) == d&quot;1/1/2012&quot;</code></td>
+</tr>
+<tr>
+<td>number</td>
+<td>datetime with corresponding unix timestamp</td>
+<td><code>to_d(42) == d&quot;1/1/1970 00:00:42&quot;</code></td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>no change</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-to_a">to_a</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_a($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Convert hash to array of pairs or a range to an array. Converting a value of type other than hash or range will result in an error.</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hash</td>
+<td>Corresponding array of pairs, ordering is random</td>
+<td><code>to_a({ &quot;one&quot;: 1, &quot;two&quot;: 2, &quot;three&quot;: 3 }) == [ [&quot;two&quot;, 2], [&quot;one&quot;, 1], [&quot;three&quot;, 3] ]</code></td>
+</tr>
+<tr>
+<td>range</td>
+<td>Array of the given range</td>
+<td><code>to_a([1..3]) == [1, 2, 3]</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-to_object">to_object</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_object(@declaration or @collection)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Convert given resource declaration or resource collection into a JSON object. Especially useful to convert a declaration into an object, manipulate that object and assign it back to a declaration so that e.g. <code>provision()</code> may be called on it.</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>collection <em>or</em> declaration</td>
+<td>JSON object containing declaration or collection fields. Note that objects created from declarations may be assigned back to a reference</td>
+<td><code>$data = to_object(@servers)</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-to_json">to_json</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_json($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Convert a value into a JSON string.</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>any</td>
+<td>JSON string</td>
+<td><code>to_json({ &quot;one&quot;: 1, &quot;two&quot;: 2, &quot;three&quot;: 3 }) == &#39;{&quot;one&quot;:1,&quot;two&quot;:2,&quot;three&quot;:3}&#39;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-from_json">from_json</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>from_json($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Convert a string value into a RCL value.</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>RCL value</td>
+<td><code>from_json(&#39;{&quot;one&quot;:1,&quot;two&quot;:2,&quot;three&quot;:3}&#39;) == { &quot;one&quot;: 1, &quot;two&quot;: 2, &quot;three&quot;: 3 }</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-strftime">strftime</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>strftime($date, $format_string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Converts the given datetime to a string using the format/directives provided.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>datetime value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td>Use any of the directives specified below when creating the string</td>
+</tr>
+</tbody></table>
+
+<p>The directive consists of a percent (%) character, zero or more flags, optional minimum field width, and a conversion specifier as follows:</p>
+
+<p><code>%&lt;flags&gt;&lt;width&gt;&lt;conversion&gt;</code></p>
+
+<p><strong>Flags:</strong></p>
+
+<ul>
+<li><code>-</code>  don&#39;t pad a numerical output</li>
+<li><code>_</code>  use spaces for padding</li>
+<li><code>0</code>  use zeros for padding</li>
+<li><code>^</code>  upcase the result string</li>
+<li><code>#</code>  change case</li>
+</ul>
+
+<p>The minimum field width specifies the minimum width.</p>
+
+<p><strong>Format directives:</strong></p>
+
+<p><strong>Date (Year, Month, Day)</strong></p>
+
+<table><thead>
+<tr>
+<th>Directive</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>%Y</code></td>
+<td>Year with century if provided, will pad result at least 4 digits. <code>-0001</code>, <code>0000</code>, <code>1995</code>, <code>2009</code>, <code>14292</code>, etc.</td>
+</tr>
+<tr>
+<td><code>%C</code></td>
+<td>year / 100 (rounded down such as <code>20</code> in <code>2009</code>)</td>
+</tr>
+<tr>
+<td><code>%y</code></td>
+<td>year % 100 (00..99)</td>
+</tr>
+<tr>
+<td><code>%m</code></td>
+<td>Month of the year, zero-padded (01..12)</td>
+</tr>
+<tr>
+<td><code>%_m</code></td>
+<td>blank-padded ( 1..12)</td>
+</tr>
+<tr>
+<td><code>%-m</code></td>
+<td>no-padded (1..12)</td>
+</tr>
+<tr>
+<td><code>%B</code></td>
+<td>The full month name (<code>January</code>)</td>
+</tr>
+<tr>
+<td><code>%^B</code></td>
+<td>uppercased (<code>JANUARY</code>)</td>
+</tr>
+<tr>
+<td><code>%b</code></td>
+<td>The abbreviated month name (<code>Jan</code>)</td>
+</tr>
+<tr>
+<td><code>%^b</code></td>
+<td>uppercased (<code>JAN</code>)</td>
+</tr>
+<tr>
+<td><code>%h</code></td>
+<td>Equivalent to <code>%b</code></td>
+</tr>
+<tr>
+<td><code>%d</code></td>
+<td>Day of the month, zero-padded (01..31)</td>
+</tr>
+<tr>
+<td><code>%-d</code></td>
+<td>no-padded (1..31)</td>
+</tr>
+<tr>
+<td><code>%e</code></td>
+<td>Day of the month, blank-padded ( 1..31)</td>
+</tr>
+<tr>
+<td><code>%j</code></td>
+<td>Day of the year (001..366)</td>
+</tr>
+</tbody></table>
+
+<p><strong>Time (Hour, Minute, Second, Subsecond)</strong></p>
+
+<table><thead>
+<tr>
+<th>Directive</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>%H</code></td>
+<td>Hour of the day, 24-hour clock, zero-padded (00..23)</td>
+</tr>
+<tr>
+<td><code>%k</code></td>
+<td>Hour of the day, 24-hour clock, blank-padded ( 0..23)</td>
+</tr>
+<tr>
+<td><code>%I</code></td>
+<td>Hour of the day, 12-hour clock, zero-padded (01..12)</td>
+</tr>
+<tr>
+<td><code>%l</code></td>
+<td>Hour of the day, 12-hour clock, blank-padded ( 1..12)</td>
+</tr>
+<tr>
+<td><code>%P</code></td>
+<td>Meridian indicator, lowercase (<code>am</code> or <code>pm</code>)</td>
+</tr>
+<tr>
+<td><code>%p</code></td>
+<td>Meridian indicator, uppercase (<code>AM</code> or <code>PM</code>)</td>
+</tr>
+<tr>
+<td><code>%M</code></td>
+<td>Minute of the hour (00..59)</td>
+</tr>
+<tr>
+<td><code>%S</code></td>
+<td>Second of the minute (00..60)</td>
+</tr>
+<tr>
+<td><code>%L</code></td>
+<td>Millisecond of the second (000..999). The digits under millisecond are truncated to not produce <code>1000</code>.</td>
+</tr>
+<tr>
+<td><code>%N</code></td>
+<td>Fractional seconds digits, default is 9 digits (nanosecond)</td>
+</tr>
+<tr>
+<td><code>%3N</code></td>
+<td>millisecond (3 digits)</td>
+</tr>
+<tr>
+<td><code>%6N</code></td>
+<td>microsecond (6 digits)</td>
+</tr>
+<tr>
+<td><code>%9N</code></td>
+<td>nanosecond (9 digits)</td>
+</tr>
+<tr>
+<td><code>%12N</code></td>
+<td>picosecond (12 digits)</td>
+</tr>
+<tr>
+<td><code>%15N</code></td>
+<td>femtosecond (15 digits)</td>
+</tr>
+<tr>
+<td><code>%18N</code></td>
+<td>attosecond (18 digits)</td>
+</tr>
+<tr>
+<td><code>%21N</code></td>
+<td>zeptosecond (21 digits)</td>
+</tr>
+<tr>
+<td><code>%24N</code></td>
+<td>yoctosecond (24 digits). The digits under the specified length are truncated to avoid carry up.</td>
+</tr>
+</tbody></table>
+
+<p><strong>Weekday</strong> </p>
+
+<table><thead>
+<tr>
+<th>Directive</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>%A</code></td>
+<td>The full weekday name (<code>Sunday</code>)</td>
+</tr>
+<tr>
+<td><code>%^A</code></td>
+<td>uppercased (<code>SUNDAY</code>)</td>
+</tr>
+<tr>
+<td><code>%a</code></td>
+<td>The abbreviated name (<code>Sun</code>)</td>
+</tr>
+<tr>
+<td><code>%^a</code></td>
+<td>uppercased (<code>SUN</code>)</td>
+</tr>
+<tr>
+<td><code>%u</code></td>
+<td>Day of the week (Monday is 1, 1..7)</td>
+</tr>
+<tr>
+<td><code>%w</code></td>
+<td>Day of the week (Sunday is 0, 0..6)</td>
+</tr>
+</tbody></table>
+
+<p><strong>ISO 8601 week-based year and week number</strong></p>
+
+<p>The first week of YYYY starts with a Monday and includes YYYY-01-04. The days in the year before the first week are in the last week of the previous year.</p>
+
+<table><thead>
+<tr>
+<th>Directive</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>%G</code></td>
+<td>The week-based year</td>
+</tr>
+<tr>
+<td><code>%g</code></td>
+<td>The last 2 digits of the week-based year (00..99)</td>
+</tr>
+<tr>
+<td><code>%V</code></td>
+<td>Week number of the week-based year (01..53)</td>
+</tr>
+</tbody></table>
+
+<p><strong>Week number</strong>
+The first week of YYYY that starts with a Sunday or Monday (according to <code>%U</code> or <code>%W</code>). The days in the year before the first week are in week 0.</p>
+
+<table><thead>
+<tr>
+<th>Directive</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>%U</code></td>
+<td>Week number of the year. The week starts with Sunday. (00..53)</td>
+</tr>
+<tr>
+<td><code>%W</code></td>
+<td>Week number of the year. The week starts with Monday. (00..53)</td>
+</tr>
+</tbody></table>
+
+<p><strong>Seconds since the Epoch</strong></p>
+
+<table><thead>
+<tr>
+<th>Directive</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>%s</code></td>
+<td>Number of seconds since 1970-01-01 00:00:00 UTC.</td>
+</tr>
+</tbody></table>
+
+<p><strong>Literal string</strong></p>
+
+<table><thead>
+<tr>
+<th>Directive</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>%n</code></td>
+<td>Newline character (<code>\n</code>)</td>
+</tr>
+<tr>
+<td><code>%t</code></td>
+<td>Tab character (<code>\t</code>)</td>
+</tr>
+<tr>
+<td><code>%%</code></td>
+<td>Literal <code>%</code> character</td>
+</tr>
+</tbody></table>
+
+<p><strong>Combination</strong> </p>
+
+<table><thead>
+<tr>
+<th>Directive</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>%c</code></td>
+<td>date and time (<code>%a %b %e %T %Y</code>)</td>
+</tr>
+<tr>
+<td><code>%D</code></td>
+<td>Date (<code>%m/%d/%y</code>)</td>
+</tr>
+<tr>
+<td><code>%F</code></td>
+<td>The ISO 8601 date format (<code>%Y-%m-%d</code>)</td>
+</tr>
+<tr>
+<td><code>%v</code></td>
+<td>VMS date (<code>%e-%^b-%4Y</code>)</td>
+</tr>
+<tr>
+<td><code>%x</code></td>
+<td>Same as <code>%D</code></td>
+</tr>
+<tr>
+<td><code>%X</code></td>
+<td>Same as <code>%T</code></td>
+</tr>
+<tr>
+<td><code>%r</code></td>
+<td>12-hour time (<code>%I:%M:%S %p</code>)</td>
+</tr>
+<tr>
+<td><code>%R</code></td>
+<td>24-hour time (<code>%H:%M</code>)</td>
+</tr>
+<tr>
+<td><code>%T</code></td>
+<td>24-hour time (<code>%H:%M:%S</code>)</td>
+</tr>
+</tbody></table>
+
+<h4 id="example">Example</h4>
+<pre class="syntax-highlight ruby"><code><span class="c1"># Format the current date for CM API 1.5</span>
+<span class="vg">$time</span> <span class="o">=</span> <span class="n">now</span><span class="p">()</span>
+<span class="vg">$api_time</span> <span class="o">=</span> <span class="n">strftime</span><span class="p">(</span><span class="vg">$time</span><span class="p">,</span> <span class="s2">"%Y/%m/%d %H:%M:%S +0000"</span><span class="p">)</span>
+</code></pre>
+
+<h3 id="data-conversion-to_base64">to_base64</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_base64($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Encodes a string into a Base64 String</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>string</td>
+<td><code>to_base64(&quot;a string&quot;) == &quot;YSBzdHJpbmc=&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-from_base64">from_base64</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>from_base64($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Decodes a base64 string into a string</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>string</td>
+<td><code>from_base64(&quot;YSBzdHJpbmc=&quot;) == &quot;a string&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-to_html">to_html</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_html($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Encodes a string into a html encoded string</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>string</td>
+<td><code>to_html(&quot;&amp;&quot;) == &quot;&amp;amp;&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-from_html">from_html</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>from_html($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Decodes an html string into a string</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>string</td>
+<td><code>from_html(&quot;&amp;amp;&quot;) == &quot;&amp;&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-to_uri">to_uri</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_uri($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Encodes a string into a Uri encoded String</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>string</td>
+<td><code>to_uri(&quot;http://example.com/?a=\11\15&quot;) == &quot;http://example.com/?a=%09%0D&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-to_uri_esc">to_uri_esc</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>to_uri_esc($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Encodes a string into a Uri encoded String with all non alphabet or number characters escaped</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>string</td>
+<td><code>to_uri_esc(&quot;http://example.com/?a=\11\15&quot;) == &quot;http%3A%2F%2Fexample.com%2F%3Fa%3D%09%0D&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="data-conversion-from_uri">from_uri</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>from_uri($value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Decodes a uri encoded string into a string</p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td>String</td>
+<td><code>from_uri(&quot;http://example.com/?a=%09%0D&quot;) == &quot;http://example.com/?a=\t\r&quot;</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="process-information">Process Information</h2>
+
+<h3 id="process-information-task_name">task_name</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>task_name()</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns the global name of the current task. See Cloud Workflow Processes for information on tasks.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<p>None.</p>
+
+<h4 id="result">Result</h4>
+
+<p>A string that represents the global name of the current task.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="n">concurrent</span> <span class="k">do</span>
+  <span class="nb">sub</span> <span class="ss">task_name: </span><span class="s2">"launch_app"</span> <span class="k">do</span>
+    <span class="vi">@servers</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="s2">"servers"</span><span class="p">,</span> <span class="s2">"db"</span><span class="p">)</span>
+    <span class="vi">@arrays</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="s2">"server_arrays"</span><span class="p">,</span> <span class="s2">"appserver"</span><span class="p">)</span>
+    <span class="n">concurrent</span> <span class="k">do</span>
+    <span class="err">​</span>  <span class="nb">sub</span> <span class="ss">task_name: </span><span class="s2">"launch_servers"</span> <span class="k">do</span>
+        <span class="vi">@servers</span><span class="p">.</span><span class="nf">launch</span><span class="p">()</span>
+        <span class="vg">$name</span> <span class="o">=</span> <span class="n">task_name</span><span class="p">()</span> <span class="c1"># $name == "launch_app/launch_servers"</span>
+      <span class="k">end</span>
+      <span class="nb">sub</span> <span class="ss">task_name: </span><span class="s2">"launch_arrays"</span> <span class="k">do</span>
+        <span class="vi">@arrays</span><span class="p">.</span><span class="nf">launch</span><span class="p">()</span>
+        <span class="vg">$name</span> <span class="o">=</span> <span class="n">task_name</span><span class="p">()</span> <span class="c1"># $name == "launch_app/launch_arrays"</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="nb">sub</span> <span class="ss">task_name: </span><span class="s2">"notify"</span> <span class="k">do</span>
+    <span class="c1"># ... do things</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="process-information-tasks">tasks</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>tasks()</code></p>
+
+<h4 id="description">Description</h4>
+
+<h4 id="arguments">Arguments</h4>
+
+<p>None</p>
+
+<h4 id="result">Result</h4>
+
+<p>Returns a hash of task status keyed by global task name. Valid values for a task status are: <code>completed</code>, <code>aborted</code>, <code>canceled</code>, <code>paused</code>, or <code>running</code>.</p>
+
+<h3 id="process-information-task_label">task_label</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>task_label($label)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Sets the label of the current task. This label is displayed in the Self-Service UI to End Users when an operation is running.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>The new label string.</p>
+
+<h3 id="process-information-task_status">task_status</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>task_status($task_name)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns the status of the given task. The task name can be relative or absolute (relative match is tried first then absolute if there is no task with a relative name matching the argument).</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>strings</td>
+<td>yes</td>
+<td>none</td>
+<td>Name of task whose status should be returned</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p><code>completed</code>, <code>aborted</code>, <code>canceled</code>, <code>paused</code> or <code>running</code>. Returns <code>null</code> for non-existent tasks.</p>
+
+<h2 id="data-introspection">Data Introspection</h2>
+
+<h3 id="data-introspection-type">type</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>type(object)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns the name of the type of the given argument. This function is mainly meant to help developing and debugging processes. If the object is a value then the possible type names are: <code>string</code>, <code>number</code>, <code>boolean</code>, <code>datetime</code>, <code>null</code>, <code>array</code> or <code>hash</code>. If the object is a resource collection then the returned name consist of <code>&lt;namespace&gt;.&lt;resource type&gt;</code>. If the object is a declaration, then function will return <code>declaration</code>.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource collection <em>or</em> value <em>or</em> declaration</td>
+<td>yes</td>
+<td>none</td>
+<td>Object for which type should be retrieved</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>A string representation of the object type.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vi">@servers</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">deployments</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==default"</span><span class="p">]).</span><span class="nf">servers</span><span class="p">()</span>
+<span class="vg">$type_name</span> <span class="o">=</span> <span class="n">type</span><span class="p">(</span><span class="vi">@servers</span><span class="p">)</span> <span class="c1"># rs_cm.servers</span>
+</code></pre>
+
+<h3 id="data-introspection-inspect">inspect</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>inspect(object)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>The <code>inspect()</code> function returns a human readable representation of the object given as argument. This function is meant as a debugging aid.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource collection <em>or</em> value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String representation of the given object.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vi">@servers</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">deployments</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==default"</span><span class="p">]).</span><span class="nf">servers</span><span class="p">()</span>
+<span class="n">log_info</span><span class="p">(</span><span class="nb">inspect</span><span class="p">(</span><span class="vi">@servers</span><span class="p">))</span>
+</code></pre>
+
+<h2 id="string-manipulation">String Manipulation</h2>
+
+<h3 id="string-manipulation-capitalize">capitalize</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>capitalize($string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string with first letter of <code>string</code> capitalized (if it is the first character) and the rest lower-case.</p>
+
+<p>See also: <a href="#string-manipulation-downcase">downcase</a>, <a href="#string-manipulation-upcase">upcase</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="n">capitalize</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"Hello"</span>
+<span class="vg">$string</span> <span class="o">=</span> <span class="s2">"HeLlO"</span>
+<span class="n">capitalize</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"Hello"</span>
+</code></pre>
+
+<h3 id="string-manipulation-downcase">downcase</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>downcase($string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string with all ASCII letters in <code>string</code> changed to lower-case.</p>
+
+<p>See also: <a href="#string-manipulation-capitalize">capitalize</a>, <a href="#string-manipulation-upcase">upcase</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"HELLO"</span>
+<span class="n">downcase</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello"</span>
+<span class="vg">$string</span> <span class="o">=</span> <span class="s2">"HeLlO"</span>
+<span class="n">downcase</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello"</span>
+</code></pre>
+
+<h3 id="string-manipulation-gsub">gsub</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>gsub($string, $pattern, $replace)</code></p>
+
+<p>See also: <a href="#string-manipulation-sub">sub</a></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string with the all occurrences of <code>pattern</code> substituted for the <code>replace</code> argument. The pattern is typically a regular expression, but can be a string.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>string value or regex</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello there howard"</span>
+<span class="nb">gsub</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"howard"</span><span class="p">,</span> <span class="s2">"tom"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello there tom"</span>
+<span class="nb">gsub</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="sr">/e./</span><span class="p">,</span> <span class="s2">"!"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"h!lo th!!howard"</span>
+</code></pre>
+
+<h3 id="string-manipulation-include-">include?</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>include?($string, $other_str)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns true if <code>string</code> contains <code>other_str</code>.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>Boolean.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="kp">include</span><span class="sc">?(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"el"</span><span class="p">)</span> <span class="o">==</span> <span class="kp">true</span>
+<span class="kp">include</span><span class="sc">?(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"yo"</span><span class="p">)</span> <span class="o">==</span> <span class="kp">false</span>
+</code></pre>
+
+<h3 id="string-manipulation-index">index</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>index($string, $substr[, $offset])</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns the index of the first occurrence of <code>substr</code> in <code>string</code>. Returns <code>null</code> if not found. If the <code>offset</code> parameter is present, it specifies the position in <code>string</code> to begin the search (can be a negative number which will be relative to the end of the string).</p>
+
+<p>See also: <a href="#string-manipulation-rindex">rindex</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>string value or regex</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>number</td>
+<td>no</td>
+<td>0</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>Number or null.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello 123"</span>
+<span class="n">index</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"he"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="n">index</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"he"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="n">null</span>
+<span class="n">index</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"23"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span>
+<span class="n">index</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="sr">/[1-9]/</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+</code></pre>
+
+<h3 id="string-manipulation-insert">insert</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>insert($string, $index, $insertion_string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string with <code>insertion_string</code> inserted before the character at the given <code>index</code> of <code>string</code>. Negative indices count from the end of <code>string</code>, and insert after the given character. If a positive <code>index</code> is given past the end of <code>string</code>, <code>insertion_string</code> will be inserted at the end. If a negative <code>index</code> is given past the beginning of <code>string</code>, <code>insertion_string</code> will be inserted at the beginning.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>number</td>
+<td>yes</td>
+<td>none</td>
+<td>The position at which to insert the new string</td>
+</tr>
+<tr>
+<td>3</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td>The string value to insert</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="n">insert</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"oh "</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"oh hello"</span>
+<span class="n">insert</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">" there"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello there"</span>
+<span class="n">insert</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"llooo"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"helllloooo"</span>
+</code></pre>
+
+<h3 id="string-manipulation-join">join</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>join($array[, $separator])</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Join elements of array into a single string using given separator if any.</p>
+
+<p>See also: <a href="#string-manipulation-split">split</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>string value</td>
+<td>no</td>
+<td>&quot;&quot;</td>
+<td>Empty string by default</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$values</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"some"</span><span class="p">,</span> <span class="s2">"dash"</span><span class="p">,</span> <span class="s2">"delimited"</span><span class="p">,</span> <span class="s2">"string"</span><span class="p">]</span>
+<span class="n">join</span><span class="p">(</span><span class="vg">$values</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"some-dash-delimited-string"</span>
+<span class="n">join</span><span class="p">(</span><span class="vg">$values</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"somedashdelimitedstring"</span>
+</code></pre>
+
+<h3 id="string-manipulation-lines">lines</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>lines($string[, $separator])</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns an array of lines in <code>string</code> split using the supplied <code>separator</code> ($/ by default).</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>string value</td>
+<td>no</td>
+<td>$/</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>Array</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello</span><span class="se">\n</span><span class="s2">there"</span>
+<span class="n">lines</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">"hello</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="s2">"there"</span><span class="p">]</span>
+<span class="n">lines</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"e"</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">"he"</span><span class="p">,</span> <span class="s2">"llo</span><span class="se">\n</span><span class="s2">the"</span><span class="p">,</span> <span class="s2">"re"</span><span class="p">]</span>
+</code></pre>
+
+<h3 id="string-manipulation-ljust">ljust</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>ljust($string, $padded_length[, $padding_value])</code></p>
+
+<p>See also: <a href="#string-manipulation-rjust">rjust</a></p>
+
+<h4 id="description">Description</h4>
+
+<p>If <code>padded_length</code> is greater than the length of <code>string</code>, returns a string of length <code>padded_length</code> with <code>string</code> left justified and padded with <code>padding_value</code>; otherwise, returns <code>string</code>.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>number</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>string value</td>
+<td>no</td>
+<td>&quot; &quot;</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="n">ljust</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello     "</span>
+<span class="n">ljust</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello"</span>
+<span class="n">ljust</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"10"</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"helloenden"</span>
+</code></pre>
+
+<h3 id="string-manipulation-lstrip">lstrip</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>lstrip($string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string with leading whitespace removed from <code>string</code>.</p>
+
+<p>See also: <a href="#string-manipulation-rstrip">rstrip</a>, <a href="#string-manipulation-strip">strip</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"  hello"</span>
+<span class="n">lstrip</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello"</span>
+</code></pre>
+
+<h3 id="string-manipulation-pluralize">pluralize</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>pluralize($string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns the plural form of the word in the string. Currently only supports the English locale.</p>
+
+<p>See also: <a href="#string-manipulation-singularize">singularize</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$singular_type</span> <span class="o">=</span> <span class="s2">"cloud"</span>
+<span class="n">pluralize</span><span class="p">(</span><span class="vg">$singular_type</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"clouds"</span>
+<span class="n">pluralize</span><span class="p">(</span><span class="s2">"ip_address"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"ip_addresses"</span>
+</code></pre>
+
+<h3 id="string-manipulation-reverse">reverse</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>reverse($string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string with the characters from <code>string</code> in reverse order.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="n">reverse</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"olleh"</span>
+</code></pre>
+
+<h3 id="string-manipulation-rindex">rindex</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>rindex($string, $substr[, $offset])</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns the index of the last occurrence of <code>substr</code> in <code>string</code>. Returns <code>null</code> if not found. If the <code>offset</code> parameter is present, it specifies the position in <code>string</code> to end the search — characters beyond this point will not be considered (can be a negative number which will be relative to the end of the string).</p>
+
+<p>See also: <a href="#string-manipulation-index">index</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>string value or regex</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>number</td>
+<td>no</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>Number or null.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello 123 123"</span>
+<span class="n">rindex</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"3"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">12</span>
+<span class="n">rindex</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"3"</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span> <span class="o">==</span> <span class="mi">8</span>
+<span class="n">rindex</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="sr">/1./</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span>
+<span class="n">rindex</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"4"</span><span class="p">)</span> <span class="o">==</span> <span class="n">null</span>
+</code></pre>
+
+<h3 id="string-manipulation-rjust">rjust</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>rjust($string, $padded_length[, $padding_value])</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>If <code>padded_length</code> is greater than the length of <code>string</code>, returns a string of length <code>padded_length</code> with <code>string</code> right justified and padded with <code>padding_value</code>; otherwise, returns <code>string</code>.</p>
+
+<p>See also: <a href="#string-manipulation-ljust">ljust</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>number</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>string value</td>
+<td>no</td>
+<td>&quot; &quot;</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="n">rjust</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"     hello"</span>
+<span class="n">rjust</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello"</span>
+<span class="n">rjust</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"10"</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"endenhello"</span>
+</code></pre>
+
+<h3 id="string-manipulation-rstrip">rstrip</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>rstrip($string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string with trailing whitespace removed from <code>string</code>.</p>
+
+<p>See also: <a href="#string-manipulation-lstrip">lstrip</a>, <a href="#string-manipulation-strip">strip</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello  "</span>
+<span class="n">rstrip</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello"</span>
+</code></pre>
+
+<h3 id="string-manipulation-singularize">singularize</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>singularize($string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>The reverse of pluralize, returns the singular form of a word in a string. Currently only supports the English locale.</p>
+
+<p>See also: <a href="#string-manipulation-pluralize">pluralize</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$plural_type</span> <span class="o">=</span> <span class="s2">"clouds"</span>
+<span class="n">singularize</span><span class="p">(</span><span class="vg">$plural_type</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"cloud"</span>
+<span class="n">singularize</span><span class="p">(</span><span class="s2">"ip_addresses"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"ip_address"</span>
+</code></pre>
+
+<h3 id="string-manipulation-split">split</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>split($string, $separator_or_regexp)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Split given string around matches of the given separator or regular expression.</p>
+
+<p>See also: <a href="#string-manipulation-join">join</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>String value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>String value or regex</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>Array of strings.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$text</span> <span class="o">=</span> <span class="s2">"some-dash-delimited--string--"</span>
+<span class="vg">$values</span> <span class="o">=</span> <span class="nb">split</span><span class="p">(</span><span class="vg">$text</span><span class="p">,</span> <span class="s2">"/-+/"</span><span class="p">)</span> <span class="c1"># ["some", "dash", "delimited", "string"]</span>
+</code></pre>
+
+<h3 id="string-manipulation-strip">strip</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>strip($string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string with leading and trailing whitespace removed from <code>string</code>.</p>
+
+<p>See also: <a href="#string-manipulation-lstrip">lstrip</a>, <a href="#string-manipulation-rstrip">rstrip</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"  hello  "</span>
+<span class="n">lstrip</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello"</span>
+</code></pre>
+
+<h3 id="string-manipulation-sub">sub</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>sub($string, $pattern, $replace)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string with the first occurrences of <code>pattern</code> substituted for the <code>replace</code> argument. The pattern is typically a regular expression, but can be a string.</p>
+
+<p>See also: <a href="#string-manipulation-gsub">gsub</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>string value or regex</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello there howard"</span>
+<span class="nb">sub</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="s2">"howard"</span><span class="p">,</span> <span class="s2">"tom"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hello there tom"</span>
+<span class="nb">sub</span><span class="p">(</span><span class="vg">$string</span><span class="p">,</span> <span class="sr">/e./</span><span class="p">,</span> <span class="s2">"!"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"h!lo there howard"</span>
+</code></pre>
+
+<h3 id="string-manipulation-upcase">upcase</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>upcase($string)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string with all ASCII letters in <code>string</code> converted to upper-case.</p>
+
+<p>See also: <a href="#string-manipulation-capitalize">capitalize</a>, <a href="#string-manipulation-downcase">downcase</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string value</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String.</p>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="vg">$string</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="n">upcase</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"HELLO"</span>
+<span class="vg">$string</span> <span class="o">=</span> <span class="s2">"HeLlO"</span>
+<span class="n">upcase</span><span class="p">(</span><span class="vg">$string</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"HELLO"</span>
+</code></pre>
+
+<h2 id="http-https-functions">HTTP-HTTPS Functions</h2>
+
+<p>This set of functions provides the ability to call HTTP/HTTPS endpoints from within Cloud Workflow. There is one function for each of the well-known HTTP verbs (<code>get</code>, <code>post</code>, <code>head</code>, <code>put</code>, <code>patch</code>, <code>delete</code>, <code>options</code>, and <code>trace</code>). The functions take all request attributes as parameters and return the response in a hash value with the keys <code>code</code>, <code>headers</code>, <code>cookies</code>, and <code>body</code> (each containing their respective response attributes).</p>
+
+<p>There is also a generic function called <code>http_request</code> which takes the verb as a parameter for any type of HTTP/HTTPS call.
+General Information</p>
+
+<h3 id="http-https-functions-making-requests">Making Requests</h3>
+
+<p>When using these functions, there is some specific behavior that is of interest:</p>
+
+<ul>
+<li>If a body is given for the request and the corresponding value is not a string then the functions will encode the value in JSON.</li>
+<li>The verb-specific functions take a single <code>url</code> argument that includes the scheme, host, href, and query strings.</li>
+<li>The generic <code>http_request</code> function takes individual arguments (<code>host</code>, <code>https</code>, <code>href</code>, <code>query_strings</code>) to form the url.</li>
+</ul>
+
+<h3 id="http-https-functions-common-parameters-for-http-https-functions">Common Parameters for HTTP-HTTPS functions</h3>
+
+<p>The following parameters are available for all verb-specific and generic HTTP functions.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Description</th>
+<th>Example</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>headers</td>
+<td>hash of string -&gt; string values</td>
+<td>no</td>
+<td>HTTP request headers, the keys are the classical <code>content-type</code> (or <code>content_type</code>), <code>accepts</code>, etc. Passing lowercase with underscore instead of dash is OK, the implementation normalizes to standard HTTP header names behind the scenes.</td>
+<td><code>{ &quot;X-Api-Version&quot;: &quot;1.0&quot; }</code></td>
+<td></td>
+</tr>
+<tr>
+<td>body</td>
+<td>string (or any value if content-type is JSON)</td>
+<td>no</td>
+<td>The request body. When unspecified and the method is one of those that expect a body, will default to &quot;&quot; (empty string). A body can be given for methods that don&#39;t require it (GET, HEAD) and it will probably get discarded by the server.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>raw_response</td>
+<td>boolean</td>
+<td>no</td>
+<td>The default is <code>false</code>. When <code>false</code> (default) and the response is <q>application/json</q> (or an extension of it), the response body will contain the parsed value (not the JSON string). <br />In case of XML content (and unless <code>raw_response</code> is set to <code>true</code>), the XML is turned into a JSON-compatible data structure (a representation of the XML tree).</td>
+<td><code>true</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>basic_auth</td>
+<td>an object with keys <code>username</code> and <code>password</code></td>
+<td>no</td>
+<td>Specifies a pair (username, password) for the basic authentication of this request.</td>
+<td><code>{ &quot;username&quot;: &quot;foo&quot;, &quot;password&quot;: &quot;bar&quot; }</code></td>
+<td></td>
+</tr>
+<tr>
+<td>cookies</td>
+<td>Array of cookie objects</td>
+<td>no</td>
+<td>An array of cookies to send to the server. Only <code>name</code> and <code>value</code> are allowed.</td>
+<td><code>[ { &quot;name&quot;: &quot;zz&quot;, &quot;value&quot;: &quot;yy&quot; } ]</code></td>
+<td></td>
+</tr>
+<tr>
+<td>noredirect</td>
+<td>boolean</td>
+<td>no</td>
+<td>The default is <code>false</code>. By default the http method will follow any redirection. Infinite loops are detected and raise an error.</td>
+<td><code>true</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>insecure</td>
+<td>boolean</td>
+<td>no</td>
+<td>The default is <code>false</code>. By default the http method will verify SSL certificates. When set to <code>true</code>, the check is not done.</td>
+<td><code>true</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>signature</td>
+<td>an object with keys <code>type</code>, <code>access_key</code>, and <code>secret_key</code></td>
+<td>no</td>
+<td>Used for signing requests for AWS. The type should be <code>aws</code>. The <code>access_key</code> and <code>secret_key</code> fields specify the AWS credentials to use for signing the request. If the <code>access_key</code> or <code>secret_key</code> fields are not provided, the default AWS credentials (<code>AWS_ACCESS_KEY_ID</code> or <code>AWS_SECRET_ACCESS_KEY</code>) for the account will be used. Note: when using the default keys, the user launching the CAT must have <q>admin</q> role on the account in order to read credential values.</td>
+<td><code>{ &quot;type&quot;: &quot;aws&quot;, &quot;access_key&quot;: &quot;myaccesskey&quot;, &quot;secret_key&quot;: &quot;mysecretkey&quot; }</code></td>
+<td></td>
+</tr>
+<tr>
+<td>auth</td>
+<td>a credentials reference</td>
+<td>no</td>
+<td>A reference to credentials in the credentials service. When called from a policy, credentials references are automatically imported as global variables such as $$auth_aws. When developing via the console, you can use the <a href="#miscellaneous-signer">signer</a> function to generate an equivalent reference.</td>
+<td>signer(<q>aws_default</q>) or $$auth_aws</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="http-https-functions-http-https-function-responses">HTTP-HTTPS Function Responses</h3>
+
+<p>The return value of every HTTP/S function is a hash with the following elements:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>number</td>
+<td>The response code. Eg: 200</td>
+<td>200</td>
+</tr>
+<tr>
+<td>headers</td>
+<td>hash</td>
+<td>The headers from the http response</td>
+<td><code>{ &quot;Connection&quot;: &quot;keep-alive&quot;, &quot;Content-Encoding&quot;: &quot;gzip&quot; }</code></td>
+</tr>
+<tr>
+<td>cookies</td>
+<td>array of objects</td>
+<td>The cookies received in the response</td>
+<td>For a cookie received as string, <q>zz=yy; Domain=.foo.com; path=/; secure</q>, it will be parsed as follows: <br/><code>[ { &quot;name&quot;: &quot;zz&quot;, &quot;value&quot;: &quot;yy&quot;, &quot;path&quot;: &quot;/&quot;, &quot;domain&quot;: &quot;.foo.com&quot;,&quot;expires&quot;: &lt;DateTime formatted value&gt;, &quot;secure&quot;: true }]</code></td>
+</tr>
+<tr>
+<td>body</td>
+<td>string if <code>raw_response</code> was set to <code>true</code> (or it was set to false but could not be parsed as an object) <br/>object if <code>raw_response</code> was set to <code>false</code> (which is by default) and the content type was xml or json</td>
+<td>The body of the response</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="http-https-functions-http_get,-http_post,-http_head,-http_put,-http_patch,-http_delete,-http_options,-http_trace">http_get, http_post, http_head, http_put, http_patch, http_delete, http_options, http_trace</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>http_get($params), http_post($params), http_head($params), http_put($params), http_patch($params), http_delete($params), http_options($params), http_trace($params)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>The verb-specific functions have the following parameters, in addition to the <q>Common Parameters</q> listed above. The return value from these functions is documented above in <q>HTTP Function Responses</q>.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Description</th>
+<th>Example</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>yes</td>
+<td>The url for the request including the scheme (http/https), host, href, as well as query strings.</td>
+<td><code>https://www.googleapis.com/drive/v2...</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="http-https-functions-http_request">http_request</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>http_request($params)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>The general function has the following parameters, in addition to the <q>Common Parameters</q> listed above. The return value from these functions is documented above in <q>HTTP Function Responses</q>.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Description</th>
+<th>Example</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>verb</td>
+<td>string</td>
+<td>yes</td>
+<td>The HTTP verb (should be one of get, post, patch, put, delete, options, head)</td>
+<td><code>get</code></td>
+<td></td>
+</tr>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>yes</td>
+<td>The host of the external service</td>
+<td><code>www.googleapis.com</code></td>
+<td></td>
+</tr>
+<tr>
+<td>https</td>
+<td>boolean</td>
+<td>no</td>
+<td>Whether to https/http</td>
+<td><code>true</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>href</td>
+<td>string</td>
+<td>no</td>
+<td>The href of the target resource relative to the host.</td>
+<td><code>/drive/v2/files/123</code></td>
+<td>&quot;&quot;</td>
+</tr>
+<tr>
+<td>query_strings</td>
+<td>hash</td>
+<td>no</td>
+<td>Query-string values (what comes after a <q>?</q> in the URL). Keys must be strings. Values are turned into strings (arrays and hashes are JSON encoded). All the values are escaped.</td>
+<td><code>{ &quot;updateViewedDate&quot;: true }</code></td>
+<td><code>{}</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="miscellaneous">Miscellaneous</h2>
+
+<h3 id="miscellaneous-assert">assert</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>assert(expression)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function evaluates an assertion. It takes an expression that resolves to a value as an argument. If the expression does not resolve to a value, resolves to <code>null</code>, or resolves to <code>false</code> then an error is raised. In all other cases it does nothing.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>expression</td>
+<td>yes</td>
+<td>none</td>
+<td>The expression that should return a value to assert</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>None.</p>
+
+<h3 id="miscellaneous-cred">cred</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>cred($cred_name)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Return the value of the <code>Credential</code> in Cloud Management with the given name. 
+<strong>Note:</strong> using this function requires the <code>admin</code> role, or a <a href="/ss/reference/cat/v20161221/index.html#permissions">permission</a> that grants the <code>admin</code> role. 
+<strong>Note:</strong> It will return an exact match if available, if not will return first partial match. </p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td>The name of the <code>Credential</code> in Cloud Management</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>The string value of the specified <code>Credential</code>, or
+Raises an error if the Credential is not found or the user doesn&#39;t have the required privileges</p>
+
+<h3 id="miscellaneous-signer">signer</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>signer($identifier)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Return a signer reference defined in the <a href="/policies/users/guides/credential_management.html">Credentials dashboard</a>. This is a newer version of the Cloud Management <code>Credential</code> resource. Note for policy developers: Signer references are automatically imported for all <code>credentials</code> and <code>auth</code> blocks from the Policy engine.
+<strong>Note:</strong> using this function requires the <code>admin</code> role, or a <a href="/ss/reference/cat/v20161221/index.html#permissions">permission</a> that grants the <code>admin</code> role. 
+<strong>Note:</strong> Must exactly match the identifier field of the credential.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td>The identifier of the <code>Credential</code> in <a href="/policies/users/guides/credential_management.html">Credentials dashboard</a></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>A reference to the <code>Credentials</code> resource, or raises an error if the Credentials is not found or the user doesn&#39;t have the required privileges</p>
+
+<h3 id="miscellaneous-jwt_encode">jwt_encode</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>jwt_encode($algorithm, $payload, $key, $header_fields)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function creates a JWT from the fields provided. For more information on json web tokens visit: <a href="https://jwt.io/">https://jwt.io/</a></p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td>Encryption Algorithms Supported(<code>RS256</code>,<code>RS384</code>,<code>RS512</code>,<code>HS256</code>,<code>HS512256</code>,<code>HS384</code>,<code>HS512</code>)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>hash</td>
+<td>yes</td>
+<td>none</td>
+<td>Hash Payload for jwt token</td>
+</tr>
+<tr>
+<td>3</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td>Encryption key for the payload, <code>RS* Encryption requires an RSA Key</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>hash</td>
+<td>no</td>
+<td>none</td>
+<td>header fields, such as <code>typ</code></td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>A string containing a jwt token</p>
+
+<h3 id="miscellaneous-keys">keys</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>keys($hash)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Return an array made of all the keys of the provided hash.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>hash</td>
+<td>yes</td>
+<td>none</td>
+<td>Hash for which keys should be retrieved</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>Array of strings representing all the keys of the provided hash.</p>
+
+<h3 id="miscellaneous-map">map</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>map($mapping_name, $key_name, $value_name)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Return the value of a two level hash given a key and value name. This function is syntactic sugar around the [] operator. It may provide a better notation when writing declarative code (e.g. in resource declarations). So doing <code>map($hash, $key, $value)</code> is equivalent to <code>$hash[$key][$value]</code>.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>hash</td>
+<td>yes</td>
+<td>none</td>
+<td>Hash for which value should be retrieved</td>
+</tr>
+<tr>
+<td>2</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td>Name of key</td>
+</tr>
+<tr>
+<td>3</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td>Name of value</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>Hash value at given key and value name.</p>
+
+<h3 id="miscellaneous-now">now</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>now()</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns the current time in a datetime value. See the <a href="#data-conversion-strftime"><code>strftime</code> function</a> for formatting a datetime into a string.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<p>None</p>
+
+<h4 id="result">Result</h4>
+
+<p>Date time value that represents the current time in UTC.</p>
+
+<h3 id="miscellaneous-rand">rand</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>rand($max_value)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Generates a random number. If <code>max_value</code> if specified, the random number is an integer between 0 and <code>max_value</code>. If <code>max_value</code> is not specified, the random number is a double between 0 and 1.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>number</td>
+<td>no</td>
+<td>see above</td>
+<td>max number to generate a random integer</td>
+</tr>
+</tbody></table>
+
+<h3 id="miscellaneous-sleep">sleep</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>sleep($duration)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Makes the current task sleep for the time expressed in duration. A duration consists of numbers suffixed with s (seconds), m (minutes), h (hours) or d (days). Each element of the duration is additive (so 2m30s means 2 minutes plus 30 seconds). If no suffix is specified then the number represents seconds.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>duration</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="examples">Examples</h4>
+<pre class="syntax-highlight ruby"><code><span class="nb">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="c1"># sleep one minute</span>
+<span class="nb">sleep</span><span class="p">(</span><span class="mi">1</span><span class="n">h</span><span class="p">)</span> <span class="c1"># sleep 60 minutes</span>
+<span class="nb">sleep</span><span class="p">(</span><span class="mi">2</span><span class="n">m30s</span><span class="p">)</span> <span class="c1"># sleep 150 seconds</span>
+</code></pre>
+
+<h4 id="result">Result</h4>
+
+<p>None.</p>
+
+<h3 id="miscellaneous-sleep_until">sleep_until</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>sleep_until(expression)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function takes an expression that resolves to a value as argument. If the expression does not resolve to a value, then an error is raised. Sleeps until the expression evaluates to a value that is neither <code>null</code> nor <code>false</code>.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>expression</td>
+<td>yes</td>
+<td>none</td>
+<td>The expression that should return a value that is neither <code>null</code> nor <code>false</code> for the wait to stop</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>None.</p>
+
+<h3 id="miscellaneous-sleep_while">sleep_while</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>sleep_while(expression)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>This function takes an expression that resolves to a value as argument. If the expression does not resolve to a value then an error is raised. Sleeps while the expression evaluates to a value that is neither <code>null</code> nor <code>false</code>.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>expression</td>
+<td>yes</td>
+<td>none</td>
+<td>the expression that is run</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>None.</p>
+
+<h3 id="miscellaneous-tag_value">tag_value</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>tag_value(@resource, $tag_prefix)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns the <code>value</code> part of a <a href="/cm/rs101/tagging.html#machine-tags-vs--raw-tags-machine-tags">machine tag</a> given the <code>&lt;namespace&gt;:&lt;predicate&gt;</code> of the tag.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>resource</td>
+<td>yes</td>
+<td>none</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td><code>&lt;namespace&gt;:&lt;predicate&gt;</code> to find</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>String containing the <code>value</code> part of the tag, if it is found. Otherwise, <code>null</code></p>
+
+<h3 id="miscellaneous-uuid">uuid</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>uuid()</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Returns a string containing a Universally Unique IDentifier.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<p>None</p>
+
+<h4 id="result">Result</h4>
+
+<p>A string containing a UUID.</p>
+
+<h3 id="miscellaneous-values">values</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>values($hash)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Return an array made of all the values of the provided hash.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>hash</td>
+<td>yes</td>
+<td>none</td>
+<td>Hash for which values should be retrieved</td>
+</tr>
+</tbody></table>
+
+<h4 id="result">Result</h4>
+
+<p>Array of strings representing all the values of the provided hash.</p>
+
+<h3 id="miscellaneous-xpath">xpath</h3>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>xpath($xml_string, $xpath)</code></p>
+
+<h4 id="description">Description</h4>
+
+<p>Using a XPath string, extracts information out of an XML string.</p>
+
+<h4 id="arguments">Arguments</h4>
+
+<table><thead>
+<tr>
+<th>Position</th>
+<th>Possible Values</th>
+<th>Required</th>
+<th>Default Value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td>XML string</td>
+</tr>
+<tr>
+<td>2</td>
+<td>string</td>
+<td>yes</td>
+<td>none</td>
+<td>XPath string like <q>//item[2]/name/text()</q> or <q>css:div.li</q> path</td>
+</tr>
+</tbody></table>
+
+<p>The xpath argument can be passed a <q>css:</q> prefix, in which case the path is a CSS path, not a XPath.</p>
+
+<h4 id="result">Result</h4>
+
+<p>Array of [XML] strings.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

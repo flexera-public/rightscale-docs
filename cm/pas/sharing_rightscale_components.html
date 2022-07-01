@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Sharing RightScale Components</title><meta content="Understand the Sharing features within the RightScale Dashboard and how you can best use them for collaborative development and testing purposes." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_pas cm_pas_sharing_rightscale_components" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Publishing and Sharing</a></p><div class="page-header"><h1>Sharing RightScale Components</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To gain a proper understanding of the Sharing features within the RightScale Dashboard and how you can best use them for collaborative development and testing purposes. You can use Account Groups (previously called Sharing Groups) to share the following RightScale components: ServerTemplates, RightScripts, and MultiCloud Images.</p>
+
+<p>For AWS, you can also share Images and EBS Snapshots, but those are cloud resources and are shared in a different manner. See <a href="/cm/pas/sharing_cloud_resources.html">Sharing Cloud Resources</a>.</p>
+
+<p>This document focuses on sharing RightScale components via Account Groups.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>One of the best ways to facilitate collaborative work across multiple teams or departments is to use RightScale&#39;s sharing features. Account Groups provide a means of sharing commonly used Rightscale components such as ServerTemplates and RightScripts between different RightScale accounts. Any RightScale user (with &#39;publisher&#39; role privileges) has the ability to create Account Groups and share RightScale components. You can either publicly or privately share your RightScale components.</p>
+
+<table><thead>
+<tr>
+<th>Detail</th>
+<th>Public Sharing</th>
+<th>Private Sharing</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Who can share?</td>
+<td>All Accounts</td>
+<td>Select RightScale Editions (Accounts with enterprise structure)</td>
+</tr>
+<tr>
+<td>Who can view it in the MultiCloud Marketplace?</td>
+<td>All Accounts</td>
+<td>All Accounts or Select Accounts</td>
+</tr>
+<tr>
+<td>Who can import it from the MultiCloud Marketplace?</td>
+<td>All Accounts</td>
+<td>Select RightScale Editions (Accounts with enterprise structure)</td>
+</tr>
+</tbody></table>
+
+<h3 id="overview-public-sharing">Public Sharing</h3>
+
+<p>Public sharing allows you to share your custom RightScale components with all other RightScale accounts. Everyone will have access to view and import your components from the RightScale Component MultiCloud Marketplace. Public sharing is supported in any RightScale account, regardless of the plan type. Community publishing helps facilitate development within the RightScale community by providing a way for RightScale users to share their custom ServerTemplates, RightScripts, etc. with each other. To enforce best practices, you can only publish committed revisions of components to the public.</p>
+
+<h3 id="overview-private-sharing">Private Sharing</h3>
+
+<p>Private sharing is performed discretely between RightScale accounts via Account Groups. Only Premium plans and above support private sharing. Whereas public sharing makes a component viewable and importable by all users, private sharing provides a way for you to control who can view and import your shared components. You can privately share both committed revisions and HEAD versions of a component.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The ability to share a HEAD version of a component is only supported in Private Sharing using private account groups; HEAD versions cannot be published and shared with the public.</p>
+</div>
+
+<p>For example, your development team could share their latest ServerTemplates with the quality assurance team for testing purposes. Privately shared components will not be visible to all RightScale users. Remember, RightScale components are not user-specific; they are RightScale account-specific. Therefore, it&#39;s important to understand that sharing is performed between RightScale accounts and not individual users. Users will be able to view and use those RightScale components as long as they have the appropriate user role privileges (&#39;designer&#39;) in that account. See <a href="/cm/ref/user_role_privs.html">User Role Privileges</a>.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>If you share a HEAD version of a RightScale component, you should understand its implications, namely that you can automatically inherit changes from the publisher. See <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#subscribe-to-a-servertemplate">Subscribe to a ServerTemplate</a>.</p>
+</div>
+
+<p>The example below demonstrates private sharing between two different RightScale accounts.</p>
+
+<h3 id="overview-key-terms">Key Terms</h3>
+
+<p>In order to properly understand the concept of sharing RightScale components, it&#39;s important to understand the following terms.</p>
+
+<ul>
+<li><strong>Account Group</strong> - A collection of a RightScale account&#39;s private RightScale components that can be shared with other RightScale accounts so that users of those accounts can either use them as-is, or clone and edit them for their own purposes.</li>
+<li><strong>RightScale Component</strong> - You can only share certain types of RightScale components (ServerTemplates, RightScripts, and MultiCloud Images.</li>
+<li><strong>Account Group Invitations</strong> - An invitation to an Account Group. An invitation can only be used once. You can either accept an invitation directly from the email invitation or enter the membership code directly into the Dashboard. You must be an &#39;admin&#39; user of a RightScale account in order to accept a sharing group invitation. Once a sharing group invitation is accepted, the RightScale account has access to the Account Group&#39;s RightScale components. Any users of the account will be able to import the shared RightScale components from the MultiCloud Marketplace. (Tip: Use the <q>Shared</q> link in the Categories section.)</li>
+<li><strong>RightScale MultiCloud Marketplace</strong> - The MultiCloud Marketplace serves as the virtual store where users can browse through all the published RightScale components and import them into a RightScale account. Only users with &#39;MultiCloud Marketplace&#39; user role privileges can import or subscribe to a component. You can never unpublish a component; a copy of it will always remain in the MultiCloud Marketplace. You can only change its visibility status (i.e. whether or not the component can be imported). If you&#39;ve shared a component and later decide that you no longer want it to be visible to new users (so that they can import it) you can deprecate it.</li>
+</ul>
+
+<p><img src="/img/cm-accept-invitation.png" alt="cm-accept-invitation.png" width="580" height="128" /></p>
+
+<ul>
+<li>Implicit Sharing - Sharing a ServerTemplate is slightly different than sharing other components because it&#39;s a component that references other components. Therefore, if you share a ServerTemplate, it&#39;s imperative that any of its referenced private components are also shared/published in order to ensure a ServerTemplate&#39;s functionality. As a convenience, when you share a ServerTemplate, any referenced private MultiCloud Image, RepoPaths, or RightScripts are implicitly shared automatically. Otherwise, it would be very difficult for a user to manually publish each private component that is required by the ServerTemplate.</li>
+<li>Explicit Sharing - Although MultiCloud Images and RightScripts are explicitly shared when a related ServerTemplate is published, you can also publish/share these components <q>explicitly</q> or by themselves. i.e. RightScripts do not have to be shared in the context of a ServerTemplate.</li>
+</ul>
+
+<p><img src="/img/cm-explicit-implicit-sharing.png" alt="cm-explicit-implicit-sharing.png" width="587" height="498" /></p>
+
+<h2 id="differences-between-sharing-rightscale-components">Differences between Sharing RightScale Components</h2>
+
+<h3 id="differences-between-sharing-rightscale-components-servertemplates">ServerTemplates</h3>
+
+<p>By default, when you publish a ServerTemplate to the MultiCloud Marketplace, you are also publishing/sharing all of the template&#39;s private RightScripts, MultiCloud Images, and RepoPaths (if available). In order to prevent against piracy, if you share a ServerTemplate that contains paid RightScripts that have been published by RightScale or some other Partner, you must make sure that the RightScale account(s) that you are sharing the template with has access to use those paid scripts, otherwise they will not be able to use the ServerTemplate as-is.</p>
+
+<h3 id="differences-between-sharing-rightscale-components-rightscripts-or-multicloud-images">RightScripts or MultiCloud Images</h3>
+
+<p>You can publish RightScripts and MultiCloud Images individually.</p>
+
+<h2 id="best-practices">Best Practices</h2>
+
+<h3 id="best-practices-use-eulas">Use EULAs</h3>
+
+<p>To protect the use of your ServerTemplate, you can attach an End User License Agreement (EULA) to it. In order to use a ServerTemplate with an attached EULA, a user must accept the defined terms and conditions.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Currently, you can only attach EULAs to ServerTemplates. In the future, you will be able to attach EULAs to other RightScale components as well.</p>
+</div>
+
+<h3 id="best-practices-share-committed-revisions-not-head-versions">Share Committed Revisions not HEAD versions</h3>
+
+<p>Unless you are working closely with another group that&#39;s using a different RightScale account, you should never publish and share a HEAD version of any component because it&#39;s not static. As a best practice, you should only publish committed revisions of a component. The ability to publish and share HEAD versions of a component is only supported for private sharing. You can only publicly share committed revisions.</p>
+
+<h3 id="best-practices-better-to-deprecate-than-remove-rightscale-components">Better to Deprecate than Remove RightScale Components</h3>
+
+<p>Before you deprecate or delete a shared component from the MultiCloud Marketplace, it&#39;s important that you understand the difference between the two actions. See <a href="/cm/pas/deprecating_or_deleting_shared_components.html">Deprecating or Deleting Shared Components</a></p>
+
+<h2 id="tutorials">Tutorials</h2>
+
+<p>To learn more about how to share RightScale components via Account Groups, see the <a href="/cm/pas/sharing_rightscale_components.html">How to Share RightScale Components</a> tutorial.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+<li><a href="/cm/pas/rightscale_components_vs_cloud_resources.html">RightScale Components vs. Cloud Resources</a></li>
+<li><a href="/cm/pas/sharing_cloud_resources.html">Sharing Cloud Resources</a></li>
+<li><a href="/cm/dashboard/design/multicloud_marketplace/multicloud_marketplace.html">About the MultiCloud Marketplace</a></li>
+<li><a href="/cm/dashboard/design/account_library/account_library_actions.html#Create_a_New_Account%20_Group">Create a New Account Group</a></li>
+<li><a href="/cm/pas/deprecating_or_deleting_shared_components.html">Deprecating or Deleting Shared Components</a></li>
+<li><a href="/cm/pas/accept_an_invitation_to_an_account_group.html">Accept an Invitation to an Account Group</a></li>
+<li><a href="/cm/pas/how_to_share_rightscale_components.html">How to Share RightScale Components</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

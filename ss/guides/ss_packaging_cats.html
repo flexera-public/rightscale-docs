@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Packaging CATs</title><meta content="A CAT file may be used to package common functionality and share it with other CAT files" name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="ss ss_guides ss_guides_ss_packaging_cats" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><div class="page-header"><h1>Packaging CATs</h1></div><div class="main-content"><p>CAT packages allow designers to reuse common declarations and definitions without having to copy/paste them into each CAT. CAT packages can be used in other CAT files by specifying an <code>import</code> field with the desired package path. Note that <code>rs_ca_ver</code> <a href="/ss/reference/cat/v20160622/index.html">20160622</a> <strong>or higher</strong> is required in order to use the <code>package</code> and <code>import</code> fields.</p>
+
+<h2 id="creating-a-package">Creating a Package</h2>
+
+<p>Any CAT may be used as a package by including the <code>package</code> field. This field is used to specify a path for the package. Package paths must be forward-slash separated scopes where each scope begins with a lowercase letter or underscore and contains only lowercase/uppercase letters, numbers, and underscores. They may not contain leading or trailing slashes. Package paths must be unique within a project.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Package paths beginning with &#39;rs&#39; or &#39;rightscale&#39; (case insensitive) are reserved and may not be used.</p>
+</div>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s2">"Simple Package"</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">package</span> <span class="s2">"simple/package"</span>
+<span class="n">short_description</span> <span class="s2">"A package which may be imported into other CATs"</span>
+</code></pre>
+
+<h2 id="importing-a-package">Importing a Package</h2>
+
+<p>One or more CATs with packaged content may be imported into another CAT by using the <code>import</code> keyword. This field contains the package path specified in the CAT to be imported. Note that importing a package does not change a CAT&#39;s declarations. The imported declarations must be used explicitly as explained in <a href="#referencing-imported-declarations">Referencing Imported Declarations</a>.</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s2">"Simple CloudApp"</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">import</span> <span class="s2">"simple/package"</span>
+<span class="n">short_description</span> <span class="s2">"A CAT which imports a package"</span>
+</code></pre>
+
+<p>Once a package is imported, it may be referenced by its package name. The package name is the last segment of the package path.</p>
+
+<h3 id="importing-a-package-using-an-alias">Using an Alias</h3>
+
+<p>The <code>import</code> keyword may also be combined with the <code>as</code> keyword to make an alias for any package. This is required if there are multiple package paths that have the same package name.</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s2">"Simple CloudApp"</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">import</span> <span class="s2">"simple/package"</span>
+<span class="n">import</span> <span class="s2">"another/package"</span><span class="p">,</span> <span class="ss">as: </span><span class="s1">'another_package'</span>
+<span class="n">short_description</span> <span class="s2">"A CAT which imports multiple packages"</span>
+</code></pre>
+
+<h2 id="referencing-imported-declarations">Referencing Imported Declarations</h2>
+
+<p>Once a package has been imported, its declarations are available for use within the importing CAT. Imported packages may be referenced by their package name (the last segment of the package path) or alias. Declarations may be referred to using dot notation, such as <code>$pkg.param</code> for declarations and <code>@pkg.server</code> for resources.</p>
+
+<h3 id="referencing-imported-declarations-wrapping-a-declaration">Wrapping a Declaration</h3>
+
+<p>In order to expose imported declarations and resources, they must be explicitly wrapped using the <code>like</code> keyword from within the importing CAT. For example, if an imported package <q>my_package</q> provides resource <q>base_server</q> and operation <q>launch</q>, those may be wrapped using:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"base_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"servers"</span> <span class="k">do</span>
+  <span class="n">like</span> <span class="vi">@my_package</span><span class="p">.</span><span class="nf">base_server</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">operation</span> <span class="s2">"launch"</span> <span class="k">do</span>
+  <span class="n">like</span> <span class="vg">$my_package</span><span class="p">.</span><span class="nf">launch</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="referencing-imported-declarations-overriding-declaration-fields">Overriding Declaration Fields</h3>
+
+<p>Declaration fields can be overridden by specifying them in addition to the <code>like</code> field.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"base_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"servers"</span> <span class="k">do</span>
+  <span class="n">like</span> <span class="vi">@my_package</span><span class="p">.</span><span class="nf">base_server</span>
+  <span class="nb">name</span> <span class="s2">"Overriden Name"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="referencing-imported-declarations-importing-reference-fields">Importing Reference Fields</h3>
+
+<p>When wrapping a declaration whose fields reference other declarations, the importing CAT must contain declarations matching the type and name of each reference. For example:</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s1">'Package CAT'</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">short_description</span> <span class="s1">'Contains declarations which use references'</span>
+<span class="n">package</span> <span class="s1">'examples/references'</span>
+
+<span class="n">parameter</span> <span class="s1">'param'</span> <span class="k">do</span>
+  <span class="n">label</span> <span class="s1">'Displayed in the CloudApp'</span>
+  <span class="n">type</span> <span class="s1">'string'</span>
+<span class="k">end</span>
+
+<span class="n">output</span> <span class="s1">'param_output'</span> <span class="k">do</span>
+  <span class="n">label</span> <span class="s1">'Parameter Value'</span>
+  <span class="c1"># Reference must be available in the importing CAT</span>
+  <span class="n">default_value</span> <span class="vg">$param</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s1">'Importing CAT'</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">short_description</span> <span class="s1">'Wraps declarations which use references'</span>
+<span class="n">import</span> <span class="s1">'examples/references'</span>
+
+<span class="n">parameter</span> <span class="s1">'param'</span> <span class="k">do</span>
+  <span class="n">like</span> <span class="vg">$references</span><span class="p">.</span><span class="nf">param</span>
+<span class="k">end</span>
+
+<span class="n">output</span> <span class="s1">'param_output'</span> <span class="k">do</span>
+  <span class="c1"># Requires we define a declaration named 'param'</span>
+  <span class="n">like</span> <span class="vg">$references</span><span class="p">.</span><span class="nf">param_output</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>If you attempt to import a declaration without also importing any other declarations it uses you will receive a compiler error telling you. For example if you left out the <code>$param</code> declaration above:</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s1">'Importing CAT'</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">short_description</span> <span class="s1">'Wraps declarations which use references'</span>
+<span class="n">import</span> <span class="s1">'examples/references'</span>
+
+<span class="c1">#parameter 'param' do</span>
+<span class="c1">#  like $references.param</span>
+<span class="c1">#end</span>
+
+<span class="n">output</span> <span class="s1">'param_output'</span> <span class="k">do</span>
+  <span class="c1"># Requires we define a declaration named 'param'</span>
+  <span class="n">like</span> <span class="vg">$references</span><span class="p">.</span><span class="nf">param_output</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The above CAT yields this compiler error:
+  <img src="/img/ss-missing-imported-ref.png" alt="Missing Imported Reference Image" width="1262" height="146" /></p>
+
+<h3 id="referencing-imported-declarations-importing-bulk-resources">Importing Bulk Resources</h3>
+
+<p>When a resource is imported into a file by the <code>import</code> and <code>like</code> keyword, the <code>copies</code> attribute is not inherited and must be redefined by the importer.  So the following shows <strong>an error</strong> when compiling the CAT files:</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s1">'Basic declarations'</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">short_description</span> <span class="s1">'Defines a server declaration'</span>
+<span class="n">package</span> <span class="s1">'basics/decls'</span>
+
+<span class="n">resource</span> <span class="s1">'main_server'</span><span class="p">,</span> <span class="ss">type: </span><span class="s1">'server'</span><span class="p">,</span> <span class="ss">copies: </span><span class="mi">10</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="s2">"resource_server"</span>
+  <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">end</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s2">"Bulk resources"</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">short_description</span> <span class="s2">""</span>
+<span class="n">import</span> <span class="s2">"basics/decls"</span>
+
+<span class="n">resource</span> <span class="s2">"my_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span> <span class="k">do</span>
+  <span class="n">like</span> <span class="vi">@decls</span><span class="p">.</span><span class="nf">main_server</span>  <span class="c1"># will throw an error as @decls.main_server is a bulk resource and 'my_server' is a single resource.</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>To resolve the above error, simply be sure to specify a <code>copies</code> attribute on the declaration that references the imported bulk declaration. For example, the <code>Bulk resources</code> CAT above can be corrected as follows:</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">name</span> <span class="s2">"Bulk resources"</span>
+<span class="n">rs_ca_ver</span> <span class="mi">20161221</span>
+<span class="n">short_description</span> <span class="s2">""</span>
+<span class="n">import</span> <span class="s2">"basics/decls"</span>
+
+<span class="n">resource</span> <span class="s2">"my_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span><span class="p">,</span> <span class="ss">copies: </span><span class="mi">3</span> <span class="k">do</span>
+  <span class="n">like</span> <span class="vi">@decls</span><span class="p">.</span><span class="nf">main_server</span>  
+<span class="k">end</span>
+</code></pre>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Importing a non-bulk resource declaration and adding the <code>copies</code> attribute is supported</p>
+</div>
+
+<h2 id="using-rcl-definitions">Using RCL Definitions</h2>
+
+<p>Definitions are automatically imported without needing to use the <code>like</code> keyword. When a definition is imported into an importing CAT it will be available in the importing CAT with the imported package alias prefixed to it. For example, if package <code>examples/defns</code> defines a definition <code>my_defn</code>, importing CATs could reference it as <code>defns.my_defn</code>.</p>
+
+<p>Imported definitions may be used as the definition field for operations or may be called directly from another definition.</p>
+
+<h3 id="using-rcl-definitions-in-operations">In Operations</h3>
+
+<p>Definitions defined in packages you import into your CAT may be used in the <code>definition</code> field of Operation declarations. If package <code>examples/defns</code> defines a definition <code>my_defn</code> then you could use it in an operation like this:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">import</span> <span class="s1">'examples/defns'</span>
+
+<span class="n">operation</span> <span class="s1">'call_defn'</span> <span class="k">do</span>
+  <span class="n">definition</span> <span class="s1">'defns.my_defn'</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Note that if the imported definition expects declarations or resources as arguments then you should make sure they&#39;re available in the importing CAT.</p>
+
+<h3 id="using-rcl-definitions-in-definitions">In Definitions</h3>
+
+<p>RCL definitions from imported CATs may be called directly by using the <code>call</code> keyword. For example, if an imported package <q>examples/defns</q> provided a definition <q>my_def</q> it may be called using:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">import</span> <span class="s1">'examples/defns'</span>
+
+<span class="n">define</span> <span class="n">foo</span><span class="p">()</span> <span class="k">do</span>
+  <span class="n">call</span> <span class="n">defns</span><span class="p">.</span><span class="nf">my_def</span><span class="p">()</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="updating-packages,-recompiling,-and-publishing">Updating Packages, Recompiling, and Publishing</h2>
+
+<p>If you update a package CAT which is used in an importing CAT the importing CAT will need to be recompiled in order to make use of the changes to the package CAT. The UI will detect direct dependents of the package CAT and offer to recompile them when you update the package CAT:</p>
+
+<p><div class="media">
+  <img src="/img/ss-recompile-prompt.png" alt="Recompile Prompt Image">
+  </div></p>
+
+<p>If the importing CAT is not recompiled it will continue to work as before but simply will not have any changes made to packages it imports made since it was last compiled. This is indicated in the UI:</p>
+
+<p><img src="/img/ss-stale-template.png" alt="Stale Template Image" width="1880" height="188" /></p>
+
+<p>CloudApps which were published from a CAT which imports packages must be republished after the importing CAT is recompiled in order for it to make use of the updated packages.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

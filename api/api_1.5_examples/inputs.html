@@ -1,0 +1,460 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Inputs</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Inputs</h1></div><div class="main-content"><h2 id="bulk-modify-deployment-inputs">Bulk Modify Deployment Inputs</h2>
+
+<p>Modify several Inputs (e.g. <q>bulk modify</q>) with a single API call for a specified deployment.</p>
+
+<p><strong>Note</strong> : HTTP PUT method is used. If a specified input does not exist, it gets created. If it does exist, its value is set to the one provided. This example modifies inputs at the Deployment level. See the API online reference (for <a href="http://reference.rightscale.com/api1.5/resources/ResourceInputs.html#multi_update">Inputs &gt; multi_update</a>) to construct the URL and modify at the ServerTemplate or server instance level. If you accidentally set the input value twice on the same API call, the last setting takes precedence.</p>
+
+<h3 id="bulk-modify-deployment-inputs-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>Modify the Timezone (text) input and the SVN User/Password (credential) input at the deployment level. A single API call changes all three for all servers in the specified deployment.</p>
+
+<p><em>Note</em>: The following example uses bulk modify inputs <q>notation 1.0</q>. Its easy to read, but lengthier to specify. See the Supplemental section below to see the newer <q>notation 2.0</q> format.</p>
+
+<p><em>Important!</em> Notation 1.0 will be deprecated in RightScale API 2.0 in favor of <q>notation 2.0</q> format.</p>
+
+<p>Curl on a single line:</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"306795001"</span> <span class="c"># Set the deployment to change inputs for</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -d inputs[][name]<span class="o">=</span><span class="s2">"rightscale/timezone"</span> -d inputs[][value]<span class="o">=</span><span class="s2">"text:US/Pacific"</span> -d inputs[][name]<span class="o">=</span><span class="s2">"repo/default/svn_username"</span> -d inputs[][value]<span class="o">=</span><span class="s2">"cred:GD_SVN_USERNAME"</span> -d inputs[][name]<span class="o">=</span><span class="s2">"repo/default/svn_password"</span> -d inputs[][value]<span class="o">=</span><span class="s2">"cred:GD_SVN_PASSWORD"</span> -X PUT https://my.rightscale.com/api/deployments/<span class="nv">$DEPLOYMENT</span>/inputs/multi_update
+</code></pre>
+
+<p>Same script but with curl split into multiple lines and basic in-line comments for readability sake:</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"306795001"</span> <span class="c"># Set the deployment to change inputs for</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+    -d inputs[][name]<span class="o">=</span><span class="s2">"rightscale/timezone"</span> <span class="se">\</span>
+    -d inputs[][value]<span class="o">=</span><span class="s2">"text:US/Pacific"</span> <span class="se">\ </span><span class="c"># Change TZ (text) input value</span>
+    -d inputs[][name]<span class="o">=</span><span class="s2">"repo/default/svn_username"</span> <span class="se">\</span>
+    -d inputs[][value]<span class="o">=</span><span class="s2">"cred:GD_SVN_USERNAME"</span> <span class="se">\ </span><span class="c"># Change SVN Username (credential) value</span>
+    -d inputs[][name]<span class="o">=</span><span class="s2">"repo/default/svn_password"</span> <span class="se">\</span>
+    -d inputs[][value]<span class="o">=</span><span class="s2">"cred:GD_SVN_PASSWORD"</span> <span class="se">\ </span><span class="c"># Change the SVN Password (credential) value</span>
+    -X PUT https://my.rightscale.com/api/deployments/<span class="nv">$DEPLOYMENT</span>/inputs/multi_update
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 204 No Content
+    Server: nginx/1.0.15
+    Date: Wed, 07 Nov 2012 16:53:34 GMT
+    Connection: keep-alive
+    Status: 204 No Content
+    X-Runtime: 62
+    X-Request-Uuid: 87119d96c03842869fcd36dc6b8131dd
+    Set-Cookie:
+    Cache-Control: no-cache
+</code></pre>
+
+<p><strong>Note</strong> : Navigate or refresh your browser from <strong><em>YourDeployment</em> &gt; Inputs</strong> tab. Each input value should be changed, and painted <q>blue</q> designating the input was set at the deployment level.</p>
+
+<h4 id="supplemental">Supplemental</h4>
+
+<p>The equivalent example using the more streamlined <q>notation 2.0</q> follows.</p>
+
+<p><em>Important!</em> Notation 1.0 will be deprecated in RightScale API 2.0 in favor of the following <q>notation 2.0</q> format.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"306795001"</span> <span class="c"># Set the deployment to change inputs for</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+    -d inputs[rightscale/timezone]<span class="o">=</span><span class="s2">"text:US/Pacific"</span>, <span class="se">\</span>
+    -d inputs[repo/default/svn_username]<span class="o">=</span><span class="s2">"cred:GD_SVN_USERNAME"</span>, <span class="se">\</span>
+    -d inputs[repo/default/svn_password]<span class="o">=</span><span class="s2">"cred:GD_SVN_PASSWORD"</span> <span class="se">\</span>
+    -X PUT https://my.rightscale.com/api/deployments/<span class="nv">$DEPLOYMENT</span>/inputs/multi_update
+</code></pre>
+
+<h3 id="bulk-modify-deployment-inputs-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>The following example modifies several Inputs (APPLICATION_LISTENER_PORT, ZIP_FILE_NAME and OPT_APP_POOL_NAME) for Deployment with ID 306795001.</p>
+<pre class="syntax-highlight plaintext"><code>    $deploymentID = "306795001" # Set the actual ID of the deployment to be modified
+    $stringToPut = "inputs[][name]=APPLICATION_LISTENER_PORT&amp;" # One of several Inputs to be modified
+    $stringToPut += "inputs[][value]=text:80&amp;" # Set to 80
+    $stringToPut += "inputs[][name]=ZIP_FILE_NAME&amp;"
+    $stringToPut += "inputs[][value]=text:thisisazipfile.zip&amp;" # Set to a zip file name
+    $stringToPut += "inputs[][name]=OPT_APP_POOL_NAME&amp;"
+    $stringToPut += "inputs[][value]=text:ASP.NET v4.0" # Set to ASP.NET v4.0
+    $inputWebRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/deployments/$deploymentID/inputs/multi_update?$stringToPut")
+    $inputWebRequest.Method = "PUT"
+    $inputWebRequest.Headers.Add("X_API_VERSION","1.5")
+    $inputWebRequest.CookieContainer = $cookieContainer
+    $inputWebRequest.ServicePoint.Expect100Continue = $false
+    $inputRequestStream = $inputWebRequest.GetRequestStream()
+    $inputRequestStream.Close()
+    [System.Net.WebResponse]$inputResponse = $inputWebRequest.GetResponse()
+    $inputResponseStream = $inputResponse.GetResponseStream()
+    $inputResponseStreamReader = New-Object System.IO.StreamReader -ArgumentList $inputResponseStream
+    $inputResponse
+    #this is the cookie container for subsequent requests: $cookieContainer
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>See http/curl output.</p>
+
+<h2 id="list-inputs-for-current-and-next-instance">List Inputs for Current and Next Instance</h2>
+
+<p>List all the Inputs for both the <q>current</q> and <q>next</q> instance. Capture the inputs to an XML file for later comparison.</p>
+
+<h3 id="list-inputs-for-current-and-next-instance-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p><strong>Note</strong> : Two invokations of the API. XML output saved in a file named <em><ThisScriptName>_Current.xml and &lt;</em>ThisScriptName_&gt;<em>Next.xml</em></p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">CLOUD</span><span class="o">=</span><span class="s2">"2112"</span>
+    <span class="nv">CURRENT</span><span class="o">=</span><span class="s2">"734PUMJGR7QNF"</span> <span class="c"># Set Current instance ID. Get from the API, listing/showing a Server or Instance.</span>
+    <span class="nv">NEXT</span><span class="o">=</span><span class="s2">"B469CS55K5VRQ"</span> <span class="c"># Set the Next instance ID. Also obtained from the API.</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+    -X GET https://my.rightscale.com/api/clouds/<span class="nv">$CLOUD</span>/instances/<span class="nv">$CURRENT</span>/inputs.xml &gt; <span class="nv">$0_Current</span>.xml
+    curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\</span>
+    -X GET https://my.rightscale.com/api/clouds/<span class="nv">$CLOUD</span>/instances/<span class="nv">$NEXT</span>/inputs.xml &gt; <span class="nv">$0_Next</span>.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : The example script above saves all output to an XML file. A sample output file is shown below (without HTTP headers).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;inputs&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:any&lt;/value&gt;
+        &lt;name&gt;sys_firewall/rule/ip_address&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;rightscale/process_match_list&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:tcp&lt;/value&gt;
+        &lt;name&gt;sys_firewall/rule/protocol&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;logging/remote_server&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;rightscale/process_list&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:time.rightscale.com, ec2-us-east.time.rightscale.com, ec2-us-wes
+    t.time.rightscale.com&lt;/value&gt;
+        &lt;name&gt;sys_ntp/servers&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:enable&lt;/value&gt;
+        &lt;name&gt;sys_firewall/rule/enable&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:&lt;/value&gt;
+        &lt;name&gt;sys_firewall/rule/port&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:/mnt/ephemeral/swapfile&lt;/value&gt;
+        &lt;name&gt;sys/swap_file&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:0.5&lt;/value&gt;
+        &lt;name&gt;sys/swap_size&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:UTC&lt;/value&gt;
+        &lt;name&gt;rightscale/timezone&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:enabled&lt;/value&gt;
+        &lt;name&gt;sys_firewall/enabled&lt;/name&gt;
+      &lt;/input&gt;
+    &lt;/inputs&gt;
+</code></pre>
+
+<h4 id="supplemental">Supplemental</h4>
+
+<p>Some might find running a simple diff command on the Current and Next XML output files helpful. The following will display differences in the Inputs for the Current and Next server instances.</p>
+
+<p>$ diff Current.xml Next.xml # Where <q>Current</q> and <q>Next</q> are the actual full file names to be compared.</p>
+
+<p>Note that this will report differences in the date, runtime, cookie and request. Perhaps not elegant, but that can be easily stripped away with the following command pipeline. What is left are legitimate input differences.</p>
+
+<p>$ diff Current.xml Next.xml | grep -v Date | grep -v Runtime | grep -v Cookie | grep -v Request</p>
+
+<h3 id="list-inputs-for-current-and-next-instance-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call---current">Example Call - Current</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+
+    $CLOUD = '2175' # Set the Cloud ID
+    $CURRENT = '34NM8MNFGPE45' # Set Current instance ID. Get from the API,listing/showing a Server or Instance.
+                               # For example, See the "List All Servers in a Deployment" example.
+
+    $webRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/clouds/$CLOUD/instances/$CURRENT/inputs.xml")
+    $webRequest.Method = "GET"
+    $webRequest.CookieContainer = $cookieContainer
+    $webRequest.Headers.Add("X_API_VERSION", "1.5");
+
+    [System.Net.WebResponse] $listInstanceTypesResponse = $webRequest.GetResponse()
+    $listInstanceTypesResponseStream = $listInstanceTypesResponse.GetResponseStream()
+    $listInstanceTypesResponseStreamReader = New-Object System.IO.StreamReader -argumentList $listInstanceTypesResponseStream
+    [string]$listInstanceTypesResponseString = $listInstanceTypesResponseStreamReader.ReadToEnd()
+    write-host $listInstanceTypesResponseStrin
+</code></pre>
+
+<h4 id="sample-output---current">Sample Output - Current</h4>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;inputs&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:UTC&lt;/value&gt;
+        &lt;name&gt;SYS_TZINFO&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;env:RS_INSTANCE_UUID&lt;/value&gt;
+        &lt;name&gt;SERVER_UUID&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;env:RS_SKETCHY&lt;/value&gt;
+        &lt;name&gt;SKETCHY&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;MON_PROCESSMATCH&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;MON_PROCESSES&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:disable&lt;/value&gt;
+        &lt;name&gt;SECURITY_UPDATES&lt;/name&gt;
+      &lt;/input&gt;
+    &lt;/inputs&gt;
+</code></pre>
+
+<h4 id="example-call---next">Example Call - Next</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+
+    $CLOUD = '2175' # Set the Cloud ID.
+    $NEXT ='3PLSU71PF2BJS' # Set the Next instance ID. Also obtained from the API. See the List All Servers in a Deployment.
+
+    $webRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/clouds/$CLOUD/instances/$NEXT/inputs.xml")
+    $webRequest.Method = "GET"
+    $webRequest.CookieContainer = $cookieContainer
+    $webRequest.Headers.Add("X_API_VERSION", "1.5");
+
+    [System.Net.WebResponse] $listInstanceTypesResponse = $webRequest.GetResponse()
+    $listInstanceTypesResponseStream = $listInstanceTypesResponse.GetResponseStream()
+    $listInstanceTypesResponseStreamReader = New-Object System.IO.StreamReader -argumentList $listInstanceTypesResponseStream
+    [string]$listInstanceTypesResponseString = $listInstanceTypesResponseStreamReader.ReadToEnd()
+    write-host $listInstanceTypesResponseString
+</code></pre>
+
+<h4 id="sample-output---next">Sample Output - Next</h4>
+
+<p>Note that the Next Instance Input values have been altered from the Current Instance (previous example). See <strong>sshd</strong> and <strong>crond</strong> in bold below.</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;inputs&gt;
+      &lt;input&gt;
+        &lt;value&gt;env:RS_SKETCHY&lt;/value&gt;
+        &lt;name&gt;SKETCHY&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;env:RS_INSTANCE_UUID&lt;/value&gt;
+        &lt;name&gt;SERVER_UUID&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;ignore:$ignore&lt;/value&gt;
+        &lt;name&gt;MON_PROCESSMATCH&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:sshd crond&lt;/value&gt;
+        &lt;name&gt;MON_PROCESSES&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:disable&lt;/value&gt;
+        &lt;name&gt;SECURITY_UPDATES&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:UTC&lt;/value&gt;
+        &lt;name&gt;SYS_TZINFO&lt;/name&gt;
+      &lt;/input&gt;
+    &lt;/inputs&gt;
+</code></pre>
+
+<h2 id="list-inputs-for-deployment">List Inputs for Deployment</h2>
+
+<p>List all inputs for a specified deployment.</p>
+
+<h3 id="list-inputs-for-deployment-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"306795001"</span> <span class="c"># Set the Deployment you want to see inputs for</span>
+    curl -i -H X-API-Version:1.5 -b mycookie <span class="se">\</span>
+    -X GET https://my.rightscale.com/api/deployments/<span class="nv">$DEPLOYMENT</span>/inputs.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : HTTP headers not shown. Response output is truncated.</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;inputs&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:&lt;/value&gt;
+        &lt;name&gt;repo/default/storage_account_provider&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:&lt;/value&gt;
+        &lt;name&gt;db/dns/slave/id&lt;/name&gt;
+      &lt;/input&gt;
+    . . .
+      &lt;input&gt;
+        &lt;value&gt;cred:GD_SVN_USERNAME&lt;/value&gt;
+        &lt;name&gt;repo/default/svn_username&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:&lt;/value&gt;
+        &lt;name&gt;db/dns/master/id&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:&lt;/value&gt;
+        &lt;name&gt;sys_dns/password&lt;/name&gt;
+      &lt;/input&gt;
+      &lt;input&gt;
+        &lt;value&gt;text:&lt;/value&gt;
+        &lt;name&gt;db_mysql/version&lt;/name&gt;
+      &lt;/input&gt;
+    &lt;/inputs&gt;
+</code></pre>
+
+<h3 id="list-inputs-for-deployment-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+    $deploymentID = "306795001" # Set deployment ID to list Inputs for
+    $listInputsRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/deployments/$deploymentID/inputs.xml")
+    $listInputsRequest.Method = "GET"
+    $listInputsRequest.CookieContainer = $cookieContainer
+    $listInputsRequest.Headers.Add("X-API-Version", "1.5");
+    [System.Net.WebResponse] $listInputsResponse = $listInputsRequest.GetResponse()
+    $listInputsResponseStream = $listInputsResponse.GetResponseStream()
+    $listInputsResponseStreamReader = New-Object System.IO.StreamReader -argumentList $listInputsResponseStream
+    [string]$listInputsResponseString = $listInputsResponseStreamReader.ReadToEnd()
+    write-host $listInputsResponseString
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>See http/curl output.</p>
+
+<h2 id="modify-next-instance-input">Modify Next Instance Input</h2>
+
+<p>Change a server level input (for the <q>next</q> instance) value. In our example, the SYS_FIREWALL category input named <q>sys_firewall/rule/port</q> gets changed to 8080.</p>
+
+<p><strong>Note</strong> : HTTP PUT method is used. If a specified input does not exist, it gets created. If it does exist, its value is set to the one provided.</p>
+
+<h3 id="modify-next-instance-input-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">CLOUD</span><span class="o">=</span><span class="s2">"2112"</span> <span class="c"># Set the Cloud ID</span>
+    <span class="nv">INSTANCE</span><span class="o">=</span><span class="s2">"B469CS55K5VRQ"</span> <span class="c"># Set the NEXT Instance ID</span>
+    <span class="nv">PORT</span><span class="o">=</span><span class="s2">"8080"</span> <span class="c"># New port number/value for the text input</span>
+    curl -i -H X-API-Version:1.5 -b mycookie <span class="se">\</span>
+    -d inputs[][name]<span class="o">=</span><span class="s2">"sys_firewall/rule/port"</span> <span class="se">\ </span><span class="c"># Input name to modify</span>
+    -d inputs[][value]<span class="o">=</span><span class="s2">"text:</span><span class="nv">$PORT</span><span class="s2">"</span> <span class="se">\ </span><span class="c"># text value to set the input to (8080)</span>
+    -X PUT https://my.rightscale.com/api/clouds/<span class="nv">$CLOUD</span>/instances/<span class="nv">$INSTANCE</span>/inputs/multi_update
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 204 No Content
+    Server: nginx/1.0.15
+    Date: Wed, 07 Nov 2012 01:34:17 GMT
+    Connection: keep-alive
+    Status: 204 No Content
+    X-Runtime: 822
+    X-Request-Uuid: d09e5755c5cd4ad1ae7e2ce3f1da7cfb
+    Set-Cookie: rs_gbl=eNo1kE1vgjAAQP9LzzShFWgh2UGHGRoYgqBzl6W0gDI-EiwNaPzvg8Pu773DewIGHNBMQAPiDpwnGO55DxxCKXlpQHLgoJWJsYl1k2jgJmY4wzYqOLMgplYGEcoxpFTkkNi2wRgmvGBizsn837Xx4s51oFbhNnokm9KvizaX9bUJ3c_zvt03GGW6GpU4NlFi0RjXSfBRu2uXw-rE1l566qdDpFOz3Zx95HVVsirDUg7r6wFug0tpwazUebElVP0ImapR_N6_-8Ro9o-q9N2vPso9y5WFruiVHGJiw53RMjSFXR_FtpvuvLC6VeNjuij-PhjxJnhbjozLEcZ5N7RynoJerz9L-1y7; domain=.rightscale.com; path=/; HttpOnly
+    Cache-Control: no-cache
+</code></pre>
+
+<h3 id="modify-next-instance-input-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    $cloudID = "2112" # Set the ID of the deployment to be modified
+    $instanceID = "B469CS55K5VRQ" # Set the ID of the next instance whose next inputs are being
+    $port = "8080" # Set the new port value to 8080
+    $stringToPut = "inputs[][name]=sys_firewall/rule/port&amp;"
+    $stringToPut += "inputs[][value]=text:$port"
+    $inputWebRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/clouds/$cloudID/instances/$instanceID/inputs/multi_update")
+    $inputWebRequest.Method = "PUT"
+    $inputWebRequest.Headers.Add("X-API-Version","1.5")
+    $inputWebRequest.CookieContainer = $cookieContainer
+    $inputWebRequest.ServicePoint.Expect100Continue = $false
+    $inputRequestStream = $inputWebRequest.GetRequestStream()
+    $inputRequestStream.Close()
+    [System.Net.WebResponse]$inputResponse = $inputWebRequest.GetResponse()
+    $inputResponseStream = $inputResponse.GetResponseStream()
+    $inputResponseStreamReader = New-Object System.IO.StreamReader -ArgumentList $inputResponseStream
+    $inputResponse
+    #this is the cookie container for subsequent requests: $cookieContainer
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>See http/curl output.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

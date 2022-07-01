@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Cloud Workflow Changelog</title><meta content="Change log for the Cloud Workflow language" name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="ss ss_reference ss_reference_rcl ss_reference_rcl_changelog" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><div class="page-header"><h1>Cloud Workflow Changelog</h1></div><div class="main-content"><h2 id="version-2">Version 2</h2>
+
+<p>Released June 2016</p>
+
+<h3 id="version-2-breaking-changes">Breaking Changes</h3>
+
+<ul>
+<li><p>The <code>rs</code> namespace has been renamed to <code>rs_cm</code> to make it clear this namespace refers to Cloud Management.</p>
+
+<p>RCL v1:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">rs</span><span class="p">.</span><span class="nf">clouds</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">href: </span><span class="s2">"/api/clouds/1234"</span><span class="p">).</span><span class="nf">instances</span><span class="p">()</span>
+</code></pre>
+
+<p>RCL v2:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">rs_cm</span><span class="p">.</span><span class="nf">clouds</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">href: </span><span class="s2">"/api/clouds/1234"</span><span class="p">).</span><span class="nf">instances</span><span class="p">()</span>
+</code></pre></li>
+<li><p>The <code>create</code> action in RCL no longer follows up with a get action. However, the built-in provision strategies handle this so that resource collections will include updated fields after a successful provision.</p>
+
+<p>RCL v1:</p>
+<pre class="syntax-highlight ruby"><code><span class="vi">@server</span> <span class="o">=</span> <span class="n">rs</span><span class="p">.</span><span class="nf">servers</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">server: </span><span class="vg">$server_hash</span><span class="p">)</span>
+<span class="vg">$server</span> <span class="o">=</span> <span class="n">to_object</span><span class="p">(</span><span class="vg">$server</span><span class="p">)</span>
+</code></pre>
+
+<p>RCL v2:</p>
+<pre class="syntax-highlight ruby"><code><span class="vi">@server</span> <span class="o">=</span> <span class="n">rs_cm</span><span class="p">.</span><span class="nf">servers</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">server: </span><span class="vg">$server_hash</span><span class="p">)</span>
+<span class="vi">@server</span> <span class="o">=</span> <span class="vi">@server</span><span class="p">.</span><span class="nf">get</span><span class="p">()</span>
+<span class="vg">$server</span> <span class="o">=</span> <span class="n">to_object</span><span class="p">(</span><span class="vi">@server</span><span class="p">)</span>
+</code></pre></li>
+<li><p>Redirects in HTTP functions include the headers only if the redirected URL is in the same domain as the original URL.  <strong>No RCL change required</strong>.  Remote HTTP server <strong>must</strong> return same <code>Host</code> header if you require HTTP request headers to pass through a redirect before hitting the appropriate endpoint and getting the response.*</p></li>
+<li><p>Errors that happen during HTTP activities are now returned as a string. <strong>No RCL change required</strong>.</p></li>
+<li><p>The <code>resource_href</code> field in <code>$_errors</code> is now <code>resource_hrefs</code>, containing an array of hrefs.</p>
+
+<p>RCL v1:</p>
+<pre class="syntax-highlight ruby"><code><span class="p">[</span> <span class="p">{</span> <span class="ss">resource_href: </span><span class="err">“</span><span class="o">/</span><span class="n">account</span><span class="o">/</span><span class="mi">71</span><span class="o">/</span><span class="n">instances</span><span class="o">/</span><span class="mi">123</span><span class="err">”</span> <span class="p">,</span> <span class="ss">action: </span><span class="err">“</span><span class="n">run_executable</span><span class="err">”</span><span class="p">,</span> <span class="err">…</span><span class="p">},</span> <span class="p">{.</span><span class="nf">.</span><span class="p">}</span> <span class="p">]</span>
+</code></pre>
+
+<p>RCL v2:</p>
+<pre class="syntax-highlight ruby"><code><span class="p">[</span> <span class="p">{</span> <span class="ss">resource_hrefs: </span><span class="err">“</span><span class="o">/</span><span class="n">account</span><span class="o">/</span><span class="mi">71</span><span class="o">/</span><span class="n">instances</span><span class="o">/</span><span class="mi">123</span><span class="err">”</span> <span class="p">,</span> <span class="ss">action: </span><span class="err">“</span><span class="n">run_executable</span><span class="err">”</span><span class="p">,</span> <span class="err">…</span><span class="p">},</span> <span class="p">{.</span><span class="nf">.</span><span class="p">}</span> <span class="p">]</span>
+</code></pre></li>
+<li><p>Arguments to <code>cancel_task</code> and <code>abort_task</code> expressions are no longer accepted. These expressions can only be used to act on the task executing it. Previously it was possible to cancel or abort a different task.</p>
+
+<p>RCL v1:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">define</span> <span class="n">handle_update_error</span><span class="p">()</span> <span class="k">do</span>
+    <span class="n">cancel_task</span> <span class="n">task_name</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>RCL v2:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">define</span> <span class="n">handle_update_error</span><span class="p">()</span> <span class="k">do</span>
+    <span class="n">cancel_task</span>
+<span class="k">end</span>
+</code></pre></li>
+<li><p>Fixed binary argument evaluation <code>&amp;&amp;</code> and <code>||</code>. Previously we would evaluate the second argument even if the first argument was evaluated to a negative value for a <code>&amp;&amp;</code> expression. Now, <code>if arg1 &amp;&amp; arg2</code> will not evaluate <code>arg2</code> if <code>arg1</code> was evaluated to false. <strong>No RCL change required</strong>.</p></li>
+<li><p>Fixed assignment expression validation. If a resource collection was assigned to a variable, it previously caused a runtime error <q>Resource collection assigned to variable</q>. We will now return a parse time error if possible. <strong>No RCL change required</strong>.</p></li>
+<li><p>Arguments to <code>call</code> expressions are now validated to ensure they are the proper type. <strong>No RCL change required</strong>.</p></li>
+<li><p>In a resource action, when a datetime value is returned from an external API in the response, we only convert string values that are in RFC3339 format. Other formats are returned unmodified as string values. <strong>No RCL change required</strong>.</p></li>
+<li><p>The <code>filter</code> parameter for <code>index</code> resource actions should be an array. If it is not an array, it is effectively the same as not passing the parameter at all. Previous versions allowed string values for the parameter.</p>
+
+<p>RCL v1:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">rs</span><span class="p">.</span><span class="nf">servers</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="s2">"name==front_end"</span><span class="p">)</span>
+</code></pre>
+
+<p>RCL v2:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">rs_cm</span><span class="p">.</span><span class="nf">servers</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="ss">filter: </span><span class="p">[</span><span class="s2">"name==front_end"</span><span class="p">])</span>
+</code></pre></li>
+</ul>
+
+<h3 id="version-2-new-features">New Features</h3>
+
+<ul>
+<li>Introduced the notion of <a href="v2/index.html#resources-custom-provisioning">custom provision functions</a> on resource declarations.</li>
+<li>Resource actions that return collections can be assigned to a variable</li>
+<li>Activities that act on multiple hrefs now run concurrently (with a limit on maximum concurrent requests). This also includes index on cloud sub resources where we do an index on every available cloud.</li>
+<li>The error messages for activity failures are improved. All error messages now include problem, summary, and resolution.</li>
+</ul>
+
+<h3 id="version-2-enhancements">Enhancements</h3>
+
+<ul>
+<li>The <code>wait_task</code> expression will embed the functionality of <code>expect_task</code> in it, i.e. <code>wait_task</code> will wait for the task to be created if the task wasn&#39;t already created.</li>
+</ul>
+
+<h3 id="version-2-additional-notes">Additional Notes</h3>
+
+<ul>
+<li>The array or collection resulting from a bulk action will now be in a predictable order.</li>
+</ul>
+
+<h2 id="version-1">Version 1</h2>
+
+<p>Released December 2013</p>
+
+<ul>
+<li><a href="v1/index.html">First release</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>EBS Snapshots - Actions</title><meta content="Common procedures for working with EBS Snapshots in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_aws cm_dashboard_clouds_aws_actions cm_dashboard_clouds_aws_actions_ebs_snapshots_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../../">Cloud Management</a> &#x2F; <a href="../../../">Dashboard User's Guide</a> &#x2F; <a href="../../">clouds</a> &#x2F; <a href="../">Amazon Web Services (AWS)</a> &#x2F; <a href="./">AWS Actions</a></p><div class="page-header"><h1>EBS Snapshots - Actions</h1></div><div class="main-content"><h2 id="attach-an-ebs-snapshot-to-an-instance">Attach an EBS Snapshot to an Instance</h2>
+
+<h3 id="attach-an-ebs-snapshot-to-an-instance-overview">Overview</h3>
+
+<p>When you attach an EBS Volume to an instance, what you&#39;re really doing is creating a volume from that snapshot and attaching the volume to the instance. Technically speaking, you cannot attach an EBS Snapshot to a running instance. If you want to attach an existing volume, see <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#attach-an-ebs-volume-to-an-instance">Attach an EBS Volume to an Instance</a>. The advantage of <q>attaching a snapshot</q> to an instance is that you don&#39;t have to worry about creating the volume in the correct availability zone. Instead, a volume will be created from the snapshot in the same availability zone as your instance. Another advantage is that by default, the created and attached volume will be deleted when the instance is terminated. If you were to attach an existing volume the old way (instead of attaching a snapshot) the volume would persist and not be deleted.</p>
+
+<p>There are two ways you can attach an EBS Snapshot to an instance:</p>
+
+<ol>
+<li><a href="/cm/dashboard/clouds/aws/actions/ebs_snapshots_actions.html#attach-an-ebs-snapshot-to-a-running%20instance">Attach an EBS Snapshot to a running instance</a></li>
+<li><a href="/cm/dashboard/clouds/aws/actions/ebs_snapshots_actions.html#attach-an-ebs-snapshot-to-a-server-at%20-boot-time">Attach an EBS Snapshot to a server at boot time</a></li>
+</ol>
+
+<h3 id="attach-an-ebs-snapshot-to-an-instance-steps">Steps</h3>
+
+<h4 id="attach-an-ebs-snapshot-to-a-running-instance">Attach an EBS Snapshot to a Running Instance</h4>
+
+<ul>
+<li>Go to the Volume&#39;s tab of the running server. Click the <strong>Attach Snapshot</strong> button.</li>
+</ul>
+
+<p><img src="/img/cm-attach-snapshot-to-running-server.png" alt="cm-attach-snapshot-to-running-server.png" width="599" height="242" /></p>
+
+<ul>
+<li><strong>Snapshot</strong> - Select the EBS Snapshot that you want to attach to the running server instance.</li>
+<li><strong>Device name</strong> - Select the device name to which the created volume will be attached. Click the <q>Override</q> box to specify a different value.</li>
+<li><strong>Volume size in GB</strong> - The size of the volume to be created from the snapshot. By default, the size of the volume will match the size that&#39;s specified by the snapshot (e.g. 2 GB). To create a larger volume, click the Override button and specify the desired size in GB. (e.g. 10)</li>
+<li><strong>Attachment options</strong> - A volume will be created from the snapshot and attached to the instance. By default, the attached volume will be detached and deleted when the instance is terminated, so if you want this snapshot to also be attached on subsequent server launches, select the <q>Attach on boot</q> option.</li>
+</ul>
+
+<h4 id="attach-an-ebs-snapshot-to-a-server-at-boot-time">Attach an EBS Snapshot to a Server at Boot Time</h4>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>EBS Snapshots</strong> and select the EBS Snapshot that you want to attach to a server at boot time. You can also attach a snapshot to a stopped server or <q>Next</q> server (of a running server) under the Volume&#39;s tab.</li>
+<li>When you configure a server to attach an EBS Snapshot, a volume will be created and attached to the server the next time that it is launched/relaunched.</li>
+</ul>
+
+<p><img src="/img/cm-attach-snapshot-to-stopped-server.png" alt="cm-attach-snapshot-to-stopped-server.png" width="556" height="279" /></p>
+
+<ul>
+<li><strong>Snapshot</strong> - Select the EBS Snapshot that you want to attach to the server the next time it is launched/relaunched.</li>
+<li><strong>Device name</strong> - Select the device name to which the created volume will be attached. Click the <q>Override</q> box to specify a different value.</li>
+<li><strong>Delete on termination</strong> - By default, the created and attached volume will be deleted when the instance is terminated.</li>
+<li><strong>Virtual name</strong> - The virtual name for the volume that will be created. (optional)</li>
+<li><strong>Volume size in GB</strong> - The size of the volume to be created from the snapshot. By default, the size of the volume will match the size that&#39;s specified by the snapshot (e.g. 8 GB). To create a larger volume, click the Override button and specify the desired size in GB. (e.g. 10)</li>
+</ul>
+
+<h2 id="create-a-bootable-ebs-snapshot">Create a Bootable EBS Snapshot</h2>
+
+<h3 id="create-a-bootable-ebs-snapshot-overview">Overview</h3>
+
+<p>In <a href="https://aws.amazon.com/about-aws/whats-new/2009/12/03/amazon-ec2-instances-now-can-boot-from-amazon-ebs/">December 2009</a>, Amazon introduced the ability to boot instances directly from Amazon EBS snapshots (EBS-based AMIs). An EBS-based AMI is an alternative to the S3-based AMI. In addition to faster boot times, one of the key advantages of bootable EBS snapshots is that you can start/stop the instance because the root partition of the instance is created on an Amazon EBS volume instead of on the instance itself, which allows you to preserve data that&#39;s saved to the volume. When an instance is stopped, you are no longer being charged for instance usage. However, you will be charged for the volume while it still exists. You can also modify some of its properties while it&#39;s in the stopped state such as instance size or kernel image. Another advantage is that the AMIs and root partitions are no longer limited to 10GB, but can be up to 1TB in size, which allows you to have more complex images.</p>
+
+<p>Use the procedure outlined below to create a bootable EBS Snapshot.</p>
+
+<h3 id="create-a-bootable-ebs-snapshot-steps">Steps</h3>
+
+<h4 id="find-a-bootable-ebs-snapshot">Find a Bootable EBS Snapshot</h4>
+
+<p>If you plan to launch a Server using an EBS-based AMI, import a MultiCloud Image from the MultiCloud Marketplace.</p>
+
+<ul>
+<li>Navigate to <strong>Design</strong> &gt; <strong>MultiCLoud Marketplace</strong> &gt; <strong>MultiCloud Images</strong></li>
+</ul>
+
+<p>RightScale publishes MCIs that reference EBS-based RightImages. The MCIs will include &#39;EBS&#39; in the name. (e.g. RightImage_Ubuntu_14.04_x64_v14.2_HVM_EBS)</p>
+
+<p>If you are looking for just an EBS-based AMI and not an MCI, they can also be found in these locations since they are both an EBS Snapshot and an AMI:</p>
+
+<ul>
+<li>Clouds &gt; <em>AWS Region</em> &gt; <strong>Volume Snapshots</strong></li>
+<li>Clouds &gt; <em>AWS Region</em> &gt; <strong>Images</strong> (screenshot below)</li>
+</ul>
+
+<p><img src="/img/cm-bootable-ebs-snapshot.png" alt="cm-bootable-ebs-snapshot.png" width="725" height="124" /></p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Bootable EBS snapshot (EBS-based AMI) will be denoted as having an &#39;ebs&#39; root device.</p>
+</div>
+
+<h2 id="create-an-ebs-standard-volume-from-an-ebs-snapshot">Create an EBS Standard Volume from an EBS Snapshot</h2>
+
+<h3 id="create-an-ebs-standard-volume-from-an-ebs-snapshot-overview">Overview</h3>
+
+<p>Amazon&#39;s Elastic Block Storage (EBS) allows for block level storage to be created for use with Amazon EC2 Instances. With an EBS volume, you can create a snapshot to reference a particular point in time of a volume.There are several scenarios where you might need to create an EBS volume from a snapshot. One is because you might need the data on the volume to be accessed by more than one Server instance. Currently, you can only mount an EBS volume to one instance at a time. Another is if you are moving your application&#39;s permanent storage from S3 to EBS.</p>
+
+<p>There are two EBS volume types: Standard and Provisioned IOPS. A Standard volume is best suited for boot volumes and provides roughly 100 IOPS (Input/Output Per Second) on average. Provisioned IOPS volumes are designed to provide predictable, high performance I/O workloads that range up to 4000 IOPS and are best suited for database workloads. This tutorial shows you how to create an EBS Standard Volume from a Snapshot. For information about creating an EBS Provisioned IOPS from a Snapshot, see <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#create-an-ebs-provisioned-iops-volume-from-a-snapshot">Create an EBS Provisioned IOPS Volume from an EBS Snapshot</a>.</p>
+
+<p>EBS volumes and snapshots are EC2 region-specific. You cannot use a volume/snapshot that you created in EC2-US in a different region like EC2-EU. This tutorial assumes you are creating an EBS volume from a snapshot in the EC2-US region.</p>
+
+<p>Use the procedure outlined below to create an EBS Standard Volume from an EBS Snapshot.</p>
+
+<h3 id="create-an-ebs-standard-volume-from-an-ebs-snapshot-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A snapshot created from an EBS Standard volume stored in an accessible S3 bucket.</li>
+</ul>
+
+<h3 id="create-an-ebs-standard-volume-from-an-ebs-snapshot-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Volume Snapshots</strong> and select a snapshot. Click the Create Volume from Snapshot button from a Snapshot&#39;s homepage.</li>
+</ul>
+
+<p><img src="/img/cm-create-ebs-standard-homepage.png" alt="cm-create-ebs-standard-homepage.png" width="725" height="595" /></p>
+
+<ul>
+<li>By default, the nickname of the volume will be identical to the name of the EBS Snapshot. Be sure to specify the availability zone where you want to create the new volume.</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You will not be able to change the volume&#39;s availability zone once it&#39;s been created.</p>
+</div>
+
+<ul>
+<li>If you leave the <q>Size in GB</q> field blank, the minimum file size that is needed to create the volume will be used (1GB - 1TB).</li>
+</ul>
+
+<p>[<img src="/img/cm-create-ebs-standard-volume.png" alt="cm-create-ebs-standard-volume.png" width="725" height="428" /></p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>When you select Standard volumes, you are charged by the amount you provision in GB per month until you release it. For more information about EBS pricing, see <a href="https://aws.amazon.com/pricing/ebs/">Amazon Elastic Block Store (EBS) Pricing</a>.</p>
+</div>
+
+<ul>
+<li>Click the Create button.</li>
+</ul>
+
+<p>A confirmation window will display some basic information about the new volume and also allow you to attach it to an instance.</p>
+
+<p>[<img src="/img/cm-create-ebs-standard-volume-confirmation.png" alt="cm-create-ebs-standard-volume-confirmation.png" width="725" height="470" /></p>
+
+<h2 id="delete-an-ebs-snapshot">Delete an EBS Snapshot</h2>
+
+<h3 id="delete-an-ebs-snapshot-overview">Overview</h3>
+
+<p>Many deployments use EBS as their permanent storage solution, while keeping regular snapshots on an S3 bucket. This is crucial in avoiding permanent data loss.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>Although the steps to delete a snapshot are extremely simple, make sure you really want to delete the snapshot. Reckless removal of snapshots can result in permanent data loss!</p>
+</div>
+
+<p>Use the procedure outlined below to delete an EBS Snapshot.</p>
+
+<h3 id="delete-an-ebs-snapshot-steps">Steps</h3>
+
+<ul>
+<li>To delete an EBS Snapshot, go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Volume Snapshots</strong>. The UI provides several means to delete a snapshot, including:
+
+<ul>
+<li>Select an individual snapshot&#39;s <strong>Delete</strong> action icon</li>
+<li>Select several snapshots via their checkbox, then select the <q>delete selected</q> action link. <q>Select all</q> and <q>clear all</q> action links are also provided in the event you want to delete the majority of your snapshots. Be <em>very careful</em> using the <q>select all</q> and <q>delete selected</q> action links in unison.</li>
+</ul></li>
+</ul>
+
+<p><img src="/img/cm-delete-an-ebs-snapshot.png" alt="cm-delete-an-ebs-snapshot.png" width="725" height="188" /></p>
+
+<h2 id="migrate-an-ebs-snapshot-to-a-different-aws-region">Migrate an EBS Snapshot to a Different AWS Region</h2>
+
+<h3 id="migrate-an-ebs-snapshot-to-a-different-aws-region-overview">Overview</h3>
+
+<p>An EBS Snapshot is a cloud resource that&#39;s AWS Region specific. (i.e. An EBS snapshot in AWS US-East can only be used to create EBS volumes in the same AWS region.) However, you may need to migrate an EBS snapshot to a different AWS region. Perhaps, you&#39;re changing your cloud architecture to a different region for cost/performance reasons. This tutorial will walk you through the process of migrating a snapshot to a different region.</p>
+
+<p>Use the procedure outlined below to replicate an EBS Snapshot to a different AWS region.</p>
+
+<h3 id="migrate-an-ebs-snapshot-to-a-different-aws-region-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>Running server with the EBS volume attached</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="migrate-an-ebs-snapshot-to-a-different-aws-region-steps">Steps</h3>
+
+<p>In this example, you&#39;re going to migrate an EBS Snapshot from Region A to Region B. (e.g. US-East to US-West)</p>
+
+<p>Remember, data transfer charges do apply!</p>
+
+<ul>
+<li>In AWS Region A (e.g. US-East), launch a server with an EBS volume that was created from the EBS snapshot you want to migrate.</li>
+<li>In AWS Region B (e.g. US-West), launch a server with a blank volume that&#39;s of the same (or larger) size as the volume that&#39;s attached to the server in Region A.</li>
+<li><strong>OPTIONAL:</strong> Instead of creating a blank volume on the new Region B server, consider using our EBS Toolbox or Database Manager scripts &#39;DB EBS Create Stripe Volume&#39; or &#39;EBS Create Stripe Volume&#39; which will create, format and mount one or more volumes for you. These volumes will then also be compatible with the remainder of our EBS/DB tools, such as backup scripts, restore scripts, automated backups, etc.</li>
+<li>Format the volume on the Region B server accordingly.</li>
+<li>Ensure you have your public and private keys setup on both Region A and Region B servers. This includes <code>/root/.ssh/id_rsa</code> (if running the rsync command as root) as well as the public launch key on the source (region A) server.</li>
+<li>Additionally, ensure that you have port 22 open to the <strong>public IPs</strong> in necessary security groups to facilitate rsync&#39;s communication. Public IPs are required because we will be migrating between cloud regions.</li>
+<li>SSH into the Region B server</li>
+<li>Run a UNIX command similar to the following on the Region B server in order to <code>rsync </code>the data from the A server to the B server:</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    rsync -avz -i &lt;ssh_private_key_file&gt; root@&lt;from_server_ip&gt;:/mnt/ebs/ /mnt/ebs/
+</code></pre>
+
+<ul>
+<li>Wait for all of the data to be migrated to the new volume.</li>
+<li>Once the data on both volumes is in-sync, take a snapshot of the volume on the Region B server. If you installed our DB or EBS tools, you can run the operational script <q>DB EBS Backup</q> or <q>EBS Backup</q> or the recipe <q>db::do_primary_backup</q> etc.</li>
+</ul>
+
+<h2 id="share-an-ebs-snapshot">Share an EBS Snapshot</h2>
+
+<h3 id="share-an-ebs-snapshot-overview">Overview</h3>
+
+<p>You can share an EBS snapshot with another user or the public so that they can create an EBS volume based on your snapshot in their account. Use the following procedure to accomplish this.</p>
+
+<h3 id="share-an-ebs-snapshot-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>To share an EBS snapshot with another user, you must know their AWS Account Number and have &#39;actor&#39; role privileges on the RightScale account.</li>
+</ul>
+
+<h3 id="share-an-ebs-snapshot-steps">Steps</h3>
+
+<h4 id="navigate-and-select">Navigate and Select</h4>
+
+<p>The way you share an EBS snapshot is similar to how you share other EC2 resources such as AMIs.</p>
+
+<ul>
+<li>Navigate to the list of EBS snapshots using <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Volume Snapshots</strong>. Notice the Owner column in the table.
+
+<ul>
+<li><strong>amazon</strong> - Amazon provides a number of EBS snapshots that are available to the public.</li>
+<li><strong>you</strong> - EBS snapshots that have been created by the RightScale account you are currently viewing. Remember, EBS snapshots are associated with an AWS Account, not an individual RightScale user. You can only share private EBS snapshots that are <q>owned</q> by the account.</li>
+<li><strong>[AWS Account Number]</strong> - EBS snapshots of that AWS account that are shared with the public or specifically with your account.</li>
+</ul></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>This feature was first released in October 2009. Do not be alarmed if you see additional EBS snapshots. You should see your own, some public snapshots from Amazon, and possibly public snapshots from others. Eventually, you will also see snapshots that were explicitly shared by others with your (AWS) account. You can always <q>filter by owner=you</q> in the filter drop down to remove any extra clutter. Also note that you have additional privileges in the Actions column associated with your own snapshots. For example, you can delete your snapshots, but not others.</p>
+</div>
+
+<p>Select an EBS snapshot (owner = you) that you want to share. Users will see all EBS snapshots that are available to them. As a result, it can be difficult for a user to find a particular shared snapshot.</p>
+
+<p>It&#39;s recommended that you add a descriptive tag or nickname so that the snapshot will be easier to find. Otherwise, you can provide them with the AWS Account Number associated with the RightScale account from which you&#39;re sharing the snapshot and they can filter by owner and enter the AWS Account Number (e.g. 1925-1925-1925). The AWS Account Number of the RightScale account is also listed as a convenience.</p>
+
+<p><img src="/img/cm-share-snapshot.png" alt="cm-share-snapshot.png" width="611" height="545" /></p>
+
+<h4 id="share-a-snapshot">Share a Snapshot</h4>
+
+<ul>
+<li>Under the <q>Snapshot Sharing</q> section, enter the AWS Account Number of whom you want to share the snapshot with (e.g. 1234-1234-1234). Once you click the <strong>Add</strong> button, the snapshot will automatically appear in the recipient&#39;s list of available EBS snapshots of that EC2 region. (EBS Snapshots are EC2 region specific.) They can either use the filter to search for your snapshot by using either a nickname, tag, or your AWS Account Number. The recipient will be able to use the shared EBS snapshot to create EBS volumes.</li>
+<li>To make the snapshot available to the public, click the <strong>make snapshot public</strong> button.</li>
+</ul>
+
+<h4 id="revoke-a-shared-snapshot">Revoke a Shared Snapshot</h4>
+
+<p>To unshare a previously shared snapshot, you can either click the <strong>make snapshot private</strong> to revoke all sharing privileges or select a specific account you wish to remove access from and click the <strong>revoke</strong> button.</p>
+
+<p><img src="/img/cm-unshare-snapshot.png" alt="cm-unshare-snapshot.png" width="644" height="152" /></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

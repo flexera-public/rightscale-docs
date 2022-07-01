@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>AWS Instance Purchase Options</title><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="clouds clouds_aws clouds_aws_amazon-ec2 clouds_aws_amazon-ec2_aws_instance_purchase_options" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="../aws_about.html"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>Amazon Web Services</span></h4></a><a class="list-group-item" href="../aws_quick_start.html">Quick Start</a><a class="list-group-item" href="aws_EC2.html">Amazon EC2</a><a class="list-group-item" href="../aws_tutorials.html">Tutorials</a><a class="list-group-item" href="../../../faq/clouds/aws/">FAQs</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">Supported Clouds</a> &#x2F; <a href="../">Amazon Web Services</a> &#x2F; <a href="./">Amazon EC2</a></p><div class="page-header"><h1>AWS Instance Purchase Options</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Amazon offers 3 different ways to purchase EC2 instances. The different purchase options are available for all <a href="/clouds/aws/aws_instance_types.html">EC2 Instance Types</a>.</p>
+
+<ul>
+<li>On-Demand Instances</li>
+<li>Reserved Instances</li>
+<li>Spot Instances</li>
+</ul>
+
+<p>Depending on your technical and financial requirements, one of these options might provide a comparative advantage over the other. There is no difference in terms of the underlying hardware that is being launched. Only the pricing model is different. It&#39;s important to properly understand the costs and benefits associated with each option. The table below highlights some of the key differences.</p>
+
+<table><thead>
+<tr>
+<th><strong>Description</strong></th>
+<th><strong>On-Demand Instances</strong></th>
+<th><strong>Reserved Instances</strong></th>
+<th><strong>Spot Instances</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Available Instance Types</td>
+<td>All</td>
+<td>All</td>
+<td>All</td>
+</tr>
+<tr>
+<td>Launch Priority</td>
+<td>2</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Pricing Model</td>
+<td>Fixed Price</td>
+<td>Upfront Fee + Reduced Fixed Price</td>
+<td>Bidding (Variable Spot Price)</td>
+</tr>
+<tr>
+<td>Predictable Server Uptime?</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+</tbody></table>
+
+<h2 id="on-demand-instances">On-Demand Instances</h2>
+
+<p>The most common instance purchase option follows the On-Demand pricing model. There is a fixed price for a particular instance type. You will be charged at an hourly rate until the instance is terminated.</p>
+
+<h2 id="reserved-instances">Reserved Instances</h2>
+
+<p>You also have the option of <q>reserving</q> EC2 instances where you pay a one-time payment up-front in order to secure a lower server usage charge when those instances are used. The one-time fee is available for 1 and 3 year terms. Pricing varies depending on size and term length. When you purchase a Reserved Instance, you must specify a particular instance type (e.g. m1.small) and availability zone (e.g. &#39;us-east-1a&#39;). See <a href="http://aws.amazon.com/ec2/">http://aws.amazon.com/ec2/</a> for current pricing information. From a technical perspective, EC2 instances are treated the same as on-demand instances inside the Dashboard. The main difference is how Amazon bills your EC2 instance usage. When you purchase Reserved Instances of a particular type in an availability zone and you have existing instances of the same instance type running in that zone, they will automatically be charged at the lower usage rate. Launching an instance is no different in the case of Reserved and On-Demand instances, however the system will apply the lower usage rate based on the number of Reserved Instances in that zone of the same type.</p>
+
+<p>Reserved Instances are an ideal option for businesses that have very predictable and steady usage requirements, and can provide significant cost savings over time. For example, if you know that you will always have at least 4 instances running at a steady rate for the next year, you might consider purchasing 4 Reserved Instances for a 1-year team. Remember, you can always use On-Demand Instances to satisfy any additional resource needs. Another benefit of Reserved Instances is that you have priority over On-Demand and Spot Instance users. If instance capacity ever becomes limited in a particular availability zone, Reserved Instance users have top priority when launching instances. If instance capacity is ever 100% utilized in a particular availability zone, Amazon reserves the right to terminate a Spot Instance so that it can be provisioned in order to satisfy a Reserved Instance launch request.</p>
+
+<h2 id="spot-instances">Spot Instances</h2>
+
+<p>In order to maximize the utilization rates of existing cloud resources, Amazon offers Spot Instances which allow you to bid on unused compute capacity on EC2. You can set a maximum bid price that you&#39;re willing to pay for an instance (e.g. $0.055). If the Spot Price for Spot Instances falls below your maximum bid price, a Spot Instance will be launched. A running Spot Instance will be billed at the variable Spot Price, not your bid price. A Spot Instance will continue to run as long as the Spot Price remains below your maximum bid price. However, if either the Spot Price exceeds your maximum bid price or Amazon needs your Spot Instance in order to fulfill an On-Demand or Reserved Instance launch request, your Spot Instance will be terminated. Typically, Amazon will update the Spot Price several times throughout the day. When you make a request to Amazon for a Spot Instance, you must wait until Amazon can fulfill that request. Depending on your maximum bid price and Amazon&#39;s excess compute capacity and Spot Price, it may take several days or even weeks before an Instance is actually launched. Therefore, you will not want to launch a Spot Instance if you want to immediately launch a server. The Spot Instance option is useful for running non-critical applications, because the instance could disappear at anytime. You should never use a Spot Instance to launch a server that requires consistent uptime.</p>
+
+<p>When you launch a Spot Instance server inside the Dashboard, the server will remain in the &#39;bidding&#39; state until additional compute capacity becomes available and the Spot Price falls below your maximum bid price. If a Spot Instance is launched and then later terminated by Amazon, the server will remain in the &#39;bidding&#39; state. By default, RightScale will persist your Spot Instance request with Amazon so that a new instance will be launched when one becomes available. In order to retract your request for a Spot Instance from Amazon, you must manually terminate the server.</p>
+
+<p><strong>Note:</strong> You cannot start/stop a Spot Instance. <a href="http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/index.html?ApiReference-query-StopInstances.html">Click here</a> to see more information on this topic from AWS.</p>
+
+<h2 id="how-do-you-select-a-server-s-pricing-type-">How do you select a Server's Pricing Type?</h2>
+
+<p>Although there are 3 different EC2 instance purchasing options, you can only manually control whether you launch an On-Demand or Spot Instance. Although Reserved Instances are manually purchased from Amazon, it is Amazon, not you, who determines whether your On-Demand instances should be billed at the discounted Reserve Instance price or at the standard On-Demand Instance price. As a user, you can only control whether or not you are launching an On-Demand or Spot Instance.</p>
+
+<p>By default, all servers will be configured to launch On-Demand Instance types unless you overwrite this preference at the server level in the Cloud Management Dashboard. Once a server has been added to a deployment, you can select <q>Spot</q> as the instance type under a server&#39;s <em>Info</em> tab. Click <strong>Edit</strong>. If you want to launch a <q>Spot</q> instance type, you will also need to define the Maximum Bid Price. Use the <q>history</q> link to view recent changes to the current spot price.</p>
+
+<p>Note: Amazon typically changes the spots randomly throughout the day.</p>
+
+<p><strong>Note</strong>: Spot Instances do not support start/stop functionality. <a href="http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/index.html?ApiReference-query-StopInstances.html">Click here</a> for more information.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+<li><a href="http://aws.amazon.com/ec2/#pricing">http://aws.amazon.com/ec2/#pricing</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

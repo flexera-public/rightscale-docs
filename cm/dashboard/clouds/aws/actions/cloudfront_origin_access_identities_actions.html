@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>CloudFront Origin Access Identities - Actions</title><meta content="Common procedures for working with CloudFront Origin Access Identities in the RightScale Cloud Management Platform." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_aws cm_dashboard_clouds_aws_actions cm_dashboard_clouds_aws_actions_cloudfront_origin_access_identities_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../../">Cloud Management</a> &#x2F; <a href="../../../">Dashboard User's Guide</a> &#x2F; <a href="../../">clouds</a> &#x2F; <a href="../">Amazon Web Services (AWS)</a> &#x2F; <a href="./">AWS Actions</a></p><div class="page-header"><h1>CloudFront Origin Access Identities - Actions</h1></div><div class="main-content"><h2 id="view-cloudfront-origin-access-identities">View CloudFront Origin Access Identities</h2>
+
+<h3 id="view-cloudfront-origin-access-identities-overview">Overview</h3>
+
+<p>Use the following procedure to view an individual or all CloudFront Origin Access Identities.</p>
+
+<h3 id="view-cloudfront-origin-access-identities-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>AWS Account with the CloudFront Services enabled and Origin Access Identities created.</li>
+</ul>
+
+<h3 id="view-cloudfront-origin-access-identities-steps">Steps</h3>
+
+<ul>
+<li>Navigate to <strong>Clouds</strong> &gt; <strong>AWS Global</strong> &gt; <strong>CF Origin Access Identities</strong>. All Origin Access Identities are displayed.</li>
+<li>Select an individual OAI to drill down on the details of a specific OAI. For example, the following information is displayed:</li>
+</ul>
+
+<p>Below is more detailed information about your CloudFront Origin Access Identity.</p>
+
+<ul>
+<li><strong>Name</strong> - A RightScale-specific name for the OAI.</li>
+<li><strong>ID</strong> - A unique virtual identity that&#39;s used to give your distribution permission to fetch a private object from your origin server S3 bucket.</li>
+<li><strong>S3 Canonical User ID</strong> - The User ID that&#39;s used to grant your OAI permission to access the objects you want to deliver as private content.</li>
+<li><strong>Caller Reference</strong> - The is a unique value that&#39;s designed to prevent accidental replays of your request.</li>
+<li><strong>Comment</strong> - Provide a description or notes about the OAI.</li>
+</ul>
+
+<h2 id="serving-private-content">Serving Private Content</h2>
+
+<h3 id="serving-private-content-overview">Overview</h3>
+
+<p>CloudFront distributions can be used to serve both public and private content. When you use CloudFront to serve <q>private content, CloudFront basically acts as a secure proxy between the user making the request and the object stored in S3. CloudFront either uses an Origin Access Identity or Signed URLs to validate each request for private content. There are two different ways to serve</q>private&quot; content.</p>
+
+<ul>
+<li><strong>Origin Access Identity</strong> - If you assign an OAI to a CF distribution, private content within the origin server (S3 bucket) can only be accessible via CloudFront. You will also need to add the OAI to a private object&#39;s ACL.</li>
+<li><strong>Trusted Signer(s) and Signed URLs</strong> - You can also create temporary access to a private object by creating a signed URL that can be used to access a <q>private</q> object until the link expires (Default = 24 hrs). Only trusted signer(s) with at least one valid CloudFront Key Pair can generated signed URLs. If you are using this option, an Origin Access Identity is not required.</li>
+</ul>
+
+<p>Use the procedure described below to create a CloudFront distribution that can be used for serving <q>private</q> objects in the origin server (S3 bucket).</p>
+
+<h3 id="serving-private-content-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>CloudFront is an additional service that&#39;s offered by Amazon that you must <a href="http://aws.amazon.com/cloudfront">sign-up</a> for in order to use.</li>
+<li>Before you can create a distribution, you must first sign-up for the Amazon&#39;s CloudFront service. If you have not yet signed up, go to <a href="http://aws.amazon.com/cloudfront">http://aws.amazon.com/cloudfront</a>. Be sure to review their detailed <a href="http://aws.amazon.com/cloudfront/#pricing">pricing</a>information.</li>
+</ul>
+
+<h3 id="serving-private-content-steps">Steps</h3>
+
+<h4 id="create-a-cloudfront-distribution">Create a CloudFront Distribution</h4>
+
+<p>Select which option you want to use to serve your <q>private</q> content. How you create and configure your CloudFront distribution will vary depending on which option is chosen.</p>
+
+<p><strong>Option 1: Origin Access Identity</strong></p>
+
+<p><strong>Create a New Origin Access Identity (OAI)</strong></p>
+
+<p>The OAI is a virtual user identity that will be used to give your CF distribution permission to fetch a private object from your origin server (S3 bucket). Use the OAI to configure the distribution so that end users can only access objects in an Amazon S3 bucket (origin server) through a CloudFront distribution.</p>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <strong>AWS Global</strong> &gt; <strong>CF Origin Access Identities</strong>.</li>
+<li>Click the <strong>New Origin Access Identity</strong> button. When you create a new OAI, Amazon will automatically assign an <q>ID</q> for the OAI, <q>S3 Canonical User ID</q> and <q>Caller Reference ID</q>. You also have the option of providing a Name and Comment.</li>
+<li>Next, you can create the CF distribution. Be sure to select which OAI you want to assign to the distribution.</li>
+</ul>
+
+<p><strong>Option 2: Trusted Signer(s) and Signed URLs</strong></p>
+
+<p>You can also generate signed URLs that provide temporary access to a private object until the link expires. Only trusted signers can generate signed URLs. A trusted signer is identified by their AWS Account Number.</p>
+
+<p>When you create a CF distribution, you can add a trusted signer to the distribution by adding a user&#39;s AWS account number. You can either include dashes in the account number of omit them. You can also add &#39;self&#39; so that the current account can generate signed URLs. You must specify a valid AWS Account. See <a href="/cm/dashboard/clouds/aws/actions/cloudfront_distribution_actions.html#create-a-new-cloudfront-distribution">Create a New CloudFront Distribution</a>.</p>
+
+<p><img src="/img/cm-trusted-signers.png" alt="cm-trusted-signers.png" width="461" height="116" /></p>
+
+<p>The trusted signer must also create a valid key pair. Amazon will keep the private key. Unfortunately, you cannot create CloudFront Key Pairs within the Dashboard. See <a href="/cm/dashboard/clouds/aws/actions/cloudfront_origin_access_identities_actions.html#create-amazon-cloudfront-key-pairs">Create Amazon CloudFront Key Pairs</a>.</p>
+
+<p>Only trusted signers with valid CloudFront Key Pairs will be able to generate signed URLs. In the screenshot below, only the (-8827) AWS Account can generate a signed URL because it has a valid CloudFront Key Pair.</p>
+
+<p><img src="/img/cm-trusted-signers-keys.png" alt="cm-trusted-signers-keys.png" width="514" height="95" /></p>
+
+<h4 id="configure-the-s3-bucket-and-its-objects">Configure the S3 Bucket and its Objects</h4>
+
+<p>The next step is to properly create/configure the S3 bucket (<q>origin server</q>), as well as set the appropriate access permissions for each object that will be available through the distribution. If you are serving private content, the ACL permissions on each object should already be set to &#39;private&#39;.</p>
+
+<p><strong>Option 1: Origin Access Identity</strong></p>
+
+<p>The next step is to add the same OAI to the private object&#39;s ACL so that it matches the OAI that&#39;s been assigned to the CloudFront distribution. Currently, one way to accomplish this task is to follow the Ruby example below. The long string is the <q>S3 Canonical User ID</q> of the OAI. Once you add an OAI to an object&#39;s ACL, it can only be accessed via CloudFront.</p>
+<pre class="syntax-highlight plaintext"><code>#!/usr/bin/rubyrequire 'rubygems'require 'right_aws'origin_access_identity_s3_canonical_id = 'de4361b33dbaf499d3d77159bfa1571d3451eaec25a2b16553de5e534da8089bb8c31a4898d73d1a658155d0e48872a7's3 = Rightscale::S3::new(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)s3_key = s3.bucket('my-bucket').key('images/test.jpg')RightAws::S3::Grantee.new(s3_key, origin_access_identity_s3_canonical_id, ['READ'], :apply)
+</code></pre>
+
+<p>Use the CF distribution&#39;s domain to construct the url to access the <q>private</q> object.</p>
+
+<ul>
+<li>Domain: s2wy8yil0wmj58.cloudfront.net</li>
+<li>CNAME: assets.mysite.com</li>
+<li>Object: photo.jpg</li>
+<li>URLs to acesss the object
+
+<ul>
+<li>http://s2wy8yil0wmj58.cloudfront.net/photo.jpg</li>
+<li>http://assets.mysite.com/photo.jpg&nbsp; (if using a CNAME)</li>
+</ul></li>
+</ul>
+
+<p><strong>Option 2: Trusted Signer(s) and Signed URLs</strong></p>
+
+<p>Currently, you will need to use a third party program such as S3Fox to generate the signed URLs.</p>
+
+<ol>
+<li>Log into S3Fox. Right-click on the private object in the S3 bucket that you want to serve via CloudFront and select the <q>Get Pre-signed Urls</q> option.</li>
+<li>Set the time when the link should expire (default = 24 hrs) and the desired protocol (http or https). The CloudFront Key Pair will be used to generate the signed url. Use the <q>Generate Urls</q> button to create multiple signed URLs for the same object.</li>
+<li>Use the generated URL to provide temporary access to your private content. When the link expires, a user will receive an <q>Access Denied</q> message.</li>
+</ol>
+
+<p>Another way to generate URLs for streaming private content from CloudFront is to use the following Ruby script.</p>
+
+<ul>
+<li><strong>access_key</strong> - The public CloudFront Key Pair ID (e.g. APKAIPLHIYV3ENOQ3ENOQ)</li>
+<li><strong>private_key</strong> - The private key that you received when you created the CloudFront key pair.&nbsp; In this example, a global hash config is used to reference the private key.</li>
+<li><strong>resource</strong> - The CloudFront URL to the object you&#39;re trying to serve. (e.g. <code>http://s2wy8yil0wmj58.cloudfront.net/photo.jpg</code> or <code>http://assets.mysite.com/photo.jpg</code> if using a CNAME.)</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>require 'base64'
+require 'openssl'
+require 'sha1'# The following Ruby script will generate URLs for streaming private content from CloudFront# I have a global config hash for my private key for S3:# The access_key is the CloudFront key id you set up.# The private key is the private key you get when you create the key pair.# resource is the FULL CloudFront URL to the object you're trying to serve.class CloudFront include OpenSSL include PKey def self.generate_cloudfront_url(resource,time_unit=:hours,time_units=2) o = self.sign(resource,time_unit,time_units) "#{resource}?Expires=#{o[:expires]}&amp;Signature=#{o[:signature]}&amp;Key-Pair-Id=#{$S3_CONFIG['streaming']['access_key']}" enddef self.sign(resource,time_unit=:hours,time_units=2) expires = Time.now.advance(time_unit =&gt; time_units).to_i request_string = "{\"Statement\":[{\"Resource\":\"#{resource}\",\"Condition\":{\"DateLessThan\":{\"AWS:EpochTime\":#{expires}}}}]}" signature = self.generate_signature(request_string) {:expires =&gt; expires, :signature =&gt; signature} enddef self.generate_signature(request_string) private_key = RSA.new($S3_CONFIG['streaming']['private_key']) signature = private_key.sign(OpenSSL::Digest::SHA1.new,request_string) Base64.encode64(signature).gsub("\n","").gsub("+","-").gsub("=","_").gsub("/","~") endend
+</code></pre>
+
+<h2 id="create-amazon-cloudfront-key-pairs">Create Amazon CloudFront Key Pairs</h2>
+
+<h3 id="create-amazon-cloudfront-key-pairs-overview">Overview</h3>
+
+<p>CloudFront uses access keys to authenticate requests you make to CloudFront. Trusted signers with at least one CloudFront key pair can create signed URLs that can be used to temporarily access private content that&#39;s stored in your origin server (S3 bucket).</p>
+
+<p>Unfortunately, you cannot create CloudFront Key Pairs inside the Dashboard. You must create them using the AWS Management Console.</p>
+
+<p>Use the procedure outlined below to generate an Amazon CloudFront key pair so that you can create signed URLs to access private content from a CloudFront distribution.</p>
+
+<h3 id="create-amazon-cloudfront-key-pairs-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>AWS Account with the CloudFront Service enabled.</li>
+</ul>
+
+<h3 id="create-amazon-cloudfront-key-pairs-steps">Steps</h3>
+
+<ul>
+<li>Log into your AWS Account at <a href="http://aws.amazon.com">http://aws.amazon.com</a>.</li>
+<li>Go to <strong>Account</strong> &gt; <strong>Security Credentials</strong>.</li>
+<li>Under <q>Access Credentials</q> click the <strong>Key Pairs</strong> tab.</li>
+<li>You can either create a new key pair or upload the public key of an existing key pair.</li>
+</ul>
+
+<p><img src="/img/cm-create-cloudfront-key-pair.png" alt="cm-create-cloudfront-key-pair.png" width="716" height="434" /></p>
+
+<p>Each CloudFront key pair includes a public key, private key, and an ID for the key pair. You can only have up to two key pairs per AWS account.</p>
+
+<p>Here is an example of a signed url:</p>
+<pre class="syntax-highlight plaintext"><code>http://mybucket.amazonaws.com/image.png?AWSAccessKeyId=YW6OAKIAAKIAJQCRVTSRQ&amp;Expires=1274228859&amp;Signature=OlnE7O5PSMz4pzaE7O5PRKD/ws%3D
+</code></pre>
+
+<p>Notice that the signed url contains the public CloudFront Access Key ID and an expiration date (default = 24 hrs).</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

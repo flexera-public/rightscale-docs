@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>PHP Application Server for Chef Server (RightLink 10) - Tutorial</title><meta content="Use this RightLink 10 ServerTemplate tutorial to set up a PHP application server in a public or private cloud environment." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="st st_rl10 st_rl10_php st_rl10_php_tutorial" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/st"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>ServerTemplates</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="/st/rl10">Version RL10</a><a class="list-group-item" href="../../open-source/">Open Source</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">ServerTemplates</a> &#x2F; <a href="../">Version RightLink 10 ServerTemplates</a> &#x2F; <a href="./">PHP Application Server for Chef Server (RightLink 10)</a></p><div class="page-header"><h1>PHP Application Server for Chef Server (RightLink 10) - Tutorial</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To set up a PHP application server in a public or private cloud environment.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>The following are prerequisites for completing this tutorial:</p>
+
+<ul>
+<li>Required user roles: &#39;actor&#39;, &#39;designer&#39;, and &#39;library&#39;</li>
+<li>For Amazon EC2 and other clouds that support security groups, you must have a security group defined with TCP port 22 open for SSH access, the default application port (8000) open to applicable load balancer servers/service, and any other port and protocol access required by your application. Also, remember that iptables is installed and enabled by default on all servers.</li>
+<li>We strongly recommend that you set up credentials for password values and any other sensitive data included as Chef recipe inputs. See the <q>Create Credentials</q> section below.</li>
+<li>This tutorial assumes that you are setting up application servers that will function as part of a three-tier architecture that includes both back-end MySQL database servers and front-end load balancer servers (e.g. HAProxy or aiCache) or services (e.g. Amazon Elastic Load Balancing (ELB)). For information on setting up your database servers, see <a href="/st/rl10/mysql/tutorial.html">Database Manager for MySQL (RightLink 10) - Tutorial</a>.</li>
+<li>A deployment into which you are going to add the server. See <a href="/cm/dashboard/manage/deployments/deployments_actions.html#create-a-new-deployment">Create a New Deployment</a>.</li>
+<li>You must have a <a href="../chef-server/overview.html">Chef Server</a> or use Hosted Chef to use this ServerTemplate.<br></li>
+<li>You must upload the <a href="https://github.com/rightscale-cookbooks/rs-application_php">rs-application_php</a> and other required cookbooks to your Chef Server.</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>This tutorial describes the steps for launching one or more application servers in the cloud.</p>
+
+<p>For a technical overview of this ServerTemplate, see <a href="/st/rl10/php/overview.html">PHP Application Server</a>.</p>
+
+<h2 id="create-credentials">Create Credentials</h2>
+
+<p>In order to use the default input values in the ServerTemplate, you must set up credentials with the following names. For more information on setting up credentials, see <a href="/cm/dashboard/design/credentials/credentials.html#create-a-new-credential">Create a New Credential</a>.</p>
+
+<ul>
+<li><strong>DBAPPLICATION_PASSWORD</strong> - Password of a database user with user-level privileges.</li>
+<li><strong>DBAPPLICATION_USER</strong> - Username of a database user with user-level privileges.</li>
+<li><strong>SSH_KNOWN_HOST_KEY</strong> <em>(Optional)</em> - Create a credential with a valid SSH key which will be appended to the <code>/root/.ssh/known_hosts</code> file. Creating and using this credential is optional but highly recommended to prevent MiTM attacks.</li>
+</ul>
+
+<p>Set up the appropriate set of authentication credentials based upon where the application code will be retrieved.</p>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-add-a-server">Add a Server</h3>
+
+<p>Follow these steps to add a load balancer server to the deployment.</p>
+
+<ol>
+<li>Go to the MultiCloud Marketplace (<strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong>) and import <a href="http://www.rightscale.com/library/server_templates/PHP-Application-Server-for-Che/lineage/57408">PHP Application Server for Chef Server (RightLink 10) ServerTemplate</a> into the RightScale account.</li>
+<li>From the imported ServerTemplate&#39;s show page, click the <strong>Add Server</strong> button.</li>
+<li>Select the cloud for which you will configure a server.</li>
+<li>Select the deployment into which the new server will be placed.</li>
+<li>Next, the Add Server Assistant wizard will walk you through the remaining steps that are required to create a server based on the selected cloud.
+
+<ul>
+<li><strong>Server Name</strong> - Provide a nickname for your new load balancer server (e.g., lb1).</li>
+<li>Select the appropriate cloud-specific resources that are required in order to launch a server into the chosen cloud. The required cloud resources may differ depending on the type of cloud infrastructure. If the cloud supports multiple datacenters / zones, select a specific zone. Later, when you create the other load balancer server you will use a different datacenter / zone to ensure high-availability. For more information, see Add Server Assistant.</li>
+<li>If you are using Elastic IPs (AWS EC2 only), select an Elastic IP.</li>
+</ul></li>
+<li>Click <strong>Confirm</strong> , review the server&#39;s configuration and click <strong>Finish</strong> to create the server.</li>
+</ol>
+
+<h3 id="steps-configure-inputs">Configure Inputs</h3>
+
+<p>The next step is to define the properties of your application balancer server or servers by entering values for inputs. As a best practice, you should define required inputs for the servers at the deployment level. For a detailed explanation of how inputs are defined and used in Chef recipes and RightScripts, see <a href="/cm/rs101/inheritance_of_inputs.html">Inheritance of Inputs</a>.</p>
+
+<p>To enter inputs for the Chef recipes that will run on your load balancers, open the deployment&#39;s <strong>Inputs</strong> tab, click <strong>Edit</strong> , and use the following settings to configure input values. We recommend that you set up credentials for password values and any other sensitive data as shown in the examples.</p>
+
+<h4 id="chef-inputs">Chef Inputs</h4>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CHEF_ENVIRONMENT</td>
+<td>The chef environment name to use</td>
+<td>text: _default</td>
+</tr>
+<tr>
+<td>CHEF_SERVER_URL</td>
+<td>The url of your chef server</td>
+<td>text:https://chef-server.example.com</td>
+</tr>
+<tr>
+<td>CHEF_VALIDATION_KEY</td>
+<td>The chef orgainization validation key.</td>
+<td>cred:CHEF_VALIDATION_KEY</td>
+</tr>
+<tr>
+<td>CHEF_VALIDATION_NAME</td>
+<td>The chef validator name</td>
+<td>text:example-validator</td>
+</tr>
+<tr>
+<td>LOG_LEVEL</td>
+<td>Chef client log level</td>
+<td>text:info</td>
+</tr>
+<tr>
+<td>VERSION</td>
+<td>The version of chef client to install</td>
+<td>text:12.16</td>
+</tr>
+</tbody></table>
+
+<h4 id="rs-application_php-inputs">RS-APPLICATION_PHP Inputs</h4>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>APPLICATION_NAME</td>
+<td>The name of the application. This name is used to generate the path of the application code and to determine the backend pool in a load balancer server that the application server will be attached to. Application names can have only alphanumeric characters and underscores.  This value should be unique across deployments</td>
+<td>text: example</td>
+</tr>
+<tr>
+<td>APPLICATION_ROOT_PATH</td>
+<td>The path of application root relative to /usr/local/www/sites/<application name> directory. Example: my_app</td>
+<td>text:myapp</td>
+</tr>
+<tr>
+<td>BIND_NETWORK_INTERFACE</td>
+<td>The network interface to use for the bind address of the application server. It can be either &#39;private&#39; or &#39;public&#39; interface.</td>
+<td>text: private</td>
+</tr>
+<tr>
+<td>DATABASE_HOST</td>
+<td>The FQDN of the database server. Example: db.example.com</td>
+<td></td>
+</tr>
+<tr>
+<td>text: db.example.com</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>DATABASE_PASSWORD</td>
+<td>The password for the application to access the database</td>
+<td>cred: APPLICATION_DB_PASSWORD</td>
+</tr>
+<tr>
+<td>DATABASE_SCHEMA</td>
+<td>The name of the database schema</td>
+<td>text: app_db</td>
+</tr>
+<tr>
+<td>DATABASE_USER</td>
+<td>The username used to connect to the database.</td>
+<td>cred:MYSQL_APPLICATION_USERNAME</td>
+</tr>
+<tr>
+<td>LISTEN_PORT</td>
+<td>The port to use for the application to bind. Example: 8080</td>
+<td>text: 8080</td>
+</tr>
+<tr>
+<td>MIGRATION_COMMAND</td>
+<td>The command used to perform application migration. Example: php app/console doctrine:migrations:migrate</td>
+<td></td>
+</tr>
+<tr>
+<td>REFRESH_TOKEN</td>
+<td>The Rightscale OAUTH refresh token. The token is used to run commands on other servers, such as attaching or detaching from the Load Balancer</td>
+<td>cred: MY_REFRESH_TOKEN</td>
+</tr>
+<tr>
+<td>SCM_REPOSITORY</td>
+<td>The repository location to download application code.</td>
+<td>text: <a href="git://github.com/rightscale/examples.git">git://github.com/rightscale/examples.git</a></td>
+</tr>
+<tr>
+<td>SCM_REVISION</td>
+<td>The revision of application code to download from the repository.</td>
+<td>text: unified_php</td>
+</tr>
+<tr>
+<td>VHOST_PATH</td>
+<td>The virtual host served by the application server. The virtual host name can be a valid domain/path name supported by the access control lists (ACLs) in a load balancer. Ensure that no two application servers in the same deployment having the same application name have different vhost paths. Example: http:://www.example.com, /index</td>
+<td>text: http://www.example.com, /index</td>
+</tr>
+</tbody></table>
+
+<h3 id="steps-launch-the-server">Launch the Server</h3>
+
+<p>Now that you have finished defining server details, you are ready to launch a server in the cloud with the new settings. Click the server&#39;s <strong>Launch</strong> button.</p>
+
+<p>Review the inputs that you set at the Inputs confirmation page and click <strong>Launch</strong>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

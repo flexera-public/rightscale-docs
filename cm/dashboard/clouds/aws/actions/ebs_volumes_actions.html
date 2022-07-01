@@ -1,0 +1,583 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>EBS Volumes - Actions</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_clouds cm_dashboard_clouds_aws cm_dashboard_clouds_aws_actions cm_dashboard_clouds_aws_actions_ebs_volumes_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../../">Cloud Management</a> &#x2F; <a href="../../../">Dashboard User's Guide</a> &#x2F; <a href="../../">clouds</a> &#x2F; <a href="../">Amazon Web Services (AWS)</a> &#x2F; <a href="./">AWS Actions</a></p><div class="page-header"><h1>EBS Volumes - Actions</h1></div><div class="main-content"><h2 id="create-a-new-ebs-volume">Create a New EBS Volume</h2>
+
+<h3 id="create-a-new-ebs-volume-overview">Overview</h3>
+
+<p>When creating an EBS volume, there are three EBS volume types to be aware of: Standard, Provisioned IOPS, and General Purpose (SSD). A Standard volume is best suited for boot volumes and provides roughly 100 IOPS (Input/Output Operations Per Second) on average. Provisioned IOPS volumes are designed to provide predictable, high performance I/O workloads that range up to 4000 IOPS and are best suited for database workloads. General Purpose (SSD) volumes are a good choice for small and medium databases, development and test environments, and boot volumes with an initial burst allocation of up to 3,000 IOPS for 30 minutes.You can either create an EBS Volume from scratch or create an EBS Volume from an existing EBS Snapshot. This tutorial focuses on creating an EBS volume from scratch.</p>
+
+<p>When you create an EBS Volume, you should carefully consider where it should be created. The first question you should ask yourself is <q>Where is my instance?</q> Remember, you can only attach a volume to an instance in the same availability zone. Once you create a volume and specify its location, you will not be able to change its availability zone. To launch a volume into a different Availability Zone you need to <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#create-an-ebs-standard-volume-from-an-ebs-snapshot">Create an EBS Standard Volume from a Snapshot</a> or, if you&#39;re creating a Provisioned IOPS, see <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#create-an-ebs-provisioned-iops-volume-from-a-snapshot">Create an EBS Provisioned IOPS Volume from a Snapshot</a>.</p>
+
+<p>EBS volumes and snapshots are EC2 region-specific. You cannot use a volume/snapshot that you created in EC2-US in a different region like EC2-EU. This tutorial assumes you are creating an EBS volume for EC2-US.</p>
+
+<p><img src="/img/cm-ebs-diagram-create-zones.gif" alt="cm-ebs-diagram-create-zones.gif" width="550" height="190" /></p>
+
+<p>Use the procedure outlined below to create a new EBS Volume.</p>
+
+<h3 id="create-a-new-ebs-volume-steps">Steps</h3>
+
+<h4 id="create-an-ebs-volume-from-scratch">Create an EBS Volume from Scratch</h4>
+
+<ol>
+<li>To create an EBS Volume from scratch, go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Volumes</strong>.</li>
+<li>Click the <strong>New</strong> button.</li>
+</ol>
+
+<p><img src="/img/cm-clouds-aws-new-volume.png" alt="cm-clouds-aws-new-volume.png" width="725" height="436" /></p>
+
+<ul>
+<li><strong>Name</strong> - Specify a Name for your volume. You can change the name at any time, but it will still be associated with the correct snapshot. <em>Note</em>: Amazon will create a unique AWS ID for each volume (ex: vol-6052E7b23).</li>
+<li><strong>Description</strong> (optional) - Provide a short description that explains the purpose of the volume. You can change the description at any time.</li>
+<li><strong>Datacenter/Zone</strong> (required) - Specify the Availability Zone where you would like this volume to be placed. Remember, you can only attach a volume to an instance in the same Availability Zone.</li>
+<li><strong>Snapshot</strong> - Since you are creating a volume from scratch, leave this value as <q>-none-.</q></li>
+<li><strong>Attach To</strong> (optional) - Select a running server you want the volume to attach to. Since you are creating a volume from scratch in this exercise, leave this value as <q>-select-.</q></li>
+<li><strong>Device</strong> - Select a device node identifier.</li>
+<li><strong>Volume Type</strong> - The type of EBS volume. Either <q>Standard</q>, <q>io1</q>, or <q>gp2</q> can be selected. A Standard volume is best suited for boot volumes and provides roughly 100 IOPS (Input/Output Per Second) on average. Provisioned IOPS volumes (io1) are designed to provide predictable, high performance I/O workloads that range up to 2000 IOPS and are best suited for database workloads. General Purpose (SSD) volumes (gp2) are a good choice for small and medium databases, development and test environments, and boot volumes with an initial burst allocation of up to 3,000 IOPS for 30 minutes.</li>
+<li><strong>Size in GB</strong> - Specify the desired size of the volume. (The minimum size is 1GB, the maximum is 1TB. One terabyte is 1000 gigabytes, so you the maximum you can enter in this field is 1000.) $0.10/GB per month.</li>
+<li><strong>IOPS</strong> - This field will appear if <q>io1</q> is chosen as a <strong>Type</strong>. The IOPS to volume size ratio can be a maximum of 30 IOPS/GB. Therefore, if the <strong>Size in GB</strong> is 10GB, the highest the <strong>IOPS</strong> value can be set to is 300. The range to create a Provisioned IOPS volume is is 300 IOPS and 10GB up to 4,000 IOPS and 133GB.</li>
+<li><strong>Encrypted</strong> (optional) - Enable this checkbox if you need your volume encrypted.</li>
+</ul>
+
+<p>When you select Provisioned IOPS volumes, you are charged by the amount you provision in GB per month as well as the amount you provision in IOPS. For more information about EBS pricing, see <a href="https://aws.amazon.com/pricing/ebs/">Amazon Elastic Block Store (EBS) Pricing</a>.</p>
+
+<ol>
+<li>Click <strong>Create</strong> when ready.</li>
+</ol>
+
+<h3 id="create-a-new-ebs-volume-next-steps">Next Steps</h3>
+
+<p>Now you&#39;re ready to attach your EBS volume. See <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#attach-an-ebs-volume-to-an-instance">Attach an EBS Volume to an Instance</a>.</p>
+
+<h3 id="create-a-new-ebs-volume-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<p>Once you create an EBS Volume, you will no longer be able to make changes to its size or availability zone, etc. You will only be able to change what&#39;s inside the volume. However, there is a procedure for <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#grow-the-size-of-an-ebs-volume">growing an EBS volume</a>.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>As with any procedure involving sensitive data, the procedure should be completed with great care by those who know what they are doing.</p>
+</div>
+
+<h2 id="attach-an-ebs-volume-to-an-instance">Attach an EBS Volume to an Instance</h2>
+
+<h3 id="attach-an-ebs-volume-to-an-instance-overview">Overview</h3>
+
+<p>You can only attach an EBS Volume to a Server in the same availability zone, and to only one Server at a given time. Therefore, if you want to automatically attach an EBS Volume to an instance when it is launched, you cannot use the <q>-any-</q> option for a Server&#39;s availability zone. Be sure to specify the same zone as the volume.</p>
+
+<p>Once you&#39;ve created an EBS Volume, the next logical step is to attach it to an instance. There are two ways you can attach an EBS Volume to an instance. Both attachment options are covered in this tutorial.</p>
+
+<ul>
+<li><strong>Attach now</strong> - Attach the EBS volume to a running instance</li>
+<li><strong>Attach on boot</strong> - The next time that the Server is launched, attach this particular EBS volume to the instance (at boot time). For example, if the current running Server is relaunched, or terminated and launched, the volume that you&#39;re creating at this time will be preserved and attached to the new instance at boot time. If this option is selected, the Volumes tab for the <q>Next</q> Server will reflect this change. If you do not want this volume to be attached to the next Server that is launched, you will need to manually remove this volume association under the <q>Next</q> Server&#39;s Volumes tab.</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You cannot attach an EBS volume to a locked instance. It will fail.</p>
+</div>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>If you manually attach a volume to an instance, none of its attached volume(s) will be deleted when the Server is terminated. You will need to manually terminate each volume once it&#39;s been detached from the instance.</p>
+</div>
+
+<h3 id="attach-an-ebs-volume-to-an-instance-steps">Steps</h3>
+
+<h4 id="attach-an-ebs-volume-to-a-running-instance">Attach an EBS Volume to a Running Instance</h4>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Volumes</strong> and click the nickname of the EBS Volume that you want to attach to a running instance.</li>
+</ul>
+
+<p>In order to attach a volume to a running instance, they must both be in the same availability zone. Once a volume is created, you cannot change its availability zone. Similarly, once an instance has been launched, you cannot change its availability zone. Also, you cannot attach the same volume to multiple instances. In order to attach the same volume to multiple instances, you must take a snapshot of the original volume and then create multiple volumes from the same snapshot. A volume&#39;s status will be <q>available</q> if it is currently not attached to a running instance. Otherwise, a volume&#39;s status will be <q>in-use.</q></p>
+
+<ul>
+<li>Click the <strong>Attach now</strong> button.</li>
+<li>Next, you will need to select which running instance the volume will be attached to, as well as the device location where the volume will be mounted. Choose an <q>/dev/sd</q> device name for Linux instances or an <q>xvd</q> device name for Microsoft Windows instances.<br></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If attaching more than 4 volumes, you will need to use the Override checkbox and specify a new, unused device name according to the operating system used (per above).</p>
+</div>
+
+<p><img src="/img/cm-attach-volume-running-instance.png" alt="cm-attach-volume-running-instance.png" width="380" height="157" /></p>
+
+<ul>
+<li>Click <strong>Attach</strong>. The EBS volume will become available for use when the volume&#39;s status is listed as <q>attached</q>.</li>
+</ul>
+
+<p><img src="/img/cm-volume-status-attached.png" alt="cm-volume-status-attached.png" width="725" height="88" /></p>
+
+<p><strong>Verify the Volume was Attached</strong></p>
+
+<p>To verify that the volume was attached, you can SSH into the instance and run the following command:</p>
+
+<p><code>cat /proc/partitions</code></p>
+
+<p>You should notice that the volume was attached to the specified mount device (e.g. sdj).</p>
+<pre class="syntax-highlight plaintext"><code>    major minor #blocks name
+       8 1 10485760 sda1
+       8 16 156352512 sdb
+       8 3 917504 sda3
+       8 144 1048576 sdj
+</code></pre>
+
+<p>This can also be achieved by the command, <code>fdisk -l</code> which is usually an easier way to verify the disk sizes.</p>
+
+<p><strong>Detach the Volume</strong></p>
+
+<ul>
+<li>To detach the volume, click the <q>eraser</q> action icon under the Actions column.</li>
+</ul>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>If you terminate the Server, the attached volume(s) will not be deleted. You will need to manually terminate each volume once it has been detached from the instance.</p>
+</div>
+
+<h4 id="attach-an-ebs-volume-when-an-instance-is-launched">Attach an EBS Volume when an Instance is Launched</h4>
+
+<p>You can also configure an EBS Volume(s) to automatically be attached to a component when it is launched. It&#39;s important that you specify that the new instance be launched in the same availability zone as the EBS Volume. If the server&#39;s availability zone is set to <q>-any-</q> or to a different availability zone, you will not be able attach the volume to the instance.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If there is an availability zone mismatch between a volume and an unlaunched server, you will receive the following warning message: <q>Volume and server are in different availability zones. Force server to same zone as volume?</q> If you click OK, the unlaunched server will be reconfigured to launch in the same availability zone as the attached volume.</p>
+</div>
+
+<p>An EBS Volume can either be attached to an instance at the <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#attach-an-ebs-volume-to-an-instance">Server Level</a> or at the <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#attach-an-ebs-volume-to-an-instance">Volume Level</a>.</p>
+
+<p><strong>Server Level</strong></p>
+
+<ul>
+<li>Go to a server&#39;s homepage and click the Volumes tab. Click <strong>Attach Existing Volume on Boot</strong>.</li>
+<li><strong>Attach Volume</strong> - Select the volume attachment.</li>
+<li><strong>As Device</strong> - List of common (Xen/Linux) device names to which the volume will be attached.<br></li>
+<li>Select the <q>Override</q> option to specify a different value not in the list.<br></li>
+<li>Choose a <q>/dev/sd</q> device name for Linux instances running on an EC2-patched kernel, or an <q>xvd</q> device name for Microsoft Windows instances. <em>Note</em>: For Xen native kernels (used by images such as Ubuntu (official) and Debian) the device is utilized by the kernel of the instance with <q>xvd</q> instead of <q>sd</q>, e.g. attaching as /dev/sdk is accessible on the instance with /dev/xvdk.</li>
+<li>Click <strong>Schedule</strong></li>
+</ul>
+
+<p><strong>Volume Level</strong></p>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Volumes</strong> and click the nickname of the EBS Volume that you want to attach to an instance. Click the <strong>Attach on Boot</strong> button.</li>
+<li><strong>To Server</strong> - Select the server that the volume will be attached to.</li>
+<li><strong>As Device</strong> - List of common device names. Choose an <q>/dev/sd</q> device name for Linux instances or an <q>xvd</q> device name for Windows instances. Select the <q>Override</q> option to specify a different value not in the list.</li>
+<li>Click <strong>Schedule</strong>.</li>
+</ul>
+
+<h2 id="create-an-ebs-provisioned-iops-volume-from-a-snapshot">Create an EBS Provisioned IOPS Volume From a Snapshot</h2>
+
+<h3 id="create-an-ebs-provisioned-iops-volume-from-a-snapshot-overview">Overview</h3>
+
+<p>Amazon&#39;s Elastic Block Storage (EBS) allows for block level storage to be created for use with Amazon EC2 Instances. With an EBS volume, you can create a snapshot to reference a particular point in time of a volume. There are several scenarios where you might need to create an EBS volume from a snapshot. One is because you might need the data on the volume to be accessed by more than one Server instance. Currently, you can only mount an EBS volume to one instance at a time. Another is if you are moving your application&#39;s permanent storage from S3 to EBS.</p>
+
+<p>When creating an EBS volume, there are two EBS volume types to be aware of: Standard and Provisioned IOPS. A Standard volume is best suited for boot volumes and provides roughly 100 IOPS (Input/Output Per Second) on average. Provisioned IOPS volumes are designed to provide predictable, high performance I/O workloads and are best suited for distributed filesystems, database workloads and various other enterprise applications. This tutorial shows you how to create an EBS Provisioned IOPS Volume from a Snapshot. For information about creating an EBS Standard from a Snapshot, see <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#create-an-ebs-standard-volume-from-an-ebs-snapshot">Create an EBS Standard Volume from an EBS Snapshot</a>.</p>
+
+<p>EBS volumes and snapshots are EC2 region-specific. You cannot use a volume/snapshot that you created in EC2-US in a different region like EC2-EU. This tutorial assumes you are creating an EBS volume from a snapshot in the EC2-US region.</p>
+
+<p>Use the procedure outlined below to create an EBS Provisioned IOPS Volume From a Snapshot.</p>
+
+<h3 id="create-an-ebs-provisioned-iops-volume-from-a-snapshot-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A snapshot created from an EBS Standard volume stored in an accessible S3 bucket.</li>
+</ul>
+
+<h3 id="create-an-ebs-provisioned-iops-volume-from-a-snapshot-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Volume Snapshots</strong> and select a snapshot. Click the <strong>Create/Attach Volume Now</strong> button.</li>
+<li>Enter a <strong>Name</strong> and <strong>Description</strong> for the new IOPS volume.</li>
+<li>Specify the <strong>Availability Zone</strong> where you want to create the new volume.</li>
+</ul>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>You will not be able to change the volume&#39;s availability zone once it&#39;s been created.</p>
+</div>
+
+<ul>
+<li>Open the <strong>Snapshot</strong> dropdown and select the snapshot to create the volume from. This setting defaults to the snapshot you selected above.</li>
+<li>Using the <strong>Attach To</strong> dropdown, choose the running server you want to attach the new IOPS volume to.</li>
+<li>Select an appropriate <strong>Device</strong> mount point for the new volume. Use the <strong>Override</strong> option if necessary to enter a different moint point.</li>
+<li>Select &#39;io1&#39; as the <strong>Volume Type</strong>.</li>
+<li>Enter the size for the new volume. The <strong>Size in GB</strong> of a Provisioned IOPS volume must be at least 10GB in size. When the <strong>Volume Type</strong> is set to &#39;io1&#39;, the <strong>IOPS</strong> field displays. This option defines the Input/Output Per Second rate that you would like to provision for the volume. The IOPS provisioned ratio of IOPS to the volume size can be a maximum of 30 IOPS/GB. Therefore, if the <strong>Size in GB</strong> is 10GB, the highest the <strong>IOPS</strong> value can be set to is 300. The range to create a Provisioned IOPS volume is 100 IOPS and 10GB up to 4,000 IOPS and 133GB.</li>
+<li>In the <strong>IOPS</strong> field, enter the input/output operations per second the new volume supports.</li>
+<li>Select the optional <strong>Encrypted</strong> option if desired.</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>When you select Provisioned IOPS volumes, you are charged by the amount you provision in GB per month as well as the amount you provision in IOPS. For more information about EBS pricing, see <a href="https://aws.amazon.com/pricing/ebs/">Amazon Elastic Block Store (EBS) Pricing</a>.</p>
+</div>
+
+<ul>
+<li>Click the <strong>Create</strong> button. Once the new volume is created you are taken to the Info tab for then new volume which displays some basic information about the volume and also allows you to attach/detach it to/from an instance, or even create a snapshot.</li>
+</ul>
+
+<h2 id="delete-an-ebs-volume">Delete an EBS Volume</h2>
+
+<h3 id="delete-an-ebs-volume-overview">Overview</h3>
+
+<p>Although deleting an EBS Volume and all its associated data may seem a bit ominous, it is not if you have been diligent to create snapshots. The data is what is important, so keeping reliable snapshots on S3 is the key.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>When an EBS volume is deleted, any references to that volume will also be deleted, including any Servers that have been configured to attach that particular volume at launch time. As a precautionary step you should also check to see which servers are referencing the volume.&nbsp;</p>
+</div>
+
+<p>Use the procedure outlined below to delete an EBS Volume.</p>
+
+<h3 id="delete-an-ebs-volume-prerequisites">Prerequisites</h3>
+
+<p>By default, you cannot delete an EBS Volume that is currently attached to a running instance. Be sure to <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#detach-an-ebs-volume-from-an-instance">detach an EBS volume from the running instance</a> before trying to delete an EBS Volume.</p>
+
+<p>Although not technically a prerequisite, before deleting an EBS Volume we strongly recommend you <a href="//cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#create-an-ebs-snapshot">create an EBS Snapshot</a> as a final backup.</p>
+
+<h3 id="delete-an-ebs-volume-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Volumes</strong> and select the volume that you want to delete. Under the <strong>Servers</strong> tab you&#39;ll see if the volume is currently attached to a running server or if any other servers are configured to attach the volume at boot time.</li>
+<li>To delete an EBS volume, go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Volumes</strong> and click on a volume&#39;s Delete action icon.</li>
+</ul>
+
+<h2 id="detach-an-ebs-volume-from-an-instance">Detach an EBS Volume from an Instance</h2>
+
+<h3 id="detach-an-ebs-volume-from-an-instance-overview">Overview</h3>
+
+<p>You must use caution when detaching an EBS volume from a running instance in order to ensure that no data is lost or corrupted. How you detach a volume will depend largely on the function of the volume. For example, if you are performing writes to the volume (i.e database or sys-log server), it&#39;s imperative that you freeze the file system before detaching the volume. However, if the volume is storing static data, freezing the file system may not be necessary.</p>
+
+<p>By default, when an instance is terminated, any attached volumes will automatically become <q>detached</q> from the running instance.</p>
+
+<p>As a best practice, you&#39;ll always want to create one last snapshot of a volume if you plan to delete it. You can either take the snapshot before you detach the volume or after it&#39;s been detached. If you are using Servers that were launched using one of RightScale&#39;s published <q>MySQL EBS</q> ServerTemplates, volumes will automatically be detached and deleted. Therefore, if you want to create one last snapshot before you detach (and possibly delete the volume), you should take one last backup EBS snapshot.</p>
+
+<p>How you take the final snapshot will largely depend on how the volume is currently being used.</p>
+
+<ul>
+<li>If you have a running instance where some application is writing data to the volume, you must first freeze the filesystem and then take the snapshot in order to ensure that no data is lost or corrupted. In such cases, you should ONLY take a snapshot by running the <q>**EBS volume backup**</q> script from the <q>EBS Toolbox</q> ServerTemplate. This script will perform an XFS freeze on the filesystem and then take a snapshot. Once the snapshot is 100% complete, you can safely detach the volume. DO NOT create a snapshot of the volume by using the <strong>Snapshot</strong> action button from the volume&#39;s page because it will not stop writes to the volume prior to the snapshot being taken, which may result in lost or corrupt data.</li>
+<li>If no data is being written to the volume, you can either follow the same steps as above or detach it at either the Server or Volume level. (see below) If a volume is detached, you can safely use the Snapshot action button at the Volume level. (Clouds &gt; <em>AWS Region</em> &gt; Volumes &gt; <em>Select Volume</em>)</li>
+</ul>
+
+<p>Use the procedure outlined below to detach an EBS volume from an instance.</p>
+
+<h3 id="detach-an-ebs-volume-from-an-instance-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A running instance with an attached EBS volume.</li>
+</ul>
+
+<h3 id="detach-an-ebs-volume-from-an-instance-steps">Steps</h3>
+
+<h4 id="before-you-detach-an-ebs-volume">Before you Detach an EBS Volume</h4>
+
+<ol>
+<li>Freeze the volume (if supported by the file system)</li>
+<li>Make sure that all files are closed and that there are no pending writes to the disk.</li>
+</ol>
+
+<h4 id="manually-detaching-an-ebs-volume">Manually detaching an EBS Volume</h4>
+
+<p>There are two different ways you can detach an EBS Volume from a running instance:</p>
+
+<ol>
+<li>Detach at the Server Level</li>
+<li>Detach at the Volume Level</li>
+</ol>
+
+<p><strong>Detach at the Server Level</strong></p>
+
+<ul>
+<li>To detach an EBS Volume from an instance, go to the <strong>Volumes</strong> tab of an instance and click the <strong>Detach</strong> button and confirm the action.</li>
+</ul>
+
+<p><img src="/img/cm-detach-volume-server-level.png" alt="cm-detach-volume-server-level.png" width="725" height="188" /></p>
+
+<p><strong>Detach at the Volume Level</strong></p>
+
+<ul>
+<li>Under <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>EBS Volumes</strong>, click on the Detach button of a volume. (You can also click the Detach button from the homepage of a selected volume.)</li>
+</ul>
+
+<p><img src="/img/cm-detach-volume-volume-level.png" alt="cm-detach-volume-volume-level.png" width="503" height="226" /></p>
+
+<h2 id="grow-the-size-of-an-ebs-volume">Grow the Size of an EBS Volume</h2>
+
+<h3 id="grow-the-size-of-an-ebs-volume-overview">Overview</h3>
+
+<p>An EBS volume cannot be resized once it is created.</p>
+
+<p>However, when you create a new EBS volume, you can specify the size of the volume upon creation or when you restore an EBS snapshot. The default size of an EBS volume is equal to the size of your current database plus 5GB.</p>
+
+<p>Since the size of the volume does not resize <q>on-the-fly,</q> at some point you may need to expand the EBS volume to compensate for a growing database. To grow an EBS volume with almost no site downtime in a production environment you need to perform the operations on the slave instance and then promote it to a master.</p>
+
+<p>Use the procedure outlined below to grow the size of an EBS volume.</p>
+
+<h3 id="grow-the-size-of-an-ebs-volume-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An EBS volume that has been determined to be too small. The example below includes a deployment that uses an EBS volume to house its master/slave database setup.</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>This article describes how to manually increase the size of a single EBS volume used to store your database contents. Use the <q>EBS Stripe volume grow and restore</q> or, in the case of a MySQL database, the <q>DB EBS slave init and grow stripe volume</q> RightScript, which handle both striped and single EBS volumes, to automate this task.</p>
+</div>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>It is highly recommended that you become familiar with this process and practice growing the size of an EBS volume in a staging environment before attempting to perform this procedure in your production environment.</p>
+</div>
+
+<h3 id="grow-the-size-of-an-ebs-volume-steps">Steps</h3>
+
+<h4 id="lower-your-dns-ttl">Lower your DNS TTL</h4>
+
+<p>Before you begin you should log into your dynamic DNS Provider (e.g. DNS Made Easy) that you&#39;re using to manage the DNS records for your Master/Slave database setup and make sure you have a low TTL for your database <strong>master&#39;s</strong> A-record. If you are using RightScale&#39;s MySQL database ServerTemplates and following best practices, you should be using a TTL &lt;= 120 seconds. (You might want to use an even lower TTL like 60 seconds.) So when you promote your slave to master, it will only take a few minutes for DNS to refresh. After a couple minutes, <code>nslookup</code> should return the new master&#39;s IP address.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>During this promotion your application servers will not be able to properly reach the new master.</p>
+</div>
+
+<p><strong>Example: DNS Made Easy</strong></p>
+
+<p>After logging into your account:</p>
+
+<ul>
+<li>Go to <strong>Managed DNS</strong> &gt; <strong>Records</strong> (for your domain name) &gt; <strong>Select</strong> your master DB A Record name</li>
+<li>Change the TTL to 60 (<em>Note</em>: Make a note of what you change it from. You will want to change it back later.)</li>
+<li>Select the <strong>Continue</strong> action button.</li>
+</ul>
+
+<p>Also, if you are using Rails you will need to restart your Mongrels because it cache&#39;s the IP addresses of the database.</p>
+
+<h4 id="ssh-into-the-slave-and-stop-database-services">SSH into the Slave and Stop Database Services</h4>
+
+<ul>
+<li>SSH into the slave and run the following command to stop MySQL and unmount the file system.</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    df # Check disk/mount paritions before and after the umount
+    service mysqld stop  
+    umount /dev/sdk
+    df
+</code></pre>
+
+<h4 id="detach-the-ebs-volume-from-the-slave">Detach the EBS Volume from the Slave</h4>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <em>AWS Region</em> &gt; <strong>Volumes</strong></li>
+<li>Locate the Slave&#39;s EBS volume. To confirm you have the correct one, make sure that:
+
+<ul>
+<li>The Server column = <q>Slave DB</q> (or similar nickname you used for your slave Server)</li>
+<li>The Device column = /dev/sdk</li>
+<li>The Status column = <q>in-use (attached)</q></li>
+</ul></li>
+<li>Click the correct eraser action icon to detach the EBS volume from the slave</li>
+</ul>
+
+<h4 id="restore-snapshot">Restore snapshot</h4>
+
+<p>Restore your most recent database snapshot and give it a much larger volume size. The nickname will be something like: <code>prefix-slave-20091281500</code>, where prefix is the lineage name of your snapshots that you&#39;ve already specified in your server input and <code>20091281500</code> is the timestamp of when the snapshot was taken.</p>
+
+<ul>
+<li>Navigate to <strong>Clouds</strong> &gt; <em>AWS Regions</em> &gt; <strong>Volume Snapshots</strong></li>
+<li>Select the play action icon on your most recent snapshot in order to create a new EBS volume
+
+<ul>
+<li><strong>Database size</strong> - You do not need to change anything except the <strong>database size</strong>.</li>
+<li><strong>Description</strong> - Although not mandatory, it is often useful to add some tracking information in the Description field. (For example, Doubled EBS volume size from 20 to 40GB on 1/1/2010.)</li>
+</ul></li>
+<li>Select the <strong>Create</strong> action button when ready</li>
+</ul>
+
+<h4 id="attach-the-new-ebs-volume-to-the-slave">Attach the New EBS Volume to the Slave</h4>
+
+<p>Once the volume is created, you are ready to attach it to your slave. (Depending on the size of the database, it may take some time to become 100% complete.)</p>
+
+<ul>
+<li>Select the <strong>Attach</strong> action button and select the same slave instance that the volume was previously attached to. You will be presented with a multi-pane window. Select <em>YourDeployment</em> &gt; <em>YourSlaveServer</em></li>
+<li>Make sure the device is set to: <strong>/dev/sdk</strong></li>
+<li>Check the <strong>Attach now</strong> option (Do <em>not</em> check the <strong>Attach at boot</strong> option since we only need to attach it this time only.)</li>
+<li>Select the <strong>Ok</strong> action button when ready. This operation could take a minute or two to complete. Follow the progress via the Events and/or Audit Entries. The <q>status</q> should progress from <q>attaching</q> to <q>in-use (attached)</q>.</li>
+</ul>
+
+<h4 id="mount-and-grow-the-filesystem">Mount and Grow the Filesystem</h4>
+
+<p>Once the EBS volume is attached you can mount it to your slave and grow the filesystem and verify the new size. Then start mysqld and verify the slave is replicating and the database is intact. Perform the following command from an SSH window on your slave:</p>
+<pre class="syntax-highlight plaintext"><code>    mount /dev/sdk /mnt/mysql # mount
+    df # check the size
+    xfs_growfs -d /mnt/mysql # grow the filesystem
+    df # Verify the increase in volume size
+    service mysqld start # Start up database services
+    mysql
+    show databases; # make sure you see your databases
+    show slave status \G # Should show slave status, in sync with the master, waiting for new events
+</code></pre>
+
+<h4 id="promote-slave-to-master">Promote Slave to Master</h4>
+
+<p>The last entry of the <q>show slave status</q> mysql command (above) reveals the number of seconds the slave is replicating behind master. (For example: Seconds_Behind_Master: 0) Once the slave is fully caught up synchronizing with master you can promote it to master.</p>
+
+<ul>
+<li>Go to your slave&#39;s Scripts tab</li>
+<li>Run the <q>DB EBS Promote to Master</q> operational script (select its Run action icon)</li>
+<li>Recall you can monitor the scripts progress via Events and/or Audit Entries. You are looking for <q>completed</q> and <q>success</q> Events.</li>
+<li>Once completed, verify the <q>old</q> slave is now your <q>new</q> master database Server. From the <q>old</q> slave&#39;s SSH window, rerun the following mysql command:
+
+<ul>
+<li><code>show slave status \G</code> # Should be the empty set now</li>
+<li><code>show master status \G</code> # Should reveal your old slave is now the master</li>
+</ul></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Remember to rename your <q>old</q> slave to your <q>new</q> master. (For example: NEW Master DB) This is such a simple task, yet not naming your Servers clearly can be very confusing and produce incorrect user actions with devastating results.</p>
+</div>
+
+<h4 id="restart-mongrels-and-web-services-(optional)">Restart Mongrels and Web Services (optional)</h4>
+
+<p>Restart your mongrels and any other web services to make sure they hit the new master. If your application does not require a restart, you can proceed to the next step. (This is a application specific step that not all will need to perform.)</p>
+
+<h4 id="terminate-the-old-master-and-launch-a-new-slave">Terminate the Old Master and Launch a New Slave</h4>
+
+<ul>
+<li>Terminate the OLD Master database Server</li>
+<li>Clone the running master database Server. Rename it appropriately, it will become your new slave (For example: Slave DB)</li>
+<li>Launch the new slave Server
+
+<ul>
+<li>Verify that the Input INIT_SLAVE_AT_BOOT = true</li>
+</ul></li>
+<li>Verify that both the master and slave have the larger volume size
+
+<ul>
+<li>Look at the Volumes tab on your running Master DB Server</li>
+<li>Look at the Volumes tab on your running Master DB Server</li>
+</ul></li>
+</ul>
+
+<h3 id="grow-the-size-of-an-ebs-volume-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<ul>
+<li>Double check that all Servers in your Deployment are named correctly</li>
+<li>When things have settled, you can change your DNS setting&#39;s TTL back to what it was at the start of this Tutorial (for your Master-DB).</li>
+</ul>
+
+<h2 id="initialize-or-format-an-ebs-volume">Initialize or Format an EBS Volume</h2>
+
+<h3 id="initialize-or-format-an-ebs-volume-overview">Overview</h3>
+
+<p>Perhaps you used the <strong>Attach Blank Volume</strong> action button to <a href="/cm/dashboard/clouds/aws/actions/ebs_volumes_actions.html#attach-an-ebs-volume-to-an-instance">Attach an EBS Volume to an Instance</a>. But, before you can use an attached EBS Volume as a normal disk drive, you must first initialize or format it.</p>
+
+<p>Use the procedure outlined below to initialize an EBS volume that was manually attached.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Some ServerTemplates, such as RightScale&#39;s <q>MySQL</q> ServerTemplates contain scripts that will attach and initialize EBS Volumes to a Server at boot and runtime.</p>
+</div>
+
+<h3 id="initialize-or-format-an-ebs-volume-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;actor&#39; user role privileges</li>
+<li>an EBS Volume that was attached to a Linux Server, but not initialized/formatted.</li>
+</ul>
+
+<h3 id="initialize-or-format-an-ebs-volume-steps">Steps</h3>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The following steps were tested on an instance running CentOS 5.2</p>
+</div>
+
+<ol>
+<li>Go to the <strong>Volumes</strong> tab of the Server that has the unitialized/unformatted EBS Volume. If you just attached the EBS Volume to the instance, you must wait for its status to be <q>attached</q> to the instance before attempting to initilize the volume. If the volume still says <q>pending</q> you must wait a couple more minutes.</li>
+<li>SSH into the Server and run the following shell commands to initialize the EBS Volume:
+
+<ul>
+<li><code>fdisk /dev/sdj</code> You must specify which mounted volume you want to format.</li>
+<li>Enter <code>m</code> for a menu</li>
+<li>Enter <code>n</code> to add a new partion</li>
+<li>Enter <code>p</code> for a primary partition</li>
+<li>Enter <code>1</code> for the first partion on the disk</li>
+<li>Click &#39;Enter&#39; to accept the default First Cylinder</li>
+<li>Select &#39;Enter&#39; to accept the default Last Cylinder</li>
+<li>Enter <code>w</code> to write the partition table (You will be returned to the Unix shell)</li>
+<li><code>mkfs.xfs -f /dev/sdj</code> (If you do not have mkfs.xfs installed, you will need to install it using a command similar to the following: <code>yum install kmod-xfs xfsdump xfsprogs dmapi</code></li>
+<li><code>mkdir /mnt/ebs</code></li>
+<li>To test, you can type <code>df -k</code> to see the mounted devices. At this point, you will not see the file system that&#39;s on your EBS volume.</li>
+<li><code>mount /dev/sdj /mnt/ebs</code></li>
+<li>Run the test again using <code>df -k</code> but this time you should see the filesystem on your EBS volume with the correct mount point (e.g. /mnt/ebs).</li>
+</ul></li>
+<li>Close your SSH session. You can now save data to the EBS Volume and take a backup, which will create an EBS Snapshot of the volume which can later be used to restore your volume&#39;s data on another instance.</li>
+</ol>
+
+<h2 id="create-an-ebs-snapshot">Create an EBS Snapshot</h2>
+
+<h3 id="create-an-ebs-snapshot-overview">Overview</h3>
+
+<p>An EBS snapshot represents an EBS volume at a particular point in time. You can take an EBS snapshot of an EBS volume regardless of whether or not the volume is attached to a running instance, although it is strongly recommended that you either detach or freeze all writes to a volume before taking a snapshot in order to prevent any data loss or corruption. If you do not take these necessary precautions, your data will not be in synch and you could possibly lose or corrupt data on the disk.</p>
+
+<p>EBS snapshots are a series of data blocks that are saved to S3. You cannot attach the same volume to multiple instances, but you can take a snapshot of the volume, create a clone of the volume from the snapshot and specify the appropriate availability zone.</p>
+
+<p>EBS volumes and snapshots are EC2 region-specific. You cannot use a volume/snapshot that you created in EC2-US in a different region like EC2-EU. This tutorial assumes you are creating an EBS snapshot for EC2-US.</p>
+
+<p><img src="/img/cm-ebs-diagram-create-snapshot.gif" alt="cm-ebs-diagram-create-snapshot.gif" width="603" height="355" /></p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>The data on your volume can be corrupted if you do not properly detach/freeze a volume before taking a snapshot. As a best practice, you should always make sure that no writes are being made to a volume before taking a snapshot. Both the EBS Toolbox and MySQL EBS ServerTemplates issue an &#39;xfs_freeze&#39; on the EBS volume prior to taking the snapshot, which stops all write activity before the snapshot is taken.</p>
+</div>
+
+<p>Use the procedure outlined below to create an EBS Snapshot.</p>
+
+<h3 id="create-an-ebs-snapshot-steps">Steps</h3>
+
+<p>Before you Create a Snapshot of an EBS Volume:</p>
+
+<ol>
+<li>Freeze the volume (if supported by the file system)</li>
+<li>Make sure that all files are closed and that there are no pending writes to the disk</li>
+</ol>
+
+<p><strong>Create an EBS Snapshot</strong></p>
+
+<p>You can take EBS Snapshots of a volume at a particular point in time and then create multiple volumes from a snapshot and place them into any zone. You can see the lineage of a volume/snapshot to see when it was created, as well as any parent/child relationships.</p>
+
+<ul>
+<li>Go to <strong>Clouds</strong> &gt; <strong>AWS Region</strong> &gt; <strong>Volumes</strong></li>
+<li>Find your volume of choice and click the Snapshot icon</li>
+</ul>
+
+<p><img src="/img/cm-ebs-create-snapshot.png" alt="cm-ebs-create-snapshot.png" width="725" height="139" /></p>
+
+<ul>
+<li>Alternatively, you can also click the Snapshot action button from an EBS Volume&#39;s homepage.</li>
+</ul>
+
+<p><img src="/img/cm-ebs-create-snapshot2.png" alt="cm-ebs-create-snapshot2.png" width="502" height="446" /></p>
+
+<ul>
+<li>Provide a name and short description of the volume. Click <strong>Create</strong>.</li>
+</ul>
+
+<p><img src="/img/cm-ebs-create-snapshot3.png" alt="cm-ebs-create-snapshot2.png" width="545" height="461" /></p>
+
+<ul>
+<li>A confirmation window will track the progress of your snapshot.</li>
+</ul>
+
+<p><img src="/img/cm-ebs-create-snapshot4.png" alt="cm-ebs-create-snapshot2.png" width="556" height="645" /></p>
+
+<p>Depending on the size of the volume, it might take several minutes to create the snapshot. You must wait for its status to become <q>completed</q> before you can launch it and create a volume from the new snapshot.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

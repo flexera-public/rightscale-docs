@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Chef Cookbooks RightLink 10 Migration Guide</title><meta content="Migration guide for migrating Chef Cookbook based ServerTemplates to use RightLink 10." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="rl10 rl10_migration rl10_migration_rl10_chef_cookbooks_migration" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="../getting_started.html">Getting Started</a><a class="list-group-item" href="../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">RightLink 10</a> &#x2F; <a href="./">Migration Guide</a></p><div class="page-header"><h1>Chef Cookbooks RightLink 10 Migration Guide</h1></div><div class="main-content"><p>With RightLink 10, <a href="https://www.chef.io/chef/">Chef</a> based ServerTemplates where cookbooks and recipes are managed within the RightScale platform
+are no longer directly supported, so several steps are needed to migrate. Instead of storing <a href="https://www.chef.io/chef/">Chef</a> cookbooks within the
+RightScale platform with previous RightLink versions, you will need to store them with a Chef Server or using
+<a href="https://manage.chef.io/">Hosted Chef</a>. For information about launching and using a Chef Server with the RightScale platform, please see
+<a href="/st/rl10/chef-server/tutorial.html">Chef Server for Linux (RightLink 10) - Tutorial</a>. RightScale Professional services has a set of
+<a href="/st/rl10/index.html">RightLink 10 ServerTemplates</a> which are based on the previous Version 14 ServerTemplates, but updated to work with
+RightLink 10 and a Chef Server or Hosted Chef following the same methodology described here. They can be used directly,
+or as reference examples, and they can be found on GitHub in <a href="https://github.com/rs-services/server-templates">rs-services/server-templates</a> where they are managed using
+the <a href="/rl10/reference/rl10_storing_scripts_in_git_svn.html#right-st-tool-method">Right ST tool method</a> of syncing ServerTemplates and RightScripts from a Git repository.</p>
+
+<h2 id="building-a-new-servertemplate">Building a new ServerTemplate</h2>
+
+<p>The basic methodology for migrating an older Chef cookbook based ServerTemplate to work with RightLink 10 is to clone or
+otherwise base a new ServerTemplate on the <a href="https://www.rightscale.com/library/server_templates/RightLink-10-Linux-Chef-Client/lineage/57237">Chef Client for Linux (RightLink 10)</a> ServerTemplate. After cloning or basing the new SeverTemplate, add a RightScript or RightScripts that invoke the Chef command line tools with the Chef recipes from your old ServerTemplate that it will be fetching from the Chef Server or Hosted Chef. In addition these RightScripts will most likely need to
+also set up Chef attributes JSON based on RightScale inputs before invoking Chef.</p>
+
+<p>Here is an example of a RightScript that invokes the <a href="https://github.com/rightscale-cookbooks/rs-base/blob/master/attributes/swap.rb">rs-base::swap</a> recipe from the <a href="https://github.com/rightscale-cookbooks/rs-base">rs-base cookbook</a> with
+<code>BASE_SWAP_SIZE</code> and <code>BASE_SWAP_FILE</code> inputs:</p>
+<pre class="syntax-highlight shell"><code><span class="c">#!/usr/bin/sudo /bin/bash</span>
+
+<span class="nb">set</span> -e
+
+<span class="c"># Set defaults for inputs; this is useful if you use the "right_st scaffold"</span>
+<span class="c"># command to add RightScript metadata comments</span>
+: <span class="k">${</span><span class="nv">BASE_SWAP_SIZE</span>:<span class="p">=1</span><span class="k">}</span>
+: <span class="k">${</span><span class="nv">BASE_SWAP_FILE</span>:<span class="p">=/mnt/ephemeral/swapfile</span><span class="k">}</span>
+
+<span class="nv">chef_attributes</span><span class="o">=</span>chef_attributes.json
+
+<span class="c"># Construct the Chef attributes as a JSON file including passing in inputs and</span>
+<span class="c"># the recipe(s) to run in the run list</span>
+cat &gt;<span class="nv">$chef_attributes</span> <span class="sh">&lt;&lt;EOF
+{
+  "rs-base": {
+    "swap": {
+      "size": $BASE_SWAP_SIZE,
+      "file": "$BASE_SWAP_FILE"
+    }
+  },
+  "run_list": [
+    "recipe[rs-base::swap]"
+  ]
+}
+EOF
+
+</span><span class="c"># Run Chef with the JSON attributes (Chef's other configuration is taken care</span>
+<span class="c"># of by earlier RightScripts in the "Chef Client for Linux (RightLink 10)"</span>
+<span class="c"># ServerTemplate</span>
+chef-client --json-attributes <span class="nv">$chef_attributes</span>
+</code></pre>
+
+<h2 id="issues-with-rightlink-5-and-version-13-servertemplates">Issues with RightLink 5 and Version 13 ServerTemplates</h2>
+
+<p>RightLink 5 and its accompanying Version 13 ServerTemplates used several non-standard Chef resources, which were built
+into RightLink itself and subsequently removed in RightLink 6. Here are those resources and our recommendations for what
+to do when migrating Chef cookbooks that use them:</p>
+
+<ul>
+<li><code>remote_recipe</code>: This resource was used for running Chef recipes on other Server instances in a deployment. For this
+kind of orchestration we now recommend using <a href="/ss/about.html">Self-Service</a> instead. Alternatively, the RightScale Professional
+Services team provides the <a href="https://github.com/RightScale-Services-Cookbooks/rsc_remote_recipe">rsc_remote_recipe</a> cookbook which provides a new implementation of <code>remote_recipe</code>, but it
+requires passing a RightScale API refresh token to your instance rather than just using the instance facing API
+access so you will need to be sure to take extra care in choosing which account and access to use for this access.
+Also, sometimes the <code>remote_recipe</code> resource was used to run recipes on the same instance, in that case you may be
+able to use API calls through <a href="/rl10/reference/rl10_local_and_proxied_http_requests.html">local and proxied HTTP requests</a> to schedule RightScripts to run instead.</li>
+<li><code>right_link_tag</code>/<code>server_collection</code>: These resources were used for tagging Server instance and finding tagged Server
+instances respectively. In the Version 14 ServerTemplates these resources were replaced by the <a href="https://github.com/rightscale-cookbooks/machine_tag">machine_tag cookbook</a>
+and it works with RightLink 10, so we recommend using the latest version of the <a href="https://github.com/rightscale-cookbooks/machine_tag">machine_tag cookbook</a>&#39;s resources
+and functions to replace the <code>right_link_tag</code> and <code>server_collection</code> resources.</li>
+<li><code>rs_shutdown</code>: This resource was used to reboot, stop, or terminate the Server instance. With RightLink 10, you can
+reboot or shutdown (stop) using the operating system&#39;s native facilities and RightLink will behave correctly, so we
+recommend using the native commands for reboot and stop (both use <code>shutdown</code> with specific arguments on Linux). For
+orchestration tasks like terminating an instance we instead recommend using <a href="/ss/about.html">Self-Service</a>.</li>
+</ul>
+
+<p>The Version 13 ServerTemplates also used some of the &#39;rs_*&#39; commands as well, we recommend you <a href="/rl10/migration/rl10_rightscript_migration.html#--rs_*--commands-are-no-longer-used">use rsc in place of
+&#39;rs_*&#39; commands</a>.</p>
+
+<h3 id="issues-with-rightlink-5-and-version-13-servertemplates-rightscale_tools-gem">rightscale_tools gem</h3>
+
+<p>The Version 13 ServerTemplate used a proprietary Ruby gem for some of the volume management and database functionality.
+For the volume management functionality used <code>right_api_client</code> and authentication credentials that were passed in the
+environment when running under RightLink 5. In RightLink 10 those credentials are no longer passed in the environment
+and instead API calls are made with <a href="/rl10/reference/rl10_local_and_proxied_http_requests.html">local and proxied HTTP requests</a>. If you wish to continue using the Version 13
+ServerTemplates cookbooks for volume management, you will need to modify the <code>rightscale_tools</code> gem that is included in
+the <code>rightscale</code> cookbook (for example <a href="https://github.com/rightscale/rightscale_cookbooks/blob/release13.05.01/cookbooks/rightscale/files/default/rightscale_tools-1.7.33.gem">rightscale_tools-1.7.33.gem</a>) with a small change to its code to use the latest
+<code>right_api_client</code>&#39;s RightLink 10 proxy support. You can extract the contents of the gem file using <code>gem unpack</code> and
+later use <code>gem build</code> to create a new gem file to replace it. The code that needs to be changed is in the file
+<code>lib/rightscale_tools/api/15.rb</code>:</p>
+<pre class="syntax-highlight ruby"><code>        <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+          <span class="k">super</span> <span class="n">options</span>
+
+          <span class="n">api_token</span> <span class="o">=</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'RS_API_TOKEN'</span><span class="p">]</span>
+          <span class="k">raise</span> <span class="s1">'RightScale API token environment variable RS_API_TOKEN is unset'</span> <span class="k">unless</span> <span class="n">api_token</span>
+          <span class="n">account_id</span><span class="p">,</span> <span class="n">instance_token</span> <span class="o">=</span> <span class="n">api_token</span><span class="p">.</span><span class="nf">split</span> <span class="sr">/:/</span>
+          <span class="n">api_url</span> <span class="o">=</span> <span class="s2">"https://</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'RS_SERVER'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+          <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="ss">:account_id</span> <span class="o">=&gt;</span> <span class="n">account_id</span><span class="p">,</span>
+            <span class="ss">:instance_token</span> <span class="o">=&gt;</span> <span class="n">instance_token</span><span class="p">,</span>
+            <span class="ss">:api_url</span> <span class="o">=&gt;</span> <span class="n">api_url</span>
+          <span class="p">}.</span><span class="nf">merge</span> <span class="n">options</span>
+
+          <span class="vi">@client</span> <span class="o">=</span> <span class="no">RightApi</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span> <span class="n">options</span>
+          <span class="vi">@client</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="vi">@logger</span><span class="p">)</span>
+        <span class="k">end</span>
+</code></pre>
+
+<p>It can be replaced with the following code:</p>
+<pre class="syntax-highlight ruby"><code>        <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+          <span class="k">super</span> <span class="n">options</span>
+
+          <span class="vi">@client</span> <span class="o">=</span> <span class="no">RightApi</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span><span class="ss">:rl10</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">}.</span><span class="nf">merge</span><span class="p">(</span><span class="n">options</span><span class="p">))</span>
+          <span class="vi">@client</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="vi">@logger</span><span class="p">)</span>
+        <span class="k">end</span>
+</code></pre>
+
+<h2 id="issues-with-rightlink-6-and-version-14-servertemplates">Issues with RightLink 6 and Version 14 ServerTemplates</h2>
+
+<p>As mentioned above, the RightScale Professional Services team has a set of <a href="/st/rl10/index.html">RightLink 10 ServerTemplates</a> which have
+adapted the cookbooks that make up the Version 14 ServerTemplates to work with <a href="https://www.chef.io/chef/">Chef</a> under RightLink 10. If you are
+directly using the Version 14 ServerTemplates, you may be able to move to an equivalent RightLink 10 ServerTemplate. If
+you have built ServerTemplates using the Version 14 cookbooks, you may be able to upgrade to the latest versions of the
+cookbooks which have the necessary changes to support RightLink 10 running Chef. The Version 14 ServerTemplates still
+used the <code>rs_run_recipe</code>/<code>rs_run_rightscript</code> to trigger running other recipes/RightScripts, but since RightLink 10 does
+not include them you should <a href="/rl10/migration/rl10_rightscript_migration.html#--rs_*--commands-are-no-longer-used">use rsc in place of &#39;rs_*&#39; commands</a>. However, there is no longer a way to run
+RightScripts on other Server instances using just the instance access so we recommend doing that kind of orchestration
+with RightScale <a href="/ss/about.html">Self-Service</a> instead. Alternatively, if you pass a RightScale API refresh token to your instance, you
+can make the API calls to run RightScripts on other instances using <code>rsc</code>. The RightScale Professional Services team
+also provides the <a href="https://github.com/RightScale-Services-Cookbooks/rsc_remote_recipe">rsc_remote_recipe</a> cookbook which provides a <code>remote_recipe</code> resource to do the same thing.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

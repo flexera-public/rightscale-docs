@@ -1,0 +1,734 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightScripts Actions</title><meta content="Common procedures for working with RightScripts in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_design cm_dashboard_design_rightscripts cm_dashboard_design_rightscripts_rightscripts_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Design</a> &#x2F; <a href="./">RightScripts</a></p><div class="page-header"><h1>RightScripts Actions</h1></div><div class="main-content"><h2 id="add-a-rightscript-or-recipe-to-a-servertemplate">Add a RightScript or Recipe to a ServerTemplate</h2>
+
+<p>You have the ability to add RightScripts and recipes to ServerTemplates. In the API, RightScripts and recipes are viewed as the same object and referred to as <q>runnables</q>.</p>
+
+<h3 id="-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>The &#39;designer&#39; user role</li>
+<li>An editable ServerTemplate (a HEAD revision)</li>
+</ul>
+
+<h3 id="-steps-for-adding-rightscripts">Steps for Adding RightScripts</h3>
+
+<p>Use the following steps to add a RightScript to a ServerTemplate and place it in the proper sequence.</p>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>ServerTemplates</strong> and click the ServerTemplate that you are adding the RightScript to. You can use the <q>Filter by</q> search box to help if you have many ServerTemplates in the list.<br>
+<img src="/img/cm-servertemplates.png" alt="cm-servertemplates.png" width="725" height="125" /><br>
+<em>Hint</em>: Click the <strong>Help</strong> action button to toggle the context sensitive Help Text built into the RightScale Dashboard. The Help Text contains useful overview information to assist you wherever you are within the Dashboard. If you are not yet familiar with ServerTemplates and the MultiCloud Marketplace, please take a minute to read the Help Text.</li>
+<li>Click the ServerTemplate&#39;s Scripts tab.<br>
+RightScripts can be added to ServerTemplates as either a Boot Sequence, Operational, or Decommission Sequence scripts.</li>
+<li>Click <strong>Modify</strong>. The Script Selection window opens.
+
+<ul>
+<li>Select <strong>RightScripts</strong>.</li>
+<li>Find the RightScript that you want to add. Use the <strong>Filter Recipes and RightScripts</strong> field to narrow your search.</li>
+<li>Drag and drop the desired RightScript into place in the desired category. You can drag RightScripts up or down in the list to change the order in which they will run.</li>
+</ul></li>
+</ol>
+
+<p><img src="/img/cm-drag-and-drop-scripts.png" alt="cm-drag-and-drop-scripts.png" width="725" height="215" /></p>
+
+<p>The RightScript is now listed with the other scripts of the same type (Boot Sequence, Operational, or Decomission Sequence).</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Operational Scripts can be manually run when a server is operational, whereas Decommission Scripts are executed during the shutdown phase in order to provide a more graceful server termination.</p>
+</div>
+
+<h3 id="-steps-for-adding-recipes">Steps for Adding Recipes</h3>
+
+<p>Use the following steps to add a recipe to a ServerTemplate and place it in the proper sequence.</p>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>ServerTemplates</strong> and click the ServerTemplate that you are adding the recipe to. You can use the <q>Filter by</q> search box to help if you have many ServerTemplates in the list. <em>Hint</em>: Click the <strong>Help</strong> action button to toggle the context sensitive Help Text built into the RightScale Dashboard. The Help Text contains useful overview information to assist you wherever you are within the Dashboard. If you are not yet familiar with ServerTemplates and the MultiCloud Marketplace, please take a minute to read the Help Text.<br>
+<img src="/img/cm-servertemplates.png" alt="cm-servertemplates.png" width="725" height="125" /></li>
+<li>Click the ServerTemplate&#39;s Scripts tab.<br>
+Recipes can be added to ServerTemplates as either an Operational Script, Boot or Decommission Sequence.</li>
+<li>Click <strong>Modify</strong>. The Recipe Selection window appears in the right pane.
+
+<ul>
+<li>All the cookbooks that are attached to your ServerTemplate are listed. Select a cookbook to view its recipes. Then drag and drop recipes into the ServerTemplate. If the cookbook that you&#39;re looking for is not in the list, use the <strong>Attach Cookbooks</strong> button to view all the cookbooks in your account and select which cookbooks you would like to attach to the ServerTemplate so their recipes are available to add.</li>
+</ul></li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>As always, you can only make these changes on a HEAD revision.</p>
+</div>
+
+<p><img src="/img/cm-add-recipe-to-st.png" alt="cm-add-recipe-to-st.png" width="725" height="288" /></p>
+
+<p>The recipe is now listed with the others of the same type (boot, operational, or decommission).</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Operational Scripts can be manually run when a server is operational, whereas Decommission Sequence recipes are executed during the shutdown phase in order to provide a more graceful server termination.</p>
+</div>
+
+<h2 id="clone-a-rightscript">Clone a RightScript</h2>
+
+<p>You can clone a RightScript so that it becomes your own (Private) RightScript that you can customize to suit your needs. Note that you cannot edit a committed revision of a RightScript. You must clone it in order to create an editable version under <strong>Design</strong> &gt; <strong>RightScripts</strong>.</p>
+
+<h3 id="clone-a-rightscript-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Design</strong> &gt; <strong>RightScripts</strong>. Select one of the available RightScripts that you would like to clone.</li>
+<li>When you click the <strong>Clone</strong> action button, an editable copy (HEAD version) of that RightScript will be created.</li>
+<li>You may notice a warning message that the cloned object will have its usage reported to RightScale. This message is meant to convey the fact that RightScale is able to track the lineage of an object even if it&#39;s cloned.</li>
+</ul>
+
+<p>By default, the version of a RightScript will be incremented. For example, if you clone <q>Script v8</q> the new cloned version will be named <q>Script v9</q>. Therefore, we recommend changing the name of the RightScript to help better distinguish the cloned script from its ancestor. Under the Info tab, notice that we always show where a script was cloned from.</p>
+
+<p><img src="/img/cm-clone-rightscript.png" alt="cm-clone-rightscript.png" width="621" height="659" /></p>
+
+<h2 id="create-a-new-rightscript">Create a New RightScript</h2>
+
+<p>RightScripts, along with the role they play in ServerTemplates are in many ways the heart of the RightScale Cloud Management Platform. Customers and Partners are free to use our RightScripts <q>as is</q>, clone and customize existing RightScripts to suit their specific needs, or create new RightScripts from scratch. This tutorial shows you how to create a basic RightScript.</p>
+
+<h3 id="create-a-new-rightscript-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Design</strong> &gt; <strong>RightScripts</strong> and click <strong>New</strong>.</li>
+</ul>
+
+<p><img src="/img/cm-new-rightscript.png" alt="cm-new-rightscript.png" width="543" height="503" /></p>
+
+<p>Provide the following information:</p>
+
+<ul>
+<li><strong>Name</strong> - A short nickname that helps you recognize the script.</li>
+<li><strong>Description</strong> - Describe the purpose of the script and any required inputs parameters that need to be defined. The description field is optional and does not affect the script&#39;s behavior.</li>
+<li><strong>Packages</strong> - A space-separated list of packages to install on the server. (ex: <q>mysql-server mysql-devel perl-DBD-MySQL mysqlclient14</q>) At boot time, the package lists of all RightScripts attached to the server are linked together and installed in one invocation of the package manager (typically yum).</li>
+<li><strong>Inputs</strong> - A RightScript can be parameterized by specifying a number of inputs that need to be provided to the script for its operation. These inputs can come from a number of sources: user, server template, meta-data about the server or other servers, and the credentials attached to the account. The inputs are passed to the script as environment variables.
+
+<ul>
+<li><strong>Identify</strong> - Click the Identify button to detect any environment variables that were declared in the Script field below. For Linux, all references of the form <strong>$ALL_CAPS</strong> are automatically identified as potential input parameters. For Windows, all references of the form <strong>$env:ALL_CAPS</strong> are automatically identified as potential input parameters.</li>
+</ul></li>
+<li><strong>Script</strong> - The script is typically a Bash, Perl, Ruby or Powershell script. It&#39;s best to keep the code short. Long and complex programs should be defined as an attachment and placed into a library. If the script starts with &#39;#!&#39; the named executable will be invoked (standard Unix convention). For Windows, Powershell will be used. In Linux, if no &#39;#!&#39; is provided, then <q>/bin/bash -e</q> is used. Note that scripts should signal a failure by using a non-zero exit code, which will stop the application and cause the server to be marked as <q>stranded</q> in the server state. Any subsequent scripts that are supposed to be executed after the current script (in the case of boot or decommission scripts) will not be executed so that an operator can take corrective action. Be sure to the check the server&#39;s audit entries to troubleshoot a script that failed to execute.</li>
+</ul>
+
+<h2 id="create-reboot-safe-rightscripts">Create Reboot-safe RightScripts</h2>
+
+<p>In the RightScale Dashboard, you can manually reboot an active server by selecting Reboot from the <strong>More actions</strong> drop-down (<em>ServerName</em> &gt; <strong>More actions</strong> &gt; <strong>Reboot</strong>). In order for your servers to reboot properly, you need to make sure that your scripts are configured correctly. We are working hard to make sure that all of our RightScripts are reboot-safe. However, you are responsible for ensuring that your own custom scripts are reboot-safe. Follow the instructions below to make sure that your own RightScripts reboot-safe.</p>
+
+<h3 id="create-reboot-safe-rightscripts-things-to-consider">Things to Consider</h3>
+
+<ul>
+<li>You cannot <q>patch</q> a program twice; it may not work if it&#39;s patched on reboot.</li>
+<li>Most scripts that use mkdir to create a directory will fail the second time if you forget the -p option.</li>
+<li>Updates on REBOOT are up to you and your application because you may want to skip updates when you reboot a server.</li>
+<li>Database restores are not needed if the information was on /mnt because this data is automatically remounted on REBOOT.</li>
+</ul>
+
+<p>As you can see, there are several details associated with performing a successful reboot.</p>
+
+<p>To help you make sure that your RightScripts are reboot-safe, we&#39;ve provided a template below that you can follow as an example.</p>
+
+<h3 id="create-reboot-safe-rightscripts-example--reboot-safe-rightscript">Example: Reboot-safe RightScript</h3>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/bash</span>
+    <span class="c">#</span>
+    <span class="c"># Description:</span>
+    <span class="c">#</span>
+    <span class="c"># Simple BASH RightScript that skips a portion of the code on REBOOT</span>
+    <span class="c">#</span>
+
+    <span class="c">#</span>
+    <span class="c"># This code runs each time the server Boots or REBOOTS</span>
+    <span class="c">#</span>
+    <span class="nb">set</span> <span class="c"># Display all of the Environment Variables to the Audit file</span>
+
+    <span class="c">#</span>
+    <span class="c"># Test for a reboot, if this is a reboot just skip this script.</span>
+    <span class="c">#</span>
+    <span class="k">if </span><span class="nb">test</span> <span class="s2">"</span><span class="nv">$RS_REBOOT</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"true"</span> ; <span class="k">then
+      </span><span class="nb">echo</span> <span class="s2">"Skip Example script on reboot."</span>
+      logger -t ExampleScript <span class="s2">"Skip Example script on reboot."</span>
+      <span class="nb">exit </span>0 <span class="c"># Leave with a smile ...</span>
+    <span class="k">fi</span>
+
+    <span class="c">#</span>
+    <span class="c"># This portion of the RightScript runs only on first Launch boot.</span>
+    <span class="c">#</span>
+    date
+    <span class="nb">echo</span> <span class="s2">"This server just launched for the first time"</span>
+    logger -t ExampleScript <span class="s2">"This server just launched for the first time"</span>
+
+    <span class="nb">exit </span>0 <span class="c"># Leave with a smile...</span>
+</code></pre>
+
+<h3 id="create-reboot-safe-rightscripts-example-breakdown">Example Breakdown</h3>
+
+<p>Now we&#39;ll explain all of the features of this script above:</p>
+<pre class="syntax-highlight plaintext"><code>    #/bin/bash
+</code></pre>
+
+<ul>
+<li>Informs the shell that is is a BASH script</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    set
+</code></pre>
+
+<ul>
+<li>Displays all of the Environment Variables to the Audit FIle in the RightScale Dashboard and on the server in the <code>/var/log/install</code> file. This is a nice way to see which variables you need to work with in your scripts.</li>
+</ul>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>Remember that any code you <q>yum</q> install may add or delete variables later. For example, when java is installed, it adds several variables to the environment.</p>
+</div>
+<pre class="syntax-highlight plaintext"><code>    if test "$RS_REBOOT" = "true" ; then
+      echo "Skip Example script on reboot."
+      logger -t ExampleScript "Skip Example script on reboot."
+      exit 0 # Leave with a smile ...
+    fi
+</code></pre>
+
+<ul>
+<li>This short bash code example will exit the script at this point in the code when it&#39;s run for the second time on REBOOT. You could also place code inside the <q>if</q> for scripts that ONLY run on reboot.</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    logger -t Example "your text here"
+</code></pre>
+
+<ul>
+<li>The <q>logger</q> program adds lines of text to the <code>/var/log/messages</code> file and sends them to the RightScale Dashboard. The <q>-t</q> token helps you <q>grep</q> for these lines. Be sure to make it unique.</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    exit 0 # Leave with a smile...
+</code></pre>
+
+<ul>
+<li>Never leave the exit code to chance. This last line in every script sets the value to <q>good</q> or <q>operational.</q> Some Linux commands leave behind a value in <q>$?</q> that can give you problems. The <q>Leave with a smile...</q> line is just for fun.</li>
+</ul>
+
+<h3 id="create-reboot-safe-rightscripts-ruby-example">Ruby Example</h3>
+
+<p>In your ruby scripts, the following example will provide a way to skip code that should not be done on reboot.</p>
+<pre class="syntax-highlight plaintext"><code>    if ENV['RS_REBOOT'] == 'true'
+      system("logger -t ExampleScript Skipping Yada yada yada.")
+      exit(0) # Leave with a smile ...
+    end
+</code></pre>
+
+<h2 id="declare-an-environment-variable-in-a-rightscript">Declare an Environment Variable in a RightScript</h2>
+
+<p>A RightScript can be parameterized by specifying a number of inputs that need to be provided to the script for its successful operation. Proper syntax for declaring standard environment variable inputs will vary depending on the type of scripting language.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning:</strong><p>If a script contains <a href="/cm/dashboard/design/rightscripts/rightscripts_metadata_comments.html">RightScript Metadata Comments</a>, this input detection will not work and the input definitions in the comments will be used instead.</p>
+</div>
+
+<table><thead>
+<tr>
+<th>Language</th>
+<th>Environment Variable Declaration</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Bash</td>
+<td>$MYINPUT</td>
+</tr>
+<tr>
+<td>Perl</td>
+<td>$ENV{‘MYINPUT’}</td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td>ENV[‘MYINPUT’]</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>environ[‘MYINPUT’]</td>
+</tr>
+<tr>
+<td>Powershell</td>
+<td>$env:MYINPUT<br> Because Powershell variable names are not case sensitive, you can use all lower case letters to prevent system environment variables from being identified as user-defined inputs. (e.g. $env:my_sys_input)</td>
+</tr>
+</tbody></table>
+
+<h3 id="declare-an-environment-variable-in-a-rightscript-steps">Steps</h3>
+
+<ul>
+<li>Go to the <strong>Scripts</strong> tab of an editable (HEAD) RightScript.</li>
+</ul>
+
+<p>Based on the language of the script, use the appropriate syntax format for declaring your environment variable. Remember to provide a helpful description for each environment variable that&#39;s identified. A few examples are shown below.</p>
+
+<h4 id="bash">Bash</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/bash -ex</span>
+    <span class="nb">echo</span> <span class="s2">"Hello my name is </span><span class="nv">$FIRST_NAME</span><span class="s2">"</span>
+</code></pre>
+
+<h4 id="perl">Perl</h4>
+<pre class="syntax-highlight perl"><code>    <span class="c1">#! /usr/bin/perl</span>
+    <span class="k">print</span> <span class="s">"Hi my name is $ENV{‘FIRST_NAME’}"</span><span class="p">;</span>
+</code></pre>
+
+<h2 id="diff-rightscripts">Diff RightScripts</h2>
+
+<p>The Dashboard supports a versioning feature for RightScripts that allows for the comparison of different RightScript revisions. When a diff is performed it will not only compare the code body itself, but also the descriptions, attachments, and Inputs.</p>
+
+<h4 id="common-uses-for-diff">Common Uses for Diff</h4>
+
+<ul>
+<li>Compare two different revisions of the same RightScript. ex: RightScript-A [rev 1] vs. RightScript-A [rev 2] -or- RightScript-A [rev 1] vs. RightScript-A [HEAD]</li>
+<li>Compare two arbitrary RightScripts. ex: RightScript-A vs. RightScript-B</li>
+</ul>
+
+<h4 id="common-scenario">Common Scenario</h4>
+
+<p>Let&#39;s say you decide to use a published RightScript that you imported from the MultiCloud Marketplace in one of your Server Templates. In order to customize this RightScript to fit your needs you must first clone it. After making any necessary changes to your private copy, you add it to your Server Template. A few weeks later, a RightScale engineer publishes a new revision of the original RightScript that includes an additional security feature. You want to see what has changed between your customized copy and the newly released revision. After reviewing the changes, you then decide to incorporate them into your script. Your customized RightScript is now up-to-date with what RightScale currently provides.  </p>
+
+<h3 id="diff-rightscripts-steps">Steps</h3>
+
+<p>To compare two RightScripts, go to <strong>Design</strong> &gt; <strong>RightScripts</strong>. Select the revision in the History bar that you want to perform a diff from and click the Diff button.</p>
+
+<p>The next window allows you to select which script you would like to compare against. You can select any RightScript that you want, including any revision of that script. By default, the Dashboard will display the previous revision(s) of the script (if available). If you perform a diff from the HEAD version of a script and there are no previously committed revisions, its parent RightScript (that it was cloned from) and its revisions will be selectable. In this example, we will compare the customized draft with the original version to see what has changed. Additionally, this functionality can be used to compare two arbitrary scripts by selecting them from the dropdown menus.</p>
+
+<p>Click the <strong>Diff</strong> button.</p>
+
+<p><img src="/img/cm-diff-rightscript.png" alt="cm-diff-rightscript.png" width="725" height="155" /></p>
+
+<p>Results are displayed that highlight all of the changes between the two scripts.</p>
+
+<p>Colored highlights denote the sections that changed. After inspecting the changes, you may close the window.</p>
+
+<h2 id="edit-rightscript-attachments">Edit RightScript Attachments</h2>
+
+<p>You can edit RightScript attachments directly from within the Dashboard for performing quick edits and modifications. This feature is especially helpful for making small changes and fixes to simple text files that are attached to your RightScripts. You should only edit simple text files (e.g. config files) or scripts.</p>
+
+<h3 id="edit-rightscript-attachments-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A RightScript that has a text based attachment</li>
+</ul>
+
+<h3 id="edit-rightscript-attachments-steps">Steps</h3>
+
+<ol>
+<li>Under the Attachments tab of a RightScript, click the Edit icon.<br>
+<img src="/img/cm-edit-attachment.png" alt="cm-edit-attachment.png" width="725" height="184" /><br></li>
+<li>The built-in text editor will allow you to make simple changes to the attachment.<br>
+<img src="/img/cm-edit-attachment-code.png" alt="cm-edit-attachment-code.png" width="591" height="358" /><br></li>
+<li>Remember to press the <strong>save</strong> action button to save your edits. <em>Note</em>: A new md5sum is generated each time you save a change.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>There is no validation for your edits, so you should always test your changes. For example, if you edit an HTML file attachment, the HTML code will not be checked for any syntax errors.</p>
+</div>
+
+<h2 id="pass-expected-input-to-ruby-rightscripts">Pass Expected Input to Ruby RightScripts</h2>
+
+<p>In some instances, the booting of a Server may hang if any commands executed within a boot script expect Input from the user. For instance, if your svn server requires a user to manually accept an SSL certificate for any reason (i.e. if you have a cert for www.oursite.com, but your SVN URL is svn.oursite.com), the RB rails svn code update &amp; db config RightScript will hang with the following message:</p>
+<pre class="syntax-highlight plaintext"><code>Error validating server certificate for 'https://svn.oursite.com:443':&lt;br&gt;  - The certificate hostname does not match.&lt;br&gt; Certificate information:&lt;br&gt;  - Hostname: www.oursite.com&lt;br&gt;  - Valid: from Feb 12 00:00:00 2008 GMT until Feb 17 23:59:59 2009 GMT&lt;br&gt;  - Issuer: www.digicert.com, DigiCert Inc, US&lt;br&gt;  - Fingerprint: 3c:c5:u3:83:46:87:fc:7e:14:47:30:c9:1d:49:83:f7:fd:eb:kf:9e&lt;br&gt; (R)eject or accept (t)emporarily?
+</code></pre>
+
+<h3 id="pass-expected-input-to-ruby-rightscripts-prerequisites">Prerequisites</h3>
+
+<p>This procedure uses the Ruby <q>expect</q> package, so it will not work for other scripting languages such as bash.</p>
+
+<h3 id="pass-expected-input-to-ruby-rightscripts-steps">Steps</h3>
+
+<p>Since many RightScripts are written in Ruby, we can utilize the Ruby <a href="http://svn.ruby-lang.org/repos/ruby/trunk/ext/pty/">expect</a> package to both detect these prompts and pass input to them. We first need to determine which RightScript is hanging on boot. Go to <strong>Manage</strong> &gt; <strong>Servers</strong> and click on the name of one of the Servers that has stopped booting. Then click on the <strong>Audit Entries</strong> tab and click on the name of the last script to run successfully. At the bottom of the audit entry you should see lines that look like this:</p>
+<pre class="syntax-highlight plaintext"><code>* script completed successfully
+&gt;&gt;&gt;&gt;&gt; NEXT: RightScript &lt;RB rails svn code update &amp; db config v3&gt;
+</code></pre>
+
+<p>If there is no audit entry regarding the <strong>RB rails svn code update &amp; db config script</strong> (or whatever script happens to be hanging), then that script is most likely causing the error. Now click on the <strong>SSH Console</strong> button and type the following at the prompt:</p>
+<pre class="syntax-highlight plaintext"><code>$ tail /var/log/install. [PRESS TAB AND THEN RETURN]
+</code></pre>
+
+<p>You should now see the offending prompt at the bottom of the file (as in the svn example at the top of the article). Now we know what we need to automate.</p>
+
+<p>Following with the svn example, we will need to clone the <strong>RB rails svn code update &amp; db config</strong> script in order to alter it. Navigate to <strong>Manage</strong> &gt; <strong>Deployments</strong> and click on the name of the deployment that is giving you trouble. From this screen, click on the name of one of the offending servers. Click on the Actions tab for the server and find the name of the hanging script. From the script page, click on the Clone button. Now navigate to <strong>Design</strong> &gt; <strong>RightScripts</strong> and click on the name of the script you&#39;ve just cloned. Be sure to click on its title at the top of the page and add &#39;(clone)&#39; to the end of its name so you can later recognize that this is a clone of an official RightScript. Now click the Edit link and let&#39;s get to work.</p>
+
+<p>This is the part that&#39;s going to require a bit of digging. We need to determine which part of script is making the call to svn checkout. In our example, this can be found in the following section of code:</p>
+<pre class="syntax-highlight plaintext"><code>res=`svn #{auth_params} --quiet co #{ENV['SVN_APP_REPOSITORY']} #{canonicalized_app_dir}`
+</code></pre>
+
+<p>This is making the &#39;svn co&#39; call that we are interested in. We need to refactor this section thusly:</p>
+<pre class="syntax-highlight plaintext"><code>    require 'pty'
+
+    PTY.spawn("svn #{auth_params} --quiet co #{ENV['SVN_APP_REPOSITORY']} #{canonicalized_app_dir}") do |r_f,w_f,pid|
+      w_f.sync = true
+
+      $expect_verbose = false
+
+      # Instruct SVN to accept the SVN cert temporarily.
+      r_f.expect("(R)eject or accept (t)emporarily?") do
+        w_f.print("t\n")
+        begin
+          while(line = r_f.gets)
+            puts line
+          end
+        rescue
+          puts "SVN checkout completed successfully."
+        end
+      end
+    end
+</code></pre>
+
+<p>If you dig through the <a href="http://svn.ruby-lang.org/repos/ruby/trunk/ext/pty/">expect documentation</a> a bit, you&#39;ll see that the call to <code>PTY.spawn</code> opens a PTY and executes the specified command. The block gives us access to three variables:</p>
+
+<ul>
+<li><strong>r_f</strong>: read from the terminal</li>
+<li><strong>w_f</strong>: write to the terminal (with w_f.puts)</li>
+<li><strong>pid</strong>: the process id of the command</li>
+</ul>
+
+<p>After executing the command, we make a call to <code>r_f.expect</code>, which takes either a string or a regex as an argument representing the prompt that we are looking for. When the prompt is reached, we pass the &#39;t&#39; option with a call to <code>w_f.print</code>. The <code>begin...rescue...end</code> block merely prints the output of the command, thus waiting for the checkout command to finish.</p>
+
+<p>Now we need to associate this script with the appropriate server template. Navigate to <strong>Design</strong> &gt; <strong>ServerTemplates</strong>, and click on the name of the appropriate template (&#39;Rails FrontEnd v1 clone&#39;, in this example). Click on the <strong>Scripts</strong> tab. Scroll to the bottom of the page and add the private RightScript that we just created (&#39;RB rails svn code update &amp; db config v1 (clone)&#39;) as a boot script. Now delete any Rails FrontEnd instances in your deployment and replace them with new instances of your template to make sure that the RightScript is updated (be sure to reset the DNS_ID appropriately for each new instance).</p>
+
+<p>Now drag the script to just below the original in the list of the boot scripts, and delete the original. Restart the servers, cross your fingers, and wait. Hopefully, you should be all set up.</p>
+
+<h2 id="publish-and-share-a-rightscript">Publish and Share a RightScript</h2>
+
+<p>Typically RightScripts are published and shared in the context of a ServerTemplate, however they can be published and shared individually. You can only publish a private component that was originally created in your RightScale account. (i.e. It was either created from scratch or cloned.) You cannot publish a component that you imported from the MultiCloud Marketplace (MCM). A particular version can only be published once.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Although you can publish a HEAD version, it&#39;s not a recommended best practice unless you&#39;re an advanced user that&#39;s actively developing and testing it across multiple RightScale accounts. It&#39;s recommended that you only publish and share committed revisions of a component.</p>
+</div>
+
+<h3 id="publish-and-share-a-rightscript-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;publisher&#39; user role privileges</li>
+</ul>
+
+<h3 id="publish-and-share-a-rightscript-steps">Steps</h3>
+
+<ol>
+<li>Navigate to <strong>Design</strong> &gt; <strong>RightScripts</strong> in the CM Dashboard.</li>
+<li>Select the RightScript that you want to share.</li>
+<li>Select the committed revision that you want to share in the History Timeline Bar. (e.g. Rev 1)</li>
+<li>Click the <strong>Publish to MultiCloud Marketplace</strong> action button. For details on how to use the publishing wizard to complete the sharing process.</li>
+</ol>
+
+<h2 id="run-a-rightscript-on-a-server">Run a RightScript on a Server</h2>
+
+<p>One of the more common tasks when managing a running server is modifying its Inputs and then executing (running) a RightScript that passes the new Input parameters to the server. You also have the ability to run a RunScript on multiple servers at the deployment level.</p>
+
+<p>A RightScript can be run at different levels:</p>
+
+<ul>
+<li><strong>Server</strong> - Run a script on a single running server</li>
+<li><strong>Deployment</strong> - Run a script on multiple/all running servers in a deployment</li>
+<li><strong>Server Array</strong> - Run a script on the oldest server or all servers in the array</li>
+</ul>
+
+<p>A RightScript can either be run automatically or manually:</p>
+
+<ul>
+<li><strong>automatically</strong> - Boot and decommission scripts are run in sequential order when a server is launched or terminated, respectively. A RightScript can also be executed using the &#39;run_rightscript&#39; action of an Alert Escalation when an alert is triggered.</li>
+<li><strong>manually</strong> - There are several different ways to manually execute a script (on-demand) on a running server.
+
+<ul>
+<li>Run a boot/operational/decommission script</li>
+<li>Run a RightScript using the &#39;Any Script&#39; option</li>
+<li>Run a RightScript from the command line (&#39;rs_run_right_script&#39;)</li>
+</ul></li>
+</ul>
+
+<p>Notes: You cannot run a RightScript on an inactive or <q>stranded</q> server. You can only run a RightScript on an instance that was launched using the ServerTemplates model.</p>
+
+<h3 id="run-a-rightscript-on-a-server-prerequisites">Prerequisites</h3>
+
+<p>An operational instance that was launched and configured with a ServerTemplate.</p>
+
+<h3 id="run-a-rightscript-on-a-server-steps">Steps</h3>
+
+<h4 id="run-a-boot/operational/decommission-script">Run a boot/operational/decommission script</h4>
+
+<p>Any script listed under the boot/operational/decomission script list can be manually run on-demand.Go to a running server&#39;s Scripts tab. (Manage -&gt; Servers -&gt; Active tab)</p>
+
+<p>Execute (run) one of the listed boot/operational/decommission RightScripts by clicking the &#39;Run&#39; action icon. A server will inherit its list of available RightScripts from its ServerTemplate.</p>
+
+<p><img src="/img/cm-run-rightscript.png" alt="cm-run-rightscript.png" width="725" height="62" /></p>
+
+<p>You can track the status of the executed action under the server&#39;s Audit Entries tab.</p>
+
+<h4 id="run-a-rightscript-using-the-&#39;any-script&#39;-option">Run a RightScript using the &#39;Any Script&#39; option</h4>
+
+<p>You also have the ability to use the &#39;Any Script&#39; option to run any RightScript in the RightScale account on the running server that is not listed in its ServerTemplate.</p>
+
+<h4 id="run-a-rightscript-from-the-command-line-(&#39;rs_run_right_script&#39;)">Run a RightScript from the command line (&#39;rs_run_right_script&#39;)</h4>
+
+<p>You can also SSH into an instance and run a RightScript from the command line of a server using the &#39;rs_run_right_script&#39; command, although it is not a recommended best practice. This option may be useful for users who are developing or testing RightScripts or ServerTemplates, but it should only be performed by advanced users.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If you use rs_run_right_script with the -p option, you must pass a COMPLETE set of input values in which case the input values that are defined on the server are not merged. If you omit any inputs, e.g. do not use -p, then the values defined on the server are used. However we do not provide a way to mix and match</p>
+</div>
+
+<p>You can SSH into an instance and run the following command to manually run a script.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You will only be able to run a script that is currently listed in the server&#39;s ServerTemplate. You cannot use this command to run any script in the RightScale account.</p>
+</div>
+<pre class="syntax-highlight plaintext"><code>    # rs_run_right_script --name 'WEB Apache (re)start - 11H1'"
+</code></pre>
+
+<p>One of the problems with using this option to run a script is that a complete audit entry will not be generated. When a script is run using this method an audit entry is created and displayed in the dashboard, however the user who executed the script cannot be absolutely identified. Notice in the example screenshot below that the user who executed the script from the command line is listed as N/A.</p>
+
+<p><img src="/img/cm-run-rightscript-audit-entry.png" alt="cm-run-rightscript-audit-entry.png" width="725" height="276" /></p>
+
+<p>You might argue that the user who ran the script is obviously the last person to SSH into the server, however it is possible to SSH into an instance outside of the RightScale system especially if a user has the right authentication information and the instance&#39;s firewall permissions are not set up to prevent it. Therefore, in such cases it&#39;s often impossible to positively identify who actually ran the script.</p>
+
+<p>Remember, one of the key benefits of using the RightScale cloud management platform is that fact that user actions are properly tracked and recorded. Therefore, as a best practice you should always perform manual actions from within the dashboard so that all user actions can be properly tracked and recorded.</p>
+
+<h2 id="run-a-rightscript-on-multiple-servers">Run a RightScript on Multiple Servers</h2>
+
+<p>There may be situations where you want to run the same RightScript on more than one running server in a Deployment. Instead of going to each server and running the same operational RightScript manually, you now have the ability to run the same script on all operational servers from one window.</p>
+
+<h3 id="run-a-rightscript-on-multiple-servers-prerequisites">Prerequisites</h3>
+
+<p>Multiple running Server instances in the same Deployment that use the same RightScript.</p>
+
+<h3 id="run-a-rightscript-on-multiple-servers-steps">Steps</h3>
+
+<ul>
+<li><p>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong> and select a Deployment.</p></li>
+<li><p>Click the Scripts tab. Find the RightScript that you would like to run on multiple Servers and click the Run action icon.</p></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If no instances are running, you will see an info icon instead of a run icon.</p>
+</div>
+
+<p><img src="/img/cm-run-rightscript-deployment.png" alt="cm-run-rightscript-deployment.png" width="725" height="414" /></p>
+
+<p>Next, you will see a list of all active servers in your Deployment that use the selected RightScript. Put a checkmark next to each server that you would like to run the RightScript on and click the Run Script action link.</p>
+
+<p><img src="/img/cm-run-rightscript-deployment-select.png" alt="cm-run-rightscript-deployment-select.png" width="725" height="332" /></p>
+
+<h2 id="search-rightscripts">Search RightScripts</h2>
+
+<p>The <strong>Search</strong> action button (Design -&gt; RightScripts) allows you to specify a pattern to match against throughout many RightScripts. For example, perhaps you are working on your own RightScript and are having difficulties with using <q>curl</q> or are considering using <q>wget</q> instead. You can search through all of the imported RightScripts for example usages of the curl utility. The Steps below use this example to help explain how this feature works.</p>
+
+<h3 id="search-rightscripts-steps">Steps</h3>
+
+<h4 id="search-for">Search for</h4>
+
+<p>You enter the search criteria in the <q>Search for</q> field:</p>
+
+<ul>
+<li>Alphanumeric text pattern to match against</li>
+<li>The search is case-sensitive</li>
+<li>Wild cards and regular expressions are <em>not</em> supported</li>
+<li>The content of the RightScripts themselves is searched, <em>not</em> the names of the RightScripts (use the filter by name feature)</li>
+</ul>
+
+<h4 id="search-in">Search in</h4>
+
+<p>The <q>Search in</q> field allows you to expand or contract the category of RightScripts you search within. Simply check which of the script types you want to search in (multiple checkboxes are supported).</p>
+
+<ul>
+<li>Private (default)</li>
+<li>Imported</li>
+</ul>
+
+<p><img src="/img/cm-search-rightscript.png" alt="cm-search-rightscript.png" width="650" height="225" /></p>
+
+<h4 id="output">Output</h4>
+
+<p>The output of your search is displayed in a separate window. It is pretty self explanatory, but here are a few more points for clarity sake:</p>
+
+<ul>
+<li>A summary of how many scripts and matches found and displayed at the top</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    Found a total of 11 script(s) containing "curl"  
+    Displaying 11 script(s), 11 matching line(s) and 11 occurence(s)
+</code></pre>
+
+<ul>
+<li>The pattern match is highlighted in red</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    res=`curl -S -s -o - -f https://www.dnsmadeeasy.com/servlet/updateip?username=$DNSMADEEASY_USER\&amp;password=$DNSMADEEASY_PASSWORD\&amp;id=$DNS_ID\&amp;ip=$ipaddr`
+</code></pre>
+
+<ul>
+<li><p>Although there is no context included in the output (e.g. lines above and/or below the matched line), the line number is included, as well as a hyperlink to view the script itself. <em>Hint</em>: Right click the script hyperlink and you can open it up in a new window, or a new tab</p></li>
+<li><p>If your pattern is matched many times, not all occurrences will necessarily be displayed. Once the 10th match is recorded, the search is completed for the current line, and then it moves on looking for matches in the next RightScript.</p></li>
+</ul>
+
+<h2 id="update-imported-rightscripts">Update Imported RightScripts</h2>
+
+<p>You can compare and/or import a newer revision of a RightScript that is available in the MultiCloud Marketplace (MCM). If you are using a RightScript that was imported from the MultiCloud Marketplace (or a slightly modified version that you created by cloning it), you may want to update the RightScript when a newer revision becomes available in the MCM.</p>
+
+<h3 id="update-imported-rightscripts-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+<li>&#39;library&#39; user role privileges are required to import a newer revision from the MCM.</li>
+</ul>
+
+<h3 id="update-imported-rightscripts-steps">Steps</h3>
+
+<p>The steps required to update an imported ServerTemplate, RightScript, or MultiCloud Image are very similar.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The most common way to import the most recent revision of a RightScript is from the context of a ServerTemplate.</p>
+</div>
+
+<h2 id="update-rightscripts-across-multiple-servertemplates">Update RightScripts across Multiple ServerTemplates</h2>
+
+<p>You can update RightScript revisions for multiple ServerTemplates (HEAD versions) at a time. The Update Xref tab cross-references and displays all cases were the RightScript is being used by ServerTemplates. You have the ability to view all ServerTemplates using the HEAD version of this RightScript and select which ServerTemplates you would like to updated to which revision of the RightScript.</p>
+
+<h3 id="update-rightscripts-across-multiple-servertemplates-steps">Steps</h3>
+
+<ul>
+<li>Navigate to Design &gt; ServerTemplates.</li>
+<li>Select a ServerTemplate.</li>
+<li>Select a RightScript you would like to update. RightScripts with newer revisions available will be highlighted in orange.</li>
+</ul>
+
+<p><img src="/img/cm-update-rightscript.png" alt="cm-update-rightscript.png" width="587" height="531" /></p>
+
+<ul>
+<li>After selecting a RightScript, click the &#39;Update Xref&#39; tab.</li>
+</ul>
+
+<p><img src="/img/cm-update-rightscript-xref.png" alt="cm-update-rightscript-xref.png" width="725" height="473" /></p>
+
+<ul>
+<li><p>Shown are all the ServerTeamplates using this RightScript. Select the ServerTemplates where you wish to update the RightScript. You have the option of selecting &#39;All shown&#39;.</p></li>
+<li><p>Click <strong>Update Selected</strong> and the following window will appear:</p></li>
+</ul>
+
+<p><img src="/img/cm-update-rightscript-revision.png" alt="cm-update-rightscript-revision.png" width="337" height="52" /></p>
+
+<ul>
+<li>Shown are the ServerTemplates you selected that are using this RightScript. Select a revision for RightScript to update.</li>
+<li>Click <strong>Update.</strong></li>
+</ul>
+
+<h2 id="update-to-latest-rightscripts-in-a-servertemplate">Update to latest RightScripts in a ServerTemplate</h2>
+
+<p>You can update RightScripts to newer versions within a HEAD ServerTemplate. Upon completion of this procedure, you should:</p>
+
+<ul>
+<li>Know how to recognize when there are newer RightScripts available for your ServerTemplate</li>
+<li>Update the version of the RightScript within the ServerTemplate, on either a individual or group (e.g. all newer RightScripts) basis</li>
+</ul>
+
+<p>If you are modifying a ServerTemplate, you may want to update its list of RightScripts to use the most recent committed revisions of those scripts. To help you know when a newer revision is available, colored notification balls are displayed. If a newer committed revision of a RightScript is available within the RightScale account or in the MultiCloud Marketplace (MCM), a yellow-orange sphere icon will appear next to the script under the HEAD ServerTemplate&#39;s Scripts tab.</p>
+
+<p>It&#39;s your responsibility to determine whether or not you should update the highlighted RightScripts.</p>
+
+<p>Orange ball notifications are only displayed if a newer committed revision of a RightScript (with the same lineage) is available. If a RightScript is cloned, it&#39;s a new object with a different lineage. The diagram below demonstrates the most common user scenarios.</p>
+
+<p><img src="/img/cm-update-rightscripts.png" alt="cm-update-rightscripts.png" width="525" height="373" /></p>
+
+<p>Depending on which RightScript revision a ServerTemplate is currently using, the following script notifications will be shown.</p>
+
+<table><thead>
+<tr>
+<th><strong>Which RightScript is in the HEAD ServerTemplate?</strong></th>
+<th><strong>Conditions</strong></th>
+<th><strong>Notification Results</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Rev 7</td>
+<td>Rev 9 is not available in the MultiCloud Marketplace</td>
+<td>No icons</td>
+</tr>
+<tr>
+<td>Rev 7</td>
+<td>Rev 9 is available in the MultiCloud Marketplace</td>
+<td>Orange icon</td>
+</tr>
+<tr>
+<td>Rev 1</td>
+<td>Rev 2 is available</td>
+<td>Orange icon</td>
+</tr>
+<tr>
+<td>Rev 2</td>
+<td>No newer committed revision is available</td>
+<td>No icons</td>
+</tr>
+</tbody></table>
+
+<h3 id="update-to-latest-rightscripts-in-a-servertemplate-prerequisites">Prerequisites</h3>
+
+<p>The following are prerequisites for completing this tutorial:</p>
+
+<ul>
+<li>You should know how to run a diff (comparison) on RightScripts</li>
+<li>You should know how to commit RightScripts</li>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="update-to-latest-rightscripts-in-a-servertemplate-steps">Steps</h3>
+
+<h4 id="navigate-to-one-of-your-servertemplates">Navigate to one of your ServerTemplates</h4>
+
+<ul>
+<li>Go to <strong>Design</strong> &gt; <strong>ServerTemplates</strong> &gt; <em>[ServerTemplateName]</em> &gt; Scripts tab</li>
+<li>Go to the editable HEAD version of the ServerTemplate. If no HEAD version exists, you can clone it to create an editable copy.</li>
+</ul>
+
+<h4 id="check-for-newer-versions">Check for newer versions</h4>
+
+<p>Under the <strong>Scripts</strong> tab of a HEAD version of a ServerTemplate, you may see yellow sphere icons, which denote that a newer revision of that script is available. RightScale will check within your RightScale account for a newer revision as well as in the MultiCloud Marketplace. The yellow sphere icons are only designed to serve as a notification. If a RightScript has a higlighted rev number in orange, it does not mean that you must update its revision. The actual content of the scripts is <em>not</em> checked, just the revision numbers. The orange highlight will only be displayed for HEAD versions of a ServerTemplate and not committed revisions because only HEAD versions are editable.</p>
+
+<p><img src="/img/cm-orange-diff-rightscript.png" alt="cm-orange-diff-rightscript.png" width="587" height="531" /></p>
+
+<p>If you click on the icon, you will perform a differential (diff) between the current revision and the most recently committed revision that&#39;s available. Use the diff to compare the differences between the two revisions to determine whether or not you want to update the script to a different revision. In the example below, the differences between the revisions are highlighted for your convenience.</p>
+
+<p><img src="/img/cm-view-diff.png" alt="cm-view-diff.png" width="550" height="360" /></p>
+
+<p>Next, you will need to determine whether or not you want to update the current RightScript revision.</p>
+
+<h4 id="update-rightscripts-within-a-servertemplate">Update RightScripts within a ServerTemplate</h4>
+
+<p>Once you have performed a differential between the two RightScripts and determined that you want to update the revision of a RightScript revision, you can update a single RightScript by clicking the highlighted rev for the RightScript and select the RightScript you would like to update to.</p>
+
+<p><img src="/img/cm-update-rightscript-rev.png" alt="cm-update-rightscript-rev.png" width="725" height="463" /></p>
+
+<h2 id="upload-an-attachment-to-a-rightscript">Upload an Attachment to a RightScript</h2>
+
+<p>You can upload a file as an attachment to a RightScript. Attachments to a RightScript can be conveniently called by the script&#39;s code using an &#39;RS_ATTACH_DIR&#39; environment variable.</p>
+
+<h3 id="upload-an-attachment-to-a-rightscript-prerequisites">Prerequisites</h3>
+
+<ul>
+<li><q>Designer</q> user role</li>
+<li>Editable HEAD RightScript</li>
+</ul>
+
+<h3 id="upload-an-attachment-to-a-rightscript-steps">Steps</h3>
+
+<p>Go to <strong>Design</strong> &gt; <strong>RightScripts</strong>. Select the RightScript to which you&#39;re going to attach a file. Under the <strong>Attachments</strong> tab of a HEAD version, click the <strong>Choose File</strong> action button. (If you do not see a HEAD version of the script, you will need to clone it to create an editable copy.)</p>
+
+<p>Select the file from your local directory and click <strong>Upload</strong>.</p>
+
+<p><img src="/img/cm-upload-attachment.png" alt="cm-upload-attachment.png" width="725" height="291" /></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightScale SAML RelayStates</title><meta content="A RightScale SAML RelayState is an optional parameter of SAML requests and responses that can be used to provide a hint about where the user wants to go after she completes single sign-on." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="platform platform_saml platform_saml_rightscale_saml_relay_states" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/platform"><h4 class="list-group-heading"><img src="../../img/platform-mark.svg" /><span>Platform</span></h4></a><a class="list-group-item" href="/platform/guides">Guides</a><a class="list-group-item" href="../saml.html">SAML</a><a class="list-group-item" href="../../security/">Security</a><a class="list-group-item" href="../../configuration-management-tool-integration/">Configuration Management Integration</a><a class="list-group-item" href="../open-source-ack/">Open Source License Acknowledgement</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Platform Docs</a> &#x2F; <a href="../saml.html">Security Assertion Markup Language (SAML) 2.0</a></p><div class="page-header"><h1>RightScale SAML RelayStates</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>RelayState is an optional parameter of SAML requests and responses that can be used to provide a hint about where the user wants to go after she completes single sign-on.</p>
+
+<h3 id="overview-relay-state-for-sp-initiated-login">Relay State for SP-Initiated Login</h3>
+
+<p>When RightScale initiates SAML, we may include a <code>RelayState</code> parameter if the user was attempting to reach a specific page or area within our platform. For example: a user might receive an email containing a deep link to a page within our platform; if she clicks the link, we will redirect her to your IdP with a RelayState set to that URL, so that she is redirected back to the page she was trying to reach after she completes single sign-on.</p>
+
+<p>As specified in the SAML 2.0 standard, when your IdP receives <code>RelayState</code> as part of a request, it should always include the same RelayState in its response. This enables us to seamlessly redirect your user to the page she was trying to reach after we have authenticated her.</p>
+
+<div class="alert alert-info " role="alert"><strong>Note:</strong><p>RightScale may initiate SAML for deep links even if you have opted not to provide a <a href="/platform/saml.html#sp-initiated-login">discovery hint</a> for your IdP. For an optimal user experience, please ensure that your IdP handles RelayState correctly.</p>
+</div>
+
+<h3 id="overview-relay-state-for-idp-initiated-login">Relay State for IdP-Initiated Login</h3>
+
+<p>Most IdPs allow you to specify a default RelayState when you configure the trust relationship with RightScale&#39;s SP. If a user performs IdP-initiated login, your IdP will include this RelayState in order to direct RightScale to send the user to a specific area of our product. Setting a default relay state allows you to control the post-login landing page for your users.</p>
+
+<p>Some IdPs support an app dashboard feature and may allow you to configure several icons for the RightScale app that send different relay states. You can use this functionality to facilitate one-click access to different parts of our platform, or to send users to a different landing page depending on their business role.</p>
+
+<h2 id="valid-relaystate-values">Valid RelayState Values</h2>
+
+<p>RightScale&#39;s SP recognizes the following relay states:</p>
+
+<table><thead>
+<tr>
+<th>RelayState</th>
+<th>Action</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>(blank/absent)</td>
+<td>Go to recent Cloud Management (CM) account</td>
+</tr>
+<tr>
+<td>urn:rightscale:product:ca</td>
+<td>Go to Optima dashboard</td>
+</tr>
+<tr>
+<td>urn:rightscale:product:cm</td>
+<td>Go to CM account selector</td>
+</tr>
+<tr>
+<td>urn:rightscale:product:ss</td>
+<td>Go to Self Service project selector</td>
+</tr>
+<tr>
+<td>urn:rightscale:product:cm#recent</td>
+<td>Go to recent CM account</td>
+</tr>
+<tr>
+<td>urn:rightscale:product:cm:recent</td>
+<td>Same as above (for IdPs that hate #)</td>
+</tr>
+<tr>
+<td>https://*.rightscale.com/*</td>
+<td>Redirect to requested page</td>
+</tr>
+</tbody></table>
+
+<div class="alert alert-info " role="alert"><strong>Note:</strong><p>When configuring a default RelayState for your IdP, we recommended that you use a URN and not a hardcoded URL. Our user-interface URLs may change over time as our application evolves, but the URNs are guaranteed to redirect users to the specified app&#39;s landing page.</p>
+</div>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Tagging</title><meta content="A tag or machine tag in the context of the RightScale Cloud Management Platform is a useful way of attaching useful metadata to an object/resource." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_tagging" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>Tagging</h1></div><div class="main-content"><h2 id="what-is-a-tag-">What is a Tag?</h2>
+
+<p>A <strong>tag</strong> or <strong>machine tag</strong> is a useful way of attaching useful metadata to an object/resource. Tags are commonly used as an extra label or identifier. For example, you might want to add a tag to an EBS Snapshot or AMI so that you can find it more quickly. </p>
+
+<h2 id="machine-tags-vs--raw-tags">Machine Tags vs. Raw Tags</h2>
+
+<p><strong>Note</strong>:  Please keep in mind the differences in syntax between <strong>machine tags</strong> and <strong>raw tags</strong>. Tagging may fail due to incorrect syntax.</p>
+
+<h3 id="machine-tags-vs--raw-tags-machine-tags">Machine Tags</h3>
+
+<p>RightScale tagging&#39;s advanced functionality can be unlocked when a tag is comprised of three parts: namespace, predicate and value. Colons [:] are used to separate namespaces and predicates whereas equal signs [=] separate predicates and values.</p>
+
+<p>Valid machine tags must be in the form of <code>&lt;namespace&gt;:&lt;predicate&gt;=&lt;value&gt;</code> -- all three components of the tag are <strong>required</strong> for machine tags. For example <code>it8n:enabled=true</code>. If you don&#39;t use this syntax, for example <code>it8n:enabled</code>, the tag will not be created and you will receive an error. </p>
+
+<p>Example: <code>loadbalancer:lb=www</code> (a load balancer server for the &#39;www&#39; vhost)</p>
+
+<ul>
+<li><strong>namespace</strong> - Namespaces must begin with any character between a-z; remaining characters may be a-z, 0-9 and underscores. Upper-case letters are invalid in the namespace.</li>
+<li><strong>predicate</strong> - Predicates must begin with any character between a-z or A-Z; remaining characters may be a-z, A-Z, 0-9 and underscores. Predicates are case-insensitive.  A machine tag predicate may contain spaces, but cannot have a leading or trailing space.  <code>this:has spaces in it=true</code> is an example of a valid tag, where <code>this: has leading spaces in the predicate=true</code> would not be a valid tag.</li>
+<li><strong>value</strong> - Values may contain most standard characters including spaces. Values do not have to be wrapped in quotes. (e.g. <q>rs_backup:lineage=somevalue</q>)</li>
+</ul>
+
+<p><strong>Example Syntax:</strong></p>
+
+<p><code>namespace:predicate=value</code></p>
+
+<h3 id="machine-tags-vs--raw-tags-raw-tags">Raw Tags</h3>
+
+<p>Raw tags can be created using any character <code>a-z</code> and <code>0-9</code>, but must not contain the characters <code>:</code> or <code>=</code>. For example, a valid raw tag is <code>it8nenabled</code>. An invalid example is <code>it8n:enabled</code>, the reason being that on the backend, it looks like you&#39;re trying to create an invalid machine tag, and we will give you an error.</p>
+
+<p><strong>Example Syntax:</strong></p>
+
+<p><code>value</code></p>
+
+<h2 id="rightscale-s-tagging-system">RightScale's Tagging System</h2>
+
+<p>RightScale uses <a href="https://www.flickr.com/groups/api/discuss/72157594497877875/">Flickr-style machine tagging</a> inside the RightScale platform. Tags are specific to a RightScale account. They are not user-specific. Tags are also global, so if you add tags to a private MultiCloud Image and later publish that image, everyone will see the tags. In order to add/edit/delete tags, you will need &#39;actor&#39; privileges for that RightScale account.</p>
+
+<p>Currently, you can create tags for the following objects/resources:</p>
+
+<ul>
+<li><a href="/ca/using_account_tags.html">Accounts</a></li>
+<li>Servers</li>
+<li>Server Arrays</li>
+<li>Instances</li>
+<li>ServerTemplates</li>
+<li>Deployments</li>
+<li>EBS Spapshots</li>
+<li>EBS Volumes</li>
+<li>MultiCloud Images*</li>
+<li>Reports</li>
+</ul>
+
+<p>* Tags can only be added to a MultiCloud Image by the owner of the MultiCloud Image. The owner of an EC2 Image is based on the AWS Account Number, not a RightScale account.</p>
+
+<h3 id="rightscale-s-tagging-system-how-does-rightscale-use-tags-">How Does RightScale Use Tags?</h3>
+
+<p>We use tagging in our ServerTemplates by using the RightLink agent to facilitate communication between related servers. For example, instead of using DNS lookup and SSH to establish communication between application servers and load balancers, we can use tags to quickly resolve this information internally without having to make any requests to third parties.</p>
+
+<h3 id="rightscale-s-tagging-system-how-can-i-use-tagging-inside-the-rightscale-platform-">How Can I Use Tagging Inside the RightScale Platform?</h3>
+
+<p>The support for tagging and its implementations will continue to evolve over time. Currently, the primary use of tags is for filtering purposes. You can then use the Dashboard GUI or RightScale API to filter and search through tagged items.</p>
+
+<ul>
+<li><strong>RightScale Dashboard</strong> - Add/Remove tags to RightScale objects and cloud resources under their respective show pages or Info tabs. You can add multiple tags per object/resource. You can then filter by &#39;tag&#39; to quickly find all of your tagged resources.</li>
+<li><strong>RightScale API</strong> - Similar to the Dashboard, you can use the Rightscale API to add/remove tags to a resource. You can also search tags for a resource and search for all resources (within a particular type) matching given tags. See the <a href="http://reference.rightscale.com/api1.5/resources/ResourceTags.html">API documentation for &#39;Tags&#39;</a> for more details.</li>
+</ul>
+
+<p><strong>Note</strong>: Tag searches are case sensitive.</p>
+
+<h3 id="rightscale-s-tagging-system-tag-inheritance">Tag Inheritance</h3>
+
+<p>Generally speaking, tags are only applied to the resource that is tagged. However, there are a couple of special behaviors that allow for tags to be inherited by sub-resources:</p>
+
+<ul>
+<li><strong>Server</strong> - Tags on a Server are applied to any instance launched from that Server <strong>at the time the server is launched</strong>. This allows you to pre-define tags on a Server and ensure that any instance launched will have those tags applied.</li>
+<li><strong>MultiCloud Images</strong> - Tags on MultiCloud Images (MCIs) are applied to any instance launched using that MCI <strong>at the time the server is launched</strong>. This allows you to set up tags on MCIs in proxy environments or other situations where you can control the MCIs more tightly than the Servers. (Actors can not modify MCIs, but can modify Servers -- Designer privilege is required for modifying MCIs).</li>
+</ul>
+
+<h2 id="how-rightscale-tags-and-cloud-tags-are-related">How RightScale Tags and Cloud Tags are Related</h2>
+
+<p>Many clouds provide native tagging systems for various resources in their cloud. Users with existing instances can manage all their cloud tags through RightScale so they can take full advantage of our reporting and billing features and manage those tags in RightScale without any additional work. With our powerful query interface, administrators can perform wildcard or intersection searches and return extra information about tagged resources. Users will also have the advantage of managing their tags -- either cloud tags or RightScale tags -- through either RightScale&#39;s Dashboard or the clouds&#39; native console. The sections below describe this behavior for the various clouds.</p>
+
+<h3 id="how-rightscale-tags-and-cloud-tags-are-related-aws-ec2-instance-tags">AWS EC2 Instance Tags</h3>
+
+<p>Your EC2 tags for instances will be discovered when you add your AWS credentials to the RightScale Dashboard, and will continue to sync any tags created from the EC2 console. Tags that originate in EC2 will show in RightScale with the namespace <code>ec2</code>. In order to sync tags from RightScale to EC2, create a tag with the <code>ec2</code> namespace, such as <code>ec2:&lt;key&gt;=&lt;value&gt;</code>. The discovery happens continuously and automatically. Note that EC2 does have a 10 tag limit that applies here, so keep that in mind when syncing your tags.</p>
+
+<p>For more information on AWS tags, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">the AWS documentation</a></p>
+
+<h4 id="aws-name-sync-with-instance-name">AWS Name Sync with Instance Name</h4>
+
+<p>RightScale will sync EC2 instance names to RightScale Server or Instance nicknames bi-directionally with instances provisioned on AWS. When a new server is provisioned then launched from the RightScale dashboard, the server or instance nickname you entered in RightScale is over-written by the instance tag name (<code>ec2:Name</code>) from EC2 if one exists. Similarly, if you add a tag of the form <code>ec2:Name=&lt;my-instance-name&gt;</code> and then launch the server, the server/instance name displayed in the Dashboard will be synched with the tag value. Once the server instance is terminated, the original server/instance nickname you created in RightScale is re-established. Finally, if you begin managing a previously <strong>existing</strong> EC2 instance in RightScale, the server/instance name displayed in RightScale will be initially set to the value of the existing instance tag name (<code>ec2:Name</code>) in EC2.</p>
+
+<h4 id="add-ec2-tags-in-the-rightscale-dashboard">Add EC2 Tags in the RightScale Dashboard</h4>
+
+<ol>
+<li>In the RightScale Dashboard, go to a deployment with an operational server and click on the running server.</li>
+<li>From the Info tab, scroll down to to the tags field.</li>
+<li>Click Edit Tags -- you will be able to remove the current tags of the instance as well as add tags.</li>
+<li>When adding an EC2 tag, make sure the syntax is <code>name:predicate=value</code> and the name is <code>ec2</code>. For example: <code>ec2:stack=production</code></li>
+<li>Click Add.</li>
+<li>The tag will be applied to the server and will can be viewable in the RightScale Dashboard as well as the AWS Management Console. Similarly, you can view and add RightScale and EC2 tags in the AWS Management Console that will influence your instance.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The <code>rs_tag</code> utility for RS-EC2 tag syncing is not supported at this time.</p>
+</div>
+
+<h3 id="how-rightscale-tags-and-cloud-tags-are-related-gce-instance-tags">GCE Instance Tags</h3>
+
+<p>Google Compute Engine supports instance tags as plain strings which are commonly used for networking-related tasks -- these tags are synced with RightScale tags as well. When a tag is discovered in GCE, it is imported into RightScale with the tag namespace of <code>gce</code>. In order for a tag in RightScale to be synced to GCE, it similarly must have the namespace <code>gce</code>. All characters following the <code>:</code> after the namespace will be synced to GCE. For example, the tag <code>gce:mytag</code> will show in GCE as <code>mytag</code>. Since GCE tags support limited characters, if you attempt to create a tag in RS starting with <code>gce:</code> and then use any disallowed characters, you will get an error message and the tag will not be created.</p>
+
+<p>Note that in GCE, instance tags are used for a variety of purposes, including specifying Firewall Rules and network Routes. When modifying tags associated with an instance, take extra care in determining the network impacts of such a change.</p>
+
+<h3 id="how-rightscale-tags-and-cloud-tags-are-related-azure-resource-manager--arm--tags">Azure Resource Manager (ARM) Tags</h3>
+
+<p>The following <a href="../../clouds/azure_resource_manager/reference/resources.html">RightScale Resources</a> support tag sync to the cloud: </p>
+
+<ul>
+<li>Placement Groups (Storage Accounts in ARM)</li>
+<li>Instances/Servers (Virtual Machines in ARM)</li>
+<li>Deployments (Resource Groups in ARM)</li>
+</ul>
+
+<p>When a tag is discovered in ARM, it is imported into RightScale with the tag namespace of <code>azure</code>. Likewise, a tag in RightScale will be synced to ARM if it has the namespace <code>azure</code>. All characters following the <code>:</code> after the namespace will be synced to ARM. For example, the RightScale tag <code>azure:name=value</code> will show in ARM as <code>name:value</code> and a tag in ARM of <code>name:value</code> will show in RightScale as <code>azure:name=value</code>.</p>
+
+<p>Please be aware that certain limitations exist with regards to tag length and limits on certain resources. For more information, see the <a href="../../clouds/azure_resource_manager/reference/tagging.html">Azure Resource Manager (ARM) Tag Synchronization</a> documentation.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

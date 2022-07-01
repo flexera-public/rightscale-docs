@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Creating Schedules</title><meta content="The Self-Service Schedule Manager provides the ability to create a runtime schedule which can be assigned to a given CloudApp at launch time. This feature allows users to proactively ensure that the cloud resources managed in Self-Service do not run longer than they are actually needed." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="ss ss_guides ss_guides_ss_creating_schedules" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><div class="page-header"><h1>Creating Schedules</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Schedule Manager provides the ability to create a runtime schedule which can be assigned to a given CloudApp at launch time. This feature allows users to proactively ensure that the cloud resources managed in Self-Service do not run longer than they are actually needed. The Schedule Manager is helpful in addressing the condition where instances continue to run at hours during which nobody is using them, thereby helping to reduce cost.</p>
+
+<p>As always, this capability is provided with a full API to manage schedules should you choose to leverage it.</p>
+
+<p>There are 3 primary steps to using Schedules in Self-Service:</p>
+
+<ul>
+<li>Create schedules</li>
+<li>Attach (associate) schedules to publications in the Catalog</li>
+<li>Select schedules when launching Catalog items</li>
+</ul>
+
+<p>In addition, this section also describes how to update a schedule for an existing/running CloudApp.</p>
+
+<h2 id="create-a-new-schedule">Create a New Schedule</h2>
+
+<p>To take advantage of the features provided by the Schedule Manager you must first create one or more schedules in Self-Service. Use the following procedure to create a new schedule.</p>
+
+<ol>
+<li>In the Self-Service user interface, navigate to the Designer view and click the Schedule Manager tab.</li>
+<li><p>Click <strong>Create New Schedule</strong>. The following dialog displays.</p>
+
+<p><img src="/img/ss-create-schedule-dialog.png" alt="Schedule Image" width="599" height="597" /></p></li>
+<li><p>Enter a meaningful name for the new schedule in the <strong>Schedule Name field</strong>.</p></li>
+<li><p>Enter a short description for the new schedule in the <strong>Schedule Description</strong> field.</p></li>
+<li><p>Use the available controls to specify the days of the week and the time range for the new schedule. (<strong>Note:</strong> Today the UI only provides for very basic schedules. If you require more complex schedules, please contact us or consider using the API.)</p></li>
+<li><p>Review the <strong>Schedule Summary</strong> at the bottom of the dialog and click Save Schedule. The new schedule now appears in the <strong>Schedule Manager</strong>.</p>
+
+<p><img src="/img/ss-schedule-manager-listing.png" alt="Schedule Manager Image" width="602" height="253" /></p></li>
+</ol>
+
+<h2 id="associate-a-schedule-with-a-cloudapp">Associate a Schedule with a CloudApp</h2>
+
+<p>Once you have created schedules in Self-Service, you can then associate them with CloudApps as they are published. Note that a published CloudApp can have multiple schedules associated with it, but an end-user will only be able to select one schedule for the CloudApp when it is launched. The following steps outline the procedure for associating a schedule with a CloudApp during the publication step.</p>
+
+<ol>
+<li><p>In the Self-Service user interface, navigate to the Designer view, select a CloudApp and click Publish to Catalog. The following dialog displays.</p>
+
+<p><img src="/img/ss-publish-schedule-dialog.png" alt="Publish Schedule Image" width="598" height="454" /></p></li>
+<li><p>Enter a name in the <strong>CloudApp Name</strong> field.</p></li>
+<li><p>Enter a meaningful description in the <strong>CloudApp Description</strong> field.</p></li>
+<li><p>Click in the <strong>Runtime Schedule(s)</strong> drop-down to expose the available schedules and select the desired schedule. Repeat this step for each schedule you wish to associate with the published CloudApp. (<strong>Note:</strong> The <q>Always On</q> schedule is always available in this dialog, but can be removed. It represents the lack of a schedule - that no automated starting or stopping of the application will take place.</p></li>
+<li><p>Click <strong>Yes, Publish CloudApp</strong>.</p></li>
+</ol>
+
+<h2 id="select-a-schedule-when-launching-a-cloudapp">Select a Schedule when Launching a CloudApp</h2>
+
+<p>Once a designer has published a CloudApp with one or more associated runtime schedules to the Catalog, end-users can select from a list of available schedules for each CloudApp they launch. The following procedure outlines the steps for selecting a runtime schedule when launching a CloudApp.</p>
+
+<ol>
+<li><p>In the Self-Service user interface, navigate to the Catalog view, select a CloudApp and click <strong>Launch</strong>. A dialog similar to the following displays.</p>
+
+<p><img src="/img/ss-end-user-schedule-pick.png" alt="Schedule Pick Image" width="602" height="595" /></p></li>
+<li><p>Enter a <strong>CloudApp Name</strong>, <strong>Cloud Description</strong>, and select parameter values as needed.</p></li>
+<li><p>Click in the <strong>Schedule</strong> drop-down to expose the schedules that are available to your CloudApp. Choose the schedule that is most appropriate for your intended use. Note that as an end-user you may only select one runtime schedule. Optionally, use the <strong>End CloudApp On</strong> control to select an end date for your CloudApp. If you select a schedule that is not currently active and outside the current time, you are given the option to <strong>Launch CloudApp immediately</strong> or <strong>Launch CloudApp at next scheduled start</strong>. Choosing the <strong>Launch CloudApp at next scheduled start</strong> option will keep the CloudApp in the <strong>Not Started</strong> state until the first scheduled start, at which time the CloudApp will launch. Otherwise, the CloudApp will launch immediately by default.</p>
+
+<p><img src="/img/ss-defer-launch.png" alt="Defer Launch" width="581" height="256" /></p></li>
+<li><p>Click <strong>Launch CloudApp</strong>.</p></li>
+</ol>
+
+<h2 id="updating-a-schedule-for-an-existing-running-cloudapp">Updating a Schedule for an Existing Running CloudApp</h2>
+
+<p>You can update the end date and schedule associated with an existing, running CloudApp using the UI or the API. In the UI, just go to the CloudApp Details page and select the end date or schedule -- you can also remove an end date if you don&#39;t want the CloudApp to be terminated. The next scheduled operation is updated automatically and immediately.</p>
+
+<h3 id="updating-a-schedule-for-an-existing-running-cloudapp-updating-or-removing-the-end-date">Updating or Removing the End Date</h3>
+
+<p>To update or remove the End Date for a running CloudApp, do the following.</p>
+
+<ol>
+<li>Navigate to the details page for the running CloudApp.</li>
+<li><p>In the Summary pane, click the Ending On control to expose the date picker.</p>
+
+<p><img src="/img/ss-change-end-date.png" alt="Change End Date Image" width="364" height="424" /></p></li>
+<li><p>Select a new date or click No End Date to keep your CloudApp running indefinitely.</p></li>
+</ol>
+
+<h3 id="updating-a-schedule-for-an-existing-running-cloudapp-changing-the-schedule-for-a-running-cloudapp">Changing the Schedule for a Running CloudApp</h3>
+
+<p>If your CloudApp has more than one associated schedule, you can change the currently active schedule using the following steps.</p>
+
+<ol>
+<li>Navigate to the details page for the running CloudApp.</li>
+<li><p>In the Schedule pane, click the Schedule control drop-down and select a different schedule.</p>
+
+<p><img src="/img/ss-change-schedule.png" alt="Change End Date Image" width="336" height="197" /></p></li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

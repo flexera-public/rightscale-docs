@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightScale Application for ServiceNow</title><meta content="RightScale provides a certified integration for ServiceNow that brings the cloud management capabilities of RightScale together with the ITSM features of ServiceNow." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="servicenow servicenow_overview" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/servicenow/"><h4 class="list-group-heading"><span>ServiceNow Integration</span></h4></a><a class="list-group-item" href="releases.html">Releases</a><a class="list-group-item" href="overview.html">Overview</a><a class="list-group-item" href="faq.html">FAQ</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">ServiceNow Integration</a></p><div class="page-header"><h1>RightScale Application for ServiceNow</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>RightScale provides a certified integration for <a href="http://www.servicenow.com/">ServiceNow</a> that brings the cloud management capabilities of RightScale together with the ITSM features of ServiceNow. The integration is available by <a href="/servicenow/releases.html">downloading from our releases page</a>. It provides features for maintaining the ServiceNow CMDB using cloud information from RightScale and provides various integration points that can be leveraged in ServiceNow to launch infrastructure in RightScale.</p>
+
+<p>See <a href="faq.html">frequently asked questions here</a>.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<h3 id="how-it-works-prerequisites">Prerequisites</h3>
+
+<p>The only prerequisite is to have at least one RightScale account connected to your cloud(s) of choice. No additional ServiceNow modules are required to leverage the functionality of this application.</p>
+
+<h3 id="how-it-works-features">Features</h3>
+
+<h4 id="cmdb-integration">CMDB Integration</h4>
+
+<p>This application helps populate your ServiceNow CMDB by querying the RightScale API for information about resources running in the cloud. The data is placed into Import Sets which you can then use to populate your CMDB. The information provided by this application is listed below.</p>
+
+<p>Note that you can use the <a href="http://www.servicenow.com/products/discovery.html">ServiceNow Discovery</a> tool in conjunction with this integration to provide additional information about your instances. There is no direct integration between this information and the Discovery information, but the IP Address of the instance can be used to correlate the information in your CMDB.</p>
+
+<p><strong>Instances</strong></p>
+
+<p>Instances represent any instance that is running in the cloud account, regardless of how it was launched. Note that not all fields will be available for all instances depending on how the instance is configured.</p>
+
+<ul>
+<li>account</li>
+<li>cloud_id</li>
+<li>cloud_name</li>
+<li>datacenter_name</li>
+<li>deployment (if the instance belongs to a RightScale deployment)</li>
+<li>description</li>
+<li>href (unique RightScale ID)</li>
+<li>image_name</li>
+<li>instance_type_name</li>
+<li>ip_addresses</li>
+<li>links (links to related RightScale resources)</li>
+<li>mci_name (if the instance was launched from a ServerTemplate)</li>
+<li>name</li>
+<li>network_names</li>
+<li>private_dns_names</li>
+<li>private_ip_addresses</li>
+<li>public_dns_names</li>
+<li>public_ip_addresses</li>
+<li>resource_uid</li>
+<li>security_group_names</li>
+<li>server_template_name (if the instance was launched from a ServerTemplate)</li>
+<li>server_template_version (if the instance was launched from a ServerTemplate)</li>
+<li>ssh_key</li>
+<li>state</li>
+<li>subnet_names</li>
+<li>tags</li>
+<li>uid (unique cloud ID)</li>
+</ul>
+
+<p><strong>Servers</strong></p>
+
+<p>Servers represent servers that are launched through RightScale or that are RightScale-enabled by installing the <a href="/rl">RightLink</a> agent.</p>
+
+<ul>
+<li>account</li>
+<li>cloud_id</li>
+<li>cloud_name</li>
+<li>deployment_id</li>
+<li>description</li>
+<li>href</li>
+<li>id</li>
+<li>links</li>
+<li>name</li>
+<li>server_template_id</li>
+<li>server_template_name</li>
+<li>state</li>
+<li>tags</li>
+</ul>
+
+<p><strong>ServerArrays</strong></p>
+
+<ul>
+<li>account</li>
+<li>cloud_id</li>
+<li>cloud_name</li>
+<li>deployment</li>
+<li>description</li>
+<li>href</li>
+<li>id</li>
+<li>instance_summary</li>
+<li>links</li>
+<li>name</li>
+<li>state</li>
+<li>tags</li>
+</ul>
+
+<p><strong>Deployments</strong></p>
+
+<ul>
+<li>account_id</li>
+<li>account_name</li>
+<li>description</li>
+<li>href</li>
+<li>id</li>
+<li>links</li>
+<li>name</li>
+<li>tags</li>
+</ul>
+
+<p><strong>Applications</strong></p>
+
+<p>Applications represent items from a Self-Service Catalog.</p>
+
+<ul>
+<li>account_id</li>
+<li>href</li>
+<li>id</li>
+<li>name</li>
+<li>parameters</li>
+<li>required_parameters</li>
+<li>schedule_required</li>
+<li>schedules</li>
+<li>short_description</li>
+</ul>
+
+<p><strong>Executions</strong></p>
+
+<p>Executions represent a CloudApp instance in Self-Service.</p>
+
+<ul>
+<li>account_id</li>
+<li>application</li>
+<li>cost_unit</li>
+<li>cost_value</li>
+<li>created_by</li>
+<li>created_at</li>
+<li>deployment</li>
+<li>description</li>
+<li>href</li>
+<li>id</li>
+<li>launched_from_href</li>
+<li>launched_from_name</li>
+<li>launched_from_type</li>
+<li>links</li>
+<li>name</li>
+<li>status</li>
+<li>terminated_at</li>
+</ul>
+
+<h4 id="self-service-application-launching">Self-Service Application Launching</h4>
+
+<p>The application also provides all of the necessary components to launch infrastructure through RightScale&#39;s <a href="/ss">Self-Service</a> product and its associated CAT file language. This language provides a powerful tool to encapsulate application definitions that is portable across clouds. These <q>Applications</q> can be made available in the ServiceNow Service Catalog and launched through ServiceNow.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Download and install the RightScale-provided Update Set from our <a href="/servicenow/releases.html">releases page</a>.</p>
+
+<h3 id="getting-started-account-setup">Account Setup</h3>
+
+<p>The RightScale integration for ServiceNow connects to your RightScale accounts to gather information about what is running in your clouds and to provide an interface for you to launch new infrastructure. In ServiceNow, you will have to configure every RightScale account that you want integrated with ServiceNow.</p>
+
+<ol>
+<li> In ServiceNow, navigate to the RightScale application and select Accounts under the Configuration menu.</li>
+<li> Click the <q>New</q> button and fill out the form.
+
+<ol>
+<li> This information can be obtained by logging in to your RightScale account and navigating to Settings -&gt; Account Settings</li>
+<li> The account_id is the numeric part of the “href” field</li>
+<li> The refresh_token can be obtained on the same page by clicking on “API Credentials” and enabling refresh tokens</li>
+<li> The endpoint is the host name in the browser (either https://us-3.rightscale.com or https://us-4.rightscale.com)</li>
+<li> The ss_endpoint is the same as the endpoint, with “us” replaced by “selfservice” (either https://selfservice-3.rightscale.com or https://selfservice-4.rightscale.com)</li>
+<li> Confirm that the account name shows up in the Accounts table within about one minute by refreshing the list. If it doesn&#39;t, there is likely a problem with the information that you entered and you should verify all input values</li>
+<li> Repeat steps 1-5 for all RightScale accounts you would like connected</li>
+</ol></li>
+</ol>
+
+<h3 id="getting-started-configuring-integration-schedules">Configuring integration schedules</h3>
+
+<p>The RightScale integration uses Scheduled Jobs to periodically poll the RightScale API and gather information about running infrastructure. The following settings will ensure that this is configured as you want it.</p>
+
+<ol>
+<li> In ServiceNow, navigate to the RightScale application and select Settings under the Configuration menu.</li>
+<li> Set the interval for each type of resource that will be updated in your CMDB</li>
+<li> In ServiceNow, navigate to the RightScale application and select Scheduled Jobs under the Source Code menu.</li>
+<li> Make sure all Scheduled Jobs are active
+
+<ol>
+<li> If a Scheduled Job is not active, select the job to edit it and select the Active checkbox</li>
+</ol></li>
+</ol>
+
+<h3 id="getting-started-configure-permissions">Configure permissions</h3>
+
+<p>The RightScale integration contains pre-built roles that you can use to give your ServiceNow users access to the resources in the integration. Use the roles as follows:</p>
+
+<ul>
+<li>x_snm_rightscale_c.user - Intended for end users and provides read access to application resources and accounts table</li>
+<li>x_snm_rightscale_c.admin - Intended for end users and provides full application permissions. Note that system admin role for ServiceNow will also be required to fully change all settings associated with the application, or any custom role that has the required privilege to modify system settings.</li>
+<li>x_ris_rightscale_c.app_role - An integration user that can setup account integrations with RightScale and import data into the import sets and tables, but does not have the full rights that are granted to the admin role described above. It is recommended to use this role with any integration accounts within ServiceNow that are used only to configure the integration with RightScale.</li>
+</ul>
+
+<h2 id="customizing-the-integration">Customizing the integration</h2>
+
+<h3 id="customizing-the-integration-create-transform-maps">Create Transform Maps</h3>
+
+<p>The RightScale integration imports data from RightScale into Import Sets - from there, Transform Maps are used to transform the data into CMDB tables. While the integration provides some basic Transform Maps that places data in the tables inside the Application, you likely want to transform the data into your own system CMDB tables.</p>
+
+<p>For more information on creating Transform Maps, reference the ServiceNow documentation: <a href="http://wiki.servicenow.com/index.php?title=Creating_New_Transform_Maps" title="http://wiki.servicenow.com/index.php?title=Creating_New_Transform_Maps">http://wiki.servicenow.com/index.php...Transform_Maps</a></p>
+
+<p>For more information on the Import Set tables made available in the RightScale integration, <a href="#integration-components-web-services--import-sets-">see below</a></p>
+
+<!-- ### Creating custom Catalog Items
+
+The RightScale integration provides all of the component pieces necessary to create Catalog Items that launch and manage Self-Service Cloud Applications. You can find more information about RightScale Self Service [on this docs site](/ss/guides).
+
+One common use of Self-Service CloudApps is to display them as Catalog Items in your Service Catalog in Self-Service. Future versions of this application will include auto-generated Catalog Items from application definitions, but in the meantime you can choose which CloudApps are available in your Service Catalog by following these steps:
+
+1. Copy the generic Service Catalog Item included with the integration and change the name of the item
+2. Select which Category in the SN Service Catalog you would like this item to be shown in (if any)
+ -->
+
+<h2 id="troubleshooting-the-integration">Troubleshooting the integration</h2>
+
+<p>The RightScale integration provides a link to the Application Logs under the Support menu. The information in these logs can usually help identify potential issues and resolutions. In the event that you experience issues that you can&#39;t resolve, please contact RightScale support through the usual channels (such as <a href="mailto:support@rightscale.com" title="mailto:support@rightscale.com">support@rightscale.com</a>).</p>
+
+<h2 id="integration-components">Integration Components</h2>
+
+<p>This section describes each component of the RightScale integration. All components can be found in the RightScale CloudManagement category on the left-hand navigation bar in ServiceNow.</p>
+
+<h3 id="integration-components-configuration">Configuration</h3>
+
+<p>Contains configuration items for the application, accessible by an administrator to customize the behavior and control the access to the application.</p>
+
+<h4 id="accounts">Accounts</h4>
+
+<p>This table contains all of the RightScale accounts that you have configured to use the RightScale integration.For every RightScale account that you want to use with ServiceNow, you must create an entry in this table. Each entry contains the information required to connect and authenticat to the RightScale system.</p>
+
+<h4 id="roles">Roles</h4>
+
+<p>Permissions on objects in the RightScale application are scoped to the roles defined in this table, which are scope to the RightScale application. The table here is similar to what you would see by filtering the system table &#39;sys_user_role&#39; on this application.</p>
+
+<h4 id="permissions">Permissions</h4>
+
+<p>Provides a list of granted permissions in the scope of this application -- this is similar to filtering the system table &#39;sys_security_acl&#39; by this application and provides an easy way to find permissions granted to app roles in the scope of this application.</p>
+
+<h4 id="users">Users</h4>
+
+<p>List of App users. Since all users in SN are &#39;system&#39; and have been created in the system table &#39;sys_user&#39; this list shows users whose &#39;User ID&#39; starts from prefix &#39;rightscale_&#39;. Since user is not belongs to the particular app it can&#39;t be published with it. So see &#39;Steps to create a dedicated integration user&#39; to add a new user which could be used to push new resources to Import sets tables.</p>
+
+<h4 id="settings">Settings</h4>
+
+<p>This is a System Property Category with four system properties inside. It could be managed through Support -&gt; Settings Manager interface.</p>
+
+<h3 id="integration-components-resources">Resources</h3>
+
+<p>The following CMDB tables are provided by default and are populated from the Import Sets listed in the Web Services section by a default transform map. Each table contains all of the information that is imported into ServiceNow by the integration.</p>
+
+<h4 id="applications">Applications</h4>
+
+<p>Applications represent Cloud Applications that have been published the Service Catalog in RightScale Self-Service.</p>
+
+<h4 id="deployments">Deployments</h4>
+
+<p>Deployments are a basic RightScale construct to logically group together a set of cloud resources that make up an application running in the cloud.</p>
+
+<h4 id="instances">Instances</h4>
+
+<p>Instances are discovered running across all clouds for all configured RightScale accounts. They can include instances from clouds, virtual infrastructure, or dedicated hardware. Some Instances are launched by RightScale, such as those launched by Servers, Arrays, or CloudApps. Others are launched outside of RightScale, but detected by the RightScale platform.</p>
+
+<h4 id="servers">Servers</h4>
+
+<p>Servers represent  the RightScale construct for a cloud-based or virtual server. Servers contain configuration items, monitoring information, alerts, and more. When a Server is launched, an instance is created in the corresponding cloud.</p>
+
+<h4 id="executions">Executions</h4>
+
+<p>Executions represent running Cloud Applications in RightScale Self-Service. Each Execution is linked to a single Deployment which contains all of the resources defined and in use by a Self-Service Cloud Application.</p>
+
+<h3 id="integration-components-source-code">Source Code</h3>
+
+<h4 id="business-rules">Business Rules</h4>
+
+<p>A list of Business Rules in scope of the RightScale Cloud Management application. Only one Business Rule is included which is used for populating account information during Account registration.</p>
+
+<h4 id="rest-messages">REST Messages</h4>
+
+<p>A set of REST messages that are in use by other components in the RightScale Cloud Management application. These messages can also be used in custom workflows to provide additional functionality on top of that provided by the application.</p>
+
+<h4 id="scheduled-jobs">Scheduled Jobs</h4>
+
+<p>The Scheduled Jobs listed for this application are used to periodically poll the RightScale API and import information into the Import Sets. Each job should be marked <q>active</q> during installation and is configured to run once a minute. Every time the jobs run, they check the configured times in the Settings to determine if information should be updated.</p>
+
+<h4 id="service-catalog-items">Service Catalog Items</h4>
+
+<p>Contains a sample catalog item which can be used to launch a RightScale Self-Service Cloud Application. This item can be copied and configured for each Application in order to provide users the ability to launch CloudApps through Self-Service.</p>
+
+<h4 id="scripts">Scripts</h4>
+
+<p>Contains a set of library JavaScript classes that are used in other parts of the application. These libraries are used for tasks such as communicating with and parsing results from the RightScale API.</p>
+
+<h4 id="workflows">Workflows</h4>
+
+<p>A set of workflows that are both used in other parts of the application and that can be leveraged for custom behavior.</p>
+
+<h3 id="integration-components-web-services--import-sets-">Web Services (Import Sets)</h3>
+
+<p>The Import Sets listed in this category are populated by the Scheduled Jobs. Each Import Set includes a default Transform Map which maps elements to the included CMDB tables in the Resources section of the application.</p>
+
+<h4 id="inbound-applications">Inbound Applications</h4>
+
+<p>The import set used to import all Applications from your RightScale Self-Service accounts. Note that this contains only Applications that have been published to the Catalog, not all CAT templates that are in Designer</p>
+
+<h4 id="inbound-deployments">Inbound Deployments</h4>
+
+<p>The import set used to populate all Deployments across your configured RightScale accounts.</p>
+
+<h4 id="inbound-instances">Inbound Instances</h4>
+
+<p>The import set used to import all instances discovered in across all clouds that are connected to all of the RightScale accounts that you’ve configured</p>
+
+<h4 id="inbound-servers">Inbound Servers</h4>
+
+<p>The import set which contains all of the RightScale Servers discovered across all of the RightScale accounts that you’ve connected</p>
+
+<h4 id="inbound-executions">Inbound Executions</h4>
+
+<p>The import set which contains all of the running CloudApps in Self-Service across the RightScale accounts that you’ve configured</p>
+
+<h3 id="integration-components-support">Support</h3>
+
+<p>This category contains support-related information that can be used by both admins and end users to get help regarding this application.</p>
+
+<h4 id="application-logs">Application Logs</h4>
+
+<p>This is a shortcut to view logs related to this application -- it is the same as System logs -&gt; System Log -&gt; Application logs but filtered by Source filed where Source is a application scope name &#39;x_snm_rightscale_c&#39;. This log contains messages posted by application scripts. In other words contains messages explicitly added by typing <q>gs.info(message)</q>. All other messages from Scheduled jobs, Transformation maps etc could be found in the system log (System logs -&gt; System Log -&gt; All).</p>
+
+<h4 id="documentation">Documentation</h4>
+
+<p>Links to this page on the RightScale support site.</p>
+
+<h4 id="rightscale-support">RightScale Support</h4>
+
+<p>Links to a page containing RightScale Support information in case of issues.</p>
+
+<h4 id="settings-manager">Settings Manager</h4>
+
+<p>This is an admin interface for adding new or changing existing settings. The application includes four settings which are used for managing the scheduled jobs intervals.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

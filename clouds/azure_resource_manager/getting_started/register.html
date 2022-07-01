@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Register an Azure Resource Manager (ARM) account with RightScale</title><meta content="Describes the process for registering an Azure Resource Manager (ARM) account with the RightScale platform." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="clouds clouds_azure_resource_manager clouds_azure_resource_manager_getting_started clouds_azure_resource_manager_getting_started_register" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/clouds/azure_resource_manager"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>Microsoft Azure</span></h4></a><a class="list-group-item" href="/clouds/azure_resource_manager/getting_started">Getting Started</a><a class="list-group-item" href="/clouds/azure_resource_manager/reference">Reference</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">Supported Clouds</a> &#x2F; <a href="../">Microsoft Azure Resource Manager</a> &#x2F; <a href="./">Getting Started with Azure Resource Manager (ARM)</a></p><div class="page-header"><h1>Register an Azure Resource Manager (ARM) account with RightScale</h1></div><div class="main-content"><div class="alert alert-warning" role="alert"><strong></strong><p>This registration method does not support personal accounts (gmail.com, live.com, hotmail.com) with ARM. You must authenticate with a corporate email, connected with your Azure AD Tenant. To use a personal account, <a href="register_using_ad_application.html">connect to Azure Resource Manager using your own Active Directory Application</a>.</p>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>This page walks you through the steps to connect your Azure Resource Manager account with RightScale for management purposes using a RightScale-owned Service Principal. This approach is simple and puts the responsibility for key rotation with RightScale, but it also limits the control that you have on the privileges granted to the Service Principal. An alternative method to connecting for management purposes is to <a href="register_using_ad_application.html">connect to Azure Resource Manager using your own Active Directory Application</a>.</p>
+
+<p>If you are part of the Azure CSP program and wish to connect your partner data to Optima for cost reporting purposes, see <a href="/clouds/azure_resource_manager/getting_started/managing_csp_partnerships_and_customers.html">Connect Azure CSP to Optima for Cost Reporting</a>.</p>
+
+<p>If you wish to connect your Azure Enterprise Agreement to Optima for cost reporting purposes, see <a href="/clouds/azure/azure_connect_azure_enterprise_agreement_to_RightScale_for_cost_reporting.html">Connect Azure Enterprise Agreement to Optima for Cost Reporting</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+<li>You must have a Azure Resource Manager subscription to register with RightScale</li>
+<li>You must be <code>admin</code> or <code>enterprise_manager</code> on the RightScale account</li>
+<li>For the initial creation of the <q>RightScale</q> Service Principal, the Azure AD user being used to register with RightScale must be a <strong>Member</strong> of the Active Directory Tenant containing the subscription (not a <strong>Guest</strong>) and have the rights to create Enterprise Applications. <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-how-applications-are-added#who-has-permission-to-add-applications-to-my-azure-ad-instance">By default, <strong>Members</strong> of the tenant have this ability, but that right can be revoked.</a></li>
+<li>The Azure AD user being used to register the Subscription with RightScale must have the <strong>Owner</strong> role on the Subscription. If you temporarily add permissions to a user to complete registration, you may revoke those permissions after the subscription is registered, as RightScale will only use the <q>RightScale</q> Service Principal for authentication.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong></strong><p>Alternatively, you can create <a href="register_using_ad_application.html">connect to Azure Resource Manager using your own Active Directory Application</a>.</p>
+</div>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-connect-to-the-cloud">Connect to the Cloud</h3>
+
+<ol>
+<li><p>After logging into the Dashboard, go to <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Clouds.</strong> Click <strong>Connect to a Cloud.</strong></p></li>
+<li><p>Next, click the (+) icon next to Microsoft Azure Resource Manager.</p>
+
+<p><img src="/img/arm-connect-to-public-clouds.png" alt="arm-connect-to-public-clouds.png" width="1318" height="1032" /></p></li>
+<li><p>You will be taken to Microsoft Azure to complete the oauth authorization process. Click on <strong>Accept</strong> when prompted to give RightScale access.</p>
+
+<p><img src="/img/arm-rightscale-needs-permission-to-access-your-azure-service.png" alt="arm-rightscale-needs-permission-to-access-your-azure-service.png" width="2010" height="1034" /></p></li>
+<li><p>Select the target subscription from a list of available Azure Subscriptions to register.</p>
+
+<p><img src="/img/arm_Connect_RightScale_with_your_Azure_Active_Directory.jpg" alt="arm_Connect_RightScale_with_your_Azure_Active_Directory.jpg" width="1442" height="1264" /></p></li>
+<li><p>Next, you should see a <code>successfully registered with clouds</code> notification on the top bar.</p>
+
+<p><img src="/img/arm-successfully-registered-with-clouds.png" alt="arm-successfully-registered-with-clouds.png" width="2050" height="364" /></p></li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>If the Azure account that you use to authenticate belongs to multiple AD tenants, select the tenant ID that contains the subscription you would like to register first.</p>
+</div>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>If there are no subscriptions available we will present the following error:</p>
+</div>
+
+<p><img src="/img/arm_multiple_tenants_no_subscription_available.jpg" alt="arm_multiple_tenants_no_subscription_available.jpg" width="1446" height="1256" /></p>
+
+<h3 id="steps-check-the-cloud-status">Check the Cloud Status</h3>
+
+<p>On the same <strong>Clouds</strong> tab or on the <strong>Cloud Credentials</strong> widget in the <strong>Overview</strong> tab, you may check the status of your cloud. Both of these items must be valid and active (green) in order to successfully launch cloud servers:
+On the Dashboard, go to  <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Clouds</strong>.  You should be able to view all the Azure Resource Manager Regions</p>
+
+<p><img src="/img/arm-view-all-arm-regions.png" alt="arm-view-all-arm-regions.png" width="1394" height="1198" /></p>
+
+<p>Once your cloud credentials have been verified, you will see that the Microsoft Azure Resource Manager cloud is enabled under the Clouds tab. You will now see all of your Microsoft Azure Resource Manager resources under the Clouds menu (Clouds <em>&gt;</em> AzureRM). You may need to refresh the tab to view your newly added Azure Resource Manager cloud.</p>
+
+<h3 id="steps-adding-newly-supported-regions">Adding Newly Supported Regions</h3>
+
+<p>As RightScale adds support for additional ARM Regions, complete the steps below to view them in RightScale for your ARM subscriptions that have been previously registered.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>You can only add regions using the same already-registered subscription.</p>
+</div>
+
+<ol>
+<li>Complete the standard <a href="/clouds/azure_resource_manager/getting_started/register.html#connect-microsoft-azure-resource-manager-to-your-rightscale-account-connect-to-the-cloud">ARM registration steps</a></li>
+</ol>
+
+<h2 id="the-rightscale-azure-integration">The RightScale-Azure Integration</h2>
+
+<p>RightScale uses the Azure <q>Service Principal</q> approach to getting permissions to operate on your subscription, which is the recommended best practice as published by Microsoft.</p>
+
+<p>In short, the RightScale <q>web application</q> is added to Azure Active Directory (AD) associated with the registered subscription. Then the RightScale application service principal (which shows up as a <q>user</q>) is granted the <q>Contributor</q> role to the subscriptions within that AD. The service principal is then used by RightScale to authenticate and make requests on your behalf. RightScale <strong>does not</strong> store any user credentials for this access in the platform. You can read more about this approach on <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-application-objects">the Microsoft Azure docs</a>.</p>
+
+<p>The registration process above performs the following tasks:</p>
+
+<ol>
+<li>Adds the RightScale web application to the Azure AD (if it is not already added)</li>
+<li>Adds the <q>RightScale</q> application service principal (<q>user</q>) to the specified subscription with the <q>Contributor</q> role</li>
+<li>Informs RightScale which subscription to use for this RightScale account</li>
+</ol>
+
+<p>Each of the above steps is explained in more detail below.</p>
+
+<h3 id="the-rightscale-azure-integration-add-the-rightscale-web-app-to-azure-ad">Add the RightScale web app to Azure AD</h3>
+
+<p>In order for the <q>RightScale</q> service principal to be granted permissions on a subscription, the RightScale web application must first be added to Azure AD. Today, there is no way to add this application directly via the Azure Portal -- note that there <strong>is</strong> a RightScale application listed in the marketplace, but that application is used for SSO, not for cloud management integration.</p>
+
+<p>The only way to add this today is to go through the cloud registration process through RightScale as specified above.</p>
+
+<p>The ARM user performing this step must be a member of the Active Directory Tenant containing the subscription (not a guest).</p>
+
+<p><strong>After registration, the only permission that the <q>RightScale</q> Service Principal will have on the Azure AD tenant is <q>Sign-in and read user profile</q>.</strong></p>
+
+<p><img src="/img/arm-ad-application-arm-portal.png" alt="arm-ad-application-arm-portal.png" width="1091" height="432" /></p>
+
+<h3 id="the-rightscale-azure-integration-grant-rightscale-permission-to-a-subscription">Grant RightScale permission to a subscription</h3>
+
+<p>In order for RightScale to be able to manage cloud resources, it must have permissions granted on the Subscriptions in Azure. The RightScale cloud registration process will automatically add the <q>RightScale</q> service principal to the specified subscription with the <strong>Contributor</strong> role -- this is the required role for RightScale to have in order to perform cloud management on Azure.</p>
+
+<p>While this permission can be manually granted in AD, the RightScale cloud registration steps must still be followed in order to associate the RightScale account with the correct subscription.</p>
+
+<p>The user performing this action must have the <strong>Owner</strong> role on the Subscription.</p>
+
+<p><strong>After registration, the <q>RightScale</q> Service Principal will have Contributor access on the Subscription.</strong></p>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>Removing the <q>RightScale</q> service principal&#39;s access from the subscription using the Azure Portal will prevent RightScale from acting on this subscription. The behavior in RightScale at this point will be undefined -- it will not be able to modify or read any information from the subscription.</p>
+</div>
+
+<p><img src="/img/arm-subscription-users2.png" alt="arm-subscription-users2.png" width="1398" height="347" /></p>
+
+<h3 id="the-rightscale-azure-integration-grant-rightscale-read-access-to-a-subscription">Grant RightScale read access to a subscription</h3>
+
+<p>In order to provide RightScale read access to a subscription, you need to first follow the steps under <a href="/clouds/azure_resource_manager/getting_started/register.html#connect-microsoft-azure-resource-manager-to-your-rightscale-account">Connect Microsoft Azure Resource Manager to your RightScale Account</a>.</p>
+
+<p>Once the AzureRM subscription has successfully been registered to the RightScale account, you can then restrict its access by following these steps:</p>
+
+<ol>
+<li>Go to the <q>Subscriptions</q> blade in the AzureRM Portal.</li>
+<li>Select the Subscription you would like to modify access for.</li>
+<li>Go to <q>Access Control (IAM)</q></li>
+<li>Find the <q>RightScale</q> user and remove it.</li>
+<li>Re-add the <q>RightScale</q> user by selecting <q>Add</q>, choose <q>Reader</q> for the role, and find the <q>RightScale</q> application user in the directory.</li>
+<li>Save your changes.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>Changing the <q>RightScale</q> service principal&#39;s access to <q>Reader</q> will still allow RightScale to discover resources. Although actions will still be available from RightScale, they will fail if you try to use them.</p>
+</div>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

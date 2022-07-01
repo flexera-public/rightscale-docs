@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Alert Escalations</title><meta content="In the RightScale Cloud Management Dashboard, an alert escalation defines the action or set of actions to be taken when specified alert conditions are met." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_design cm_dashboard_design_alert_escalations cm_dashboard_design_alert_escalations_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Design</a></p><div class="page-header"><h1>Alert Escalations</h1></div><div class="main-content"><h3 id="-overview">Overview</h3>
+
+<p>An <strong>alert escalation</strong> defines the action or set of actions to be taken when specified alert conditions are met. Unlike alerts which are specific to a Server, ServerTemplate, or Server Array, Alert Escalations can be designated to a specific Deployment or made available for use across all Deployments.</p>
+
+<p>An alert must be enabled on a server in order for the server to monitor for a condition and call an Alert Escalation. Alert conditions are evaluated every minute. When an alert that is tied to an Alert Escalation is triggered, the actions of the associated escalation will be executed until the alert condition no longer exists or it&#39;s disabled. If an alert&#39;s conditions no longer exist, an option Resolution Action can be specified to be run.</p>
+
+<p>You can also override an Alert Escalation by creating one with the same name in order to override the account-wide escalation with one that is deployment-specific.</p>
+
+<p>Several of the most common alert escalations have already been predefined for your convenience. You can also create your own custom alert escalations.</p>
+
+<p>To view or create Alert Escalations, navigate to <strong>Design</strong> &gt; <strong>Alert Escalations</strong>. The <strong>New</strong> button is provided to create Alert Escalations.</p>
+
+<p>Visit the <a href="/cm/dashboard/design/alert_escalations/alert_escalations_actions.html">Alert Escalations - Actions and Procedures</a></p>
+
+<p>Here is a list of supported actions inside an Alert Escalation. These actions are summarized in the sections below.</p>
+
+<ul>
+<li><a href="#valid-actions-for-alert-escalations-send-email"><strong>send_email</strong></a> - Send email to one or multiple recipients.</li>
+<li><a href="#valid-actions-for-alert-escalations-reboot-server"><strong>reboot_server</strong></a> - Reboot the server instance generating the alert.</li>
+<li><a href="#valid-actions-for-alert-escalations-relaunch-server"><strong>relaunch_server</strong></a> - Relaunch the server generating the alert (this terminates the current instance and launches a fresh instance).</li>
+<li><a href="#valid-actions-for-alert-escalations-run-rightscript"><strong>run_right_script</strong></a> - Run a RightScript on the server instance generating the alert.</li>
+<li><a href="#valid-actions-for-alert-escalations-run-cloud-workflow"><strong>run_cloud_workflow</strong></a> - Run a <a href="/ss/reference/rcl/v2/index.html">Cloud Workflow</a> to react to the alert.</li>
+<li><strong>vote_grow_array</strong> - Vote to grow a server array attached to the deployment in which the alerting server is running. (This option will soon be deprecated. Use Voting Tags instead.)</li>
+<li><strong>vote_shrink_array</strong> - Vote to shrink a server array attached to the deployment in which the alerting server is running. (This option will soon be deprecated. Use Voting Tags instead.)</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The <q>vote to grow/shrink array</q> options will soon be deprecated. Autoscaling is now performed using <a href="/cm/dashboard/manage/arrays/arrays_actions.html#set-up-autoscaling-using-voting-tags">voter tags</a>.</p>
+</div>
+
+<p>The following is a list of supported actions to be run as part of a Resolution Action. These actions are summarized in the sections below.</p>
+
+<ul>
+<li><a href="#valid-actions-for-alert-escalations-send-email"><strong>send_email</strong></a> - Send email to one or multiple recipients.</li>
+<li><a href="#valid-actions-for-alert-escalations-run-cloud-workflow"><strong>run_cloud_workflow</strong></a> - Run a <a href="/ss/reference/rcl/v2/index.html">Cloud Workflow</a> to react to the alert.</li>
+</ul>
+
+<h2 id="valid-actions-for-alert-escalations">Valid Actions for Alert Escalations</h2>
+
+<p>The following actions are supported when creating a sequence of actions for an alert escalation.</p>
+
+<h3 id="valid-actions-for-alert-escalations-send-email">Send Email</h3>
+
+<p>Action name: <code>send_email</code></p>
+
+<p>You can send an email to one or multiple recipients. Email field supports space-, comma- or semicolon-separated list of email addresses.</p>
+
+<p>There are three different types of email formats.</p>
+
+<ul>
+<li><p><strong>detailed email message</strong> - Standard email format with Subject and Message.  </p></li>
+<li><p><strong>short TXT message</strong> - Designed for sending short SMS/MMS text messages to cell phones. Enter the phone number in a valid SMS string into the Email field. (e.g., <a href="mailto:18052224444@vtext.com">18052224444@vtext.com</a> (Verizon) See <a href="/faq/How_do_I_send_an_alert_as_a_text_message.html">FAQ 105 - How do I text message an alert?</a>  </p></li>
+<li><p><strong>parsable message</strong> - Designed for auto responders. A server will receive the email message and &#39;parse&#39; a response. (See example below)</p></li>
+</ul>
+
+<p><strong>Example of Parsable Message</strong></p>
+<pre class="syntax-highlight plaintext"><code>    subject: alert: 'My cool server' My sweet alert spec
+</code></pre>
+<pre class="syntax-highlight plaintext"><code>    message: Server Name: My super server,
+    Server Href: http://my.rightscale.com/api/acct/0/servers/0,
+    Deployment Name : My awesome deployment,
+    Deployment Href: http://my.rightscale.com/api/acct/0/deployments/0,
+    Account Name: My account name,
+    Cloud: 1,
+    Alert Name: My sweet alert spec,
+    Alert Time: 2009-11-21 00:00:42,
+    Alert Spec Input: cpu-0/cpu-idle,
+    Alert Spec Metric: value,
+    Alert Spec Condition: &gt;,
+    Alert Spec Target Value: 60,
+    Alert Spec Duration: 5
+</code></pre>
+
+<h3 id="valid-actions-for-alert-escalations-reboot-server">Reboot Server</h3>
+
+<p>Action name: <code>reboot_server</code></p>
+
+<p>Reboot the server generating the alert. Equivalent to rebooting the same physical machine. (i.e., The Server will maintain its Instance ID.)</p>
+
+<h3 id="valid-actions-for-alert-escalations-relaunch-server">Relaunch Server</h3>
+
+<p>Action name: <code>relaunch_server</code></p>
+
+<p>Relaunch the server generating the alert (this terminates the current running instance and launches a fresh instance). i.e. The Server will receive a new Instance ID.</p>
+
+<h3 id="valid-actions-for-alert-escalations-run-rightscript">Run RightScript</h3>
+
+<p>Action name: <code>run_right_script</code></p>
+
+<p>Run a RightScript on a server.</p>
+
+<ul>
+<li><strong>Repeat every</strong> - Enter a positive integer greater than zero (valid range: 1 - 10,000,000) to repeat this action every <em>n</em> minutes. Leave the field blank to run the script once.</li>
+<li><strong>Prior actions</strong> - This value is only applicable if a prior action already exists.
+
+<ul>
+<li><strong>add</strong> - Add the current action to any previously running actions. (i.e. Continue executing any previous actions and run this action too.)</li>
+<li><strong>replace</strong> - Replace any previously running actions with this action. (i.e. Stop performing any previous actions and run this action.)</li>
+</ul></li>
+<li><strong>Escalate after</strong> - Defines how many minutes must pass before executing the next action in the list. Enter a positive integer greater than zero (valid range: 1 - 10,000,000)</li>
+<li><strong>Execute on server</strong> - If the Alert Escalation is available across all deployments in the RightScale account, you can only execute the script on the server that raised the alert. However, if you were explicit when you created the Alert Escalation and only made it available for use inside of a specific deployment, you will also have the option to execute the script on another server in the deployment.
+<img src="/img/cm-select-server.png" alt="cm-select-server.png" width="314" height="106" /><br>
+You can only run the script on a single server. To run the script on another server you must create another action. Only servers that currently exist in the deployment will be listed. You cannot execute the script on any instances in an associated array.</li>
+<li><strong>RightScript</strong> - Select the RightScript to be executed on the server. All RightScripts available within the RightScale account will be listed. All committed revisions as well as the HEAD version of the script will be listed.</li>
+</ul>
+
+<h3 id="valid-actions-for-alert-escalations-run-cloud-workflow">Run Cloud Workflow</h3>
+
+<p>Action name: <code>run_cloud_workflow</code></p>
+
+<p>Run a <a href="/ss/reference/rcl/v2/index.html">Cloud Workflow</a>. The workflow is run using the permissions of the user that creates the alert escalation at time of creation.</p>
+
+<ul>
+<li><strong>Repeat every</strong> - Enter a positive integer greater than zero (valid range: 1 - 10,000,000) to repeat this action every <em>n</em> minutes. Leave the field blank to run the script once.</li>
+<li><strong>Prior actions</strong> - This value is only applicable if a prior action already exists.
+
+<ul>
+<li><strong>add</strong> - Add the current action to any previously running actions. (i.e. Continue executing any previous actions and run this action too.)</li>
+<li><strong>replace</strong> - Replace any previously running actions with this action. (i.e. Stop performing any previous actions and run this action.)</li>
+</ul></li>
+<li><strong>Escalate after</strong> - Defines how many minutes must pass before executing the next action in the list. Enter a positive integer greater than zero (valid range: 1 - 10,000,000)</li>
+<li><strong>Cloud Workflow source</strong> - Enter the <a href="/ss/reference/rcl/v2/index.html">RCL source code</a> to run. The RCL must implement a definition named <code>alert</code> that takes no parameters, which is the entry point when the alert is triggered. The global variables <code>@@alert</code> and <code>@@instance</code> are are available to the definition, representing the alert and instance that was triggered, respectively.</li>
+</ul>
+
+<p>The following limits exist for Cloud Workflow processes running as part of an alert escalation:</p>
+
+<ul>
+<li>A hard limit of <strong>10 minutes</strong> is defined for the runtime of a Cloud Workflow associated with an alert escalation. If a Cloud Workflow is still running past this time, it will be canceled. </li>
+<li>Only one Cloud Workflow process may be running at any time for a given server alert</li>
+<li>Cloud Workflow processes running as part of an alert escalation do not support plugins</li>
+<li>When an alert is <q>resolved</q>, any running Cloud Workflow processes continue to run to completion (they are not canceled/aborted)</li>
+</ul>
+
+<h3 id="valid-actions-for-alert-escalations-vote-to-grow-the-server-array--scale-up-">Vote to Grow the Server Array (scale-up)</h3>
+
+<p>Action name: <code>vote_grow_array</code></p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>This action will soon be deprecated. Please see <a href="/cm/dashboard/manage/arrays/arrays_actions.html#set-up-autoscaling-using-voting-tags">Set up Autoscaling using Voting Tags</a>.</p>
+</div>
+
+<p>The server is voting to grow or &#39;scale-up&#39; by launching additional servers into the server array that&#39;s attached to the deployment. It is only a vote; not a trigger to launch servers. Additional servers will not be launched unless enough servers are voting for the &#39;vote_grow_array&#39; action. The server array&#39;s scaling parameters will ultimately determine when to scale (e.g. &gt; 51% are voting) and how to scale (e.g. Launch &#39;2&#39; new servers into the array).</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The array must be active (enabled) in order for any scaling to take place.</p>
+</div>
+
+<h3 id="valid-actions-for-alert-escalations-vote-to-shrink-the-server-array--scale-down-">Vote to Shrink the Server Array (scale-down)</h3>
+
+<p>Action name: <code>vote_shrink_array</code></p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>This action will soon be deprecated. Please see <a href="/cm/dashboard/manage/arrays/arrays_actions.html#set-up-autoscaling-using-voting-tags">Set up Autoscaling using Voting Tags</a>.</p>
+</div>
+
+<p>The server is voting to shrink or &#39;scale-down&#39; by terminating underutilized servers from the array that&#39;s attached to the deployment. It is only a vote; not a trigger to terminate servers. Underutilized servers will not be terminated unless enough servers are voting for the &#39;vote_shrink_array&#39; action. The server array&#39;s scaling parameters will ultimately determine when to scale (e.g. &gt; 51% are voting) and how to scale (e.g. Terminate &#39;1&#39; server from the array).</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The array must be active (enabled) in order for any scaling to take place.</p>
+</div>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+<li><a href="/cm/dashboard/design/alert_escalations/alert_escalations_actions.html">Alert Escalations - Actions and Procedures</a></li>
+<li><a href="/cm/rs101/alerts_alert_escalations_and_server_arrays.html">Alerts, Alert Escalations, and Server Arrays</a></li>
+<li><a href="/cm/rs101/create_a_new_alert_specification.html">Create an Alert Specification</a></li>
+<li><a href="/cm/rs101/create_a_custom_alert_specification.html">Create a Custom Alert Specification</a></li>
+<li><a href="/cm/dashboard/manage/arrays/arrays_actions.html">Set up Autoscaling using Voting Tags</a></li>
+<li><a href="/ss/reference/rcl/v2/index.html">Cloud Workflow</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

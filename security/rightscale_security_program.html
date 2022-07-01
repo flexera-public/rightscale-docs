@@ -1,0 +1,674 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightScale Security Program</title><meta content="RightScale Cloud Portfolio Management is a software-as-a-service (SaaS) platform that is used to manage cloud applications." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="security security_rightscale_security_program" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/security"><h4 class="list-group-heading"><img src="../img/product-cloud-management.svg" /><span>Security</span></h4></a><a class="list-group-item" href="rightscale_security_program.html">Security Program</a><a class="list-group-item" href="security_announcements.html">Announcements</a><a class="list-group-item" href="standard_practices.html">Standard Practices</a><a class="list-group-item" href="faqs.html">FAQs</a><a class="list-group-item" href="security_resources.html">Security Resources</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">Security</a></p><div class="page-header"><h1>RightScale Security Program</h1></div><div class="main-content"><h2 id="overview-of-the-rightscale-security-and-compliance-program">Overview of the RightScale Security and Compliance Program</h2>
+
+<p>RightScale Cloud Portfolio Management is a software-as-a-service (SaaS) platform that is used to manage cloud applications. The RightScale platform is hosted at cloud providers and other hosting facilities. The RightScale platform stores various types of metadata about your cloud applications (referred to as Customer-Specific RightScale Data), but <strong>does not store data that is created and managed by your cloud applications</strong> (herein referred to as Customer Application Data).</p>
+
+<p>Because RightScale operates as a SaaS solution, our software, infrastructure, and security processes have been designed from the ground up with a multi-layered, defense-in-depth approach. The RightScale Security and Compliance Program is based on the ISO 27001 Information Security Management System (ISMS). We have defined policies that govern our security policies and processes and continually update our security program to be consistent with applicable legal, industry, and regulatory requirements for services that we provide to you under contractual agreement.</p>
+
+<p>RightScale complies with industry standard application security guidelines that include a dedicated security engineering team and include regular reviews of application source code and IT infrastructure to detect, validate, and remediate any security vulnerabilities.</p>
+
+<p>This document will provide an overview of these security measures as well as links to additional documents that provide details on specific areas.</p>
+
+<h2 id="physical-and-environmental-security">Physical and Environmental Security</h2>
+
+<h3 id="physical-and-environmental-security-rightscale-hosting-facilities">RightScale Hosting Facilities</h3>
+
+<p>The cloud providers used by RightScale manage the physical security and basic IT infrastructure operations for the RightScale platform, including your Customer-Specific RightScale Data. All hosting facilities used by RightScale have met a minimum of SSAE 18/SOC 1 certification.</p>
+
+<p>Our hosting facilities provide industry-standard controls including:</p>
+
+<ul>
+<li>Fire suppression</li>
+<li>Data center cooling</li>
+<li>Data center power</li>
+<li>Multiple layers of physical access control</li>
+<li>Video monitoring of equipment locations</li>
+</ul>
+
+<h3 id="physical-and-environmental-security-cloud-providers-for-your-cloud-applications">Cloud Providers for Your Cloud Applications</h3>
+
+<p>You deploy your applications in the cloud providers of your choice. You should obtain all physical security and access-control verification information directly from that cloud provider. Typically, physical floor layouts and network infrastructure designs are not disclosed by cloud providers, and are therefore not available to RightScale or to our customers. However, RightScale can support you in further discussions with cloud providers on specific physical or logical access controls.</p>
+
+<h3 id="physical-and-environmental-security-rightscale-offices">RightScale Offices</h3>
+
+<p>No customer-specific systems or data reside within the corporate network or office facilities of RightScale. RightScale does implement physical security on RightScale offices as part of our comprehensive security procedures.</p>
+
+<p>RightScale corporate headquarters are subject to physical perimeter access controls. The outer perimeter doors of the facility are locked and require badge card access for entry during working hours. After hours, badge card and lock PIN are required for entry. All access is logged. RightScale uses video surveillance of the exterior and lobby at RightScale headquarters. Videos are archived for at least 30 days. Satellite offices also are subject to multi-level perimeter controls.</p>
+
+<h2 id="rightscale-access-controls">RightScale Access Controls</h2>
+
+<p>RightScale delivers both professional services and managed services, and our employees have significant training and expertise for the type of data, systems, and information assets that they design, architect, implement, manage, support, and interact with.</p>
+
+<p>RightScale personnel who need to access components of the RightScale production systems, production management tools, or customer accounts must request access. RightScale follows an established on-boarding process to ensure that the appropriate level of access is assigned and maintained. RightScale has established levels of access that are appropriate for each role. All requests are reviewed and approved by the manager. RightScale follows a least-privilege policy that grants employees the minimum level of access required to complete their duties. RightScale follows an established off-boarding process through RightScale human resources that revokes all access rights upon termination.</p>
+
+<p>All required employee access to customer accounts is limited to access levels commensurate for supporting our customers. These access levels are enforced by the RightScale platform, and the privilege to obtain any global roles is extended only to those employees whose job responsibilities include customer support. RightScale employee global roles are used for purposes of supporting our customers and, as such, these global roles are by default excluded from any customer-applied whitelisting. If RightScale personnel needs any additional access to a customer account, customers must explicitly invite them. For a small number of employees who require higher levels of access to maintain the RightScale platform itself, additional processes, approvals, and training procedures apply.</p>
+
+<h3 id="rightscale-access-controls-roles-and-responsibilities">Roles and Responsibilities</h3>
+
+<p>Roles and responsibilities of all staff are documented as related to information assets and security.</p>
+
+<h3 id="rightscale-access-controls-rightscale-cost-optimization-team-role-permissions-and-use-of-customer-billing-data">RightScale Cost Optimization Team Role Permissions and Use of Customer Billing Data</h3>
+
+<p>RightScale has implemented a cost optimizer role designed specifically for the purpose of allowing RightScale Cost Optimization team members to perform a Cost Optimization Assessment or provide Cost Optimization Services at a customer’s request. The cost optimizer role has limited permissions that provide the RightScale employee with access levels commensurate with what is required to perform Cost Optimization Assessments and Services. This role is extended only to those employees whose job responsibilities include Cost Optimization Assessments and Services support.</p>
+
+<p>RightScale Cost Optimization team members designated with the cost optimizer role will be able to:</p>
+
+<ul>
+<li>View billing information and details of cloud resource usage and costs.</li>
+<li>View cost and other information in cloud accounts connected to RightScale.</li>
+<li>View RightScale Optima recommendations.</li>
+<li>Flag recommendations to be “ignored.”</li>
+<li>Customize recommendation rule settings.</li>
+<li>Set up cost reports and budget alerts.</li>
+</ul>
+
+<p>RightScale Cost Optimization team members cannot:</p>
+
+<ul>
+<li>Make any changes to cloud resources.</li>
+<li>Execute on any recommendations.</li>
+<li>Make any changes to Billing Centers.</li>
+</ul>
+
+<p>Billing data is used only for the purpose of:</p>
+
+<ul>
+<li>Providing access for RightScale Optima to deliver analytics and recommendations.</li>
+<li>Permitting RightScale Cost Optimization team members to perform Cost Optimization</li>
+</ul>
+
+<p>Assessments and Services.</p>
+
+<ul>
+<li>Research for delivering support or improving the product.</li>
+<li>Providing summary statistics of aggregated and anonymized customer billing data.</li>
+</ul>
+
+<h3 id="rightscale-access-controls-background-checks">Background Checks</h3>
+
+<p>RightScale has a documented process for performing background checks. RightScale uses a third party to conduct background checks, as permitted by law, as part of the recruitment and new-hire process.</p>
+
+<h3 id="rightscale-access-controls-password-policy">Password Policy</h3>
+
+<p>RightScale has a documented password policy for all employees. Passwords must meet complexity and length requirements and cannot be reused. Employees are required to secure all computers with a screensaver and password. Employees are required to secure mobile devices using full-disk encryption and other applicable technologies.</p>
+
+<h4 id="creating-a-password">Creating a Password</h4>
+
+<p>A password must meet the following minimum requirements:</p>
+
+<ul>
+<li>Must be 8 characters or longer</li>
+<li>Must use both lower and uppercase letters</li>
+<li>Must include numbers</li>
+<li>Must include at least one symbol (e.g., !@#$%^&amp;*)</li>
+<li>Cannot contain part of username</li>
+<li>Cannot be any of last 4 passwords</li>
+</ul>
+
+<p>Other tips for making a strong, complex password:</p>
+
+<ul>
+<li>Avoid using repeating characters such as <q>aaabbbccc</q></li>
+<li>Avoid using simple sequences such as <q>123</q> or <q>abc</q></li>
+</ul>
+
+<p>Password complexity is augmented with account lockout. We understand that the complexity requirements are not as stong as they potentially could be, but because we enforce account and IP lockouts, the overall controls against brute-force guessing have been extremely effective. Our lockout policy, after six failed login attempts:</p>
+
+<ul>
+<li>Lockout the user account for five minutes</li>
+<li>Lockout the IP address for one hour</li>
+<li>This policy is a balance between brute-force prevention and availability. </li>
+</ul>
+
+<p><strong>Note:</strong> If you require more granular authentication controls, we highly recommend you utilize our Single Sign-On feature. </p>
+
+<h3 id="rightscale-access-controls-account-review">Account Review</h3>
+
+<p>Account access is reviewed at least every 90 days to ensure appropriate access.</p>
+
+<h3 id="rightscale-access-controls-remote-access">Remote Access</h3>
+
+<p>All systems that are part of the RightScale platform run a version of the Linux operating system and use SSH for remote access. All interactive login and non-interactive (file-copy) access requires public-key SSH authentication; SSH sessions are audited in the RightScale platform, and any activities performed during a session are logged via the system logging facility. Each user is assigned a unique user ID and must use sudo to perform any operations requiring elevated privileges. See the Key Management and Storage section below for additional information on our key management procedures.</p>
+
+<h3 id="rightscale-access-controls-training-and-education">Training and Education</h3>
+
+<p>All employees are required to complete security awareness training as part of the onboarding process. Ongoing security updates and education are also provided.</p>
+
+<h2 id="business-continuity-management">Business Continuity Management</h2>
+
+<p>The RightScale platform is architected for high availability, leveraging the capabilities of our cloud providers to maximize uptime, resilience, and data protection by deploying our platform across multiple geographic regions and data centers and through fault-tolerant software architectures.</p>
+
+<p>Because RightScale CMP runs independently of your workloads and is not an active component of your applications, it is not a point of failure for
+your managed workloads. If RightScale CMP suffers from an outage, your cloud workloads will continue to be available.</p>
+
+<p><img src="/img/security-rs-platform-overview.png" alt="security-rs-platform-overview.png" width="620" height="523" /></p>
+
+<h3 id="business-continuity-management-disaster-recovery">Disaster Recovery</h3>
+
+<p>The repositories and databases used by the RightScale platform are mirrored across multiple data centers in geographically distant regions. RightScale employs a partitioned (sharded) architecture and master-slave replication with “warm disaster recovery” to ensure business continuity and data recovery in the event of service interruptions at the cloud or hosting provider.</p>
+
+<h3 id="business-continuity-management-geographical-separation-of-applications-from-the-management-plane">Geographical Separation of Applications from the Management Plane</h3>
+
+<p>You may choose from several options for the geographic location of your RightScale accounts. RightScale can advise you on the specific location that is most appropriate for your situation. This approach enables geographical separation of your RightScale Cloud Management account and the actual cloud applications being managed.</p>
+
+<p>By following this best practice of geographical separation, your RightScale Cloud Management solution can be used in case of a potential service interruption at your cloud provider or other data center to execute disaster recovery or failover processes. In addition, any service interruptions that disrupt your access to the RightScale platform will not impact your running cloud applications.</p>
+
+<h3 id="business-continuity-management-uptime-and-maintenance-windows">Uptime and Maintenance Windows</h3>
+
+<p>RightScale provides a <a href="https://www.flexera.com/media/legal/saas-service-levels.pdf">service level agreement</a> of 99.5 percent.</p>
+
+<p>RightScale maintains a <a href="https://status.flexera.com/">status page</a> showing the current status of all RightScale services. RightScale notifies customers of planned maintenance windows in advance. Planned maintenance windows are typically 60-90 minutes.</p>
+
+<h2 id="network-security">Network Security</h2>
+
+<p>The RightScale platform is a SaaS solution hosted by RightScale at our cloud and hosting providers. The RightScale platform also leverages several components that may be run in your data centers or on your cloud instances depending on the capabilities of RightScale that you use. These include:</p>
+
+<h3 id="network-security-rightlink">RightLink</h3>
+
+<p>RightLink™ is an agent that is installed on your RightScale-managed cloud instances. It communicates with the RightScale platform to allow for running of scripts, monitoring, and other management functions. The latest version of the agent (RightLink 10.x) leverages HTTPS (TLS/SSL HTTPS and AES-192 encryption) and Secure WebSockets to secure communication between the agent and the RightScale platform. When used to manage a private-cloud or virtualized environment, the RightLink agent requires egress-only through the firewall to a small, fixed set of destination IP addresses. For the required outbound firewall rules, see <a href="/faq/Firewall_Configuration_Ruleset.html">Firewall Configuration Ruleset</a>.</p>
+
+<h3 id="network-security-monitoring-agent">Monitoring Agent</h3>
+
+<p>RightScale leverages an optional collectd agent installed on your cloud instances for monitoring. Communication is through UDP. When used to manage private cloud or virtualized environments, the collectd agent requires egress-only through the firewall. For the required outbound firewall rules, see <a href="/faq/Firewall_Configuration_Ruleset.html">Firewall Configuration Ruleset</a>.</p>
+
+<h3 id="network-security-rightscale-cloud-appliance-for-vsphere--rca-v-">RightScale Cloud Appliance for vSphere (RCA-V)</h3>
+
+<p>RCA-V is a virtual software appliance that enables you to manage your vSphere environments with RightScale. RCA-V is installed in your data center with access to your vSphere environment. RCA-V does not require any inbound connectivity to your network.</p>
+
+<p>You must allow for egress (outbound) access from RCA-V to the RightScale platform. For the required outbound firewall rules, see <a href="/faq/Firewall_Configuration_Ruleset.html">Firewall Configuration Ruleset</a>. This connection uses HTTPS (TLS/SSL HTTPS and AES-192 encryption) and Secure WebSockets to protect communications.</p>
+
+<p>You must also allow for egress (outbound) access from your vSphere-based virtual machines that are deployed using RightScale. These instances run the RightLink agent that communicates with the RightScale platform. The required outbound connections are documented on the support site. The connections use HTTPS and Secure WebSockets to protect communications.</p>
+
+<p>RCA-V requires access to your vCenter Server. It does not require admin access. See <a href="/faq/Firewall_Configuration_Ruleset.html">Firewall Configuration Ruleset</a>.</p>
+
+<h2 id="software-lifecycle-and-change-management">Software Lifecycle and Change Management</h2>
+
+<p>The RightScale software development lifecycle and change management processes are applied to the following types of code that are associated with the RightScale platform.</p>
+
+<p><strong>RightScale Platform Code</strong></p>
+
+<p>This is the software that implements the functionality of the RightScale solution.</p>
+
+<p><strong>RightScale Multi-Cloud Images<sup>TM</sup></strong></p>
+
+<p>These are operating system images for various cloud providers.</p>
+
+<p><strong>RightLink Agent</strong></p>
+
+<p>This is the software agent used to communicate between RightScale-managed instances and the RightScale platform.</p>
+
+<p><strong>RightScale ServerTemplates<sup>TM</sup></strong></p>
+
+<p>These are out-of-the-box configuration management scripts created by RightScale that you may use to provision your servers. Note: The RightScale MultiCloud MarketplaceTM also includes ServerTemplates from partners or community members, which may follow different software lifecycle management processes.</p>
+
+<h3 id="software-lifecycle-and-change-management-development-and-operations-process">Development and Operations Process</h3>
+
+<p>RightScale follows established and documented processes that govern all of the asset types listed above. Key elements of this process include:</p>
+
+<p><strong>Source Code Repository and Change Tracking</strong></p>
+
+<p>RightScale leverages GitHub as a source code repository and management system. All changes are tracked, including the person making the change and the date of the change. All code must be tagged with the business requirement that generated the code change.</p>
+
+<p><strong>Code Reviews</strong></p>
+
+<p>All code is reviewed by a team lead or designated domain expert before being merged into the main branch. Code that is being merged into a release branch is subject to additional review (see below).</p>
+
+<p><strong>QA Processes</strong></p>
+
+<p>Testing is conducted at multiple phases in the development process, including unit testing, functional testing, integration testing, and regression testing.</p>
+
+<p><strong>Multiple Checkpoints with Segregation of Duties</strong></p>
+
+<p>There are several review and validation steps as code moves from development into production. Code is written by developers. Requests to merge code into a release branch can only be made by development managers, and only after QA personnel have conducted final acceptance/regression tests. The changes are independently reviewed by our production support team, who validates that the received change matches the expected change. Once validated, the production support team merges code. The operations team is responsible for deploying code changes to the production environment.</p>
+
+<p><strong>Management of Inbound Source Code</strong></p>
+
+<p>RightScale obtains source and binary packages for Linux operating systems directly from the source code repository of the distro maintainer (i.e., Ubuntu and CentOS). We complete a repeatable, automated “clean build” that includes security checks and then adds the RightLink agent.</p>
+
+<p>RightScale obtains base Windows images directly from the individual cloud provider. RightScale adds the RightLink agent and then uses Microsoft’s Sysprep utility to prepare the final image.</p>
+
+<p>After preparation, cloud images are digitally signed (when supported by the cloud provider) and uploaded to the provider via HTTPS.</p>
+
+<p>RightScale ServerTemplates may also include open source software, such as Apache, MySQL, Rails, or others. RightScale maintains mirrors of the distro maintainers&#39; package repositories to ensure consistency and availability. RightScale relies on the OS packaging system to ensure the integrity of package contents.</p>
+
+<p>Packages that reside in distro maintainers&#39; repositories are generally signed using GPG, and instances verify the package signature (and the trustworthiness of the signer) when a package is installed. RightScale also signs all packages that we publish, such as RightLink.</p>
+
+<h2 id="control-of-production-systems">Control of Production Systems</h2>
+
+<p>RightScale uses an independent, single-tenant, separately located instance of the RightScale solution to manage the RightScale platform. We leverage the RightScale platform’s role-based access controls to enforce segregation of duties among our employees.</p>
+
+<p>All major production systems have documented runbooks to cover deployment, update, and troubleshooting processes. Extensive alerts are set up to notify and escalate in the case of issues.</p>
+
+<p><strong>Baseline Configurations</strong></p>
+
+<p>RightScale leverages RightScale ServerTemplates to create hardened and tested baseline configurations for use on all production servers. Permissions to change baseline configurations are strictly limited. Changes to baseline configurations require peer review and approval by the appropriate manager. No ad hoc scripts may be run on production systems. All scripts must follow the lifecycle management process and be approved by a manager.</p>
+
+<h2 id="identity-management">Identity Management</h2>
+
+<h3 id="identity-management-user-authentication-and-session-management">User Authentication and Session Management</h3>
+
+<p>The RightScale platform supports the following end-user authentication mechanisms:</p>
+
+<ul>
+<li>Username and password (password length/complexity and lockout policies are enforced).</li>
+<li>Single Sign-On using SAML or OpenID.</li>
+<li>OAuth 2.0 refresh token (for API access only).</li>
+</ul>
+
+<p>By leveraging SAML, RightScale can integrate with customer identity platforms such as Active Directory (ADDS and ADFS) or third-party identity platforms such as Okta, Ping, OneLogin, and others.</p>
+
+<p>Two-factor authentication for access to RightScale can be implemented in a federated manner through any of the above identity management platforms or via OpenID.</p>
+
+<p>You may leverage IP whitelisting capabilities in the RightScale platform to limit access to RightScale Cloud Management based on user IP address. Whitelisting policies apply to both the RightScale UI and API.</p>
+
+<p>A session timeout is in place, and inactive sessions are invalidated after a period of inactivity. The session timeout is two hours for inactive sessions, and this timeout applies to both UI and API sessions.</p>
+
+<p>See the <a href="/cm/administrators_guide/user_and_account_management.html">User and Account Management</a> section of the <a href="/cm/administrators_guide/">RightScale Administrator&#39;s Guide</a> for more detailed information.</p>
+
+<h3 id="identity-management-cloud-authentication">Cloud Authentication</h3>
+
+<p>RightScale authenticates to public and private clouds using cloud API credentials that are provided when you first register a new cloud in RightScale. Registering a cloud is restricted to RightScale users with admin privileges. The nature of the credential varies by cloud type, but generally involves a username/password (or similar) or a PKI certificate.</p>
+
+<p>If you wish to restrict RightScale’s access to specific cloud functionality or enable easy revocation of access, we recommend that you create a user with the appropriate permissions in the cloud console (such as AWS IAM) and then supply that credential to RightScale.</p>
+
+<p><strong>Public Cloud Authentication</strong></p>
+
+<p>RightScale authenticates to public clouds by communicating with well-known API endpoints of each cloud provider and validates the API endpoint server certificates according to OpenSSL&#39;s built-in policy and trusted roots.</p>
+
+<p><strong>Private Cloud Authentication</strong></p>
+
+<p>Admin credentials for your private cloud are required when you initially register it with RightScale. Once a private cloud is registered, admin cloud credentials are not required.</p>
+
+<ul>
+<li>For non-vSphere private clouds, the admin who first registers a private cloud with RightScale defines its API endpoint(s). RightScale connects via inbound HTTPS and validates the cloud controller’s SSL certificate according to OpenSSL&#39;s built-in policy and trusted roots.</li>
+<li>For vSphere-based clouds, RightScale leverages Secure WebSockets to provide integrity and secrecy of outbound connections from the cloud controller to RightScale.</li>
+</ul>
+
+<p>See the Key Management and Storage section below for information on how credentials are secured.</p>
+
+<h3 id="identity-management-instance-authentication">Instance Authentication</h3>
+
+<p>When the RightLink agent starts up, it contacts the RightScale API to enroll itself and begin receiving management instructions. RightScale authenticates the agent with an OAuth 2.0 token-refresh operation. The instance authenticates the RightScale platform via standard SSL certificate validation.</p>
+
+<p>Individual API requests from instances to RightScale are authenticated using a short-lived access token; instances periodically re-enroll when their tokens near expiration.</p>
+
+<p>Enrollment URL, refresh token, and other data are conveyed to the instance using the cloud’s user-data capability. User data in transit to the cloud provider is protected by SSL, and the cloud provider protects the user-data at rest and ensures that it is only available to the intended instance.</p>
+
+<h2 id="key-management-and-storage">Key Management and Storage</h2>
+
+<p>RightScale uses database column encryption to ensure the confidentiality and integrity of secrets we store on behalf of our customers. Sensitive columns are encrypted at the application layer with AES128-CBC using the PKCS#5 passphrase-based KDF for key derivation. Additional documentation on RightScale’s information handling is available on the RightScale support site.</p>
+
+<h3 id="key-management-and-storage-customer-secrets,-keys,-and-credentials">Customer Secrets, Keys, and Credentials</h3>
+
+<p>There are five types of customer secrets that may be stored by RightScale. Any of these keys that are stored in RightScale will be encrypted as described above.</p>
+
+<p><strong>Public SSH Keys</strong> are used to log in to your cloud instances. Public SSH keys are securely stored in RightScale. The RightScale platform notifies your cloud instances of which public keys it should trust.</p>
+
+<p><strong>Private SSH Keys</strong> can be stored on your desktop or local key management systems or, at your option, in RightScale. You can configure RightScale to disallow your users from storing their private SSH keys in RightScale.</p>
+
+<p><strong>Cloud-Based SSH Keys</strong> are created by some clouds to provide for automation between instances. We recommend against using cloud-based SSH keys and instead recommend the use of ServerTemplates and RightScriptsTM for automation. However, if you want to use cloud-based SSH keys for automation, they will be securely stored in RightScale.</p>
+
+<p><strong>Cloud (API) Credentials</strong> are used to authenticate to a cloud account. These credentials are securely stored in the RightScale platform.</p>
+
+<p><strong>Design Credentials</strong> are used to store customer-generated credentials, keys, and other secrets needed to configure servers, such as a database password that’s needed by an application server that will be deployed to your instance. Credentials at rest are protected by RightScale database encryption and in transit by SSL. Credential values that appear in script output are filtered from the audit text before it is stored in RightScale databases, ensuring that audit entries cannot become a back channel for credential disclosure. As a best practice, RightScale recommends authoring scripts such that sensitive inputs are never written to disk, relieving you of the burden to protect credentials at rest on your own instances.</p>
+
+<h3 id="key-management-and-storage-rightscale-key-management-procedures">RightScale Key Management Procedures</h3>
+
+<p>Keys and secrets utilized by the RightScale platform itself include private SSL keys, database encryption secrets, and credentials for RightScale’s own cloud accounts. All such keys are generated with industry-standard practices. Keys are stored only on instances that require them. Keys are rotated as needed, and access to the dedicated system that stores these secrets (as Design Credentials) is restricted to small number of personnel.</p>
+
+<h3 id="key-management-and-storage-hsm-solutions">HSM Solutions</h3>
+
+<p>Customers can leverage on-premises HSM solutions or cloud-based HSM solutions for key management in conjunction with RightScale. RightScale services teams can help customers to set up and configure these solutions.</p>
+
+<h2 id="data-security-and-residency">Data Security and Residency</h2>
+
+<h3 id="data-security-and-residency-data-types">Data Types</h3>
+
+<p><strong>Customer-Specific RightScale Data</strong>: This refers to customer-specific data used to manage customer cloud applications. This data is stored by the RightScale platform. This includes:</p>
+
+<ul>
+<li>Metadata
+
+<ul>
+<li>ServerTemplate definitions.</li>
+<li>RightScripts and cloud workflows.</li>
+<li>Deployment definitions.</li>
+<li>Server definitions and inputs.</li>
+<li>Network definitions.</li>
+<li>Tags.</li>
+</ul></li>
+<li>Operational data
+
+<ul>
+<li>Monitoring metrics.</li>
+<li>Alerts and escalations.</li>
+<li>Audit entries.</li>
+<li>Usage and cost activity.</li>
+</ul></li>
+<li>User-created images</li>
+<li>RightScale account/user data
+
+<ul>
+<li>User definitions and permissions.</li>
+<li>Account settings.</li>
+<li>Credentials for clouds, repository, and configuration.</li>
+<li>RightScale user password verifier.</li>
+<li>SSH public keys.</li>
+<li>Cloud events and event failures recorded by the Gateway Service.</li>
+</ul></li>
+</ul>
+
+<p><strong>Customer Application Data</strong>: This refers to data that is created and accessed by your applications. This type of data data is stored on your cloud infrastructure or on-premises systems. This information is not stored or accessed by the RightScale platform.</p>
+
+<p><strong>Syslog Data</strong>: This refers to log data that is created and stored by your cloud instances. This information is not stored or accessed by the RightScale platform. You can set up your own agents on your cloud instances to collect syslog data and send to your own log aggregation or SIEM systems.</p>
+
+<h3 id="data-security-and-residency-data-residency">Data Residency</h3>
+
+<p><strong>Customer-Specific RightScale Data</strong> is stored in the RightScale cluster where your account is located and in the designated DR backup location for that cluster. There are three exceptions:</p>
+
+<ul>
+<li>Monitoring metrics sent to RightScale by instances are stored on a nearby collection server, generally located in the same cloud and region as the instance.</li>
+<li>ServerTemplate and RightScript metadata that you publish to the MultiCloud Marketplace is stored in the RightScale global cluster, located in the eastern U.S.</li>
+<li>Some metadata pertaining to running instances (chiefly tags, but also some presence and connectivity information) is geographically distributed for high availability.</li>
+</ul>
+
+<p><strong>Customer Application Data</strong> is stored by you with your application in a location of your choice.</p>
+
+<h3 id="data-security-and-residency-data-protection-in-transit">Data Protection in Transit</h3>
+
+<p>The RightScale application uses private network connections provided by cloud providers for all intra-cloud communications between the server instances in that cloud. All services listen on, and communicate over, private network interfaces. In addition, security groups are configured to restrict public traffic to use only allowed ports.</p>
+
+<p>RightScale uses two approaches to encrypt communications that cross public networks.</p>
+
+<p>Most of these communications use TLS to secure the transport. When TLS is employed, we use 2048-bit X.509 certificates for server authentication and key exchange, and a strong cipher suite for bulk encryption. Our servers are configured to reject weak ciphers and protocols.</p>
+
+<p>Communications encrypted with TLS include:</p>
+
+<ul>
+<li>Between UI and API users and front-end services.</li>
+<li>Between instances and repositories or mirrors.</li>
+<li>Between cloud controllers and cluster services.</li>
+<li>Between RightScale services located in different clouds.</li>
+<li>Between RightLink (10.0+) and RightScale.</li>
+</ul>
+
+<p>Monitoring data sent via UDP is not encrypted or integrity-protected due to limitations of the collectd protocol. As a compensating control, RightScale typically locates monitoring servers in the same cloud as the instances for which they collect data.</p>
+
+<h3 id="data-security-and-residency-data-protection-at-rest">Data Protection at Rest</h3>
+
+<p>Remote access to RightScale databases is limited to application servers that have a business need to connect, and are enforced by security groups.</p>
+
+<p>For sensitive data that is encrypted at the application level before storage in the database, we derive a unique key for every encrypted value; keys are never reused across rows or columns. The key for an individual value in our database is a function of: a 256-bit master secret, the name of the table and of the column being encrypted, and a row-specific pseudo-random salt. Initialization vectors are freshly generated every time a message is encrypted.</p>
+
+<p>Customer-specific data stored in object storage is encrypted before being sent over the network, ensuring that not even the cloud provider can recover the plaintext for stored files.</p>
+
+<p>Sensitive customer data that is encrypted and stored in databases:</p>
+
+<ul>
+<li>Public and private cloud credentials.</li>
+<li>Design credentials.</li>
+<li>Repository credentials for cookbooks and cloud workflows.</li>
+<li>Users’ SSH private keys (optional; users may store private keys locally).</li>
+<li>Cloud events and event failures recorded by the gateway service.</li>
+</ul>
+
+<p>Sensitive customer data that is stored as a bcrypt hash with a high work factor:</p>
+
+<ul>
+<li>RightScale user password verifiers.</li>
+</ul>
+
+<p>Sensitive customer data that is encrypted and stored in cloud object stores:</p>
+
+<ul>
+<li>Archived audit entries (with credential values filtered out before storage)</li>
+</ul>
+
+<p>We never store:</p>
+
+<ul>
+<li>RightScale user passwords.</li>
+<li>Private cloud admin credentials.</li>
+</ul>
+
+<h3 id="data-security-and-residency-personally-identifiable-information">Personally Identifiable Information</h3>
+
+<p>RightScale stores the following PII for each RightScale user: email address, first name, last name, and (optionally) phone number.</p>
+
+<p>RightScale’s independent financial system and Salesforce.com CRM system contains customer account, contact, and payment details.</p>
+
+<p>Customer Application Data is stored on your cloud instances or on-premises systems. This information is not stored or accessed by the RightScale platform.</p>
+
+<h3 id="data-security-and-residency-data-backup-and-retention">Data Backup and Retention</h3>
+
+<p>Backup of Customer-Specific RightScale Data</p>
+
+<p>RightScale maintains certain customer specific data that is used by the platform for management of cloud applications (Customer-Specific RightScale Data). Customer-Specific RightScale Data is backed up through the following mechanisms:</p>
+
+<table><thead>
+<tr>
+<th>Type of Data</th>
+<th>Storage Location</th>
+<th>Backup Location</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RightScripts</td>
+<td>Cluster SQL DB</td>
+<td>Master/Slave replication periodic snapshots</td>
+</tr>
+<tr>
+<td>ServerTemplates</td>
+<td>Cluster SQL DB</td>
+<td>Master/Slave replication periodic snapshots</td>
+</tr>
+<tr>
+<td>Credentials</td>
+<td>Cluster SQL DB</td>
+<td>Master/Slave replication periodic snapshots</td>
+</tr>
+<tr>
+<td>RightScript attachments</td>
+<td>S3</td>
+<td>AWS replication to multiple availability zones</td>
+</tr>
+<tr>
+<td>Monitoring metrics</td>
+<td>Special monitoring servers</td>
+<td>Hourly to S3</td>
+</tr>
+<tr>
+<td>Metadata about instances, volumes, and other cloud resources</td>
+<td>Cluster SQL DB</td>
+<td>Master/Slave replication periodic snapshots</td>
+</tr>
+<tr>
+<td>Usage and cost records</td>
+<td>Cluster SQL DB; denormalized to analytics data store</td>
+<td>Master/Slave replication periodic snapshots</td>
+</tr>
+<tr>
+<td>Metadata about accounts, users, settings, and preferences</td>
+<td>Central SQL DB; denormalized to clusters’ core DBs</td>
+<td>Master/Slave replication periodic snapshots</td>
+</tr>
+<tr>
+<td>Tags</td>
+<td>Cluster NoSQL data store</td>
+<td>Master/Slave replication periodic snapshots</td>
+</tr>
+<tr>
+<td>Audit Entries</td>
+<td>Cluster NoSQL data store</td>
+<td>Multi-master replication periodic snapshots</td>
+</tr>
+</tbody></table>
+
+<p>RightScale does not maintain any other client-related data. Data created and managed by your applications (Customer Application Data) resides on your cloud instances. You are responsible for backup of your own application data.</p>
+
+<h3 id="data-security-and-residency-retention-of-customer-specific-rightscale-data">Retention of Customer-Specific RightScale Data</h3>
+
+<p>RightScale maintains Customer-Specific RightScale Data for a minimum of 13 months.</p>
+
+<p>Upon termination of a customer account, security sensitive details like cloud credentials are deleted upon request.</p>
+
+<p>Other Customer-Specific RightScale Data is not guaranteed to be deleted upon account termination and may remain in RightScale production systems or rotating backups.</p>
+
+<p>Prior to account termination, you may extract your data through the means described below.</p>
+
+<h3 id="data-security-and-residency-export-of-customer-data">Export of Customer Data</h3>
+
+<p>We provide a variety of means for you to export your data in order to integrate IT systems with RightScale, maintain backups of your data, or migrate your data off of the RightScale platform.</p>
+
+<p><strong>Data that remains outside of RightScale:</strong></p>
+
+<ul>
+<li>Your application source code.</li>
+<li>Chef cookbooks.</li>
+</ul>
+
+<p><strong>Data exportable via API:</strong></p>
+
+<ul>
+<li>Monitoring metrics.</li>
+<li>Alerts and escalations.</li>
+<li>Audit entries for instances and cloud resources.</li>
+<li>Audit entries for user and account activity.</li>
+<li>Tags.</li>
+<li>Deployment metadata.</li>
+<li>Server metadata and inputs.</li>
+<li>Cloud networking information (VPC settings, routing information, etc.).</li>
+<li>ServerTemplate definitions.</li>
+</ul>
+
+<p><strong>Data exportable via UI:</strong></p>
+
+<ul>
+<li>Usage and cost activity.</li>
+<li>User-created images, RightScripts, and cloud workflows.</li>
+</ul>
+
+<h3 id="data-security-and-residency-physical-media-destruction">Physical Media Destruction</h3>
+
+<p>RightScale relies on its cloud providers to decommission storage devices. These providers follow industry standard practices that are designed to prevent customer data from being exposed to unauthorized individuals.</p>
+
+<h2 id="audit-trails-of-rightscale-usage">Audit Trails of RightScale Usage</h2>
+
+<p>The RightScale platform tracks all user activity performed on a RightScale account via the RightScale UI or API. The audit trails include changes to RightScale-managed cloud instances and RightScale objects. No sensitive data, such as plaintext of passwords or credentials, is stored in or visible in the audit logs.</p>
+
+<p>For more documentation on audit logs, see <a href="/cm/dashboard/reports/audit_entries/audit_entries.html">Audit Entries</a>.</p>
+
+<p>RightScale also logs all user login activity and permission changes and can provide a report upon request.</p>
+
+<h2 id="threat-prevention-and-response">Threat Prevention and Response</h2>
+
+<h3 id="threat-prevention-and-response-vulnerability-scans">Vulnerability Scans</h3>
+
+<p>RightScale performs vulnerability assessments on a regular basis. We leverage both third-party assessment tools and external services, including:</p>
+
+<ul>
+<li><p>ControlScan, a <a nocheck href='https://www.pcisecuritystandards.org/assessors_and_solutions/approved_scanning_vendors'>PCI DSS Approved Scanning Vendor</a>.</p></li>
+<li><p>Rapid7 Nexpose, OpenVAS8, and OWASP ZAP.</p></li>
+<li><p>Cigital, which performed a two week long assessment that included web application and RightScale-specific API testing.</p></li>
+</ul>
+
+<p>Customers may request a copy of the most recent scan from their RightScale account managers.</p>
+
+<h3 id="threat-prevention-and-response-penetration-testing">Penetration Testing</h3>
+
+<p>RightScale leverages a third party to perform an annual penetration test on the RightScale platform. Customers may request a copy of the report from their RightScale account managers.</p>
+
+<p>Customers must request permission to perform their own penetration tests by scheduling them through their RightScale account managers.</p>
+
+<h3 id="threat-prevention-and-response-patch-management">Patch Management</h3>
+
+<p>RightScale leverages vulnerability disclosure channels (Bugtraq, SANS ISC, and others) to remain current on “0-day” disclosures.</p>
+
+<p>Critical security patches published by an OS vendor are generally applied nightly to production systems. For high-availability software components that require testing before upgrade, the RightScale operations team deploys the patch manually, generally with a resolution time of 24-48 hours after availability of the new package.</p>
+
+<p>As a defense-in-depth measure, RightScale continuously monitors the patch status of every host with respect to OS vendor security-update channels. If security updates become available, and a given host remains unpatched for more than 24 hours, an alert is raised.</p>
+
+<p>Customers leveraging RightScale Multi-Cloud Images or ServerTemplates can apply these patches by rebooting or relaunching their servers or by restarting the RightLink agent. In the event of a major vulnerability, RightScale will contact affected customers to notify them that patching is required and assist with the patching procedure.</p>
+
+<h3 id="threat-prevention-and-response-incident-management">Incident Management</h3>
+
+<p>RightScale has a documented incident management plan to ensure continuity of business operations, personnel, and facilities. The plan is triggered if there is any reason to believe that a server or data is compromised. This plan defines incident team members, steps to take, and reporting requirements. It also requires post-mortems and identification of any necessary remediation. Customers are notified regarding security incidents in line with contractual agreements and terms of service.</p>
+
+<p>Traffic levels and request failure rates are continuously monitored. In the case of a denial-of-service attack, alerts will fire if there is sustained abnormal activity. Our operations team may respond using a number of traffic control measures, including:</p>
+
+<ul>
+<li>Blocking or rate limiting specific IP networks.</li>
+<li>Enabling TCP SYN cookies and connection-rate limiting.</li>
+<li>Blacklisting selected RightScale users or accounts.</li>
+<li>Taking message queues offline and cleansing queues of invalid messages.</li>
+</ul>
+
+<h2 id="auditability-and-compliance">Auditability and Compliance</h2>
+
+<p>The RightScale Security Program (RSSP) is based on the ISO 27001 Information Security Management System (ISMS). We have defined policies that govern our security policies and processes and continually update our security program to be consistent with applicable legal, industry, and regulatory requirements for services that we provide to our clients under contractual agreements.</p>
+
+<p>RightScale complies with industry standard application security guidelines that include a dedicated security engineering team and include regular reviews of application source code and IT infrastructure to detect, validate, and remediate any security vulnerabilities.</p>
+
+<h3 id="auditability-and-compliance-external-security-reviews">External Security Reviews</h3>
+
+<p>Third-party security reviews and assessments of applications and the platform are performed at a minimum of once a year. Results of the most recent review can be provided to customers under contractual agreements.</p>
+
+<h3 id="auditability-and-compliance-certifications">Certifications</h3>
+
+<p>RightScale certifications include:</p>
+
+<ul>
+<li>SSAE18 SOC1 and SOC2 Type II (Customers may request RightScale’s SSAE18 reports through their account manager).</li>
+<li>Pending compliance with the new EU-U.S. Privacy Shield Framework</li>
+</ul>
+
+<h3 id="auditability-and-compliance-compliance--pii,-pci,-phi,-and-others">Compliance: PII, PCI, PHI, and Others</h3>
+
+<p>For customers with applications that need to comply with PII, PCI, or PHI standards, it is important to note that the RightScale platform does not store, access, transmit, or manage this sensitive data. However, the RightScale platform can be used to help you meet the requirements of compliance for <strong>your applications</strong> through such RightScale capabilities as visibility, enforcement of standards, access controls, and audit trails. We can <a href="http://www.rightscale.com/solutions/cloud-case-studies">connect you with RightScale customers</a> who are leveraging RightScale to manage applications that follow these regulations.</p>
+
+<p>Your applications and data that have compliance requirements will be located in the cloud provider of your choice. Many cloud providers offer certifications in particular regulations or standards, so you should carefully evaluate which cloud providers meet these options.</p>
+
+<h3 id="auditability-and-compliance-business-associates-agreement">Business Associates Agreement</h3>
+
+<p>Customer Application Data, including HIPAA/PHI data, is not stored, created, received, maintained, or transmitted in the RightScale system. As such we have not historically been considered a business associate or covered entity. The RightScale security team can answer any questions you may have.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

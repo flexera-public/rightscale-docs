@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Enabling Existing Workloads with RightLink 6</title><meta content="Steps for enabling existing workloads with RightLink 6 including supported clouds and known limitations." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="rl6 rl6_rl6_enabling" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl6"><h4 class="list-group-heading"><span>RightLink 6</span></h4></a><a class="list-group-item" href="rl6_about.html">About</a><a class="list-group-item" href="rl6_getting_started.html">Getting Started</a><a class="list-group-item" href="../release-notes/right-link-6.html">Releases</a><a class="list-group-item" href="rl6_installing.html">Installing RightLink 6</a><a class="list-group-item" href="rl6_enabling.html">Enabling Running Instances</a><a class="list-group-item" href="rl6_using.html">Using RightLink 6</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">About RightLink 6</a></p><div class="page-header"><h1>Enabling Existing Workloads with RightLink 6</h1></div><div class="main-content"><div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>RightLink 6 <a href="/faq/end_of_life_end_of_service.html#schedule-images-rightlink">has been EOL&#39;d</a> - please refer to the <a href="/rl10">RightLink 10 documentation</a></p>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>This section covers enablement using RightLink 6.3+ on Windows only. For enabling Linux workloads, you must use the <a href="/rl10/getting_started.html">RightLink 10</a> agent.</p>
+</div>
+
+<p>RightLink 6.3 and above now supports <q>RightScale-enabling</q> existing Windows workloads via the RightLink enablement Powershell script. When executed on a running unmanaged (raw) instance, the script will install and run the RightScale RightLink agent, turning the raw instance into a <q>RightScale Server</q> which allows monitoring, alerts, configuration management, lifecycle management, and all other services provided by the RightScale platform.
+The script is idempotent. If at any point the script fails, raises an error, or does not complete for any reason, the script can be run again after fixing the issue and it will continue executing from the point at which it encountered the error.</p>
+
+<p>The enablement script accomplishes this using the following six steps:</p>
+
+<ol>
+<li>Installs any missing prerequisites (.NET 3.5).</li>
+<li>Locates the instance&#39;s unique identifier (such as instance ID) if the instance&#39;s HREF is not provided.</li>
+<li>Locates the ServerTemplate to use through either the inputted name or HREF.</li>
+<li>Locates the Deployment to use through the existing deployment or inputted name.</li>
+<li>Associates the ServerTemplate and Deployment with the instance by making a wrap_instance API call to RightScale&#39;s API service.</li>
+<li>Downloads, installs, and starts RightLink.</li>
+</ol>
+
+<h3 id="overview-supported-clouds">Supported Clouds</h3>
+
+<p>AWS, Microsoft Azure, OpenStack, SoftLayer, vSphere (RCA-V)</p>
+
+<h3 id="overview-supported-operating-systems">Supported Operating Systems</h3>
+
+<p>Windows Server 2012 R2, Windows Server 2012, Windows Server 2008 R2</p>
+
+<h3 id="overview-vsphere-specific-notes">vSphere-Specific Notes</h3>
+
+<ul>
+<li>A single RightScale RCA-V appliance can support multiple tenants, with each tenant associated with a particular RightScale dashboard account. Each of these tenants/accounts generally matches back to one VMware resource pool. In order for a particular RightScale dashboard account to see VMware virtual machines, that virtual machine must be a member of the appropriate resource pool. The vSphere dashboard allows drag-and-drop reassignment of virtual machines between resource pools.</li>
+<li>Stop/start of instances is currently not supported on vSphere. Images stopped and then started outside of a RightScale context will lose management capabilities.</li>
+<li>RightLink has the ability to manage network interfaces on the vSphere cloud for freshly launched RightScale Servers. Servers created via the enablement script will not try to manage the network for you.</li>
+<li>The enablement script will first attempt to look in the OvfEnv to get a unique id for the instance, so it may associate it with the RightScale platform. This requires guestinfo to be enabled for the Template/Image that the VM was created from. If guestinfo is not enabled, the script will look for a public and then private IP address. If you have multiple networks defined with overlapping private IP ranges the wrap_instance call may fail.</li>
+</ul>
+
+<h3 id="overview-known-limitations">Known Limitations</h3>
+
+<ul>
+<li>ServerTemplates can have more than one MultiCloud Image (MCI) associated with them. The default MCI for a ServerTemplate must have the cloud you are trying to wrap associated with it. For example, if you are wrapping a vSphere instance, the default MCI must include a vSphere image. You can do this by adding a placeholder image to the default MCI. The placeholder image can be any arbitrary image available on the cloud. This placeholder image will be overridden with the name of the actual image when the wrap_instance api call is performed. If this placeholder image is not in place, <q>500 internal server</q> errors may be returned by the RightScale API during execution of the rightscale.enable.ps1 script.</li>
+<li>The system time on the instance/VM needs to be synchronized to Internet time in order to process operational scripts reliably. If the system time on the instance differs significantly from actual time, operational scripts will fail.</li>
+</ul>
+
+<h3 id="overview-enablement-procedure">Enablement Procedure</h3>
+
+<p>Please execute the following steps outlined below:</p>
+
+<ol>
+<li>Log into your account on the RightScale dashboard, go to the MultiCloud Marketplace and find the <a href="https://us-3.rightscale.com/library/server_templates/Base-ServerTemplate-for-Window/lineage/52414">Base ServerTemplate for Windows (RL 6.3 Enablement) [SAMPLE] ServerTemplate</a> and import it into your account. This ServerTemplate is specifically designed for the existing Windows workloads use case. It has a MultiCloud Image (MCI) that is valid for each currently supported cloud.</li>
+<li>Identify the name of the deployment (or create a new deployment using Manage-&gt;Deployments-&gt;New from the RightScale dashboard) where you want the RightScale-enabled server to be placed. If the instance is not already in a deployment, an existing deployment name must be supplied to the enablement script.</li>
+<li>Make sure that the virtual server (instance) you are enabling appears in the RightScale dashboard with the state “running” (<q>operational</q> for EC2 instances). This can be done using Clouds-&gt;<Your Cloud>-&gt;Instances in the RightScale dashboard.</li>
+<li>Download the rightlink.enable.ps1 script from <a href="https://island1.rightscale.com/rightlink/scripts/rightlink.enable.ps1">https://island1.rightscale.com/rightlink/scripts/rightlink.enable.ps1</a> onto the Windows virtual server that you want to  RightScale-enable. It is presumed that this virtual server is already running and you have access and permission to download/execute software there. (Note: island1.rightscale.com - an Island load balancer - is a proxy for mirror.rightscale.com which does not support SSL yet, so the island1 download link is preferred.) Private cloud considerations: Private clouds should follow ingress/egress rules defined in <a href="/faq/Firewall_Configuration_Ruleset.html">Firewall Configuration Ruleset</a>.</li>
+<li>Run the enablement script on the virtual server. It should run to completion. It may take up to 10 minutes to download RightLink from the mirror URL, install RightLink and associated dependencies (.NET 3.5), and start up the client. Note that if the script fails on a particular step, the script is designed to be idempotent. This means that the script can be run again and it will pick up execution at a point after which it last failed.</li>
+</ol>
+
+<p>The enablement script has the following options:</p>
+
+<ul>
+<li><strong>RefreshToken</strong> (Required) - RightScale API token. You can get the refresh token for your account from the RightScale dashboard using Settings-&gt;Account Settings-&gt;API credentials.</li>
+<li><strong>Cloud</strong> (Required) - Possible values are:  ec2, softlayer, vsphere, openstack, azure.</li>
+<li><strong>DeploymentName</strong> - Target RightScale deployment where you want the new server to land. This parameter does not need to be supplied if the instance is already placed in a deployment.</li>
+<li><strong>ServerTemplateName</strong> (Required) - Name of the ServerTemplate that you want to use. Note the known limitations section on ServerTemplates below.</li>
+<li><strong>ServerTemplateHref</strong> - API HREF of the ServerTemplate to use if the name is ambiguous. This is a HREF parameter available from the dashboard (ex. /api/server_templates/1234).</li>
+<li><strong>ServerName</strong> - Name that you want to give to the newly enabled server. Defaults to instance name, else RL Enabled.</li>
+<li><strong>Inputs</strong> - Inputs to the ServerTemplate. Server inputs in the form of NAME=type:value. Separate multiple inputs with commas. Inputs parameter must be a single-quoted string (i.e., &#39;INPUT_NAME_X=text:foo,INPUT_NAME_Y=cred:BAR&#39; ). See <a href="http://reference.rightscale.com/api1.5/resources/ResourceInputs.html">RightScale API 1.5 reference -&gt; Resources -&gt; Inputs</a> for the list of input value types.</li>
+<li><strong>ApiServer</strong> - Hostname of API server to use, default to my.rightscale.com, which is an alias for us-3.rightscale.com. Note that this must match the hostname given as the <q>Token endpoint</q> in Settings-&gt; Account Settings-&gt;API Credentials or you will get an authentication failure.</li>
+<li><strong>MirrorUrl</strong> (Optional) - Full URL of where to download the RightLink installer from. Defaults to https://island1.rightscale.com/rightlink</li>
+<li><strong>RightLinkVersion</strong> (Optional) - Defaults to always getting the latest 6.x version. Manually supplied version must be in a format similar to <q>6.3.0-0</q>. Minimum version is 6.3.0-0.</li>
+<li><strong>InstanceHref</strong> - API HREF of the instance. This should only need to be supplied in the case of ambiguous instances, such as the instance not having a unique IP in the vSphere cloud. This is the HREF as displayed in the dashboard, such as /api/clouds/2705/instances/8M1D4PGONQ0P9.</li>
+<li><strong>Debug</strong> - Prints out additional debugging information such as API calls used, etc.</li>
+</ul>
+
+<h4 id="example">Example</h4>
+
+<p>Here is an example of a RightScale enablement script:</p>
+<pre class="syntax-highlight powershell"><code><span class="nv">$wc</span> <span class="o">=</span> <span class="nb">New-Object </span>System.Net.Webclient
+<span class="nv">$wc</span>.DownloadFile<span class="o">(</span><span class="s2">"https://island1.rightscale.com/rightlink/scripts/rightlink.enable.ps1"</span>, <span class="s2">"</span><span class="nv">$pwd</span><span class="s2">/rightlink.enable.ps1"</span><span class="o">)</span>
+powershell -executionpolicy unrestricted -file rightlink.enable.ps1 -refreshToken <span class="s1">'ae1...1fe'</span> -deploymentName <span class="s1">'My deployment'</span> -serverTemplateName <span class="s1">'Base ServerTemplate for Windows (v14.1)'</span> -serverName <span class="s1">'My server'</span> -cloud vsphere -inputs <span class="s2">"AD_ADMIN_ACCOUNT=text:Adminstrator,AD_ADMIN_PASSWORD=cred:MY_AD_PW,AD_DOMAIN_NAME=text:rightscale.local"</span>
+</code></pre>
+
+<h2 id="proxy-support">Proxy support</h2>
+
+<p>Proxy support for the enablement case is currently not supported for RightLink 6. For enablement behind a proxy, use <a href="/rl10/getting_started.html">RightLink 10</a>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

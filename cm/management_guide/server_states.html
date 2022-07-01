@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Server States</title><meta content="Provides an overview of the RightScale Server States including a flow diagram and descriptions of each state." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_management_guide cm_management_guide_server_states" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Lifecycle Management</a></p><div class="page-header"><h1>Server States</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>When you launch an instance in the Cloud, a server will progress through various states. Each cloud defines and describes server states in different ways. To be consistent, RightScale has defined our own class of server states that&#39;s generic across all clouds.</p>
+
+<p>The time that is required to complete the launch/terminate process varies across clouds. When launching instances, RightScale can only control the actual configuration process, but not the instantiation times for each cloud. Typically, we&#39;ve observed launch times on EC2 to be around 5-10 minutes.</p>
+
+<h2 id="rightscale-server-states">RightScale Server States</h2>
+
+<p>The RightScale Server States only apply to server instances that were defined using ServerTemplates. Bare instances that are launching directly from machine images will not be subject to various RightScale-specific states (e.g. &#39;booting&#39; and &#39;decommissioning&#39;). If you are using ServerTemplates to launch RightScale server instances via the RightScale Dashboard or API, a server instance will transition between the various RightScale Server States that are defined below.</p>
+
+<p>The diagram below applies to servers using v5 and above RightImages.</p>
+
+<p><strong>Note:</strong> If you are using v4 or earlier RightImages, the flowchart is slightly different.</p>
+
+<p><strong>Server State Diagram for v5 RightImages</strong></p>
+
+<p><img src="/img/cm-server-state-flowchart-v5ri.png" alt="cm-server-state-flowchart-v5ri.png" width="725" height="769" /></p>
+
+<p><strong>Note:</strong> If you are using v4 or earlier RightImages, the flowchart is slightly different.</p>
+
+<h3 id="rightscale-server-states-bidding">Bidding</h3>
+
+<p>The &#39;bidding&#39; state is specific to Amazon EC2.</p>
+
+<p>When you launch a Spot instance, RightScale will submit the request to Amazon on your behalf. The launched server will remain in the &#39;bidding&#39; state until your request has been accepted by Amazon. Once a server is in the &#39;bidding&#39; state you can no longer edit its configuration or change your maximum bid price. You must terminate the server in order to make any such modifications. A Spot instance will only be provisioned to you when excess EC2 capacity is available and the current Spot Price drops below your maximum bid price.</p>
+
+<p><strong>Note:</strong> If a running Spot instance is terminated by Amazon because your bid is no longer above the Spot price, the server will transition back to the &#39;bidding&#39; state because RightScale assumes that you would like to run the same type of Spot instance again if one becomes available in the future. In this way, the request for a Spot instance will persist. If you do not want the request to persist, you must terminate the server.</p>
+
+<p>If you are currently in the bidding state you can change your bid price (under the Server&#39;s Info tab), but it will only apply to the <q>current</q> server. The changed price will not be inherited by the <q>next</q> server.</p>
+
+<h3 id="rightscale-server-states-pending">Pending</h3>
+
+<p>RightScale makes a request to the cloud infrastructure of your choice for a new instance on your behalf (using your cloud credentials). The cloud provider will provision an instance for you and perform a basic configuration of your machine which often includes a base OS installation. By the end of the &#39;pending&#39; phase, the instance will have a public and private IP address, DNS Name, SSH access, etc.</p>
+
+<p><strong>AWS</strong> - Amazon will consider it a &#39;running&#39; (billable) instance at the end of this phase. However, you will not be charged instance usage charges during the pending phase itself.</p>
+
+<h3 id="rightscale-server-states-booting">Booting</h3>
+
+<p>At then end of the &#39;pending&#39; state you will have a functional machine, however it&#39;s not completely configured from a RightScale perspective. During the &#39;booting&#39; state, RightScale will begin to execute the specified boot scripts in succession. If you are using ServerTemplates, the instance will be configured appropriately so that upon completion of the installation and configuration process, it will be able to assume its designed server role. For example, an instance can be configured to be a MySQL database server, FrontEnd PHP server, Rails application server, etc. During the booting phase, boot scripts (RightScripts/Chef Recipes) are executed in succession, Elastic IPs are assigned, and EBS volumes are created (if necessary) and attached to the instance. Although you can run a script during the booting phase of an instance, it is not recommended. Server alerts and monitoring features are enabled during the booting phase.</p>
+
+<p><strong>AWS</strong> - Amazon will charge you instance usage costs during the &#39;booting&#39; state.</p>
+
+<ul>
+<li><strong>Stranded in Booting</strong> - When a server is stranded in the &#39;booting&#39; state, the server&#39;s alert and monitoring features are not functional. A server will persist in the stranded in booting state until it is either manually terminated or forced into the operational state.</li>
+</ul>
+
+<h3 id="rightscale-server-states-configuring">Configuring</h3>
+
+<p>The &#39;configuring&#39; state is a state that a server instance might quickly transition into if it&#39;s waiting for certain environment variables to exist in order to complete the execution of a script. For example, an input might be defined to use an environment variable for another instance in the deployment that was just launched and is still in the &#39;pending&#39; state. In such cases, the instance must wait for that variable to exist before the associated script can be executed.</p>
+
+<p><strong>Note:</strong> The &#39;configuring&#39; state only exists for v4 RightImages. In v5 RightImages, the server will transition directly from the &#39;booting&#39; state to either &#39;operational&#39; or &#39;stranded in booting&#39;. The &#39;booting&#39; phase includes all configuration processes.</p>
+
+<p><strong>AWS</strong> - Amazon will charge you instance usage costs during the &#39;configuring&#39; state.</p>
+
+<ul>
+<li><strong>Stranded in Configuring</strong> - If the script fails after it receives the missing environment variable, the instance will become stuck in the <q>stranded in configuring</q> state.</li>
+</ul>
+
+<h3 id="rightscale-server-states-operational">Operational</h3>
+
+<p>If the server was successfully configured, the server will become operational. It is now safe to run scripts on the server instance. Typically, you will only want to execute operational scripts, however, you can also run boot and decommission scripts.</p>
+
+<p><strong>AWS</strong> - Amazon will charge you instance usage costs during the &#39;operational&#39; state.</p>
+
+<ul>
+<li><strong>Terminate</strong> - Shutdown the instance. When an instance is terminated, it will be shutdown and returned to Amazon&#39;s pool of EC2 resources.</li>
+<li><strong>Stop</strong> - You can only &#39;stop&#39; an EC2 instance that was launched with an EBS-based AMI. Any data that&#39;s stored in RAM will not be preserved when an instance is stopped. When you stop an instance you will no longer be billed for hourly instance usage. The root partition Amazon EBS volume that was attached to the instance will not be deleted and will persist, so you will continue to be charged for Amazon EBS volume usage.</li>
+</ul>
+
+<p><strong>Note:</strong> You cannot stop a Spot instance.</p>
+
+<ul>
+<li><strong>Reboot</strong> - When you reboot a running instance it will complete the standard shutdown steps and then transition directly to the &#39;booting&#39; state without ever being completely shutdown. When you reboot a server instance, the same machine is rebooted so you&#39;ll keep the same AWS-id, DNS names, IP addresses, etc.</li>
+<li><strong>Bundle</strong> - Create an AMI of the instance.</li>
+<li><strong>Relaunch</strong> - When a server instance is relaunched, you can either launch a new server and terminate the current server at the same or wait for the current server to be completely terminated before launching a new server. When you relaunch a server instance, a completely new instance is provisioned to you. It will have a new AWS-id, DNS names, and IP addresses.</li>
+</ul>
+
+<h3 id="rightscale-server-states-shutting-down">Shutting-Down</h3>
+
+<p>During the &#39;shutting-down&#39; phase, a request is made to RightScale to terminate an existing RightScale server instance.</p>
+
+<p><strong>v4 RightImages</strong> - The cloud provider has been notified that you no longer want to keep the server running. The cloud provider begins the process of shutting down your instance and returning provisioned cloud resources.</p>
+
+<h3 id="rightscale-server-states-decommissioning">Decommissioning</h3>
+
+<p>Since each cloud infrastructure handles the shutdown process differently, RightScale added an intermediary phase before a cloud instance is permanently terminated. The purpose of the &#39;decommissioning&#39; state is to provide you with a brief window to gracefully terminate your machine. The &#39;decommissioning&#39; state is a RightScale-specific concept that is only supported when you terminate servers that you&#39;ve defined using ServerTemplates. Each RightScale server instance that is terminated via the RightScale Dashboard or API will go through the &#39;decommissioning&#39; state.</p>
+
+<p>Be sure to use discretion when defining which scripts should be run during the decommissioning phase since some scripts may not be fully executed if time does not permit. Although you can run other scripts during the decommissioning phase of a server, it is not recommended. Important tasks such as database backups that cannot be completed in the allotted time must be manually run during the operational phase. If there are few or no decommission scripts to be executed, the server instance will be shut down faster. See <a href="/cm/dashboard/design/rightscripts/index.html#decommission-rightscripts">Decommission Scripts</a> for more information.</p>
+
+<p><strong>v4 RightImages</strong> - In v4 RightImages, when a server instance is terminated, RightScale makes a request to the cloud infrastructure to terminate the instance and then executes the decommission scripts during the cloud&#39;s shutdown phase.</p>
+
+<p><strong>v5 RightImages</strong> - In v5 RightImages, when a server instance is terminated, RightScale will explicitly run the decommission scripts (up to 180 seconds) before it makes a request to the cloud infrastructure to terminate the instance. As a result, you may still incur cloud instance usage costs when a server is in the decommissioning state.</p>
+
+<p><strong>AWS</strong> - When you make a request to Amazon to terminate your instance, AWS shuts down your instance normally within minutes of issuing the terminate command. EC2 instances that are launched directly from AMIs and not through RightScale ServerTemplates will <em>not</em> go through the &#39;decommissioning&#39; state.</p>
+
+<ul>
+<li><strong>Stranded in Decommissioning</strong> - If a script fails to run during the &#39;decommissioning&#39; state or there is a network issue, a server may become stranded in decommissioning. Typically, a server will still be terminated in 2-3 minutes.  RightScale will attempt to force a terminate or stop on servers stuck in &#39;decommissioning&#39; after 50 minutes.  This can be extended using the <code>rs_decommissioning:delay</code> tag, for more details see <a href="/cm/ref/list_of_rightscale_tags.html">Instance tags</a>.</li>
+</ul>
+
+<h3 id="rightscale-server-states-terminated">Terminated</h3>
+
+<p>When an instance has been successfully terminated, the instance that was provisioned to you has been returned to the pool of cloud resources and you will never have access to that same virtual machine ever again. Any RAM data will be lost. Public/Private DNS Names and IP addresses will be removed, Elastic IPs (if applicable) will be disassociated from the instance, EBS volumes will be unmounted and deleted (default), etc. You are no longer being charged for instance usage.</p>
+
+<h3 id="rightscale-server-states-stopping">Stopping</h3>
+
+<p>The &#39;stopping&#39; state is specific to Amazon EC2.</p>
+
+<p>When an instance is in the &#39;stopping&#39; state, the root EBS volume will be detached but not deleted. It will remain in a billable state. Related AWS activity (EBS usage) will be charged at the normal rate. However, the instance will be terminated and any data stored in RAM will be lost. You are no longer being charged for instance usage.</p>
+
+<p><strong>Note:</strong> The Stop/Start function is not available for Spot instances.</p>
+
+<h3 id="rightscale-server-states-stopped-and-provisioned">Stopped and Provisioned</h3>
+
+<p>Once an instance transitions into the &#39;stopped&#39; state you will no longer have access to the instance. Any EBS volumes or block devices will remain and will be charged at normal billing rates. A stopped instance can be started again at a later time. You will be charged an instance hour each time that a stopped instance is started again. If you change the instance type while it is in the &#39;stopped&#39; state, you will be charged at the new rate once you start the instance.</p>
+
+<p><strong>Note:</strong> When stopping an instance, keep in mind that it must be started again through RightScale in order to operate correctly.</p>
+
+<h3 id="rightscale-server-states-stranded">Stranded</h3>
+
+<p>If a server does not successfully complete one of the transitional phases, the server will enter a <q>stranded</q> state. A server will strand whenever the execution of one of the scripts fails during the boot/configuring/decommissioning phase. There are several reasons why a server can become stranded. For troubleshooting purposes, check the server&#39;s Audit Entries tab to see which script failed. An incorrectly set input is often the cause for a stranded in booting server. Check your inputs to make sure that the correct input parameter is being set. Remember, inputs can be overwritten depending on where they&#39;re defined. See <a href="/cm/rs101/inheritance_of_inputs.html">Inheritance of Inputs</a> for more information.</p>
+
+<p>If you are aware of the script failure and you still want to make the server operational, you have the option of forcing a <q>stranded</q> server to become operational. Under the server&#39;s Info tab, click the <q><u>operational</u></q> action link to force the server into the operational state.</p>
+
+<p><img src="/img/cm-force-operational-state.png" alt="cm-force-operational-state.png" width="494" height="140" /></p>
+
+<p><strong>Note:</strong> Amazon will still charge you the standard rate per hour even if a server is stuck in the stranded state, because the machine is technically in the &#39;running&#39; (billable) state.</p>
+
+<h3 id="rightscale-server-states-error">Error</h3>
+
+<p>If for some reason an instance experiences an error with the cloud provider, the state of the VM in RightScale will be reported as <code>Error</code>. Check audit entires for further details. Note that it may be necessary to investigate further by way of the cloud provider&#39;s portal.</p>
+
+<h2 id="amazon-instance-states">Amazon Instance States</h2>
+
+<p>The following states are specific to instances on Amazon EC2. It&#39;s important to understand that although RightScale uses the same names in the Dashboard to describe various server states (e.g. pending), the actual actions that take place during each state may differ depending on the context in which they are used. For example, RightScale&#39;s &#39;booting&#39; and &#39;configuring&#39; states actually take place during Amazon&#39;s &#39;running&#39; state. You will only be charged for instance usage when an instance is in the &#39;running&#39; state.</p>
+
+<p><img src="/img/cm-server-state-flowchart-aws.png" alt="cm-server-state-flowchart-aws.png" width="725" height="554" /></p>
+
+<h3 id="amazon-instance-states-pending">Pending</h3>
+
+<p>During the &#39;pending&#39; phase, Amazon will provision an instance to you based on the specified instance type, AWS region, and availability zone, assign it an AWS-id and load the specified AMI. Once the image is loaded, you will have an instance with a functional operating system. Next an SSH Key and Security Group will be applied. By the end of the &#39;pending&#39; state your instance will have public and private DNS names, public and private IP Addresses, and if there were any EBS snapshots that were configured to be &#39;attached at boot&#39;, EBS volumes will be created and attached to the instance. You cannot associate an Elastic IP to an instance or attach an existing EBS volume during the &#39;pending&#39; state.</p>
+
+<p>The following items will be installed, associated, and configured on the instance:</p>
+
+<ul>
+<li>AWS ID</li>
+<li>SSH Key</li>
+<li>Security Group</li>
+<li>Public/Private DNS Names</li>
+<li>Public/Private IP Addresses (Elastic IP association, if applicable)</li>
+<li>machine/kernel/ramdisk image</li>
+<li>EBS Snapshots (&#39;attach at boot&#39;)</li>
+</ul>
+
+<h3 id="amazon-instance-states-running">Running</h3>
+
+<p>In the &#39;running&#39; state, an instance is fully configured based upon the specified launch parameters. Once an instance is running you can perform one of the following actions:</p>
+
+<ul>
+<li><strong>Terminate</strong> - Shutdown the instance. When an instance is terminated, it will be shutdown and returned to Amazon&#39;s pool of EC2 resources.</li>
+<li><strong>Stop</strong> - You can only &#39;stop&#39; an EC2 instance that was launched with an EBS-based AMI. Any data that&#39;s stored in RAM will not be preserved when an instance is stopped. When you stop an instance you will no longer be billed for hourly instance usage. The root partition Amazon EBS volume that was attached to the instance will not be deleted and will persist, so you will continue to be charged for Amazon EBS volume usage.</li>
+<li><strong>Reboot</strong> - When you reboot a running instance it will transition directly from the &#39;shutting down&#39; state to the &#39;running&#39; state without ever being completely shutdown. Amazon reserved the right to occasionally reboot your instance for maintenance purposes. You can also reboot an instance manually.</li>
+<li><strong>Bundle</strong> - Create an AMI of the instance.</li>
+</ul>
+
+<h3 id="amazon-instance-states-shutting-down">Shutting Down</h3>
+
+<p>In the &#39;shutting down&#39; state, Amazon is preparing your instance to be either stopped or terminated.</p>
+
+<h3 id="amazon-instance-states-stopped">Stopped</h3>
+
+<p>Once an instance transitions into the &#39;stopped&#39; state you will no longer be charged for instance usage. However, all of its Amazon EBS volumes will remain attached. Related AWS activity (EBS usage) will be charged at the normal rate. When an instance is stopped, it is shutdown, and any data stored in RAM will be lost (Spot instances do not have the start/stop functionality).</p>
+
+<ul>
+<li><strong>Terminate</strong> - If you terminate a &#39;stopped&#39; instance, any attached EBS volumes will be deleted (default).</li>
+<li><strong>Start</strong> - You can start a stopped instance at anytime. You will be charged an instance hour each time that a stopped instance is started again. If you change the instance type while it is in the &#39;stopped&#39; state, you will be charged at the new rate once you start the instance.</li>
+</ul>
+
+<p><strong>Note:</strong> When stopping an instance, keep in mind that it must be started again through RightScale in order to operate correctly.</p>
+
+<h3 id="amazon-instance-states-terminated">Terminated</h3>
+
+<p>When an instance has been successfully terminated, the instance that was provisioned to you has been returned to the pool of cloud resources and you will never have access to that same physical machine ever again. Any RAM data will be lost. Public/Private DNS Names and IP addresses will be removed, Elastic IPs (if applicable) will be disassociated from the instance, EBS volumes will be unmounted and deleted (default), etc.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

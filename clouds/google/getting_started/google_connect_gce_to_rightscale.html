@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Connect Google Cloud Platform to RightScale for Cloud Management</title><meta content="This page walks you through the steps to connect Google Cloud Platform (GCP) to RightScale for cloud management." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="clouds clouds_google clouds_google_getting_started clouds_google_getting_started_google_connect_gce_to_rightscale" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/clouds/google"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>Google Cloud Platform</span></h4></a><a class="list-group-item" href="/clouds/google/getting_started">Getting Started</a><a class="list-group-item" href="/clouds/google/reference">Reference</a><a class="list-group-item" href="/faq/clouds/google">FAQ</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">Supported Clouds</a> &#x2F; <a href="../">Google Cloud Platform</a> &#x2F; <a href="./">Getting Started with Google Cloud Platform</a></p><div class="page-header"><h1>Connect Google Cloud Platform to RightScale for Cloud Management</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Register your Google Compute Engine cloud account with RightScale so that you can use the Dashboard to manage your Google Compute Engine cloud resources. </p>
+
+<p>RightScale uses <a href="https://cloud.google.com/iam/docs/understanding-service-accounts">Google Service Accounts</a> to interact with your Google Cloud Platform project. The Service Account does not need to exist in the project that you are registering, but it must have access to the project as defined below.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>You have the <a href="https://support.google.com/cloud/answer/6158840?hl=en">project ID of the project</a> you wish to register </li>
+<li>The project has <a href="https://support.google.com/cloud/answer/6158841?hl=en">Google Cloud APIs enabled</a> (this is the default setting for cloud projects) </li>
+<li>A <a href="https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account">Google Service Account</a> has been created </li>
+<li>You have the <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys">JSON private key</a> for the service account</li>
+<li>You have enough privileges on the project to grant the service account an IAM role (for example, &#39;Project Owner&#39;)</li>
+<li>You have <code>admin</code> or <code>enterprise_manager</code> on the RightScale account you wish to register the project with</li>
+<li>The RightScale account does not currently have a Google project registered with it</li>
+</ul>
+
+<h2 id="connecting-rightscale-to-gce">Connecting RightScale to GCE</h2>
+
+<h3 id="connecting-rightscale-to-gce-grant-the-service-account-iam-access-to-the-project">Grant the service account IAM access to the project</h3>
+
+<p>In order for the service account to be able to manipulate resources in the project, it must be granted an IAM role on the project. When granting roles, you can use either the <code>Viewer</code> role to grant RightScale read-only access, or the <code>Editor</code> role to take full advantage of the features in RightScale. </p>
+
+<p>Follow the steps below to add the IAM role to the service account if this is not already configured.</p>
+
+<ol>
+<li><p>In <a href="https://console.cloud.google.com">Google cloud console</a>, navigate to the project you wish to register</p></li>
+<li><p>From the left menu, select <q>IAM & admin</q> -&gt; <q>IAM</q>
+<img src="/img/google-register-1-iam-menu.png" alt="google-register-1-iam-menu.png" width="571" height="435" /></p></li>
+<li><p>Click the <q>Add</q> button on top of the IAM page
+<img src="/img/google-register-2-add-iam-user.png" alt="google-register-2-add-iam-user.png" width="655" height="220" /></p></li>
+<li><p>Enter the ID of the service account and use the Roles dropdown to select Project -&gt; Editor (or Project -&gt; Viewer for read-only access) and click <q>Add</q>
+<img src="/img/google-register-3-add-iam-user.png" alt="google-register-3-add-iam-user.png" width="654" height="344" /></p></li>
+</ol>
+
+<p>Now that the service account has access to the project, you can use the service account credentials to register the project with RightScale in the step below.</p>
+
+<h3 id="connecting-rightscale-to-gce-register-the-project-with-rightscale">Register the Project with RightScale</h3>
+
+<p>The following instructions are for registering using the Cloud Management UI. If you would prefer using an API call to register the project, see <a href="/api/api_1.5_examples/cloudaccounts.html#create-curl">the API documentation examples</a></p>
+
+<p>In order for RightScale to interact with the Project, you must provide the service account credentials and specify which project to link to the RightScale account.</p>
+
+<ol>
+<li><p>In RightScale, select the account you wish to register the project with</p></li>
+<li><p>Using the top menu, select <q>Clouds</q> -&gt; <q>Add Cloud</q> (note: if you do not see <q>Add cloud</q>, you do not have enough permissions to add a cloud) and then press the <q>Connect to a Cloud</q> button
+<img src="/img/google-register-4-add-cloud.png" alt="google-register-4-add-cloud.png" width="525" height="425" /></p></li>
+<li><p>Select <q>Google</q> from the list on the left (note: if you do not see <q>Google</q>, this is because you have already registered a Google project with this RightScale account -- select a different account or <a href="/cm/dashboard/settings/enterprise/#actions-and-procedures-create-a-new-account">create a new RightScale account</a> to register this project)</p></li>
+<li><p>In the dialog that opens, enter the <strong>Project ID</strong> of the project you want to connect and upload the JSON key file for the service account
+<img src="/img/google-register-5-enter-creds.png" alt="google-register-5-enter-creds.png" width="780" height="264" /></p></li>
+<li><p>Click Continue</p></li>
+<li><p>The system will perform a quick check to ensure that the key file is correct and provides the required access to the Google Project</p></li>
+</ol>
+
+<h3 id="connecting-rightscale-to-gce-next-steps">Next Steps</h3>
+
+<p>Once you have registered your project, you will see that the Google cloud is <q>enabled</q> under the Clouds tab in the Dashboard. It may take several minutes, but all of your Google Compute Engine resources are now visible under the Clouds menu (Clouds &gt; Google). </p>
+
+<h3 id="connecting-rightscale-to-gce-update-your-account-to-use-service-account">Update your account to use Service Account</h3>
+
+<p>First, ensure <a href="#prerequisites">you have met all of the prerequisites</a> listed earlier on this page. </p>
+
+<p>It is considered best practices to rotate your keys periodically. To rotate service account credentials, first <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys">create a new key for the service account</a>.</p>
+
+<p>The following instructions are for updating credentials using the Cloud Management UI. If you would prefer using an API call to update credentials, see <a href="/api/api_1.5_examples/cloudaccounts.html#update-curl">the API documentation examples</a>.</p>
+
+<p>Follow these steps in all RightScale accounts registered with projects using that service account:</p>
+
+<ol>
+<li><p>In RightScale Cloud Management, navigate using the top menu to Settings -&gt; Account Settings -&gt; Clouds</p></li>
+<li><p>Click on the pencil icon next to <q>Google</q> cloud
+<img src="/img/google-register-update-1-pencil.png" alt="google-register-update-1-pencil" width="810" height="137" /></p></li>
+<li><p>Select the <q>Update service account credentials</q> option, select your new key file, and press <q>Update</q>
+<img src="/img/google-register-update-2-upload-key.png" alt="google-register-update-2-upload-key.png" width="655" height="397" /></p></li>
+</ol>
+
+<p>Once all accounts have been updated with the new keys, you can delete the old key from Google.</p>
+
+<h3 id="connecting-rightscale-to-gce-why-is-rightscale-requesting-customers-to-use-google-service-accounts-">Why is RightScale requesting customers to use Google Service Accounts?</h3>
+
+<p>Google Service Accounts are new and were not available when RightScale implementd GCE support.</p>
+
+<h2 id="troubleshooting">TroubleShooting</h2>
+
+<h3 id="troubleshooting-error-during-registration">Error During Registration</h3>
+
+<p>If you are seeing a red error during registration that says something to the effect of: <code>Project &#39;your-project&#39; is not accessible</code>, check the following:</p>
+
+<ul>
+<li>you have <a href="https://support.google.com/cloud/answer/6158841?hl=en">enabled the Google Cloud APIs</a></li>
+<li>the service account has IAM permissions on the project you are registering</li>
+<li>the key file you are using is still valid </li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

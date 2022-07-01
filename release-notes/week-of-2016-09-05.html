@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Release Notes</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="release-notes release-notes_week-of-2016-09-05"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/release-notes"><h4 class="list-group-heading">Release Notes</h4></a><a class="list-group-item menu-item-cm" href="cloud-management.html">Cloud Management</a><a class="list-group-item menu-item-ss" href="self-service.html">Self-Service</a><a class="list-group-item menu-item-gov" href="governance.html">Governance</a><a class="list-group-item menu-item-ca" href="https://helpnet.flexerasoftware.com/?product=Optima">Optima</a><a class="list-group-item menu-item-rca" href="rca-v.html">RCA-V</a><a class="list-group-item menu-item-rl10" href="right-link-10.html">RightLink 10</a></nav></aside><div class="callout"><a href="https://support.rightscale.com/18-Release_Notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Archived Release Notes</h4></div><span>View previously published release notes.</span></div></div></a></div><div class="callout"><a href="mailto:support@rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Release Questions?</h4></div><span>Our technical support staff is ready to help.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="clearfix"><div class="main-content"><div class="page-header"><h1>Release Notes</h1><div class="page-subheader">Week of 2016-09-05</div></div><div class="row release-notes-weekof"><div class="col-md-8"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/09/08.html">Cloud Management</a> </h1><div class="article-time"><time datetime="09- 8-2016">September  8, 2016</time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for the <strong>X1 instance type</strong> on AWS clouds</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/09/08.html">Self-Service</a> </h1><div class="article-time"><time datetime="09- 8-2016">September  8, 2016</time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>A <strong>new function to retrieve Credential values</strong> has been added to both Cloud Workflow and CAT. This allows you to more easily leverage sensitive credential values in your CAT/CWF code. Learn how to use the <code>cred()</code> function in both <a href="/ss/reference/cat/v20160622/index.html#built-in-methods-and-other-keywords">CAT files</a> and in <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#miscellaneous-cred">Cloud Workflow code</a>.</li>
+<li>Added the ability to <strong>set schedules and end dates</strong> for Test CloudApp launches from Designer to help your CAT authors save costs when they are developing CloudApps.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix: fixed a bug that prevented checkboxes from rendering properly in the CloudApp launch dialog</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-10/2016/09/07.html">RightLink v10.5.2 Release</a> </h1><div class="article-time"><time datetime="09- 7-2016">September  7, 2016</time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>The RightScale Network Agent set of configuration scripts for RCA-V installation can be disabled by passing the &#39;-n&#39; option to rightlink.install.sh or the -NoNetworkingScripts option to rightlink.install.ps1. These scripts have also been updated to not install for the enablement and install-at-boot use cases where functioning network connectivity is a prerequisite</li>
+<li>Added support for passing open_stack_v3 as a cloud_type for enablement on Openstack (Liberty)</li>
+<li>Added reference/example alerts to both the Linux and Windows RightLink 10 ServerTemplates</li>
+<li>Added a new RightScript for both Linux and Windows that will enumerate the network interfaces from the current server and add/update the alerts to reflect the correct interface naming</li>
+<li>Add support for a shebang on Windows to specify extra command line flags for PowerShell such as -Version 2.0, the shebang must be the first line of the RightScript, for example #!powershell -Version 2.0</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Update to no longer mark the state or secret files for deletion on Windows. This was found to interfere with some Microsoft installers (MS SQL 2016). RightLink checks if the state file was created before the system boot time to determine the booting state on Windows</li>
+<li>Fixed an issue where the Server could fail to post audit entry updates grater than 5 MB in size</li>
+<li>Fixed a possible race condition where the RightLink state file did not always reflect the current state before a required service restart (Docker monitoring). This could cause the boot scripts to run a second time or for a stranded server to go operational</li>
+<li>Updated to go 1.7 to resolve an issue with timeouts from the RightLink10 local proxy</li>
+<li>Update to both Linux and Windows enablement scripts to use UUID to locate servers in Azure Resource Manager</li>
+<li>Update to enable-managed-login.sh script to suppress benign error output</li>
+<li>Update to allow a reboot during the boot script execution which will now stop execution of further scripts and not enter a stranded or operational state until the subsequent boot</li>
+<li>Update to avoid exit code 143 (sigterm) for RightScripts on upstart-based systems by putting them in their own process group</li>
+</ul>
+
+<p>For additional detail and documentation on this release, please refer to the following <a href="/rl10/releases/rl10_10.5.2_release.html">release notes.</a></p>
+</div></div></div></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

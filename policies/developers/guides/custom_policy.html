@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Create a Custom Policy</title><meta content="Flexera allows users to not only take advantage of our policies but also write their own based on their organizational needs. This page outlines the policy template language and how to write a new policy." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="policies policies_developers policies_developers_guides policies_developers_guides_custom_policy" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/"><h4 class="list-group-heading"><img src="../../../img/product-governance.svg" /><span>Policies Users Guide</span></h4></a><a class="list-group-item" href="/policies/">About</a><a class="list-group-item" href="/policies/users/getting_started">Getting Started</a><a class="list-group-item" href="/policies/users/guides">Guides</a><a class="list-group-item" href="../../users/policy_list.html">Flexera Policies</a><a class="list-group-item" href="/policies/users/faq">FAQ</a></nav></aside><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/developers"><h4 class="list-group-heading"><img src="../../../img/product-governance.svg" /><span>Policies Developers Guide</span></h4></a><a class="list-group-item" href="/policies/developers">Overview</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">Policy Automation</a> &#x2F; <a href="../">Developers Guide</a> &#x2F; <a href="./">Developers Guide</a></p><div class="page-header"><h1>Create a Custom Policy</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>In addition to built-in <strong>Cost, Security, Operational, and Compliance</strong> policies, the system supports creating <em>custom policies</em> using the new and purpose built <a href="/policies/reference/policy_template_language.html">Policy Template Language</a>. These policies can then be uploaded and applied in RightScale just like the pre-built ones.</p>
+
+<p>It&#39;s first recommended to view the <a href="/policies/getting_started/policy_lifecycle.html">Policy Lifecycle</a> to get a general sense of what happens during the execution of a policy.</p>
+
+<h2 id="tooling">Tooling</h2>
+
+<p>There are a few tools that a developer might find useful for interacting with APIs in general and the policy APIs and workflow specifically.</p>
+
+<ul>
+<li><a href="https://github.com/rightscale/rsc">rsc</a> is the all-purpose RightScale API client, written in Go. It supports all API calls from the Policy, Self-Service, and Cloud Management APIs with built-in help and validation.</li>
+<li><a href="https://github.com/rightscale/policy_sdk/tree/master/cmd/fpt">fpt</a> or the Flexera Policy Tool is a command-line tool that interacts with the Policy API in a more specific way. It helps with the most common tasks that come up when developing your own policies, such as testing JavaScript, calling against external APIs, and checking Policy Template syntax.</li>
+<li><a href="https://www.getpostman.com/">Postman</a> or <a href="https://httpie.org/">HTTPie</a> are also popular general-purpose tools for calling APIs and can get used to examine raw API responses from external sources.</li>
+</ul>
+
+<h2 id="sample-policies">Sample Policies</h2>
+
+<p>The easiest way to get started on developing your own policies is to look at pre-existing code. The full source code to all published <a href="/policies/getting_started/policy_list.html">RightScale policies</a> is open source and available online. Policies such as <a href="https://github.com/rightscale/policy_templates/blob/master/cost/unattached_addresses/unattached_addresses.pt">Unattached Addresses</a> and <a href="https://github.com/rightscale/policy_templates/blob/master/cost/azure/reserved_instances/utilization/azure_reserved_instance_utilization.pt">Azure Reserved Instance Utilization</a> demonstrate many of the different parts of the language.</p>
+
+<p>We recommend storing all your custom policy source code in a version control system such as github with the <code>.pt</code> file extension.</p>
+
+<h2 id="policy-tutorial">Policy Tutorial</h2>
+
+<p>A <a href="/policies/getting_started/policy_tutorial.html">short tutorial</a> is available that walks through developing a simple policy using the above tooling.</p>
+
+<h2 id="debugging-tips-and-tricks">Debugging Tips and Tricks</h2>
+
+<h3 id="debugging-tips-and-tricks-policy-debug-log">Policy debug log</h3>
+
+<p>Whenever a policy is applied it automatically creates a debug log that can be viewed by users with the <code>policy_designer</code> role in the given account. The debug log is viewable in the UI in Applied Policies -&gt; Actions -&gt; View log. It displays the following information as the policy is evaluated:</p>
+
+<ul>
+<li>Outgoing http requests including headers, body, and query parameters.</li>
+<li>Resources, Datasource, and JavaScript data as its evaluated.</li>
+<li>console.log and console.dir statements from JavaScript.</li>
+<li><p>Info about failed validation/check statements.</p>
+
+<p><img src="/img/policy-view-log.png" alt="policy-view-log.png" width="772" height="353" /></p></li>
+</ul>
+
+<h3 id="debugging-tips-and-tricks-api-based-datasources">API-based Datasources</h3>
+
+<ul>
+<li>Raw JSON responses can be gathered using whichever tool you choose and compared against the debug log above to see if transformations are proceeding as planned.</li>
+<li>The debug log always prints out the first 6K of the final datasource after all transformations have been applied.</li>
+</ul>
+
+<h3 id="debugging-tips-and-tricks-javascript-based-datasources">JavaScript-based Datasources</h3>
+
+<ul>
+<li>For more complicated data transformations and logic, its recommended to do most of the <a href="/policies/reference/policy_template_language.html#processing-datasources-with-javaScript">work using JavaScript</a> in a policy template <code>script</code> block. Policy scripts are run in an interpreter with a limited set of capabilities. A script datasource can contain one or more other datasources as inputs and always outputs a single datasource. <a href="https://github.com/rightscale/policy_sdk/tree/master/cmd/fpt">fpt</a> contains a <code>retrieve_data</code> command which can fetch those input datasources and extract them to disk. The <code>fpt script</code> command can then be run on those extracted datasources to test out logic. Arbitrary data can also be fed in to test out corner cases and other conditions. The <code>fpt script</code> command evaluates scripts locally using the same environment and libraries as the service does.</li>
+</ul>
+
+<h3 id="debugging-tips-and-tricks-incidents">Incidents</h3>
+
+<ul>
+<li>All data failing validation will be listed in the debug log. To force all data to fail, in order to test subsequent actions such as email, run or data templates, you can add a <code>check false</code> statement which will cause an incident to always be created.</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>policy "my_policy"
+  validate_each $my_datasource   do
+    detail_template &lt;&lt;-EOS
+# Table of data
+
+| Account | Type | Field1 |
+| ------- | ---- | ------ |
+{{ range data -}}
+| {{ .account }}({{ .type }}) | {{.field1}} |
+{{ end -}}
+EOS
+    escalate $my_escalation
+    check false
+  end
+end
+</code></pre>
+
+<h3 id="debugging-tips-and-tricks-escalation-and-resolution-actions">Escalation and Resolution Actions</h3>
+
+<ul>
+<li>Any escalation and resolution actions containing a <code>run</code> action will be executed in <a href="/ss/reference/rcl/v2/index.html">Cloud Workflow</a>. These executions will show up under the <a href="/ss/tools/cloud_workflow_console.html">Self-Service CWF Console</a>. The Self-Service product must first be selected by going to the Product selector in the upper right corner and select <q>Self-Service</q> -- users must have the <code>ss_designer</code> role to access this tool.</li>
+<li>For <code>run</code> escalation actions, code from a <code>define</code> block can be pasted into the CWF console and arbitrary data supplied in order to test out actions in isolation.</li>
+<li>For <code>run</code> escalation actions, within the code defined in a <code>define</code> block, you can log to <a href="/cm/dashboard/reports/audit_entries/">audit entries</a>. These entries can be found in Cloud Management &gt; Reports &gt; Audit entries and require at minimum the <code>observer</code> role to access.</li>
+</ul>
+<pre class="syntax-highlight ruby"><code><span class="n">escalation</span> <span class="s2">"foo"</span> <span class="k">do</span>
+  <span class="n">run</span> <span class="s2">"myaction"</span><span class="p">,</span> <span class="n">data</span>
+<span class="k">end</span>
+
+<span class="n">define</span> <span class="n">myaction</span><span class="p">(</span><span class="vg">$data</span><span class="p">)</span> <span class="k">do</span>
+  <span class="vg">$$</span><span class="n">debug</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="n">call</span> <span class="n">sys_log</span><span class="p">(</span><span class="s1">'policy action'</span><span class="p">,</span><span class="vg">$data</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">define</span> <span class="n">sys_log</span><span class="p">(</span><span class="vg">$subject</span><span class="p">,</span> <span class="vg">$detail</span><span class="p">)</span> <span class="k">do</span>
+  <span class="k">if</span> <span class="vg">$$</span><span class="n">debug</span>
+    <span class="n">rs_cm</span><span class="p">.</span><span class="nf">audit_entries</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+      <span class="ss">notify: </span><span class="s2">"None"</span><span class="p">,</span>
+      <span class="ss">audit_entry: </span><span class="p">{</span>
+        <span class="ss">auditee_href: </span><span class="vc">@@account</span><span class="p">,</span>
+        <span class="ss">summary: </span><span class="vg">$subject</span><span class="p">,</span>
+        <span class="ss">detail: </span><span class="vg">$detail</span>
+      <span class="p">}</span>
+    <span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<ul>
+<li>For <code>run</code> escalation actions, within the code defined in a <code>define</code> block, you can reference any authentication defined in an <code>auth</code> or <code>credentials</code> declaration. These request signers will automatically be exported as global variables to the Cloud Workflow process. It is recommended to use the <code>credentials</code> declaration.</li>
+</ul>
+<pre class="syntax-highlight ruby"><code><span class="n">credentials</span> <span class="s2">"auth_aws"</span> <span class="k">do</span>
+  <span class="n">schemes</span> <span class="s2">"aws"</span><span class="p">,</span> <span class="s2">"aws_sts"</span>
+  <span class="n">label</span> <span class="s2">"AWS"</span>
+  <span class="n">description</span> <span class="s2">"Select the AWS credential from the list"</span>
+  <span class="n">tags</span> <span class="s2">"provider=aws"</span>
+<span class="k">end</span>
+
+<span class="n">escalation</span> <span class="s2">"delete_unencrypted_s3_buckets"</span> <span class="k">do</span>
+  <span class="n">run</span> <span class="s2">"delete_unencrypted_s3_buckets"</span><span class="p">,</span> <span class="n">data</span>
+<span class="k">end</span>
+
+<span class="c1">#https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketDELETE.html</span>
+<span class="n">define</span> <span class="n">delete_unencrypted_s3_buckets</span><span class="p">(</span><span class="vg">$data</span><span class="p">)</span> <span class="k">return</span> <span class="vg">$all_responses</span> <span class="k">do</span>
+  <span class="vg">$$</span><span class="n">debug</span><span class="o">=</span><span class="kp">true</span>
+  <span class="vg">$all_responses</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">foreach</span> <span class="vg">$item</span> <span class="k">in</span> <span class="vg">$data</span> <span class="k">do</span>
+    <span class="nb">sub</span> <span class="ss">on_error: </span><span class="n">skip</span> <span class="k">do</span>
+      <span class="vg">$response</span> <span class="o">=</span> <span class="n">http_delete</span><span class="p">(</span>
+        <span class="ss">auth: </span><span class="vg">$$</span><span class="n">cred_aws</span><span class="p">,</span>
+        <span class="ss">url: </span><span class="n">join</span><span class="p">([</span><span class="s2">"https://"</span><span class="p">,</span><span class="vg">$item</span><span class="p">[</span><span class="s1">'host'</span><span class="p">],</span><span class="s2">"/"</span><span class="p">,</span> <span class="vg">$item</span><span class="p">[</span><span class="s1">'bucket_name'</span><span class="p">]]),</span>
+      <span class="p">)</span>
+      <span class="vg">$all_responses</span> <span class="o">&lt;&lt;</span> <span class="vg">$response</span>
+      <span class="n">call</span> <span class="n">sys_log</span><span class="p">(</span><span class="s1">'Delete AWS Unencrypted S3 Buckets'</span><span class="p">,</span><span class="nb">to_s</span><span class="p">(</span><span class="vg">$response</span><span class="p">))</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>If you want to test out the code in a <a href="/ss/tools/cloud_workflow_console.html">Self-Service CWF Console</a> you can mimic the credentials reference passed through from the policy with the <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#miscellaneous-signer">signer function</a> function to authenticate requests using existing credentials. The signer function accepts the credential id, available on the credentials show page as <q>Identifier</q>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

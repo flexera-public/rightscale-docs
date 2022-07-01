@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Environment Inputs</title><meta content="A description of the selectable pre-defined Environment Variables in the RightScale Cloud Management Platform including examples." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_ref cm_ref_environment_inputs" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Reference Information</a></p><div class="page-header"><h1>Environment Inputs</h1></div><div class="main-content"><h2 id="selectable-environment-variables">Selectable Environment Variables</h2>
+
+<p>There are several pre-defined Environment Inputs (sometimes referred to loosely as simply <q>environment variables</q>) at your disposal when writing or editing any RightScripts.</p>
+
+<p>When editing inputs (Inputs tab), the following cloud-specific and RightScale-specific environment variables can be chosen when the &#39;Env&#39; input type is selected. Once you&#39;ve selected which environment variable you&#39;re going to use (e.g. RS_SKETCHY), you will also need to select from which Server (e.g. ebs-db1) the environment variable will be retrieved. You will be able to select any Server in the current Deployment regardless of whether the Server is active/inactive.</p>
+
+<p><img src="/img/cm-environment-variables.png" alt="cm-environment-variables.png" width="566" height="64" /></p>
+
+<p>The following list defines each EC2 and RightScale pre-defined variable. When applicable, the name, description, view from the dashboard and an example are included for each variable.</p>
+
+<h3 id="selectable-environment-variables-amazon--ec2--">Amazon (EC2):</h3>
+
+<h4 id="ec2_ami_id">EC2_AMI_ID</h4>
+
+<p>Amazon Machine Image ID number. This is a unique identifier for each image that Amazon publishes. RightScale uses base AMIs to build RightImages<sup>TM</sup>, which can be easily configured to meet your needs. We maintain our own mirrors with RightImages, etc.</p>
+
+<p>From the Dashboard (Ec2 Info) you will see this EC2_AMI_ID value within parenthesis as part of the <q>Image</q> name.</p>
+
+<p>Example: <code>ami-d8a347b1</code></p>
+
+<h4 id="ec2_aki_id">EC2_AKI_ID</h4>
+
+<p>Amazon Kernel Image ID. Although the kernel image is displayed and selectable within the RightScale Dashboard, the <q>default</q> is typically used by RightScale customers when building out deployments, etc.</p>
+
+<p>From the Dashboard (Ec2 Info) you will see this EC2_AKI_ID value within parenthesis as part of the <q>Kernel Image</q> name.</p>
+
+<p>Example: <code>aki-9b00e5f2</code></p>
+
+<h4 id="ec2_ari_id">EC2_ARI_ID</h4>
+
+<p>Amazon Ramdisk Image ID that was used when launching the instance (if applicable). Although the ramdisk image is displayed and selectable within the RightScale Dashboard, it is rarely (if ever) used by RightScale customers when building out server deployments, etc.</p>
+
+<h4 id="ec2_ami_manifest_path">EC2_AMI_MANIFEST_PATH</h4>
+
+<p>The directory/file name path to the AMI Manifest XML file. Includes the base image and version number within it.</p>
+
+<p>Example: <code>rightscale_images/CentOS5_0V3_0_0.img.manifest.xml</code></p>
+
+<h4 id="ec2_availability_zone">EC2_AVAILABILITY_ZONE</h4>
+
+<p>The availability zone within a given EC2 Region. This information is both displayed from the Info tab and selectable (via drop-downs during the design/manage process) from within the RightScale Dashboard.</p>
+
+<p>Examples: <code>us-east-1a, us-east-1b, us-east-1c</code></p>
+
+<h4 id="ec2_hostname">EC2_HOSTNAME</h4>
+
+<p>Fully qualified hostname of the Amazon EC2 instance. This is the equivalent of the EC2_LOCAL_HOSTNAME. It is kept for backwards compatibility reasons.</p>
+
+<p>Example: <code>domU-12-31-38-00-34-27.compute-1.internal</code></p>
+
+<h4 id="ec2_instance_id">EC2_INSTANCE_ID</h4>
+
+<p>This is a unique identifier for each launched instance. It is assigned by AWS. When using our RightScripts or our API, this is how you identify a specific running instance, and perform operations against it.</p>
+
+<p>The RightScale Dashboard displays this value as the <q>AWS id</q> on the Server&#39;s Info tab (EC2 Info section).</p>
+
+<p>Example: <code>i-baad23d3</code></p>
+
+<h4 id="ec2_instance_type">EC2_INSTANCE_TYPE</h4>
+
+<p>The type of instance. Amazon EC2 supports several instance types, that reflect the amount of CPU, memory and disk resources.</p>
+
+<p>From the RightScale Dashboard, you can select several values depending on your compute and disk requirements. You can also scale up or down later in your deployment if need be. The Dashboard refers to this value as the <q>Instance Type</q>.</p>
+
+<p>Examples: <code>m1.small, m1.large, m1.xlarge, c1.medium, c1.xlarge</code></p>
+
+<h4 id="ec2_local_hostname">EC2_LOCAL_HOSTNAME</h4>
+
+<p>Fully qualified hostname of the Amazon EC2 instance. This is an internal hostname that is the equivalent of the output of the Unix <code>hostname</code>command on the instance, with the Amazon internal domain name appended to it. This is a fully qualified local hostname, similar to the EC2_HOSTNAME.</p>
+
+<p>The RightScale Dashboard displays this value as the <q>Private DNS name</q> on the Server&#39;s Info tab.</p>
+
+<p>Example: <code>domU-12-31-38-00-34-27.compute-1.internal</code></p>
+
+<h4 id="ec2_public_hostname">EC2_PUBLIC_HOSTNAME</h4>
+
+<p>The fully qualified public hostname.</p>
+
+<p>From the Dashboard, this is displayed as the <q>Public DNS name</q>. This is public as the name implies, and the hyperlink from the info tab should render in your browser (for example, an Apache website or a Rails web application).</p>
+
+<p>Example: <code>ec2-75-101-247-165.compute-1.amazonaws.com</code></p>
+
+<h4 id="ec2_public_ipv4">EC2_PUBLIC_IPV4</h4>
+
+<p>The publicly routable IPv4 Ip address of the instance.</p>
+
+<p>Note this IP address is used in the formatting of the EC2_PUBLIC_HOSTNAME.</p>
+
+<p>Example: <code>75.101.247.165</code></p>
+
+<h4 id="ec2_reservation_id">EC2_RESERVATION_ID</h4>
+
+<p>Displayed in the Dashboard as the <q>Reservation</q> from the Info Tab (Ec2 section).</p>
+
+<p>Example: <code>r-ae2090c7</code></p>
+
+<h4 id="ec2_security_groups">EC2_SECURITY_GROUPS</h4>
+
+<p>List of all EC2 Security Groups. (Notice the plural. AWS allows multiple security groups when launching an image, whereas RightScale supports one. Hence for RightScale deployments, this will be a <q>list</q> of one.)</p>
+
+<p>Examples: <code>default,</code><code>staging</code>or<code>splunktest</code></p>
+
+<h3 id="selectable-environment-variables-rightscale--rs--">RightScale (RS):</h3>
+
+<h4 id="instance_id">INSTANCE_ID</h4>
+
+<p>The cloud controller&#39;s unique identifier for the running instance (for an EC2 instance, the return value will match the EC2_INSTANCE_ID environment variable. Example 1874519).</p>
+
+<h4 id="private_ip">PRIVATE_IP</h4>
+
+<p>The private IP of the server.</p>
+
+<h4 id="public_ip">PUBLIC_IP</h4>
+
+<p>The public facing IP address for the instance.</p>
+
+<h4 id="datacenter">DATACENTER</h4>
+
+<p>The cloud controller&#39;s unique identifier for the data center this instance is running in (Availability Zone for EC2).</p>
+
+<h4 id="rs_eip">RS_EIP</h4>
+
+<p>RightScale Elastic IP address as issued by Amazon EC2. This is a static, publicly routable IP address.</p>
+
+<p>From the Dashboard, navigate to Clouds -&gt; AWS Region -&gt; Elastic IPs to see any allocated elastic IP addresses. (Note: They are free of charge when in use, allocated but unused IP addresses are charged by Amazon.)</p>
+
+<p>Example: <code>75.101.242.174</code></p>
+
+<h4 id="rs_server">RS_SERVER</h4>
+
+<p>RightScale server name.</p>
+
+<p>What RightScale customers navigate to when using the RightScale Cloud Management Platform. (e.g. <code>https://my.rightscale.com</code>)</p>
+
+<p>Example: <code>my.rightscale.com</code>.</p>
+
+<h4 id="rs_sketchy">RS_SKETCHY</h4>
+
+<p>RightScale Sketchy servers. Sketchy is used to display the data assembled from the <q>`collectd`</q> monitoring daemons.</p>
+
+<p>See the Deployment Monitoring tabs in the RightScale Cloud Management Dashboard to view built-in monitoring tools.</p>
+
+<p>Example: <code>sketchy1-5.rightscale.com</code>.</p>
+
+<h4 id="rs_token">RS_TOKEN</h4>
+
+<p>RightScale Token. 32 character alphanumeric string.</p>
+
+<p>Example: <code>32303f49fac8fa79bb6141210a7538ef</code></p>
+
+<h4 id="rs_server_name*">RS_SERVER_NAME*</h4>
+
+<p>RightScale Server Name.</p>
+
+<p>From within the RightScale Dashboard page, this value is displayed in the <q>Nickname</q> column.</p>
+
+<p>Example: <code>GregDoes Album</code></p>
+
+<h4 id="rs_deployment_name*">RS_DEPLOYMENT_NAME*</h4>
+
+<p>RightScale Deployment Name.</p>
+
+<p>From within the RightScale Dashboard page, this value is displayed as <q>Deployment <u><em>DeploymentName</em></u></q>. Where <u><em>DeploymentName</em></u> is an action link you can click into to view and manage details of the deployment itself.</p>
+
+<p>Example: <code>Modified LAMP Test</code></p>
+
+<h4 id="rs_server_template_name*">RS_SERVER_TEMPLATE_NAME*</h4>
+
+<p>RightScale Server Template Name.</p>
+
+<p>From within the RightScale Dashboard page, this value is displayed in the <q>Server Template</q> column.</p>
+
+<p>Example: <code>LP Stack</code></p>
+
+<h4 id="rs_instance_uuid">RS_INSTANCE_UUID</h4>
+
+<p>Universally-unique identifier for this server incarnation. Unique across all clouds, partitions, and guaranteed to change after a bundled boot or stop/start operation. Can be used as a sketchy hostname identifier.</p>
+
+<p><code>* </code>All environment variables are directly available in the instance with the exception of RS_SERVER_NAME, RS_DEPLOYMENT_NAME and RS_SERVER_TEMPLATE_NAME. They can only be evaluated as part of a RightScript. For example, you could use a variable such as RSDEPLOYNAME in a script, then assign it the RS_DEPLOYMENT_NAME in the env dropdown list for Inputs.</p>
+
+<h4 id="non-selectable-environment-variables">Non-selectable Environment Variables</h4>
+
+<p>There are also several other environment variables that are used for internal, RightScale purposes only. The following inputs will not be identified as user-defined inputs of a script, nor will they appear as selectable &#39;Env&#39; input variables when defining input parameters. These environment variables are populated by the RightLink agent immediately before executing every RightScript.</p>
+
+<h4 id="rs_attach_dir,-attach_dir">RS_ATTACH_DIR, ATTACH_DIR</h4>
+
+<p>The filesystem directory where files attached to this RightScript can be found.</p>
+
+<h4 id="rs_distro,-rs_dist">RS_DISTRO, RS_DIST</h4>
+
+<p>On Linux instances, it&#39;s the name of the Linux distribution, e.g. <q>centos</q>, <q>ubuntu</q>, or <q>redhatenterpriseserver</q>. Always lowercase with no punctuation.</p>
+
+<h4 id="rs_reboot">RS_REBOOT</h4>
+
+<p>If defined, it indicates that this particular RightScript was successfully executed on the instance. Covers the following cases:  </p>
+
+<ul>
+<li>Scripts that ran on a prior boot<br></li>
+<li>Scripts that ran before this image was bundled (for user-bundled images)<br></li>
+<li>Scripts that ran before this instance was stopped/started (on EC2)</li>
+</ul>
+
+<p>This variable is <u>only available for boot scripts</u>; it should be undefined for all operational and decommission scripts.</p>
+
+<h4 id="rs_arch">RS_ARCH</h4>
+
+<p>Instance CPU architecture, e.g. <q>i386</q> or <q>x86_64</q>.</p>
+
+<h2 id="see-also">See also</h2>
+
+<ul>
+<li><a href="/clouds/aws/amazon-ec2/aws_metadata.html">EC2 Metadata</a></li>
+<li><a href="/faq/clouds/aws/How_can_I_export_AWS_environment_variables_to_the_shell.html">How can I export AWS environment variables to the Shell?</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Deployments</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Deployments</h1></div><div class="main-content"><h2 id="create-deployment">Create Deployment</h2>
+
+<p>Create a new deployment.</p>
+
+<h3 id="create-deployment-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d deployment[name]<span class="o">=</span><span class="s2">"Deployment for API Sandbox"</span> <span class="se">\</span>
+    -d deployment[description]<span class="o">=</span><span class="s2">"Sandbox for miscellaneous API tests"</span> <span class="se">\</span>
+    https://my.rightscale.com/api/deployments.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 201 Created
+    Server: nginx/1.0.15
+    Date: Thu, 25 Oct 2012 18:33:36 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 201 Created
+    Location: /api/deployments/314837001
+    X-Runtime: 292
+    X-Request-Uuid: ecf7f1ed401b48a4b98de27d894389db
+    Set-Cookie: _session_id=b8112ab3a540a2cf0a81ce64be2c3e38; path=/; Secure; HttpOnly
+    Cache-Control: no-cache
+</code></pre>
+
+<h3 id="create-deployment-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+    $deploymentName = "Deployment for API Sandbox"
+    $deploymentDescription = "Sandbox for Miscellaneous API Tests"
+    $postString = "deployment[name]=""$deploymentName""&amp;deployment[description]=$deploymentDescription"
+    $postBytes = [System.Text.Encoding]::UTF8.GetBytes($postString)
+    $createDeploymentRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/deployments.xml")
+    $createDeploymentRequest.Method = "POST"
+    $createDeploymentRequest.CookieContainer = $cookieContainer
+    $createDeploymentRequest.Headers.Add("X_API_VERSION", "1.5");
+
+    $createDeploymentRequestStream = $createDeploymentRequest.GetRequestStream()
+    $createDeploymentRequestStream.Write($postBytes, 0, $postBytes.Length)
+    $createDeploymentRequestStream.Close()
+    [System.Net.WebResponse] $createDeploymentResponse = $createDeploymentRequest.GetResponse()
+    $createDeploymentResponseStream = $createDeploymentResponse.GetResponseStream()
+    $createDeploymentResponseStreamReader = New-Object System.IO.StreamReader -argumentList $createDeploymentResponseStream
+    [string]$createDeploymentResponseString = $createDeploymentResponseStreamReader.ReadToEnd()
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    IsMutuallyAuthenticated : False
+    Cookies : {}
+    Headers : {Transfer-Encoding, Connection, Status, X-Runtime...}
+    SupportsHeaders : True
+    ContentLength : -1
+    ContentEncoding :
+    ContentType : text/html; charset=utf-8
+    CharacterSet : utf-8
+    Server : nginx/1.0.15
+    LastModified : 2/21/2013 12:54:34 PM
+    StatusCode : Created
+    StatusDescription : Created
+    ProtocolVersion : 1.1
+    ResponseUri : https://my.rightscale.com/api/deployments.xml
+    Method : POST
+    IsFromCache : False
+</code></pre>
+
+<h2 id="delete-deployment">Delete Deployment</h2>
+
+<p>Delete a deployment. Also known as <q>destroy</q> a deployment.</p>
+
+<h3 id="delete-deployment-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"314866001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X DELETE https://my.rightscale.com/api/deployments/<span class="nv">$DEPLOYMENT</span>
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>There is no XML/JSON content, just headers output. (HTTP 204 No Content)</p>
+
+<p><strong>Notes</strong> :</p>
+
+<ul>
+<li>You cannot delete a locked deployment. (HTTP 422 Unprocessible Entity and <q>ActionNotAllowed: The deployment is locked</q> returned.)</li>
+<li>You cannot delete a deployment with operational servers. (HTTP 422 and <q>ActionNotAllowed: This deployment cannot be deleted because it contains running servers and/or active arrays.</q>)</li>
+<li><em>Warning!</em> You <em>can</em> delete a deployment that has non-operational servers in it (as long as its not locked). The servers will be deleted too.</li>
+</ul>
+
+<h3 id="delete-deployment-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+    $deploymentID = "365623001"
+    $deleteDeploymentsRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/deployments/$deploymentID")
+    $deleteDeploymentsRequest.Method = "DELETE"
+    $deleteDeploymentsRequest.CookieContainer = $cookieContainer
+    $deleteDeploymentsRequest.Headers.Add("X_API_VERSION", "1.5");
+    [System.Net.WebResponse] $deleteDeploymentsResponse = $deleteDeploymentsRequest.GetResponse()
+    $deleteDeploymentsResponseStream = $deleteDeploymentsResponse.GetResponseStream()
+    $deleteDeploymentsResponseStreamReader = New-Object System.IO.StreamReader -argumentList $deleteDeploymentsResponseStream
+    [string]$deleteDeploymentsResponseString = $deleteDeploymentsResponseStreamReader.ReadToEnd()
+    $deleteDeploymentsResponse
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    IsMutuallyAuthenticated : False
+    Cookies : {}
+    Headers : {Connection, Status, X-Runtime, X-Request-Uuid...}
+    SupportsHeaders : True
+    ContentLength : -1
+    ContentEncoding :
+    ContentType :
+    CharacterSet :
+    Server : nginx/1.0.15
+    LastModified : 2/21/2013 1:00:04 PM
+    StatusCode : NoContent
+    StatusDescription : No Content
+    ProtocolVersion : 1.1
+    ResponseUri : https://my.rightscale.com/api/deployments/365623001
+    Method : DELETE
+    IsFromCache : False
+</code></pre>
+
+<h2 id="list-deployments">List Deployments</h2>
+
+<p>List all Deployments of an account (also referred to as the Deployments Index).</p>
+
+<h3 id="list-deployments-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/deployments.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : Truncated XML output without headers included (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;deployments&gt;
+      &lt;deployment&gt;
+        &lt;links&gt;
+          &lt;link href="/api/deployments/394" rel="self"/&gt;
+          &lt;link href="/api/deployments/394/servers" rel="servers"/&gt;
+          &lt;link href="/api/deployments/394/server_arrays" rel="server_arrays"/&gt;
+          &lt;link href="/api/deployments/394/inputs" rel="inputs"/&gt;
+        &lt;/links&gt;
+        &lt;server_tag_scope&gt;deployment&lt;/server_tag_scope&gt;
+        &lt;description&gt;
+    &lt;/description&gt;
+        &lt;name&gt;Default&lt;/name&gt;
+        &lt;actions&gt;&lt;/actions&gt;
+      &lt;/deployment&gt;
+      &lt;deployment&gt;
+        &lt;links&gt;
+    . . .
+</code></pre>
+<pre class="syntax-highlight plaintext"><code>    &lt;deployment&gt;
+        &lt;links&gt;
+          &lt;link href="/api/deployments/306795001" rel="self"/&gt;
+          &lt;link href="/api/deployments/306795001/servers" rel="servers"/&gt;
+          &lt;link href="/api/deployments/306795001/server_arrays" rel="server_arrays"/&gt;
+          &lt;link href="/api/deployments/306795001/inputs" rel="inputs"/&gt;
+        &lt;/links&gt;
+        &lt;server_tag_scope&gt;deployment&lt;/server_tag_scope&gt;
+        &lt;description&gt;Test out API 1.5. Craft examples based on http/curl and right_api_client. Greg Doe&lt;/description&gt;
+        &lt;name&gt;GD: API 1.5 Sandbox&lt;/name&gt;
+        &lt;actions&gt;&lt;/actions&gt;
+      &lt;/deployment&gt;
+    &lt;/deployments&gt;
+</code></pre>
+
+<h3 id="list-deployments-right_api_client">right_api_client</h3>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    require 'rubygems'
+    require 'pp' # Require pretty print Ruby gem
+    require 'right_api_client' # RightScale API client gem
+
+    user = 'greg.doe@example.com' # Set user email address for using the Dashboard
+    acct = '1234' # Set the account ID
+    pass = 'SomePassword' # Set the password for the user. Create client object so you can use the API.
+    @client = RightApi::Client.new(:email =&gt; user, :password =&gt; pass, :account_id =&gt; acct)
+    #
+    # Setup and authenticate above. Display output below.
+    #
+    pp @client.deployments.index
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    [#&lt;RightApi::ResourceDetail resource_type="deployment", name="Default"&gt;,
+      #&lt;RightApi::ResourceDetail resource_type="deployment", name="RightScale Staging"&gt;,
+      #&lt;RightApi::ResourceDetail resource_type="deployment", name="GD: API 1.5 Sandbox"&gt;,
+      #&lt;RightApi::ResourceDetail resource_type="deployment", name="Cloned Resat API 1.5"&gt;,
+    . . . output abbreviated here . . .
+      #&lt;RightApi::ResourceDetail resource_type="deployment", name="Resat API 1.5"&gt;,
+      #&lt;RightApi::ResourceDetail resource_type="deployment", name="Ride Deployment - 1354684326633"&gt;,
+      #&lt;RightApi::ResourceDetail resource_type="deployment", name="QA_rspec_Deployment 1354732811"&gt;,
+      #&lt;RightApi::ResourceDetail resource_type="deployment", name="Knapp"&gt;]
+</code></pre>
+
+<h4 id="supplemental">Supplemental</h4>
+
+<h4 id="only-show-(filter)-certain-deployments">Only Show (Filter) certain Deployments</h4>
+
+<p>Similar to the way you can <q>Filter by Nickname</q> in the Dashboard UI, this example will only display Deployments that contain <q>api</q> in their name.</p>
+<pre class="syntax-highlight plaintext"><code>    require 'rubygems'
+    require 'pp' # Require pretty print Ruby gem
+    require 'right_api_client' # RightScale API client gem
+
+    user = 'greg.doe@example.com' # Set user email address for using the Dashboard
+    acct = '1234' # Set the account ID
+    pass = 'SomePassword' # Set the password for the user. Create client object so you can use the API.
+    @client = RightApi::Client.new(:email =&gt; user, :password =&gt; pass, :account_id =&gt; acct)
+    #
+    # Setup and authenticate above. Set and use additional variables below, display output, etc.
+    #
+    pp @client.deployments.index(:filter =&gt; ['name==API']) # ONLY show deployments with "api" in the nickname
+</code></pre>
+
+<p><em>Note</em>: If you run the above script (e.g. <em>DeploymentListFilter</em>) and total the number of deployments, it should match the number in the Dashboard (Manage &gt; Deployments) if you <q>filter by</q> the same nickname.</p>
+
+<p>For example:</p>
+
+<p>$ ruby DeploymentListFilter | wc -l</p>
+
+<p><strong>58</strong></p>
+
+<p><img src="/img/api_deployments.jpg" alt="api_deployments.jpg" width="725" height="143" /></p>
+
+<h3 id="list-deployments-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+    $listDeploymentsRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/deployments.xml")
+    $listDeploymentsRequest.Method = "GET"
+    $listDeploymentsRequest.CookieContainer = $cookieContainer
+    $listDeploymentsRequest.Headers.Add("X_API_VERSION", "1.5");
+    [System.Net.WebResponse] $listDeploymentsResponse = $listDeploymentsRequest.GetResponse()
+    $listDeploymentsResponseStream = $listDeploymentsResponse.GetResponseStream()
+    $listDeploymentsResponseStreamReader = New-Object System.IO.StreamReader -argumentList $listDeploymentsResponseStream
+    [string]$listDeploymentsResponseString = $listDeploymentsResponseStreamReader.ReadToEnd()
+    write-host $listDeploymentsResponseString
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>See http/curl output.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

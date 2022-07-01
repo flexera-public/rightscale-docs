@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Add a Custom Monitoring Plugin Manually</title><meta content="Steps for adding and testing a custom monitoring plugin in the RightScale Cloud Management Platform." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_windows_guide cm_windows_guide_add_a_custom_monitoring_plugin_manually" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Windows Guide</a></p><div class="page-header"><h1>Add a Custom Monitoring Plugin Manually</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This tutorial is useful for testing a custom monitoring plugin, but if you want the plugin to be usable by ServerTemplates so that your custom graphs will always be displayed in future launches of Windows servers, you will need to use RightScripts and/or Chef Recipes. See <a href="/cm/windows_guide/add_a_custom_monitoring_plugin_automatically_with_rightscripts_or_chef_recipes.html">Add a Custom Monitoring Plugin Automatically with RightScripts or Chef Recipes</a>.</p>
+
+<p>Use the procedure outlined below to extend monitoring on Windows servers by manually adding custom monitoring plugins directly on a running server so that additional metrics are monitored and graphed inside the RightScale Dashboard.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>&#39;actor&#39; and &#39;server_login&#39; user role privileges</li>
+</ul>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-launch-a-windows-server">Launch a Windows Server</h3>
+
+<p>For the purpose of this tutorial, we recommend launching a <a href="/st/rl10">Windows server with a ServerTemplate</a>.</p>
+
+<p>Once you have an operational Windows server, proceed to the next step.</p>
+
+<h3 id="steps-rdp-into-the-server">RDP into the Server</h3>
+
+<p>When viewing the running Server&#39;s show page, click on its <strong>RDP</strong> action button to create a Remote Desktop Connection to the running instance. Remember, you must use an Internet Explorer browser window to perform this action and the instance&#39;s security group must have port 3389 open.</p>
+
+<h3 id="steps-identify-the-wmi-metric-to-graph">Identify the WMI Metric to Graph</h3>
+
+<p>Let&#39;s assume you want graph the &#39;InterruptsPersec&#39; metric from the &#39;Win32_PerfFormattedData_PerfOS_Processor&#39; WMI class. To verify the select statement, run this command in a PowerShell window:</p>
+<pre class="syntax-highlight plaintext"><code>PS C:\&gt; Get-WmiObject -Query "Select InterruptsPersec from Win32_PerfFormattedData_PerfOS_Processor where Name='_Total'"
+
+__GENUS : 2
+__CLASS : Win32_PerfFormattedData_PerfOS_Processor
+__SUPERCLASS :
+__DYNASTY :
+__RELPATH :
+__PROPERTY_COUNT : 1
+__DERIVATION : {}
+__SERVER :
+__NAMESPACE :
+__PATH :
+InterruptsPersec : 112  
+
+PS C:\&gt;
+</code></pre>
+
+<h3 id="steps-create-a-custom-plugin">Create a Custom Plugin</h3>
+
+<p>If you haven&#39;t already created the code for your plugin, you can simply use Notepad/WordPad and enter your code.</p>
+
+<p><strong>Example</strong></p>
+
+<p>Below is an example that will graph the &#39;InterruptsPersec&#39; metric. The &#39;gauge&#39; graph type will be labeled as &#39;mycustom-plugin&#39; in the Dashboard. For best results, it&#39;s recommended that you use either the &#39;gauge&#39; or &#39;counter&#39; graph type for defining any custom plug-in.</p>
+<pre class="syntax-highlight plaintext"><code># true:: Always return true
+def run  
+    items = execute_wmi_query("Select InterruptsPersec from Win32_PerfFormattedData_PerfOS_Processor where Name='_Total'")
+    for item in items do  
+        value=item.InterruptsPersec
+    if is_number?(value)
+        @logger.debug("Total InterruptsPersec: #{value}")
+        gauge('mycustom', 'plugin', 'gauge', 'cpuinterruptsgraph', value)
+    else
+        @logger.debug("The returned InterruptsPersec(#{value}) is not a number")
+    end
+    end
+end
+</code></pre>
+
+<p>Where,</p>
+
+<ul>
+<li><strong>gauge</strong> - graph type</li>
+<li><strong>mycustom-plugin</strong> - the name of the plugin</li>
+<li><strong>cpuinterruptsgraph</strong> - the name of the graph</li>
+<li><strong>value</strong> - the value that will be graphed</li>
+</ul>
+
+<h3 id="steps-place-the-custom-plugin-in-the-correct-directory">Place the Custom Plugin in the Correct Directory</h3>
+
+<p>Be sure to save your plugin as a .rb file (e.g., custom_plugin.rb) into the appropriate directory on the Windows server:</p>
+
+<p>Warning! The actual installation path may be different depending on the version of Windows. Tip: Search for the <q>RightScale</q> folder</p>
+
+<ul>
+<li>For Windows <strong>i386</strong> - C:\Program Files\RightScale\RightLinkService\scripts\lib\monitors</li>
+<li>For Windows <strong>x64</strong> - C:\Program Files (x86)\RightScale\RightLinkService\scripts\lib\monitors</li>
+</ul>
+
+<p>Plugins must be placed in the appropriate directory on the instance otherwise RightLink will not be able to properly discover it. In the same directory you will also find plugins for the monitors that are currently supported by default (cpu, disk, memory, etc.).</p>
+
+<p><img src="/img/cm-add-custom-monitoring-plugins.png" alt="cm-add-custom-monitoring-plugins.png" width="725" height="534" /></p>
+
+<h3 id="steps-test-and-verify">Test and Verify</h3>
+
+<p>Once the plugin file has been added in the appropriate directory, go back to the Dashboard and click on (or refresh) the Server&#39;s Monitoring tab.&nbsp; In a few minutes you should see the new graph(s) being displayed. (You do not have to reboot the instance or stop/restart the RightLink service.)</p>
+
+<p><img src="/img/cm-custom-graph.png" alt="cm-custom-graph.png" width="725" height="483" /></p>
+
+<p><strong>Congratulations!</strong> You just created a custom plugin and manually added it to a running Server, as well as verified that the data is properly being graphed in the Dashboard.</p>
+
+<h3 id="steps-troubleshooting">Troubleshooting</h3>
+
+<p>If the graph is not generated, follow these steps to troubleshoot your monitoring plugin.</p>
+
+<p>By default, the logging level for the monitoring service is set to &#39;Logger::INFO&#39; in the core monitoring script:</p>
+
+<ul>
+<li>For Windows <strong>i386</strong> - C:\Program Files\RightScale\RightLinkService\scripts\monitoring.rb</li>
+<li>For Windows <strong>x64</strong> - C:\Program Files (x86)\RightScale\RightLinkService\scripts\monitoring.rb</li>
+</ul>
+
+<p>To increase the log verbosity, edit the monitoring.rb file and replace  </p>
+
+<p><code>@logger.level = Logger::INFO</code></p>
+
+<p>with  </p>
+
+<p><code>@logger.level = Logger::DEBUG</code></p>
+
+<p>The monitoring service will have to be restarted by deleting the &#39;monitoring.pid&#39; file located in:</p>
+
+<p><code>C:\Windows\Temp\RightScale\</code></p>
+
+<p>or on older RightLink based images:</p>
+
+<p><code>C:\Users\RightScale\AppData\Local\Temp\RightScale\</code></p>
+<pre class="syntax-highlight plaintext"><code>PS C:\Windows\Temp\RightScale&gt; dir
+
+Directory: C:\Windows\Temp\RightScale
+
+Mode LastWriteTime Length Name
+---- ------------- ------ ----
+-a--- 12/13/2010 12:41 PM 528609 monitoring.log
+-a--- 12/13/2010 12:06 PM 4 monitoring.pid
+
+PS C:\Windows\Temp\RightScale&gt; Remove-Item monitoring.pid
+PS C:\Windows\Temp\RightScale&gt; notepad monitoring.log
+</code></pre>
+
+<p>The &#39;monitoring.log&#39; and &#39;monitoring_errors.log&#39; files located in the same directory will contain the logging data.</p>
+
+<h3 id="steps-troubleshooting-file-encoding">Troubleshooting File Encoding</h3>
+
+<p>If you see the following error message in the &#39;monitoring_errors.log&#39; file, it&#39;s possible that the monitor file is not using the ASCII encoding.</p>
+<pre class="syntax-highlight plaintext"><code>Monitoring plugin failed to start:
+SyntaxError: (eval):2:in `initialize_monitors': compile error
+(eval):1: Invalid char `\377' in expression
+(eval):1: Invalid char `\376' in expression
+</code></pre>
+
+<p>By default, PowerShell creates files with &#39;Little Endian&#39; encoding. Use this PowerShell command to make sure the file is created as ASCII:</p>
+<pre class="syntax-highlight plaintext"><code>echo "# true:: Always return true" | Out-File -Encoding ASCII custom_plugin.rb
+</code></pre>
+
+<h3 id="steps-dsl-equivalent">DSL Equivalent</h3>
+
+<p>The DSL equivalent for the previous &#39;InterruptsPersec&#39; Ruby example looks like the following:</p>
+<pre class="syntax-highlight plaintext"><code>wmi_query "Select InterruptsPersec from Win32_PerfFormattedData_PerfOS_Processor where Name='_Total'"
+wmi_query_send_attributes 'InterruptsPersec'
+collectd_plugin 'mycustom-plugin-dsl'
+collectd_type 'gauge'
+collectd_type_instance 'cpuinterruptsgraph'
+collectd_sender :gauge
+</code></pre>
+
+<p>For more details on writing DSL-based plugins, please see <a href="/cm/windows_guide/add_a_custom_monitoring_plugin_automatically_with_rightscripts_or_chef_recipes.html">Add a Custom Monitoring Plugin Automatically with RightScripts or Chef Recipes</a>.</p>
+
+<h3 id="steps-changing-default-namespace">Changing Default Namespace</h3>
+
+<p>By default the wmi query will use the &#39;root/cimv2&#39; name space. Here are two example monitors that use the &#39;root/hardware&#39; name space to query &#39;EnabledState&#39;:</p>
+
+<p><strong>Ruby version:</strong></p>
+<pre class="syntax-highlight ruby"><code><span class="c1"># true:: Always return true</span>
+<span class="k">def</span> <span class="nf">run</span>
+  <span class="nb">require</span> <span class="s1">'win32ole'</span>
+  <span class="n">wmi</span> <span class="o">=</span> <span class="no">WIN32OLE</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s2">"winmgmts://./root/hardware"</span><span class="p">)</span>
+  <span class="n">items</span> <span class="o">=</span> <span class="n">wmi</span><span class="o">.</span><span class="no">ExecQuery</span><span class="p">(</span><span class="s2">"select EnabledState from AdminDomain where Name='Management Access Point (MAP) Addressing Root'"</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">item</span> <span class="k">in</span> <span class="n">items</span> <span class="k">do</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="no">EnabledState</span>
+    <span class="k">if</span> <span class="n">is_number?</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="vi">@logger</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s2">"AdminDomain EnabledState: </span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+      <span class="n">gauge</span><span class="p">(</span><span class="s1">'custom-namespace'</span><span class="p">,</span> <span class="s1">'plugin'</span><span class="p">,</span> <span class="s1">'gauge'</span><span class="p">,</span> <span class="s1">'enabledstate'</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="k">else</span>
+      <span class="vi">@logger</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s2">"AdminDomain EnabledState(</span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="s2">) is not a number"</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><strong>DSL Equivalent:</strong></p>
+<pre class="syntax-highlight ruby"><code><span class="k">def</span> <span class="nf">init</span>
+  <span class="vi">@wmi</span> <span class="o">=</span> <span class="no">WIN32OLE</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s1">'winmgmts:root\hardware'</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">wmi_query</span>                 <span class="s2">"select EnabledState from AdminDomain where Name='Management Access Point (MAP) Addressing Root'"</span>
+<span class="n">wmi_query_send_attributes</span> <span class="s1">'EnabledState'</span>
+<span class="n">collectd_plugin</span>           <span class="s1">'dsl-custom-namespace'</span>
+<span class="n">collectd_type</span>             <span class="s1">'gauge'</span>
+<span class="n">collectd_type_instance</span>    <span class="s1">'EnabledState'</span>
+<span class="n">collectd_sender</span>           <span class="ss">:gauge</span>
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

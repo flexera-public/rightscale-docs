@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Preparing for AWS maintenance</title><meta content="This article details RightScale's recommended practices to prepare for and handle AWS EC2 maintenance requests." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="faq faq_clouds faq_clouds_aws faq_clouds_aws_Preparing_for_AWS_maintenance" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightScale General FAQs</a> &#x2F; <a href="../">Cloud Providers</a> &#x2F; <a href="./">Amazon Web Services</a></p><div class="page-header"><h1>Preparing for AWS maintenance</h1></div><div class="main-content"><h2 id="background">Background</h2>
+
+<p>This article details RightScale&#39;s recommended practices to prepare for and handle AWS EC2 maintenance requests. Occasionally Amazon needs to reboot host hardware and/or reboot instances for the purpose of installing security patches and updates.</p>
+
+<p>As an example, you may receive a notification from Amazon for such events. Here is a perfect example:</p>
+
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+          Amazon Maintenance Letter Example
+          </div>
+        </div>
+        <div class="panel-body"><p>Dear Amazon EC2 Customer,</p>
+
+<p>One or more of your Amazon EC2 instances have been scheduled for a reboot in order to receive some patch updates. Most reboots complete within minutes, depending on your instance configuration. The instance(s) that will be rebooted and your scheduled reboot time(s) are listed below.</p>
+
+<p><strong>Region Instance ID Maintenance Window</strong></p>
+
+<p>us-east-1 i-xxxxxxx 2011-12-11 04:00:00 UTC - 2011-12-11 10:00:00 UTC instance-reboot</p>
+
+<p>No action is required on your part. Each reboot will occur during the corresponding scheduled maintenance window listed above. Note that when a reboot is done, all of your configuration settings are retained. You also have the option to manage these reboots yourself at any time prior to the scheduled maintenance window.</p>
+
+<p>If you do want to manage your reboots for yourself, or simply want more information on the reboot process, please visit the Amazon EC2 Maintenance Help Page at: http://aws.amazon.com/maintenance-help/</p>
+
+<p>All scheduled events for your Amazon EC2 instances can also be found on the Scheduled Events page in the AWS Management Console at:
+https://console.aws.amazon.com/ec2/home?#s=ScheduledEvents</p>
+
+<p>Additional details on how to see your scheduled events, as well as additional details on how to manage them yourself can be found in the Amazon EC2 User Guide at: http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check.html</p>
+
+<p>Should you have any questions or concerns, the AWS Support Team is available on the community forums and via AWS Premium Support at:
+http://aws.amazon.com/support</p>
+
+<p>Sincerely,
+Amazon Web Services</p>
+</div>
+
+<p><div class="panel-footer"></div>
+      </div></p>
+
+<h2 id="answer">Answer</h2>
+
+<p><strong>1. Ensure your scripts are reboot-safe</strong></p>
+
+<p>This can&#39;t be stressed enough! Be sure that any and all of your RightScripts (or Chef recipes) are fully reboot-safe.</p>
+
+<p>The majority of our default RightScripts are reboot-safe by default.&nbsp; However, your own custom scripts or 3rd party imported scripts may not be. We utilize an environment variable on our Linux RightScripts that checks for reboot conditions, and if it is met it will NOT re-run the RightScript.</p>
+
+<p>An example of this is shown here:</p>
+<pre class="syntax-highlight plaintext"><code>#
+# Test for a reboot, if this is a reboot just skip this script.
+#
+if test "$RS_REBOOT" = "true" ; then
+  echo "Skip re-setting Timezone on reboot."
+  exit 0 # Leave with a smile ...
+fi
+</code></pre>
+
+<p>When you put this code in your bash script/RightScript, it will check for the $RS_REBOOT variable&#39;s status, and if it is True it will skip the remainder of the script.</p>
+
+<p>For more information on making RightScripts reboot-friendly, see <a href="http://support.rightscale.com/12-Guides/Dashboard_Users_Guide/Design/RightScripts/Actions/Create_Reboot-safe_RightScripts">Create Reboot-safe RightScripts</a>.</p>
+
+<p><strong>2. Backups</strong></p>
+
+<p>The next thing to check is that any custom configuration file changes, settings or anything of that nature are regularly and currently backed up OR scripted out in RightScripts.</p>
+
+<p>We normally recommend scripting these changes into RightScripts or Chef Recipes if possible, as opposed to simply changing them on the instance once. The reason for this is because if it is scripted, an instance can simply reboot or re-launch and the configuration change or setting will automatically recreate itself, so there is no need to worry about having a file backed up or saved anywhere else.</p>
+
+<p>As a quick example, instead of changing a Timezone on an instance manually, we have a script to accomplish it like the following:</p>
+<pre class="syntax-highlight plaintext"><code>if ["$SYS_TZINFO" = "localtime"]; then
+  echo "SYS_TZINFO set to localtime. Not changing /etc/localtime..."
+  exit 0
+else
+  tzset="$SYS_TZINFO"
+fi
+
+
+#
+# Set the Timezone
+#
+ln -sf /usr/share/zoneinfo/$tzset /etc/localtime
+echo "Timezone set to $tzset"
+</code></pre>
+
+<p>This may seem obvious, but now we can simply set an Input value to a timezone, and every time this script runs it will setup the timezone properly.</p>
+
+<p>Another example for editing config files could be done using &#39;sed&#39; or a similar tool. For example -</p>
+<pre class="syntax-highlight plaintext"><code>sed -i "s/127.0.0.1/&amp;\t$HOSTNAME/" /etc/hosts
+sed -i "s/^HOSTNAME.*/HOSTNAME=$HOSTNAME/" /etc/sysconfig/network
+hostname $HOSTNAME
+</code></pre>
+
+<p>This simple script updates the hostname on an instance. Instead of manually connecting to the instance using SSH and changing the hostname one time by editing the /etc/hosts file, we change it dynamically using the sed command. This way, it is scripted, and we do not need to keep a backup of our <code>/etc/hosts</code> file from our instances anywhere.</p>
+
+<p><strong>EBS Volumes</strong></p>
+
+<p>Another good practice for backups is to ensure you have regular EBS snapshots of any/all EBS volumes attached to ANY of your running instances. You can take a manual snapshot or if you are using our EBS Tools, we have a <q>Continuous</q> snapshot script that runs a backup regularly throughout the day.</p>
+
+<p>Our EBS Toolbox template can be used to create properly tagged volumes and backup/restore to/from snapshots easily. It is located in the library here:</p>
+
+<p><a href="http://www.rightscale.com/library/server_templates/EBS-Stripe-Toolbox-11H1/18194">http://www.rightscale.com/library/server_templates/EBS-Stripe-Toolbox-11H1/18194</a></p>
+
+<p>For more info on creating a manual snapshot, see <a href="http://support.rightscale.com/12-Guides/Dashboard_Users_Guide/Clouds/AWS_Regions/EBS_Snapshots/Actions/Create_an_EBS_Snapshot">Create an EBS Snapshot</a>.</p>
+
+<p>For more info in general on EBS snapshots, see <a href="http://support.rightscale.com/12-Guides/Dashboard_Users_Guide/Clouds/AWS_Regions/EBS_Snapshots">EBS Snapshots</a>.</p>
+
+<p><strong>3. Be proactive - reboot/re-launch yourself</strong></p>
+
+<p>If everything above has been taken care of - that is to say, you have <strong>ANY</strong> changes scripted and <strong>ALL</strong> important data backed up/snapshotted, you are ready to reboot the instance yourself.</p>
+
+<p>To do so, simply navigate to the server or instance within the RightScale Dashboard and use the <q>Reboot</q> button found towards the top of the page. This will be a user-initiated reboot.</p>
+
+<p>Here is a screenshot of the Reboot button on a server:</p>
+
+<p><img src="/img/faq-reboot.png" alt="faq-reboot.png" width="547" height="213" /></p>
+
+<p>Alternatively, if you do not think a reboot will completely keep Amazon from rebooting your instance, you are welcome to also try a <strong>Relaunch</strong> of the server/instance as well.</p>
+
+<p>A relaunch will give you an entirely new instance, which means you will be given new resources/hardware on the infrastructure side and a new Amazon EC2 Instance ID. This might be a better option (we normally recommend re-launch instead of a reboot 99% of the time) since it could possibly give you a new instance on hardware that does not need an AWS-scheduled reboot! If it is successful, you can circumvent the problem before AWS even needs to reboot the instance.</p>
+
+<p><strong>NOTE</strong>: Some people may think this is a better way to go, because you can control WHEN the instance is rebooted/relaunched! If AWS is planning on doing a scheduled reboot after hours and you run into problems with production servers, you may not get the help you need right away. However, if you perform this early, you have the opportunity to do it during business hours and get support from RightScale, AWS or other 3rd party resources as needed!!</p>
+
+<p><strong>Still need help or have questions?</strong></p>
+
+<p>Feel free to contact us at <strong><a href="mailto:support@rightscale.com">support@rightscale.com</a></strong> or at <strong>(866) 787-2253.</strong> Alternatively, you may open a support ticket by going to the <strong>Support -&gt; Email</strong> link from within the RightScale Dashboard (top right corner) and opening a support incident.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

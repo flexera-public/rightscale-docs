@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Cloud Computing System Architecture Diagrams</title><meta content="Example diagrams depicting typical cloud computing system architectures commonly administered and managed using the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_designers_guide cm_designers_guide_cm-cloud-computing-system-architecture-diagrams" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Designers Guide</a></p><div class="page-header"><h1>Cloud Computing System Architecture Diagrams</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Below you will find several sample diagrams of cloud-based solution architectures that you can build with the RightScale platform using both public and/or private cloud infrastructures. Most of these architectures can be built using existing ServerTemplates that are available in the MultiCloud Marketplace.</p>
+
+<p>Each application is unique and will have a custom set of requirements. The purpose of the system architecture diagrams below is to provide you with real-world examples that you can use as base reference architectures when you design your own custom system architectures in the cloud. Once you find a system architecture that is similar to what you are trying to build, you can modify and customize it accordingly to meet your own project&#39;s requirements. The diagrams are designed to demonstrate a particular concept such as disaster recovery or multicloud deployments. When you are designing your own solution architectures you should consider integrating several of the concepts described below.</p>
+
+<p>Get more details and additional reference architectures in our white paper: <a href="http://www.rightscale.com/lp/building-scalable-applications-in-the-cloud-white-paper.php">Build Scalable Applications in the Cloud: Reference Architecture &amp; Best Practices</a>.</p>
+
+<h2 id="things-to-consider">Things to Consider</h2>
+
+<p>There are several factors that you need to take into consideration before designing your own cloud-based systems architecture, particularly if you&#39;re considering a multi-cloud/region architecture.</p>
+
+<ul>
+<li><strong>Cost</strong> - Before you architect your site/application and start launching servers, you should clearly understand the SLA and pricing models associated with your cloud infrastructure(s). There are different costs associated with both private and public clouds. For example, in AWS, data transferred between servers inside of the same datacenter (Availability Zone) is free, whereas communication between servers in different datacenters within the same cloud (EC2 Region) is cheaper than communication between servers in different clouds or on-premise datacenters.</li>
+<li><strong>Complexity</strong> - Before you construct a highly customized hybrid cloud solution architecture, make sure you properly understand the actual requirements of your application, SLA, etc. Simplified architectures will always be easier to design and manage. A more complex solution should only be used if a simpler version will not suffice. For example, a system architecture that is distributed across multiple clouds (regions) introduces complexity at the architecture level and may require changes at the application level to be more latency-tolerant and/or be able to communicate with a database that&#39;s migrated to a different cloud for failover purposes.</li>
+<li><strong>Speed</strong> - The cloud gives you more flexibility to control the speed or latency of your site/application. For example, you could launch different instance types based on your application&#39;s needs. For example, do you need an instance type that has high memory or high CPU? From a geographic point of view which cloud will provide the lowest latency for your users? Is it necessary or cost effective to use a content distribution network (CDN) or caching service? For user-intensive applications, the extra latency that results from cross-cloud/region communication may not be acceptable.</li>
+<li><strong>Cloud Portability</strong> - Although it might be easier to use one of the cloud provider&#39;s tools or services, such as a load balancing or database service, it&#39;s important to realize that if and when you need to move that particular tier of your architecture to another cloud provider, you will need to modify your architecture accordingly. Since ServerTemplates are cloud-agnostic, you can use them to build portable cloud architectures.</li>
+<li><strong>Security</strong> - For MultiCloud system architectures, it&#39;s important to realize that cross-cloud/region communication is performed over the public Internet and may introduce security concerns that will need to be addressed using some type of data encryption or VPN technology.</li>
+</ul>
+
+<h2 id="example-reference-diagrams">Example Reference Diagrams</h2>
+
+<p>The architecture diagrams below show a progression from simple to more complex reference architectures.</p>
+
+<h3 id="example-reference-diagrams-single--all-in-one--server">Single "All-in-one" Server</h3>
+
+<p>Use one of the <q>All-in-one</q> ServerTemplates, such as the LAMP (Linux, Apache, MySQL, PHP) ServerTemplate to launch a single server that contains a web server (Apache), as well as your application (PHP) and database (MySQL). You&#39;ll find a collection of simple <q>All-in-one</q> ServerTemplates in the MultiCloud Marketplace, which are useful for new RightScale users and basic demos.</p>
+
+<p><img src="/img/cm-system-architecture-1.png" alt="cm-system-architecture-1.png" width="177" height="208" /></p>
+
+<h3 id="example-reference-diagrams-single-cloud-site-architectures">Single Cloud Site Architectures</h3>
+
+<p>In a standard three-tier website architecture, there is at least one dedicated server in each tier of the system architecture. (Load Balancing Server, Application Server, Database Server)</p>
+
+<h4 id="non-redundant-3-tier-architecture">Non-Redundant 3-Tier Architecture</h4>
+
+<p>If you are only testing the interactivity between each tier of your architecture, you may want to use a non-redundant system architecture to save on costs and resources. Since it is a non-redundant system architecture it is primarily used for basic test and development purposes. In the example diagram below, there are dedicated servers for each tier of the application/site. A non-redundant architecture is not recommended for production environments.</p>
+
+<p><img src="/img/cm-system-architecture-2.png" alt="cm-system-architecture-2.png" width="240" height="322" /></p>
+
+<h4 id="redundant-3-tier-architecture">Redundant 3-Tier Architecture</h4>
+
+<p>Any production environment that is launched in the cloud should also have a redundant architecture for failover and recovery purposes. Typically, you will use a Server Array for your application tier to take advantage of autoscaling in the cloud, however there may be some scenarios where your application is not designed to autoscale. In such cases, you can still create a redundant multi-tier architecture where you have redundancy at each tier of your reference architecture. In the example below, there are two load balancer servers, two application servers, as well as master and slave database servers. A redundant architecture will help protect your site/application from system downtime.</p>
+
+<p>This example diagram also demonstrates the use of a striped volume set at the database tier. If your database is large and requires faster backups, you may consider using a set of striped volumes for data storage.</p>
+
+<p><img src="/img/cm-system-architecture-3.png" alt="cm-system-architecture-3.png" width="455" height="390" /></p>
+
+<h4 id="multi-datacenter-architecture">Multi-Datacenter Architecture</h4>
+
+<p>If your cloud infrastructure supports multiple datacenters (or zones), it&#39;s recommended that you spread your system architecture across multiple datacenters to add another layer of redundancy and protection. Each datacenter in a cloud is designed to be an isolated segment inside the same geographical cloud. So if a power failure occurs in one datacenter, the other datacenters will be unaffected. For example, within a cloud/region there may be several resource pools called availability zones and datacenters. The benefit of using multiple datacenters is to protect your entire site/application from being negatively affected by some type of network/power failure, lack of available resources, or service outtage that&#39;s specific to a particular datacenter.</p>
+
+<p>As a best practice you should always leverage multiple datacenters in your reference architecture if they are supported by the cloud infrastructure. In the other reference architecture diagrams below, it&#39;s also recommended that you use multiple datacenters even though it&#39;s not explicitly shown in the diagrams.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Additional cloud charges may apply for data transferred between different datacenters.</p>
+</div>
+
+<p><img src="/img/cm-system-architecture-4.png" alt="cm-system-architecture-4.png" width="393" height="444" /></p>
+
+<h4 id="autoscaling-architecture">Autoscaling Architecture</h4>
+
+<p>One of the key benefits of the cloud is the ability to horizontally scale (i.e. grow or shrink the number of running server resources) as the demands of your application/site change over time. With RightScale, you can use Server Arrays to set up a particular tier of your architecture to autoscale based on predefined alert conditions. Autoscaling is most commonly used for the application tier of your cloud reference architecture.</p>
+
+<p><img src="/img/cm-system-architecture-5.png" alt="cm-system-architecture-5.png" width="481" height="390" /></p>
+
+<h4 id="scalable-architecture-with-membase">Scalable Architecture with Membase</h4>
+
+<p>If you do not want to use a Master-Slave MySQL setup, you could also use Membase (Couchbase) nodes for your database tier, which is a distributed NoSQL database, which replicates data across all of the Membase nodes. If you are using the Enterprise edition you can attach volumes to each node (shown below), but the Community Edition doesn&#39;t support the use of volumes.</p>
+
+<p><img src="/img/cm-system-architecture-7.png" alt="cm-system-architecture-7.png" width="479" height="405" /></p>
+
+<h4 id="scalable-multi-tier-architecture-with-memcached">Scalable Multi-Tier Architecture with Memcached</h4>
+
+<p>For applications/sites that require lots of reads from the database and serve a lot of static content, you might want to add a Memcached layer to your cloud system architecture to offload a read-heavy database. Memcached is an open source distributed memory object caching system that&#39;s ideal for speeding up dynamic web applications by alleviating database load. In the example diagram below, the application servers can still make writes to the database, but many commonly used objects will be retrieved from one of the Memcached servers instead of the Master-DB server.</p>
+
+<p><img src="/img/cm-system-architecture-6.png" alt="cm-system-architecture-6.png" width="539" height="465" /></p>
+
+<h4 id="scalable-queue-based-setups">Scalable Queue-based Setups</h4>
+
+<p><strong>(AWS only)</strong></p>
+
+<p>RightScale&#39;s Grid Edition provides a back-end batch processing framework that provides a more efficient solution for processing a group of jobs (work units) by taking advantage of the scalable compute capacity of cloud computing infrastructures. Create a grid application that will scale based on the number of jobs in the queue or how long a sample of jobs has been in the queue.</p>
+
+<p><strong>Number of Jobs</strong></p>
+
+<p>This is the most common way to scale an application for batch processing is by the number of jobs in the queue.</p>
+
+<p><img src="/img/cm-rightgrid-number-jobs.gif" alt="cm-rightgrid-number-jobs.gif" width="725" height="283" /></p>
+
+<p><strong>Time</strong></p>
+
+<p>Create a grid application that will scale based on time or how long a sample of jobs has been in the queue. In this setup, a sample of 10 items in the queue will be chosen at random. The server array will scale up based on the average age of items in the queue or by the age of the oldest item in the queue.</p>
+
+<p><img src="/img/cm-rightgrid-time.gif" alt="cm-rightgrid-time.gif" width="725" height="284" /></p>
+
+<p><strong>Internal Hybrid Setup</strong></p>
+
+<p>If you already have an existing grid architecture or internal compute resources that you still want to use, you can create a hybrid model which will scale-up in an AWS region, when necessary. This setup gives you the flexibility of using internal resources while also letting you take advantage of the unlimited compute resources of the cloud.</p>
+
+<p><img src="/img/cm-rightgrid-internal-hybrid.gif" alt="cm-rightgrid-internal-hybrid.gif" width="672" height="323" /></p>
+
+<p><strong>Alert-based and Queue-based Scalable Setup</strong></p>
+
+<p>Since you can attach multiple server arrays to the same deployment, you can also create a dual scalable architecture where you have a scalable front-end and back-end array.</p>
+
+<p><img src="/img/cm-site-grid-array-diagram.png" alt="cm-site-grid-array-diagram.png" width="536" height="527" /></p>
+
+<h3 id="example-reference-diagrams-hybrid-cloud-site-architectures">Hybrid Cloud Site Architectures</h3>
+
+<p>Another way that you can protect your site/application in the cloud is to design a hybrid cloud site architecture that leverages multiple public/private cloud infrastructures or dedicated hosted servers. One of the key benefits of the RightScale platform is cloud portability, where you can use the same assets (ServerTemplates, RightScripts, etc.) to launch identically functioning servers into multiple public/private clouds. Avoid cloud lock-in and design a solution architecture that takes advantage of multiple cloud resource pools instead of just a single cloud. Similarly, you can also design a hybrid cloud architecture where servers in a cloud can communicate with dedicated servers that are hosted in an internal/external datacenter.</p>
+
+<h4 id="scalable-multicloud-architecture">Scalable MultiCloud Architecture</h4>
+
+<p>In the example below, you&#39;re using one cloud infrastructure to host your site/application, but you&#39;ve also set up a Server Array for autoscaling your application tier in a different cloud infrastructure. For example, you might use your own private cloud servers before incurring any costs associated with launching servers in public cloud infrastructures. The MultiCloud Architecture diagram below gives you the flexibility of primarily hosting your application in your private cloud infrastructure but also autoscale out into a public cloud for additional server capacity, if necessary.</p>
+
+<p><img src="/img/cm-system-architecture-9.png" alt="cm-system-architecture-9.png" width="643" height="390" /></p>
+
+<h4 id="failover-multicloud-architecture">Failover MultiCloud Architecture</h4>
+
+<p>In the example diagram below, the same ServerTemplates and scripts are used to configure and launch functional servers into either Cloud X or Y. When you are designing your cloud system architecture across multiple clouds, there are several factors that you will have to take into consideration. In the example below, there is a running Slave-DB server that&#39;s serving as a <q>warm</q> backup, but it&#39;s replicating data with the Master-DB across the public, not private IP address. Remember, only servers within the same cloud infrastructure can communicate over a private IP address. However, if there is ever a problem or failure that would require you to switch clouds, a MultiCloud Architecture would allow you to easily migrate your site/application. Notice that the other tiers of the reference architecture have already been configured and are ready to be launched if you need to migrate your production environment from Cloud X to Cloud Y. It&#39;s important to remember that the clouds could be any combination of public/private cloud infrastructures that are enabled in a RightScale account.</p>
+
+<p><img src="/img/cm-system-architecture-8.png" alt="cm-system-architecture-8.png" width="721" height="417" /></p>
+
+<p>If you want to send/receive data in a secure manner between servers in two different clouds, you can use data encryption or a VPN wrapped around the public IP address since any data transmitted between different cloud infrastructures (except if they&#39;re both private clouds) is sent over the public IP. In the diagram below, data replication across the public Internet is sent between the servers in two different clouds over a secure VPN tunnel.</p>
+
+<p><img src="/img/cm-system-architecture-10.png" alt="cm-system-architecture-10.png" width="725" height="356" /></p>
+
+<h4 id="multicloud-disaster-recovery-architecture">MultiCloud Disaster Recovery Architecture</h4>
+
+<p>One of the key benefits of the RightScale management platform is that you automatically gain a multi-cloud disaster recovery solution simply by following best practices with our ServerTemplates. Remember, no cloud is disaster-proof. Servers and services will eventually go down so it&#39;s important that your system architecture is structured to handle various different disaster recovery scenarios. For example, what would happen if there was a sudden outage in the cloud in which your production environment is currently deployed? In the traditional dedicated hosting model, you are at the mercy of your service provider because your only option is to wait for your hosting company to fix the problem and get your servers back to an operational state. But in the cloud, if you have architected your site appropriately, you have the ability to respond immediately and recover your site yourself. For example, if you have launched your production environment using RightScale&#39;s published ServerTemplates, you&#39;ll be able to use those same ServerTemplates to launch identical servers across multiple clouds. So, if there is a major service outage in a cloud, you can rebuild your production environment by launching servers into a different cloud/region.</p>
+
+<p>In the diagram below, the production environment is currently hosted in Cloud X. Primary (snapshot) backups are periodically being taken of the database. However, you can also take a manual LVM backup of the database to a supported cloud storage service (e.g. Remote Object Storage (ROS) such as an Amazon S3 bucket or Google Cloud Storage container. So, if you need to perform a database migration or there is a cloud outage, you can use the LVM backup to relaunch your database server into a different cloud/region. The LVM backup can then be used to-restore your database and re-establish a redundant database setup in the cloud of your choice. (Note: The LVM backup can either be used to restore the database to a volume or locally to an instance depending on whether or not the cloud supports the use of volumes and snapshots.)</p>
+
+<p><img src="/img/cm-system-architecture-13.png" alt="cm-system-architecture-13.png" width="725" height="314" /></p>
+
+<h4 id="cloud-and-dedicated-hosting-architecture">Cloud and Dedicated Hosting Architecture</h4>
+
+<p>Another type of hybrid cloud solution architecture is to leverage a public/private cloud&#39;s resources along with existing servers from an internal or external datacenter. For example, perhaps your company has strict requirements around the physical location of your database server because it contains sensitive user information or proprietary data. In such cases, even though the database cannot be hosted in a cloud infrastructure the other tiers of your application or site are not subject to the same levels of restrictions. In such cases, you can use the RightScale platform to build a hybrid system architecture using a virtual private network (VPN) solution to create a tunnel for secure communication across a public IP between cloud servers and dedicated servers.</p>
+
+<p><img src="/img/cm-system-architecture-11.png" alt="cm-system-architecture-11.png" width="634" height="305" /></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Instances and Servers - Concepts</title><meta content="Basic concepts of Instances and Servers in the RightScale Cloud Management Dashboard including the Anatomy of a Server, differences between Servers and Instances, and the history timeline of a Server." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_manage cm_dashboard_manage_instances_and_servers cm_dashboard_manage_instances_and_servers_instances_and_servers_concepts" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Manage</a> &#x2F; <a href="./">Instances and Servers</a></p><div class="page-header"><h1>Instances and Servers - Concepts</h1></div><div class="main-content"><h2 id="anatomy-of-a-server">Anatomy of a Server</h2>
+
+<p>Let&#39;s take a closer look at a Server. It&#39;s helpful to understand where a Server gets all of its cloud resources, software installation packages, inputs, etc. A Server&#39;s configuration leverages multiple services from RightScale, the cloud infrastructure, and other web resources to properly configure an instance in the cloud for its intended purpose (MySQL database server, application server, etc.)</p>
+
+<p>For this discussion, a Server is a <q>RightScale</q> Server that you&#39;ve defined using ServerTemplates. Below is a diagram that describes a Server that&#39;s designed to launch an EC2 Instance.</p>
+
+<p><img src="/img/cm-location-instance-resources.png" alt="cm-location-instance-resources.png" width="725" height="480" /></p>
+
+<h2 id="is-there-a-difference-between-launching-a-server-and-launching-an-instance-">Is there a difference between launching a Server and launching an Instance?</h2>
+
+<p>When you launch a Server, an Instance will be launched in the specified cloud infrastructure. You cannot launch a Server without subsequently launching an Instance. However, you can launch an Instance directly from a machine image. For example, in Amazon EC2, you can launch an Instance using one of Amazon&#39;s AMIs, a RightImage published by RightScale, or a custom image of your own that you created by bundling a running Instance. In such cases, you can still manage the Instance in the RightScale Management Platform, however since it&#39;s technically not a RightScale Server, you cannot run RightScripts or Chef Recipes. Monitoring and alerts are also disabled. To properly take advantage of all the benefits of the RightScale Management Platform, you should use Servers to launch Instances in the cloud.</p>
+
+<p>Instances that are launched directly from an image are not considered RightScale Servers, so they will not be listed under Manage -&gt; Servers. However, they will appear under the Cloud or AWS Region in which they were launched. (e.g. Clouds -&gt; AWS Region -&gt; EC2 Instances) Typically, you will only want to launch an instance directly from an image for testing purposes only. Perhaps you&#39;ve built a customized RightImage, but you need to first test and verify that a bare instance can successfully be launched before you reference that image in a MultiCloud Image and leverage it in your ServerTemplates.</p>
+
+<p><img src="/img/cm-servers-instances.png" alt="cm-servers-instances.png" width="725" height="540" /></p>
+
+<h2 id="servers-vs--instances">Servers vs. Instances</h2>
+
+<h3 id="servers-vs--instances-overview">Overview</h3>
+
+<p>Is there a difference between a Server and an Instance?</p>
+
+<p>Often times the words &#39;Server&#39; and &#39;Instance&#39; are used interchangeably in many cloud-related discussions. Although, the technical differences between these two terms will typically not lead to incorrect statements in most cases, they can cause some confusion. In order to prevent misinterpretations during collaborative efforts with your team or interacting with RightScale Technical Services, it&#39;s important to have an accurate, baseline understanding of each term.</p>
+
+<h3 id="servers-vs--instances-definitions">Definitions</h3>
+
+<h4 id="instance">Instance</h4>
+
+<p>A virtual machine running in the cloud.  </p>
+
+<h4 id="server">Server</h4>
+
+<p>The collection of properties and attributes that define a virtual machine that has run, will run, or is running in the cloud.</p>
+
+<p>Since instances in the cloud can be launched and terminated several times throughout the lifetime of your web application, it&#39;s important that you can easily manage these different iterations of what are essentially different incarnations of the <q>same</q> Server that typically serve the same purpose over time. (e.g. PHP Application Server)</p>
+
+<p>ServerTemplates are the <q>templates</q> that are used to create Servers. The only way to create a Server in the RightScale platform is to start with a ServerTemplate, which serves as the base configuration template for a Server. A Server will inherit a majority of its configuration from its ServerTemplate, however configurations can be overwritten at the Deployment or Server levels. (See <a href="/cm/rs101/inheritance_of_inputs.html">Inheritance of Inputs</a>.) When you create a Server, it must be placed inside a particular Deployment. A Deployment is a collection of related Servers that help satisfy the requirements for a common project. A Server cannot exist outside of the context of a Deployment. When you create a Server using a ServerTemplate, you must specify into which Deployment the Server will be placed.</p>
+
+<h2 id="server-history-timeline">Server History Timeline</h2>
+
+<p>The History timeline for a server shows the most recent server sessions. As a system administrator, you&#39;re typically only concerned about the most recent servers that were launched, the current server, as well as the next server launch. The timeframe of the launched server will be displayed. If a server was launched and terminated the same day, the time period will be displayed, otherwise the launch and termination date will be displayed. More detailed information about the time periods can be found under the server&#39;s <strong>Info</strong> tab under the <strong>Timestamps</strong> section.</p>
+
+<p><img src="/img/cm-history-timeline-default.png" alt="cm-history-timeline-default.png" width="607" height="49" /></p>
+
+<p>By default, the timeline will only show up to the three most recent server launches. If you want to view an older server launch, click the <strong>History</strong> button, which will take you to the template&#39;s <strong>History</strong> tab.</p>
+
+<p>Changes made to the <q>Next</q> server launch will carry forward to future server launches.</p>
+
+<p><img src="/img/cm-history-timeline-old.png" alt="cm-history-timeline-old.png" width="725" height="45" /></p>
+
+<p>If you select a launch that&#39;s older than the three most recent server launches, the History timeline will display [...] to denote a larger gap in the server&#39;s history.</p>
+
+<h2 id="what-happens-when-a-server-is-launched-with-rightscale-">What happens when a Server is launched with RightScale?</h2>
+
+<p>Before you start launching instances in the cloud using the RightScale platform, it&#39;s important to first understand how a server is defined, launched, and configured using RightScale&#39;s ServerTemplate model. A proper understanding of how instances are launched in the cloud will provide you with a useful perspective as you become more familiar with the RightScale platform and start launching your own custom servers.</p>
+
+<p>When you launch a Server from the RightScale platform (Dashboard or API), the following actions take place to properly configure your instance in the cloud.</p>
+
+<p><strong>Note</strong>: The example below applies to how EC2 instances are defined, launched, and configured in AWS using RightScale&#39;s ServerTemplate model.</p>
+
+<h3 id="what-happens-when-a-server-is-launched-with-rightscale--define-a-server">Define a Server</h3>
+
+<p>Before you can launch a Server, you must first define how that Server will be configured. For example, you need to choose an operating system (CentOS 5.4, Ubuntu, 9.10, Windows 2008, etc.), the desired size or hardware specifications for the cloud instance, as well as into which cloud or AWS region the instance will be launched.</p>
+
+<ol>
+<li>Go to the RightScale Component Library (<strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong>) to find a ServerTemplate that best satisfies your server requirements. Import a copy of the ServerTemplate into your local collection (<strong>Design</strong> &gt; <strong>ServerTemplates</strong>). You can either use the ServerTemplate as-is or clone it to create an editable version that you can customize yourself. You can also create your own ServerTemplate from scratch.</li>
+<li>Use the ServerTemplate to add a Server to a Deployment or configure a Server Array. You will also need to provide any required cloud-specific information. Below is a list of the minimum requirements that must be specified in order to launch an EC2 instance.
+
+<ul>
+<li>AWS Region - Select into which AWS Region the instance will be launched. (e.g. AWS US-East)</li>
+<li>EC2 instance type - Defines the hardware specifications of the provisioned instance. (e.g. m1.small, m1.large, etc.)</li>
+<li>Amazon Machine Image (AMI) - The base machine image that will be loaded onto the instance by Amazon. The selection of the appropriate AMI (based upon the selected AWS Region) will be chosen by the ServerTemplate&#39;s MultiCloud Image (MCI). (e.g. RightImage_CentOS_5.4_i386_v5.6)</li>
+<li>EC2 SSH Key - Key pair used to establish SSH access to the instance.</li>
+<li>EC2 Security Group - Hardware firewall for controlling ingress communication to the instance.</li>
+<li>EC2 Elastic IP (optional) - Remappable Public IP address for use in EC2. Instead of being randomly assigned a Public IP by Amazon, you can choose to use an EIP that you&#39;ve reserved for use within your AWS account.</li>
+</ul></li>
+</ol>
+
+<h3 id="what-happens-when-a-server-is-launched-with-rightscale--launch-a-server">Launch a Server</h3>
+
+<p>A Server can be launched from either the RightScale Dashboard (GUI) or API. You can either launch a Server manually or set up a scalable Server Array for autoscaling purposes that will grow/shrink (i.e. launch/terminate instances) depending on the various scaling parameters that you&#39;ve defined.</p>
+
+<ol>
+<li>A Server is either manually or automatically launched.</li>
+<li>RightScale makes an API request to the cloud provider on your behalf (using your cloud credentials) to launch a new instance. An instance will be provisioned to you based upon how you defined the Server above. For example:
+
+<ul>
+<li>AWS Region: AWS US-East</li>
+<li>EC2 Instance Type: m1.small</li>
+</ul></li>
+<li>The cloud provider will use the following user-specified cloud resources to properly configure the bare instance. Each of these resources are AWS region-specific. The appropriate machine image will be chosen by the selected MultiCloud Image (MCI). (Note: A ServerTemplate can have more than one MCI.)
+
+<ul>
+<li>Amazon Machine Image (AMI): (e.g. RightImage_CentOS_5.4_i386_v5.6)</li>
+<li>Kernel Image</li>
+<li>Ramdisk Image</li>
+<li>EC2 User Data</li>
+<li>EC2 SSH Key</li>
+<li>EC2 Security Group</li>
+</ul></li>
+<li>The cloud provider assigns the instance the following configurations. At the end of this phase, AWS declares the configured instance both active and billable.
+
+<ul>
+<li>UID (unique identifier) (e.g. i-a97984c3)</li>
+<li>Private DNS Name</li>
+<li>Public DNS Name</li>
+<li>Private IP Address</li>
+<li>Public IP Address / Elastic IP (optional)</li>
+</ul></li>
+<li>RightScale associates the following RightScale-specific configurations with the instance:
+
+<ul>
+<li>Tags</li>
+<li>Sketchy host - Each instance will be assigned to one of RightScale&#39;s Sketchy servers, which monitors all server activity, alerts, and server status. The Sketchy servers collect Server data and draw the real-time monitoring graphs in the Dashboard.</li>
+</ul></li>
+<li>RightScale executes the list of enabled Boot Scripts that are defined by the Server&#39;s ServerTemplate in sequential order.</li>
+<li>If all scripts were executed successfully, RightScale will label it as an <q>operational</q> server.</li>
+</ol>
+
+<h2 id="where-does-a-server-inherit-its-configurations-">Where does a Server inherit its configurations?</h2>
+
+<h3 id="where-does-a-server-inherit-its-configurations--introduction">Introduction</h3>
+
+<p>When you launch a Server, there are several places where different inheritance rules apply to ensure that a Server will properly be configured. It&#39;s important to understand where a Server will ultimately inherit certain configurations in order to properly configure your Deployments, as well as for troubleshooting purposes.</p>
+
+<p>Remember, a Server is either <q>inactive</q> (yet to be launched) or <q>active</q> (a running instance in a cloud). This document specifically addresses inactive or <q>Next</q> servers which defines how the next instance of that Server will be configured when it&#39;s launched.</p>
+
+<h3 id="where-does-a-server-inherit-its-configurations--diagram">Diagram</h3>
+
+<p>The diagram below highlights where a Server will initially inherit most of its configurations. Some configurations can be overwritten at the Deployment and Server levels. See tables below for more details.</p>
+
+<p><img src="/img/cm-server-resource-inheritance.png" alt="cm-server-resource-inheritance.png" width="725" height="512" /></p>
+
+<h3 id="where-does-a-server-inherit-its-configurations--cloud-assigned">Cloud-assigned</h3>
+
+<p>The following configurations are assigned by the individual cloud providers and are not user-defined. These configurations only apply to active (running) Servers and are assigned to instances at launch time.</p>
+
+<table><thead>
+<tr>
+<th>Configuration</th>
+<th>Cloud Provider</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>UID (e.g. AWS id)</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Private DNS name</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Public DNS name</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Private IP Address</td>
+<td>X</td>
+</tr>
+<tr>
+<td>(Public) IP Address</td>
+<td>X</td>
+</tr>
+</tbody></table>
+
+<h3 id="where-does-a-server-inherit-its-configurations--user-defined">User-defined</h3>
+
+<p>The following configurations are defined by the user. You have the flexibility to choose which cloud resources and RightScale components should be used to configure the instance.</p>
+
+<p>You&#39;ll notice that a Server inherits a majority of its configurations from higher levels (e.g. ServerTemplate or Deployment). As a best practice, you should rarely configure any settings at the Server level. You&#39;ll find that it&#39;s much easier to manage all Servers in your Deployment if you configure your Servers to inherit their configurations from either the ServerTemplate or Deployment levels. By effectively using the various inheritance rules to your advantage, you&#39;ll have a better way of ensuring overall consistency and repeatability across all Servers in your Deployment.</p>
+
+<p>The table below shows where a Server will ultimately inherit its configuration. Configurations that are defined at the right of the table (MultiCloud Image) take the least precendence, whereas any configurations that are defined at the Server level will automatically take the most precedence. For example, a Server will initially inherit its machine image from the ServerTemplate&#39;s MultiCloud Image. But, you can overwrite the seletion and choose a different machine image at the Server level. See <a href="/cm/rs101/understanding_inputs.html">Understanding Inputs</a>.</p>
+
+<table><thead>
+<tr>
+<th>Configuration</th>
+<th><q>Next</q> Server</th>
+<th>Deployment</th>
+<th>ServerTemplate</th>
+<th>MultiCloud Image</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Nickname<sup>RS</sup></td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>X</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>ServerTemplate</td>
+<td>X<sup>1</sup></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>SSH Key</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Security Group(s)</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Cloud</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>MultiCloud Image<sup>RS</sup></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>X</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Machine Image</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Kernel Image</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Ramdisk Image</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Instance Type</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>X</td>
+</tr>
+<tr>
+<td>Availability Zone*</td>
+<td>X</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Elastic IP*</td>
+<td>&nbsp;X<sup>2</sup></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>User Data*</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Pricing Type*</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Tag(s)<sup>RS</sup></td>
+<td>&nbsp;X<sup>3</sup></td>
+<td>&nbsp;</td>
+<td>X</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Scripts<sup>RS</sup></td>
+<td>&nbsp;X<sup>4</sup></td>
+<td>&nbsp;</td>
+<td>X</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Inputs<sup>RS</sup></td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Alerts<sup>RS</sup></td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>X</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>EBS Volumes*</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>EBS Snapshots*</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>OS Distribution Repositories</td>
+<td>X</td>
+<td>&nbsp;</td>
+<td>X</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>Cookbooks Repositories Path</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>X</td>
+<td>&nbsp;</td>
+</tr>
+</tbody></table>
+
+<p>* AWS only<br>
+<sup>RS</sup> RightScale-specific term</p>
+
+<p><strong>Notes</strong></p>
+
+<ol>
+<li>Change a Server&#39;s ServerTemplate. You can either select a different committed revision or HEAD version (if available). You cannot select a completely different ServerTemplate.</li>
+<li>Disassociate or associate an Elastic IP</li>
+<li>Edit Tags (Add or Delete)</li>
+<li>At the Server level you can define which Scripts (RightScripts and/or Chef Recipes) are enabled. For example, If you disable a boot script, that script will not be executed during the booting phase the next time that the server is launched.</li>
+</ol>
+
+<p>Once a Server is launched and an instance is running in the cloud, you can still edit some of its configurations, however, those changes only apply to the Current (Running) Server and are not preserved in future launches of that Server.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

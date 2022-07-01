@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Migration of RightScripts to work with RightLink 10</title><meta content="Provide steps to enable RightScripts used with older versions of RightLink to work with RightLink 10." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="rl10 rl10_migration rl10_migration_rl10_rightscript_migration" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="../getting_started.html">Getting Started</a><a class="list-group-item" href="../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">RightLink 10</a> &#x2F; <a href="./">Migration Guide</a></p><div class="page-header"><h1>Migration of RightScripts to work with RightLink 10</h1></div><div class="main-content"><p>RightScripts used with RightLink 5 and 6 may not work with RightLink 10 due to <a href="/rl10/reference/rl10_incompatibilities_with_rl6.html">incompatibilities</a>. Below are common issues and suggested steps to alter your code to work with RightLink 10. The recommended workflow is to develop on a separate copy of your existing RightScripts specifically for RightLink 10. Updating a single set of RightScripts to work in both RightLink 6 and RightLink 10 is <em>not</em> recommended. Lastly, use of the <a href="/rl10/reference/rl10_storing_scripts_in_git_svn.html#right-st-tool-method">right_st</a> tool is recommended.</p>
+
+<h3 id="-rightscripts-run-as-non-root">RightScripts run as non-root</h3>
+
+<p>If a command in your script requires root privileges, you can add <code>sudo</code> to the front of that command. If the whole script requires root privileges, you can alter the hashbang line by adding sudo to it, ie <code>#!/usr/bin/sudo /bin/bash</code>.</p>
+
+<h3 id="--packages--field-does-not-install-packages">'Packages' field does not install packages</h3>
+
+<p>The <q>Packages</q> field for RightScripts in the RightScale dashboard is no longer used to install packages. This field is used to set the <code>RS_PACKAGES</code> environment variable with a space-separated list. <em>RightLink 10 does no actions with the <code>RS_PACKAGES</code> environment variable.</em> It is suggested that RightScripts install any required packages, avoiding the use of the <q>Packages</q> field.  If use of the <q>Packages</q> field is desired, the RightScale provided <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll-examples/install-packages.sh">example script</a> implements some suggested semantics using <code>RS_PACKAGES</code> to install packages.</p>
+
+<h3 id="-reduced-number-of-predefined-environment-variables">Reduced number of predefined environment variables</h3>
+
+<p>Pre-defined environment variables have been reduced to <code>RS_ATTACH_DIR</code>, <code>RS_SELF_HREF</code>, and <code>RS_PACKAGES</code>. It is suggested to write idempotent scripts to replace use of <code>RS_REBOOT</code> and using operating system provided resources to replace <code>RS_DISTRO</code> and <code>RS_ARCH</code> such as the <code>/etc/os-release</code> file and <code>uname</code> command.</p>
+
+<h3 id="-no-frozen-software-repositories">No frozen software repositories</h3>
+
+<p>Use of <a href="/cm/rs101/freezing_software_repositories.html">frozen software repositories</a> are ignored as RightLink 10 does not setup OS mirrors. It is strongly recommended to follow best practices by using the current software repositories provided by the OS, as they are often updated based on security and dependability concerns. If a frozen software repository is required, this must be done in a RightScript. The RightScale provided <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll-examples/rightscale-mirrors.sh">example script</a> shows how to implement a frozen software repository.  Another method would be to attach the specific package file to the RightScript and update the code to install from <code>RS_ATTACH_DIR</code>.</p>
+
+<div class="alert alert-info" role="alert"><strong>Please note:</strong><p>RightScale provided frozen software repositories will be deprecated in the future.</p>
+</div>
+
+<h3 id="-no-hiding-of-credentials-in-audit-entries">No hiding of credentials in audit entries</h3>
+
+<p>STDOUT and STDERR from RightScripts are sent to audit entries and are NOT filtered to hide credentials. It is strongly suggested to review the scripts and verify that credentials are not sent to STDOUT or STDERR.</p>
+
+<h3 id="--rs_*--commands-are-no-longer-used">'rs_*' commands are no longer used</h3>
+
+<p><code>rs_*</code> commands are no longer used.  RightLink 10 ships with <a href="https://github.com/rightscale/rsc/blob/master/README.md"><code>rsc</code>, a RightScale Client command line tool</a>, and should be used instead to make API calls through <a href="/rl10/reference/rl10_local_and_proxied_http_requests.html">local and proxied HTTP requests</a>. Following is an example function to add to your bash scripts to replicate <code>rs_tag</code>:</p>
+<pre class="syntax-highlight shell"><code><span class="k">function </span>rs_tag<span class="o">()</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="nv">$1</span> <span class="k">in</span>
+  <span class="s2">"--list"</span><span class="p">|</span><span class="s2">"-l"</span><span class="p">)</span>
+    <span class="nv">action</span><span class="o">=</span><span class="s2">"by_resource"</span>
+    <span class="nv">options</span><span class="o">=</span><span class="s2">"--xm .name"</span>
+    <span class="p">;;</span>
+  <span class="s2">"--add"</span><span class="p">|</span><span class="s2">"-a"</span><span class="p">)</span>
+    <span class="nv">action</span><span class="o">=</span><span class="s2">"multi_add"</span>
+    <span class="nv">options</span><span class="o">=</span><span class="s2">"tags[]=</span><span class="nv">$2</span><span class="s2">"</span>
+    <span class="p">;;</span>
+  <span class="s2">"--remove"</span><span class="p">|</span><span class="s2">"-r"</span><span class="p">)</span>
+    <span class="nv">action</span><span class="o">=</span><span class="s2">"multi_delete"</span>
+    <span class="nv">options</span><span class="o">=</span><span class="s2">"tags[]=</span><span class="nv">$2</span><span class="s2">"</span>
+    <span class="p">;;</span>
+  <span class="k">*</span><span class="p">)</span>
+    <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2"> UNSUPPORTED OPTION"</span>
+    <span class="k">return </span>1
+    <span class="p">;;</span>
+  <span class="k">esac</span>
+  rsc --retry<span class="o">=</span>5 --timeout<span class="o">=</span>60 --rl10 cm15 <span class="nv">$action</span> /api/tags/<span class="nv">$action</span> <span class="se">\</span>
+    resource_hrefs[]<span class="o">=</span><span class="nv">$RS_SELF_HREF</span> <span class="se">\</span>
+    <span class="nv">$options</span>
+<span class="o">}</span>
+</code></pre>
+
+<h3 id="-no-private-sandbox">No Private Sandbox</h3>
+
+<p>RightLink 6 used commands and software packages installed in a private sandbox located at <code>/opt/rightscale/sandbox</code> for Linux and <code>%ProgramFiles(x86)%\RightScale\sandbox</code> for Windows. This was the location where Ruby, Rubygems, and <code>rs_*</code> commands were installed to be used by RightScripts. With RightLink 10, the private sandbox does not exist and commands and packages installed on the OS are exclusively used.</p>
+
+<h3 id="-remotely-running-rightscripts">Remotely Running RightScripts</h3>
+
+<p>As stated earlier, <a href="#--rs_*--commands-are-no-longer-used">&#39;rs_*&#39; commands are no longer used</a>, including <code>rs_run_right_script</code> and <code>rs_run_recipe</code>. These commands used with the <code>--recipient_tags</code> option could remotely execute RightScripts on servers in the same deployment. If these commands were used for automation and orchestration, <a href="/ss/about.html">Self-Service</a> is the recommended method to do so with RightLink 10.</p>
+
+<p>Alternatively, <a href="https://github.com/rightscale/rsc/blob/master/README.md"><code>rsc</code></a> can be used to replicate this function, provided an <a href="/cm/dashboard/settings/account/enable_oauth.html">API Refresh Token</a>. Please be careful! This is a user-specific OAuth 2.0 refresh token representing a grant with unrestricted scope. Anyone who possesses it can login to RightScale&#39;s API and perform requests on any account with all of your permissions. For more information, including how to enable and obtain the API Refresh Token, consult the <a href="/cm/dashboard/settings/account/enable_oauth">OAuth documentation</a>. Following is an example Bash RightScript that uses <code>rsc</code> to remotely run <code>LB_Attach_Application_Server</code> RightScript on all instances in the local deployment with the tag <code>load_balancer:active=true</code>:</p>
+<pre class="syntax-highlight shell"><code><span class="c">#!/bin/bash -e</span>
+<span class="c"># ---</span>
+<span class="c"># RightScript Name: APP Remote Request LB Attach</span>
+<span class="c"># Description: |</span>
+<span class="c">#   Remotely runs the RightScript 'LB Attach Application Server' on all servers in the local</span>
+<span class="c">#   deployment with the tag 'load_balancer:active=true'</span>
+<span class="c"># Inputs:</span>
+<span class="c">#   REFRESH_TOKEN:</span>
+<span class="c">#     Input Type: single</span>
+<span class="c">#     Category: RightScale</span>
+<span class="c">#     Description: API Refresh Token</span>
+<span class="c">#     Required: true</span>
+<span class="c">#     Advanced: false</span>
+<span class="c">#     Default: cred:REFRESH_TOKEN</span>
+<span class="c">#   TOKEN_ENDPOINT:</span>
+<span class="c">#     Input Type: single</span>
+<span class="c">#     Category: RightScale</span>
+<span class="c">#     Description: API Token Endpoint</span>
+<span class="c">#     Required: true</span>
+<span class="c">#     Advanced: false</span>
+<span class="c">#     Default: cred:TOKEN_ENDPOINT</span>
+<span class="c"># Attachments: []</span>
+<span class="c"># ...</span>
+
+<span class="nv">desired_tag</span><span class="o">=</span><span class="s2">"load_balancer:active=true"</span>
+<span class="nv">rightscript_name</span><span class="o">=</span><span class="s2">"LB Attach Application Server"</span>
+
+<span class="nv">retry_args</span><span class="o">=</span><span class="s2">"--retry=5 --timeout=60"</span>
+
+<span class="c"># REFRESH_TOKEN and TOKEN_ENDPOINT should be cred inputs</span>
+<span class="nv">auth_args</span><span class="o">=</span><span class="s2">"--refreshToken=</span><span class="nv">$REFRESH_TOKEN</span><span class="s2"> --host=</span><span class="nv">$TOKEN_ENDPOINT</span><span class="s2">"</span>
+
+<span class="c"># Obtain deployment_href current instances is in</span>
+<span class="nv">deployment_href</span><span class="o">=</span><span class="k">$(</span>
+  rsc <span class="nv">$retry_args</span> <span class="se">\</span>
+  --rl10 cm15 index_instance_session /api/sessions/instance <span class="se">\</span>
+  --x1 <span class="s1">':has(.rel:val("deployment")).href'</span>
+<span class="k">)</span>
+
+<span class="c"># Obtain all instance_hrefs from servers in deployment</span>
+<span class="nv">deployment_instance_hrefs</span><span class="o">=</span><span class="k">$(</span>
+  rsc <span class="nv">$retry_args</span> <span class="nv">$auth_args</span> <span class="se">\</span>
+  cm15 servers <span class="nv">$deployment_href</span> <span class="se">\</span>
+  --xm <span class="s1">':has(.rel:val("current_instance")).href'</span>
+<span class="k">)</span>
+
+<span class="c"># Obtain all instance_hrefs from servers with desired tag</span>
+<span class="nv">tagged_instance_hrefs</span><span class="o">=</span><span class="k">$(</span>
+  rsc <span class="nv">$retry_args</span> <span class="nv">$auth_args</span> <span class="se">\</span>
+  cm15 by_tag /api/tags/by_tag <span class="nv">resource_type</span><span class="o">=</span>instances <span class="s2">"tags[]=</span><span class="nv">$desired_tag</span><span class="s2">"</span> <span class="se">\</span>
+  --xm <span class="s1">':has(.rel:val("resource")).href'</span>
+<span class="k">)</span>
+
+<span class="c"># Find union of servers in deployment with desired tag</span>
+<span class="nv">tagged_in_deployment_instance_hrefs</span><span class="o">=</span><span class="k">$(</span>
+  <span class="nb">printf</span> <span class="s1">'%s\n'</span> <span class="nv">$deployment_instance_hrefs</span> <span class="nv">$tagged_instance_hrefs</span> | sort | uniq -d | tr -d <span class="s1">'"'</span>
+<span class="k">)</span>
+
+<span class="c"># Run remote RightScript on discovered servers</span>
+<span class="k">for </span>instance_href <span class="k">in</span> <span class="nv">$tagged_in_deployment_instance_hrefs</span>; <span class="k">do</span>
+  <span class="c"># Obtain resource_uid from instance to be used to specify where to run RightScript</span>
+  <span class="nv">instance_ruid</span><span class="o">=</span><span class="k">$(</span>
+    rsc <span class="nv">$retry_args</span> <span class="nv">$auth_args</span> <span class="se">\</span>
+    cm15 show <span class="nv">$instance_href</span> <span class="se">\</span>
+    --x1 <span class="s1">'.resource_uid'</span> | tr -d <span class="s1">'"'</span>
+  <span class="k">)</span>
+  <span class="nv">cloud_attribute</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$instance_href</span> | cut --delimiter<span class="o">=</span><span class="s1">'/'</span> --fields<span class="o">=</span>-5<span class="k">)</span>
+
+  <span class="c"># Obtain rightscript_id specific to ST attached to instance</span>
+  <span class="nv">st_href</span><span class="o">=</span><span class="k">$(</span>
+    rsc <span class="nv">$retry_args</span> <span class="nv">$auth_args</span> <span class="se">\</span>
+    cm15 show <span class="nv">$instance_href</span> <span class="se">\</span>
+    --x1 <span class="s1">':has(.rel:val("server_template")).href'</span>
+  <span class="k">)</span>
+  <span class="nv">rightscript_id</span><span class="o">=</span><span class="k">$(</span>
+    rsc <span class="nv">$retry_args</span> <span class="nv">$auth_args</span> <span class="se">\</span>
+    cm15 index <span class="nv">$st_href</span>/runnable_bindings <span class="se">\</span>
+    --x1 <span class="s2">":has(.sequence:val(</span><span class="se">\"</span><span class="s2">operational</span><span class="se">\"</span><span class="s2">)):has(.name:val(</span><span class="se">\"</span><span class="nv">$rightscript_name</span><span class="se">\"</span><span class="s2">)).id"</span>
+  <span class="k">)</span>
+
+  <span class="c"># Run remote RightScript</span>
+  rsc <span class="nv">$retry_args</span> <span class="nv">$auth_args</span> <span class="se">\</span>
+  cm15 multi_run_executable <span class="k">${</span><span class="nv">cloud_attribute</span><span class="k">}</span>/multi_run_executable <span class="se">\</span>
+  <span class="s2">"right_script_href=/api/right_scripts/</span><span class="nv">$rightscript_id</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="s2">"filter[]=resource_uid==</span><span class="nv">$instance_ruid</span><span class="s2">"</span>
+<span class="k">done</span>
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

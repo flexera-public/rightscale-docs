@@ -1,0 +1,844 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Cloud Workflow Operators</title><meta content="The RightScale Cloud Workflow Language supports a variety of operators for manipulating values and resource collections." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="2" name="docsearch:version_major" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="ss ss_reference ss_reference_rcl ss_reference_rcl_v2 ss_reference_rcl_v2_ss_RCL_operators" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Self-Service Docs</a> &#x2F; <a href="../../">Reference</a> &#x2F; <a href="../">RightScale Cloud Workflow</a> &#x2F; <a href="./">Cloud Workflow Language</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>2&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/ss/reference/rcl/v1/ss_RCL_operators.html">1</a></li><li><a href="/ss/reference/rcl/v2/ss_RCL_operators.html">2</a></li></ul></div></div><div class="page-header"><h1>Cloud Workflow Operators</h1></div><div class="main-content"><h2 id="operators-overview">Operators Overview</h2>
+
+<p>RCL supports a variety of operators for manipulating values and resource collections. There are arithmetic operators for calculations (+, -, *, /, ^, %), collections and array management operators for retrieving and adding elements as well as checking inclusion ([ ], &lt;&lt;, &lt;, &gt;), the usual equality and boolean operators (==, !=, &lt;, &gt;, &lt;=, &gt;=, &amp;, |, !) as well as the regexp operator for match strings with regular expressions (=~, !~).</p>
+
+<h3 id="operators-overview-rcl-operator-precedence">RCL Operator Precedence</h3>
+
+<p>The following table lists the precedence of RCL operators. Operators are listed top to bottom, in descending precedence.</p>
+
+<table><thead>
+<tr>
+<th>Precedence</th>
+<th>Operators</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>0</td>
+<td><code>[]</code></td>
+<td>slice operator (retrieve item(s) of array, hash or collection given an index, key or range)</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>^</code></td>
+<td>exponent</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>!</code>, <code>+</code>, <code>-</code></td>
+<td>logical not, unary plus, unary minus</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>*</code>, <code>/</code>, <code>%</code></td>
+<td>multiplication, division, modulo</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>+</code>, <code>-</code></td>
+<td>addition or string, array or collection concatenation - subtraction or array collection difference</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>&lt;&lt;</code></td>
+<td>array append</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>==</code>, <code>!=</code>, <code>=~</code>, <code>!~</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&lt;</code></td>
+<td>relational and equality operators</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>&amp;</code></td>
+<td>bitwise AND</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>&#124;</code></td>
+<td>bitwise OR</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>&amp;&amp;</code></td>
+<td>logical AND</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>&#124;&#124;</code></td>
+<td>logical OR</td>
+</tr>
+</tbody></table>
+
+<h2 id="operator-semantics">Operator Semantics</h2>
+
+<p>The following sections list all the operators and their semantic depending on the types of the operands. The left column represent the left hand side operand type while the top row represents the right hand side operand type. The values describe the semantic of the operation or list error if the corresponding operator cannot be applied with the given operand types.</p>
+
+<h3 id="operator-semantics-arithmetic-operators">Arithmetic Operators</h3>
+
+<h4 id="+">+</h4>
+
+<table><thead>
+<tr>
+<th><code>+</code></th>
+<th>number</th>
+<th>string</th>
+<th>array</th>
+<th>hash</th>
+<th>res collection</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>number</td>
+<td>addition</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>string</td>
+<td>concatenation</td>
+<td>concatenation</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>date/time</td>
+<td>addition (seconds)</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>array</td>
+<td>error</td>
+<td>error</td>
+<td>concatenation</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>merge left into right</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>res collection</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>concatenation</td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h4 id="-">-</h4>
+
+<table><thead>
+<tr>
+<th><code>-</code></th>
+<th>number</th>
+<th>date/time</th>
+<th>array</th>
+<th>res collection</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>number</td>
+<td>subtraction</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>date/time</td>
+<td>subtraction (seconds)</td>
+<td>subtraction (seconds)</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>array</td>
+<td>error</td>
+<td>error</td>
+<td>array difference</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>res collection</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>coll difference</td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h4 id="*">*</h4>
+
+<table><thead>
+<tr>
+<th><code>*</code></th>
+<th>number</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>number</td>
+<td>multiplication</td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h4 id="/">/</h4>
+
+<table><thead>
+<tr>
+<th><code>/</code></th>
+<th>number</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>number</td>
+<td>division (integral if both numbers are integers)</td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h4 id="%">%</h4>
+
+<table><thead>
+<tr>
+<th><code>%</code></th>
+<th>number</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>number</td>
+<td>modulo (non integer numbers are rounded)</td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h4 id="^">^</h4>
+
+<table><thead>
+<tr>
+<th><code>^</code></th>
+<th>number</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>number</td>
+<td>power</td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h3 id="operator-semantics-collection-and-array-operator">Collection and Array Operator</h3>
+
+<h4 id="&lt;&lt;">&lt;&lt;</h4>
+
+<table><thead>
+<tr>
+<th><code>&lt;&lt;</code></th>
+<th>all</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>array</td>
+<td>Append object in right hand side to array in left hand side</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h4 id="[-]">[ ]</h4>
+
+<p>The slice operator returns elements of an array, a hash or a resource collection using an index or a range (array and resource collection) or a key (hash). A range is specified using <code>x..y</code> where x and y are optional (no x means from the start of the array or collection, no y means to the end of the array or collection). Note that retrieving elements of a resource collection creates a new resource collection consisting of these elements.</p>
+
+<table><thead>
+<tr>
+<th><code>[ ]</code></th>
+<th>number</th>
+<th>string</th>
+<th>range</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>res collection</td>
+<td>Creates new collection consisting of the element at given index.</td>
+<td>error</td>
+<td>Creates a new collection consisting of the element in the given range (<code>x..y</code> where x and y are optional)</td>
+<td>error</td>
+</tr>
+<tr>
+<td>array</td>
+<td>value at given index</td>
+<td>error</td>
+<td>Creates a new array consisting of the element in the given range (<code>x..y</code> where x and y are optional)</td>
+<td>error</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>error</td>
+<td>value associated with given key if any, <code>null</code> otherwise</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>string</td>
+<td>Create string composed of character at given index.</td>
+<td>error</td>
+<td>Create string made of characters in the given range. Range bounds may have negative values (from last or from beginning).</td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h4 id="[-]=">[ ]=</h4>
+
+<p>The slice assign operator replaces an element of an array, hash or resource collection or a range of an array or resource collection with given elements.</p>
+
+<table><thead>
+<tr>
+<th><code>[ ]=</code></th>
+<th>number</th>
+<th>string</th>
+<th>range</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>res collection</td>
+<td>Replaces resource at given index. Right hand side must be a resource collection.</td>
+<td>error</td>
+<td>Replace elements in the given range with elements of right hand side resource collection.</td>
+<td>error</td>
+</tr>
+<tr>
+<td>array</td>
+<td>Replace value at given index</td>
+<td>error</td>
+<td>Replace elements in the given range with elements of the given array. Right hand side must be an array.</td>
+<td>error</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>error</td>
+<td>Replace/set value associated with given key</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h3 id="operator-semantics-regular-expression-include-operators">Regular expression-Include Operators</h3>
+
+<h4 id="=~">=~</h4>
+
+<table><thead>
+<tr>
+<th><code>=~</code></th>
+<th>string</th>
+<th>array</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>string</td>
+<td><code>true</code> if regular expression given in right operand matches string given in left operand</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>array</td>
+<td><code>true</code> if array contains string</td>
+<td><code>true</code> if array contains array</td>
+<td><code>true</code> if array contains value</td>
+</tr>
+<tr>
+<td>hash</td>
+<td><code>true</code> if hash has that key</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<p>The right hand side of a regular expression comparison may use the symbol <code>/</code> to delineate the pattern. The ending <code>/</code> may be followed by the following options:</p>
+
+<ul>
+<li><code>i</code> for case insensitive matching</li>
+<li><code>m</code> for multi-line string matching</li>
+<li><code>x</code> for extended syntax support (whitespaces in the pattern are ignored)</li>
+</ul>
+
+<h5 id="examples">Examples</h5>
+<pre class="syntax-highlight ruby"><code><span class="s2">"foo"</span> <span class="o">=~</span> <span class="s2">"foo"</span> <span class="c1"># true</span>
+<span class="s2">"foo"</span> <span class="o">=~</span> <span class="sr">/foo/</span> <span class="c1"># true</span>
+<span class="s2">"foo"</span> <span class="o">=~</span> <span class="sr">/FOO/i</span> <span class="c1">#true</span>
+</code></pre>
+
+<h4 id="!~">!~</h4>
+
+<p><code>a !~ b</code> is equivalent to <code>!(a =~ b)</code></p>
+
+<h3 id="operator-semantics-relational-and-equality-operators">Relational and Equality Operators</h3>
+
+<h4 id="==,-!=">==, !=</h4>
+
+<p>Equality comparison is done recursively if values are arrays or hashes.</p>
+
+<table><thead>
+<tr>
+<th><code>==</code></th>
+<th>all</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>all</td>
+<td><code>true</code> if operands have same value, <code>false</code> otherwise</td>
+</tr>
+</tbody></table>
+
+<h4 id="&lt;,-&lt;=,-&gt;,-&gt;=">&lt;, &lt;=, &gt;, &gt;=</h4>
+
+<table><thead>
+<tr>
+<th><code>&lt;</code></th>
+<th>number</th>
+<th>string</th>
+<th>date/time</th>
+<th>res collection</th>
+<th>array</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>number</td>
+<td>less than</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>string</td>
+<td>error</td>
+<td>lexicographical less than</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>date/time</td>
+<td>error</td>
+<td>error</td>
+<td>less than</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>res collection</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td><code>@a &lt; @b</code>: <code>true</code> if all elements of <code>@a</code> are also elements of <code>@b</code></td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>array</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td><code>$a &lt; $b</code>: <code>true</code> if all elements of <code>$a</code> are also elements of <code>$b</code></td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<p>Note:  <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code>  are omitted for brevity (greater than, lesser or equal than, greater or equal than, respectively).</p>
+
+<h3 id="operator-semantics-logical-operators">Logical Operators</h3>
+
+<h4 id="&amp;">&amp;</h4>
+
+<p>&#39;Bitwise and&#39;. Applied to resource collections (or arrays) it returns all elements that appear in both resource collections (or arrays).</p>
+
+<table><thead>
+<tr>
+<th><code>&amp;</code></th>
+<th><code>false</code></th>
+<th><code>null</code></th>
+<th><code>true</code></th>
+<th>array</th>
+<th>res collection</th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>null</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>array</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>intersection of the two arrays</td>
+<td>error</td>
+<td>error</td>
+</tr>
+<tr>
+<td>res collection</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>new collection with common hrefs <em>or</em> error if collections are of different types</td>
+<td>error</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h4 id="&amp;&amp;">&amp;&amp;</h4>
+
+<p>&#39;Logical and&#39;. Returns the right hand side operand if the left hand side is neither <code>false</code> nor <code>null</code> (otherwise returns left hand side operand). In the following table <q>(1)</q> and <q>(2)</q> refer the position of that particular argument in the expression.</p>
+
+<table><thead>
+<tr>
+<th><code>&amp;&amp;</code></th>
+<th><code>false</code></th>
+<th><code>null</code></th>
+<th><code>true</code></th>
+<th>other (1)</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>null</code></td>
+<td><code>null</code></td>
+<td><code>null</code></td>
+<td><code>null</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>false</code></td>
+<td><code>null</code></td>
+<td><code>true</code></td>
+<td>(1)</td>
+</tr>
+<tr>
+<td>other (2)</td>
+<td><code>false</code></td>
+<td><code>null</code></td>
+<td><code>true</code></td>
+<td>(2)</td>
+</tr>
+</tbody></table>
+
+<h4 id="|">|</h4>
+
+<p>&#39;Bitwise or&#39;. Applied to resource collections (or arrays), returns all elements that appear in either resource collection (or array).</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>This operator differs from the <code>+</code> operator when applied to collection in that it will produce only one instance of each element in each collection even if the same element appears in both.</p>
+</div>
+
+<table><thead>
+<tr>
+<th><code>&#124;</code></th>
+<th><code>false</code></th>
+<th><code>null</code></th>
+<th><code>true</code></th>
+<th>other</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>null</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h4 id="||">||</h4>
+
+<p>&#39;Logical or&#39;. Returns the left hand side operand if it is neither <code>false</code> nor <code>null</code> (otherwise returns right hand side operand). In the following table <q>(1)</q> and <q>(2)</q> refer the position of that particular argument in the expression.</p>
+
+<table><thead>
+<tr>
+<th><code>&#124;&#124;</code></th>
+<th><code>false</code></th>
+<th><code>null</code></th>
+<th><code>true</code></th>
+<th>other (2)</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>null</code></td>
+<td><code>true</code></td>
+<td>(2)</td>
+</tr>
+<tr>
+<td><code>null</code></td>
+<td><code>false</code></td>
+<td><code>null</code></td>
+<td><code>true</code></td>
+<td>(2)</td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>other (1)</td>
+<td>(1)</td>
+<td>(1)</td>
+<td>(1)</td>
+<td>(1)</td>
+</tr>
+</tbody></table>
+
+<h3 id="operator-semantics-unary-operators">Unary Operators</h3>
+
+<h4 id="-">-</h4>
+
+<p><code>-</code> is the unary minus operator:</p>
+
+<table><thead>
+<tr>
+<th><code>-</code></th>
+<th>value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>number</td>
+<td>opposite value</td>
+</tr>
+<tr>
+<td>other</td>
+<td>error</td>
+</tr>
+</tbody></table>
+
+<h4 id="!">!</h4>
+
+<p><code>!</code> is the logical not operator. Note that it applies to all types (negating a non boolean value returns <code>true</code> if it is either <code>false</code> or <code>null</code>, <code>false</code> otherwise):</p>
+
+<table><thead>
+<tr>
+<th><code>!</code></th>
+<th>value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>false</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>null</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>other</td>
+<td><code>false</code></td>
+</tr>
+</tbody></table>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

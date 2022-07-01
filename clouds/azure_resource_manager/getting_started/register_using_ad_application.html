@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Register an Azure Resource Manager (ARM) account with RightScale using an Azure Active Directory Application</title><meta content="Describes the process for registering an Azure Resource Manager (ARM) account with the RightScale platform using an Azure Active Directory Application" name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="clouds clouds_azure_resource_manager clouds_azure_resource_manager_getting_started clouds_azure_resource_manager_getting_started_register_using_ad_application" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/clouds/azure_resource_manager"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>Microsoft Azure</span></h4></a><a class="list-group-item" href="/clouds/azure_resource_manager/getting_started">Getting Started</a><a class="list-group-item" href="/clouds/azure_resource_manager/reference">Reference</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">Supported Clouds</a> &#x2F; <a href="../">Microsoft Azure Resource Manager</a> &#x2F; <a href="./">Getting Started with Azure Resource Manager (ARM)</a></p><div class="page-header"><h1>Register an Azure Resource Manager (ARM) account with RightScale using an Azure Active Directory Application</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This page walks you through the steps to connect your Azure Resource Manager account with RightScale for management purposes using an Azure Active Directory Application that you create in your own Active Directory tenant. This approach allows you full control over the privileges the Application has to your subscription(s) and requires that you take responsibility for key rotation. An alternative method to connecting for management purposes is to <a href="register.html">connect to Azure Resource Manager using the RightScale Service Principal</a>.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>This approach is only possible <a href="/api/api_1.5_examples/cloudaccounts.html">using API calls to RightScale</a> and can not be performed using the Cloud Management User Interface.</p>
+</div>
+
+<p>If you are part of the Azure CSP program and wish to connect your partner data to RightScale for cost reporting purposes, see <a href="/clouds/azure_resource_manager/getting_started/managing_csp_partnerships_and_customers.html">Connect Azure CSP to RightScale for Cost Reporting</a>. </p>
+
+<p>If you wish to connect your Azure Enterprise Agreement to RightScale for cost reporting purposes, see <a href="/clouds/azure/azure_connect_azure_enterprise_agreement_to_RightScale_for_cost_reporting.html">Connect Azure Enterprise Agreement to RightScale for Cost Reporting</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+<li>You must have a Azure Resource Manager subscription to register with RightScale</li>
+<li>You must be <code>admin</code> or <code>enterprise_manager</code> on the RightScale account</li>
+</ol>
+
+<h2 id="using-an-azure-active-directory-application">Using an Azure Active Directory Application</h2>
+
+<p>Azure Active Directory (AD) Applications are identitys that you create and control within your own AD tenant and can be granted privileges on the resources that you specify. These applications have their own login credentials and are intended to be used in code, such as in RightScale. </p>
+
+<p>At a high level, the following steps must be completed in order to register an Azure subscription with RightScale using an AD Application:</p>
+
+<ol>
+<li>Create the AD Application - creates the application in your Active Directory tenant. You can use the same application to register multiple subscriptions</li>
+<li>Get the application ID and authentication key - obtain the login information RightScale needs to interact with the subscription(s)</li>
+<li>Get the tenant ID - obtain additional information needed by RightScale to use the AD application</li>
+<li>Assign the AD application a role on the subscription - grant the desired permissions on the target subscription(s)</li>
+<li>Perform an API call to RightScale with the above information to register the subscription - perform the registration</li>
+</ol>
+
+<p>Steps 1-4 above are <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal">well-documented on the Azure website</a> and those instructions can be followed (see notes below).</p>
+
+<div class="alert alert-warning" role="alert"><strong>Important</strong><p>Please note that in Step 2 your authentication key has an expiration date. Ensure that this key is rotated prior to the expiration date in Azure and in RightScale to prevent any service interruptions.</p>
+</div>
+
+<p>In the instructions for <code>Create an Azure Active Directory application</code>, step 5, you can use any URL - we recommend <code>https://my.rightscale.com</code>.</p>
+
+<p>In the instructions for <code>Assign application to role</code>, RightScale requires the <code>Contributor</code> role on the subscription for full management capabilities. <code>Reader</code> role can be granted in order to allow RightScale to read information from the subscription, but prevent any active orchestration of resources.</p>
+
+<p>In the final step, also collect the ID of the Subscription that you have added the application to which can be found in the <code>Overview</code> page for the Subscription.</p>
+
+<p>Step 5 <a href="/api/api_1.5_examples/cloudaccounts.html">is documented in the API examples</a>. Note that the API call must be completed for every region that you wish to add to RightScale -- you may register as few or as many regions as you wish.</p>
+
+<h2 id="check-the-cloud-status">Check the Cloud Status</h2>
+
+<p>Log in to <a href="https://my.rightscale.com">RightScale Cloud Management</a>, go to <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Clouds.</strong> You should be able to view all the registered Azure Resource Manager Regions</p>
+
+<p><img src="/img/arm-view-all-arm-regions.png" alt="arm-view-all-arm-regions.png" width="1394" height="1198" /></p>
+
+<p>Once your cloud credentials have been verified, you will see that the Microsoft Azure Resource Manager cloud is enabled under the Clouds tab. You will now see all of your Microsoft Azure Resource Manager resources under the Clouds menu (Clouds <em>&gt;</em> AzureRM). You may need to refresh the tab to view your newly added Azure Resource Manager cloud.</p>
+
+<h2 id="adding-newly-supported-regions">Adding Newly Supported Regions</h2>
+
+<p>As RightScale adds support for additional ARM Regions, complete the steps above using the new <code>cloud_href</code> value for the new region.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

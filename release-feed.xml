@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>RightScale Releases</title>
+  <subtitle>Keep up to date with RightScale Releases</subtitle>
+  <id>https://docs.rightscale.com</id>
+  <link href="https://docs.rightscale.com/release-notes"/>
+  <link href="https://docs.rightscale.com/release-notes" rel="self"/>
+  <updated>2021-03-16T07:00:00+00:00</updated>
+  <author>
+    <name>RightScale</name>
+  </author>
+  <entry>
+    <title>Policies</title>
+    <link rel="alternate" href="/release-notes/governance/2021/03/16.html"/>
+    <id>https://docs.rightscale.com/release-notes</id>
+    <author>
+      <name>RightScale</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Policies</title>
+    <link rel="alternate" href="/release-notes/governance/2020/12/21.html"/>
+    <id>https://docs.rightscale.com/release-notes</id>
+    <author>
+      <name>RightScale</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Policies</title>
+    <link rel="alternate" href="/release-notes/governance/2020/09/09.html"/>
+    <id>https://docs.rightscale.com/release-notes</id>
+    <author>
+      <name>RightScale</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Policies</title>
+    <link rel="alternate" href="/release-notes/governance/2020/08/25.html"/>
+    <id>https://docs.rightscale.com/release-notes</id>
+    <author>
+      <name>RightScale</name>
+    </author>
+  </entry>
+  <entry>
+    <title>Policies</title>
+    <link rel="alternate" href="/release-notes/governance/2020/08/14.html"/>
+    <id>https://docs.rightscale.com/release-notes</id>
+    <author>
+      <name>RightScale</name>
+    </author>
+  </entry>
+</feed>

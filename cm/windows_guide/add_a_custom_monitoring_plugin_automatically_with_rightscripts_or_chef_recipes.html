@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Add a Custom Monitoring Plugin Automatically with RightScripts or Chef Recipes</title><meta content="Steps for creating RightScripts or Chef Recipes that you can use in ServerTemplates so that your custom monitoring plugin(s) will be properly installed on each Windows server that you launch." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_windows_guide cm_windows_guide_add_a_custom_monitoring_plugin_automatically_with_rightscripts_or_chef_recipes" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Windows Guide</a></p><div class="page-header"><h1>Add a Custom Monitoring Plugin Automatically with RightScripts or Chef Recipes</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Unfortunately, there are currently no collectd plugins for Windows. To help you get started with monitoring for Windows, RightScale has created a few plugins for common metrics (cpu, disk, and memory). However, if you want to extend monitoring support to include other collectd plugins, you can manually create a monitoring script for your own applications.</p>
+
+<p>This tutorial will help you create RightScripts or Chef Recipes that you can use in ServerTemplates so that your custom monitoring plugin(s) will be properly installed on each Windows server that you launch. If you only want to perform a quick test to verify that your custom monitoring plugin works as expected, you should first complete the <a href="/cm/windows_guide/add_a_custom_monitoring_plugin_manually.html">Add a Custom Monitoring Plugin Manually</a> tutorial.</p>
+
+<p>Use the procedure outlined below to extend monitoring on Windows servers by using RightScripts or Chef Recipes to add a custom monitoring plugin(s) to a server at boot time so that additional server metrics are monitored and graphed inside the RightScale Dashboard.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>&#39;actor&#39; and &#39;server_login&#39; user role privileges</li>
+<li>Windows server with RightLink installed</li>
+</ul>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-create-a-custom-plugin">Create a Custom Plugin</h3>
+
+<p>Unfortunately, there is a variety of monitoring information which cannot be queried from the Windows Management Instrumentation (WMI), especially for older platforms like Windows Server 2003. In such cases, a script is required to handle the gathering and sending of monitoring information via collectd. There are two different ways that you can create a custom monitoring plugin.</p>
+
+<ul>
+<li>DSL Option</li>
+<li>Pure Ruby Option</li>
+</ul>
+
+<h4 id="dsl-option">DSL Option</h4>
+
+<p>The DSL (domain-specific language) plugin option consists of a single file per monitor. Its attribute values can be String, Boolean, Integer or Array and must follow Ruby conventions for declaring literal values (though you do not have to know Ruby).</p>
+
+<p><strong>Example</strong></p>
+
+<p>The example below implements a DSL plugin for Memory Usage. For the example &#39;my-monitor.rb&#39; file, these are the entire contents:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">wmi_query</span> <span class="s1">'Select FreePhysicalMemory from Win32_OperatingSystem'</span>
+<span class="n">wmi_query_send_attributes</span> <span class="s1">'FreePhysicalMemory'</span>
+<span class="n">collectd_plugin</span> <span class="s1">'memory'</span>
+<span class="n">collectd_type</span> <span class="s1">'memory'</span>
+<span class="n">collectd_type_instance</span> <span class="s1">'free'</span>
+<span class="n">collectd_units_factor</span> <span class="mi">1024</span>
+</code></pre>
+
+<p><strong>Attributes</strong></p>
+
+<p>The supported attributes are described in the table below:</p>
+
+<table><thead>
+<tr>
+<th>Attribute Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>Default</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>collectd_plugin</td>
+<td>Name of the collectd plugin associated with monitor</td>
+<td>String</td>
+<td>True</td>
+<td>collectd_plugin &#39;memory&#39;</td>
+</tr>
+<tr>
+<td>collectd_units_factor</td>
+<td>Collectd units multiplier for converting the WMI result attribute(s)</td>
+<td>Number</td>
+<td>False</td>
+<td>collectd_units_factor 1024</td>
+</tr>
+<tr>
+<td>collectd_sender</td>
+<td>Collectd send method which must be one of :gauge, :counter, :derive, :absolute</td>
+<td>Symbol or string</td>
+<td>Defaults to :gauge</td>
+<td>collectd_sender :counter</td>
+</tr>
+<tr>
+<td>collectd_type</td>
+<td>Type of the collectd plugin associated with the monitor</td>
+<td>String</td>
+<td>True</td>
+<td>collectd_type &#39;memory&#39;</td>
+</tr>
+<tr>
+<td>collectd_type_instance</td>
+<td>Instance for the type of the collectd plugin or else a regular expression which selects the collectd instance type name from the WMI attribute name. In the latter case, the WMI attribute name is first matched by the regular expression which must select the portion of the name to send and then the name is converted to lowercase and underscores if it is camel case. The regular expression allows a single monitor DSL to represent multiple attributes returned from a single WMI query, each of which is sent individually with its value to collectd. The default behavior is not to send any zero values, but this can be overridden by using the wmi_query_required_send parameter (see below).</td>
+<td>String or Regexp</td>
+<td>True</td>
+<td>collectd_type_instance &#39;free&#39; collectd_type_instance /\A(.*)RequestsPerSec\z/</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>Used to prioritize to ensure time-critical monitors run sooner than others. Must be one of :highest, :high, :normal, :low, :lowest</td>
+<td>Symbol or string or integer</td>
+<td>Default to :normal</td>
+<td>priority :high</td>
+</tr>
+<tr>
+<td>wmi_query</td>
+<td>WMI Query string to execute</td>
+<td>String</td>
+<td>True</td>
+<td>wmi_query &#39;Select FreePhysicalMemory from Win32_OperatingSystem&#39;</td>
+</tr>
+<tr>
+<td>wmi_query_name_attribute</td>
+<td>Attribute name to get from WMI result and use as collectd plugin instance</td>
+<td>String</td>
+<td>False</td>
+<td>wmi_query_name_attribute &#39;Name&#39;</td>
+</tr>
+<tr>
+<td>wmi_query_send_attributes</td>
+<td>Names of attributes from WMI result to send</td>
+<td>String array or single string value</td>
+<td>True</td>
+<td>wmi_query_send_attributes &#39;FreePhysicalMemory&#39;</td>
+</tr>
+<tr>
+<td>wmi_query_required_send</td>
+<td>Array of collectd instance type names used to ensure that a set of attributes are always sent to Sketchy regardless of whether the value is non-zero. Only needed when collectd_type_instance is a regular expression used to convert WMI attribute names to collectd type instance names.</td>
+<td>String array or single string value</td>
+<td>False</td>
+<td>wmi_query_required_send [<q>get</q>, <q>post</q>]</td>
+</tr>
+</tbody></table>
+
+<h4 id="pure-ruby-option">Pure Ruby Option</h4>
+
+<p>As an alternative, you can also implement a Pure Ruby option by shelling out to a PowerShell script. However, this option could be costly in terms of processor time and memory usage (which might ultimately affect the perception of the monitored machine&#39;s busy state).</p>
+
+<p>The pure Ruby plugin would consist of a single Ruby file with a run function and optionally an init function.</p>
+
+<p><strong>Example</strong></p>
+
+<p>The example below implements a Pure Ruby plugin for Disk Usage using the &#39;gauge&#39; graph type (&#39;counter&#39; is also supported):</p>
+<pre class="syntax-highlight ruby"><code><span class="k">def</span> <span class="nf">run</span>
+  <span class="n">drives</span> <span class="o">=</span> <span class="n">execute_wmi_query</span><span class="p">(</span><span class="s2">"Select deviceid, freespace, size from win32_logicaldisk"</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">drive</span> <span class="k">in</span> <span class="n">drives</span> <span class="k">do</span>
+    <span class="k">if</span> <span class="n">drive</span><span class="p">.</span><span class="nf">deviceid</span> <span class="o">=~</span> <span class="sr">/^(\w):$/</span>
+      <span class="n">drive_letter</span> <span class="o">=</span> <span class="vg">$1</span>
+      <span class="n">free_space_val</span> <span class="o">=</span> <span class="n">drive</span><span class="p">.</span><span class="nf">freespace</span>
+      <span class="n">drive_size_val</span> <span class="o">=</span> <span class="n">drive</span><span class="p">.</span><span class="nf">size</span>
+      <span class="k">if</span> <span class="n">is_number?</span><span class="p">(</span><span class="n">free_space_val</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">is_number?</span><span class="p">(</span><span class="n">drive_size_val</span><span class="p">)</span>
+        <span class="n">used_space</span> <span class="o">=</span> <span class="n">drive_size_val</span><span class="p">.</span><span class="nf">to_i</span> <span class="o">-</span> <span class="n">free_space_val</span><span class="p">.</span><span class="nf">to_i</span>
+        <span class="vi">@logger</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s2">"Drive </span><span class="si">#{</span><span class="n">drive_letter</span><span class="si">}</span><span class="s2">: has </span><span class="si">#{</span><span class="n">free_space_val</span><span class="si">}</span><span class="s2"> free and </span><span class="si">#{</span><span class="n">used_space</span><span class="si">}</span><span class="s2"> used space"</span><span class="p">)</span>
+        <span class="n">gauge</span><span class="p">(</span><span class="s1">'df'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="s1">'df'</span><span class="p">,</span> <span class="s2">"drive_</span><span class="si">#{</span><span class="n">drive_letter</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="p">[</span><span class="n">used_space</span><span class="p">,</span> <span class="n">free_space_val</span><span class="p">.</span><span class="nf">to_i</span><span class="p">])</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The content of the plugin file will be instance eval&#39;d into a new instance of a Monitor class. The Monitor class provides the bridge between the monitoring script and the user-defined plugin. This type of plugin is simple for RightScale to implement and fairly straight forward for users to add their own monitoring plugins.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Ruby knowledge will be required to implement complex monitors.</p>
+</div>
+
+<h3 id="steps-create-a-script-to-deploy-the-custom-monitoring-plugin">Create a Script to Deploy the Custom Monitoring Plugin</h3>
+
+<p>Once you&#39;ve created a custom monitoring plugin, you can either use a RightScript or Chef Recipe for deployment so that the plugin is installed in the proper directory on the instance at launch time.</p>
+
+<p>Even though RightLink itself is installed to the x64 Program Files location on 64-bit platforms, the custom monitoring plugin must always be deployed to the x86 install location for both 32-bit and 64-bit platforms. For your convenience, RightLink will provide an environment variable called <q>RS_MONITORS_DIR</q> which will indicate the proper location on the instance&#39;s disk for plugins to be deployed. You should always use this variable instead of trying to hardcode an absolute path.</p>
+
+<p>Inside the directory, you&#39;ll find the plugins that RightScale automatically installs by default:</p>
+
+<ul>
+<li>cpu_load.rb</li>
+<li>disk_usage.rb</li>
+<li>memory.rb<br></li>
+</ul>
+
+<p><strong>RightScript Example</strong></p>
+
+<p>The following PowerShell code can be used when creating a RightScript with &#39;my-monitor.rb&#39; as attachment:</p>
+<pre class="syntax-highlight plaintext"><code>$ErrorActionPreference = "Stop"
+$pluginFileName = "my-monitor.rb" $srcPluginFilePath = Join-Path $env:RS_ATTACH_DIR $pluginFileName $dstPluginFilePath = Join-Path $env:RS_MONITORS_DIR $pluginFileName
+write-output "Copying from $srcPluginFilePath to $dstPluginFilePath" Copy-Item $srcPluginFilePath $dstPluginFilePath -Force write-output "Monitor copied"
+</code></pre>
+
+<p><strong>Chef Recipe Example</strong></p>
+
+<p>The following Ruby code can be used when creating a Chef Recipe:</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">require</span> <span class="s1">'fileutils'</span>
+<span class="n">ruby</span> <span class="s1">'copy custom monitors'</span> <span class="k">do</span> <span class="n">plugin_file_name</span> <span class="o">=</span> <span class="s2">"my-monitor.rb"</span> <span class="n">src_plugin_file_path</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'RS_ATTACH_DIR'</span><span class="p">],</span> <span class="n">plugin_file_name</span><span class="p">)</span>
+<span class="n">dst_plugin_file_path</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'RS_MONITORS_DIR'</span><span class="p">],</span> <span class="n">plugin_file_name</span><span class="p">)</span> <span class="no">FileUtils</span><span class="p">.</span><span class="nf">cp</span><span class="p">(</span><span class="n">src_plugin_file_path</span><span class="p">,</span> <span class="n">dst_plugin_file_path</span><span class="p">)</span> <span class="k">end</span>
+</code></pre>
+
+<h3 id="steps-add-the-script-to-a-servertemplate">Add the Script to a ServerTemplate</h3>
+
+<p>The last step is to add the RightScript or Chef Recipe to a Windows ServerTemplate. When you add the script to your ServerTemplate, be sure to add it as a Boot Script <em>after</em> the <q>sys monitoring</q> script that installs the default monitoring plugins.</p>
+
+<h3 id="steps-test-and-verify">Test and Verify</h3>
+
+<p>Launch a Server using the modified ServerTemplate to test and verify that the custom monitoring plugin was successfully installed and that you can view your custom graphs in the Dashboard.</p>
+
+<p><strong>Congratulations!</strong> You just created a custom monitoring plugin, created a script to properly deploy the plugin, and added it to one of your Windows ServerTemplates.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

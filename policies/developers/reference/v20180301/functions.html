@@ -1,0 +1,631 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Policy Template Language Functions</title><meta content="This page outlines all functions available in the policy template language." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="policies policies_developers policies_developers_reference policies_developers_reference_v20180301 policies_developers_reference_v20180301_functions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/"><h4 class="list-group-heading"><img src="../../../../img/product-governance.svg" /><span>Policies Users Guide</span></h4></a><a class="list-group-item" href="/policies/">About</a><a class="list-group-item" href="/policies/users/getting_started">Getting Started</a><a class="list-group-item" href="/policies/users/guides">Guides</a><a class="list-group-item" href="../../../users/policy_list.html">Flexera Policies</a><a class="list-group-item" href="/policies/users/faq">FAQ</a></nav></aside><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/developers"><h4 class="list-group-heading"><img src="../../../../img/product-governance.svg" /><span>Policies Developers Guide</span></h4></a><a class="list-group-item" href="/policies/developers">Overview</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Policy Automation</a> &#x2F; <a href="../../">Developers Guide</a> &#x2F; <a href="../">Developers Guide</a> &#x2F; <a href="./">Developers Guide</a></p><div class="page-header"><h1>Policy Template Language Functions</h1></div><div class="main-content"><p>Functions make it possible to compute values dynamically, for example by concatenating multiple values together or extracting sub-text from an API
+response. The syntax for calling a function is:</p>
+<pre class="syntax-highlight plaintext"><code>&lt;function&gt;(&lt;term&gt;, &lt;term&gt;, …)
+</code></pre>
+
+<p>For example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">size</span><span class="p">(</span><span class="vg">$volumes</span><span class="p">)</span>
+</code></pre>
+
+<p>Functions can accept a number of basic types as parameters. These basic types strongly parallel what you might find in JSON or JavaScript:</p>
+
+<ul>
+<li>Number: a number can be an integer or floating point value.</li>
+<li>String: a string value, denoted with &quot;&quot;</li>
+<li>Boolean: true or false.</li>
+<li>Regexp: a regular expression value. Always denoted in the language with // brackets. For example, the function which accepts a Regexp might be called like <code>contains(&quot;hello world&quot;, /hello/)</code></li>
+<li>Array: an array of any of the other values.</li>
+<li>Object: an object is a hash or map of values. See <a href="policy_template_language.html#syntax-object-literals">policy template language syntax</a> for details.</li>
+<li>Datasource, Resource: Datasources and resources are treated as an array of objects if used as a parameter to a function.</li>
+</ul>
+
+<h2 id="array-functions">Array Functions</h2>
+
+<h3 id="array-functions-first">first</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">first</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>first</code> returns the first value of an array. The return value type is value of the element. <code>first</code> may appear when defining datasource fields or in validations</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">first</span><span class="p">(</span><span class="vi">@instances</span><span class="p">)</span> <span class="c1"># returns the first instance from an array of instances</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">first</span><span class="p">(</span><span class="nb">split</span><span class="p">(</span><span class="s2">"x,y,z"</span><span class="p">,</span> <span class="s2">","</span><span class="p">))</span> <span class="c1"># returns the value "x"</span>
+</code></pre>
+
+<p>In this example we get the first IP address from a list of IP addresses.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">first</span><span class="p">(</span><span class="n">val</span><span class="p">(</span><span class="n">iter_item</span><span class="p">,</span> <span class="s2">"private_ip_addresses"</span><span class="p">))</span>
+</code></pre>
+
+<h3 id="array-functions-last">last</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">last</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>last</code> returns the last value of an array. The return value type is value of the element. <code>last</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">last</span><span class="p">(</span><span class="vi">@volume</span><span class="p">)</span> <span class="c1"># returns the last volume from an array of volumes</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">last</span><span class="p">(</span><span class="nb">split</span><span class="p">(</span><span class="s2">"/api/volumes/1234"</span><span class="p">,</span> <span class="s2">"/"</span><span class="p">))</span> <span class="c1"># returns "1234"</span>
+</code></pre>
+
+<h3 id="array-functions-get">get</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>get</code> returns value of an array at index. Index starts at 0. The return value type is value of the element. <code>get</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="vi">@instances</span><span class="p">)</span> <span class="c1"># return the third element (index 2) of an array</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">split</span><span class="p">(</span><span class="s2">"x,y,z"</span><span class="p">,</span> <span class="s2">","</span><span class="p">))</span> <span class="c1"># returns the second element of the split array, which is "y"</span>
+</code></pre>
+
+<h3 id="array-functions-contains">contains</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">contains</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nb">select</span> <span class="n">expression</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>contains</code> returns true if the array contains any elements which match the select expression. The select expression will differ based on the type of the array:</p>
+
+<ul>
+<li>For an array of numbers, select expression much be a number</li>
+<li>For an array of strings, select expression can be a string or regexp.</li>
+<li>For an array of objects, select expression must be a object denoting which fields to match. Deeper matches can be done by specifying sub objects.</li>
+</ul>
+
+<p>The return type of <code>contains</code> is a boolean. <code>contains</code> may appear when defining datasource fields or in validations.</p>
+
+<p>This example selects fields out of a basic array using a regular expression.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">contains</span><span class="p">([</span><span class="s2">"John Smith"</span><span class="p">,</span> <span class="s2">"John Adams"</span><span class="p">,</span> <span class="s2">"Tom Jackson"</span><span class="p">],</span> <span class="sr">/John/</span><span class="p">)</span> <span class="c1"># returns true</span>
+<span class="n">contains</span><span class="p">([</span><span class="s2">"John Smith"</span><span class="p">,</span> <span class="s2">"John Adams"</span><span class="p">,</span> <span class="s2">"Tom Jackson"</span><span class="p">],</span> <span class="s2">"Tom Jackson"</span><span class="p">)</span> <span class="c1"># returns true</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">contains</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># returns true</span>
+<span class="n">contains</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">],</span> <span class="s2">"100"</span><span class="p">)</span> <span class="c1"># returns false. The type matters! "100" is a string and the array is an array of numbers.</span>
+</code></pre>
+
+<p>For the next examples @instances is an array of Instance Resources returned by the RightScale API with the following structure:</p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;string&gt;</span><span class="w">
+    </span><span class="s2">"name"</span><span class="err">:</span><span class="w"> </span><span class="err">&lt;string&gt;</span><span class="w">
+    </span><span class="s2">"cloud_specific_attributes"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"ebs_optimized"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;boolean&gt;</span><span class="p">,</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This will get instances where the ebs optimized flag is set to true:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">contains</span><span class="p">(</span><span class="vi">@instances</span><span class="p">,</span> <span class="p">{</span><span class="s2">"cloud_specific_attributes"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"ebs_optimized"</span><span class="p">:</span> <span class="kp">true</span><span class="p">})</span>
+</code></pre>
+
+<h3 id="array-functions-select">select</h3>
+<pre class="syntax-highlight ruby"><code><span class="nb">select</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nb">select</span> <span class="n">expression</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>select</code> returns a new array with zero or more elements matching the select expression. The select expression will differ based on the type of the array:</p>
+
+<ul>
+<li>For an array of numbers, select expression must be a number</li>
+<li>For an array of strings, select expression can be a string or regexp.</li>
+<li>For an array of objects, select expression must be an object denoting which fields to match. Deeper matches can be done by specifying sub objects.</li>
+</ul>
+
+<p>The return type of <code>select</code> is a boolean. <code>select</code> may appear when defining datasource fields or in validations.</p>
+
+<p>This example selects fields out of a basic array:</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">select</span><span class="p">([</span><span class="s2">"John Smith"</span><span class="p">,</span> <span class="s2">"John Adams"</span><span class="p">,</span> <span class="s2">"Tom Jackson"</span><span class="p">],</span> <span class="sr">/John/</span><span class="p">)</span> <span class="c1"># returns ["John Smith", "John Adams"]</span>
+</code></pre>
+
+<p>For the next examples @instances is an array of Instance objects returned by the RightScale API with the following structure:</p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;string&gt;</span><span class="w">
+    </span><span class="s2">"name"</span><span class="err">:</span><span class="w"> </span><span class="err">&lt;string&gt;</span><span class="w">
+    </span><span class="s2">"ip_addresses"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="err">&lt;string&gt;</span><span class="p">,</span><span class="w"> </span><span class="err">&lt;string&gt;</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This example creates a new datasource with public IP addresses selected out:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">datasource</span> <span class="s2">"test_instances"</span> <span class="k">do</span>
+    <span class="n">iterate</span> <span class="vi">@instances</span>
+    <span class="n">field</span> <span class="s2">"private_ips"</span> <span class="nb">select</span><span class="p">(</span><span class="n">val</span><span class="p">(</span><span class="n">iter_item</span><span class="p">,</span> <span class="s2">"ip_addresses"</span><span class="p">),</span> <span class="sr">/(^192\.168)|(^10\.)|(^172\.1[6-9])|(^172\.2[0-9])|(^172\.3[0-1])/</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="array-functions-size">size</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">size</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>size</code> returns the size of an array. The return value type is <code>number</code>. <code>size</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">size</span><span class="p">(</span><span class="vi">@volumes</span><span class="p">)</span> <span class="c1"># returns the number of volumes</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">size</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">,</span><span class="s2">"c"</span><span class="p">])</span> <span class="c1"># returns 3</span>
+</code></pre>
+
+<h3 id="array-functions-jmes_path">jmes_path</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">jmes_path</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span> <span class="n">of</span> <span class="n">objects</span><span class="o">&gt;|&lt;</span><span class="n">object</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">expression</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>jmes_path</code> will run a <a href="http://jmespath.org/">JMESPath</a> expression against an array of objects or object. The return type is varied. <code>jmes_path</code> should mostly be used in defining <a href="policy_template_language.html#retrieving-data-api-data-with-datasources">custom datasources</a> and <a href="policy_template_language.html#retrieving-data-pagination">paginations</a>, but can also be used for writing <a href="policy_template_language.html#describing-the-policy-conditions">validations</a>. For more complicated validations, it&#39;s highly recommended to use <a href="policy_template_language.html#processing-datasources-with-javascript">a JavaScript datasource</a>.</p>
+
+<p>For example, given a resource named <code>@clouds</code>:</p>
+<pre class="syntax-highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"cloud_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amazon"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amazon's US Cloud on the East Coast"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS US-East"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EC2 us-east-1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"cloud_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"google"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google Cloud, including Google Compute Engine, Google Cloud Storage, etc."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">jmes_path</span><span class="p">(</span><span class="vi">@clouds</span><span class="p">,</span> <span class="s2">"[].name"</span><span class="p">)</span> <span class="c1"># returns ["EC2 us-east-1", "Google"]</span>
+</code></pre>
+
+<h3 id="array-functions-jq">jq</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">jq</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span> <span class="n">of</span> <span class="n">objects</span><span class="o">&gt;|&lt;</span><span class="n">object</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">expression</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">[,</span> <span class="n">type</span> <span class="s2">"simple_element"</span><span class="o">|</span><span class="s2">"array"</span><span class="p">])</span>
+</code></pre>
+
+<p><code>jq</code> will run a <a href="https://stedolan.github.io/jq/">jq</a> expression against an array of objects or object. The return type is varied. The optional third argument specifies whether the expression is expected to return a single element (<code>&quot;simple_element&quot;</code>) or multiple (<code>&quot;array&quot;</code>); if unspecified, the default is <code>&quot;simple_element&quot;</code> except when used as the expression of a <code>collect</code> where it is <code>&quot;array&quot;</code>. <code>jq</code> should mostly be used in defining <a href="policy_template_language.html#retrieving-data-api-data-with-datasources">custom datasources</a> and <a href="policy_template_language.html#retrieving-data-pagination">paginations</a>, but can also be used for writing <a href="policy_template_language.html#describing-the-policy-conditions">validations</a>. For more complicated validations, it&#39;s highly recommended to use <a href="policy_template_language.html#processing-datasources-with-javascript">a JavaScript datasource</a>.</p>
+
+<p>For example, given a resource named <code>@clouds</code>:</p>
+<pre class="syntax-highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"cloud_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amazon"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amazon's US Cloud on the East Coast"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS US-East"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EC2 us-east-1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"cloud_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"google"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google Cloud, including Google Compute Engine, Google Cloud Storage, etc."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">jq</span><span class="p">(</span><span class="vi">@clouds</span><span class="p">,</span> <span class="s2">".[].name"</span><span class="p">,</span> <span class="s2">"array"</span><span class="p">)</span> <span class="c1"># returns ["EC2 us-east-1", "Google"]</span>
+</code></pre>
+
+<h3 id="array-functions-xpath">xpath</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">xpath</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span> <span class="n">of</span> <span class="n">xml</span> <span class="n">node</span> <span class="n">objects</span><span class="o">&gt;|&lt;</span><span class="n">xml</span> <span class="n">node</span> <span class="n">object</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">expression</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">[,</span> <span class="n">type</span> <span class="s2">"simple_element"</span><span class="o">|</span><span class="s2">"array"</span><span class="p">])</span>
+</code></pre>
+
+<p><code>xpath</code> will run an <a href="https://www.w3.org/TR/xpath/all">XPath</a> expression against an array of XML node objects or object. The return type is varied. The optional third argument specifies whether the expression is expected to return a single element (<code>&quot;simple_element&quot;</code>) or multiple (<code>&quot;array&quot;</code>); if unspecified, the default is <code>&quot;simple_element&quot;</code> except when used as the expression of a <code>collect</code> where it is <code>&quot;array&quot;</code>. <code>xpath</code> should be used in defining <a href="policy_template_language.html#retrieving-data-api-data-with-datasources">custom datasources</a> and <a href="policy_template_language.html#retrieving-data-pagination">paginations</a>.</p>
+
+<p>For example, given the <code>response</code> in a datasource:</p>
+<pre class="syntax-highlight xml"><code><span class="nt">&lt;clouds&gt;</span>
+  <span class="nt">&lt;cloud&gt;</span>
+    <span class="nt">&lt;type&gt;</span>amazon<span class="nt">&lt;/type&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Amazon's US Cloud on the East Coast<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;display-name&gt;</span>AWS US-East<span class="nt">&lt;/display-name&gt;</span>
+    <span class="nt">&lt;name&gt;</span>EC2 us-east-1<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;/cloud&gt;</span>
+  <span class="nt">&lt;cloud&gt;</span>
+    <span class="nt">&lt;type&gt;</span>google<span class="nt">&lt;/type&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Google Cloud, including Google Compute Engine, Google Cloud Storage, etc.<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;display-name&gt;</span>Google<span class="nt">&lt;/display-name&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Google<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;/cloud&gt;</span>
+<span class="nt">&lt;/clouds&gt;</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">xpath</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">"//clouds/cloud/name"</span><span class="p">,</span> <span class="s2">"array"</span><span class="p">)</span> <span class="c1"># returns ["EC2 us-east-1", "Google"]</span>
+</code></pre>
+
+<h2 id="object-functions">Object Functions</h2>
+
+<h3 id="object-functions-header">header</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">header</span><span class="p">(</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>header</code> extracts a single response header from the API request. The return value type is a string. <code>header</code> may appear when defining datasource fields.</p>
+
+<p>This example creates a new datasource from a API request and sets the field with the response header value.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">datasource</span> <span class="s2">"aws_s3_object"</span>
+  <span class="n">request</span> <span class="k">do</span>
+    <span class="n">auth</span> <span class="vg">$auth_aws</span>
+    <span class="n">verb</span> <span class="s2">"GET"</span>
+    <span class="n">host</span> <span class="s2">"my_bucket.s3.amazonaws.com"</span>
+    <span class="n">path</span> <span class="s2">"/"</span>
+    <span class="n">query</span> <span class="s2">"list-type"</span><span class="p">,</span> <span class="s2">"2"</span>
+  <span class="k">end</span>
+  <span class="n">result</span> <span class="k">do</span>
+    <span class="n">encoding</span> <span class="s2">"xml"</span>
+    <span class="n">collect</span> <span class="n">xpath</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">"//ListBucketResult/Contents"</span><span class="p">,</span> <span class="s2">"array"</span><span class="p">)</span> <span class="k">do</span>
+      <span class="n">field</span> <span class="s2">"key"</span><span class="p">,</span> <span class="n">xpath</span><span class="p">(</span><span class="n">col_item</span><span class="p">,</span><span class="s2">"Key"</span><span class="p">)</span> <span class="c1">#the Key / File name</span>
+      <span class="n">field</span> <span class="s2">"last_modified"</span><span class="p">,</span> <span class="n">header</span><span class="p">(</span><span class="s2">"LastModified"</span><span class="p">)</span> <span class="c1">#last modified date</span>
+      <span class="n">field</span> <span class="s2">"bucket"</span><span class="p">,</span> <span class="n">header</span><span class="p">(</span><span class="s2">"Name"</span><span class="p">)</span> <span class="c1">#the bucket name</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="object-functions-href">href</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">href</span><span class="p">(</span><span class="o">&lt;</span><span class="n">object</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>href</code> extracts a self href from the <code>links</code> section of a RightScale resource. The return value type is a string. <code>href</code> may appear when defining datasource fields or in validations. This function is provided as a shortcut as the <a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#show_example_responses">response</a> can otherwise be cumbersome to parse.</p>
+
+<p>This example creates a new datasource from an array of RightScale instances with the href field set to the <q>self</q> href of the instance.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">datasource</span> <span class="s2">"instances"</span>
+  <span class="n">iterate</span> <span class="vi">@instances</span>
+  <span class="n">field</span> <span class="s2">"id"</span> <span class="n">val</span><span class="p">(</span><span class="n">iter_item</span><span class="p">,</span> <span class="s2">"resource_uid"</span><span class="p">)</span>
+  <span class="n">field</span> <span class="s2">"href"</span><span class="p">,</span> <span class="n">href</span><span class="p">(</span><span class="n">iter_item</span><span class="p">)</span> <span class="c1"># set to something like "/api/clouds/1/instances/AE3F0B9AE"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="object-functions-hrefs">hrefs</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">hrefs</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span> <span class="n">of</span> <span class="n">objects</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>hrefs</code> extracts a self href from the <code>links</code> sections of an array of RightScale resources. See <a href="#href">href</a> above for details.</p>
+
+<p>Example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">datasource</span> <span class="s2">"instances"</span> <span class="k">do</span>
+  <span class="n">field</span> <span class="s2">"all_hrefs"</span> <span class="n">hrefs</span><span class="p">(</span><span class="vi">@instances</span><span class="p">)</span> <span class="c1"># set to something like ["/api/clouds/1/instances/AAA", "/api/clouds/1/instances/BBB", ...]</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="object-functions-val">val</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">val</span><span class="p">(</span><span class="o">&lt;</span><span class="n">object</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+</code></pre>
+
+<p><code>val</code> extracts a field from an object returns the corresponding value. The return value type is the value of the field. <code>val</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">val</span><span class="p">(</span><span class="vi">@instance</span><span class="p">,</span> <span class="s2">"resource_uid"</span><span class="p">)</span> <span class="c1"># returns the value of the instance resource_uid field</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">datasource</span> <span class="s2">"instances"</span> <span class="k">do</span>
+   <span class="n">iterate</span> <span class="vi">@instances</span> <span class="c1"># iterate previously defined resources</span>
+   <span class="n">field</span> <span class="s2">"id"</span><span class="p">,</span> <span class="n">val</span><span class="p">(</span><span class="n">iter_item</span><span class="p">,</span> <span class="s2">"resource_uid"</span><span class="p">)</span> <span class="c1"># rename "resource_uid" into "id"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="object-functions-vals">vals</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">vals</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span> <span class="n">of</span> <span class="n">objects</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+</code></pre>
+
+<p><code>vals</code> extracts a field from an an array of objects returns an array of the the field values. <code>vals</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Example:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">vals</span><span class="p">(</span><span class="vi">@instances</span><span class="p">,</span> <span class="s2">"resource_uid"</span><span class="p">)</span> <span class="c1"># returns an array of resource_uids.</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="n">datasource</span> <span class="s2">"instances"</span> <span class="k">do</span>
+   <span class="n">field</span> <span class="s2">"all_ids"</span><span class="p">,</span> <span class="n">vals</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">"resource_uid"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="comparison-functions">Comparison Functions</h2>
+
+<h3 id="comparison-functions-ge">ge</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">ge</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>ge</code> returns true if the first value is greater than or equal to second value. Values must both be the same type. <code>ge</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">ge</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># true</span>
+<span class="n">ge</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="s2">"world"</span><span class="p">)</span> <span class="c1"># false, hello is lexicographically before world</span>
+<span class="n">ge</span><span class="p">(</span><span class="n">now</span><span class="p">,</span> <span class="n">to_d</span><span class="p">(</span><span class="s2">"2015-11-10T11:10:06Z"</span><span class="p">))</span> <span class="c1"># true, current time is greater than supplied value</span>
+</code></pre>
+
+<h3 id="comparison-functions-gt">gt</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">gt</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>gt</code> returns true if the first value is greater than second value. Values must both be same type. <code>gt</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">gt</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># true</span>
+<span class="n">gt</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="s2">"world"</span><span class="p">)</span> <span class="c1"># false, hello is lexicographically before world</span>
+<span class="n">gt</span><span class="p">(</span><span class="n">now</span><span class="p">,</span> <span class="n">to_d</span><span class="p">(</span><span class="s2">"2015-11-10T11:10:06Z"</span><span class="p">))</span> <span class="c1"># true, that date is in the past</span>
+</code></pre>
+
+<h3 id="comparison-functions-le">le</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">le</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>le</code> returns true if value1 is less than or equal to value2. Values must both be same type. <code>le</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">le</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># true</span>
+<span class="n">le</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="s2">"world"</span><span class="p">)</span> <span class="c1"># true, hello is lexicographically before world</span>
+<span class="n">le</span><span class="p">(</span><span class="n">to_d</span><span class="p">(</span><span class="s2">"2015-11-10T11:10:06Z"</span><span class="p">),</span> <span class="n">now</span><span class="p">)</span> <span class="c1"># true, that date is in the past</span>
+</code></pre>
+
+<h3 id="comparison-functions-lt">lt</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">lt</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>lt</code> returns true if value1 is less than value2. Values must both be same type. <code>lt</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">lt</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># true</span>
+<span class="n">lt</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="s2">"world"</span><span class="p">)</span> <span class="c1"># true, hello is lexicographically before world</span>
+<span class="n">lt</span><span class="p">(</span><span class="n">to_d</span><span class="p">(</span><span class="s2">"2015-11-10T11:10:06Z"</span><span class="p">),</span> <span class="n">now</span><span class="p">)</span> <span class="c1"># true, that date is in the past</span>
+</code></pre>
+
+<h3 id="comparison-functions-ne">ne</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">ne</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>ne</code> returns true if first value is not equal to second value. Values must both be same type. <code>ne</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">ne</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># true</span>
+<span class="n">ne</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="s2">"world"</span><span class="p">)</span> <span class="c1"># true</span>
+</code></pre>
+
+<h3 id="comparison-functions-eq">eq</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">eq</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;|&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">date</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>eq</code> returns true if first value is equal to second value. Values must both be same type. <code>eq</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">eq</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># true</span>
+<span class="n">eq</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">)</span> <span class="c1"># false, different types</span>
+<span class="n">eq</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="s2">"hello"</span><span class="p">)</span> <span class="c1"># true</span>
+<span class="n">eq</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="s2">"HELLO"</span><span class="p">)</span> <span class="c1"># false</span>
+</code></pre>
+
+<h3 id="comparison-functions-now">now</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">now</span><span class="p">()</span>
+</code></pre>
+
+<p><code>now</code> returns the current time in UTC timezone. It accepts no parameters.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">gt</span><span class="p">(</span><span class="n">now</span><span class="p">,</span> <span class="n">to_d</span><span class="p">(</span><span class="s2">"2015-11-10T11:10:06Z"</span><span class="p">))</span> <span class="c1"># true, that date is in the past</span>
+</code></pre>
+
+<h2 id="string-functions">String Functions</h2>
+
+<h3 id="string-functions-split">split</h3>
+<pre class="syntax-highlight ruby"><code><span class="nb">split</span><span class="p">(</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">separator</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;|&lt;</span><span class="n">regex</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>split</code> splits a string on separator. Separator may be a string or a regular expression. <code>split</code> returns an array of strings. <code>split</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">split</span><span class="p">(</span><span class="s2">"us-east-1a"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span> <span class="c1"># returns ["us","east","1a"]</span>
+</code></pre>
+<pre class="syntax-highlight ruby"><code><span class="nb">split</span><span class="p">(</span><span class="s2">"a, b, c"</span><span class="p">,</span> <span class="sr">/\s*,\s*/</span><span class="p">)</span> <span class="c1"># returns ["a","b","c"]</span>
+</code></pre>
+
+<h3 id="string-functions-join">join</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">join</span><span class="p">(</span><span class="o">&lt;</span><span class="n">array</span> <span class="n">of</span> <span class="n">strings</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">separator</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>join</code> joins a string with a separator. Separator must be a string. <code>join</code> always returns a string. <code>join</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">join</span><span class="p">([</span><span class="s2">"us"</span><span class="p">,</span><span class="s2">"east"</span><span class="p">,</span><span class="s2">"1a"</span><span class="p">],</span> <span class="s2">"-"</span><span class="p">)</span> <span class="c1"># returns "us-east-1a"</span>
+</code></pre>
+
+<h3 id="string-functions-ljust">ljust</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">ljust</span><span class="p">(</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">length</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">padder</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>ljust</code> left justifies a string by filling it with the padder until it meets a minimum length.  <code>ljust</code> always returns a string. <code>ljust</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">ljust</span><span class="p">(</span><span class="s2">"foo"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">"-="</span><span class="p">)</span> <span class="c1"># returns "foo-=-=-=-"</span>
+</code></pre>
+
+<h3 id="string-functions-rjust">rjust</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">rjust</span><span class="p">(</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">length</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">padder</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>rjust</code> left justifies a string by filling it with the padder until it meets a minimum length.  <code>rjust</code> always returns a string. <code>rjust</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">rjust</span><span class="p">(</span><span class="s2">"foo"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">"-="</span><span class="p">)</span> <span class="c1"># returns "=-=-=-=foo"</span>
+</code></pre>
+
+<h2 id="logical-operators">Logical operators</h2>
+
+<h3 id="logical-operators-switch">switch</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">switch</span><span class="p">(</span><span class="o">&lt;</span><span class="n">conditional</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">a</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">b</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>switch</code> operates much like an if statement. It accepts a conditional as the first argument and will return a if true, b if false. Any argument passed in the first argument will be converted to a boolean using <a href="#conversion-functions-to-b">to_b</a>. <code>switch</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">switch</span><span class="p">(</span><span class="n">lt</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"b"</span><span class="p">),</span> <span class="s2">"first"</span><span class="p">,</span> <span class="s2">"second"</span><span class="p">)</span> <span class="c1"># returns "first" as the condition is true</span>
+<span class="n">switch</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">)</span> <span class="c1"># returns "b" as 0 evaluates to false</span>
+<span class="n">switch</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">)</span> <span class="c1"># returns "b" as empty string evaluates to false</span>
+</code></pre>
+
+<h3 id="logical-operators-logic_and">logic_and</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">logic_and</span><span class="p">(</span><span class="o">&lt;</span><span class="n">conditional</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">conditional</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>logic_and</code> returns true if both arguments evaluate to true. Anything passed as the first or second argument will be converted to a boolean using <a href="#conversion-functions-to-b">to_b</a>. <code>logic_and</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">logic_and</span><span class="p">(</span><span class="s2">"first"</span><span class="p">,</span> <span class="s2">"second"</span><span class="p">)</span> <span class="c1"># true as both are non-empty</span>
+<span class="n">logic_and</span><span class="p">(</span><span class="kp">true</span><span class="p">,</span> <span class="kp">true</span><span class="p">)</span> <span class="c1"># returns true</span>
+</code></pre>
+
+<h3 id="logical-operators-logic_or">logic_or</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">logic_or</span><span class="p">(</span><span class="o">&lt;</span><span class="n">conditional</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">conditional</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>logic_or</code> returns true if either argument evaluates to true. Anything passed as the first or second argument will be converted to a boolean using <a href="#conversion-functions-to-b">to_b</a>. <code>logic_or</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">logic_or</span><span class="p">(</span><span class="s2">"first"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="c1"># true as first element is non-empty</span>
+<span class="n">logic_or</span><span class="p">(</span><span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="p">)</span> <span class="c1"># returns true</span>
+</code></pre>
+
+<h3 id="logical-operators-logic_not">logic_not</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">logic_not</span><span class="p">(</span><span class="o">&lt;</span><span class="n">conditional</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>logic_not</code> returns true if the conditional evaluates to false. Anything passed as the first or second argument will be converted to a boolean using <a href="#conversion-functions-to-b">to_d</a>. <code>logic_not</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">logic_not</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span> <span class="c1"># true as first element evaluates to false</span>
+<span class="n">logic_not</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span> <span class="c1"># true</span>
+</code></pre>
+
+<h2 id="number-functions">Number Functions</h2>
+
+<h3 id="number-functions-inc">inc</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">inc</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>inc</code> returns the sum of two numbers. <code>inc</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">inc</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># 5</span>
+</code></pre>
+
+<h3 id="number-functions-dec">dec</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">dec</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>dec</code> subtracts the second argument from the first. <code>dec</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">dec</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># 8</span>
+</code></pre>
+
+<h3 id="number-functions-prod">prod</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">prod</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>prod</code> returns the product of two numbers. <code>prod</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">prod</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># 8</span>
+</code></pre>
+
+<h3 id="number-functions-div">div</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">div</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>div</code> divides the first argument by the second. <code>div</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">div</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># 5</span>
+</code></pre>
+
+<h3 id="number-functions-mod">mod</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">mod</span><span class="p">(</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>mod</code> takes a modulus of the first number by the second. <code>mod</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">mod</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># 1</span>
+</code></pre>
+
+<h2 id="conversion-functions">Conversion Functions</h2>
+
+<h3 id="conversion-functions-to_n">to_n</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">to_n</span><span class="p">(</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>to_n</code> converts a string into a number. <code>to_n</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">to_n</span><span class="p">(</span><span class="s2">"10"</span><span class="p">)</span> <span class="c1"># 10</span>
+</code></pre>
+
+<h3 id="conversion-functions-to_s">to_s</h3>
+<pre class="syntax-highlight ruby"><code><span class="nb">to_s</span><span class="p">(</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>to_s</code> converts a number into a string. <code>to_s</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="nb">to_s</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># "10"</span>
+</code></pre>
+
+<h3 id="conversion-functions-to_b">to_b</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">to_b</span><span class="p">(</span><span class="o">&lt;</span><span class="n">anything</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>to_b</code> converts anything into a boolean value of true or false. For numbers, it&#39;ll evaluate to true if the number is not zero. For strings, it&#39;ll evaluate to true if the string is non-empty. For arrays, it&#39;ll evaluate to true if the array length is greater than 0. <code>to_b</code> may appear when defining datasource fields or in validations.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">to_b</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># false</span>
+<span class="n">to_b</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># true</span>
+<span class="n">to_b</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span> <span class="c1"># false</span>
+<span class="n">to_b</span><span class="p">(</span><span class="s2">"any value"</span><span class="p">)</span> <span class="c1"># true</span>
+</code></pre>
+
+<h3 id="conversion-functions-to_d">to_d</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">to_d</span><span class="p">(</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+
+<p><code>to_d</code> converts a string into a date in the UTC timezone so it can be used in comparisons. It&#39;ll make a best effort to convert most common date formats.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">to_d</span><span class="p">(</span><span class="s2">"2009-11-10 04:10:06 -0700"</span><span class="p">)</span> <span class="c1"># Ruby default format</span>
+<span class="n">to_d</span><span class="p">(</span><span class="s2">"2009-11-10T11:10:06Z"</span><span class="p">)</span> <span class="c1"># RFC3339</span>
+<span class="n">gt</span><span class="p">(</span><span class="n">to_d</span><span class="p">(</span><span class="n">some_timestamp</span><span class="p">),</span> <span class="n">now</span><span class="p">)</span> <span class="c1"># true if some_timestamp takes place in the future</span>
+</code></pre>
+
+<h2 id="miscellaneous">Miscellaneous</h2>
+
+<h3 id="miscellaneous-resolve_incident">resolve_incident</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">resolve_incident</span>
+</code></pre>
+
+<p><code>resolve_incident</code> is used in an <code>escalation</code> declaration to force the related policy&#39;s incident to be marked as resolved and the policy&#39;s <code>resolve</code> directives to be executed.</p>
+
+<p>Examples:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">escalation</span> <span class="s2">"stop_instances"</span> <span class="k">do</span>
+  <span class="n">email</span> <span class="vg">$param_email</span>
+  <span class="n">run</span> <span class="s2">"stop_instances"</span><span class="p">,</span> <span class="n">data</span>
+  <span class="n">resolve_incident</span>
+<span class="k">end</span>
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

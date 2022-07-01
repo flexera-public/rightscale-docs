@@ -1,0 +1,415 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightScale Cloud Appliance for vSphere (RCA-V) - Troubleshooting Guide</title><meta content="This guide is designed to help you troubleshoot common issues that you may experience while installing and maintaining a RightScale Cloud Appliance for vSphere (RCA-V)." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="rcav rcav_v3" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rcav/"><h4 class="list-group-heading"><span>RightScale Cloud Appliance for vSphere (RCA-V)</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="./">RCA-V Version 3.0</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">RightScale Cloud Appliance for vSphere (RCA-V)</a> &#x2F; <a href="./">Version 3.0</a></p><div class="page-header"><h1>RightScale Cloud Appliance for vSphere (RCA-V) - Troubleshooting Guide</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This guide is designed to help you troubleshoot common issues that you may experience while installing and maintaining a RightScale Cloud Appliance for vSphere (RCA-V).</p>
+
+<h2 id="knowing-your-environment">Knowing Your Environment</h2>
+
+<p>In order to successfully navigate through issues, you must have a proper understanding of your environment. Please refer to the <a href="rcav_administrator.html">RCA-V Administrator Guide</a> for details of how the RCA-V fits into your vSphere environment.</p>
+
+<p>Describing it very briefly, RCA-V sits in your vSphere environment and interacts with your vCenter Server.  Key pieces of information are:</p>
+
+<table><thead>
+<tr>
+<th>Credentials</th>
+<th>Checked by</th>
+<th>Set by</th>
+<th>Storage</th>
+<th>Purpose</th>
+<th>Initial value</th>
+<th>Comment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>unix &#39;root&#39; password</td>
+<td>unix login</td>
+<td>disabled</td>
+<td>/etc/shadow</td>
+<td>there is no root login capability, following Ubuntu best practices</td>
+<td>disabled</td>
+<td>Fully disabled. Recommend not enabling</td>
+</tr>
+<tr>
+<td>&#39;admin&#39; password</td>
+<td>unix login &amp; nginx basic auth</td>
+<td>admin UI</td>
+<td>verifiers in /etc/shadow &amp; /etc/nginx</td>
+<td>authenticates customer admin for SSH and HTTP access</td>
+<td>vscale2013@@</td>
+<td>recommend changing this initial value using admin UI</td>
+</tr>
+<tr>
+<td>&#39;rightscale&#39; password</td>
+<td>nginx basic auth</td>
+<td>admin UI</td>
+<td>verifier in /etc/nginx</td>
+<td>authenticates rightscale platform (GW) for HTTP access</td>
+<td>disabled</td>
+<td>Note: No SSH access for this user</td>
+</tr>
+<tr>
+<td>&#39;services&#39; password</td>
+<td>unix login nginx basic auth</td>
+<td>admin UI</td>
+<td>verifiers in /etc/shadow &amp; /etc/nginx</td>
+<td>authenticates RS professional services for SSH and HTTP access</td>
+<td>disabled</td>
+<td>Customers should enable it for RightScale services as needed</td>
+</tr>
+<tr>
+<td>wstunnel token</td>
+<td>wstunsrv and wstuncli</td>
+<td>admin UI</td>
+<td>plain text in /etc/defaults/wstuncli</td>
+<td>ensures tunnel uniqueness and obfuscates access to tunnel for defense in-depth</td>
+<td>random value</td>
+<td>check in wstuncli, split off in admin UI</td>
+</tr>
+<tr>
+<td>tenant password</td>
+<td>RCA-V</td>
+<td>admin UI</td>
+<td>obfuscated in /etc/vscale.conf</td>
+<td>authenticate individual tenants&#39; access to the cloud</td>
+<td>disabled</td>
+<td>new in 1.0</td>
+</tr>
+<tr>
+<td>vCenter user/password</td>
+<td>vCenter server</td>
+<td>admin UI</td>
+<td>obfuscated in /root/.vscalerc</td>
+<td>access to vCenter for managing resources</td>
+<td>unset</td>
+<td>non-admin user recommended</td>
+</tr>
+</tbody></table>
+
+<p>When everything is working fine, the following should happen:</p>
+
+<ul>
+<li>When powered on, RCA-V should come up without any issues.</li>
+<li>RCA-V should have at least one network interface (either with public or private IP address that has a route to the Internet).</li>
+<li>RCA-V should be reachable via Console (using vSphere client)</li>
+<li>RCA-V should be reachable via SSH (from within your firewall)</li>
+<li>RCA-V establishes an outbound tunnel to RightScale Platform</li>
+</ul>
+
+<p>In the Admin UI, all Status <img src="/img/rcav-green-status.png" alt="status icon" width="19" height="17" /> should be green.</p>
+
+<h2 id="troubleshooting---frequently-asked-questions">Troubleshooting - Frequently Asked Questions</h2>
+
+<h3 id="troubleshooting---frequently-asked-questions-is-my-appliance-running-">Is my appliance running?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<ol>
+<li>Log in to the vSphere client.</li>
+<li>Look at the RightScale Adapter VM and verify that it&#39;s running. It should have an IP address assigned to it and you should be able to ping it from behind your network firewall.</li>
+</ol>
+
+<h3 id="troubleshooting---frequently-asked-questions-how-come-i-can-see-the-ip-address-on-the-rca-v-but-i-can-t-ping-it-">How come I can see the IP address on the RCA-V but I can't ping it?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<ol>
+<li>Log in to the vSphere client.</li>
+<li>Go to <strong>Edit Settings &gt; Options &gt; vApp Options &gt; Properties</strong></li>
+<li>Make sure all fields are properly configured. In the Hardware tab, make sure your network adapter is in the correct network and that you&#39;re pinging the appliance from a device on the same network.</li>
+</ol>
+
+<h3 id="troubleshooting---frequently-asked-questions-why-do-i-get-a-502-error-when-i-try-to-log-in-to-the-rca-v-console-">Why do I get a 502 error when I try to log in to the RCA-V console?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>This could be due to couple of reasons:</p>
+
+<ul>
+<li>IP address may not be reachable. (See the issue in the row above.)</li>
+<li>The Admin backend process may not be up -- If you suspect this to be the case, you can either restart the appliance (which will restart all processes) or you can SSH into the appliance, switch to the root user (<code>$ sudo su</code>) and then run the following command: <code># service vscale-admin restart</code></li>
+</ul>
+
+<h3 id="troubleshooting---frequently-asked-questions-why-do-i-get-a-401-error-when-i-try-to-log-in-to-the-rca-v-console-">Why do I get a 401 error when I try to log in to the RCA-V console?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>This is likely related to an authentication issue. If you have forgotten your password, you will have to use the vSphere client to log in to the appliance as the ‘root’ user. (<em>Note</em>: The ability to SSH into the instance as the &#39;root&#39; user is not allowed.)</p>
+
+<h3 id="troubleshooting---frequently-asked-questions-i-can-log-in-to-the-rca-v-console-but-why-is-the-cloud-account-s-status-red-">I can log in to the RCA-V console but why is the cloud account's status red?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>There are several reasons why the status may be red instead of green:</p>
+
+<p><img src="/img/rcav-cloud-status-red.png" alt="Cloud Status" width="600" height="92" /></p>
+
+<p>A connectivity problem with the WebSocket tunnel between the RCA-V and RightScale platform could be a result of issues related to the <strong>wstuncli</strong> (tunnel client on the appliance) or <strong>wstunsrv</strong> (RightScale&#39;s tunnel server). Run the following UNIX command from a computer with Internet connectivity to make a request to the cloud&#39;s gateway controller.</p>
+<pre class="syntax-highlight plaintext"><code>$ curl -kvu 'rightscale:&lt;your_password&gt;' https://wstunnel10-1.rightscale.com/_token/&lt;your_token&gt;/gw/v1/acct/&lt;your_tenant_name&gt;/instance-types
+</code></pre>
+
+<p>If everything is working as expected you should get a JSON response with the defined instance types for the vSphere cloud. However, if you don&#39;t get a response or receive a connection error, it&#39;s probably a problem with <strong>wstunsrv</strong> (RightScale&#39;s tunnel server). Please inform RightScale immediately.</p>
+
+<p>If there is an issue with <strong>wstuncli</strong> (tunnel client on the appliance), you will likely see the following response (see below) and need to restart <strong>wstuncli</strong>.</p>
+<pre class="syntax-highlight plaintext"><code>* Adding handle: conn: 0x7f83c3003a00
+* Adding handle: send: 0
+* Adding handle: recv: 0
+* Curl_addHandleToPipeline: length: 1
+* - Conn 0 (0x7f83c3003a00) send_pipe: 1, recv_pipe: 0
+* About to connect() to wstunnel.test.rightscale.com port 443 (#0)
+*   Trying 50.112.73.62...
+* Connected to wstunnel.test.rightscale.com (50.112.73.62) port 443 (#0)
+* TLS 1.2 connection using TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+* Server certificate: *.test.rightscale.com
+* Server certificate: Go Daddy Secure Certification Authority
+* Server certificate: Go Daddy Class 2 Certification Authority
+* Server certificate: http://www.valicert.com/
+* Server auth using Basic with user 'rightscale'
+&gt; GET /_token/your_token/gw/v1/acct/ut-tenant1/instance-types HTTP/1.1
+&gt; Authorization: Basic cmlnaHRzY2FsZTp2c2NhbGUyMDEzQEA=
+&gt; User-Agent: curl/7.30.0
+&gt; Host: wstunnel.test.rightscale.com
+&gt; Accept: */*
+</code></pre>
+
+<h3 id="troubleshooting---frequently-asked-questions-how-do-i-reset-the-tunnel-or-restart-wstuncli--on-the-rca-v--">How do I reset the tunnel or restart wstuncli (on the RCA-V)?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>There are two different ways to restart wstuncli.</p>
+
+<ol>
+<li>(Recommended) Log in to the RCA-V console. Go to <strong>Connectivity &gt; RightScale Platform &gt; RightScale Connection (wstunnel)</strong>. Click the <strong>Restart</strong> button.</li>
+<li>SSH in to the RCA-V instance (as &#39;rightscale&#39;) and switch to the &#39;root&#39; user (<code># sudo su</code>) and run the following UNIX command: <code># service wstuncli restart</code></li>
+</ol>
+
+<h3 id="troubleshooting---frequently-asked-questions-how-do-i-register-my-vsphere-cloud-environment-with-rightscale-">How do I register my vSphere cloud environment with RightScale?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>See <a href="rcav_register_vsphere_cloud.html">Register a vSphere Cloud with RightScale</a>.</p>
+
+<h3 id="troubleshooting---frequently-asked-questions-how-long-does-it-take-for-all-of-my-images-and-instances-to-appear-in-the-rightscale-cloud-management-dashboard-after-i-ve-registered-or-added-a-vsphere-cloud-">How long does it take for all of my images and instances to appear in the RightScale Cloud Management Dashboard after I've registered or added a vSphere cloud?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>Typically you should see your images and instances inside the RightScale Cloud Management Dashboard within a few minutes after adding a vSphere cloud environment to a RightScale account. Depending on the size of the cloud and the number of resources (e.g. running instances) you may need to wait 10 or more minutes before all of your resources are properly displayed in the Dashboard. If you think that it&#39;s taking longer than normal to display all of the resources, you can also manually (re)query the cloud&#39;s controller by logging in to the Dashboard and clicking the &#39;query&#39; text link on the bottom of the <strong>Clouds &gt; Your vSphere Cloud &gt; Instances</strong> screen.</p>
+
+<h3 id="troubleshooting---frequently-asked-questions-how-come-i-still-do-not-see-my-images-and-instances-even-though-it-s-been-more-than-10-minutes-">How come I still do not see my images and instances even though it's been more than 10 minutes?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>If it looks like you are still not seeing your images and/or instances in the RightScale Cloud Management Dashboard even after you&#39;ve manually re-queried the cloud controller (see previous row) and you have not received an error message, you may have connectivity problems (between your vSphere cloud environment and RightScale) or an incorrect cloud token.</p>
+
+<p><em>Check Connectivity</em>:</p>
+
+<ol>
+<li>Log in to the RCA-V console. Go to <strong>Connectivity &gt; RightScale Platform &gt; Overview</strong>.</li>
+<li>Make sure all statuses are green.</li>
+</ol>
+
+<p><em>Check Cloud Redez-vous Token</em>:</p>
+
+<ol>
+<li>Use a command prompt from a computer with Internet connectivity and run the following command:</li>
+</ol>
+<pre class="syntax-highlight plaintext"><code>$ curl -kvu 'rightscale:&lt;your_password&gt;' https://wstunnel10-1.rightscale.com/_token/&lt;your_token&gt;/gw/v1/acct/&lt;your_tenant_name&gt;/instance-types
+</code></pre>
+
+<ul>
+<li><p>If you get a successful response, it means the cloud&#39;s gateway is functioning as expected but RightScale doesn&#39;t have the correct information to connect to it. In such cases, you must make sure the cloud&#39;s gateway endpoint URL (that your RightScale account uses to connect to the vSphere cloud) is correct. For example, maybe the cloud&#39;s Rendez-vous token was changed in the RCA-V console after the cloud was registered with RightScale. In such cases, you must update the cloud&#39;s Endpoint URL in your RightScale account to match what is used in the vSphere&#39;s RCA-V. Log in to the RightScale Dashboard and go to <strong>Settings &gt; Administered Clouds &gt; Your_Cloud &gt; Edit</strong> tab. Change the Endpoint URL accordingly. You may need to contact the person who manages the RCA-V in order to retrieve the correct cloud token.</p></li>
+<li><p>If the problem still persists, you must remove the cloud from your RightScale account and add it again. <em>Note</em>: Any running instances will not be terminated when you remove (disassociate) the cloud from your RightScale account. (See <a href="/cm/dashboard/settings/account/delete_a_private_cloud_account_from_rightscale.html">Delete a Private Cloud Account from RightScale</a>.) Once the cloud has been successfully re-added to the account with the correct Gateway URL, you will see the running instances once again in the RightScale Dashboard.</p></li>
+</ul>
+
+<h3 id="troubleshooting---frequently-asked-questions-where-are-the-log-files-for-the-processes-running-on-the-appliance-">Where are the log files for the processes running on the appliance?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<ol>
+<li>Log in to the RCA-V console and go to <strong>Cloud Appliance Mgmt &gt; System</strong>.</li>
+<li>In the Logs card you can see all of the RCA-V&#39;s log files. The key log files are:</li>
+</ol>
+
+<p><code>vscale.log</code></p>
+
+<p><code>vscale-admin.log</code></p>
+
+<p><code>wstuncli.log</code></p>
+
+<p>If you happen to login to the appliance directly (using SSH), you will find the log files in /var/log directory</p>
+
+<h3 id="troubleshooting---frequently-asked-questions-why-is-my-virtual-machine--vm--stuck-in-a--booting--state-">Why is my virtual machine (VM) stuck in a 'booting' state?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>There are several reasons that might cause a VM (instance) to become stranded in a &#39;booting&#39; state.</p>
+
+<ul>
+<li>RightLink is not properly installed on the VM that was launched. Make sure you launch VMs with images that install RightLink.</li>
+<li>The RightLink agent fails to connect to the RightScale platform to <q>phone home</q> after the instance is running.​ Perhaps the VM does not have an outbound route to the Internet so that it can connect to RightScale. Maybe DNS is not set up properly or the public DNS server (such as 8.8.8.8) is not reachable.</li>
+<li>A script in the ServerTemplate&#39;s boot phase did not get executed or handled correctly.</li>
+</ul>
+
+<h3 id="troubleshooting---frequently-asked-questions-why-is-the-cloud-controller-status-red--and-not-green--">Why is the Cloud Controller status red (and not green)?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>When you check the status of the VMware vSphere cloud (<strong>Settings &gt; Account Settings &gt; Clouds</strong>) and the status of the Cloud Controller is red (as shown below), it means that the RightScale platform cannot properly connect to the RCA-V and/or related vSphere cloud.</p>
+
+<p><img src="/img/rcav-cloud-status-controller-red.png" alt="Cloud Controller Status" width="600" height="91" /></p>
+
+<p>There could be several issues that could cause this type of problem.</p>
+
+<ul>
+<li>RCA-V is not running</li>
+<li>RCA-V is not properly installed on the server. You may need to launch a new RCA-V server.</li>
+<li>The tenant (that the RightScale account was assigned) was deleted.</li>
+<li>vSphere environment no longer exists</li>
+<li>The RCA-V appliance cannot connect to the vSphere cloud&#39;s API endpoint.
+
+<ul>
+<li>Perhaps the network firewall permissions were changed</li>
+<li>Maybe the &#39;RightScale&#39; user was accidentally deleted inside the vSphere Client application or the permissions associated with the &#39;RightScale&#39; role were changed and no longer satisfy the minimum set of requirements.</li>
+<li>Perhaps the VMware vSphere cloud was deregistered and is no longer accessible via the RightScale platform.</li>
+</ul></li>
+</ul>
+
+<p>See the <a href="rcav_installation_guide.html">RCA-V Installation Guide</a>.</p>
+
+<h3 id="troubleshooting---frequently-asked-questions-why-is-the-cloud-account-status-red--and-not-green--">Why is the Cloud Account status red (and not green)?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>When you check the status of the VMware vSphere cloud (<strong>Settings &gt; Account Settings &gt; Clouds</strong>) and the status of the Cloud Account is red (as shown below), it means that there is a problem with your cloud&#39;s subscription.</p>
+
+<p><img src="/img/rcav-cloud-status-account-red.png" alt="Cloud Controller Status" width="600" height="91" /></p>
+
+<p>Invalid Cloud Subscription/Credentials. Please log a RightScale Support ticket or email <a href="mailto:support@rightscale.com">support@rightscale.com</a>.</p>
+
+<h3 id="troubleshooting---frequently-asked-questions-i-get-the-genericerror---sdrs-recommendation-not-found-for-datastore-cluster--when-i-launch-a-new-server--why-">I get the GenericError: "SDRS recommendation not found for datastore cluster" when I launch a new Server. Why?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>The error simply means that the datastore being used does not have enough space available to launch a new Server. So you either need to clear up some space in your datastore or expand its size.</p>
+<pre class="syntax-highlight plaintext"><code>CloudExceptions::CloudException - Vscale::GenericError: SDRS recommendation not found for datastore cluster C7700_NPE_T_SCSI
+</code></pre>
+
+<p>See this <a href="https://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=1003412">VMware KnowledgeBase Article</a> for additional information.</p>
+
+<h3 id="troubleshooting---frequently-asked-questions-datastore-cluster-can-t-be-used-as-a-storage-for-disks-snapshots">Datastore cluster can't be used as a storage for disks/snapshots</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>Datastore cluster is not supported for snapshots. A volume snapshot can be created from a volume that is attached or that is not attached. An SDRS recommendation from vCenter is an operation on VMs. So there is no way to get an SDRS recommendation for an unattached volume so the datastore must be <strong>explicit</strong>.</p>
+
+<p>If you edit the vscale.conf directly to set the Datastore Cluster, the following error will appear when committing the config which is expected:</p>
+<pre class="syntax-highlight plaintext"><code>"An error occurred: Datastore cluster can't be used as a storage for disks/snapshots. Please specify a particular datastore. (status 400)"
+</code></pre>
+
+<h3 id="troubleshooting---frequently-asked-questions-why-am-i-getting-different-status,-available-and-provisioned,-when-a-volume-is-created-in-vsphere">Why am I getting different status, available and provisioned, when a volume is created in vSphere</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>The volume state depends on the datastore location. So the following is true:</p>
+
+<ul>
+<li>If you create a volume on <strong>datastore</strong> - you&#39;ll get <strong>available</strong> state</li>
+<li>If you create a volume on <strong>datastore cluster</strong>, you&#39;ll get <strong>provisioned</strong> state</li>
+</ul>
+
+<p>The explanation from the latter case is the volume status is set as <strong>provisioned</strong> because we can&#39;t create volume on a datastore cluster before getting a SDRS recommendation. The volume needs to be attach to an instance and during this process, that&#39;s where we get vSphere recommendation in placing the volume and after that, the volume state will be <strong>available</strong>. And after detaching the volume from an instance, it will show as unattached and available.</p>
+
+<h3 id="troubleshooting---frequently-asked-questions-why-am-i-getting-**time-limit-exceeded-**-when-attaching-a-volume--">Why am I getting **Time limit exceeded.** when attaching a volume. </h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<ul>
+<li>If you create a volume on <strong>datastore cluster</strong>, you&#39;ll get <strong>provisioned</strong> state</li>
+<li>When you attach the volume is when it creates the vmdk on the SDRS recommended datastore</li>
+<li>When Provisioning Mode: <strong>eagerZeroedThick</strong> is chosen. </li>
+</ul>
+
+<p>When you create a volume on an SDRS Cluster over a certain size via RCL it will exceed the timeout for the volume attach call. You will need to write some custom code in self service to bypass this. </p>
+<pre class="syntax-highlight plaintext"><code>sub do
+  provision(@volume1)
+  sleep_until(@volume1.status =~ "provisioned")
+  sub on_error: skip do
+    provision(@volume_attachment1)
+  end
+  sleep_until(@volume1.status =~ "in-use")
+end
+</code></pre>
+
+<h3 id="troubleshooting---frequently-asked-questions-when-i-view-a-vmware-instance,-the-private-ip-address-is-not-always-shown-">When I view a VMware instance, the private IP address is not always shown?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p>The usual problem when this happens could be due to VMware Tools not working properly. Check if the instance is set to auto-update the VMware Tools and this process may be failing, leaving the VM without a running VMware Tools service. The vmware tools is an <a href="rcav_image_requirements.html">image requirement</a> in order for RCA-V to retrieve the instance IP. If this is verified to be the issue, you can:</p>
+
+<ul>
+<li>Install/re-install the vmware tools on the instance or</li>
+<li>For a permanent fix, create a new vm template that has auto update disabled</li>
+</ul>
+
+<h3 id="troubleshooting---frequently-asked-questions-why-isn-t-the-volume-types-tab-loading-in-the-rca-v-web-ui-">Why isn't the Volume Types tab loading in the RCA-V web UI?</h3>
+
+<p><strong>Suggestion</strong>:</p>
+
+<p><img src="/img/rcav-faqs-vol_types_tab.png" alt="RCA-V Volume Types Tab" width="2442" height="986" /></p>
+
+<p>If the Volume Types tab of the RCA-V appears to be <q>stuck</q> while loading, this is likely due to how permissions were applied to the VMware environment.  Verfiy the following:</p>
+
+<ul>
+<li>Ensure the correct <a href="./rcav_prepare_vsphere_environment.html#vcenter-access-requirements-create-a-rightscale-role">privileges</a> were granted to the RightScaleRole </li>
+<li>Ensure the RightScaleRole was <a href="./rcav_prepare_vsphere_environment.html#vcenter-access-requirements-assign-permissions-for-rightscale-to-the-vsphere-infrastructure">applied to the <strong>vCenter</strong> and propagated to child objects</a> </li>
+</ul>
+
+<h3 id="troubleshooting---frequently-asked-questions-why-aren-t-rightscale-instance-names-syncing-with-vsphere-vm-names--">Why aren't RightScale Instance names syncing with vSphere VM names? </h3>
+
+<p><strong>Suggestion:</strong> 
+The RightScale to VMware name sync feature is only available on RCA-V v3.0 or newer. If you are running an earlier release then an error will be generated in the vscale log (/var/log/vscale/vscale.log), but no error will be returned to the audit entries in RightScale.  The recommended solution is to <a href="/rcav/v3.0/rcav_upgrade_to_3_0.html">upgrade to the v3.0 release</a>.</p>
+
+<h3 id="troubleshooting---frequently-asked-questions-is-the-rca-v-patched-against-the-meltdown-and-spectre-vulnerabilities---">Is the RCA-V patched against the Meltdown and Spectre vulnerabilities?  </h3>
+
+<p><strong>Suggestion:</strong>
+RCA-V versions <code>vscale-3.0-20170921-13</code> and older have not been patched to protect against these vulnerabilities.  The suggested action is to ssh into the appliance and apply the necessary patches to secure the system.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>10.0.rc4 Release</title><meta content="Version-specific information for the 10.0.rc4 Release of RightLink." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="rl10 rl10_releases rl10_releases_rl10_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="../getting_started.html">Getting Started</a><a class="list-group-item" href="../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">RightLink 10</a> &#x2F; <a href="./">Releases</a></p><div class="page-header"><h1>10.0.rc4 Release</h1></div><div class="main-content"><p>*<em>NOTE: This is a Release Candidate, for the latest GA release see <a href="index.html">releases</a> *</em></p>
+
+<p>(This Release Candidate is virtually identical to 10.0.3 except that the ServerTemplate has images for 7 operating systems on 4 clouds making it easier to try out the install-at-boot use-cases and making it easier to refer to a known-to-work image if you&#39;re having difficulties.)</p>
+
+<h2 id="quick-reference">Quick Reference</h2>
+
+<table><thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Change log</td>
+<td><a href="https://rightlink.rightscale.com/rll/10.0.rc4/CHANGES.md">https://rightlink.rightscale.com/rll/10.0.rc4/CHANGES.md</a></td>
+</tr>
+<tr>
+<td>Linux Base ServerTemplate</td>
+<td><a href="https://us-3.rightscale.com/library/server_templates/RL10-0-3-Linux-Base/lineage/52389">https://us-3.rightscale.com/library/server_templates/RL10-0-3-Linux-Base/lineage/52389</a></td>
+</tr>
+<tr>
+<td>Github repo for Base ServerTemplate</td>
+<td><a href="https://github.com/rightscale/rightlink_scripts/tree/10.0.rc4">https://github.com/rightscale/rightlink_scripts/tree/10.0.rc4</a></td>
+</tr>
+<tr>
+<td>Install-at-boot</td>
+<td>Tag:<br><code>rs_agent:mime_include_url=https://rightlink.rightscale.com/rll/10.0.rc4/rightlink.boot.sh</code><br>How-to: import ServerTemplate, create server from ST, pick desired MCI, launch</td>
+</tr>
+<tr>
+<td>Enable-running</td>
+<td>Script:<br><code>https://rightlink.rightscale.com/rll/10.0.rc4/rightlink.enable.sh</code><br>How-to: import ST, launch raw instance, SSH in, copy key from &#39;settings&gt;API credentials&#39;, run:<br><code>curl -s https://rightlink.rightscale.com/rll/10.0.rc4/rightlink.enable.sh &#124; bash -s -- -l -k &lt;your-key&gt; -d <q>&#060;deployment-name&#062;</q> -n <q>my server</q> -t <q>RL10.0.rc4 Linux Base</q> -a us-3.rightscale.com -c &lt;cloud_type&gt;</code></td>
+</tr>
+<tr>
+<td>Known limitations</td>
+<td>Decommission scripts are terminated after a second or two instead of waiting up to 180 seconds due to errors in init system scripts. Upstart, systemd, and sysvinit are affected. A RightScript to hotfix these issues is available at <a href="https://us-4.rightscale.com/library/right_scripts/RightLink-10-0-3-fix-decommiss/lineage/53363">https://us-4.rightscale.com/library/right_scripts/RightLink-10-0-3-fix-decommiss/lineage/53363</a>. This issue will be fixed in 10.0.5.  Meanwhile, this fix should also be applied to RC4 manually by running the above script.</td>
+</tr>
+</tbody></table>
+
+<h2 id="rightscale-tested-images">RightScale tested images</h2>
+
+<p>The following images were tested by RightScale and known to work with this version of RightLink 10. This list is not intended as a recommendation of these images, it is simply intended as a reference so you can locate known-to-work images and compare with your own images if you are having difficulties.</p>
+
+<p><q>Known to work</q> means that the following features work: enable a running <q>bare</q> instance using the rightlink.enable.sh script, reboot the instance, stop&amp;start the enabled instance, create the rightscale user and support managed login, install the Rightlink init scripts, and install monitoring (collectd v4).</p>
+
+<p>Note: except for vmWare the tests for this RC use official images prepared by the OS vendor or the cloud vendor. In some cases this leads to failures due to problems with the specific images that can easily be overcome using a custom image.</p>
+
+<table border="1" cellpadding="1" cellspacing="1">
+    <tbody>
+        <tr>
+            <td style="background-color: rgb(211, 211, 211);"><strong>OS</strong></td>
+            <td style="background-color: rgb(211, 211, 211);"><strong>Clouds</strong></td>
+            <td style="background-color: rgb(211, 211, 211);"><strong>Images</strong></td>
+            <td style="background-color: rgb(211, 211, 211);"><strong>Image provenance</strong></td>
+            <td style="background-color: rgb(211, 211, 211);"><strong>Limitations</strong></td>
+        </tr>
+        <tr>
+            <td colspan="1" rowspan="4">Ubuntu 14.04</td>
+            <td>AWS</td>
+            <td>US-East:&nbsp;ami-6089d208<br />
+            US-Oregon:&nbsp;ami-3b14370b</td>
+            <td colspan="1">
+            <p><a class="external" href="http://cloud-images.ubuntu.com/locator/" title="http://cloud-images.ubuntu.com/locator/">Official Ubuntu image locator</a></p>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Softlayer</td>
+            <td>25GB - Ubuntu / Ubuntu /<br />
+            14.04-64 Minimal for VSI (226478)</td>
+            <td colspan="1">Softlayer public image</td>
+            <td>enable-running use-case only</td>
+        </tr>
+        <tr>
+            <td>vmWare (RCA-V)</td>
+            <td>QA_0.7.2_Fixed_DataSource_Ubuntu_<br>14.04_20150204.1_784bd81bd3cce8 (not public)</td>
+            <td colspan="1">Custom</td>
+            <td>
+            <p>no public image available</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1" rowspan="3">Ubuntu 12.04</td>
+            <td>AWS</td>
+            <td>US-East:&nbsp;ami-94faa6fc</td>
+            <td colspan="1">
+            <p><a class="external" href="http://cloud-images.ubuntu.com/locator/" title="http://cloud-images.ubuntu.com/locator/">Official Ubuntu image locator</a></p>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Softlayer</td>
+            <td>25GB - Ubuntu / Ubuntu /<br />
+            12.04-64 Minimal for VSI (202346)</td>
+            <td colspan="1">Softlayer public image</td>
+            <td>enable-running use-case only</td>
+        </tr>
+        <tr>
+            <td colspan="1" rowspan="3">CentOS 7</td>
+            <td>AWS</td>
+            <td>US-East:&nbsp;ami-96a818fe</td>
+            <td><a class="external" href="http://wiki.centos.org/Cloud/AWS" rel="freeklink" title="http://wiki.centos.org/Cloud/AWS">http://wiki.centos.org/Cloud/AWS</a></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><strike>Softlayer</strike></td>
+            <td>N/A</td>
+            <td>&nbsp;</td>
+            <td>no official image available</td>
+        </tr>
+        <tr>
+            <td colspan="1" rowspan="2">CentOS 6</td>
+            <td>Softlayer</td>
+            <td>25G CentOS 6 64-bit (10609)</td>
+            <td>Softlayer public image</td>
+            <td>enable-running use-case only</td>
+        </tr>
+        <tr>
+            <td><strike>AWS</strike></td>
+            <td>N/A</td>
+            <td>&nbsp;</td>
+            <td>problems with cloud-init installation</td>
+        </tr>
+        <tr>
+            <td colspan="1">Debian 7</td>
+            <td>AWS</td>
+            <td>US-East:&nbsp;ami-e0efab88</td>
+            <td><a class="external" href="https://wiki.debian.org/Cloud/AmazonEC2Image/Wheezy" title="https://wiki.debian.org/Cloud/AmazonEC2Image/Wheezy">https://wiki.debian.org/Cloud/AmazonEC2Image/Wheezy</a></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="1" rowspan="3">RHEL 7</td>
+            <td>AWS</td>
+            <td>US-East:&nbsp;ami-785bae10</td>
+            <td><a class="external" href="https://aws.amazon.com/marketplace/pp/B00KWBZVK6" title="https://aws.amazon.com/marketplace/pp/B00KWBZVK6">AWS&nbsp;Marketplace</a></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Softlayer</td>
+            <td>N/A</td>
+            <td>&nbsp;</td>
+            <td>no official image available</td>
+        </tr>
+        <tr>
+            <td colspan="1" rowspan="2">RHEL 6</td>
+            <td>AWS</td>
+            <td>US-East:&nbsp;ami-8d756fe4</td>
+            <td><a class="external" href="https://aws.amazon.com/marketplace/pp/B00CFQWLS6" title="https://aws.amazon.com/marketplace/pp/B00CFQWLS6">AWS&nbsp;Marketplace</a></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Softlayer</td>
+            <td>25G RedHat 6 64-bit (10660)</td>
+            <td>Softlayer public image</td>
+            <td>enable-running use-case only</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 id="how-to">How-To</h2>
+
+<h3 id="how-to-quick-test">Quick test</h3>
+
+<ul>
+<li>From the marketplace import the RightLink 10.0.rc4 Linux Base (fix link) ServerTemplate published by RightScale Engineering.</li>
+<li>Create a Server from the ServerTemplate</li>
+<li>Select an appropriate MCI and launch, the ST should go operational, you should see an audit entry with the boot scripts, you should be able to SSH into the instance using your <q>managed SSH</q> key and you should be logged in as user &#39;rightscale&#39; from which you can sudo</li>
+</ul>
+
+<h3 id="how-to-adapting-the-base-servertemplate">Adapting the Base ServerTemplate</h3>
+
+<ul>
+<li>You can clone the base ST and insert a different MCI of your choice, the MCI needs to have the required RS_agent tags (see below)</li>
+<li>Alternatively, you can create you own ST using your own MCI</li>
+<li><p>Standard MCI tags (see RLL: <a href="../reference/rl10_install_at_boot.html">cloud-init</a> for additional tags):</p>
+
+<p><code>rs_agent:type=right_link_lite
+rs_agent:mime_include_url=rs_agent:mime_include_url=https://rightlink.rightscale.com/rll/10.0.rc4/rightlink.boot.sh</code></p></li>
+<li><p>AWS, Softlayer, and VMware (vscale) have been tested; YMMV on other clouds</p></li>
+<li><p>For GCE the tags and script differ slightly due to some problems with multi-part MIME userdata, which we expect to resolve soon, contact RightScale for info</p></li>
+<li><p>nFor CoreOS the tags and script also differ slightly due to limitations in CoreOS&#39; cloud-init implementation, contact RightScale for info</p></li>
+<li><p>The collectd monitoring script works for Ubuntu 14.04, Ubuntu 12.04, CentOS 7, CentOS 6.6, RHEL 6.5 and will strand for most other distros due to the lack of a functioning collectd.4.10 rpm</p></li>
+</ul>
+
+<h2 id="rl10-is-not-fully-compatible-with-rl6">RL10 is Not Fully Compatible with RL6</h2>
+
+<ul>
+<li>The environment variables available to RightScripts are different, and there are no RS_REBOOT or RS_OS_TYPE variables. Write idempotent scripts using the capabilities of the shell, such as testing for the presence of files. Dispatch based on the presence of tools or filesystem locations you need instead of a OS type variable.</li>
+<li>No rs_tag command, instead RLL can proxy API 1.5 requests and add authentication along the way</li>
+<li>No built-in Chef support</li>
+<li>RightScript log output is not sanitized to remove credential values! (Some of them are by the platform but this will change soon.) The sanitization has lots of problems, the only proper solution is for the script writer to ensure sensitive creds are not output to stdout/stderr!</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

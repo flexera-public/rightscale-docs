@@ -1,0 +1,412 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Developing RightScripts - Tutorial</title><meta content="In this RightScale tutorial we cover creating a basic RightScript, layering on complexity using Inputs, and developing more advanced RightScripts." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_design cm_dashboard_design_rightscripts cm_dashboard_design_rightscripts_rightscripts_developing" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Design</a> &#x2F; <a href="./">RightScripts</a></p><div class="page-header"><h1>Developing RightScripts - Tutorial</h1></div><div class="main-content"><p>The focus of this section is understanding and developing RightScripts, not Chef Cookbooks. Although many of our ServerTemplates come with fully functioning RightScripts (that we encourage using <q>as is</q>), we realize the need for customization or even writing your own from scratch. If you can work through this tutorial from end to end, you will have a solid foundation for developing your own RightScripts.<br>
+In this tutorial we cover creating a basic RightScript, layering on complexity using <em>Inputs</em>, and developing more advanced RightScripts touching on most of the features used within the Dashboard. Several best practices are also covered along the way.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>An operational Linux based Server and basic understanding of bash scripting. The examples in this tutorial use the Unix shell (bash), but you could develop similar scripts in a different scripting language. (For example, Perl, Ruby, or a different shell such as Bourne, csh or ksh.)</p>
+
+<h3 id="prerequisites-create-a-basic-rightscript">Create a Basic RightScript</h3>
+
+<ul>
+<li>Go to <strong>Design</strong> &gt; <strong>RightScripts</strong> &gt; <strong>New</strong></li>
+<li>Fill out the following fields:
+
+<ul>
+<li><strong>Name</strong> - Hello World</li>
+<li><strong>Description</strong> - Fill out a basic description</li>
+<li><strong>Script</strong> - Use the following example to start your basic Hello World RightScript</li>
+<li><strong>Packages</strong> - OK to leave this blank</li>
+</ul></li>
+</ul>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/bash -ex</span>
+    <span class="nb">echo</span> <span class="s2">"Hello World!"</span>
+    <span class="nb">exit </span>0 <span class="c"># Graceful exit</span>
+</code></pre>
+
+<ul>
+<li>Click the <strong>Save</strong> action button when ready</li>
+<li><em>Tip</em>: If any of this does not make sense, see the Dashboard Help Text.</li>
+</ul>
+
+<p>You now have the most basic of RightScripts. This RightScript can be added to a ServerTemplate and run in any one of the three phases (boot, operational or decommission). More on this later...</p>
+
+<h3 id="prerequisites-add-a-standard-environment-input">Add a Standard Environment Input</h3>
+
+<p>Recall that Inputs are environment variables in all CAPS that are parsed out of RightScripts. Before adding one, test the Identify action button.</p>
+
+<ul>
+<li>Click the <strong>Edit</strong> action button for the RightScript you saved earlier</li>
+<li>Click the <strong>Identify</strong> action button. You should receive a message similar to the following:</li>
+</ul>
+
+<p>There are no environment variables in the script.</p>
+
+<ul>
+<li>Run your RightScript
+
+<ul>
+<li>From your running Server&#39;s Script tab, select the Any Script pull-down</li>
+<li>Select your Hello World script from the <q>private RightScript</q> drop-down</li>
+<li>Click the <strong>Run Script</strong> action button</li>
+<li>Monitor progress in your Events pane</li>
+<li>You can look at the Audit Entries. (Nothing too interesting yet.)</li>
+</ul></li>
+<li>Add the following echo statement just before your <q>exit 0</q> statement. In the Bash example below, FIRSTNAME is the input variable. The syntax</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    echo "Nice to be here, my name is $FIRSTNAME"
+</code></pre>
+
+<ul>
+<li>Proper syntax for declaring standard environment inputs:
+
+<ul>
+<li>Bash $MYINPUT</li>
+<li>Perl $ENV{‘MYINPUT’}</li>
+<li>Ruby ENV[‘MYINPUT’]</li>
+<li>Powershell $env:MYINPUT</li>
+<li>Python environ[‘MYINPUT’]
+
+<ul>
+<li>Also place $MYINPUT (i.e. the Python variable name with a leading dollar sign) in a comment so the Identify action below will discover the input.</li>
+</ul></li>
+</ul></li>
+<li>Select the <strong>Identify</strong> action button. This will force a parsing of the RightScript. The Input, FIRSTNAME, should be identified.
+
+<ul>
+<li>Enter a basic Description of your Input. (e.g. First name of the user)</li>
+<li>Leave the Value Type as the default <q>any</q></li>
+</ul></li>
+<li>Save your changes and run your RightScript again
+
+<ul>
+<li>This time, you should be asked for a value for the FIRSTNAME Input. Enter your name as text then click the <strong>Continue</strong> action button.</li>
+<li>View the audit entries for this run. You should notice the correct value for FIRSTNAME displayed in the Audit Entries.</li>
+</ul></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Tip:</strong><p>During the development process, you will be spending a lot of time editing your RightScript, and then running it. You may want to use the Bookmark feature in the left window pane to bookmark the Scripts tab of your running Server.</p>
+</div>
+
+<h3 id="prerequisites-add-a-cloud-environment-input">Add a Cloud Environment Input</h3>
+
+<p>This example uses AWS EC2 Input values.</p>
+
+<ul>
+<li>Open up a window and navigate to the RightScale Support Portal (/)
+
+<ul>
+<li>Navigate to <strong>Cloud Management</strong> &gt; <strong>Reference Information</strong> &gt; <a href="/cm/ref/environment_inputs.html">Environment Inputs</a></li>
+<li>Read over the type of environment information you have access to within a RightScript</li>
+</ul></li>
+<li>Add the following lines to your RightScript (again, place them just prior to the <q>exit 0</q> statement) <em>Note</em>: Feel free to use different Cloud Inputs that interest you.</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    echo "Instance Size: $EC2_INSTANCE_TYPE"
+    echo "Public IP addr: $EC2_PUBLIC_IPV4"
+</code></pre>
+
+<ul>
+<li>Run your RightScript again</li>
+<li>View your Audit Entries. The <q>success</q> entry should have something like this, with valid values for EC2 Environment Inputs:</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    ********************************************************************************
+    *RS&gt; Running RightScript &lt;GD: Hello World&gt; ****
+    *RS&gt; script starting at: Mon May 10 19:59:45 -0400 2010
+    + echo 'Hello World!'
+    Hello World!
+    + echo 'Nice to be here, my name is GregDoe'
+    Nice to be here, my name is GregDoe
+    + echo 'Instance Size: m1.small'
+    Instance Size: m1.small
+    + echo 'Public IP addr: 184.73.100.71'
+    Public IP addr: 184.73.100.71
+    + exit 0
+    *RS&gt; script duration: 0.005064 seconds
+</code></pre>
+
+<h3 id="prerequisites-add-a-rightscale-environment-input">Add a RightScale Environment Input</h3>
+
+<ul>
+<li>View the RightScale <a href="/cm/ref/environment_inputs.html">Environment Inputs</a> further down in the same Support Portal document. Read the footnote. Notice that RS_SERVER_NAME, RS_DEPLOYMENT_NAME and RS_SERVER_TEMPLATE_NAME <em>are not</em> directly accessible on your running instance (like other RS and EC2 environment Inputs are). For example, if you simply echo or evaluate any of these three Inputs you will get null values. However, you can use the following example in order to access this important environment information.</li>
+<li>Click the <strong>Edit</strong> action button for your Hello World RIghtScript</li>
+<li>Add the following line to the script (just above the <q>exit 0</q> statement)</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    echo "RightScale Server Name: $RS_SERVER_NAME"
+</code></pre>
+
+<ul>
+<li>Click the <strong>Identify</strong> action button and fill out a basic description for your new Input</li>
+<li>Click the <strong>Save</strong> action button and then run your RightScript again. This time when the Inputs are flagged, for RSSERVERNAME select the following three choices from the drop-down menus:
+
+<ul>
+<li>Select Env in the drop down as the Input type</li>
+<li>Select RS_SERVER_NAME as the RightScale environment Input to assign RSSERVERNAME to</li>
+<li>Finally, select your Server name (from the list of all Servers in the Deployment)</li>
+</ul></li>
+<li>Click the <strong>Continue</strong> action button when ready to run your RightScript</li>
+<li>View the <q>success</q> Audit Entry for your RightScript run. You should see valid values for all of your environment Inputs. That is, for the standard, Cloud and RightScale Inputs you have created thus far in the tutorial.</li>
+</ul>
+
+<p>Again, you would have seen a <q>null</q> value for RS_SERVER_NAME <em>unless</em> it was evaluated as part of a RightScript, which is accomplished by mapping a standard Input to an RightScale environment Input. The same behavior holds true for RS_DEPLOYMENT_NAME and RS_SERVER_TEMPLATE_NAME as well.</p>
+
+<h3 id="prerequisites-develop-a-more-practical-and-advanced-rightscript">Develop a More Practical and Advanced RightScript</h3>
+
+<p>In this part of the tutorial you will develop a more practical RightScript that checks port status, using various types of Inputs. You will also learn more about RightScript descriptions (which support Markdown) and Input descriptions.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>This section of the tutorial is less verbose, unless covering a new step that merits additional explanation. Refer to the Basic RightScript section if you forget any step details.</p>
+</div>
+
+<div class="alert alert-info" role="alert"><strong>Tip:</strong><p>Until now, we have developed the RightScript within the RightScale Dashboard. Those familiar with a Unix editor such as vi may want to develop RightScripts by SSHing into the instance and working through the development process there. (Or SSH into the instance and use that in concert with development straight in the Dashboard.) Use what process works best for you, but be careful not to get confused if you let your RightScripts get out of sync with each other (instance version versus the Dashboard version).</p>
+</div>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>If you do any development on the instance itself (for example, creating and working in /tmp/test.sh) if you terminate the instance your work will be lost. Make sure you save anything you need by transferring the file elsewhere, or copy/pasting into a RightScript within the Dashboard.</p>
+</div>
+
+<h3 id="prerequisites-create-the-basics-of-a-rightscript">Create the Basics of a RightScript</h3>
+
+<ul>
+<li>Create a new RightScript named <q>Port State Checker</q> (or something similar).</li>
+<li>Add the following to the RightScript body:</li>
+</ul>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/bash -ex</span>
+    <span class="nb">echo</span> <span class="s2">""</span>
+    lsof -P -i | grep -i <span class="s2">"</span><span class="nv">$STATE</span><span class="s2">"</span>
+    <span class="nb">echo</span> <span class="s2">"Done (port state)."</span>
+    <span class="nb">exit </span>0
+</code></pre>
+
+<ul>
+<li>Run the RightScript, setting the Input STATE to <q>listen</q> when you run it. This will instruct the script to display all port connections in a listen state.</li>
+<li>As always, check the Audit Entries to observe what happens during the run.</li>
+</ul>
+
+<h3 id="prerequisites-add-a-credential-verification-check">Add a Credential Verification Check</h3>
+
+<p>Recall that Credentials are essentially secure key/value pairs stored within the RightScale Dashboard (database).</p>
+
+<p>Now you will create a new Credential in the RightScale Credential store, and verify against that credential before the core of your port checker RightScript is executed.</p>
+
+<ul>
+<li>Create a new Credential called <q>MYCREDS</q> in the RightScale Credential store. Note whatever you set the MYCREDS value to. (In our example, it is set to <q>GregDoe</q>.)</li>
+<li>Add to your RightScript so it now looks similar to the following:</li>
+</ul>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/bash -ex</span>
+    <span class="nb">echo</span> <span class="s2">""</span>
+    <span class="k">if</span> <span class="o">[</span><span class="s2">"</span><span class="nv">$MYCREDS</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"GregDoe"</span><span class="o">]</span>
+    <span class="k">then
+       </span><span class="nb">echo</span> <span class="s2">"Credentials validated. Port states are:"</span>
+       lsof -P -i | grep -i <span class="s2">"</span><span class="nv">$STATE</span><span class="s2">"</span>
+       <span class="nb">echo</span> <span class="s2">"Done (port state)."</span>
+       <span class="nb">exit </span>0 <span class="c"># Graceful exit</span>
+    <span class="k">fi
+    </span><span class="nb">echo</span> <span class="s2">"&gt;&gt;&gt; Credential AUTHORIZATION FAILED! &lt;&lt;&lt;"</span>
+    <span class="nb">exit </span>1 <span class="c"># Ungraceful exit, Credential check failed</span>
+</code></pre>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If the Credential check fails the RightScript will exit. If it passes, the port status is displayed.</p>
+</div>
+
+<ul>
+<li>Run the RightScript again
+
+<ul>
+<li>For MYCREDS, select CRED as the Input type. Select the Credential you created earlier (e.g. MYCREDS)</li>
+<li>Set the STATE to <q>listen</q> again</li>
+<li>Select the <strong>Continue</strong> action button to run the RightScript</li>
+</ul></li>
+<li>The success Audit Entry should include a line stating <q>Credentials validated</q> along with output from the lsof command.</li>
+<li>To test that your Credential Input validation is indeed working<br>
+
+<ul>
+<li>Run the RightScript again. This time, fill out a valid STATE (e.g. <q>listen</q>), but enter an incorrect Credential or type in something incorrect.</li>
+<li>The Audit Entry should reveal: <q>>>> Credential AUTHORIZATION FAILED! <<<</q></li>
+</ul></li>
+</ul>
+
+<h3 id="prerequisites-use-a-rightscript-attachment-to-configure-the-port-number">Use a RightScript Attachment to Configure the Port number</h3>
+
+<p>First, lets simply add the port logic and hard code the port number to check for. Once satisfied, we&#39;ll create a configuration file, attach it to our script so it gets its port value from an external file when the script runs.</p>
+
+<ul>
+<li>Add the following two lines of code to your RightScript above the <q>exit 0</q> statement in the code block where the Credential validation succeeded:</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    lsof -P -i | grep $PORT
+    echo "Done (port connection status)."
+</code></pre>
+
+<ul>
+<li>Run your RightScript again<br>
+
+<ul>
+<li>Fill out the MYCREDS and STATE with correct values like you did before.</li>
+<li>For PORT, enter an integer. For example, enter 22 to see if sshd is listening on port 22, or 25 to see if there is an SMTP process listening on standard SMTP port 25.</li>
+<li>You should see two valid executions of lsof, the first for the state, the second for a specific port number.</li>
+</ul></li>
+</ul>
+
+<p>Assuming all has gone well, you are now ready to include the port number to check connection status on as a value in a RightScript Attachment.</p>
+
+<ul>
+<li>Create a standard text file on your local computer.
+
+<ul>
+<li>Name it <q>port.conf</q></li>
+<li>Add the contents <q>22</q> to the file. You will check for SSH port 22 the next time you run the RightScript.</li>
+<li>Close and save the file.</li>
+</ul></li>
+<li>Navigate to the Attachments tab of your port status RightScript
+
+<ul>
+<li><strong>Browse</strong> to your <q>port.conf</q> file and <strong>upload</strong> it</li>
+<li>Select the <strong>pencil</strong> action icon to verify your uploaded configuration file has the correct contents in it</li>
+</ul></li>
+<li>Modify the contents of your RightScript.
+
+<ul>
+<li>First, either delete or comment out the hardcoding of the lsof that checks for the port status. (That is, delete or prepend a <q>#</q> to the line: <q># lsof -P -i |grep $PORT</q></li>
+<li>Add the following code snippet in its place (previous lsof) and re-run your RightScript.</li>
+</ul></li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    port=$(&lt;"$RS_ATTACH_DIR"/port.conf)
+    echo Port "$port" connection status:
+    lsof -P -i | grep :"$port" | grep -i "$STATE"
+</code></pre>
+
+<p>This will assign the value <q>22</q> from your attached port.conf file to the variable <q>port</q>, and parse out any and all occurrences of <q>:22</q> in the output of your lsof command.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>Notice that the first part of this section uses $PORT in your RightScript. Later, that is replaced with $port, which is read in from an external file attachment. RightScript Input naming conventions mandate Inputs be in all CAPS. Hence $PORT is an Input and you will be prompted for a value when you run the RightScript. Later, when reading the value for <q>port</q> from the port.conf file, you will not be prompted for a value. <q>port</q> is simply a variable in your RightScript, that is populated from an external file, not an actual RightScript Input.</p>
+</div>
+
+<h3 id="prerequisites-summary">Summary</h3>
+
+<p>This may not be the most helpful RightScript ever written, but layer upon layer it touches most of the main points you must learn in order to develop RightScripts, work with various types of Inputs, Credentials and Attachments. Of course the example configuration file was as basic as it could be, but it could have been a more complex configuration file, or perhaps an Apache httpd.conf file that you run sed against in order to change a default configuration setting, etc. Read the Post Tutorial Steps for a list of additional tasks you may want to perform in order to continue your learning curve.</p>
+
+<h2 id="post-tutorial-steps">Post Tutorial Steps</h2>
+
+<p>The focus of this tutorial was to touch on many areas with respect to <em>developing</em> RightScripts and learning more about how they work. Once you have finished active development, there are several post tutorial steps described below that are considered <em>best practice</em>.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>In addition to the method of defining inputs mentioned here, there are also <a href="/cm/dashboard/design/rightscripts/rightscripts_metadata_comments.html">RightScript Metadata Comments</a> which allow you to fully specify the RightScript Inputs, their default values, type, and other settings with in the script itself. This is useful if you want to store your RightScript outside of RightScale in your own source control system such as Git or Subversion.</p>
+</div>
+
+<h3 id="post-tutorial-steps-make-your-rightscript-reboot-safe">Make Your RightScript Reboot Safe</h3>
+
+<p>RightScripts that we publish in the MultiCloud Marketplace are considered <q>reboot safe</q>. Towards the top of the script they contain a code block similar to the one shown below. To understand why this is important, note that if you reboot a Server and an installation/configuration script runs again, you can end up with undesired results. In most cases, you will want to make your scripts reboot safe.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Under most circumstances we consider it best practice to relaunch Servers rather than reboot them. In this instance, being reboot safe is moot.</p>
+</div>
+<pre class="syntax-highlight plaintext"><code>    #
+    # Test for a reboot, if this is a reboot just skip this script.
+    #
+    if test "$RS_REBOOT" = "true" ; then
+        echo "Skip HTTPERF installation on REBOOT."
+        logger -t RightScale "Skip HTTPERF installation on REBOOT."
+        exit 0     # Leave with a smile ...
+    fi
+</code></pre>
+
+<h3 id="post-tutorial-steps-document-your-rightscript-and-its-inputs">Document Your RightScript and its Inputs</h3>
+
+<p>As a best practice, in addition to any in-line documentation, you should document the RightScript and any Inputs as well. Note that <a href="http://en.wikipedia.org/wiki/Markdown">markdown</a> is supported, and is encourged to make your RightScript description more readable.</p>
+
+<p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Click here</a> to see a good <em>cheat sheet</em> for common markdown syntax.</p>
+
+<h3 id="post-tutorial-steps-documenting-the-rightscript-description">Documenting the RightScript Description</h3>
+
+<ul>
+<li>Navigate to the Info tab of your RightScript</li>
+<li>Click the <strong>edit</strong> action button</li>
+<li>The following is an example including a brief description of the scripts purpose, and a bulleted list of key Inputs:</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    Purpose - Uses standard Unix utility lsof (list system open files) to check port state and connection status based on several supplied Inputs:
+    * MYCREDS - If MYCREDS is not validated, then exit gracefully with a no-op.
+    * STATE - User supplied standard Input to check all port states against.
+    * port - Specific port to check status on. Note: port is a variable (not Input) supplied from within the attached configuration file.
+</code></pre>
+
+<ul>
+<li>Click the <strong>save</strong> action button. The above example looks like the following in the Dashboard display:</li>
+</ul>
+
+<p><img src="/img/cm-rightscript-descriptions.png" alt="cm-rightscript-descriptions.png" width="725" height="136" /></p>
+
+<h3 id="post-tutorial-steps-documenting-the-rightscript-inputs-description">Documenting the RightScript Inputs Description</h3>
+
+<ul>
+<li>Navigate to the Script tab of your RightScript</li>
+<li>Click the <strong>edit</strong> action button</li>
+<li>Enter a Description for each of the identified Inputs. Whenever possible, include appropriate examples. Example descriptions:
+
+<ul>
+<li>MYCREDS - RightStore Credential store value to confirm before running script.</li>
+<li>STATE * - State of the port to check for. Examples: <q>listen</q> or <q>close_wait</q></li>
+</ul></li>
+<li>Click the <strong>save</strong> action button when you are done</li>
+</ul>
+
+<p>* If you have a finite set of options for legal values, you can make the Input Value Type <q>drop-down</q> not <q>any</q>. Then fill out all legal values for the Input.</p>
+
+<p>The next time you run your RightScript, when filling out the missing Inputs, notice your Input description will be displayed when your mouse hovers over the blue information icon. (This is sometimes referred to as <q>hover text</q>). For example:</p>
+
+<p><img src="/img/cm-inputs-descriptions.png" alt="cm-inputs-descriptions.png" width="605" height="216" /></p>
+
+<h3 id="post-tutorial-steps-turn-down-verbosity">Turn Down Verbosity</h3>
+
+<p>Once your debugging efforts are complete, you may want to turn off the scripts verbosity. This trims up what is saved in your Audit Entries. Change the preamble so it does not contain the <q>-x</q> option to bash. For example:</p>
+<pre class="syntax-highlight plaintext"><code>\#!/bin/bash –e
+</code></pre>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The <q>-e</q> command line option to bash causes an exit if something goes wrong in a RightScript. This is generally considered a best practice, particularly with boot phase RightScripts. When a Server boots up and runs various installation and configuration RightScripts, if one fails miserably, it is best to exit than continue attempting to install other packages, modify configuration files, etc. You do have the option to force an non-operational Server to be Operational, and attempt to debug the boot phase RightScripts manually/iteratively.</p>
+</div>
+
+<h3 id="post-tutorial-steps-rename-your-rightscript">Rename Your RightScript</h3>
+
+<p>Name your RightScript something descriptive. For example, <q>Acme Co - Port State Checker</q> is better than simply <q>Port State</q>.</p>
+
+<h3 id="post-tutorial-steps-add-your-rightscript-to-a-servertemplate">Add Your RightScript to a ServerTemplate</h3>
+
+<p>In this tutorial we developed several RightScripts from scratch. Although RightScripts can be used in <q>stand-alone</q> fasion, they are usually created to work within a ServerTemplate. Normally, you would add the RightScript to a ServerTemplate that is used to configure a Server or Servers in a Deployment, etc.</p>
+
+<h3 id="post-tutorial-steps-commit-your-rightscript">Commit Your RightScript</h3>
+
+<p>Commit your RightScript. ServerTemplates and the RightScripts in them should be commited. Working on a HEAD revision is recommended only during development, and it is considered a best practice to use our version control capabilities. See the <a href="/cm/dashboard/design/server_templates/servertemplates_concepts.html#servertemplate-versioning">ServerTemplate Versioning</a> section of our <em>ServerTemplate Developer Guide</em> for more information.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

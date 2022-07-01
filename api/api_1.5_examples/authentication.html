@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Authentication</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Authentication</h1></div><div class="main-content"><p>Authenticate and save a session cookie for the RightScale API 1.5 in a file called &#39;mycookie&#39; (http/curl), in memory (right_api_client) or &#39;cookieContainer&#39; (Powershell). Authentication is required in order to run other examples scripts (and their API calls) elsewhere in this guide.</p>
+
+<p><em><strong>Note:</strong></em> Although <a href="/api/api_1.5_examples/oauth.html">OAuth</a> is preferred for production environments, the <em>Examples</em> section of the API guide uses standard user/pass authentication for simplicity sake.</p>
+
+<h2 id="api-endpoints">API Endpoints</h2>
+
+<p><em><strong>IMPORTANT!</strong></em> Be sure to use the correct API endpoint in accordance with your account when using the API. Available values are: <ul><li>us-3.rightscale.com</li>
+<li>us-4.rightscale.com</li>
+<li>telstra-10.rightscale.com</li></ul> </p>
+
+<p>You can check where the account is hosted from the URL while viewing the account. Examples in these docs use a variety of endpoints as examples only. If you get a <code>HTTP 302</code> redirect, you are using a different API endpoint than the account is hosted.</p>
+
+<h2 id="curl">Curl</h2>
+
+<p>The following uses curl/HTTP as part of a basic Unix shell script. Because several key variables are set in the script, you can literally copy, paste and change/set the variables in accord with your cloud assets to get you on your way using the RightScale API.</p>
+
+<h3 id="curl-example-call">Example Call</h3>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+
+    <span class="nv">email</span><span class="o">=</span><span class="s2">"john.doe@example.com"</span>    <span class="c"># The email address for your RightScale User in the Dashboard</span>
+    <span class="nv">pswd</span><span class="o">=</span><span class="s2">"SomeSecurePassword"</span>       <span class="c"># Your User's password</span>
+    <span class="nv">account</span><span class="o">=</span><span class="s2">"1234"</span>                  <span class="c"># Account ID, easily obtained from navigation in the Dashboard</span>
+    <span class="nv">api_host</span><span class="o">=</span><span class="s2">"us-3"</span>                 <span class="c"># Make sure to use the right API endpoint. Available values are: us-3, us-4 or telstra-10.</span>
+
+    curl -i -H X_API_VERSION:1.5 -c mycookie -X POST --data-urlencode <span class="s2">"email=</span><span class="nv">$email</span><span class="s2">"</span> --data-urlencode <span class="s2">"password=</span><span class="nv">$pswd</span><span class="s2">"</span> -d <span class="nv">account_href</span><span class="o">=</span>/api/accounts/<span class="s2">"</span><span class="nv">$account</span><span class="s2">"</span> https://<span class="nv">$api_host</span>.rightscale.com/api/session
+</code></pre>
+
+<h3 id="curl-sample-output">Sample Output</h3>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 204 No Content
+
+    Server: nginx/1.0.15
+
+    Date: Tue, 09 Oct 2012 22:11:46 GMT
+
+    Connection: keep-alive
+
+    Status: 204 No Content
+
+    X-Runtime: 64
+
+    X-Request-Uuid: 5687742b86ba40468c037d362d32a2db
+
+    Set-Cookie: rs_gbl=eNo1kEFvgjABRv9Lz5DQFmxLsoMMMzQjgJls5NIoLaJTZFBENP338bDjl3zvHd4d5MAFpxEYQHbAvYO-Uy1wCaXkYQBdABdim1FkEWtmgL2czo5FFHVQbkLkKBNChUzh5M40McQS2jNpoUmn1T9L2Iud7KDe8yw3l7gRiUcallYRCajylzZbbaU_4pK06HipN_Pv3SEL9ej3PG2HehsK0ui0SpTXQ3Eakts2O8YyDrloEjivDhjhUovIG393s_nfZq2KevyJjvFw6egpjMmnuEVfI-02wWrRnlN9HeCHxRdBlrAd53VZeWvz3W76VO6L8zJgps_fXkWuryJ5UZz7WgOXORA-Hk9qR10P; domain=.rightscale.com; path=/; HttpOnly
+
+    Set-Cookie: _session_id=e7ee4fd4bce4543a2b258b2c8d54db80; path=/; Secure; HttpOnly
+
+    Cache-Control: no-cache
+</code></pre>
+
+<p>Successfully authenticating with the API always result in <code>HTTP 204</code>. The API session cookie will be saved to the file &#39;mycookie&#39;. This cookie file contains the session ID for use with subsequent API calls used by the examples. The TTL (time to live) for the session cookie is 2 hours. An example cookie file looks similar to:</p>
+<pre class="syntax-highlight plaintext"><code>    $ cat mycookie # NOTE: Below cookie formatted slightly to make more readable.
+</code></pre>
+<pre class="syntax-highlight plaintext"><code>    # Netscape HTTP Cookie File
+
+    # http://www.netscape.com/newsref/std/cookie_spec.html
+
+    # This file was generated by libcurl! Edit at your own risk.
+
+
+
+    .rightscale.com TRUE / FALSE 0 rs_gbl eNo1kEFvgjAARv9Lz5DQFmxLsoMMMzQjgJls5WIoLaJTZFBFNP538bDjl3zvHd4d5MAFpxEYQHbAvYO-Uy1wCaXkYQBdABdim1FkEXtmgL2czo5FFHVQbkLkKBNChUzh5M40McQS2jNpoUmn1T9L2Iud7KDe8y
+
+    w3l7gRiUcallYRCajylzZbbaU_4pK06HipN_Pv3SEL9ej3PG2HehsK0ui0SpTXQ3Eakts2O8YyDrloEjivDhjh
+
+    UovIG393s_nfZq2KevyJjvFw6egpjMmnuEVfI-02wWrRnlN9HeCHxRdBlrAd53VZeWvz3W76VO6L8zJgps_
+
+    fXkWuryJ5UZz7WgOWORA-Hk9qR10P
+
+    my.rightscale.com FALSE / TRUE 0 _session_id e7ce4fb4bce4543b2b258b2c8d54db80
+</code></pre>
+
+<p>If your session cookie expires you will receive:</p>
+
+<ul>
+<li>HTTP <q>403 Forbidden</q></li>
+<li><q>Session cookie is expired or invalid</q> message</li>
+</ul>
+
+<p>If you get a <code>302 redirect</code>, you are using a different API endpoint than the account is hosted. Use the correct API endpoint.</p>
+
+<h2 id="right_api_client">right_api_client</h2>
+
+<p><em><strong>Important!</strong></em> Authentication works differently when using the right_api_client as opposed to the http/curl examples. Using standard authentication and the account facing RightScale API with http/curl requires authenticating whereby a session cookie is stored to a file. (&#39;mycookie&#39; in our examples.) The session cookie lasts for two hours, not requiring each subsequent API call to re-authenticate during that time. The authentication example below uses the right_api_client. Authentication information is stored as an object in memory. Hence, each Ruby script you develop and execute will require authenticating with the API.</p>
+
+<p><strong>Note</strong> : Technically speaking, although we refer to this simply as <q>authentication</q>, its really creating an object in the Ruby language so that one can use the RightScale API.</p>
+
+<h3 id="right_api_client-prerequisites">Prerequisites</h3>
+
+<p>The authentication example below assumes the following Ruby and RightScale REST API client (right_api_client) installs have been completed.</p>
+
+<h3 id="right_api_client-ruby">Ruby</h3>
+
+<p>To check that Ruby version 1.8.7 or later is installed.</p>
+<pre class="syntax-highlight plaintext"><code>    $ ruby -v
+
+    ruby 1.8.7 (2011-06-30 patchlevel 352) [x86_64-linux]
+</code></pre>
+
+<h3 id="right_api_client-right_api_client">right_api_client</h3>
+
+<p>Basic installation instructions for the RightScale REST API client (right_api_client).</p>
+<pre class="syntax-highlight plaintext"><code>    # sudo -i # switch to root user for installing the Ruby gem
+
+    # gem install right_api_client
+
+    Building native extensions. This could take a while...
+
+    Successfully installed json-1.7.3
+
+    Successfully installed mime-types-1.18
+
+    Successfully installed rest-client-1.6.7
+
+    Successfully installed right_api_client-1.5.9
+
+    4 gems installed
+
+    Installing ri documentation for json-1.7.3...
+
+    Installing ri documentation for mime-types-1.18...
+
+    Installing ri documentation for rest-client-1.6.7...
+
+    Installing ri documentation for right_api_client-1.5.9...
+
+    Installing RDoc documentation for json-1.7.3...
+
+    Installing RDoc documentation for mime-types-1.18...
+
+    Installing RDoc documentation for rest-client-1.6.7...
+
+    Installing RDoc documentation for right_api_client-1.5.9...
+
+
+
+    $ exit # logout from root user, create/run ruby scripts using right_api_client from a non-root user login.
+</code></pre>
+
+<p><strong>Note</strong> : make sure you have the appropriate server permissions to perform these actions. For more information, see <a href="/cm/rs101/server_login_control.html">Server Login Control</a>.</p>
+
+<h3 id="right_api_client-example-call">Example Call</h3>
+<pre class="syntax-highlight plaintext"><code>    # Script: authenticate - Establish authentication with the RS API. Requires rubygems and right_api_client.
+
+    # Authentication credentials stored in memory (not a cookie/file on local disk)
+
+    require 'rubygems'
+
+    require 'pp' # require the pp Pretty Print rubygem.
+
+    require 'right_api_client'
+
+    @client = RightApi::Client.new(:email =&gt; 'greg.doe@example.com', :password =&gt; 'SomeSecurePassword', :account_id =&gt; '1234')
+
+    puts "Available methods: #{pp @client.api_methods}" # Use pretty print for more readable output
+
+    #puts "Available methods: #{@client.api_methods}" # Use standard puts call. Less readable. Commented out so it will not be executed.
+</code></pre>
+
+<p>$ ruby authenticate # Run Ruby script &#39;authenticate&#39; shown above.</p>
+
+<h3 id="right_api_client-sample-output">Sample Output</h3>
+
+<p>Below output displays all methods available to the account that was previously authenticated. More information on each method is in the <a href="http://reference.rightscale.com/api1.5/index.html" title="http://reference.rightscale.com/api1.5/index.html">RightScale API 1.5 Online Reference</a>.</p>
+
+<p><strong>Note</strong> <em>:</em> The following output uses <q>pp</q> (pretty print gem) in the Ruby script, producing more readable output. Future right_api_client examples will use <q>pp</q> instead of the standard Ruby <q>puts</q> call (which is shown below for contrast).</p>
+<pre class="syntax-highlight plaintext"><code>    ["audit_entries",
+
+    "deployments",
+
+    "cloud_flow_processes",
+
+    "cloud_accounts",
+
+    "publication_lineages",
+
+    "server_templates",
+
+    "permissions",
+
+    "clouds",
+
+    "security_group_rules",
+
+    "accounts",
+
+    "tags",
+
+    "publications",
+
+    "server_arrays",
+
+    "users",
+
+    "alert_specs",
+
+    "multi_cloud_images",
+
+    "account_groups",
+
+    "servers",
+
+    "child_accounts",
+
+    "backups",
+
+    "session",
+
+    "identity_providers",
+
+    "server_template_multi_cloud_images"]
+</code></pre>
+
+<p><em><strong>Important!</strong></em> Only the resources (or their sub-resources) displayed in the output above can be used by the account. See the <a href="http://reference.rightscale.com/api1.5/index.html">RightScale API Online Reference</a> documentation for all API resources. Note that the resources for your account will likely vary somewhat.</p>
+
+<p><strong>Note</strong> <em>:</em> Below is sample output when using a Ruby <q>puts</q> call to display the available methods. The output is less readable, stringing together all methods on a single line with no delimeters or whitespace.</p>
+<pre class="syntax-highlight plaintext"><code>    Available methods: audit_entriesserverscloud_flow_processescloud_accountspublication_lineagesserver_template_multi_cloud_imagespermissionsdeploymentssecurity_group_rulesaccountspublicationsserver_templatesusersbackupscloudssessionalert_specstagsaccount_groupsserver_arrayschild_accountsidentity_providersmulti_cloud_images
+</code></pre>
+
+<h2 id="powershell">PowerShell</h2>
+
+<h3 id="powershell-example-call">Example Call</h3>
+
+<p><strong>Note</strong> <em>:</em> See API Endpoints section for possible values to use in <code>$postURL</code></p>
+<pre class="syntax-highlight plaintext"><code>    $email = "greg.doe@example.com" # Use the Email Address for your RightScale User in the Dashboard
+
+    $passwd = "SomeSecurePassword" # Your User's password
+
+    $account = "1234" # Your RightScale Account ID, easily obtained via Dashboard navigation
+
+    $postURL = "https://us-3.rightscale.com/api/session"
+
+    $stringToPost = "email=$email&amp;password=$passwd&amp;account_href=/api/accounts/$account"
+
+    $bytesToPost = [System.Text.Encoding]::UTF8.GetBytes($stringToPost)
+
+    $cookieContainer = New-object System.Net.CookieContainer
+
+    $webRequest = [System.Net.WebRequest]::Create($postURL)
+
+    $webRequest.Method = "POST"
+
+    $webRequest.ContentType = "application/x-www-form-urlencoded"
+
+    $webRequest.Headers.Add("X_API_VERSION","1.5")
+
+    $webRequest.ContentLength = $bytesToPost.Length
+
+    $webRequest.PreAuthenticate = $false;
+
+    $webRequest.ServicePoint.Expect100Continue = $false
+
+    $webRequest.CookieContainer = $cookieContainer
+
+    $requestStream = $webRequest.GetRequestStream()
+
+    $requestStream.Write($bytesToPost, 0, $bytesToPost.Length)
+
+    $requestStream.Close()
+
+    [System.Net.WebResponse]$response = $webRequest.GetResponse()
+
+    $responseStream = $response.GetResponseStream()
+
+    $responseStreamReader = New-Object System.IO.StreamReader -ArgumentList $responseStream
+
+    [string]$responseString = $responseStreamReader.ReadToEnd()
+
+    #this is the cookie container for subsequent requests: $cookieContainer
+</code></pre>
+
+<h3 id="powershell-sample-output">Sample Output</h3>
+
+<p>Same as http/curl response.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

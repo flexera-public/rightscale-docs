@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Analyzing Costs</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="ca ca_ca_analyzing_costs" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="about.html"><h4 class="list-group-heading"><img src="../img/product-cloud-analytics.svg" /><span>Optima</span></h4></a><a class="list-group-item" href="legacy.html">Legacy Feature Documentation</a><a class="list-group-item" href="https://helpnet.flexerasoftware.com/Optima">Current Feature Documentation</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./"></a></p><div class="page-header"><h1>Analyzing Costs</h1></div><div class="main-content"><div class="alert alert-danger" role="alert"><strong>Warning</strong><p>The features described on this page will soon be deprecated. Refer to the <a href="https://helpnet.flexerasoftware.com/Optima">latest documentation</a> for information on the latest features.</p>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>The Instance Analyzer in RightScale Optima provides a detailed view of compute costs across all of your public and private clouds as well as virtualized resources.</p>
+
+<p>You can slice and dice and filter your data to gain visibility into spend and usage, which in turn will help you understand the cost drivers of your business.</p>
+
+<p>The Analyze is your central place to understand compute costs and usage. It also serves as a starting point to create scenarios (forecasts), scheduled reports, and budget alerts based on any set of filters you have specified.</p>
+
+<h2 id="changing-the-time-period-to-analyze">Changing the Time Period to Analyze</h2>
+
+<p>To get started, set the appropriate date range in the upper right hand corner. You can specify the beginning and end dates, or select from several pre-defined date ranges.</p>
+
+<p><img src="/img/ca-select-time-period.png" alt="ca-select-time-period.png" width="727" height="445" /></p>
+
+<p>After you have chosen your desired date range, the graph will show you trends based on the time period specified. You can specify the granularity of of data to be hourly, daily, weekly, or monthly using the tabs to the upper left of the graph.</p>
+
+<p>This example shows a weekly view.</p>
+
+<p><img src="/img/ca-weekly-view.png" alt="ca-weekly-view.png" width="727" height="334" /></p>
+
+<p>The blue bars represents clouds costs while the lines represent maximum instances (red), average instances (blue), and minimum instances (green) for each time period. You can turn the individual metrics on or off by clicking on their name to the upper right of the graph.</p>
+
+<p>You can add in VM Hours or RightScale Compute Units (RCUs) to your graph (purple bars), which represents RightScale usage. The dark purple bar represents managed RightScale Hours or RCUs. The light purple bar represents unmanaged RightScale Hours / RCUs.</p>
+
+<h2 id="managing-analyze-filters">Managing Analyze Filters</h2>
+
+<p>Below the graph, you will find various modules that provide ways to slice and dice your data. For the quickest results, start with all of the modules closed and then expand the ones that are most relevant to your analysis.</p>
+
+<p><img src="/img/ca-analyze-filters.png" alt="ca-analyze-filters.png" width="727" height="402" /></p>
+
+<h3 id="managing-analyze-filters-manage-your-modules">Manage Your Modules</h3>
+
+<p>At the bottom of the page you will find an icon, “Manage your modules”, where you can select which modules you would like to see and use within the Instance Analyzer.</p>
+
+<p><img src="/img/ca-available-modules.png" alt="ca-available-modules.png" width="674" height="578" /></p>
+
+<h2 id="using-filters-to-slice-and-dice">Using Filters to Slice and Dice</h2>
+
+<p>To start slicing and dicing your data, open the relevant modules by clicking on the arrow on the right side of each module. In this example the Clouds module was chosen to drill down on specific cloud environments.</p>
+
+<p><img src="/img/ca-filters-1.png" alt="ca-filters-1.png" width="727" height="319" /></p>
+
+<p>Check the box on the left hand side of the cloud that you want to analyze.</p>
+
+<p><img src="/img/ca-filters-2.png" alt="ca-filters-2.png" width="727" height="331" /></p>
+
+<p>After you check your first items, you will notice the <strong>Apply Your Filter Selection</strong> button near the bottom of the screen. After you have checked the boxes for all relevant items, click this button to apply the filter selection.</p>
+
+<p><img src="/img/ca-filters-3.png" alt="ca-filters-3.png" width="405" height="83" /></p>
+
+<p>You can see all of your selected filters at the top of the filter modules.</p>
+
+<p><img src="/img/ca-filters-4.png" alt="ca-filters-4.png" width="375" height="135" /></p>
+
+<p>You can remove all of the filters by clicking the <strong>X</strong> next to <strong>Selected filters</strong>. Alternatively, you can remove each specific filter individually by clicking the <strong>X</strong> next to the name of that specific filter.</p>
+
+<h2 id="sharing-analyses">Sharing Analyses</h2>
+
+<p>Once you have create a set of filters and date range to analyze, the <strong>Share</strong> button to the left of the date range generates a “point in time” link for you to share with anyone you choose. Click the share button on the right of the link and then click the icon to copy the URL to your clipboard. Simply share the URL and other users that have access to these accounts can immediately jump to the same analysis. This is very helpful for collaborating with others to resolve questions on costs.</p>
+
+<p><img src="/img/ca-analysis-share.png" alt="ca-analysis-share.png" width="678" height="90" /></p>
+
+<h2 id="using-analysis-filters-for-forecasts,-reports-and-alerts">Using Analysis Filters for Forecasts, Reports and Alerts</h2>
+
+<p>Once you have defined a set of filters on the Instance Analyzer, you can create a <a href="/ca/ca_forecasting_and_budgeting.html">Scenario</a>, <a href="/ca/ca_setting_up_scheduled_reports.html">Scheduled Report</a>, or <a href="/ca/ca_setting_up_budget_alerts.html">Budget Alert</a> from this screen. Navigate to the top of the Instance Analyzer and click <strong>Create</strong>. This will direct you to the specific page, and retain the filters you have set on the Instance Analyzer.</p>
+
+<p><img src="/img/ca-create-with-filter.png" alt="ca-create-with-filter.png" width="520" height="249" /></p>
+
+<h2 id="full-instance-details">Full Instance Details</h2>
+
+<p>Click the <strong>Full Instance Details</strong> tab next to <strong>Overview</strong> to see full instance details across the already pre-selected filters. If you want to view full instance details of your whole environment, make sure you remove the filters before navigating to this screen.</p>
+
+<p><img src="/img/ca-instance-details-1.png" alt="ca-instance-details-1.png" width="572" height="144" /></p>
+
+<p>This page that provides full instance information for all instances that match the filters you specified.</p>
+
+<p><img src="/img/ca-instance-details-2.png" alt="ca-instance-details-2.png" width="727" height="213" /></p>
+
+<p>Use the Show/Hide columns link to customize the columns. Click a column header to sort the data by that column.</p>
+
+<p><img src="/img/ca-instance-details-3.png" alt="ca-instance-details-3.png" width="727" height="368" /></p>
+
+<p>For instances that are currently running, you can click the Instance ID to link directly to that instance within RightScale Cloud Management. This enables you to take actions on a set of instances that you identify. For example, you may need to terminate “stranded” instances that are stuck while booting, change instance sizes for instances with low utilization or adjust instances to match Reserved Instances you’ve purchased on AWS. You can also go to clouds and accounts directly from their names on this table.</p>
+
+<p>You can export the full instance information to a CSV if needed to further analyze using a spreadsheet or to integrate the data into other systems.</p>
+
+<p><img src="/img/ca-instance-details-5.png" alt="ca-instance-details-5.png" width="584" height="232" /></p>
+
+<h2 id="reserved-instances">Reserved Instances</h2>
+
+<p>To view all types of AWS Reserved Instances (RI) including the utilization percentage, click on the <strong>Reserved Instances</strong> link on the left navigation of Optima. This page shows information about your RIs for the selected organization for a 7 day rolling window (starting 7 days back, ie over the last 7 days). If you belong to more than one RightScale organization, select the organization you want to view RI information on. </p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You need to have <code>ca_user</code> role at the organization level in RightScale to access this information.</p>
+</div>
+
+<p><img src="/img/new_ri_page.png" alt="new_ri_page.png" width="1869" height="866" /></p>
+
+<p>You can choose the columns you wish to see in your view by selecting the fields from the column picker. Click the <strong>Export to CSV</strong> button to download the information as a CSV including all columns (visible and hidden) in the table.</p>
+
+<p>The information presented on this page is retrieved from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetReservationUtilization.html">AWS Cost Explorer API</a>. To fetch this data, the following IAM stanza needs to be added to the RightScale user&#39;s IAM policy on your AWS parent account. <a href="/clouds/aws/aws_connect_aws_compute_to_RightScale_for_cost_reporting.html#create-an-iam-user-for-rightscale">Find the complete policy details here</a>.</p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"ce:GetReservationUtilization"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

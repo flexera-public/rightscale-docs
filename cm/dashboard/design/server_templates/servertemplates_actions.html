@@ -1,0 +1,1224 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>ServerTemplate Actions and Procedures</title><meta content="Common procedures for working with ServerTemplates in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_design cm_dashboard_design_server_templates cm_dashboard_design_server_templates_servertemplates_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Design</a> &#x2F; <a href="./">ServerTemplates</a></p><div class="page-header"><h1>ServerTemplate Actions and Procedures</h1></div><div class="main-content"><h2 id="add-a-multicloud-image-to-a-servertemplate">Add a MultiCloud Image to a ServerTemplate</h2>
+
+<h3 id="add-a-multicloud-image-to-a-servertemplate-objective">Objective</h3>
+
+<p>To add a new MultiCloud Image to a HEAD ServerTemplate.</p>
+
+<h3 id="add-a-multicloud-image-to-a-servertemplate-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="add-a-multicloud-image-to-a-servertemplate-overview">Overview</h3>
+
+<p>A ServerTemplate is cloud-agnostic. However, the reason why a ServerTemplate can be used to create and launch servers across multiple clouds is because of its list of MultiCloud Images (MCIs). You can only create a server for a cloud if one of the ServerTemplate&#39;s MCIs has a valid reference to an actual image that&#39;s available in that cloud.</p>
+
+<p>If you are using ServerTemplates published by RightScale, you&#39;ll notice that they are often published with multiple MCIs. However, you may need to add new MCIs or update existing ones if new revisions are available. This document explains how to add a new MCI to a ServerTemplate.</p>
+
+<h4 id="why-should-i-add-a-new-multicloud-image-to-a-servertemplate?">Why should I add a new MultiCloud Image to a ServerTemplate?</h4>
+
+<p>There are several reasons why you may want to add a new MCI.</p>
+
+<ul>
+<li>Add cloud support. If you want to use the ServerTemplate in a cloud that it currently does not support, you can add a new MCI that supports that particular cloud. For example, RightScale could announce support for a new cloud infrastructure and release a set of new MCIs that support that cloud. In such cases, you could simply add those new MCIs to your ServerTemplate. Of course, you will need to test your ServerTemplate in those clouds to make sure that it&#39;s compatible.</li>
+<li>RightScale or another publisher releases newer versions of MCIs that you would like a ServerTemplate to use. If the MCIs are of a different lineage, you will need to manually add them.</li>
+</ul>
+
+<h4 id="what-are-the-ramifications-of-adding-a-new-multicloud-to-a-servertemplate?">What are the ramifications of adding a new MultiCloud to a ServerTemplate?</h4>
+
+<p>If you add a new MultiCloud Image, you are introducing new functionality that may or may not be supported. Be sure to test each iteration of an MCI to ensure that the ServerTemplate can successfully be used with any of the new MCIs. As long as the scripts and inputs of the ServerTemplate are not cloud-specific, you may be able to add cloud support to a ServerTemplate by simply adding new MCIs.</p>
+
+<p>It&#39;s important to remember that a ServerTemplate imported from the MultiCloud Marketplace was originally published with a set of MultiCloud Images. The publisher of the ServerTemplate is responsible for supporting their asset as long as it has not been modified. However, if you decide to modify the ServerTemplate and introduce new functionality such as adding a new MultiCloud Image, you accept full responsibility for those changes. Any compatibility issues and bugs that are caused by any of your changes to the ServerTemplate are your responsibility.</p>
+
+<h3 id="add-a-multicloud-image-to-a-servertemplate-steps">Steps</h3>
+
+<ol>
+<li>Navigate to an editable HEAD version of a ServerTemplate. You can only add a new MCI to a previously committed ServerTemplate because it&#39;s static.</li>
+<li>Click on the <strong>Images</strong> tab to see the list of MultiCloud Images that the ServerTemplate is currently using.</li>
+<li>To add a new MCI, click the <strong>Add MultiCloud Image</strong> button. You will see a responsibility disclaimer about adding a new MCI to a ServerTemplate.
+<img src="/img/cm-add-mci.png" alt="cm-add-mci.png" width="550" height="192" /><br></li>
+<li>Use the <q>MultiCloud Image Selector</q> to find the MCI that you want to add to the ServerTemplate. You can only add one MCI at a time. <em>Note</em>: If an MCI has a committed revision, the most recent revision will be displayed. If no revision exists, the HEAD version will be displayed.</li>
+<li>Select an MCI and click <strong>Select</strong>.</li>
+<li>The new MCI will now be listed under the Images tab. To use a different revision of the selected MCI (if available), click the <strong>Edit</strong> icon next to the MCI to change its revision.</li>
+</ol>
+
+<h2 id="add-server-assistant">Add Server Assistant</h2>
+
+<h3 id="add-server-assistant-overview">Overview</h3>
+
+<p>To make it easier to define new servers in the dashboard using ServerTemplates RightScale provides a simple wizard that will walk you through the appropriate steps to create a server based on the chosen cloud. Since each cloud infrastructure is unique, the selections in the wizard may differ depending on the cloud&#39;s server requirements. For example, you must select an EC2 SSH Key and Security Group to launch a server in one of the AWS EC2 clouds/regions. However, other clouds might use IP tables instead of security groups.</p>
+
+<p>Be sure to take advantage of the information offered in the tooltips throughout the wizard. Just hover over a tooltip icon to view additional information about that specific component.</p>
+
+<h3 id="add-server-assistant-steps">Steps</h3>
+
+<h4 id="add-a-new-server-or-array">Add a New Server or Array</h4>
+
+<p>There are several different ways to get to the <strong>Add Server Assistant</strong> wizard in the dashboard.</p>
+
+<ul>
+<li><strong>Manage</strong> &gt; <strong>Deployments</strong> &gt; <em>Deployment Name</em> &gt; <strong>Add Server</strong> or <strong>Add Array</strong> button</li>
+<li><strong>Manage</strong> &gt; <strong>Servers</strong> &gt; <strong>New Server</strong> button</li>
+<li><strong>Design</strong> &gt; <strong>ServerTemplates</strong> &gt; <em>ServerTemplate Name</em> &gt; <strong>Add Server</strong> or <strong>Add Array</strong> button. (<em>Note</em>: After successfully importing a ServerTemplate from the MultiCloud Marketplace you are left here.)</li>
+</ul>
+
+<h4 id="choose-a-cloud">Choose a Cloud</h4>
+
+<p>When you click the <strong>Add Server</strong> or <strong>Add Array</strong> buttons you will be prompted to make a cloud selection. Select the cloud where you will eventually launch the server. (Servers are cloud-specific.) If you are adding a server or server array through the Design &gt; ServerTemplate route or through the Manage &gt; Servers &gt; New Server/Array route as shown above, you will need to specify a cloud and deployment. If you are adding the server or array directly from a deployment, the <q>Deployment</q> row will be hidden and you will only need to specify a cloud.</p>
+
+<p><img src="/img/cm-add-server-box.png" alt="cm-add-server-box.png" width="428" height="187" /></p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You will only be able to create a server in the chosen cloud if one of the ServerTemplate&#39;s MultiCloud Images supports that cloud.</p>
+</div>
+
+<p>Make your selections and click <strong>Continue</strong>.</p>
+
+<h4 id="servertemplate">ServerTemplate</h4>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You will only see this tab if you are adding the server from a deployment or from the Manage &gt; Servers section. If you already selected the ServerTemplate, proceed to the <q>Server Details</q> tab.</p>
+</div>
+
+<p><img src="/img/cm-add-server-servertemplate.png" alt="cm-add-server-servertemplate.png" width="725" height="548" /></p>
+
+<p>Select the ServerTemplate in your RightScale account that you are going to use to create a server. Only ServerTemplates that support the selected cloud (from the previous step) will be displayed. Enter the name of the ServerTemplate or sort the list by using one or several of the Filter Options including Publisher, Tags, Category, and Name or Date. After choosing a ServerTemplate, select which revision you would like to use (if multiple revisions are available) and click the <strong>Server Details</strong> button to proceed to the next step.</p>
+
+<p><strong>Other Buttons</strong></p>
+
+<ul>
+<li><strong>Finish</strong> - Save and go to the show page of your server where you can edit settings and launch your server if you have the minimum of required components.</li>
+<li><strong>Launch</strong> - Launch your server and skip the Confirm tab if you have all of the required components.</li>
+<li><strong>Cancel</strong> - Cancel your selections and take you back to the Server index page or the Servers tab of your deployment.</li>
+</ul>
+
+<h4 id="server-details">Server Details</h4>
+
+<p>The Server Details tab allows you to select configuration details about the server. Some of the options are cloud-specific and will vary depending on the selected cloud. Go to the section that applies to the selected cloud.</p>
+
+<h4 id="aws">AWS</h4>
+
+<p><img src="/img/cm-add-server-assistant.png" alt="cm-add-server-assistant.png" width="725" height="630" /></p>
+
+<ul>
+<li><strong>Server Name -</strong> Provide a name for the server.</li>
+<li><strong>MultiCloud Image -</strong> Select the MultiCloud Image to be used for the server or keep the <q>Inherited from the ServerTemplate</q> option to use the ServerTemplate&#39;s default MCI selection.</li>
+<li><strong>Instance Type -</strong> Specify the type (size) of instance to launch or keep the <q>Inherit from MultiCloud Image</q> option to use the MCI&#39;s default instance type selection.</li>
+<li><strong>Boot to New Volume</strong> - If enabled, the instance will launch into volume storage. Otherwise, it will boot to local storage. Available only on certain clouds.</li>
+<li><strong>Delete Volume on Termination</strong> - If &#39;Delete&#39; is selected, the associated volume will be deleted when the instance is terminated. Only shown if &#39;Boot to New Volume&#39; is enabled.</li>
+<li><strong>Root Volume Size (GB)</strong> - The size (in gigabytes) of the volume that contains the root filesystem of the instance. Available only on certain clouds.</li>
+<li><strong>Pricing</strong> - Choose either Spot or On-Demand for your instances. See the <q>AWS Pricing</q> section below.</li>
+<li><strong>EBS Optimized</strong> - Select this option if you would like to use an EBS Optimized instance. If you&#39;re using a Provisioned IOPS volume with an EBS Optimized instance, performance benefits can be seen if you&#39;re using high amounts of network bandwidth and disk bandwidth at the same time. Additionally, Amazon guarantees that when a Provisioned IOPS volume is attached to an Optimized Instance, the volume will perform within 10% of their provisioned performance 99.9% of the time.</li>
+</ul>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>Only certain instance types support EBS Optimized Instances. For information on which AWS Instance Types support EBS Optimized Instances, see <a href="/clouds/aws/aws_instance_types.html">EC2 Instance Types</a>.</p>
+</div>
+
+<ul>
+<li><strong>IAM Instance Profile or ARN</strong> - Enter the Identity and Access Management (IAM) Instance Profile name. If you prefer, you can enter the Amazon Resource Name (ARN) in the ARN format (arn:aws:service:region:account:resource). IAM roles contained in the Instance Profile will be assigned to the server instance at launch time. For additional information on AWS IAM see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html">What is IAM?</a></li>
+<li><strong>Automatic instance store mapping</strong> - Select this option to create and attach the maximum number of ephemeral disks to your EC2 instance at boot time as permitted by the instance type you launch. Note that you can add more ephemeral space to an <em>existing</em> server by editing that server, enabling <strong>Automatic instance store mapping</strong>, then relaunching the server.</li>
+</ul>
+
+<p>The Networking section will have some or all of the following fields, depending on the selected AWS region:</p>
+
+<ul>
+<li><strong>Datacenter / Zone</strong> - Specify the Availability Zone where your new server will be launched.</li>
+<li><strong>Subnets</strong> - If applicable, specify a subnet of your Virtual Private Cloud (VPC).</li>
+<li><strong>SSH Key</strong> - The SSH key that will be used by the server.</li>
+<li><strong>Security Group(s)</strong> - Security group that will be used by the server.</li>
+<li><strong>Associate Ephemeral Public IP Address</strong> - Select this option to assign a non-static public IP address to the server at launch. Certain subnet selections preclude this option, in which case this checkbox will be disabled. For example, EC2-Classic subnets require an ephemeral public IP address.</li>
+<li><strong>IP Forwarding Enabled</strong> - Allow this server to send and receive traffic to act like a NAT instance when the source or destination is not itself.</li>
+<li><strong>Private IP Address</strong> - Enter an IP address within the selected subnet CIDR range to specify a static private IP address for this server&#39;s primary network interface.</li>
+<li><strong>Elastic IP Address</strong> - Select or create a new EIP for your sever.</li>
+<li><strong>Placement Group</strong> - Placement Groups are logical groupings or clusters of instances in the selected AWS region. Placement groups are exclusively used for launching cluster compute instance types. Ignore this field for all other instance types.</li>
+<li><strong>Machine Image</strong> - The AMI that will be used to build the machine. RightScale will only support instances launched with one of our RightImages. We recommend using ServerTemplates with RightImages.</li>
+<li><strong>Ramdisk Image</strong>**** - Select a Ramdisk image of your choice. (optional)</li>
+<li><strong>Kernel Image</strong>**** - Select a kernel image of your choice. (optional)</li>
+<li> <strong>Ec2 user data</strong>**** - This information is passed to the instance using the EC2 user launch data mechanism which is limited to 16KB of data. The best way to pass configuration data into instances is with RightScripts, but this user data field is sometimes useful for testing purposes.</li>
+</ul>
+
+<p><strong>AWS Pricing</strong></p>
+
+<p>With an AWS server, you have the option to choose the type of pricing for your instance. The default is On-Demand, with the current On-Demand price listed right below. If you select Spot from the Pricing dropdown, the current spot prices will be viewable for each Availability Zone.</p>
+
+<p><img src="/img/cm-spot-pricing.png" alt="cm-spot-pricing.png" width="311" height="198" /></p>
+
+<h4 id="azure">Azure</h4>
+
+<p><img src="/img/cm-add-server-assistant-azure.png" alt="cm-add-server-assistant-azure.png" width="725" height="588" /></p>
+
+<ul>
+<li><strong>Server Name</strong> - Provide a name for the server.</li>
+<li><strong>MultiCloud Image</strong> - Select the MultiCloud Image to be used for the server. The default MultiCloud Image is inherited from the ServerTemplate.</li>
+<li><strong>Instance Type</strong> - Specify the type (size) of instance to launch.</li>
+<li><strong>Machine Image</strong> - The image that will be used to build the machine. RightScale will only support instances launched with one of our RightImages. We recommend using ServerTemplates with RightImages.</li>
+<li><strong>Availability Set</strong> - Availability sets are used to indicate to Windows Azure that VMs in the availability sets are to be protected against single points of failure. When you assign multiple virtual machines to an availability set, Windows Azure ensures that the machines are assigned to different update and fault domains.</li>
+<li><strong>User data</strong> - This information is passed to the instance. The best way to pass configuration data into instances is with RightScripts, but this user data field is sometimes useful for testing purposes.</li>
+</ul>
+
+<h4 id="google">Google</h4>
+
+<p><img src="/img/cm-add-server-assistant-google.png" alt="cm-add-server-assistant-google.png" width="725" height="581" /></p>
+
+<ul>
+<li><strong>Server Name</strong> - Provide a name for the server.</li>
+<li><strong>MultiCloud Image</strong> - Select the MultiCloud Image to be used for the server. The default MultiCloud Image is inherited from the ServerTemplate.</li>
+<li><strong>Instance Type</strong> - Specify the type (size) of instance to launch.</li>
+<li><strong>Security Group</strong> - Security group that will be used by the server.</li>
+<li><strong>Datacenter/Zone</strong> - The regional datacenter in the cloud (Datacenter and Zone are synonymous). A cloud will often have multiple Datacenters which can help when architecting a highly available Deployment.</li>
+<li><strong>Machine Image</strong> - The image that will be used to build the machine. RightScale will only support instances launched with one of our RightImages. We recommend using ServerTemplates with RightImages.</li>
+<li><strong>User data</strong> - This information is passed to the instance. The best way to pass configuration data into instances is with RightScripts, but this user data field is sometimes useful for testing purposes.</li>
+</ul>
+
+<h4 id="softlayer">SoftLayer</h4>
+
+<p><img src="/img/cm-add-server-assistant-softlayer.png" alt="cm-add-server-assistant-softlayer.png" width="725" height="468" /></p>
+
+<ul>
+<li><strong>Server Name</strong> - Provide a name for the server.</li>
+<li><strong>MultiCloud Image</strong> - Select the MultiCloud Image to be used for the server. The default MultiCloud Image is inherited from the ServerTemplate.</li>
+<li><strong>Instance Type</strong> - Specify the type (size) of instance to launch.</li>
+<li><strong>Datacenter / Zone</strong> -  The regional datacenter in the cloud (Datacenter and Zone are synonymous). A cloud will often have multiple Datacenters which can help when architecting a highly available Deployment.</li>
+<li><strong>Machine Image</strong> - The image that will be used to build the machine. RightScale will only support instances launched with one of our RightImages. We recommend using ServerTemplates with RightImages.</li>
+</ul>
+
+<h4 id="confirm">Confirm</h4>
+
+<p>The <strong>Confirm</strong> tab provides a detailed summary of the server you&#39;re about to create. If the ServerTemplate contains any predefined alerts, they will also be displayed in this view. If you are satisfied with your selections, click <strong>Finish</strong> to create the server/array.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You should only use the Launch option if you know all of the server&#39;s boot script inputs are defined.</p>
+</div>
+
+<p>(Optional) You also have the option to save these settings as <q>default settings</q> for future servers used in that deployment. For more information, see <a href="/cm/rs101/server_defaults.html">Server Defaults</a>.</p>
+
+<p><img src="/img/cm-add-server-confirm.png" alt="cm-add-server-confirm.png" width="649" height="532" /></p>
+
+<h2 id="change-the-category-for-an-input-on-a-servertemplate">Change the Category for an Input on a ServerTemplate</h2>
+
+<h3 id="change-the-category-for-an-input-on-a-servertemplate-objective">Objective</h3>
+
+<p>To change the input category for a script that has been added to a ServerTemplate and create a new category if desired.</p>
+
+<h3 id="change-the-category-for-an-input-on-a-servertemplate-prerequisites">Prerequisites</h3>
+
+<p>You must be working with an editable [HEAD] version of a ServerTemplate. You can create an editable version by cloning a ServerTemplate.</p>
+
+<h3 id="change-the-category-for-an-input-on-a-servertemplate-overview">Overview</h3>
+
+<p>When you add a script to a ServerTemplate, it is automatically placed in the &#39;UNCATEGORIZED&#39; category. You do not need to change the category but may want to do so if you are customizing a ServerTemplate extensively by adding scripts and need to categorize them for better tracking or organization.</p>
+
+<h3 id="change-the-category-for-an-input-on-a-servertemplate-steps">Steps</h3>
+
+<p>Use the following steps to change the input category of a script.</p>
+
+<ol>
+<li>Go to <em>your deployment</em> &gt; <em>ServerTemplate name</em> &gt; <strong>Inputs</strong>.</li>
+<li>Click the <strong>Show</strong> icon for the script that you are recategorizing.</li>
+<li>Click <strong>Clone</strong>.</li>
+<li>A confirmation message appears and the new script displays on the page with a new version assigned to it. If necessary, you can rename the script here by clicking on it.</li>
+<li>Click <strong>Edit</strong> and scroll down to the bottom of the page.</li>
+<li>Under <strong>Inputs</strong>, either select one of the RightScale categories from the drop-down menu or click <strong>New</strong> to create your own. Save your changes.<br>
+<img src="/img/cm-change-category-dropdown.png" alt="cm-change-category-dropdown.png" width="550" height="193" /><br></li>
+<li>Click <strong>Commit</strong> and add a Commit Message (required). Commit your changes.</li>
+<li>Delete the original script from the ServerTemplate.</li>
+<li>Click <strong>Add Script</strong>.</li>
+<li>Under <strong>Publisher</strong>, click <strong>Unpublished</strong> and find your script in the <strong>Search Results</strong>.</li>
+<li>Click your script to highlight it then and click <strong>Select</strong>.</li>
+<li>Commit the ServerTemplate using the <strong>Commit</strong> button at the top of the page.</li>
+<li>Add a Commit Message (required).</li>
+<li>Click the <strong>Inputs</strong> tab of your ServerTemplate to verify that your changes were executed successfully.</li>
+</ol>
+
+<h2 id="change-the-servertemplate-of-a-server">Change the ServerTemplate of a Server</h2>
+
+<h3 id="change-the-servertemplate-of-a-server-objective">Objective</h3>
+
+<p>To change the ServerTemplate of a created server.</p>
+
+<h3 id="change-the-servertemplate-of-a-server-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="change-the-servertemplate-of-a-server-overview">Overview</h3>
+
+<p>Once a server or instance is launched with a particular ServerTemplate, you cannot change its ServerTemplate to a completely different ServerTemplate (that has a different lineage). For operational servers, you can only change the revision of the selected ServerTemplate. However, for inactive servers or future instances that will be launched into an array you can select a completely different ServerTemplate. The following tutorial will explain how to change a server&#39;s or server array&#39;s ServerTemplate.</p>
+
+<h3 id="change-the-servertemplate-of-a-server-steps">Steps</h3>
+
+<h4 id="inactive-server">Inactive Server</h4>
+
+<p>To change which ServerTemplate will be used to launch the next server or instance into the server array, click the <strong>Edit</strong> button under the server array&#39;s show page or the <q>Next</q> server. Changes will affect the next server that is launched.</p>
+
+<p>In the Add Server Wizard, click on the <strong>ServerTemplate</strong> tab.</p>
+
+<p><img src="/img/cm-select-different-server-template.png" alt="cm-select-different-server-template.png" width="550" height="367" /></p>
+
+<ul>
+<li><strong>Select a different ServerTemplate</strong> - use the Filter Options to find and select a completely different ServerTemplate. If there are multiple revisions of the new ServerTemplate, you will also need to select a specific revision or the HEAD version once you&#39;ve selected the new ServerTemplate.</li>
+<li><strong>Select a different revision of the same ServerTemplate</strong> - At the bottom, select a different revision of the currently selected ServerTemplate. You can select a previous revision or HEAD version. It&#39;s useful to select the editable HEAD version of a ServerTemplate, especially if you are actively developing the ServerTemplate.</li>
+</ul>
+
+<p>A record of these types of changes will be displayed under the <q>Next</q> server&#39;s <strong>Changes</strong> tab.</p>
+
+<h4 id="active-server">Active Server</h4>
+
+<p>If you already have an operational instance in the server array or a <q>current</q> operational server, you can only change its ServerTemplate revision under the the <strong>Info</strong> tab. Click the Edit icon to select a different revision.</p>
+
+<p><img src="/img/cm-server-template-revision-edit.png" alt="cm-server-template-revision-edit.png" width="416" height="42" /></p>
+
+<p><img src="/img/cm-server-template-revision-dropdown.png" alt="cm-server-template-revision-dropdown.png" width="462" height="79" /></p>
+
+<h2 id="clone-a-servertemplate">Clone a ServerTemplate</h2>
+
+<h3 id="clone-a-servertemplate-objective">Objective</h3>
+
+<p>To clone a RightScale ServerTemplate for the purposes of making custom modifications</p>
+
+<h3 id="clone-a-servertemplate-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="clone-a-servertemplate-overview">Overview</h3>
+
+<p>You cannot edit a published RightScale ServerTemplate that you imported from the MultiCloud Marketplace (<strong>Design</strong> &gt; <strong>ServerTemplates</strong> &gt; <strong>MultiCloud Marketplace</strong>) Because you cannot edit a published ServerTemplate, you must first clone it, which creates an editable copy in your &#39;Local&#39; view. You are free to customize this version of the ServerTemplate as you see fit. (Note that RightScripts function the same way. You must first clone them before you can make any modifications.)</p>
+
+<h3 id="clone-a-servertemplate-steps">Steps</h3>
+
+<p>Select a ServerTemplate that you would like to clone. For example, you may have an uneditable ServerTemplate that you imported from the MultiCloud Marketplace.</p>
+
+<p>When you click <strong>Clone</strong>, an editable (private) copy of that ServerTemplate is added to your &#39;Local&#39; view.</p>
+
+<p><img src="/img/cm-clone-server-template.png" alt="cm-clone-server-template.png" width="725" height="427" /></p>
+
+<p>By default, a version is appended to the template&#39;s name to make it distinct from the original ServerTemplate (for example, v10). As a best practice, we recommend changing the name of the ServerTemplate to help better distinguish the template. If you are using one of the ServerTemplates published by RightScale, you might want to keep the original version number in the name so that it will be more apparent when a newer version of that ServerTemplate becomes available in the MultiCloud Marketplace. (for example, <q>My PHP App Server v9 (clone)</q>)</p>
+
+<p>Notice that you can also see which ServerTemplate it was cloned from (in this case, PHP App Server v9).</p>
+
+<p><img src="/img/cm-clone-server-template-new.png" alt="cm-clone-server-template-new.png" width="480" height="503" /></p>
+
+<h2 id="commit-a-servertemplate">Commit a ServerTemplate</h2>
+
+<h3 id="commit-a-servertemplate-objective">Objective</h3>
+
+<p>To create a history of ServerTemplate versions. For a conceptual understanding our version control system from a Lifecycle Management perspective, see <a href="/cm/dashboard/design/server_templates/servertemplates_concepts.html">ServerTemplate Versioning</a>.</p>
+
+<h3 id="commit-a-servertemplate-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="commit-a-servertemplate-overview">Overview</h3>
+
+<p>You can now create multiple revisions of the same ServerTemplate. This feature provides a level of version control that is particularly useful for making changes to a ServerTemplate&#39;s RightScripts. Instead of cloning a ServerTemplate to make changes, simply click the Commit button to create a revision of the ServerTemplate.</p>
+
+<p>As a best practice, once you have a functioning ServerTemplate, we recommend creating a revision of the ServerTemplate so that you&#39;ll have a version that you can revert back to if you run into problems. The versioning process allows you to annotate as you produce newer versions. (That is, you can create a custom message as you commit a ServerTemplate. These messages will show up under the <q>Revisions</q> tab of your ServerTemplate.)</p>
+
+<h3 id="commit-a-servertemplate-steps">Steps</h3>
+
+<h4 id="create-a-servertemplate-revision">Create a ServerTemplate Revision</h4>
+
+<ul>
+<li>Navigate to <strong>Design</strong> &gt; <strong>ServerTemplates</strong>.</li>
+<li>Select an editable ServerTemplate.</li>
+<li>Click the <strong>Commit</strong> button.</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You can only commit a [HEAD] version of a private ServerTemplate. The <q>Head</q> version is always the version that you are allowed to edit.</p>
+</div>
+
+<p><img src="/img/cm-template-revision-commit-1.png" alt="cm-template-revision-commit-1.png" width="520" height="518" /></p>
+
+<p>Be sure to include a helpful description and click <strong>Commit</strong>.</p>
+
+<h4 id="commit-a-servertemplate-with-changes">Commit a ServerTemplate with Changes</h4>
+
+<p>Let&#39;s say you&#39;ve made some changes to the [HEAD] version of a ServerTemplate such as adding/removing/rearranging RightScripts or editing individual RightScripts, and want to commit the ServerTemplate and create a new revision.</p>
+
+<p>Before you commit a ServerTemplate, you&#39;ll most likely want to commit any RightScripts that you&#39;ve modified. If you don&#39;t commit all [HEAD] RightScripts, you risk future incompatibility issues because you&#39;ll be referencing a RightScript whose functionality could have changed since the last commit.</p>
+
+<p>To ensure that all RightScripts are preserved in their current version along with the ServerTemplate, you should commit all RightScripts that have been modified. If you do not click the <strong>Commit [HEAD] RightScripts</strong> link before clicking the ServerTemplate&#39;s <strong>Commit</strong> button, you will be reminded on the next screen that any RightScripts with [HEAD] versions will be committed.</p>
+
+<p>Click the <strong>Commit</strong> button of the ServerTemplate.</p>
+
+<p>It&#39;s important to leave a detailed description of all of your changes. These messages will be visible under a ServerTemplate&#39;s Revisions tab.</p>
+
+<p>Once again, if there are any RightScripts with [HEAD] versions, they will automatically be committed when you commit the ServerTemplate.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If there is a special scenario where you do NOT want to commit such changes, uncheck the <q>Commit [HEAD] RightScripts</q> box.</p>
+</div>
+
+<p>Click the <strong>Commit</strong> button.</p>
+
+<h4 id="change-servertemplate-revisions">Change ServerTemplate Revisions</h4>
+
+<p>Once you&#39;ve committed a ServerTemplate, you should see a timeline bar underneath the ServerTemplate&#39;s name. To change revisions, simply select a revision from the timeline.</p>
+
+<p><img src="/img/cm-template-revision-commit-2.png" alt="cm-template-revision-commit-2.png" width="665" height="233" /></p>
+
+<p>You can also click on the <strong>Revisions</strong> tab to see who created the ServerTemplate revision, when it was committed, as well as the change descriptions for each revision.</p>
+
+<p><img src="/img/cm-template-revision-tab-2.png" alt="cm-template-revision-tab-2.png" width="725" height="277" /></p>
+
+<h3 id="commit-a-servertemplate-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<h4 id="make-a-previous-revision-the-new-head-revision">Make a Previous Revision the new HEAD Revision</h4>
+
+<p>If you have a previously committed revision (e.g. rev 5) of a ServerTemplate that you would like to make your new HEAD version, you will need to clone that revision. Currently, that is the only way to revert back to an editable version of a committed template. Essentially, what you are doing with this procedure is creating a <em>new branch</em> of that ServerTemplate. This process ensures that revisions are always updated versions of the previous revision.</p>
+
+<h2 id="create-a-new-servertemplate">Create a New ServerTemplate</h2>
+
+<h3 id="create-a-new-servertemplate-objective">Objective</h3>
+
+<p>To create a ServerTemplate for launching new instances on one or more cloud infrastructures</p>
+
+<h3 id="create-a-new-servertemplate-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="create-a-new-servertemplate-overview">Overview</h3>
+
+<p>ServerTemplates are cloud-agnostic. However, each ServerTemplate references a single MultiCloud Image (MCI) object. It is the MultiCloud Image object that actually defines into which clouds you can launch a server instance. See <a href="/cm/dashboard/design/multicloud_images/multicloud_images.html">MultiCloud Images</a> for more information. When you add a server to a deployment from a ServerTemplate, you can only add that server to a cloud that the MultiCloud Image supports. When you create a ServerTemplate, you must either select an existing MultiCloud Image or create one <q>on-the-fly</q> and specify at least one image for a particular cloud.</p>
+
+<h3 id="create-a-new-servertemplate-steps">Steps</h3>
+
+<p>Go to <strong>Design</strong> &gt; <strong>ServerTemplates</strong> and click <strong>New</strong>.</p>
+
+<p>You will need to provide some basic information about your new ServerTemplate.</p>
+
+<ul>
+<li><strong>Nickname</strong> – A short nickname that helps you recognize the ServerTemplate.</li>
+<li><strong>Description</strong> – A short description of the ServerTemplate.</li>
+<li><strong>MultiCloud Image</strong> – You can either select an existing MultiCloud Image or create a new MultiCloud Image at this time. If possible, we recommend using one of the default MultiCloud Images from RightScale or creating a custom MultiCloud Image beforehand. If you choose to create a New MultiCloud Image at this time, you will need to specify an image for a cloud. Later, you can add other clouds to the MultiCloud Image that you just created, under its Clouds tab ( <strong>Design</strong> &gt; <strong>MultiCloud Images</strong> ).<br>
+<img src="/img/cm-create-new-multicloud-image.png" alt="cm-create-new-multicloud-image.png" width="584" height="271" /></li>
+</ul>
+
+<p>Click the <strong>Save</strong> action button.</p>
+
+<h2 id="customize-a-servertemplate-to-be-multicloud">Customize a ServerTemplate to be MultiCloud</h2>
+
+<h3 id="customize-a-servertemplate-to-be-multicloud-objective">Objective</h3>
+
+<p>To convert or change a ServerTemplate so that it can be used to create Servers and launch instances on one or more public/private cloud infrastructures that it currently doesn&#39;t support.</p>
+
+<h3 id="customize-a-servertemplate-to-be-multicloud-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+<li>a ServerTemplate that you cannot use to create a Server in your desired cloud infrastructure</li>
+</ul>
+
+<h3 id="customize-a-servertemplate-to-be-multicloud-overview">Overview</h3>
+
+<p>ServerTemplates are cloud-agnostic. It&#39;s the template&#39;s MultiCloud Images (MCIs) that technically controls which clouds a ServerTemplate supports. You&#39;ll find that most ServerTemplates are published with multiple MCIs, where each MCI typically references the same machine image across multiple clouds/regions.</p>
+
+<p>When you <a href="/cm/dashboard/manage/deployments/deployments_actions.html">Add a Server to a Deployment</a> from a ServerTemplate, you will only be able to add a server in a cloud/region that the selected MultiCloud Image supports. Currently, most ServerTemplates published by RightScale include MCIs that reference copies of the same machine image in all supported AWS regions. For example, the <q>RightImage_CentOS_5.4_i386_v5.6 - 11H1.b1</q> MCI references identical machine images (with the same name) across all supported AWS regions (us-east, us-west, etc.).</p>
+
+<p>But for private clouds, it&#39;s impossible for RightScale to publish ServerTemplates that can be used as-is to launch instances into those private clouds because we don&#39;t know in advance where those images are located. In such cases, you will need to customize a ServerTemplate yourself by creating an MCI that can be used for your private cloud.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If you need to create an image for use in a private cloud, please contact your RightScale Sales Account Manager. If you do not have a RightScale Account Manager, please contact the sales department at <a href="mailto:sales@rightscale.com">sales@rightscale.com</a>.</p>
+</div>
+
+<p>Follow the steps below to modify an existing ServerTemplate so that it can be used to create Servers for multiple public and private clouds.</p>
+
+<h3 id="customize-a-servertemplate-to-be-multicloud-steps">Steps</h3>
+
+<h4 id="select-a-servertemplate">Select a ServerTemplate</h4>
+
+<p>The first step is to find a ServerTemplate that you want to customize to support other clouds. You can either import and clone a published ServerTemplate from the MultiCloud Marketplace or modify a private ServerTemplate in your local collection.</p>
+
+<p>Once you&#39;ve found the ServerTemplate that you want to modify, make sure that&#39;s it&#39;s an editable HEAD version. If not, you will need to clone the ServerTemplate so that you can make changes to its configuration, namely its list of MCIs.</p>
+
+<h4 id="modify-the-multicloud-image-(mci)">Modify the MultiCloud Image (MCI)</h4>
+
+<p>The next step is to modify the MCIs that are used by the editable ServerTemplate to support your additional private/public clouds. There are two options depending on whether you want to create a new MCI or modify an existing one. Complete the tutorial that best suits your needs.</p>
+
+<ul>
+<li><a href="/cm/dashboard/design/multicloud_images/multicloud_images_actions.html">Create a New MultiCloud Image</a></li>
+<li><a href="/cm/dashboard/design/multicloud_images/multicloud_images_actions.html">Add New Cloud Support to a MultiCloud Image</a></li>
+</ul>
+
+<h4 id="update-the-servertemplate&#39;s-mci-list">Update the ServerTemplate&#39;s MCI List</h4>
+
+<p>Now that you have an MCI that can be used to find the appropriate image in your newly added cloud/region, you&#39;ll need to update the ServerTemplate.</p>
+
+<p>Go to the editable HEAD version of the ServerTemplate and go to its <strong>Images</strong> tab.</p>
+
+<p>The next step is to replace the MCI that you cloned and modified with the new MCI that you just created. Remember, when you clone a RightScale component (ServerTemplate, RightScript, etc.) it becomes a new object with its own distinct lineage. Therefore, you can&#39;t use the Edit (pencil) icon to select your cloned version of that particular MCI.</p>
+
+<p>Click the <strong>Add MultiCloud Image</strong> button. Select and add the new cloned MCI that includes the added cloud support.</p>
+
+<p>Delete the old MCI that the new one replaced.</p>
+
+<p>Commit the ServerTemplate. (optional)</p>
+
+<p><strong><em>Congratulations!</em></strong> You now have a ServerTemplate that you can use to <a href="/cm/dashboard/manage/deployments/deployments_actions.html">Add a Server to a Deployment</a> for the newly supported cloud(s).</p>
+
+<h2 id="detect-changes-in-head-servertemplate">Detect Changes in HEAD ServerTemplate</h2>
+
+<h3 id="detect-changes-in-head-servertemplate-objective">Objective</h3>
+
+<p>To detect RightScripts in a HEAD ServerTemplate that have changes between the committed revision that&#39;s currently being used and its HEAD version (if available).</p>
+
+<h3 id="detect-changes-in-head-servertemplate-prerequisites">Prerequisites</h3>
+
+<p>The following are prerequisites for completing this tutorial:</p>
+
+<ul>
+<li>You should know how to run a diff (comparison) on RightScripts</li>
+<li>You should know how to commit RightScripts</li>
+<li>&#39;publisher&#39; user role privileges</li>
+</ul>
+
+<h3 id="detect-changes-in-head-servertemplate-overview">Overview</h3>
+
+<p>If you are developing new ServerTemplates or modifying existing ones, you may want to know if you are using the most recent version of a RightScript. Use the <strong>Detect changes in HEAD</strong> button to identify RightScripts where the revision that is currently being used in a HEAD ServerTemplate does not match the HEAD version of the RightScript. (i.e. The most recent version of the RightScript is not being used.) If you are developing a new ServerTemplate you might want to make sure that you&#39;re using the latest versions of all the RightScripts.</p>
+
+<p>This procedure can be used to help publishers manage and keep their ServerTemplates and RightScripts up to date.</p>
+
+<p>Blue spherical icons (<img src="/img/cm-icon-blueball.png" alt="cm-icon-blueball.png" width="11" height="11" />) will be displayed next to a RightScripts if its HEAD version does not match the revision that is currently being used in a HEAD ServerTemplate.</p>
+
+<p><img src="/img/cm-blue-orange-balls.png" alt="cm-blue-orange-balls.png" width="587" height="391" /></p>
+
+<p>The orange and blue spheres will be displayed for different reasons. The diagram below demonstrates the most common user scenarios.</p>
+
+<p><img src="/img/cm-update-rightscripts.png" alt="cm-update-rightscripts.png" width="525" height="373" /></p>
+
+<p>Depending on which RightScript revision a ServerTemplate is currently using, the following script notifications will be shown.</p>
+
+<table><thead>
+<tr>
+<th>Which RightScript is in the HEAD ServerTemplate?</th>
+<th>Conditions</th>
+<th>Notification Results</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Rev 7</td>
+<td>Rev 9 is not available in the MultiCloud Marketplace</td>
+<td>No icons</td>
+</tr>
+<tr>
+<td>Rev 7</td>
+<td>Rev 9 is available in the MultiCloud Marketplace</td>
+<td><img src="/img/cm-icon-orangeball.png" alt="cm-icon-orangeball.png" width="11" height="11" /> [orange icon]</td>
+</tr>
+<tr>
+<td>Rev 1</td>
+<td>Rev 2 is available; Rev 1 is not equal to HEAD</td>
+<td><img src="/img/cm-icon-orangeball.png" alt="cm-icon-orangeball.png" width="11" height="11" /> [orange icon] <br><img src="/img/cm-icon-blueball.png" alt="cm-icon-blueball.png" width="11" height="11" /> [blue icon]</td>
+</tr>
+<tr>
+<td>Rev 2</td>
+<td>Rev 2 is equal to HEAD</td>
+<td>No icons</td>
+</tr>
+<tr>
+<td>Rev 2</td>
+<td>Rev 2 is not equal to HEAD</td>
+<td><img src="/img/cm-icon-blueball.png" alt="cm-icon-blueball.png" width="11" height="11" /> [blue icon]</td>
+</tr>
+</tbody></table>
+
+<h3 id="detect-changes-in-head-servertemplate-steps">Steps</h3>
+
+<ol>
+<li>Go to the <strong>Scripts</strong> tab of a HEAD ServerTemplate. Orange ball notifications will automatically be displayed.</li>
+<li>Click the <strong>Detect Changes in HEAD</strong> action button. Blue spherical icons (<img src="/img/cm-icon-blueball.png" alt="cm-icon-blueball.png" width="11" height="11" />) will be displayed next to a RightScript if its HEAD version does not match the revision that is currently being used in a HEAD ServerTemplate.</li>
+<li>Click the blue sphere icon to view a differential between the current revision of the script that&#39;s being used and its HEAD version.</li>
+<li>Determine why a blue sphere icon appears next to a RightScript.
+
+<ul>
+<li>If you are using the latest committed revision of the RightScript and there is a <img src="/img/cm-icon-blueball.png" alt="cm-icon-blueball.png" width="11" height="11" /> icon, you may want to commit the HEAD version of the RightScript so that the most recently committed revision of the script matches the HEAD version and then select the new committed revision.</li>
+<li>If you are using an older revision of the RightScript and a more recent committed revision exists in your RightScale account you may want to select the newer revision (which hopefully matches the script&#39;s HEAD version).</li>
+</ul></li>
+</ol>
+
+<h3 id="detect-changes-in-head-servertemplate-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<p>Note that when RightScripts within ServerTemplates have been updated, the associated icons (spheres) disappear. The content of the RightScripts themselves has in no way been changed, just which RightScripts the ServerTemplate uses changes.</p>
+
+<h2 id="differentiate-two-servertemplates">Differentiate Two ServerTemplates</h2>
+
+<h3 id="differentiate-two-servertemplates-objective">Objective</h3>
+
+<p>To differentiate between two ServerTemplates, revealing what has been added, removed or modified to produce their differences</p>
+
+<h3 id="differentiate-two-servertemplates-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="differentiate-two-servertemplates-overview">Overview</h3>
+
+<p>Similar to the way you can differentiate between two RightScripts, you can also run a <em>diff</em> to see the differences between two ServerTemplates. You select the two ServerTemplates in drop-down menu fashion. The output of your diff shows the two ServerTemplates in parallel, with colored text highlights of all added, removed, and modified attributes.</p>
+
+<p>A common use case for this is when you want to see, in detail, the differences between two ServerTemplates after a new ServerTemplate release. Another possible use case is when you have cloned a ServerTemplate, spent some time working on it, then perhaps left it untouched for some period of time. Running a diff on the original and the clone will quickly catch you up to speed with respect to what has changed. You can also follow that up with running a diff on the two latest versions of your newer cloned ServerTemplate to pin point exactly what you had been working on most recently.</p>
+
+<h3 id="differentiate-two-servertemplates-steps">Steps</h3>
+
+<p>The following is a basic example of how to perform a diff on two ServerTemplates, including sample output.</p>
+
+<h4 id="running-a-diff">Running a Diff</h4>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>ServerTemplates</strong></li>
+<li>Select the ServerTemplate you wish to run a diff on (for example, PHP App Server v6) *</li>
+<li>Select the <strong>Diff</strong> action button
+
+<ul>
+<li>Select the revision to compare against in the drop down menu</li>
+<li>Select the <strong>Diff</strong> action button in the drop down</li>
+</ul></li>
+</ol>
+
+<ul>
+<li>Alternatively, you can select the <strong>Diff</strong> action button here, and specify <em>both</em> ServerTemplates in the drop down menu. It is easier to have this filled out for you when selecting the ServerTemplate name however, particularly because the default version numbers are usually correct and you can often proceed by simply pressing the Diff action button.</li>
+</ul>
+
+<h4 id="sample-output">Sample output</h4>
+
+<h4 id="example:-description-and-mci">Example: Description and MCI</h4>
+
+<p><img src="/img/cm-server-template-diff.png" alt="cm-server-template-diff.png" width="725" height="540" /></p>
+
+<h4 id="example:-modified-cookbook">Example: Modified Cookbook</h4>
+
+<p>A cookbook change will be highlighted for the following reasons:</p>
+
+<ul>
+<li>A different version of the cookbook is attached to the ServerTemplate. (e.g. v12.1.0 =&gt; v13.5.0)</li>
+<li>The cookbook comes from a different repository location. In such cases, the name of the repository is listed underneath the cookbook name. <em>Note</em>: The cookbook&#39;s version may be unchanged.</li>
+</ul>
+
+<p><img src="/img/cm-diff-cookbook.png" alt="cm-diff-cookbook.png" width="725" height="111" /></p>
+
+<h4 id="example:-script-reorder">Example: Script Reorder</h4>
+
+<p>When a script is dragged up/down the list, it will be highlighted as removed and added in the differential markup.</p>
+
+<p><img src="/img/cm-diff-move-script.png" alt="cm-diff-move-script.png" width="550" height="128" /></p>
+
+<h4 id="example:-modified-rightscript">Example: Modified RightScript</h4>
+
+<p>A RightScript will be highlighted as a change whenever a different revision is used.</p>
+
+<p><img src="/img/cm-diff-script.png" alt="cm-diff-script.png" width="550" height="62" /></p>
+
+<h4 id="default-version-information">Default Version Information</h4>
+
+<p>When you select a ServerTemplate name, the default versions in the drop down are usually correct, and what you would want to run a diff against. However, you can specify any existing revisions. The <q>To</q> entry is the most recent non-Head version. The default <q>From</q> entry is the version prior to that. For example, if your ServerTemplate has 5 revisions (rev 5 down to rev 1), the defaults would be:</p>
+
+<ul>
+<li>To: [rev 5]</li>
+<li>From: [rev 4]</li>
+</ul>
+
+<h2 id="import-a-servertemplate">Import a ServerTemplate</h2>
+
+<h3 id="import-a-servertemplate-objective">Objective</h3>
+
+<p>To import a ServerTemplate from the MultiCloud Marketplace so it becomes <q>local</q>.</p>
+
+<h3 id="import-a-servertemplate-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;library&#39; user role privileges</li>
+</ul>
+
+<h3 id="import-a-servertemplate-overview">Overview</h3>
+
+<p>When you import a ServerTemplate, all of its associated RightScripts, MultiCloud Image, and RepoPaths are also imported over (unless they&#39;ve already been imported or you don&#39;t have access to those published RightScale components).</p>
+
+<p>Before importing the ServerTemplate:</p>
+
+<ul>
+<li>ServerTemplate is found in: <strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong></li>
+</ul>
+
+<p>After importing the ServerTemplate:</p>
+
+<ul>
+<li>ServerTemplate is found in: <strong>Design</strong> &gt; <strong>ServerTemplates</strong> &gt; <strong>View Local</strong></li>
+<li>Associated RightScripts are found in: <strong>Design</strong> &gt; <strong>RightScripts</strong> &gt; <strong>View Local</strong></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Because any ServerTemplate that you import over from the MultiCloud Marketplace will most likely be a committed revision, you will need to clone it in order to create an editable copy in your Local view.</p>
+</div>
+
+<h3 id="import-a-servertemplate-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong></li>
+<li>Find and select the appropriate ServerTemplate. Browse by categories, perform a keyword search, or use the filter options to find the correct ServerTemplate.</li>
+<li>Click <strong>Import</strong>.<br></li>
+</ol>
+
+<p>Once imported, the ServerTemplate and associated RightScripts are considered part of your <q>local</q> collection.</p>
+
+<h2 id="publish-and-share-a-servertemplate">Publish and Share a ServerTemplate</h2>
+
+<h3 id="publish-and-share-a-servertemplate-objective">Objective</h3>
+
+<p>To publish and share a ServerTemplate.</p>
+
+<h3 id="publish-and-share-a-servertemplate-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;publisher&#39; user role privileges</li>
+</ul>
+
+<h3 id="publish-and-share-a-servertemplate-overview">Overview</h3>
+
+<p>You can only publish a private component that was originally created in your RightScale account. (i.e. It was either created from scratch or cloned.) You cannot publish a component that you imported from the MultiCloud Marketplace (MCM). A particular version can only be published once.</p>
+
+<p>When you publish a ServerTemplate, any of its private RightScale components must also be published (unless they were previously published to the MCM). For example, if the ServerTemplate uses any cloned RightScripts or new MCIs that you created in the current RightScale account, all of those private RightScale components will also be shared with the ServerTemplate.</p>
+
+<p>It&#39;s strongly recommended that you only share committed revisions of ServerTemplates where all of its referenced RightScale components are also committed revisions.</p>
+
+<p>If you try to publish a ServerTemplate that references HEAD versions of RightScale components (e.g. RightScripts or MultiCloud Images), you will be prompted to commit any HEAD versions in order to create static, committed revisions. It&#39;s strongly recommended that you agree and let RightScale automatically create committed revisions of those HEAD versions. The ServerTemplate will automatically select and use the new committed revisions that were created instead of the HEAD versions.</p>
+
+<p>Although you can publish a HEAD version of a ServerTemplate, it&#39;s not a recommended best practice unless you&#39;re an advanced user that&#39;s actively developing and testing it across multiple RightScale accounts. It&#39;s recommended that you only publish and share committed revisions of a component.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong><p>If you share a MultiCloud Image that has a reference to a privately owned Amazon Machine Image (AMI) (i.e. the AMI was created using your AWS credentials) and want to share the MCI with another RightScale account, you must also privately share the AMI with the other AWS account, otherwise the other RightScale account will not have access to use the referenced AMI.</p>
+</div>
+
+<h3 id="publish-and-share-a-servertemplate-steps">Steps</h3>
+
+<ol>
+<li>Navigate to <strong>Design</strong> &gt; <strong>ServerTemplates</strong> in the RightScale Dashboard.</li>
+<li>Select the ServerTemplate that you want to share.</li>
+<li>Select the committed revision that you want to share in the History Timeline Bar. (e.g. Rev 1)</li>
+<li>Click the <strong>Publish to MultiCloud Marketplace</strong> action button. For details on how to use the publishing wizard to complete the sharing process, see the <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#using-the-publishing-assistant">Using the Publishing Assistant</a> tutorial for details.</li>
+</ol>
+
+<h2 id="resurrect-a-deleted-servertemplate">Resurrect a Deleted ServerTemplate</h2>
+
+<h3 id="resurrect-a-deleted-servertemplate-objective">Objective</h3>
+
+<p>To resurrect (recover) a ServerTemplate that was previously deleted from your RightScale account&#39;s local collection by using the clone button.</p>
+
+<h3 id="resurrect-a-deleted-servertemplate-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="resurrect-a-deleted-servertemplate-overview">Overview</h3>
+
+<p>If you&#39;ve defined a Server in the past using ServerTemplate &#39;X&#39; and later delete it from the RightScale account, the Server will remain and continue to reference a deleted ServerTemplate. In such cases, if you attempt to view a deleted ServerTemplate, you will have the option of adding it back to your local collection, provided that you have the appropriate user role privileges and the ServerTemplate is still available to the RightScale account.</p>
+
+<h3 id="resurrect-a-deleted-servertemplate-steps">Steps</h3>
+
+<p>If you see the following error message (Warning, this ServerTemplate has been deleted! Use &#39;clone&#39; to resurrect it.) when viewing a ServerTemplate&#39;s show page, click the <strong>Clone</strong> button to add the ServerTemplate back to your local collection.</p>
+
+<p><img src="/img/cm-clone-deleted-template.png" alt="cm-clone-deleted-template.png" width="464" height="164" /></p>
+
+<h2 id="subscribe-to-a-servertemplate">Subscribe to a ServerTemplate</h2>
+
+<h3 id="subscribe-to-a-servertemplate-objective">Objective</h3>
+
+<p>To subscribe to a privately shared, HEAD version of a ServerTemplate from the MultiCloud Marketplace.</p>
+
+<h3 id="subscribe-to-a-servertemplate-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;library&#39; user role privileges</li>
+</ul>
+
+<h3 id="subscribe-to-a-servertemplate-overview">Overview</h3>
+
+<p>Typically you will only import committed (uneditable) revisions of a ServerTemplate from the MultiCloud Marketplace (MCM). However, another RightScale account can privately share a HEAD (editable) version of a ServerTemplate with your RightScale account. In such cases, you will be able to subscribe to the HEAD version of the ServerTemplate in the MCM.</p>
+
+<p>If you want to use a privately shared HEAD version in your RightScale account, you must subscribe, not import, the ServerTemplate, because you can inherit changes from its publisher at any time. For example, if the publisher makes changes to the HEAD version of their ServerTemplate in their own account they will have the option to republish the ServerTemplate to the MCM, which will update the copy in the MCM to reflect those changes. Any RightScale accounts that have subscribed to the HEAD version of that ServerTemplate will automatically inherit those changes when it&#39;s republished. Therefore, it&#39;s important to understand the implications of using and launching servers with a HEAD version of a ServerTemplate that you subscribed to from the MCM because you can inherit changes at any time.</p>
+
+<p>If you are actively developing and testing a ServerTemplate across multiple accounts, you may want to inherit changes to the HEAD version. However, if you do not want to inherit changes because it could cause potential problems if imcompatible changes are inherited, you should clone the HEAD version of the ServerTemplate once you&#39;ve subscribed to it from the MCM to create a separate component with its own lineage.You will have to determine which option makes the most sense for your use case.</p>
+
+<h3 id="subscribe-to-a-servertemplate-steps">Steps</h3>
+
+<ol>
+<li>Navigate to <strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong></li>
+<li>Locate and select the appropriate ServerTemplate.
+
+<ul>
+<li>Browse by categories, perform a search, or the filter options to find the correct ServerTemplate.</li>
+</ul></li>
+<li>Once found, click the <strong>Subscribe</strong> button to retrieve a copy of the HEAD version of the ServerTemplate and make it available for use within your RightScale account.<br></li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>A Warning icon and/or message denotes a HEAD version of a ServerTemplate that you are currently subscribing to from the MCM.  </p>
+</div>
+
+<p><img src="/img/cm-subscribe-warning.png" alt="cm-subscribe-warning.png" width="550" height="54" /></p>
+
+<p>Once subscribed, the ServerTemplate and its associated RightScripts are considered part of your <q>local</q> collection.</p>
+
+<h2 id="update-a-servertemplate-revision-on-multiple-servers">Update a ServerTemplate Revision on Multiple Servers</h2>
+
+<h3 id="update-a-servertemplate-revision-on-multiple-servers-objective">Objective</h3>
+
+<p>To update the revision of a ServerTemplate that is being used on multiple servers at once.</p>
+
+<h3 id="update-a-servertemplate-revision-on-multiple-servers-overview">Overview</h3>
+
+<p>The ServerTemplate&#39;s Update Xref tab allows you to view servers using that ServerTemplate and update them in bulk to a newer revision. When using this update feature, you will specify a revision of the ServerTemplate and view the revisions of MultiCloud Images (MCIs) available. A new revision of a ServerTemplate may be using different MCIs; in this case, you will have the option to specify which MCIs you will use. If this is performed on a running server, you will need to re-launch for the MCIs to be updated.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If new inputs are required by the new revision, you will not be prompted until the next time that server is launched.</p>
+</div>
+
+<h4 id="best-practices-prerequisites">Best Practices Prerequisites</h4>
+
+<p>This is a powerful feature that could have negative repercussions if done incorrectly in a production environment. For this reason, we recommend the following:</p>
+
+<ul>
+<li><a href="/cm/rs101/version_control_(diff_and_merge).html">Perform a Diff</a> between old and newer revisions to know exactly which updates will be made.</li>
+<li>Try out the new revision by updgrading one server, testing and launching before performing an update in bulk.</li>
+<li>For server array instances, it is highly recommended that you launch one instance in the array to ensure your new changes will continue to grow and shrink the array accordingly.</li>
+</ul>
+
+<h3 id="update-a-servertemplate-revision-on-multiple-servers-steps">Steps</h3>
+
+<ol>
+<li>Choose the ServerTemplate you will update by navigating to Design &gt; ServerTemplates.<br></li>
+<li>After selecting a ServerTemplate, click its Update Xref tab.
+<img src="/img/cm-stx-ref-update-layout.png" alt="cm-stx-ref-update-layout.png" width="725" height="638" /></li>
+<li>You will see all the servers that are using the same version of ServerTemplate. Choose servers to update. You have the option to select <q>All shown,</q> meaning all the servers shown on the page. Under the Instance(s) column, <q>next</q> indicates that the server is not running, and changes can still be made to that instance by clicking <q>next,</q> which will take effect the next time the server is launched. <q>Current</q> under the Instance(s) column signifies a running server.<br>
+<img src="/img/cm-stx-ref-update-layout-selected.png" alt="cm-stx-ref-update-layout-selected.png" width="725" height="631" /></li>
+<li>After finishing the selection, click <strong>Update Selected</strong> to initiate the <q>Update ServerTemplate Revision</q> options.
+<img src="/img/cm-update-st-revision.png" alt="cm-update-st-revision.png" width="625" height="400" /></li>
+<li>The above dialog box will appear, allowing you to select a revision. You will have the option of executing these updates for <q>current</q> server instances (running) or <q>Next server/array instances</q> (non-running, future instances). When performing this action on future instances, every update will take effect the next time it is launched. When performing this action on running instances, the instance will continue to run, but the MCI upgrades will not take effect until they are re-launched. Note that for running array instances, the behavior is similar to normal instances. But alerts will automatically be upgraded to coincide with the new revision, which may effect behavior of old alerts are no longer there. Check the inputs tab of the array to see if there are any new missing required inputs and also the alerts tab to see if anything has changed. Otherwise, the array may not spin up instances in accordance with your usual specifications, or they may strand due to unset required inputs.
+The <q>default</q> image selected is the image (or images) that are the default of the specified revision of the ServerTemplate, which may not be the equivalent MCI you were previously using (for example, if you were previously using a 32-bit instance type, the default MCI might be a 64-bit instance type). Make sure your MCI revision selection is in accordance with your desired specifications.
+<img src="/img/cm-update-st-revision-2.png" alt="cm-update-st-revision-2.png" width="623" height="400" /><br></li>
+<li>Additional points:
+
+<ul>
+<li>For revision selection, it is not recommended to use a <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html">HEAD</a> revision for production, since this is a living revision. It is best to select a committed revision, which is static.</li>
+<li>If a new revision requires new input values, the next time the server is launched, these inputs will need to be specified</li>
+<li>if any scripts are run on the new revision, you will be prompted to set any inputs.</li>
+<li>When selecting a revision, you may choose older or newer revisions.</li>
+<li>For running instances, remember that your MCI selection is tied to a RightImage(s) for one or more clouds and you have the choice to keep the same MCI in use. If you do decide to update the MCI(s), these changes will only take effect when the server is re-launched.</li>
+</ul></li>
+</ol>
+
+<p>When you are finished with your configuration, click <strong>Update</strong>.</p>
+
+<h2 id="update-the-revision-of-a-multicloud-image-in-a-servertemplate">Update the revision of a MultiCloud Image in a ServerTemplate</h2>
+
+<h3 id="update-the-revision-of-a-multicloud-image-in-a-servertemplate-objective">Objective</h3>
+
+<p>To update the revision of an existing MultiCloud Image of a HEAD ServerTemplate.</p>
+
+<h3 id="update-the-revision-of-a-multicloud-image-in-a-servertemplate-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="update-the-revision-of-a-multicloud-image-in-a-servertemplate-overview">Overview</h3>
+
+<p>If you are modifying a ServerTemplate, you may want to update its list of MultiCloud Images. There are two main reasons why you would update a ServerTemplate&#39;s MCIs.</p>
+
+<ul>
+<li>Add new cloud support</li>
+<li>Update the list of MCIs to use newer revisions</li>
+</ul>
+
+<p>To help you know when a newer revision of a MultiCloud Image is available, orange notification balls are displayed. If a newer committed revision of an MCI is available within the RightScale account or in the MultiCloud Marketplace (MCM), a yellow-orange sphere icon will appear next to the MCI under the HEAD ServerTemplate&#39;s Images tab.</p>
+
+<p>It&#39;s your responsibility to determine whether or not you should update the highlighted MCIs.</p>
+
+<p>Orange ball notifications are only displayed if a newer committed revision of an MCI (with the same lineage) is available. If an MCI is cloned, it&#39;s a new object with a different lineage. The diagram below demonstrates the most common user scenarios.</p>
+
+<h3 id="update-the-revision-of-a-multicloud-image-in-a-servertemplate-steps">Steps</h3>
+
+<h4 id="navigate-to-one-of-your-servertemplates">Navigate to one of your ServerTemplates</h4>
+
+<ul>
+<li><strong>Design</strong> &gt; <strong>ServerTemplates</strong> &gt; <em>[ServerTemplateName]</em> &gt; <strong>Images</strong> tab</li>
+<li>Go to the editable HEAD version of the ServerTemplate. If no HEAD version exists, you can clone it to create an editable copy.</li>
+</ul>
+
+<h4 id="check-for-newer-versions">Check for newer versions</h4>
+
+<p>Under the <strong>Images</strong> tab of a HEAD version of a ServerTemplate, you may see yellow sphere icons, which denote that a newer revision of an MCI is available. RightScale will check within your RightScale account for a newer revision as well as in the MultiCloud Marketplace. The yellow sphere icons are only designed to serve as a notification. If an MCI has a yellow sphere icon, it does not mean that you must update its revision. The spheres will only be displayed for HEAD versions of a ServerTemplate and not committed revisions because only HEAD versions are editable.</p>
+
+<p><img src="/img/cm-update-mci-notification.png" alt="cm-update-mci-notification.png" width="550" height="290" /></p>
+
+<p>If you click on the icon, you will perform a differential (diff) between the current revision and the most recently committed revision that&#39;s available. Use the diff to compare the differences between the two revisions to determine whether or not you want to update the MCI to a different revision. In the example below, the differences between the revisions are highlighted for your convenience.</p>
+
+<p><img src="/img/cm-update-mci-diff.png" alt="cm-update-mci-diff.png" width="550" height="304" /></p>
+
+<p>Next, you will need to determine whether or not you want to update the current RightScript revision.</p>
+
+<h4 id="update-a-multicloud-image-revision-within-a-servertemplate">Update a MultiCloud Image revision within a ServerTemplate</h4>
+
+<p>Once you have performed a differential between the two RightScripts and determined that you want to update the revision of a RightScript revision, you can follow one of the upgrade procedures below.</p>
+
+<ul>
+<li>If a newer revision of the MCI is available in the MultiCloud Marketplace and it was not previously imported, you will need to import it first before you can select the new revision. Click the <img src="/img/cm-icon-orangeball.png" alt="cm-icon-orangeball.png" width="11" height="11" /> icon and click the <strong>Import</strong> button. (Requires &#39;library&#39; user role privileges)  Or you can go to the MCM and manually import the newer revision. (Design &gt; MultiCloud Marketplace &gt; MultiCloud Images)</li>
+<li>If a newer revision of the MCI already exists locally within your RightScale account, you do not need to import it.</li>
+</ul>
+
+<p>Next, click the <q>Select Revision</q> icon <img src="/img/cm-icon-edit.png" alt="cm-icon-edit.png" width="21" height="17" />. The available revisions will be displayed in a drop-down menu. If the newer revision is not listed in the dropdown menu, you will need to import it from the MultiCloud Marketplace. Select the newer revision that you want to use.</p>
+
+<p>Repeat the steps above to manually update another individual MCI.</p>
+
+<p>The orange ball icon will automatically disappear if you update the ServerTemplate to use the latest committed revision of a MultiCloud Image.</p>
+
+<h4 id="test-the-servertemplate">Test the ServerTemplate</h4>
+
+<p>If you make any changes to a ServerTemplate&#39;s list of MultiCloud Images, you should test the new images in their respective clouds. A user should be able to successfully launch a server with any of the MCI&#39;s images.</p>
+
+<h4 id="publish-the-servertemplate">Publish the ServerTemplate</h4>
+
+<p>Once you have tested the ServerTemplate with the new MCIs, you may want to publish it to the MultiCloud Marketplace so that you can share it with other users.</p>
+
+<h2 id="update-to-latest-rightscripts-in-a-servertemplate">Update to latest RightScripts in a ServerTemplate</h2>
+
+<h3 id="update-to-latest-rightscripts-in-a-servertemplate-objective">Objective</h3>
+
+<p>To update RightScripts to newer versions within a HEAD ServerTemplate.</p>
+
+<p>Upon completion of this tutorial, you should:</p>
+
+<ul>
+<li>Know how to recognize when there are newer RightScripts available for your ServerTemplate</li>
+<li>Update the version of the RightScript within the ServerTemplate, on either a individual or group (e.g. all newer RightScripts) basis</li>
+</ul>
+
+<h3 id="update-to-latest-rightscripts-in-a-servertemplate-prerequisites">Prerequisites</h3>
+
+<p>The following are prerequisites for completing this tutorial:</p>
+
+<ul>
+<li>You should know how to run a diff (comparison) on RightScripts</li>
+<li>You should know how to commit RightScripts</li>
+<li>&#39;designer&#39; user role privileges</li>
+</ul>
+
+<h3 id="update-to-latest-rightscripts-in-a-servertemplate-overview">Overview</h3>
+
+<p>If you are modifying a ServerTemplate, you may want to update its list of RightScripts to use the most recent committed revisions of those scripts. To help you know when a newer revision is available, colored notification balls are displayed. If a newer committed revision of a RightScript is available within the RightScale account or in the MultiCloud Marketplace (MCM), a yellow-orange sphere icon will appear next to the script under the HEAD ServerTemplate&#39;s Scripts tab.</p>
+
+<p>It&#39;s your responsibility to determine whether or not you should update the highlighted RightScripts.</p>
+
+<p>Orange ball notifications are only displayed if a newer committed revision of a RightScript (with the same lineage) is available. If a RightScript is cloned, it&#39;s a new object with a different lineage. The diagram below demonstrates the most common user scenarios.</p>
+
+<p><img src="/img/cm-update-rightscripts.png" alt="cm-update-rightscripts.png" width="525" height="373" /></p>
+
+<p>Depending on which RightScript revision a ServerTemplate is currently using, the following script notifications will be shown.</p>
+
+<table><thead>
+<tr>
+<th><strong>Which RightScript is in the HEAD ServerTemplate?</strong></th>
+<th><strong>Conditions</strong></th>
+<th><strong>Notification Results</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Rev 7</td>
+<td>Rev 9 is not available in the MultiCloud Marketplace</td>
+<td>No icons</td>
+</tr>
+<tr>
+<td>Rev 7</td>
+<td>Rev 9 is available in the MultiCloud Marketplace</td>
+<td>Orange icon</td>
+</tr>
+<tr>
+<td>Rev 1</td>
+<td>Rev 2 is available</td>
+<td>Orange icon</td>
+</tr>
+<tr>
+<td>Rev 2</td>
+<td>No newer committed revision is available</td>
+<td>No icons</td>
+</tr>
+</tbody></table>
+
+<h3 id="update-to-latest-rightscripts-in-a-servertemplate-steps">Steps</h3>
+
+<h4 id="navigate-to-one-of-your-servertemplates">Navigate to one of your ServerTemplates</h4>
+
+<ul>
+<li><strong>Design</strong> &gt; <strong>ServerTemplates</strong> &gt; <em>[ServerTemplateName]</em> &gt; <strong>Scripts</strong> tab</li>
+<li>Go to the editable HEAD version of the ServerTemplate. If no HEAD version exists, you can clone it to create an editable copy.</li>
+</ul>
+
+<h4 id="check-for-newer-versions">Check for newer versions</h4>
+
+<p>Under the <strong>Scripts</strong> tab of a HEAD version of a ServerTemplate, you may see yellow sphere icons, which denote that a newer revision of that script is available. RightScale will check within your RightScale account for a newer revision as well as in the MultiCloud Marketplace. The yellow sphere icons are only designed to serve as a notification. If a RightScript has a highlighted rev number in orange, it does not mean that you must update its revision. The actual content of the scripts is <em>not</em> checked, just the revision numbers. The orange highlight will only be displayed for HEAD versions of a ServerTemplate and not committed revisions because only HEAD versions are editable.</p>
+
+<p><img src="/img/cm-orange-diff-rightscript.png" alt="cm-orange-diff-rightscript.png" width="587" height="531" /></p>
+
+<p>If you click on the icon, you will perform a differential (diff) between the current revision and the most recently committed revision that&#39;s available. Use the diff to compare the differences between the two revisions to determine whether or not you want to update the script to a different revision. In the example below, the differences between the revisions are highlighted for your convenience.</p>
+
+<p><img src="/img/cm-view-diff.png" alt="cm-view-diff.png" width="550" height="360" /></p>
+
+<p>Next, you will need to determine whether or not you want to update the current RightScript revision.</p>
+
+<h4 id="update-rightscripts-within-a-servertemplate">Update RightScripts within a ServerTemplate</h4>
+
+<p>Once you have performed a differential between the two RightScripts and determined that you want to update the revision of a RightScript revision, you can update a single RightScript by clicking the highlighted rev for the RightScript and select the RightScript you would like to update to.</p>
+
+<p><img src="/img/cm-update-rightscript-rev.png" alt="cm-update-rightscript-rev.png" width="725" height="463" /></p>
+
+<h2 id="using-the-publishing-assistant">Using the Publishing Assistant</h2>
+
+<h3 id="using-the-publishing-assistant-objective">Objective</h3>
+
+<p>Publish a private (unpublished) RightScale component using the Publishing Assistant.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>The Publishing Assistant may be used when publishing any RightScale component (ServerTemplate, RightScript, Macro or MultiCloud Image). However, EULAs only apply to ServerTemplates, not other components. The tutorial below uses a ServerTemplate as to include every step of the Publishing Assistant process.</p>
+</div>
+
+<h3 id="using-the-publishing-assistant-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>Requires the &#39;publisher&#39; <a href="/cm/ref/user_role_privs.html">User Role Privileges</a> in the RightScale account</li>
+<li>All RightScale accounts can publish private components to the MultiCloud Marketplace (i.e. public sharing). Accounts that are premium or better can publish to private Account Groups (i.e. private sharing). (Standard or Free accounts cannot publish to private Account Groups.)</li>
+</ul>
+
+<h3 id="using-the-publishing-assistant-overview">Overview</h3>
+
+<p>Using the Publishing Assistant is very intuitive. This tutorial will highlight the multiple phases of using the Publishing Assistant:</p>
+
+<ol>
+<li><strong>Organization</strong> - First time publishers will need to provide information about their organization. <em>(Only seen the first time</em> you publish a component.)</li>
+<li><strong>Sharing</strong> - Specify the target audience you want to share with.</li>
+<li><strong>Descriptions</strong> - Enter the short and long descriptions.</li>
+<li><strong>EULAs¹</strong> - End User License Agreements. You can use an existing EULA or create a new one from within the assistant.</li>
+<li><strong>Preview</strong> - Preview what a user would see prior to actually publishing to the MultiCloud Marketplace.</li>
+</ol>
+
+<p>While transitioning through these phases of the Publishing Assistant, you are also free to navigate to the previous or next phase at any time. The phase arrows are also actionable (Shown in below diagrams for each phase.)</p>
+
+<p>For more information about sharing, please see <a href="/cm/pas/sharing_rightscale_components.html">Sharing RightScale Components</a>.</p>
+
+<p><strong>¹ Only applies when publishing ServerTemplates.</strong></p>
+
+<h3 id="using-the-publishing-assistant-steps">Steps</h3>
+
+<p>RightScale&#39;s Publishing Assistant wizard will walk you through the process of publishing your component(s).</p>
+
+<h4 id="publish-to-multicloud-marketplace">Publish to MultiCloud Marketplace</h4>
+
+<p>The first step in the sharing process is to determine which RightScale component you want to publish to the MultiCloud Marketplace. Users will need to have access to the MultiCloud Marketplace (&#39;library&#39; user role privileges) in order to view and import/subscribe to a shared component. You can only publish private components to the MultiCloud Marketplace. (i.e. You cannot import a premium ServerTemplate that&#39;s published by a different account and then re-publish it to the MultiCloud Marketplace.)</p>
+
+<ol>
+<li>Go to the private component in your local collection that you want to share. (e.g. Design -&gt; ServerTemplates -&gt; View Local)</li>
+<li>Be sure to select the correct revision of that component that you want to share. As a best practice, you should only share committed (static) revisions of a component. Also make sure that you haven&#39;t previously published it. The component should be listed as <q>unpublished</q> under the component&#39;s Info tab. You should only share a HEAD version under certain circumstances. The ability to publish a HEAD version is only supported for RightScale accounts that are enabled for private sharing. You cannot publicly share a HEAD version of a component. When you publish a component to the MultiCloud Marketplace, only the selected revision or HEAD version will be published. (i.e. Previous revisions of that component will not be published.)</li>
+<li>Click the <strong>Publish to MultiCloud Marketplace</strong> action button. <em>Note</em>: If this button is not displayed, you do not have the &#39;publisher&#39; User Role Privilege in the RightScale account <em>or</em> if you are looking at a HEAD revision and your account does not support private sharing.<br>
+<img src="/img/cm-publish-to-library.png" alt="cm-publish-to-library.png" width="584" height="208" /></li>
+<li>You must read and agree to RightScale&#39;s EULA before continuing the publishing process.</li>
+<li>Next, you will need to specify the visibility of your component. This selection controls who can browse and find your component in the MultiCloud Marketplace. (In a later step you will specify which accounts have access to import the component.)<br>
+<img src="/img/cm-publish-to-marketplace.png" alt="cm-publish-to-marketplace.png" width="431" height="181" />
+
+<ul>
+<li><strong>Publish to the Public MultiCloud Marketplace Catalog</strong> - Make this component publicly visible to everyone in the MultiCloud Marketplace. Unless your account is enabled for private publishing, only committed revisions can be publicly shared. (Note: Components will be indexed by search engines.)</li>
+<li><strong>Share privately</strong> - Make this component only visible in the MultiCloud Marketplace to specific RightScale accounts with whom you&#39;ve granted access via Account Group Invitations. Users will be able to view the component in the MultiCloud Marketplace under Categories -&gt; Shared. <em>Note</em>: You must have a Premium account (or better) for private sharing.</li>
+<li> You must read and agree to <a href="/cm/pas/rightscale_publisher_agreement.html">RightScale&#39;s Publishing Agreement</a> before continuing the publishing process.</li>
+<li>Click the <strong>Sharing</strong> action button to proceed to the next step.</li>
+</ul></li>
+</ol>
+
+<h4 id="organization">Organization</h4>
+
+<p>If you are publishing for the first time, you must provide the following information about your publishing organization. Later, you can edit this information under <strong>Design</strong> &gt; <strong>Account Library</strong> &gt; <strong>Your Publishing Organization</strong>.The &#39;Organization&#39; tab appears the first time a user publishes from your account.</p>
+
+<ul>
+<li><strong>Organization Name (required)</strong> - In the MultiCloud Marketplace, the organization name will denote who published the component. Each account can only have one defined publishing organization. Several characters are not allowed in the namespace: ; \ / &gt; &lt; &amp; , .</li>
+<li><strong>Organization Email (required)</strong> - When someone leaves a comment on one of your shared components, notifications will be sent to this email address (if enabled).</li>
+<li><strong>Logos</strong> - Depending on the view in the MultiCloud Marketplace, large and small logos will appear next to the component.</li>
+<li><strong>Support Information</strong> - Publishers are responsible for supporting their shared components. Be sure to provide helpful links and contact information that will be useful for your users. The provided support information will be displayed for each shared component regardless of the account group.</li>
+<li><strong>Welcome Message</strong> - The welcome message will be shown when an Account Group Invitation is accepted.</li>
+</ul>
+
+<h4 id="sharing">Sharing</h4>
+
+<p><img src="/img/cm-pub-assist-st-sharing.png" alt="cm-pub-assist-st-sharing.png" width="725" height="394" /></p>
+
+<p>The <q>Sharing</q> section allows you to control who can import your component.</p>
+
+<p>Specify your sharing preferences. Remember, when you publish a ServerTemplate, any (unpublished) private RightScripts, MultiCloud Images, and RepoPaths that are used by the ServerTemplate are implictly shared to guarantee the usability of the template itself. Click the <strong>View ServerTemplate components</strong> link to see what other components will be implicitly published.</p>
+
+<ul>
+<li><strong>All RightScale Accounts</strong> - The component can be imported into any RightScale account. Note: Public publishing must be enabled in the publishing account. Contact your RightScale account manager to enable public publishing for your account.</li>
+<li><strong>Specific Accounts</strong> - The component can only be imported into specified RightScale accounts. You can either select an existing Account Group(s) or create a New Account Group. Note: You must select at least one Account Group, however it can be empty. (i.e. Specific RightScale accounts have not been added to the Account Group.)
+
+<ul>
+<li><strong>Publishing Only for RightScale Paid Accounts</strong> - If your account is enabled for private publishing, you can also select the <q>RightScale Paid Customers</q> Account Group which makes the component importable ONLY into paid RightScale accounts (Standard and above). Only users with credit cards on file are able to import ISV templates that require payment (contact your account manager or <a href="mailto:sales@rightscale.com">sales@rightscale.com</a> for clarification). <strong>NOTE</strong> : Select this option if you are an ISV publishing a pay-per-use RightScale ServerTemplate unless otherwise instructed by your RIghtScale account contact.</li>
+</ul></li>
+</ul>
+
+<p>The <q>Comments</q> section allows you to control the comment feature in the MultiCloud Marketplace.</p>
+
+<ul>
+<li><strong>Allow users to leave comments on this ServerTemplate</strong> - If checked, users will be able to leave comments about your component in the MultiCloud Marketplace. Only users who are logged into the Dashboard can leave comments.</li>
+<li><strong>Email me when a user comments on this ServerTemplate</strong> - If checked, an email notification will be sent to the provided Organization Email address. (Design -&gt; Account Library -&gt; Your Publishing Organization)</li>
+</ul>
+
+<p>Click the <strong>Descriptions</strong> action button to proceed to the next step.</p>
+
+<h4 id="descriptions">Descriptions</h4>
+
+<p><img src="/img/cm-pub-assist-st-descriptions.png" alt="cm-pub-assist-st-descriptions.png" width="725" height="647" /></p>
+
+<p>Fill out the Short and Long Descriptions for the component. For your convenience, both description fields are pre-populated with the ServerTemplate&#39;s current description. If you have published an earlier revision, the fields are pre-populated with the previously entered short and long descriptions. However, since these description fields will be saved in the MultiCloud Marketplace&#39;s database, you can actually provide different descriptions.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The provided descriptions will appear in the MultiCloud Marketplace for all previously shared revisions of that component.</p>
+</div>
+
+<p>You can update the <q>New Revision Notes</q> as well, which are pre-populated with the component&#39;s Commit message for the selected revision.</p>
+
+<p>Revision Notes are similar to commit messages in the Dashboard. They will be seen at the bottom of the shared component in the MultiCloud Marketplace. As a best practice, you should provide useful information about any changes, bug fixes, new features, especially if there&#39;s a previously published revision of that component in the MultiCloud Marketplace.</p>
+
+<p>Categories allow users to more easily search for your publication in the MultiCloud Marketplace. The selected categories will be applied to all revisions of your publication. You can add multiple categories.</p>
+
+<p><strong>Notes</strong>:</p>
+
+<ul>
+<li>Markdown syntax is supported</li>
+<li>Hover over the blue information icon for additional help</li>
+<li>Character limitations are updated in real time as the fields are populated</li>
+</ul>
+
+<p>Click the <strong>EULAs</strong> action button to proceed to the next step.</p>
+
+<h4 id="eulas">EULAs</h4>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>EULAs currently apply to ServerTemplates only. This phase is not part of the Publishing Assistant when publishing other RightScale components (RightScripts, Macros or MCIs).</p>
+</div>
+
+<p><img src="/img/cm-pub-assist-st-eulas.png" alt="cm-pub-assist-st-eulas.png" width="725" height="539" /></p>
+
+<ul>
+<li>EULAs can be managed outside of the Publishing Assistant. Simply select which EULA(s) should be attached to the ServerTemplate you are going to publish.</li>
+<li>You can also create and add a new EULA directly from within the Publishing Assistant.
+
+<ul>
+<li>Click the <strong>New EULA</strong> action button</li>
+<li>Fill out the EULA Name and Text. Markdown Syntax is supported.</li>
+<li>Preview the EULA. Don&#39;t forget to select <strong>Save &amp; Attach</strong> prior to continuing.</li>
+</ul></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>EULAs are not required when publishing RightImages, RIghtScripts, or Macros independently from a ServerTemplate.</p>
+</div>
+
+<p>Click the <strong>Preview</strong> action button to proceed to the next step.</p>
+
+<h4 id="preview">Preview</h4>
+
+<p><img src="/img/cm-pub-assist-st-preview.png" alt="cm-pub-assist-st-preview.png" width="725" height="521" /></p>
+
+<p>If everything looks correct, click the <strong>Publish</strong> action button.</p>
+
+<h3 id="using-the-publishing-assistant-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<h4 id="categorize-your-servertemplate">Categorize your ServerTemplate</h4>
+
+<ul>
+<li><p>When you publish a ServerTemplate to the Public MultiCloud Marketplace Catalog, we <em>highly recommend</em> that you categorize the ServerTemplate so that it is easy to find by category in the MultiCloud Marketplace. Go to <strong>Design</strong> &gt; <strong>Account Library</strong> &gt; <strong>Your Publications</strong>. A component&#39;s categories can be managed under its Info tab. Click the <strong>Edit</strong> action link, then simply select a category from the pulldown and click the <strong>Add</strong> action button. Remember to click <strong>Save</strong> when done selecting categories. Although, you can add your component to multiple categories, please make sure that they are relevant for each topic.</p>
+
+<p><img src="/img/cm-add-categories.png" alt="cm-add-categories.png" width="480" height="319" /></p></li>
+</ul>
+
+<h4 id="republish-to-multicloud-marketplace">Republish to MultiCloud Marketplace</h4>
+
+<ul>
+<li>You can republish changes to a shared HEAD version that was previously published to the MultiCloud Marketplace. When you click the <strong>Republish to MultiCloud Marketplace</strong> action button any changes since the last time the HEAD version was published will be sent and updated in the MultiCloud Marketplace.</li>
+</ul>
+
+<h4 id="manage-previously-published-components">Manage previously published Components</h4>
+
+<ul>
+<li>You can also manage components that were previously published under <strong>Design</strong> &gt; <strong>Account Library</strong> &gt; <strong>Your Publications</strong>.</li>
+</ul>
+
+<h2 id="view-a-servertemplate">View a ServerTemplate</h2>
+
+<h3 id="view-a-servertemplate-objective">Objective</h3>
+
+<p>View a ServerTemplate from either the local or MultiCloud Marketplace.</p>
+
+<h3 id="view-a-servertemplate-background">Background</h3>
+
+<p>You can view a ServerTemplate that is either local or in the MultiCloud Marketplace.</p>
+
+<ul>
+<li><strong>local</strong> - Part of your <q>local</q> collection. ServerTemplates that are local have been either created new by you, or imported from the MultiCloud Marketplace.</li>
+<li><strong>MultiCloud Marketplace</strong> - Part of the MultiCloud Marketplace. View ServerTemplates published by RightScale, partners, or other users. You will also find any ServerTemplates that have been shared with the current RightScale account.</li>
+</ul>
+
+<h3 id="view-a-servertemplate-steps">Steps</h3>
+
+<h4 id="view-local">View Local</h4>
+
+<ul>
+<li>Navigate to <strong>Design</strong> &gt; <strong>ServerTemplates</strong></li>
+<li>Any ServerTemplates that you either imported from the MCM or created from scratch will be displayed.</li>
+<li>Select the ServerTemplate you want to view.</li>
+<li>Use the <q>Filter by</q> options to narrow your search results.</li>
+</ul>
+
+<h4 id="view-multicloud-marketplace">View MultiCloud Marketplace</h4>
+
+<ul>
+<li>Navigate to <strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong></li>
+<li>Select the ServerTemplate you want to view. Use the search and category options to narrow your search results.
+
+<ul>
+<li><strong>Search</strong> - Use the standard keyword search in the Dashboard&#39;s navigational menu to search for a ServerTemplate by name.</li>
+<li><strong>Categories</strong> - Browse by category. ServerTemplates are grouped by function. Click <q>All</q> to view all ServerTemplates or click the <q>Shared</q> link to view the ServerTemplates that have been shared with the current RightScale account</li>
+</ul></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

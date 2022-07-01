@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Prepare the vSphere Environment for RightScale Connectivity</title><meta content="This article describes the steps for preparing a vSphere environment for RightScale connectivity including creating a RigthtScale role, creating a non-admin user, and assigning necessary permissions." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="rcav rcav_v3" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rcav/"><h4 class="list-group-heading"><span>RightScale Cloud Appliance for vSphere (RCA-V)</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="./">RCA-V Version 3.0</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">RightScale Cloud Appliance for vSphere (RCA-V)</a> &#x2F; <a href="./">Version 3.0</a></p><div class="page-header"><h1>Prepare the vSphere Environment for RightScale Connectivity</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To prepare an existing vSphere environment so that a RightScale Cloud Appliance for vSphere (RCA-V) can be successfully deployed.
+Prerequisites:</p>
+
+<ul>
+<li>Access to log in to the vSphere Client</li>
+<li>Ability to create new user roles</li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If you do not have access to make the changes outlined below, contact your vSphere network administrator.</p>
+</div>
+
+<h2 id="vsphere-requirements">vSphere Requirements</h2>
+
+<ul>
+<li><strong>vSphere Requirements</strong>: vSphere 5.5, 6.0, 6.5, or 6.7 Enterprise or Enterprise Plus Edition. vSphere Standard Edition is not supported at this time.  <em>Note</em>: The vSphere environment must be enabled for Distributed Resource Scheduling (DRS). Datastores placed under Storage DRS is recommended (which is only available in Enterprise Plus), but not required.</li>
+<li><strong>ESXi hosts must have NTP time sync enabled.</strong> Verify that the NTP client for the hypervisor is enabled, using the vSphere Web client, <strong>Host-&gt;Manage-&gt;Settings-&gt;Time Configuration.</strong></li>
+<li><strong>vCenter Server Requirements:</strong> ​ vCenter 5.5, 6.0, 6.5 or 6.7 Standard or Foundation edition</li>
+</ul>
+
+<h2 id="vcenter-access-requirements">vCenter Access Requirements</h2>
+
+<p>Although RightScale <strong>does not require</strong> admin access to vCenter server, please create a role that contains the minimum set of privileges required by the RightScale platform as described below.</p>
+
+<p>You can follow the steps below or use this simple <a href="https://github.com/kramfs/rcav-utilities">PowerCLI script</a> to create the role, set permissions and add the user to the role.</p>
+
+<h3 id="vcenter-access-requirements-create-a-rightscale-role">Create a RightScale Role</h3>
+
+<ol>
+<li>The first step is to create a new Role. Open the vSphere Client application and go to <strong>View &gt; Administration &gt; Roles</strong>.</li>
+<li><p>Click <strong>Add Role</strong> and name it accordingly. (e.g. RightScaleRole)</p>
+
+<p><img src="/img/rcav-edit-role.png" alt="RCA-V Edit Role" width="436" height="595" /></p></li>
+<li><p>Make sure the role has the following privileges (at a minimum):</p></li>
+</ol>
+
+<ul>
+<li><strong>Datastore</strong>: All</li>
+<li><strong>Datastore Cluster</strong>: All</li>
+<li><strong>Folder</strong>: Create, Delete</li>
+<li><strong>Global</strong>: Cancel task, Licenses</li>
+<li><strong>Host &gt; Local operations</strong>: Create virtual machine, Delete virtual machine, Reconfigure virtual machine</li>
+<li><strong>Profile-driven storage</strong>: All</li>
+<li><strong>Network</strong>: Assign network</li>
+<li><strong>Resource</strong>: Apply recommendation, Assign virtual machine to resource pool, Create resource pool, Modify resource pool, Move resource pool, Remove resource pool</li>
+<li><strong>vApp</strong>: Import</li>
+<li><strong>Virtual machine</strong>: All</li>
+</ul>
+
+<h3 id="vcenter-access-requirements-create-a-non-admin-user">Create a Non-Admin User</h3>
+
+<p>The next step is to create a new user profile that the RightScale platform will use to log in and access the vSphere environment.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Creating a new user account for use with your vSphere environment is strictly optional. You may elect to use an existing user account if you wish, or even an existing <em>domain user</em> account.</p>
+</div>
+
+<ol>
+<li>Open the system&#39;s Control Panel and go to User Accounts. Click Add or remove user accounts.</li>
+<li><p>Click Create a new account. Provide a descriptive name (e.g. RS-User), select the <q>Standard</q> user option, and click Create Account. <em>Note: The user does not require &#39;Administrator&#39; privileges.</em></p>
+
+<p><img src="/img/rcav-create-RS-user.png" alt="RCA-V Create RS User" width="600" height="340" /></p></li>
+<li><p>Set a valid password for the user.</p></li>
+<li><p><img src="/img/rcav-icon-save.png" alt="RCA-V Save Icon" width="33" height="15" /> The RightScale platform will use this new user profile to access the vSphere environment. Save the username and password in a safe place and provide this login information to the person who is going to <a href="rcav_download_deploy_configure.html">Download, Deploy, and Configure the RCA-V</a>.</p></li>
+</ol>
+
+<h3 id="vcenter-access-requirements-assign-permissions-for-rightscale-to-the-vsphere-infrastructure">Assign Permissions for RightScale to the vSphere Infrastructure</h3>
+
+<p>Assign the new user (e.g. RS-User) the role that you created in the previous step (e.g. RightScaleRole). <em>It&#39;s important to add the user at the vCenter level so that it can have the same permissions throughout the object hierarchy as well as have access to various services.</em> From that point on, you can always restrict the <q>RightScale</q> user to a specific cluster, you can go down to that specific cluster and add permission for this user.​</p>
+
+<ol>
+<li>Go to Home.</li>
+<li>Click Host and Clusters.</li>
+<li>Right-click on the <strong>vCenter</strong> icon and select <strong>Add Permission</strong>.</li>
+<li>Click <strong>Add</strong>, select the new user (e.g.  RS-User), and click <strong>Add</strong>. Click <strong>OK</strong>.</li>
+<li>Assign the user the role that you created for the RightScale platform. (e.g. RightScaleRole)  Make sure the <q>Propagate to Child Objects</q> option is checked so that the user will have the same permissions to all underlying objects. Click <strong>OK</strong>.</li>
+</ol>
+
+<p><strong>Note</strong>: Make sure that RS-User has permission to access  vSwitches and dvSwitches objects.</p>
+
+<p><img src="/img/rcav-assign-permissions.png" alt="RCA-V Assign Permissions" width="550" height="438" /></p>
+
+<h2 id="hardware-requirements">Hardware Requirements</h2>
+
+<p>The requirements below are specific to deploy the RCA-V in the vSphere environment.</p>
+
+<ul>
+<li><strong>Requirements</strong>: Single-core 1GB VM with 10GB of disk space (plus overhead); in the future multiple VMs are recommended for fault tolerance.​</li>
+<li><strong>(Optional)</strong>: An additional NAT / DHCP appliance, which requires a single-core 1GB VM with 10GB of disk space. However, if you already have existing NAT and DHCP mechanisms, you may not need to deploy this additional instance.</li>
+</ul>
+
+<h2 id="connectivity-requirements">Connectivity Requirements</h2>
+
+<p>Update your firewall permissions accordingly to allow egress connectivity between the RCA-V and RightScale.
+<strong>Important!</strong> There are no inbound connectivity requirements. (RightScale to RCA-V)</p>
+
+<h3 id="connectivity-requirements-rca-v-to-rightscale">RCA-V to RightScale</h3>
+
+<p><img src="/img/rcav-vSphere-network-access-RCA.png" alt="RCA-V vSphere Network Access RCA" width="531" height="387" /></p>
+
+<ul>
+<li>Egress (Outbound) access from RCA-V to RightScale:
+
+<ul>
+<li><code>https://wstunnel10-1.rightscale.com</code>: Secure web socket tunnel between RCA-V and RightScale</li>
+<li><code>https://island10.rightscale.com</code>: RightScale Mirrors which contain required software installation packages (e.g. Ubuntu, rubygem, RCA-V appliance upgrades, etc.). This firewall permission must be in place during initial installation and during upgrades.</li>
+<li>(Optional) Access to DNS servers <code>8.8.8.8</code> and <code>8.8.4.4</code></li>
+<li>(Optional) Access to <code>https://github.com</code></li>
+</ul></li>
+</ul>
+
+<h3 id="connectivity-requirements-vms-to-rightscale">VMs to RightScale</h3>
+
+<p>Each instance launched via the RightScale Dashboard/API must be allowed to make the following <strong>egress (outbound)</strong> connections to the RightScale platform in order for all instance-level services to be supported.</p>
+
+<p><strong>Note</strong>: NTP and DNS can also be provided locally. If true, you do not have to create firewall rules for NTP or DNS.</p>
+
+<ul>
+<li>Each instance launched through RightScale must synchronize with the global time standard (e.g. through NTP or through other means). If the instance clock drifts by more than two minutes, certain operations will start to fail.</li>
+</ul>
+
+<p><strong>Please refer to the <a href="/faq/Firewall_Configuration_Ruleset.html#all-inclusive-firewall-rules">firewall rules page</a></strong> -- only the <strong>Egress Rules</strong> section applies to vSphere environments.</p>
+
+<p><img src="/img/rcav-vSphere-network-access-VM.png" alt="RCA-V vSphere Network Access VM" width="600" height="471" /></p>
+
+<h3 id="connectivity-requirements-rca-v-to-vcenter-server">RCA-V to vCenter Server</h3>
+
+<p>The RCA-V communicates with vCenter Server over SSL connection. If there is a firewall between the RCA-V and the vCenter Server, please setup the rules such that the RCA-V is able to make a connection to vCenter Server&#39;s IP address on port 443.</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>You are now ready to install the RCA-V in your vSphere environment. The person who is installing the RCA-V can now follow the next section of the installation guide.</p>
+
+<p><strong>Important!</strong> Be sure to give the following information to the person who will be installing and configuring the RCA-V.</p>
+
+<p>The <q>RightScale User</q> login information (from the <a href="#vcenter-access-requirements-create-a-non-admin-user">Create a Non-Admin User</a> step above).</p>
+
+<p><strong>username</strong>: _______________<strong><em><br>
+    <strong>password</strong>: _</em></strong>______________</p>
+
+<p>Please proceed to the next step in the setup guide.</p>
+
+<ul>
+<li><a href="rcav_download_deploy_configure.html">Download, Deploy, and Configure the RightScale Cloud Appliance for vSphere (RCA-V)</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Deployment - Actions</title><meta content="Common procedures for working Deployments in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_manage cm_dashboard_manage_deployments cm_dashboard_manage_deployments_deployments_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Manage</a> &#x2F; <a href="./">Deployments</a></p><div class="page-header"><h1>Deployment - Actions</h1></div><div class="main-content"><h2 id="add-a-server-to-a-deployment">Add a Server to a Deployment</h2>
+
+<h3 id="add-a-server-to-a-deployment-objective">Objective</h3>
+
+<p>To add a server to an existing Deployment using a ServerTemplate.</p>
+
+<h3 id="add-a-server-to-a-deployment-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>A deployment for your server(s)</li>
+<li>SSH Key</li>
+<li>Security Group (or groups)</li>
+<li>Elastic IP (if applicable to the servers)</li>
+</ul>
+
+<h3 id="add-a-server-to-a-deployment-steps">Steps</h3>
+
+<ol>
+<li>Navigate to the deployment you previously created (where you are adding the server).</li>
+<li>Even <em>before selecting</em> the <strong>Add Server</strong> action button, you should select the cloud that the server should be in. Use the <strong>Select Cloud</strong> drop down menu to make your choice. Remember that if you specified a default Availability Zone for your deployment, you should add the server to a cloud that includes that zone. (e.g. US-East)</li>
+<li>Click <strong>Add Server</strong> to add a server to your deployment. The <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#add-server-assistant">Add Server Assistant</a> opens. Use the field descriptions listed below to add a server (example shown is from EC2):</li>
+<li>Click <strong>Add</strong> after you have filled out all the fields.</li>
+</ol>
+
+<p><strong>Field Descriptions:</strong></p>
+
+<ul>
+<li><strong>Deployment</strong> - A Server always exists within the context of a deployment. Therefore, when you create a Server, you must specify into which Deployment the Server will be added. Each RightScale account has a <q>Default</q> Deployment that&#39;s best used for testing purposes. Select either the <q>Default</q> one or another Deployment that you&#39;ve already defined.</li>
+<li><strong>ServerTemplate</strong> - Select the type of ServerTemplate from the pull-down menu. When launching directly from a ServerTemplate, this has already been decided and will simply be listed in the dialog box.
+
+<ul>
+<li><strong>Private</strong> - ServerTemplate from your private MultiCloud Marketplace. That is, ServerTemplates that you either created from scratch, or imported and cloned. These ServerTemplates are your own copy that you are free to customize. They maintain their own lineage.</li>
+<li><strong>Imported</strong> - Anything you have imported directly from the MultiCloud Marketplace (which is a static copy). Additionally, any ServerTemplates that you have subscribed to (which is a HEAD version, changing not a static revision.)</li>
+<li>Then select the actual ServerTemplate name from another pull-down menu. (e.g. Simple Linux Server)</li>
+</ul></li>
+<li><strong>Cloud</strong> _ What cloud the Server should be added to. When adding a Server, this has already been selected via the <strong>Select Cloud</strong> action button, so in this dialog window you cannot alter it. It is simply displayed for informational purposes.</li>
+<li><strong>MultiCloud Image</strong> - Select the MCI to use or leave inherit from the ServerTemplate (default).</li>
+<li><strong>Instance Type</strong> - Select the Instance Type (e.g. small, medium, large, etc.) or inherit from the MultiCloud Image (default)</li>
+<li><strong>Nickname</strong> - Give a descriptive name for the Server&#39;s primary purpose.</li>
+<li><strong>SSH Key</strong> - Specify the (previously created) SSH Key to use.</li>
+<li><strong>Security Group</strong> - Select the (previously created) Security Group (or Groups) to use for security purposes.</li>
+<li><strong>Availability Zone</strong> - Select what Availability Zone (EC2) this Server should be in. Recall that there are additional charges for traffic across zones. Servers are typically placed in the same zone, unless the Deployment is working towards high availability across different zones. Some clouds have multiple zones or regions.</li>
+<li><strong>Elastic IP</strong> - Specify what EIP (or none) to use for the Server.</li>
+<li><strong>Associate IP at launch</strong> - Normally you will leave this default (checked) so that an IP address is associated with the Server at launch.</li>
+</ul>
+
+<h3 id="add-a-server-to-a-deployment-post-tutorial-steps">Post Tutorial Steps</h3>
+
+<ul>
+<li> Select the <strong>Launch</strong> action button to launch your server when ready. Remember, you pay cloud usage fees for operational servers (instances).</li>
+</ul>
+
+<h2 id="archive-or-unarchive-a-deployment">Archive or Unarchive a Deployment</h2>
+
+<h3 id="archive-or-unarchive-a-deployment-objective">Objective</h3>
+
+<p>To archive an existing Deployment. Conversely, unarchive an archived Deployment.</p>
+
+<h3 id="archive-or-unarchive-a-deployment-overview">Overview</h3>
+
+<p>You can archive an existing Deployment to help manage and prevent excessive clutter in the RightScale Dashboard. This is typically done with Deployments you wish to keep, but are not at the forefront of your current work. This is an excellent alternative to deleting a Deployment that you think you might need again sometime in the future.</p>
+
+<h4 id="things-to-remember">Things to Remember</h4>
+
+<ul>
+<li><em>Important!</em> Archived deployments will not show up in any drop down menus. (For example, the Design &gt; Macros &gt; New action button has a calculated Deployments drop-down menu, as does the Alert Escalations menu. Any such menus will not include archived deployments to draw an association with.)</li>
+<li>You cannot archive the Default deployment. The Archive functionality does not apply to the Default deployment.</li>
+<li>Archived deployments <em>can</em> be unarchived.</li>
+<li>All archived deployments are displayed in a comma separated <q>Archived Deployments</q> list at the bottom of the Deployments&#39; page.</li>
+</ul>
+
+<h3 id="archive-or-unarchive-a-deployment-steps-to-archive-a-deployment">Steps to Archive a Deployment</h3>
+
+<ul>
+<li>Navigate to Deployments in the RightScale Dashboard in any of the following ways
+
+<ul>
+<li>RightScale logo in the header</li>
+<li><strong>Home</strong> &gt; <strong>Dashboard</strong> &gt; <strong>Deployments Tab</strong></li>
+<li><strong>Manage</strong> &gt; <strong>Deployments</strong></li>
+</ul></li>
+<li>Select the specific deployment (e.g. <q>Archive Test</q>)</li>
+<li>Select the <q>Archive</q> action button</li>
+</ul>
+
+<p>The following should occur:</p>
+
+<ul>
+<li>A flash message in the RightScale header (e.g. <q>Deployment was successfully archived</q>)</li>
+<li>The deployment is added to the <q>Archived Deployments</q> list. The list is at the <em>bottom</em> of the Deployments display.<br>
+<img src="/img/cm-archived-deployments.png" alt="cm-archived-deployments.png" width="472" height="97" /></li>
+</ul>
+
+<h3 id="archive-or-unarchive-a-deployment-steps-to-unarchive-a-deployment">Steps to Unarchive a Deployment</h3>
+
+<p>Steps to unarchive a deployment are very similar.</p>
+
+<ul>
+<li>Navigate to Deployments in the RightScale Dashboard in any of the following ways
+
+<ul>
+<li>RightScale logo in the header</li>
+<li><strong>Home</strong> &gt; <strong>Dashboard</strong> &gt; <strong>Deployments Tab</strong></li>
+<li><strong>Manage</strong> &gt; <strong>Deployments</strong></li>
+</ul></li>
+<li>Scroll to the bottom of the display, and select the specific deployment you wish to unarchive</li>
+<li>Select the <q>Unarchive</q> action button</li>
+</ul>
+
+<p>The following should occur:</p>
+
+<ul>
+<li>A flash message in the RightScale header (e.g. <q>Deployment was successfully unarchived</q>)</li>
+<li>The deployment is removed from the <q>Archived Deployments</q> list, and displayed with the other Deployments.</li>
+</ul>
+
+<h2 id="change-a-server-s-public-ip">Change a Server's Public IP</h2>
+
+<h3 id="change-a-server-s-public-ip-objective">Objective</h3>
+
+<p>To change a running Server&#39;s Public IP address.</p>
+
+<p><em>Note</em>: Currently, this tutorial is specific to EC2 instances.</p>
+
+<h3 id="change-a-server-s-public-ip-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An existing Deployment with an unlocked, running Server</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="change-a-server-s-public-ip-overview">Overview</h3>
+
+<p>Each EC2 instance can only have one public IP address at a time. An instance either has a public IP address that it was randomly assigned by the cloud provider or it&#39;s specifically assigned an Elastic IP address that you designate at launch time or later when an instance is operational.</p>
+
+<p><em>Note</em>: You cannot change a running Server&#39;s Public IP address if it&#39;s locked.</p>
+
+<h3 id="change-a-server-s-public-ip-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong> and select a <strong>Deployment</strong>.</li>
+<li>At the Deployment level, click on the <q>Change</q> icon next to the running Server&#39;s Public IP address.<br>
+<img src="/img/cm-change-public-ip.png" alt="cm-change-public-ip.png" width="725" height="50" /></li>
+<li>Select the Elastic IP address you want to assign to the current instance. The name of the EIP is followed by the actual IP Address. Be careful! It is possible to steal an EIP that&#39;s currently being used by another instance. Instances that are currently assigned to running instances are denoted with <strong>*in use*</strong> for precautionary reasons.<br>
+<img src="/img/cm-change-public-ip-select.png" alt="cm-change-public-ip-select.png" width="554" height="157" /></li>
+<li>Confirm the action.</li>
+</ol>
+
+<h2 id="clone-a-deployment">Clone a Deployment</h2>
+
+<h3 id="clone-a-deployment-objective">Objective</h3>
+
+<p>To clone an existing deployment.</p>
+
+<h3 id="clone-a-deployment-overview">Overview</h3>
+
+<p>When you clone a deployment, you create an <em>exact</em> copy of a deployment&#39;s configuration too. The most common use case for cloning a deployment is for setting up a staging deployment for the purposes of further development and test.</p>
+
+<h3 id="clone-a-deployment-steps">Steps</h3>
+
+<ul>
+<li>Navigate to the deployment you wish to clone</li>
+<li>Select the <strong>Clone</strong> action button</li>
+<li>Be sure to change the name of the new deployment after you&#39;ve cloned it.</li>
+</ul>
+
+<p><img src="/img/cm-clone-deployment.png" alt="cm-clone-deployment.png" width="725" height="498" /></p>
+
+<h4 id="things-to-consider">Things to Consider</h4>
+
+<ul>
+<li>Elastic IPs are copied over, so be careful not to <q>steal</q> an Elastic IP from a running server. Be sure to check the cloned deployment and change the EIPs when necessary.</li>
+<li>If you clone a deployment that has <q>operational</q> servers with attached volumes, the volumes will appear in the cloned deployment as unattached volumes that can be attached at boot time. (EBS volumes can only be attached to one server at any time.)</li>
+<li>If you clone a deployment that has <q>stopped</q> servers that are configured to attach a specific volume at boot time, the same configuration will appear in the cloned deployment.</li>
+<li>When you clone a deployment where server arrays are attached, the server arrays will also be cloned. Since the cloned server array will have the same name as the original, it is recommended that you change the name of the cloned deployment so that you can easily distinguish the server arrays from each other.</li>
+<li>If you&#39;re cloning a deployment so that you can create a <q>staging</q> deployment, in addition to using different Elastic IPs, you must also remember to isolate the databases and their backups from each other by specifying a different database inputs.</li>
+</ul>
+
+<h2 id="create-a-new-deployment">Create a New Deployment</h2>
+
+<h3 id="create-a-new-deployment-objective">Objective</h3>
+
+<p>To create a new deployment in the RightScale Dashboard.</p>
+
+<h3 id="create-a-new-deployment-overview">Overview</h3>
+
+<p>A deployment is a logical, user-defined grouping of servers. They can range from basic (e.g., a single server) to complex.</p>
+
+<h3 id="create-a-new-deployment-steps">Steps</h3>
+
+<ul>
+<li>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong>. Click <strong>New</strong> and provide the following information:
+
+<ul>
+<li><strong>Nickname</strong> - User-defined name for the deployment.</li>
+<li><strong>Description</strong> - A short, internal-only description of the deployment.</li>
+</ul></li>
+</ul>
+
+<h2 id="delete-a-deployment">Delete a Deployment</h2>
+
+<h3 id="delete-a-deployment-objective">Objective</h3>
+
+<p>To delete a Deployment.</p>
+
+<h3 id="delete-a-deployment-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An existing Deployment</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="delete-a-deployment-overview">Overview</h3>
+
+<p><strong>Warning!</strong>  When you delete a Deployment, its configuration and any defined Servers within that Deployment will be permanently deleted. Server Arrays that are associated with the Deployment will not be deleted. You cannot undo the deletion of a Deployment. Lock the Deployment if you want to prevent a Deployment from accidentally being deleted. If you are reluctant to permanently delete a Deployment, you might want to Archive or Unarchive a Deployment instead.</p>
+
+<p><em>Note</em>: You cannot delete a Deployment if it contains running servers and/or active arrays. Also, you cannot delete the &#39;Default&#39; Deployment (although you can change the name of the &#39;Default&#39; Deployment).</p>
+
+<h3 id="delete-a-deployment-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong> and select a Deployment you wish to delete.</li>
+<li>Click the <strong>Delete</strong> button.</li>
+<li>Confirm the deletion action.</li>
+</ol>
+
+<h2 id="delete-a-server-from-a-deployment">Delete a Server from a Deployment</h2>
+
+<h3 id="delete-a-server-from-a-deployment-objective">Objective</h3>
+
+<p>To delete a Server from a Deployment.</p>
+
+<h3 id="delete-a-server-from-a-deployment-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An existing Deployment that&#39;s unlocked</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="delete-a-server-from-a-deployment-overview">Overview</h3>
+
+<p>You can only delete a Server that&#39;s inactive. You cannot delete a Server in a locked Deployment.</p>
+
+<p><strong>Warning!</strong> When you delete a Server from a Deployment, it&#39;s permanently removed from the Deployment.</p>
+
+<h3 id="delete-a-server-from-a-deployment-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong> and select a Deployment in which you want to delete one of its Servers.</li>
+<li>At the Deployment level, there are several different ways to delete and remove a Server from a Deployment.
+
+<ul>
+<li>Click the <strong>Delete</strong> icon next to the Server you want to remove from the Deployment.</li>
+<li>Use the select checkbox to select which Server(s) you wish to delete from the Deployment, select <q>Terminate Selected</q> from the dropdown menu and then click the <strong>Perform Action</strong> button.</li>
+<li>Click on the Server&#39;s Nickname link and then clicking the <strong>Delete</strong> action button.<br><br>
+<img src="/img/cm-delete-server.png" alt="cm-delete-server.png" width="725" height="146" /></li>
+</ul></li>
+<li>Confirm the deletion action.</li>
+</ol>
+
+<h2 id="download-csv-of-external-repositories">Download CSV of External Repositories</h2>
+
+<h3 id="download-csv-of-external-repositories-objective">Objective</h3>
+
+<p>Export all Input information at the Deployment level to a CSV file so you can view and report on it from an Excel spreadsheet.</p>
+
+<h3 id="download-csv-of-external-repositories-steps">Steps</h3>
+
+<h4 id="navigation">Navigation</h4>
+
+<ul>
+<li>Navigate to <strong>Manage</strong> &gt; <strong>Deployments</strong> &gt; <strong>View all</strong></li>
+<li>Select the Deployment you are interested in</li>
+<li>Select the <strong>Inputs</strong> tab. Inputs at the Deployment level are displayed.</li>
+</ul>
+
+<h4 id="generate-and-save-data">Generate and save data</h4>
+
+<ul>
+<li>Select the <strong>Download CSV of External References</strong> action button (located under the Inputs tab)</li>
+<li>Save (or open) the resulting CSV file directly.
+
+<ul>
+<li>The file name generated is of the following format: xref_report_<number>.csv</li>
+<li>Example: xref_report_1260895780.csv</li>
+</ul></li>
+</ul>
+
+<h4 id="viewing-the-data">Viewing the data</h4>
+
+<ul>
+<li>The partial CSV excerpt below shows the data types and example data in the resultant file</li>
+</ul>
+
+<p><img src="/img/cm-download-csv-of-external-references.png" alt="cm-download-csv-of-external-references.png" width="725" height="72" /></p>
+
+<p>Where the following brief data type description applies to each column:</p>
+
+<ul>
+<li><strong>Input</strong> - Input name</li>
+<li><strong>Server</strong> - Server name in the Deployment</li>
+<li><strong>ID</strong> - Unique ID of the Server</li>
+<li><strong>RightScript/Chef Recipe</strong> - Name of the RightScript or Chef Recipe that uses the Input (Note: Multiples can use the same Input.)</li>
+<li><strong>Phase</strong> - Boot, operational or decommission phase</li>
+<li><strong>Value</strong> - Input Value. See also <a href="/cm/ref/input_types.html">Input Types</a>.</li>
+<li><strong>Source</strong> - Whether the Input was set at the ServerTemplate or Deployment level</li>
+</ul>
+
+<h2 id="edit-a-deployment">Edit a Deployment</h2>
+
+<h3 id="edit-a-deployment-objective">Objective</h3>
+
+<p>To edit a Deployment&#39;s configuration.</p>
+
+<h3 id="edit-a-deployment-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An existing Deployment that&#39;s unlocked. You cannot edit a locked Deployment.</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="edit-a-deployment-overview">Overview</h3>
+
+<p>You can change all of a Deployment&#39;s parameters. The <q>Default</q> parameters only affect new Servers that are added to a Deployment. <strong>Warning!</strong> You can have more than one Deployment with the same name in your account. For detailed descriptions about each field, see <a href="/cm/dashboard/manage/deployments/deployments_actions.html">Create a New Deployment</a>.</p>
+
+<h2 id="launch-a-server">Launch a Server</h2>
+
+<h3 id="launch-a-server-objective">Objective</h3>
+
+<p>To launch a Server at the Deployment level.</p>
+
+<h3 id="launch-a-server-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An existing deployment</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="launch-a-server-overview">Overview</h3>
+
+<p>You can either launch a server at the server level or deployment level. At the deployment level, you also have the option of launching multiple servers at the same time.</p>
+
+<h3 id="launch-a-server-launch-options">Launch Options</h3>
+
+<h4 id="launch-a-single-server">Launch a Single Server</h4>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong> and select a deployment.</li>
+<li>At the deployment level, click on the <q>Launch</q> icon next to the inactive server that you want to launch.</li>
+<li>The pre-launch Inputs confirmation screen will appear for the selected server. All required inputs must be defined. As a best practice, all inputs should be defined prior to the pre-launch screen for production environments. However, you do have the option to change any inherited values, which you may find as a useful option for testing purposes. In production environments, a server should always inherit its inputs from either the ServerTemplate or deployment level.<br>
+<img src="/img/cm-launch-single-server.png" alt="cm-launch-single-server.png" width="725" height="62" /></li>
+<li>Once all required inputs are defined you can safely launch your server. See <a href="http://support.rightscale.com/06-FAQs/FAQ_190_-_What_is_the_difference_between_the_Launch_option_and_Save_and_Launch_option%3F/index.html">What is the difference between the <q>Launch</q> option and <q>Save and Launch</q> option?</a> for more information.<br>
+There are two launch options:
+
+<ul>
+<li><strong>Launch</strong> - Launches a server using the defined inputs. Any changes that are made at the inputs confirmation screen will only apply to the current instance being launched and will not be applied to future launches of the server. (i.e. Changes are not saved at the server level, which are displayed under the <q>Next</q> server&#39;s Inputs tab.</li>
+<li><strong>Save and Launch</strong> - Launches a server using the modified inputs and also saves those changes so that it will be applied to future launches of that server. (i.e. Changes are saved at the server level, and are highlighted as overrides under the <q>Next</q> server&#39;s Inputs tab.)</li>
+</ul></li>
+</ol>
+
+<h4 id="launch-multiple-servers">Launch Multiple Servers</h4>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong> and select a deployment.</li>
+<li><p>At the deployment level, use the checkboxes to select all servers that you want to launch at the same time. <em>Note</em>: You can only launch multiple servers if you&#39;ve defined valid values for ALL inputs that are required by the boot scripts. The input confirmation screen is not displayed when launching multiple servers.</p>
+
+<p><img src="/img/cm-launch-multiple-servers.png" alt="cm-launch-multiple-servers.png" width="725" height="326" /></p></li>
+<li><p>Select the <strong>Launch</strong> option from the dropdown menu and click the <strong>Apply to selected</strong> action button.</p></li>
+</ol>
+
+<h4 id="launch-an-instance-in-a-server-array">Launch an Instance in a Server Array</h4>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Arrays</strong> and select your server array. (If a server array is associated with a deployment, you can also select a server array at the bottom of the deployment&#39;s <strong>Servers</strong> tab.)</li>
+<li>At the server array&#39;s show page, click the <strong>Launch</strong> action button to manually launch a single instance (server) into the array. <em>Note</em>: You can manually launch a new server instance into the array regardless of whether or not the array is active (enabled), which is recommended for testing purposes before you enable an array.<br></li>
+</ol>
+
+<p><img src="/img/cm-launch-instance-array.png" alt="cm-launch-instance-array.png" width="379" height="166" /></p>
+
+<h2 id="lock-or-unlock-a-deployment">Lock or Unlock a Deployment</h2>
+
+<h3 id="lock-or-unlock-a-deployment-objective">Objective</h3>
+
+<p>To lock or unlock Deployment.</p>
+
+<h3 id="lock-or-unlock-a-deployment-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An existing Deployment</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="lock-or-unlock-a-deployment-overview">Overview</h3>
+
+<p>When you lock a deployment, you cannot delete the deployment, any of its servers and/or server arrays. However, you will still be able to manage all other aspects of your deployment such as launching or terminating servers, as well as editing server and deployment configurations. If you are defining a mission critical deployment it is recommended that you lock the deployment once it&#39;s deployed.</p>
+
+<p><em>Note</em>: You can also lock a single server.</p>
+
+<h3 id="lock-or-unlock-a-deployment-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong> and select a Deployment you wish to lock.</li>
+<li>To lock a Deployment, click the <q>Lock</q> icon next to the Deployment&#39;s name.<br>
+<img src="/img/cm-lock-deployment.png" alt="cm-lock-deployment.png" width="404" height="49" /></li>
+<li>To unlock a Deployment, click the <q>Unlock</q> icon next to the Deployment&#39;s name.<br>
+<img src="/img/cm-unlock-deployment.png" alt="cm-unlock-deployment.png" width="404" height="49" /></li>
+<li>To check and see who last locked/unlocked the Deployment, click on the Deployment&#39;s <strong>Changes</strong> tab.</li>
+</ol>
+
+<h2 id="terminate-a-server">Terminate a Server</h2>
+
+<h3 id="terminate-a-server-objective">Objective</h3>
+
+<p>To terminate a running Server in a Deployment.</p>
+
+<h3 id="terminate-a-server-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>An existing Deployment with an unlocked, running Server</li>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="terminate-a-server-overview">Overview</h3>
+
+<p>You can only terminate an unlocked Server.</p>
+
+<h3 id="terminate-a-server-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Manage</strong> &gt; <strong>Deployments</strong> and select a Deployment in which you want to terminate one of its Servers.</li>
+<li>At the Deployment level, there are several different ways to terminate a running Server from a Deployment.
+
+<ul>
+<li>Click the <strong>Terminate</strong> icon next to the Server you want to terminate in the Deployment.</li>
+<li>Use the select checkbox to select which Server(s) you wish to terminate in the Deployment, select <q>Terminate Selected</q> from the dropdown menu and then click the <strong>Perform Action</strong> button.</li>
+<li>Click on the Server&#39;s Nickname link and click the <strong>Terminate</strong> action button.<br>
+<img src="/img/cm-terminate-server.png" alt="cm-terminate-server.png" width="725" height="184" /></li>
+</ul></li>
+<li>Confirm the terminate action.</li>
+</ol>
+
+<h2 id="update-inputs-of-multiple-running-servers">Update Inputs of Multiple Running Servers</h2>
+
+<h3 id="update-inputs-of-multiple-running-servers-objective">Objective</h3>
+
+<p>To update the current input values of multiple running servers within a deployment.</p>
+
+<h3 id="update-inputs-of-multiple-running-servers-overview">Overview</h3>
+
+<p>With deployments that contain many servers, you may update the inputs on a selected number of servers for either the &#39;current&#39; servers or the &#39;next&#39; launched servers. Use this feature to manage your running instances by updating input values before running operational scripts rather than having to re-launch in order to update multiple servers at once.</p>
+
+<h3 id="update-inputs-of-multiple-running-servers-steps">Steps</h3>
+
+<h4 id="select-running-servers-to-update">Select running servers to update</h4>
+
+<p>Navigate to the index page of a deployment. Select your running servers using the checkboxes on the right. For large amounts of servers, utilize the toggles at the bottom of the page.</p>
+
+<p><img src="/img/cm-bulk-update-select.png" alt="cm-bulk-update-select.png" width="725" height="370" /></p>
+
+<h4 id="select-&#39;set-current-server-inputs&#39;">Select &#39;Set Current Server Inputs&#39;</h4>
+
+<p>After making your selections, click &#39;Set Current Server Inputs&#39; from the dropdown in the bottom right. Click <strong>Apply to Selected</strong>.</p>
+
+<p><img src="/img/cm-bulk-updates-set-current.png" alt="cm-bulk-updates-set-current.png" width="725" height="219" /></p>
+
+<h4 id="edit-the-inputs-of-current-servers">Edit the inputs of current servers</h4>
+
+<p>Under <strong>Bulk Inputs Update</strong>, the number of servers you selected is shown. The dropdown next to each input consists of two options that are unique to this flow: &#39;Unchanged&#39; and &#39;Use deployment value.&#39; When first viewing the page without making any changes, all the inputs will say &#39;Unchanged&#39; by default to let you know that none of the inputs have been edited. Otherwise, use the other options in the dropdown to specify your value.</p>
+
+<p><q>Use Deployment Value</q> sets the input to the current input value on the deployment. Future changes to the input at the deployment level will not affect the server(s).</p>
+
+<p>After making your edits, click the <strong>Show only changed inputs</strong> checkbox to filter only the inputs that were changed. Use this checkbox to confirm the changes you are about to make.</p>
+
+<p><img src="/img/cm-bulk-update-edit-current.png" alt="cm-bulk-update-edit-current.png" width="525" height="732" /></p>
+
+<p>Make your edits and click <strong>Save</strong>. You will return to the <strong>Servers</strong> tab of the deployment.</p>
+
+<h2 id="use-tags-in-a-deployment">Use Tags in a Deployment</h2>
+
+<h2 id="add-or-remove-tags-to-servers-within-a-deployment">Add or Remove Tags to Servers within a Deployment</h2>
+
+<h3 id="add-or-remove-tags-to-servers-within-a-deployment-objective">Objective</h3>
+
+<p>To add/remove tags (bulk tagging) to multiple Servers in a Deployment.</p>
+
+<h3 id="add-or-remove-tags-to-servers-within-a-deployment-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;Actor&#39; User Role Privileges</li>
+</ul>
+
+<h3 id="add-or-remove-tags-to-servers-within-a-deployment-overview">Overview</h3>
+
+<p>The ability to tag multiple servers (bulk tagging) at the same time is a useful feature, especially if you use tags to perform operations on Servers across your Deployment(s) using the RightScale API. Bulk tagging is only supported at the Deployment level.</p>
+
+<h3 id="add-or-remove-tags-to-servers-within-a-deployment-steps">Steps</h3>
+
+<h4 id="add-tags">Add Tags</h4>
+
+<p>Go to <strong>Manage</strong> &gt; <strong>Deployment</strong> &gt; <em>YourDeployment</em>. Under the <strong>Servers</strong> tab, select which Servers you want to add the same tag to, select <strong>Add Tag(s)</strong> from the dropdown menu and click the <strong>Apply to selected</strong> button.</p>
+
+<p><img src="/img/cm-add-tags.png" alt="cm-add-tags.png" width="725" height="271" /></p>
+
+<p>Next, enter the tag that you want to add. Add as many tags as you want. Be sure to specify if you only want the tag to apply to the <q>current</q> server or apply to all future (<q>next</q>) servers. This preference will apply to all tags that you add during this action. If you want to use separate preferences for a tag, you will need to repeat the process and add it as a separate action.</p>
+
+<p>When you&#39;re finished, click the <strong>Apply</strong> button.</p>
+
+<p><img src="/img/cm-add-tags-popup.png" alt="cm-add-tags-popup.png" width="347" height="220" /></p>
+
+<h4 id="remove-tags">Remove Tags</h4>
+
+<p>Unlike adding tags, you can only remove one tag at a time. To remove a tag, simply select which servers you want to remove the tag from, select the <strong>Remove Tag</strong> option, and click the <strong>Apply to selected</strong> button.</p>
+
+<p>You will need to manually enter the tag you wish to remove and click the <strong>Apply</strong> button.</p>
+
+<p><img src="/img/cm-remove-tag.png" alt="cm-remove-tag.png" width="347" height="220" /></p>
+
+<h2 id="run--any-script--on-a-server">Run 'Any Script' On a Server</h2>
+
+<h3 id="run--any-script--on-a-server-objective">Objective</h3>
+
+<p>To use the &#39;Any Script&#39; option to run a single RightScript on one or more Servers</p>
+
+<h3 id="run--any-script--on-a-server-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>&#39;actor&#39; user role privileges</li>
+</ul>
+
+<h3 id="run--any-script--on-a-server-overview">Overview</h3>
+
+<p>When a Server is running, you can run any of its scripts on-demand at anytime under the Scripts tab. A Server is designed to inherit its scripts from its ServerTemplate. Typically, the ServerTemplate will contain any relevant RightScripts for a particular server. However, you may need to run a script to perform a one-time upgrade to a running server or apply a patch across a set of servers. In such cases, instead of adding the script to the Server&#39;s ServerTemplate (which may not be possible if you launched the Server with a committed ServerTemplate) just so that you can perform a one-time operation, you can use the &#39;Any Script&#39; option. The &#39;Any Script&#39; option is useful if you need to execute a script that wasn&#39;t inherited by the ServerTemplate. For example, you might want to run a script from one of the &#39;Toolbox&#39; ServerTemplates.</p>
+
+<h3 id="run--any-script--on-a-server-steps">Steps</h3>
+
+<p>The &#39;Any Script&#39; option is only available for use on running servers. Although an &#39;Any Script&#39; can be used at multiple levels, the operation functions slightly different depending on where it&#39;s executed. The &#39;Any Script&#39; option can be found under the Scripts tab at the following levels:</p>
+
+<ul>
+<li>Server</li>
+<li>Deployment</li>
+<li>Server Array</li>
+</ul>
+
+<h4 id="select-an-&#39;any-script&#39;">Select an &#39;Any Script&#39;</h4>
+
+<p>Go to the Scripts tab at the level where you&#39;re going to run the &#39;Any Script&#39; and click on the dropdown bar to open a selection window where you can select which RightScript you want to execute. <em>Note</em>: You can only use the &#39;Any Script&#39; option to run a RightScript. It cannot be used to run a Chef Recipe.</p>
+
+<p><img src="/img/cm-any-script-select.png" alt="cm-any-script-select.png" width="216" height="117" /></p>
+
+<p>Select the revision of the script you want to run and click the <strong>Run</strong> button.</p>
+
+<h4 id="select-which-servers-the-script-should-be-run-on">Select which Servers the Script should be run on</h4>
+
+<p>Unless you are running the &#39;Any Script&#39; at the Server level, you will be prompted to select which active Servers the script should be run on. (You cannot run an &#39;Any Script&#39; on an inactive Server.)</p>
+
+<h5 id="deployment-level">Deployment Level</h5>
+
+<p>There is an intermediary page where you can filter by one of the following prior to making the selection of what Servers to run the selected RightScript against</p>
+
+<ul>
+<li>Server&#39;s Nickname</li>
+<li>ServerTemplate</li>
+<li>Machine tags</li>
+</ul>
+
+<p>Based on the result set of the filters you choose you can also select <q>all shown</q>, <q>none</q> or <q>all *Number#*</q> (where <em>Number#</em> is the total number of Servers in the result set. This is only displayed if pagination is involved in the Servers result set). Notice this feature can be very helpful in the event you need to patch all (or most all) Servers in your Deployment. For example, perhaps you have a change to make to the /etc/bashrc (or similar startup file) on 10 Servers in a Deployment, that use 3 or 4 different ServerTemplates. You could write a <em>one-off</em> RightScript to make the change, and run it as an &#39;Any script&#39; against all the Servers in your Deployment. (There is no need to add the RightScript as an Operational script to each ServerTemplate, etc.)</p>
+
+<p><img src="/img/cm-any-script-deployment.png" alt="cm-any-script-deployment.png" width="725" height="306" /></p>
+
+<p>Make your selection(s) and click the <strong>Run on selected</strong> action button when ready.</p>
+
+<p><em>Note</em>: When you run an &#39;Any Script&#39; at the Deployment level, the script will not be run on any instances in a Server Array that&#39;s attached to the Deployment. To run the script across all instances in an array, you will need to perform the &#39;Any Script&#39; operation at the Server Array level.</p>
+
+<h4 id="server-array-level">Server Array Level</h4>
+
+<p>When you run an &#39;Any Script&#39; at the Server Array level, the script will be run on all selected instances. Typically, each instance in the server array will be launched with the same ServerTemplate. However, if there are instances that were launched with different ServerTemplates, they will be listed separately. You can only run the script across all instances that were launched with a particular ServerTemplate. You cannot select instances individually. (If you want to run the script only on certain instances, you can do so at the individual Server level.)</p>
+
+<ul>
+<li><strong>Run on oldest</strong> - Only run the script on the oldest instance of a ServerTemplate group. The <q>oldest</q> instance is the one with the longest runtime. For example, you may want to run the script on the oldest server before you run it on the rest of the servers.</li>
+<li><strong>Run on all</strong> - Run script on all selected ServerTemplate groups.</li>
+</ul>
+
+<p><img src="/img/cm-any-script-array.png" alt="cm-any-script-array.png" width="725" height="163" /></p>
+
+<p>Select which action you wish to run.</p>
+
+<h4 id="specify-input-parameters">Specify Input Parameters</h4>
+
+<p>Next, you will need to specify any missing input parameters.</p>
+
+<p><img src="/img/cm-any-script-input.png" alt="cm-any-script-input.png" width="612" height="126" /></p>
+
+<p>If you are running the &#39;Any Script&#39; at either the Server or Server Array levels, input inheritance rules will apply, so the input parameters will be pre-populated if any of the script&#39;s inputs have been predefined at either the ServerTemplate, Deployment, or Server/Server Array levels.</p>
+
+<p>However, if you are running the &#39;Any Script&#39; at the Deployment level, input parameters will not be pre-populated. You will need to manually enter all input parameters. If you want to use the same value for an input that&#39;s been predefined at a different level, you will need to use the Inputs tab as a cross-reference.</p>
+
+<p>Once all input parameters have been defined, click <strong>Run</strong> to actually run the script on the server(s).</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

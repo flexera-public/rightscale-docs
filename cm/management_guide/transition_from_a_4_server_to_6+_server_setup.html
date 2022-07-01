@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Transition from a 4-Server to 6+ Server Setup</title><meta content="Guidelines and steps for transitioning from a 4-Server to 6+ Server setup in the RightScale Cloud Management Platform." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_management_guide cm_management_guide_transition_from_a_4_server_to_6-_server_setup" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Lifecycle Management</a></p><div class="page-header"><h1>Transition from a 4-Server to 6+ Server Setup</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Your original site started as a basic 4-server setup where the FrontEnds served as both the load balancer and application server. But, now your site has grown and now you need to have FrontEnds that are dedicated load balancers. This tutorial will walk you through the steps of how to migrate from the 4-server setup to a 6+ server setup.</p>
+
+<p><img src="/img/cm-overview4-6server-setup.png" alt="cm-overview4-6server-setup.png" width="725" height="321" /></p>
+
+<p>This tutorial below assumes that you&#39;re going to use a server array to serve as the application level for your Deployment. Similarly, you can also have a Deployment with two application servers and a server array that&#39;s ready to scale-up when necessary. But, one of the advantages of having all application servers inside of a single server array is that you now have one place where you can manage and update all of your application servers. Be sure to configure your server array to have a minimum instance count of two at all times.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>This tutorial assumes you have a running 4-server setup in production with Elastic IPs assigned to the FrontEnd servers.</p>
+
+<h2 id="steps">Steps</h2>
+
+<ol>
+<li>Create a server array for your application servers and associate it with the Deployment. See <a href="/cm/dashboard/manage/arrays/arrays_actions.html#create-a-new-alert-based-server-array">Create a New Alert-based Server Array</a>. If you already have a server array, verify that it&#39;s properly configured (see below) and go to Step 2.
+
+<ul>
+<li>Configure your application server array to have a minimum of two running instances. (Default Min Count = 2)</li>
+<li>The server array should be configured to use an <q>application</q> ServerTemplate (e.g. PHP App Server, Rails App Server, etc.) to launch additional server instances.</li>
+<li>The server array should be <q>enabled</q> so that the server array can scale-up or down as necessary.<br>
+<img src="/img/cm-4server-setup-array.png" alt="cm-4server-setup-array.png" width="629" height="275" /></li>
+</ul></li>
+<li>Your web application is now being served by the two FrontEnds and the 2+ instances in your application server array.</li>
+<li>(Recommended) Eventually, you may want to replace your FrontEnds with servers that are specifically designed for load balancing. As a best practice, a server should only have applications that are actually required for its function. Import the <q>LB Apache+HAproxy</q> ServerTemplate from the Library. Clone the ServerTemplate if you expect to make modifications to it.</li>
+<li>Add two new Servers to the Deployment using the ServerTemplate you just imported/cloned. These Servers will become your new dedicated load balancers.<br>
+<img src="/img/cm-new-load-balancers.png" alt="cm-new-load-balancers.png" width="636" height="275" /></li>
+<li>Next, you will launch and test each load balancer individually. Launch one of the load balancer servers and wait for it to become operational.</li>
+<li>Under the Server Array&#39;s Inputs tab, change the LB_HOSTNAME input parameter to point to the public DNS name or public IP Address of one of the new load balancers. (e.g. ec2-184-72-2-123.us-east-1.compute.amazonaws.com or 184.72.2.149)</li>
+<li>Go to the Server Array&#39;s Scripts tab and run the <q>LB app to HA proxy connect</q> operational script on all currently running instances in the array. The application servers in the array will now be connected to both the FrontEnds and dedicated load balancers. Notice that the new dedicated load balancer is NOT connected to the FrontEnds because they will be terminated at the end of this tutorial.<br>
+<img src="/img/cm-connect-load-balancer.png" alt="cm-connect-load-balancer.png" width="636" height="275" /></li>
+<li>Normal user traffic is still hitting your Elastic IPs, so content is still being served through the old FrontEnds. Before you continue to the next step, you should test the new load balancer to make sure that it is properly serving content from the application servers in the array. Simply hit the public DNS of the load balancer a couple of times to verify that content is being served correctly.</li>
+<li>Repeat steps 5-8 for the other load balancer server.</li>
+<li>Under the Server Array&#39;s Inputs tab, change the LB_HOSTNAME input parameter back to the original value (e.g. www.mysite.com) to ensure that any new instances that are launched during the migration will still connect to the old FrontEnds with the EIPs.</li>
+<li>Now that you verified that the new load balancers are properly serving content, the next step is to switch the Elastic IPs and assign them to the new load balancer servers so that any new incoming traffic will no longer be sent to the old FrontEnds. See <a href="/cm/dashboard/clouds/aws/actions/ec2_elastic_ips_actions.html#transfer-an-elastic-ip-to-a-running-instance">Transfer an Elastic IP to a running instance</a>. Any active sessions prior to the switch will be maintained, but any new requests will be served by the new load balancer.  In such cases, existing users may be asked to reactivate their session and log in again.
+<img src="/img/cm-switch-eip.png" alt="cm-switch-eip.png" width="636" height="275" /></li>
+<li>A recommended clean-up task would be to ensure that all application servers in the array are connected to the new load balancer servers. Go to the Server Array&#39;s Scripts tab and run the <q>LB app to HA proxy connect</q> operational script one more time on all currently running instances in the array.</li>
+<li>The old FrontEnds are no longer being used to serve incoming user requests. Use the monitoring graphs to check the number of incoming Apache requests. After about 15 minutes, both FrontEnds should no longer be receiving anymore incoming requests.<br>
+<img src="/img/cm-no-apache-requests.png" alt="cm-no-apache-requests.png" width="713" height="212" />
+Once you&#39;ve confirmed that the site is 100% stable, you can safely terminate the old FrontEnds.<br>
+<img src="/img/cm-terminate-front-ends.png" alt="cm-terminate-front-ends.png" width="636" height="276" />
+Congratulations! You now have an upgraded server setup with dedicated load balancers and a scalable array of application servers.</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

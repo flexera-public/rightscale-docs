@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Arrays - Concepts</title><meta content="Server arrays are commonly used in the RightScale Cloud Management Dashboard for application tiers where additional application servers are launched or terminated in response the changing workloads at the application level." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_manage cm_dashboard_manage_arrays cm_dashboard_manage_arrays_arrays_concepts" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Manage</a> &#x2F; <a href="./">Arrays</a></p><div class="page-header"><h1>Arrays - Concepts</h1></div><div class="main-content"><h2 id="best-practices-for-autoscaling-alerts">Best Practices for Autoscaling Alerts</h2>
+
+<h3 id="best-practices-for-autoscaling-alerts-overview">Overview</h3>
+
+<p>Server arrays are commonly used for application tiers (e.g. PHP, Tomcat, Rails) where additional application servers are launched or terminated in response the changing workloads at the application level.</p>
+
+<p>If you are using a server array for autoscaling purposes, you must configure each server with the appropriate alert specifications so that it can vote for a grow/shrink action, which causes the server array to resize up or down accordingly.</p>
+
+<h3 id="best-practices-for-autoscaling-alerts-things-to-consider">Things to Consider</h3>
+
+<h4 id="identify-all-voters">Identify all voters</h4>
+
+<p>Depending on how the deployment is configured, you may need to add the alerts at multiple levels to ensure that each server will inherit the same alert. Use the reference architecture examples below as a general guideline to make sure that each <q>voting</q> server will inherit the same alert specifications.</p>
+
+<ul>
+<li>If you are using the same ServerTemplate to launch each voting server and it&#39;s not being used in a different deployment, add the alert to the ServerTemplate.</li>
+<li>If you are using a server array to launch all voting servers and the ServerTemplate is used in multiple deployments, add the alert to the Server Array&#39;s <strong>Next Alerts</strong> tab so that each new instance launched into the array will inherit its alert specifications from the array level.</li>
+<li>If there are servers at the deployment level (under the deployment&#39;s <strong>Servers</strong> tab) and its ServerTemplate is used in multiple deployments, add the alert to each inactive server&#39;s <strong>Alerts</strong> tab. If server is already active (overational), you must add the alerts to each active server&#39;s <strong>Current Alerts</strong> and <strong>Next Alerts</strong> tabs to apply the alerts to the running server as well as ensure that it will be inherited by the next instantiation of that server.</li>
+</ul>
+
+<h4 id="select-the-metric">Select the Metric</h4>
+
+<p>Before you create alerts for triggering an autoscaling event, the first step is to identify the appropriate metric for autoscaling purposes.If you pick an inappropriate metric for the alerts, the server array may potentially resize up/down under false conditions. Be sure to test autoscaling in a staging environment to make sure the server array is resizing appropriately as expected. You may need to change the metric or thresholds accordingly to ensure proper autoscaling behavior.</p>
+
+<p>Add alerts at the appropriate level(s) to make sure that each <q>voting</q> server will inherit the same alert specifications.</p>
+
+<p>If you do not have a specific metric that you want to use, it&#39;s recommended that you use &#39;<strong>cpu-idle</strong>&#39; as the base metric for each alert. Although you can use a different metric for scaling down, it&#39;s generally recommended that you use the same metric for both resize actions.</p>
+
+<p><img src="/img/cm-scaling-alerts.png" alt="cm-scaling-alerts.png" width="725" height="121" /></p>
+
+<ul>
+<li>Scale Up
+
+<ul>
+<li>If a server&#39;s &#39;<strong>cpu-0/cpu-idle</strong>&#39; is <strong>&lt; 30%</strong> available for longer than <strong>5</strong> minutes, vote to &#39;<strong>grow</strong>&#39; the server array.</li>
+</ul></li>
+<li>Scale Down
+
+<ul>
+<li>If a server&#39;s &#39;<strong>cpu-0/cpu-idle</strong>&#39; is <strong>&gt; 70%</strong> available for longer than <strong>5</strong> minutes, vote to &#39;<strong>shrink</strong>&#39; the server array.</li>
+</ul></li>
+</ul>
+
+<h2 id="manage-server-arrays">Manage Server Arrays</h2>
+
+<p>In the Dashboard, Server Arrays (or simply <q>Arrays</q> for short) are located under <strong>Manage</strong> &gt; <strong>Arrays</strong>. A list of all Server Arrays in your account will be displayed along with relevant information. The table provides a way to monitor all of your Server Arrays.</p>
+
+<ul>
+<li>For <strong>alert-based</strong> Arrays, you can see how many instances are currently operational in the Array, how many instances are voting to either grow/shrink the Array, as well as whether or not the Server Array is active.</li>
+<li>For queue <strong>-based</strong> Arrays, you can see how many instances are currently operational in the Array, as well as which queues are being monitored.</li>
+<li>For <strong>spot instance</strong> Arrays, you can place bids on spot instances to be used in your Server Array, enabling you to cut costs by paying less than the on-demand price.</li>
+<li>You may select a Nickname to see more detailed information about a specific Server Array.</li>
+</ul>
+
+<h2 id="server-array-schedule">Server Array Schedule</h2>
+
+<p>You can also define how an alert-based array resizes over the course of the week by using the server array schedule feature. This feature is not supported on queue-based server arrays.</p>
+
+<p><em>Note</em>: The time zone for the Server Array Schedule is UTC.</p>
+
+<p><strong>WARNING!</strong>  Any changes that are made to the min/max count in the server array schedule will override the array&#39;s default min/max count settings.</p>
+
+<p>Go to <strong>Manage</strong> &gt; <strong>Arrays</strong> and select an array that you would like create a custom schedule for and click the Schedule <strong>Edit</strong> link under the Info tab.</p>
+
+<p><img src="/img/cm-edit-array-schedule.png" alt="cm-edit-array-schedule.png" width="426" height="641" /></p>
+
+<p>Notice the current default min/max counts for the server array.</p>
+
+<p>Let&#39;s say you want to increase your resize settings during the upcoming week because a new release or promotion will be launched on Monday. Instead of modifying your default settings, you can just change them for this week.</p>
+
+<p>To support the increased traffic to the site, you want to increase the min count to 5 servers and the max count to 50 servers during normal business hours and then return to the default settings overnight.</p>
+
+<p>Select <strong>Monday</strong> from the drop down list and type the time that you would like these new setting to take effect. The time follows the 24h format and is UTC. Specify the new min/max counts and click the <strong>apply</strong> button.</p>
+
+<p><img src="/img/cm-edit-schedule-monday-2.png" alt="cm-edit-schedule-monday-2.png" width="498" height="193" /></p>
+
+<p>The new resize configurations will be added to the specified day.</p>
+
+<p>Remember, these new settings will persist until they are changed. The only way to revert back to your default settings is to add another resize setting. The default min/max settings will be listed by default.</p>
+
+<p>Select <strong>Monday</strong> again from the list, but this time set the time to <strong>23:00</strong> and keep the default min/max settings.</p>
+
+<p><img src="/img/cm-edit-schedule-monday-3.png" alt="cm-edit-schedule-monday-3.png" width="725" height="195" /></p>
+
+<p>Now you want to use the same resize patterns for the rest of the business week. To copy the settings of one day to another, select <strong>as Monday</strong> from the drop down bar and click the <strong>copy schedule</strong> link next to the day you want to inherit the settings. Repeat the steps as necessary.</p>
+
+<p><img src="/img/cm-edit-schedule-wednesday.png" alt="cm-edit-schedule-wednesday.png" width="725" height="374" /></p>
+
+<p>The schedule is a rolling calendar, so the settings from Saturday will continue to be active until the settings are changed.</p>
+
+<p>To reset a day&#39;s setting, select <strong>reset</strong> from the drop down bar and click the <strong>copy schedule</strong> link next to the day.</p>
+
+<h2 id="weighted-arrays">Weighted Arrays</h2>
+
+<h3 id="weighted-arrays-overview">Overview</h3>
+
+<p>Weighted arrays allow you to adjust the distribution of your array&#39;s launched instances to favor a particular ration among the available data centers/zones. The UI defines the weights in percentages, but the actual algorithm is a weighted distribution.</p>
+
+<p><img src="/img/cm-weighted-array-server-details.png" alt="cm-weighted-array-server-details.png" width="725" height="717" /></p>
+
+<p>If the <strong>weighted array</strong> option is selected in the Server Details tab, the user enters proportions to describe precisely how they want to scale across datacenters on the <strong>Array Details</strong> tab</p>
+
+<p><img src="/img/cm-weighted-array-details.png" alt="cm-weighted-array-details.png" width="725" height="557" /></p>
+
+<h3 id="weighted-arrays-weighted-array-algorithm">Weighted Array Algorithm</h3>
+
+<p>Weighted array instances are launched sequentially using the defined probability to choose a region in each occurrence of a launched instance. For example, if there are 2 instances each in zone A, zone B, zone C and zone D and you specified a weighted distribution of 25%, 25%, 25% and 25%, there is an equal chance of an instance launching in any of those regions. Say zone A is selected. An instance will attempt to launch in zone A. If that instance fails, it will not retry launching in that zone until successful, it will continue to randomly select a zone until an instance is successful. This helps if there is an outage in a zone or one is overloaded. A round robin method would attempt to launch in the same zone zone until successful. This way it&#39;s not completely predictable, and the weights you specify will be applied each attempt at launching an instance. The weighted array algorithm takes into account the distribution of instances that already exists.</p>
+
+<p>The allocation is weighted randomly, so the number of instances launched in each zone may not be equal at any point in time but asymptotically equal. The weighted random approach is more effective than trying to keep perfect distribution. If a datacenter/zone runs out of instances, the randomized algorithm will be able to launch in the next available zone.</p>
+
+<h2 id="what-is-autoscaling-">What is Autoscaling?</h2>
+
+<h3 id="what-is-autoscaling--overview">Overview</h3>
+
+<p>Before we can properly define autoscaling (auto-scaling), we must first explain the different types of scaling since autoscaling only applies to a specific type of scaling in the cloud. Remember, <q>scaling</q> refers to the ability to grow or shrink an object or set of objects. Scaling provides a means of changing the server sizes or quantity of servers to meet your application&#39;s demands. The ability to efficiently scale up or down is one of the key benefits of the cloud. And when combined with the monitoring and alert tools of the RightScale platform, you can truly harness the power of the cloud by dynamically scaling, automatically, based on predefined alert conditions (autoscaling).</p>
+
+<h3 id="what-is-autoscaling--what-is-scaling-">What is Scaling?</h3>
+
+<p>Scaling is the ability to increase/decrease compute capacity either by launching additional servers or changing server sizes.</p>
+
+<p>Below is a summary of the two types of scaling:</p>
+
+<ul>
+<li><strong>Horizontal Scaling</strong> - The ability to automatically scale (grow/shrink) the number of server resources that are provisioned to a particular Deployment. For example, as your site grows and the number of user requests increases, you can scale-up horizontally by launching and provisioning additional server resources to serve your application. Conversely, when those resources are no longer needed, you can scale-down and automatically terminate underutilized server resources.<br>
+<img src="/img/cm-horizontal-scaling.png" alt="cm-horizontal-scaling.png" width="278" height="83" /></li>
+<li><strong>Vertical Scaling</strong> - The ability to scale the size of a server. Another way to dramatically change compute capacity is to change server sizes. Depending on your site&#39;s architecture, cost, and bandwidth requirements, it might be more beneficial for you to scale vertically instead of horizontally. For example, instead of managing 6 smaller servers, you might want to simplify your Deployment and replace them with 2 larger servers that provide an equivalent amount of performance at a more cost-effective rate. Vertical scaling is also common for growing the size of your database over time. Unlike horizontal scaling, you do not vertically scale automatically. Autoscaling does not apply to vertically scaling scenarios.<br>
+<img src="/img/cm-vertical-scaling.png" alt="cm-vertical-scaling.png" width="217" height="126" /></li>
+</ul>
+
+<h3 id="what-is-autoscaling--what-is-autoscaling-">What is Autoscaling?</h3>
+
+<p>The ability to autoscale only applies to horizontal scaling. In the RightScale platform, autoscaling is achieved by setting up scalable server arrays, as well as defining the alert conditions under which additional servers will be launched or terminated. You can set up two different types of server arrays for autoscaling purposes:</p>
+
+<ul>
+<li><strong>Alert-based Server Arrays</strong> - Define a set of predefined alert specifications that are constantly being monitored on the server by RightScale&#39;s alert daemon. (e.g. If &#39;cpu-idle 0&#39; is &lt; 25% for 15 minutes) When an alert condition&#39;s threshold has been met or exceeded, an alert is triggered and either an Alert Escalation is called or the server&#39;s Voter Tag changes accordingly to denote a vote to grow/shrink the server array.</li>
+<li><strong>Queue-based Server Arrays</strong> - Strictly used for back-end, batch processing applications where <q>worker</q> instances are launched to process work units from an input queue and then send the result files to either S3 or another queue. Queue-based server arrays are a primary component for creating grid applications.</li>
+</ul>
+
+<h3 id="what-is-autoscaling--scaling-manually-vs--automatically">Scaling Manually vs. Automatically</h3>
+
+<p>Although autoscaling might seem like the preferred method for scaling in the cloud, manual scaling is definitely a preferred method for certain use cases. For example, vertical scaling typically involves making significant changes to a server&#39;s core configuration. Therefore, it&#39;s better to perform such changes manually. Remember, when you set up scalable server arrays for (horizontal) autoscaling purposes, you&#39;re not changing an existing server&#39;s configuration. Rather, you are simply adding or subtracting compute resources based on changing demand metrics.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

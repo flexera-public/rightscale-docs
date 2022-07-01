@@ -1,0 +1,659 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Servers</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Servers</h1></div><div class="main-content"><h2 id="create-server">Create Server</h2>
+
+<p>Create a server in the specified cloud, deployment, from the given ServerTemplate, MCI, etc.</p>
+
+<p><em><strong>Reminder</strong></em>: Not all clouds support all cloud resources. For example, don&#39;t include a security group in your Create Server example if the cloud you are working with does not support security groups.</p>
+
+<h3 id="create-server-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p><strong>Note</strong> : A <q>\</q> character has been added to allow a single curl command to continue for several lines in the editor. This is for readability sake. The shell will interpret the script&#39;s curl command as a single line.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"306795001"</span> <span class="c"># Deployment to add Server to</span>
+    <span class="nv">CLOUD</span><span class="o">=</span><span class="s2">"2112"</span> <span class="c"># Specify Cloud to add Server to</span>
+    <span class="nv">ST</span><span class="o">=</span><span class="s2">"250769001"</span> <span class="c"># Set the ServerTemplate the Server will be based on</span>
+    <span class="nv">SG</span><span class="o">=</span><span class="s2">"DEU7O32167MJ4"</span> <span class="c"># Set the Security Group</span>
+    <span class="nv">MCI</span><span class="o">=</span><span class="s2">"240802001"</span> <span class="c"># Set MultiCloud Image (MCI)</span>
+    <span class="nv">ITYPE</span><span class="o">=</span><span class="s2">"9F6N6MA39F7E9"</span> <span class="c"># Set the Instance Type for this Sever, this cloud, ...</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST <span class="se">\</span>
+    -d server[name]<span class="o">=</span>my_app_server <span class="se">\</span>
+    -d server[description]<span class="o">=</span>my_app_server_description <span class="se">\</span>
+    -d server[deployment_href]<span class="o">=</span>/api/deployments/<span class="nv">$DEPLOYMENT</span> <span class="se">\</span>
+    -d server[instance][cloud_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span> <span class="se">\</span>
+    -d server[instance][server_template_href]<span class="o">=</span>/api/server_templates/<span class="nv">$ST</span> <span class="se">\</span>
+    -d server[instance][multi_cloud_image_href]<span class="o">=</span>/api/multi_cloud_images/<span class="nv">$MCI</span> <span class="se">\</span>
+    -d server[instance][instance_type_href]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/instance_types/<span class="nv">$ITYPE</span> <span class="se">\</span>
+    -d server[instance][security_group_hrefs][]<span class="o">=</span>/api/clouds/<span class="nv">$CLOUD</span>/security_groups/<span class="nv">$SG</span> <span class="se">\</span>
+    https://my.rightscale.com/api/servers
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : There is no XML/JSON content, just headers.</p>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 201 Created
+    Server: nginx/1.0.15
+    Date: Mon, 19 Nov 2012 22:07:48 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 201 Created
+    Location: /api/servers/589477001
+    X-Runtime: 2676
+    X-Request-Uuid: d3f28e8cb11c45c5862800201d350fa4
+    Set-Cookie:
+    Cache-Control: no-cache
+</code></pre>
+
+<h2 id="delete-server">Delete Server</h2>
+
+<p>Delete a server based on the specified server ID.</p>
+
+<h3 id="delete-server-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">SERVER</span><span class="o">=</span><span class="s2">"532922001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X DELETE https://my.rightscale.com/api/servers/<span class="nv">$SERVER</span>
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Notes</strong> :</p>
+
+<ul>
+<li>There is no XML/JSON content, just headers.</li>
+<li>You cannot delete a running Server, or a <q>next</q> server. (HTTP 422 and <q>ActionNotAllowed: The server has a current instance.</q>)</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 204 No Content
+    Server: nginx/1.0.15
+    Date: Fri, 12 Oct 2012 16:25:00 GMT
+    Connection: keep-alive
+    Status: 204 No Content
+    X-Runtime: 1390
+    X-Request-Uuid: 6c1eb0c8c21b4835ad425d1bb6fb2b59
+    Set-Cookie: _session_id=92ede080c999a3e5734035f582d11b0e; path=/; Secure; HttpOnly
+    Cache-Control: no-cache
+</code></pre>
+
+<h3 id="delete-server-right_api_client">right_api_client</h3>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    require 'rubygems'
+    require 'pp' # Require pretty print Ruby gem
+    require 'right_api_client' # RightScale API client gem
+
+    user = 'greg.doe@example.com' # Set user email address for using the Dashboard
+    acct = '1234' # Set the account ID
+    pass = 'SomePassword' # Set the password for the user. Create client object so you can use the API.
+    @client = RightApi::Client.new(:email =&gt; user, :password =&gt; pass, :account_id =&gt; acct)
+    #
+    # Setup and authenticate above. Set and use additional variables below, display output, etc.
+    #
+    server_id = '626129001'
+    pp @client.servers(:id =&gt; server_id).destroy
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>nil</p>
+
+<p>If the <q>destroy</q> method was not prefaced with <q>pp</q> (pretty print), then no output is returned, the action (delete/destroy) is executed with no output.</p>
+
+<p><em>Note</em>: Similar to the http/curl example, you cannot delete a running or <q>next</q> server. In the above right_api_client call you will receive a message similar to:</p>
+<pre class="syntax-highlight plaintext"><code>/usr/lib64/ruby/gems/1.8/gems/right_api_client-1.5.9/lib/right_api_client/client.rb:215:in `do_delete': Error: HTTP Code: 422, Response body: ActionNotAllowed: The server has a current instance. (RightApi::Exceptions::ApiException)
+</code></pre>
+
+<h2 id="launch-server">Launch Server</h2>
+
+<p>Launch a Server that has already been added to a deployment, in a particular cloud, etc.</p>
+
+<h3 id="launch-server-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">SERVER</span><span class="o">=</span><span class="s2">"532922001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST https://my.rightscale.com/api/servers/<span class="nv">$SERVER</span>/launch.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 201 Created
+    Server: nginx/1.0.15
+    Date: Fri, 19 Oct 2012 22:52:28 GMT
+    Content-Type: text/html; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Status: 201 Created
+    Location: /api/clouds/232/instances/3R397M9BPGB5J
+    X-Runtime: 10360
+    X-Request-Uuid: b41d5bd4a4cd4f338bc6542417806e7a
+    Set-Cookie: _session_id=4af33099ee4f9e2eb0f169ecb928d5b4; path=/; Secure; HttpOnly
+    Cache-Control: no-cache
+</code></pre>
+
+<h2 id="list-all-servers-in-a-deployment">List all Servers in a Deployment</h2>
+
+<p>List all Servers in a given Deployment.</p>
+
+<h3 id="list-all-servers-in-a-deployment-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"306795001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/deployments/<span class="nv">$DEPLOYMENT</span>/servers.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> :</p>
+
+<ul>
+<li>Truncated XML output without headers included (to save space).</li>
+<li>Only one server in this example deployment (or <em>all</em> additional servers would have been displayed).</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;servers&gt;
+      &lt;server&gt;
+        &lt;updated_at&gt;2012/10/09 21:42:04 +0000&lt;/updated_at&gt;
+        &lt;links&gt;
+          &lt;link href="/api/servers/527725001" rel="self"/&gt;
+          &lt;link href="/api/deployments/306795001" rel="deployment"/&gt;
+          &lt;link href="/api/clouds/2112/instances/2BFJC99QC8FJA" rel="current_instance"/&gt;
+          &lt;link href="/api/clouds/2112/instances/B469CS55K5VRQ" rel="next_instance"/&gt;
+          &lt;link href="/api/servers/527725001/alert_specs" rel="alert_specs"/&gt;
+        &lt;/links&gt;
+        &lt;description&gt;&lt;/description&gt;
+        &lt;created_at&gt;2012/10/09 21:41:34 +0000&lt;/created_at&gt;
+        &lt;name&gt;Base ServerTemplate for Linux (v12.11.0-LTS)&lt;/name&gt;
+        &lt;actions&gt;
+          &lt;action rel="terminate"/&gt;
+        &lt;/actions&gt;
+        &lt;state&gt;operational&lt;/state&gt;
+      &lt;/server&gt;
+    &lt;/servers&gt;
+</code></pre>
+
+<h3 id="list-all-servers-in-a-deployment-right_api_client">right_api_client</h3>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    require 'rubygems'
+    require 'pp' # Require pretty print Ruby gem
+    require 'right_api_client' # RightScale API client gem
+
+    user = 'greg.doe@example.com' # Set user email address for using the Dashboard
+    acct = '1234' # Set the account ID
+    pass = 'SomePassword' # Set the password for the user. Create client object so you can use the API.
+    @client = RightApi::Client.new(:email =&gt; user, :password =&gt; pass, :account_id =&gt; acct)
+    #
+    # Setup and authenticate above. Set and use additional variables below, display output, etc.
+    #
+    deployment_id = '306795001' # Set the Deployment ID I want to show Servers for
+    pp @client.deployments(:id =&gt; deployment_id).show.servers.index
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>The following reveals 7 servers in the specified deployment.</p>
+<pre class="syntax-highlight plaintext"><code>    [#&lt;RightApi::ResourceDetail resource_type="server", name="Base ServerTemplate for Linux (v12.11.0-LTS)"&gt;,
+    #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_app_server1"&gt;,
+    #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_app_server2"&gt;,
+    #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_db_server1"&gt;,
+    #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_db_server2"&gt;,
+    #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_load_balancer1"&gt;,
+    #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_load_balancer2"&gt;]
+</code></pre>
+
+<h3 id="list-all-servers-in-a-deployment-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+    $DEPLOYMENT="366638001" # Set the Deployment ID to list Servers for
+
+    $webRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/deployments/$DEPLOYMENT/servers.xml")
+    $webRequest.Method = "GET"
+    $webRequest.CookieContainer = $cookieContainer
+    $webRequest.Headers.Add("X_API_VERSION", "1.5");
+
+    [System.Net.WebResponse] $webResponse = $webRequest.GetResponse()
+    $responseStream = $webResponse.GetResponseStream()
+    $responseStreamReader = New-Object System.IO.StreamReader -argumentList $responseStream
+    [string]$responseString = $responseStreamReader.ReadToEnd()
+    $responseString
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><em>Note</em>: Two servers are listed in the sample output. One is inactive, the other is operational. The operational servers highlights (in <strong>bold</strong> ) both the Current and Next Instance IDs. These IDs are often needed for other API calls (such as List Current or Next Inputs).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;servers&gt;
+      &lt;server&gt;
+        &lt;state&gt;inactive&lt;/state&gt;
+        &lt;updated_at&gt;2013/10/09 22:38:22 +0000&lt;/updated_at&gt;
+        &lt;created_at&gt;2013/10/09 21:06:18 +0000&lt;/created_at&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/servers/931047001"/&gt;
+          &lt;link rel="deployment" href="/api/deployments/366638001"/&gt;
+          &lt;link rel="next_instance" href="/api/clouds/2175/instances/FULA6ROBR8RR4"/&gt;
+          &lt;link rel="alert_specs" href="/api/servers/931047001/alert_specs"/&gt;
+          &lt;link rel="alerts" href="/api/servers/931047001/alerts"/&gt;
+        &lt;/links&gt;
+        &lt;description&gt;&lt;/description&gt;
+        &lt;actions&gt;
+          &lt;action rel="launch"/&gt;
+          &lt;action rel="clone"/&gt;
+        &lt;/actions&gt;
+        &lt;name&gt;Base ServerTemplate for Linux (RSB) (v13.5)&lt;/name&gt;
+      &lt;/server&gt;
+      &lt;server&gt;
+        &lt;state&gt;operational&lt;/state&gt;
+        &lt;updated_at&gt;2013/10/09 21:25:54 +0000&lt;/updated_at&gt;
+        &lt;created_at&gt;2013/10/09 21:23:59 +0000&lt;/created_at&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/servers/931067001"/&gt;
+          &lt;link rel="deployment" href="/api/deployments/366638001"/&gt;
+          &lt;link rel="current_instance" href="/api/clouds/2175/instances/34NM8MNFGPE45"/&gt;
+          &lt;link rel="next_instance" href="/api/clouds/2175/instances/3PLSU71PF2BJS"/&gt;
+          &lt;link rel="alert_specs" href="/api/servers/931067001/alert_specs"/&gt;
+          &lt;link rel="alerts" href="/api/servers/931067001/alerts"/&gt;
+        &lt;/links&gt;
+        &lt;description&gt;&lt;/description&gt;
+        &lt;actions&gt;
+          &lt;action rel="terminate"/&gt;
+          &lt;action rel="clone"/&gt;
+        &lt;/actions&gt;
+        &lt;name&gt;Base ServerTemplate for Linux (RSB) (v13.5.0-LTS)&lt;/name&gt;
+      &lt;/server&gt;
+    &lt;/servers&gt;
+</code></pre>
+
+<h2 id="list-servers">List Servers</h2>
+
+<p>List all Servers owned by the current account.</p>
+
+<p><strong><em>Warning!</em></strong> Some API calls can be <q>expensive</q> (resource intensive) depending on the number of cloud assets. Listing all servers can take time and may not be recommended for accounts with many servers.</p>
+
+<h3 id="list-servers-curl">Curl</h3>
+
+<h4 id="example-call">Example Call</h4>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+<pre class="syntax-highlight plaintext"><code>    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/servers.xml
+</code></pre>
+
+<p><strong>Tip</strong> : If you save XML output of your &#39;ListServers&#39; script to a file, you can then run a single command to get the number of Servers for that account. For example:</p>
+<pre class="syntax-highlight plaintext"><code>    $ ./ListServers &gt; ListServers.xml # Output of the example ListServers script saved to ListServers.xml
+    $ grep "&lt;server&gt;" ListServers.xml | wc -l # Find each &lt;server&gt; XML block, and then count how many lines there are
+    482 # 482 servers found in this example
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : Truncated XML output without headers included (to save space). Shows only first and last server for the account.</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;servers&gt;
+      &lt;server&gt;
+        &lt;updated_at&gt;2010/11/10 05:47:08 +0000&lt;/updated_at&gt;
+        &lt;links&gt;
+          &lt;link href="/api/servers/710980" rel="self"/&gt;
+          &lt;link href="/api/deployments/28185" rel="deployment"/&gt;
+          &lt;link href="/api/clouds/232/instances/2PL2523DPV4ES" rel="next_instance"/&gt;
+          &lt;link href="/api/servers/710990/alert_specs" rel="alert_specs"/&gt;
+        &lt;/links&gt;
+        &lt;description&gt;&lt;/description&gt;
+        &lt;created_at&gt;2009/12/01 21:51:31 +0000&lt;/created_at&gt;
+        &lt;name&gt;PHP FrontEnd (Chef) -2&lt;/name&gt;
+        &lt;actions&gt;
+          &lt;action rel="launch"/&gt;
+        &lt;/actions&gt;
+        &lt;state&gt;inactive&lt;/state&gt;
+      &lt;/server&gt;
+    . . .
+      &lt;server&gt;
+        &lt;updated_at&gt;2012/10/10 17:46:12 +0000&lt;/updated_at&gt;
+        &lt;links&gt;
+          &lt;link href="/api/servers/529811001" rel="self"/&gt;
+          &lt;link href="/api/deployments/89627" rel="deployment"/&gt;
+          &lt;link href="/api/clouds/1859/instances/EQPVQSTLQC6KQ" rel="current_instance"/&gt;
+          &lt;link href="/api/clouds/1859/instances/6N7C6A3D98EMO" rel="next_instance"/&gt;
+          &lt;link href="/api/servers/529911001/alert_specs" rel="alert_specs"/&gt;
+        &lt;/links&gt;
+        &lt;description&gt;&lt;/description&gt;
+        &lt;created_at&gt;2012/10/10 17:43:42 +0000&lt;/created_at&gt;
+        &lt;name&gt;Greg Doe Test 1&lt;/name&gt;
+        &lt;actions&gt;
+          &lt;action rel="terminate"/&gt;
+        &lt;/actions&gt;
+        &lt;state&gt;operational&lt;/state&gt;
+      &lt;/server&gt;
+    &lt;/servers&gt;
+</code></pre>
+
+<h4 id="supplemental">Supplemental</h4>
+
+<h4 id="show-only-servers-in-a-specific-deployment">Show only Servers in a Specific Deployment</h4>
+
+<p>The following supplemental example includes a <q>filter</q> such that only servers from the specified deployment are listed.</p>
+
+<p><strong>Important!</strong> When using a filter (or view) the computation is done on the server side. This results in a lighter response (less content) returned to the client. The server essentially fetches all content and returns it to the client.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"316795001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -d filter[]<span class="o">=</span><span class="s2">"deployment_href==/api/deployments/</span><span class="nv">$DEPLOYMENT</span><span class="s2">"</span> -X GET https://my.rightscale.com/api/servers.xml
+</code></pre>
+
+<h4 id="show-only-load-balancers-in-a-specific-deployment">Show only Load Balancers in a specific Deployment</h4>
+
+<p>The following supplemental example is similar to the previous, but it includes an additional filter. Not only does it <em>only</em> show servers in a specific deployment (as opposed to all servers in the cloud you authenticated with) but it restricts the response to servers that have <q>balancer</q> in their name.</p>
+
+<p><strong>Important!</strong> When using more than one filter they are logically ANDed. In our example, this mean servers in the specified deployment AND their name has the string <q>balancer</q> in it. Note that a partial match is allowed with the name filter, hence a complicated regular expression with wildcards is not needed. (e.g. *balancer*)</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">DEPLOYMENT</span><span class="o">=</span><span class="s2">"306795001"</span> <span class="c"># Deployment ID to list servers from</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie <span class="se">\ </span><span class="c"># Invoke curl, specify version and authentication cookie</span>
+    -d filter[]<span class="o">=</span><span class="s2">"deployment_href==/api/deployments/</span><span class="nv">$DEPLOYMENT</span><span class="s2">"</span> <span class="se">\</span>
+    -d filter[]<span class="o">=</span><span class="s2">"name==balancer"</span> <span class="se">\ </span><span class="c"># ONLY show servers that have "balancer" in their name</span>
+    -X GET https://my.rightscale.com/api/servers.xml
+</code></pre>
+
+<h3 id="list-servers-right_api_client">right_api_client</h3>
+
+<h4 id="example-call">Example Call</h4>
+
+<p><strong><em>Warning!</em></strong> Some API calls can be <q>expensive</q> (resource intensive) depending on the number of cloud assets. Listing all servers can take time and may not be recommended for accounts with many servers.</p>
+<pre class="syntax-highlight plaintext"><code>    require 'rubygems'
+    require 'pp' # Pretty print Ruby gem
+    require 'right_api_client' # RightScale API Client gem
+                                          # Create client object. Effectively authenticate to use the RS API.
+    @client = RightApi::Client.new(:email =&gt; 'greg.doe@example.com', :password =&gt; 'SecurePasswd', :account_id =&gt; '1234')
+    pp @client.servers.index # Print/output all Servers in this account
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    [#&lt;RightApi::ResourceDetail resource_type="server", name="PHP FrontEnd (Chef Alpha) -2"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_load_balancer1"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_load_balancer2"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_app_server1"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_app_server2"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_db_server1"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Bethany_db_server2"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Base ServerTemplate for Linux (v13.1)"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Base ServerTemplate for Linux (RSB) (v13.1)"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Azure West US"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Google"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Resat API 1.5 server"&gt;,
+     #&lt;RightApi::ResourceDetail resource_type="server", name="Storage Toolbox (v13.1.1)"&gt;]
+</code></pre>
+
+<h3 id="list-servers-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+
+<p>The following will show all servers within the account (not just servers in a deployment).</p>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+
+    $webRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/servers.xml")
+    $webRequest.Method = "GET"
+    $webRequest.CookieContainer = $cookieContainer
+    $webRequest.Headers.Add("X_API_VERSION", "1.5");
+
+    [System.Net.WebResponse] $webResponse = $webRequest.GetResponse()
+    $responseStream = $webResponse.GetResponseStream()
+    $responseStreamReader = New-Object System.IO.StreamReader -argumentList $responseStream
+    [string]$responseString = $responseStreamReader.ReadToEnd()
+    $responseString
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;servers&gt;
+      &lt;server&gt;
+        &lt;state&gt;inactive&lt;/state&gt;
+        &lt;updated_at&gt;2010/11/10 05:47:08 +0000&lt;/updated_at&gt;
+        &lt;created_at&gt;2009/11/17 23:45:16 +0000&lt;/created_at&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/servers/708440"/&gt;
+          &lt;link rel="deployment" href="/api/deployments/31226"/&gt;
+          &lt;link rel="next_instance" href="/api/clouds/232/instances/6JV1EEKB421BH"/&gt;
+          &lt;link rel="alert_specs" href="/api/servers/708440/alert_specs"/&gt;
+          &lt;link rel="alerts" href="/api/servers/708440/alerts"/&gt;
+        &lt;/links&gt;
+        &lt;description&gt;&lt;/description&gt;
+        &lt;actions&gt;
+          &lt;action rel="launch"/&gt;
+          &lt;action rel="clone"/&gt;
+        &lt;/actions&gt;
+        &lt;name&gt;PHP FrontEnd&lt;/name&gt;
+      &lt;/server&gt;
+
+    . . . output truncated . . .
+
+      &lt;server&gt;
+        &lt;state&gt;inactive&lt;/state&gt;
+        &lt;updated_at&gt;2013/10/08 23:05:33 +0000&lt;/updated_at&gt;
+        &lt;created_at&gt;2013/10/08 22:50:16 +0000&lt;/created_at&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/servers/930342001"/&gt;
+          &lt;link rel="deployment" href="/api/deployments/96308"/&gt;
+          &lt;link rel="next_instance" href="/api/clouds/2160/instances/8EL23Q5CAC6SP"/&gt;
+          &lt;link rel="alert_specs" href="/api/servers/930342001/alert_specs"/&gt;
+          &lt;link rel="alerts" href="/api/servers/930342001/alerts"/&gt;
+        &lt;/links&gt;
+        &lt;description&gt;&lt;/description&gt;
+        &lt;actions&gt;
+          &lt;action rel="launch"/&gt;
+          &lt;action rel="clone"/&gt;
+        &lt;/actions&gt;
+        &lt;name&gt;Base ServerTemplate for Linux (RSB) (v13.2.1) v1&lt;/name&gt;
+      &lt;/server&gt;
+      &lt;server&gt;
+        &lt;state&gt;operational&lt;/state&gt;
+        &lt;updated_at&gt;2013/10/10 21:52:33 +0000&lt;/updated_at&gt;
+        &lt;created_at&gt;2013/10/10 21:51:35 +0000&lt;/created_at&gt;
+        &lt;links&gt;
+          &lt;link rel="self" href="/api/servers/932206001"/&gt;
+          &lt;link rel="deployment" href="/api/deployments/42060"/&gt;
+          &lt;link rel="current_instance" href="/api/clouds/2175/instances/19TO4SE9LC1BS"/&gt;
+          &lt;link rel="next_instance" href="/api/clouds/2175/instances/12RRDHIJ68ABF"/&gt;
+          &lt;link rel="alert_specs" href="/api/servers/932206001/alert_specs"/&gt;
+          &lt;link rel="alerts" href="/api/servers/932206001/alerts"/&gt;
+        &lt;/links&gt;
+        &lt;description&gt;&lt;/description&gt;
+        &lt;actions&gt;
+          &lt;action rel="terminate"/&gt;
+          &lt;action rel="clone"/&gt;
+        &lt;/actions&gt;
+        &lt;name&gt;Base ServerTemplate for Linux (RSB) (v13.5.0-LTS)&lt;/name&gt;
+      &lt;/server&gt;
+    &lt;/servers&gt;
+</code></pre>
+
+<h2 id="show-server">Show Server</h2>
+
+<p>Show the information on a single server.</p>
+
+<h3 id="show-server-curl">Curl</h3>
+
+<h4 id="example-call">Example Call</h4>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">SERVER</span><span class="o">=</span><span class="s2">"527725001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET https://my.rightscale.com/api/servers/<span class="nv">$SERVER</span>.xml
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : Truncated XML output without headers included (to save space).</p>
+<pre class="syntax-highlight plaintext"><code>    &lt;server&gt;
+      &lt;updated_at&gt;2012/10/09 21:42:04 +0000&lt;/updated_at&gt;
+      &lt;links&gt;
+        &lt;link href="/api/servers/527725001" rel="self"/&gt;
+        &lt;link href="/api/deployments/306795001" rel="deployment"/&gt;
+        &lt;link href="/api/clouds/2112/instances/2BFJC99QC8FJA" rel="current_instance"/&gt;
+        &lt;link href="/api/clouds/2112/instances/B469CS55K5VRQ" rel="next_instance"/&gt;
+        &lt;link href="/api/servers/527725001/alert_specs" rel="alert_specs"/&gt;
+      &lt;/links&gt;
+      &lt;description&gt;&lt;/description&gt;
+      &lt;created_at&gt;2012/10/09 21:41:34 +0000&lt;/created_at&gt;
+      &lt;name&gt;Base ServerTemplate for Linux (v12.11.0-LTS)&lt;/name&gt;
+      &lt;actions&gt;
+        &lt;action rel="terminate"/&gt;
+      &lt;/actions&gt;
+      &lt;state&gt;operational&lt;/state&gt;
+    &lt;/server&gt;
+</code></pre>
+
+<p><strong>Note</strong> : If your server ID is incorrect, you will receive:</p>
+
+<ul>
+<li>HTTP 422 Unprocessable Entity</li>
+<li>ResourceNotFound: Couldn&#39;t find Server with ID=123456789</li>
+</ul>
+
+<h3 id="show-server-right_api_client">right_api_client</h3>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    require 'rubygems'
+    require 'pp' # Require pretty print Ruby gem
+    require 'right_api_client' # RightScale API client gem
+
+    user = 'greg.doe@example.com' # Set user email address for using the Dashboard
+    acct = '1234' # Set the account ID
+    pass = 'SomePassword' # Set the password for the user. Create client object so you can use the API.
+    @client = RightApi::Client.new(:email =&gt; user, :password =&gt; pass, :account_id =&gt; acct)
+    #
+    # Setup and authenticate above. Set and use additional variables below, display output, etc.
+    #
+    server_id = '527725001'
+    pp @client.servers(:id =&gt; server_id).show
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+<pre class="syntax-highlight plaintext"><code>    #&lt;RightApi::ResourceDetail resource_type="server", name="Base ServerTemplate for Linux (v12.11.0-LTS)"&gt;
+</code></pre>
+
+<h3 id="show-server-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+    $SERVER='761004' # Set the Server ID. Obtain via the API or Dashboard navigation and the URL.
+
+    $webRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/servers/$SERVER.xml")
+    $webRequest.Method = "GET"
+    $webRequest.CookieContainer = $cookieContainer
+    $webRequest.Headers.Add("X_API_VERSION", "1.5");
+
+    [System.Net.WebResponse] $webResponse = $webRequest.GetResponse()
+    $responseStream = $webResponse.GetResponseStream()
+    $responseStreamReader = New-Object System.IO.StreamReader -argumentList $responseStream
+    [string]$responseString = $responseStreamReader.ReadToEnd()
+    $responseString
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>Same as the bash/curl output.</p>
+
+<h2 id="terminate-server">Terminate Server</h2>
+
+<p>Terminate the running instance of a server.</p>
+
+<h3 id="terminate-server-curl">Curl</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    <span class="nv">SERVER</span><span class="o">=</span><span class="s2">"532922001"</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X POST https://my.rightscale.com/api/servers/<span class="nv">$SERVER</span>/terminate
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p><strong>Note</strong> : There is no XML/JSON content from a Terminate Server (or instance).</p>
+<pre class="syntax-highlight plaintext"><code>    HTTP/1.1 204 No Content
+    Server: nginx/1.0.15
+    Date: Fri, 12 Oct 2012 16:18:49 GMT
+    Connection: keep-alive
+    Status: 204 No Content
+    X-Runtime: 463
+    X-Request-Uuid: cbb45a90192a4e75b8580e8f0ff5674f
+    Set-Cookie: _session_id=92ede080c999a3e5734035f582d11b0e; path=/; Secure; HttpOnly
+    Cache-Control: no-cache
+</code></pre>
+
+<h3 id="terminate-server-right_api_client">right_api_client</h3>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    require 'rubygems'
+    require 'pp' # Require pretty print Ruby gem
+    require 'right_api_client' # RightScale API client gem
+
+    user = 'greg.doe@example.com' # Set user email address for using the Dashboard
+    acct = '1234' # Set the account ID
+    pass = 'SomePassword' # Set the password for the user. Create client object so you can use the API.
+    @client = RightApi::Client.new(:email =&gt; user, :password =&gt; pass, :account_id =&gt; acct)
+    #
+    # Setup and authenticate above. Set and use additional variables below, display output, etc.
+    #
+    server_id = '626129001'
+    @client.servers(:id =&gt; server_id).show.terminate
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>The specified server is terminated, but no output. (<em>Note</em>: Even if the example script above used <q>puts</q> or <q>pp</q> to display output, none is returned.)</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

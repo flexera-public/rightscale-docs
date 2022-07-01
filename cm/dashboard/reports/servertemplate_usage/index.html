@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>ServerTemplate Usage</title><meta content="Use the ServerTemplates Usage Report in the RightScale Cloud Management Dashboard to track the monthly or daily usage of your published/shared Server Templates." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_reports cm_dashboard_reports_servertemplate_usage cm_dashboard_reports_servertemplate_usage_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Reports</a></p><div class="page-header"><h1>ServerTemplate Usage</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Use the ServerTemplates Usage Report to track the monthly or daily usage of your published/shared Server Templates for the RightScale account you&#39;re currently viewing.</p>
+
+<h3 id="overview-create-a-servertemplates-usage-report">Create a ServerTemplates Usage Report</h3>
+
+<p>A ServerTemplates Usage Report is typically downloaded in comma-separated values (CSV) format, but can optionally be displayed on the screen as well. This report can be run for a daily or monthly timeframe, or for a range of recent dates. The report can be run in On Demand or Periodic mode.</p>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<p>Access is available to all new customers and trial signups, however existing customers and legacy free developer accounts must contact <a href="mailto:sales@rightscale.com">sales@rightscale.com</a> for upgraded access.</p>
+
+<h4 id="running-an-on-demand-report">Running an On Demand Report</h4>
+
+<p>When running an On Demand report, you have control over the following report parameters:</p>
+
+<ul>
+<li>Time:
+
+<ul>
+<li>Select Day or Month</li>
+<li>If by month, a drop down assists in selecting the correct month of the year</li>
+<li>If by day, a menu pop-up assists in selecting the correct day.  The current day is not defaulted, but is surrounded by a dotted line.</li>
+</ul></li>
+<li>Action:  Overview or Download
+
+<ul>
+<li><strong>Overview</strong> - Displays directly to the screen.  Depending on whether you run the report by Instance, ServerTemplate or Publisher, the output fields will differ.</li>
+<li><strong>Download</strong> - Download a CSV file to your local hard drive.
+
+<ul>
+<li>Filename convention:  isv_server_template_report_MM######.csv (where MM is the month)</li>
+<li>Output fields:</li>
+<li>Sharing Group</li>
+<li>Deployment</li>
+<li>Server Template</li>
+<li>User - User email address or <q>unknown</q></li>
+<li>Instance - Unique Instance ID</li>
+<li>Instance Size</li>
+<li>Instance Start - Date/time stamp when the Instance went active</li>
+<li>Instance End - Date/time stamp when the Instance went inactive (blank if its still running/active)</li>
+<li>Lodgement Type - Lodgement typically billed by Cloud provider for, such as instance usage or volume usage</li>
+<li>Lodgement Start - Date/Time stamp for lodgement start</li>
+<li>Lodgement End - Date/Time stamp for lodgement end</li>
+<li>Instance Hours</li>
+<li>Max Disk Volume Size</li>
+<li>Disk Volume Hours</li>
+<li>Custom Unit - See Creating Custom Metering Reports for more information.</li>
+<li>Custom Metric - See Creating Custom Metering Reports for more information.</li>
+<li>Server ID</li>
+<li>Availability Zone</li>
+</ul></li>
+</ul></li>
+<li>View by - When the action is Overview, you must select how you want to view:
+
+<ul>
+<li>by Instance - The following fields are displayed:  Instance Size, Server Hours, Servers Launched, Disk Volume Hours, Max Disk Volume Size</li>
+<li>by ServerTemplate - The following fields are displayed:  ServerTemplate, Publisher, Instance Size, Server Hours, Servers Launched, Disk Volume Hours, Max Disk Volume Size</li>
+<li>by Publisher - The following fields are displayed:  Publisher, Instance Size, Server Hours, Servers Launched, Volume Hours, Max Disk Volume Size</li>
+</ul></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Underlined fields indicate they are sortable.  (Select to sort by that field.)</p>
+</div>
+
+<p>Take the following steps to run a On Demand report.</p>
+
+<ol>
+<li>In the CM Dashboard navigate to <strong>Reports</strong> &gt; <strong>ServerTemplates Usage</strong> &gt; <strong>On Demand tab</strong> (default tab)</li>
+<li>Select <strong>Overview</strong> to display on the screen or <strong>Download</strong> to save a CSV file. If <strong>Overview</strong>, select <strong>View by Instance</strong>, <strong>ServerTemplate</strong>, or <strong>Publisher</strong>, depending on the needed report data.</li>
+<li>Select the timeframe (year/month or day) from the drop-down menus provided.</li>
+<li>Click the <strong>Submit</strong> button when ready.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If the definition of any fields are unclear use the field information in the Overview section above to help interpret your report. Consider running and archiving this report as part of your monthly best practices.</p>
+</div>
+
+<h4 id="running-a-periodic-report">Running a Periodic Report</h4>
+
+<p>A periodic report consists of the exact same data that is provided in an On Demand report, in a .csv file format. Periodic reports automatically run in the background based on a user-configured schedule, and you can view their output at your convenience. Output files are uploaded to an S3 bucket of your choice and you can choose to receive notification via email when your report output is complete and ready for viewing. You must specify the following parameters when running a periodic ServerTemplates Usage Report:</p>
+
+<ul>
+<li><strong>Frequency</strong> - Select Monthly or Daily from the drop-down menu. A date stamp will be included in the .csv output file name.</li>
+<li><strong>S3 bucket</strong> - Select the S3 bucket where your report output should be placed.</li>
+<li><strong>Report Name</strong> - Specify a name for your report, to be included in the .csv file that is uploaded to S3.</li>
+<li><strong>Email Notification (optional)</strong> - Specify an email address to receive notification when the report is complete. If you enable email notification for your report, then each time the report runs, an email message with a subject like <q>Your Periodic Report 'GregDoeTest' has been uploaded</q> will be sent to the specified address. The email content will be similar to the following:</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>Your Periodic Report 'GregDoeTest' has been uploaded to S3 bucket
+'&lt;a href="https://my.rightscale.com/s3/view?bucket=gregdoe-rs-testbucket"&gt;gregdoe-rs-testbucket&lt;/a&gt;'
+as key 'Monthly_2010-04_GregDoeTest.csv.'
+</code></pre>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>At the bottom of the dialog box a message similar to the following is displayed.  As you make your selections the description dynamically reflects your choices making it more helpful in explaining exactly the the report you are about to run.  The [variables] are displayed in bold to highlight where changes are made as you make your choices.</p>
+</div>
+<pre class="syntax-highlight plaintext"><code>Your report will usually be generated [select frequency] by 12:00 PM UTC in the
+[select S3 bucket] bucket with the filename [frequency]_[report name].csv.
+No email notification will be sent when the report is generated.
+</code></pre>
+
+<p>Take the following steps to setup a periodic report.</p>
+
+<ol>
+<li>In the CM Dashboard navigate to <strong>Reports</strong> &gt; <strong>ServerTemplates Usage</strong> &gt; <strong>Periodic tab</strong></li>
+<li>Click the <strong>Add Periodic Report</strong> action button.</li>
+<li>Select the <strong>Frequency</strong>, <strong>S3 bucket</strong>, and <strong>Report Name</strong>. Optionally, specify an email address to receive a notification when the report is completed and ready for viewing.</li>
+<li>Click the Create Periodic Report action button.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If the definition of any fields are unclear use the field information in the Overview section above to help interpret your report.</p>
+</div>
+
+<p>Here are some additional actions you may take when running periodic reports.</p>
+
+<ul>
+<li>If the number of reports grows over time, you can filter (or sort) by:
+
+<ul>
+<li>ReportName</li>
+<li>Frequency</li>
+<li>S3 bucket</li>
+<li>Email Notification</li>
+</ul></li>
+<li>Each report can be edited or deleted by selecting the corresponding action icons.</li>
+</ul>
+
+<p>Finally, you should consider running and archiving periodic reports as part of your monthly best practices.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

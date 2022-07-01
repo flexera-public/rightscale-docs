@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>List of Monitored Metrics</title><meta content="Here is a complete list of metrics that are monitored by RightScale's Monitoring System." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_list_of_monitored_metrics" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>List of Monitored Metrics</h1></div><div class="main-content"><p>The following is a complete list of metrics that are monitored by RightScale&#39;s <a href="/cm/rs101/monitoring_system.html">Monitoring System</a></p>
+
+<p>For more information about the different collectd plugins, see collectd&#39;s <a href="http://collectd.org/wiki/index.php/Table_of_Plugins">Table of Plugins</a>.</p>
+
+<ul>
+<li><p><strong>apache</strong> - Displays graphs for overall bits/sec and requests/sec served by all of the httpd processes running on the machine. In addition there are individual graphs showing the number of httpd processes in a specific state: closing, dnslookup, finishing, idle-cleanup, keepalive, logging, open, reading, sending, starting, and waiting. There is also a &#39;scoreboard&#39; graph that summarizes the state information in a single graph with each state identified by a different color.  </p></li>
+<li><p><strong>cpu</strong> - Displays graphs showing the fraction of time cpu 0,1,...,n spends on each state: idle, interrupt, nice, softirq, steal, system, user, and wait. There is also an &#39;overview&#39; graph that displays all the states in a single graph using different colors. The cpu information displayed by these graphs is similar to that given by unix commands: sar, iostat, or top.  </p></li>
+<li><p><strong>df</strong> - Displays graphs showing the file system disk usage. There are graphs for each of the mounted file partitions showing the amount of used and available disk usage relative to the total amount. Each graph shows statistics for the minimum, average, maximum, and last values.</p></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>When creating an alert specification for the &#39;df&#39; category, there are options for specifying Bytes, Kilobytes (KB), Megabytes (MB) and Gigabytes (GB) accordingly. When using one of these options, the number specified on the alert specification will be automatically converted to Bytes for you. Thus, upon viewing the alert specification afterwards, it will <em>always</em> display it&#39;s value as Bytes.</p>
+</div>
+
+<ul>
+<li><p><strong>disk-xxxx</strong> - Displays graphs showing the performance statistics for the attached hard disks. Individual graphs are: read and written bytes/sec (octets), disk operations/sec, merged operations/sec and time for an I/O operation. The &#39;merged&#39; operations represent the number of logical operations in the queue that could be merged together so that all operations can be satisfied with a single physical disk access. Each graph shows statistics for the average, maximum, and last values.  </p></li>
+<li><p><strong>haproxy</strong> - To view HAProxy status you should navigate to the URL <code>www.&lt;_MySite.com_&gt;/haproxy-status</code>. The following status information is displayed:</p>
+
+<p><strong>(haproxy_status)</strong> the health check status of each instance in each group.</p>
+
+<ul>
+<li>2: Active. The server is active.</li>
+<li>1: Down, going Active. The server is going to be active.</li>
+<li>0: No check or other.</li>
+<li>-1: Active, going Down. The server is going down.</li>
+<li>-2: Down. The server is down.</li>
+</ul>
+
+<p><strong>(haproxy_traffic)</strong></p>
+
+<ul>
+<li>Requests per second.</li>
+<li>Response errors per second.</li>
+<li>Health check errors per second.</li>
+</ul>
+
+<p><strong>(haproxy_sessions)</strong></p>
+
+<ul>
+<li>Current sessions of each instance.</li>
+<li>Queued sessions of each instance.</li>
+</ul></li>
+</ul>
+
+<p><br /></p>
+
+<ul>
+<li><p><strong>interface</strong> - Displays graphs showing the network interface activity with respect to errors/sec, octets/sec, and packets/sec for both incoming and outgoing interfaces. Each graph shows statistics for the minimum, average, maximum, and last values.  </p></li>
+<li><p><strong>load</strong> - Displays graphs showing the system load as defined by the number of runnable tasks in the run queue. The statistics are running averages over 1, 5, and 15 minutes. Each graph shows statistics for the minimum, average, maximum, and last values.  </p></li>
+<li><p><strong>memory</strong> - Displays graphs showing the allocation of memory for used (currently used by programs), free (not in use), buffers (used by Linux to cache access to block devices), and cached (page cache; used to speed up data access). Each graph shows statistics for the minimum, average, maximum, and last values.  </p></li>
+<li><p><strong>mysql</strong> - Displays graphs showing internal MySQL activity corresponding to the information given by MySQL when given the &#39;show status&#39; command. The individual graphs can be grouped into the following categories: command statistics, handler statistics, query cache statistics, and thread statistics.  </p></li>
+<li><p><strong>ping</strong> - Displays graphs showing the network latency between the current instance and machines on the following domains: ec2.amazonaws.com, s3.amazonaws.com, and www.rightscale.com domains. Each graph shows statistics for the minimum, average, maximum, and last values.  </p></li>
+<li><p><strong>processes</strong> - Displays graphs showing the number of processes grouped by their state (e.g. blocked, paging, running, sleeping, stopped, or zombie). Each graph shows statistics for the minimum, average, maximum, and last values.  </p></li>
+<li><p><strong>processes-xxxx</strong> - Displays graphs showing the number of processes and associated threads for each of the following applications: &#39;alert&#39;, &#39;collectd&#39;, &#39;cron&#39;, &#39;haproxy&#39;, &#39;httpd.worker&#39;, &#39;merb&#39;, &#39;mongrel_rails&#39;, &#39;mysqld&#39;, &#39;sshd&#39;, and&#39;tomcat&#39;.  </p>
+
+<p>Which ones are displayed depends on the specific value given to an input on your server/template. The following inputs are used for both Rightscript and Chef based templates:​</p>
+
+<ul>
+<li>Rightscript based templates: MON_PROCESSES and MON_PROCESSMATCH​</li>
+<li>Chef based templates: <q>Process List</q> and <q>Process Match List</q>, available under the &#39;Rightscale&#39; input category as Advanced Inputs</li>
+</ul>
+
+<p>MON_PROCESSMATCH and <q>Process Match List</q> should be used in a name/regex format. For example: ssh/ssh*</p>
+
+<p>Each graph shows statistics for the minimum, average, maximum, and last values.</p></li>
+<li><p><strong>swap</strong> - Displays graphs showing the amount of swap space that is either cached, free, or used. Each graph shows statistics for the minimum, average, maximum, and last values.</p></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>When creating an alert specification for the &#39;swap&#39; category, there are options for specifying Bytes, Kilobytes (KB), Megabytes (MB) and Gigabytes (GB) accordingly. When using one of these options, the number specified on the alert specification will be automatically converted to Bytes for you. Thus, upon viewing the alert specification afterwards, it will <em>always</em> display it&#39;s value as Bytes.  </p>
+</div>
+
+<ul>
+<li><strong>users</strong> - Displays a graph showing the number of users connected to the instance. Each graph shows statistics for the minimum, average, maximum, and last values.</li>
+</ul>
+
+<h2 id="see-also">See also</h2>
+
+<ul>
+<li><a href="http://www.collectd.org/documentation.shtml">http://www.collectd.org/documentation.shtml</a></li>
+<li><a href="/cm/windows_guide/windows_monitoring.html">Windows Monitoring</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

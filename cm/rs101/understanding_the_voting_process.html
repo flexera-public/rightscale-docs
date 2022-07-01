@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Understanding the Voting Process</title><meta content="An example of the voting process applied to to array-based alerts that are used for the purpose of autoscaling. (i.e. Launching additional instances in a server array.) in RightScale." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_understanding_the_voting_process" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>Understanding the Voting Process</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>The voting process only applies to array-based alerts that are used for the purpose of autoscaling. (i.e. Launching additional instances in a server array.) The best way to fully understand how the voting process works is to simply walk through an example.</p>
+
+<h2 id="example">Example</h2>
+
+<p>Voting Tags are used to denote whether or not a Server is voting for a scaling action. RightScale monitors these tags across all voting instances and counts them to determine whether or not enough Servers are voting for a particular scaling action. Let&#39;s assume you have a server array with the following alert parameters.</p>
+
+<ul>
+<li>Nickname: MyArray</li>
+<li>Decision Threshold: 51%</li>
+<li>Choose voters by tag (Voter Tag): [x] default to nickname (e.g. MyArray)</li>
+<li>Resize Up by: 2</li>
+<li>Resize Down by: 1</li>
+<li>Resize Calm Time: 15 (minutes)</li>
+</ul>
+
+<p>RightScale monitors all tags across all of your Servers. For autoscaling purposes RightScale looks for all Servers with the specified Voting Tag that you&#39;ve assigned to a server array in order to determine when the array should grow/shrink. You can only have one Voting Tag per Server Array.</p>
+
+<p><strong>Note</strong>: Voting tags are NOT case sensitive.</p>
+
+<p>Let&#39;s assume that you&#39;ve also configured the alert specifications for the voting Servers to use a matching voting tag (e.g. MyArray). It&#39;s important that any Server that you want to allow to vote for a scaling action in the server array has a matching voting tag, otherwise RightScale will be looking for an incorrect tag for autoscaling purposes. In this example, each instance that gets launched into the server array is assigned the following tag:</p>
+
+<p><code>rs_vote:MyArray=none</code></p>
+
+<p>At this point, no Server is voting for a scaling action because their Voting Tags are set to &#39;none&#39;.</p>
+
+<p><img src="/img/cm-voting-tags-0votes.png" alt="cm-voting-tags-0votes.png" width="513" height="105" /></p>
+
+<p>Later, an alert is triggered on a Server for a scale-up action. The Server&#39;s Voting Tag automatically changes to <code>rs_vote:MyArray=grow</code></p>
+
+<p><img src="/img/cm-voting-tags-1vote.png" alt="cm-voting-tages-1vote.png" width="513" height="104" /></p>
+
+<p>Because only one Server is voting to scale-up and grow, nothing happens.</p>
+
+<p>However, once another Server also votes to grow, the Server Array&#39;s Decision Threshold is exceeded (51%), causing a scaling action to grow the array.</p>
+
+<p><img src="/img/cm-voting-tags-2votes.png" alt="cm-voting-tags-2votes.png" width="512" height="104" /></p>
+
+<p>In this example, we&#39;re going to launch two additional instances into the array (Resize Up by = 2).</p>
+
+<p><img src="/img/cm-voting-tags-2votes-scaleup.png" alt="cm-voting-tages-2votes-scaleup.png" width="725" height="87" /></p>
+
+<p>Once a scaling action occurs, the Server Array is not allowed to undergo another scaling action until the Resize Calm Time (e.g. 15 min) expires, which is necessary so that the newly launched Servers have enough time to become operational and start making an impact on the array (by offloading some of the work from the overworked instances). Hopefully, the additional Servers can make a significant enough impact so that the triggered alerts disappear and the Voting Tags return to &#39;none&#39; again.</p>
+
+<p><img src="/img/cm-voting-tags-after-scaleup.png" alt="cm-voting-tags-after-scaleup.png" width="725" height="86" /></p>
+
+<p>In this example, the extra Servers helped satisfy a spike in traffic. However, once that spike is over and those extra Servers are no longer needed, the array will scale down to save costs. Once again, as soon as the Decision Threshold has been surpassed (e.g. 51% of the Servers are voting to <q>shrink</q>), the Server Array automatically scales down by terminating one of your array servers.</p>
+
+<p><img src="/img/cm-voting-tags-3votes-scaledown.png" alt="cm-voting-tags-3votes-scaledown.png" width="725" height="87" /></p>
+
+<p>Since you typically want to scale down more conservatively than when you scale up, we&#39;ve configured the Server Array to scale down by one at a time. (e.g. Resize Down by = 1) .</p>
+
+<p><img src="/img/cm-voting-tags-during-scaledown.png" alt="cm-voting-tags-during-scaledown.png" width="725" height="87" /></p>
+
+<p>In this example, the Server Array only needed to scale down once in order for all of the autoscaling alerts to disappear.</p>
+
+<p><img src="/img/cm-voting-tags-after-scaledown.png" alt="cm-voting-tags-after-scaledown.png" width="725" height="86" /></p>
+
+<h2 id="things-to-consider">Things to Consider</h2>
+
+<ul>
+<li>A Server can only have one vote; it cannot have a vote to grow and a vote to shrink.</li>
+<li>Only a single Voting Tag (e.g. MyArray) can be assigned to a Server Array. RightScale will look for all Servers that have a particular Voting Tag when evaluating when to autoscale (i.e. grow/shrink the array).</li>
+<li>Votes are aggregated at the Server level, so if a Server has multiple alerts that are using the same Voting Tag (e.g. MyArray), the Server will only have a single aggregated vote. For example, you might have an application that&#39;s both memory and cpu intensive, so you create an alert specification that scales based on &#39;memory&#39; and another alert specification that scales based on &#39;cpu&#39;. In such cases, there could be a situation where both alerts are triggered on a single Server. Perhaps the &#39;memory&#39; alert triggers a scale up (grow) action while the &#39;cpu&#39; alert triggers a scale down (shrink) action. In such cases, the votes would cancel each other out and a Server&#39;s Voting Tag would be set to &#39;none&#39; and no vote would be made for either scaling action. (1grow - 1shrink = none)</li>
+</ul>
+
+<p><img src="/img/cm-voting-scenarios-none.png" alt="cm-voting-scenarios-none.png" width="725" height="115" /></p>
+
+<p>Similarly, if there are 3 alerts that are being monitored for autoscaling purposes and there are 2 votes to &#39;grow&#39; and 1 vote to &#39;shrink&#39;, the Server would vote to &#39;grow&#39; (2grow - 1shrink = grow).  </p>
+
+<p><img src="/img/cm-voting-scenarios-grow.png" alt="cm-voting-scenarios-grow.png" width="725" height="120" /></p>
+
+<ul>
+<li>Votes are based upon the Server Array&#39;s Voting Tag (<q>Choose voters by</q>). RightScale does not check to see which triggered alert caused the Voting Tag to change for a grow/shrink scaling action. So if there are 5 Servers voting to grow based on a triggered &#39;cpu&#39; alert and another 5 Servers that are voting to grow based on a triggered &#39;memory&#39; alert, the total number of votes to grow the array is 10. Generally speaking, the important thing to monitor is whether or not a Server needs help regardless of the reason.</li>
+<li>Voting Tags must match. Therefore, the voting tag that you configure when creating the Server Array (<q>Choose voters by tag</q>) must match the voting tag that is specified when defining an alert specification. Therefore, if you keep the default Voting Tag (<q>Default to nickname</q>) when creating a Server Array and then create an alert specification, be sure to select the matching Voting Tag. See <a href="/cm/dashboard/manage/arrays/arrays_actions.html#set-up-autoscaling-using-voting-tags">Set up Autoscaling using Voting Tags</a> for detailed instructions.</li>
+</ul>
+
+<p><img src="/img/cm-voting-tag-match.png" alt="cm-voting-tag-match.png" width="725" height="237" /></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

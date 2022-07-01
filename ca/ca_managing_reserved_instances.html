@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Manage Reserved Instances</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="ca ca_ca_managing_reserved_instances" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="about.html"><h4 class="list-group-heading"><img src="../img/product-cloud-analytics.svg" /><span>Optima</span></h4></a><a class="list-group-item" href="legacy.html">Legacy Feature Documentation</a><a class="list-group-item" href="https://helpnet.flexerasoftware.com/Optima">Current Feature Documentation</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./"></a></p><div class="page-header"><h1>Manage Reserved Instances</h1></div><div class="main-content"><div class="alert alert-danger" role="alert"><strong>Warning</strong><p>The features described on this page will soon be deprecated. Refer to the <a href="https://helpnet.flexerasoftware.com/Optima">latest documentation</a> for information on the latest features.</p>
+</div>
+
+<h2 id="understanding-aws-reserved-instances">Understanding AWS Reserved Instances</h2>
+
+<p>Amazon Web Services (AWS) Reserved Instances (RIs) allow you to reserve Amazon EC2 computing capacity for 1 or 3 years, in exchange for a significantly discounted hourly rate (up to 75%) compared to On-Demand Instance pricing.</p>
+
+<p>Reserved Instances are a reservation for a specific instance type in a specific region and availability zone with a specific platform. You can purchase RIs for standard multi-tenant hardware or for dedicated (single-tenant) hardware.</p>
+
+<p>You can choose between two terms (1 year or 3 years) and three payment options (All Upfront, Partial Upfront and No Upfront). The more you pay upfront, the higher your overall discount. Keep in mind that Partial Upfront and No Upfront RIs require you to pay a monthly charge over the term of the RI, <strong><em>whether you use the RI or not</em></strong>.</p>
+
+<h2 id="how-aws-applies-reserved-instances">How AWS Applies Reserved Instances</h2>
+
+<p>While RIs are purchased from a specific AWS account, if the reservation is not fully used in the purchasing AWS account, the RI discount will then be applied to matching instances (those matching the instance type, region and availability zone of the RI) across other accounts within the consolidated billing account family.</p>
+
+<h2 id="determining-your-ri-requirements">Determining your RI Requirements</h2>
+
+<p>In order to determine how many RIs you need, you’ll need to analyze your past and present cloud usage. A few recommendations to maximize your savings:</p>
+
+<ul>
+<li><strong>Centralize RI purchasing</strong> - Since you can apply RIs across an entire consolidated billing account group, you will maximize your ability to purchase and use RIs if you centralize decisions and purchases across all accounts.</li>
+<li><strong>Standardize instance types</strong> - Since RIs relate to specific instance types, reducing the number of different instance types you use means you can better target your RI purchases.</li>
+<li><strong>Rationalize your regions and availability zones</strong> - You may need to run workloads across different regions or availability zones for purposes of reducing latency or providing for high availability, failover, and disaster recovery. However, to maximize savings from RIs, you may want to consolidate the regions and availability zones used across your entire application portfolio.</li>
+<li><strong>Consider future changes in usage</strong> - You will want to take into account expected changes in your future cloud usage. You may have new or growing applications that will increase cloud usage, or declining or end-of-life applications that will decrease future cloud usage. These may impact your decisions on the level of Reserved Instances to purchase.</li>
+</ul>
+
+<p>The Instance Analyzer can help you determine how many reserved instances to buy:</p>
+
+<ol>
+<li><p><strong>Specify a time period</strong>. For analyzing RI purchases you should analyze at least 6 months of history. If you have significant seasonality in usage (such as peaks in load for holidays), you should include a minimum of 12 months.</p>
+
+<p><img src="/img/ca-specify-time-period.png" alt="ca-specify-time-period.png" width="209" height="73" /></p></li>
+<li><p><strong>Filter for Cloud Vendor</strong>. If you only want to buy RIs for workloads already running on AWS, filter Cloud Vendor to AWS. If you want to consider moving workloads from other cloud vendors to AWS, you can select those cloud vendors as well. Click <strong>Apply your filter selection</strong> once you have selected your filters.</p>
+
+<p><img src="/img/ca-filter-cloud-vendor.png" alt="ca-filter-cloud-vendor.png" width="714" height="483" /></p></li>
+<li><p><strong>Pick On-Demand instances</strong>. The Purchase option filter allows you to exclude instances that are already covered by RIs.</p>
+
+<p><img src="/img/ca-pick-on-demand-instances.png" alt="ca-pick-on-demand-instances.png" width="532" height="373" /></p></li>
+<li><p><strong>Select accounts</strong>. Use the Accounts filter to select which RightScale accounts you want to buy for. If you don’t fully use an RI within the purchasing account, it will automatically be applied to qualifying instances in the same account group.</p></li>
+<li><p><strong>Start with Windows or Linux</strong>. Use the Operating System filter to pick the platform and then apply your selection.</p>
+
+<p><img src="/img/ca-start-windows-linux.png" alt="ca-start-windows-linux.png" width="536" height="237" /></p></li>
+<li><p><strong>Pick an instance type</strong>. Start with your most used instance type since it offers the largest opportunity to save money.</p>
+
+<p><img src="/img/ca-pick-instance-type.png" alt="ca-pick-instance-type.png" width="541" height="436" /></p></li>
+<li><p><strong>Pick a datacenter</strong>. A datacenter is equivalent to an AWS availability zone. Start with the most used datacenter.</p>
+
+<p><img src="/img/ca-pick-datacenter.png" alt="ca-pick-datacenter.png" width="532" height="166" /></p></li>
+<li><p><strong>Determine the number of instances</strong>. Find the minimum number of instances used historically for this combination of instance size, region, datacenter, and platform. It’s important to look at the Lowest Instance Count field to find the absolute minimum over the time period.</p>
+
+<p><img src="/img/ca-determine-number-of-instances.png" alt="ca-determine-number-of-instances.png" width="727" height="365" /></p></li>
+<li><p><strong>Evaluate potential changes in the future</strong>. Do you expect the usage for this combination of instance type, region, data center, and platform to change in the future? You may want to consider data center migrations, plans to change instance types, or expected changes in application load.</p></li>
+<li><p><strong>Determine your desired number of RIs</strong>. You may want to be conservative and purchase RIs at or below the historical minimum or you may want to be more aggressive and take into account future growth.</p></li>
+<li><p><strong>Repeat for other datacenters and instance types.</strong></p></li>
+</ol>
+
+<h2 id="deciding-what-type-of-ris-to-buy-using-breakeven-analysis">Deciding What Type of RIs to Buy using Breakeven Analysis</h2>
+
+<p>Although the RI discount levels calculated by AWS are based on running an instance 100 percent of the time over the term of the RI, you can still realize (lower) savings for an instance that doesn’t run 100 percent of the time. You can do a breakeven analysis to determine the amount of time an instance must be used before you break even vs on-demand. After that break even point, you start to realize savings for the remainder of the RI term.</p>
+
+<p>The breakeven point for an RI will depend on the discount level. For example, if a No Upfront RI for a particular instance type in a particular region offers a 25 percent discount for a 1-year term, then you will realize some savings as long as you use that RI for at least 75 percent of the year (or at least 9 months). In order to realize the full 25 percent savings, you need to use that RI for the entire year.</p>
+
+<p><a href="http://www.rightscale.com/blog/cloud-cost-analysis/aws-vs-google-pricing-decoding-new-aws-ri-model">Read more details on RI breakeven points in our blog.</a></p>
+
+<h2 id="analyzing-reserved-instance-utilization-">Analyzing Reserved Instance Utilization </h2>
+
+<p>Once you’ve purchased Reserved Instances (RI), you want to make sure that you are using them so that you can gain the full savings and avoid wasting money.</p>
+
+<p>To view all types of AWS Reserved Instances (RI) including the utilization information, click the <strong>Reserved Instances</strong> link on the left navigation of Optima. This page shows complete information about your Reserved Instances for the selected organization. For more information on complete RI , check out our new <a href="/ca/ca_analyzing_costs.html#reserved-instances">Reserved Instances page</a> for accurate utilization report.</p>
+
+<p>Sort on the State column to find <strong>active</strong> RIs, which are RIs that have not expired and are still in effect. If you see any active RIs that have less than 100% utilization, then you will want to make some changes to take advantage of the RI. You can:</p>
+
+<ul>
+<li><strong>Move On-Demand instances to new instance types:</strong> Look for instances of similar sizes and move them to the instance size of the RI. Be careful that you don’t move from a much smaller On-Demand instance to a larger Reserved Instance where the RI hourly cost is actually more expensive than the On-Demand cost. Use the Instance Analyzer to find instances that match the datacenter and operating system of the RI, then use Cloud Management to re-launch your instance.</li>
+<li><strong>Move On-Demand instances to the matching datacenter:</strong> Use the Instance Analyzer to find On-demand instances that match the region, instance size, and operating system of the RI. Use Cloud Management to move the instance to the availability zone that matches the RI.</li>
+<li><strong>Ask AWS to modify the availability zone or instance type of the RI:</strong> AWS allows you to request a modification of a RI. <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html">You can request a change</a> to another availability zone in the same region, or to another instance size in the same family. When changing the instance size, <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modification-instancemove.html">you must maintain the same footprint</a> (e.g. change an RI for one m3.large for one for two m3.mediums).</li>
+<li><strong>Sell your RI in the RI Marketplace:</strong> If you can’t find a way to use the RI enough to cover the breakeven point, <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-selling-guide.html">you can sell the RI in the AWS RI Marketplace</a>. Keep in mind that when you sell your RI in the Marketplace, the customer will pay the same recurring fee that you would have paid (you cannot change that price). You can set the upfront price you want to charge. If you purchased a No Upfront RI, then you would typically price it to sell with $0 upfront cost. Keep in mind that you must have held the RI for 30 days before you can sell it, and you must have at least one month remaining on the reservation. You must also have funds sent to a bank in the United States.</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

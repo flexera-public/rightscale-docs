@@ -1,0 +1,2512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://docs.rightscale.com/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/search.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/api/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/getting_started/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/dashboard.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/automated_optimization.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/reserved_instances.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/reference/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/users/getting_started/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/users/policy_list.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/developers/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/users/faq/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/about.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/getting_started/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/gov/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/gov/getting_started/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/gov/reference/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/gov/faq/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/about.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/platform/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/platform/guides/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/platform/saml.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/security/index.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/configuration-management-tool-integration/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/servicenow/index.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/platform/open-source-ack/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/about.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/administrators_guide/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/CVE-2015-7547_Information_on_glibc_Vulnerability.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_do_I_Set_Up_IP_Whitelisting_for_Self-Service.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/Using_ssh_prot_win_chrome.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/end_of_life_end_of_service.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/Firewall_Configuration_Ruleset.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/Enable_Single_Sign-On_with_OpenID.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/Which_browsers_are_supported_by_the_RightScale_Dashboard.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rl10/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rl10/about.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/aws/aws_about.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/google/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/azure/azure_about.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/azure_resource_manager/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/openstack/openstack_about.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/softlayer/softlayer_about.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/vmware/vmware_about.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/st/index.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/st/about.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/st/rl10/index.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/st/open-source/index.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/api/general_usage.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/api/api_1.5_examples/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/api.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/ss_api_guide.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/rca-v.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/right-link-10.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/week-of-2020-08-24.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2020/08/25.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/week-of-2020-08-10.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2020/08/14.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/week-of-2020-06-22.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2020/06/25.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/week-of-2020-06-01.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2020/06/03.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/week-of-2020-05-18.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2020/05/22.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/week-of-2020-05-11.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2020/05/13.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/developers/reference/v20180301/policy_template_language.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/week-of-2020-04-06.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2020/04/07.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/users/guides/apply_policy.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/weekly-all.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/getting_started/bill_connect/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/general_controls.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/custom_dashboards.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/Dashboards/shared_dashboards.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/user_roles.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/billing_configuration.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/reference/custom_dimensions.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/currency.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/bill_adjustments.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/sample_custom_cost_reports.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/guides/exporting_data.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/reference/bill_data_dimensions.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/optima/reference/rightscale_dimensions.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/users/guides/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/rcl/v2/index.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/users/getting_started/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/users/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/users/getting_started/policy_roles.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/users/guides/credential_management.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/users/guides/ui_overview.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/developers/concepts/basic_concepts.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/developers/concepts/policy_lifecycle.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/developers/guides/custom_policy.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/developers/guides/policy_tutorial.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/developers/reference/v20180301/functions.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/policies/developers/reference/v20180301/permissions.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/rcl/v2/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/tools/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/ss_user_interface_guide.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/getting_started/ss_overview.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/getting_started/ss_user_types.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/ss_writing_your_first_CAT.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/ss_publishing_CATs.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/ss_testing_CATs.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/ss_bulk_resources.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/ss_packaging_cats.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/ss_plugins.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/ss_permissions.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/guides/ss_creating_schedules.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/cat/v20161221/index.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/cat/v20161221/ss_CAT_resources.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/cat/v20161221/ss_CAT_outputs.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/cat/v20161221/ss_plugins.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/cat/changelog.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/rcl/v2/ss_RCL_functions.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/rcl/v2/ss_RCL_operators.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/rcl/changelog.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/ss_api_sample_request_responses.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/ss_common_error_messages.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2018/04/05.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2018/02/06.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/11/30.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/11/22.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/11/03.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/05/17.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/05/10.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/04/21.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/03/29.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/03/15.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/03/01.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/02/15.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/02/09.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2017/01/11.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/12/29.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/11/02.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/10/05.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/09/21.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/09/08.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/cat/v20160622/index.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/08/18.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/07/28.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/07/20.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/07/13.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/07/07.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/06/29.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/05/04.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/04/28.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2016/03/04.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/12/09.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/ss/reference/cat/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/12/02.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/10/28.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/10/21.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/10/14.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/09/30.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/09/16.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/08/27.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/08/19.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/08/05.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/07/22.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/07/15.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/07/01.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/06/17.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/05/27.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/04/29.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/self-service/2015/04/15.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/gov/getting_started/gov_user_management.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/gov/getting_started/gov_groups.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/gov/getting_started/gov_remove_all_roles.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/user_role_privs.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/rightScale_account_and_user_role_management.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/gov/reference/gov_ldap_group_sync.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2020/03/20.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2020/02/28.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2020/01/17.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/12/06.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/11/15.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/11/08.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/11/01.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/10/25.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/10/11.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/10/04.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/09/27.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/09/20.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/09/13.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/08/30.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/08/23.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/08/16.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/08/09.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/08/02.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/07/26.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/07/11.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/07/05.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/06/28.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/06/21.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/06/14.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/06/12.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/05/31.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/05/24.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/05/10.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/04/26.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/04/19.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/04/03.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/03/29.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/03/22.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/03/15.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/02/22.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/02/15.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/02/01.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/01/25.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/01/18.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2019/01/11.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2018/10/25.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2018/08/24.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2018/07/30.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2018/04/06.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/credentials/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2017/10/27.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2017/05/23.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2017/05/09.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2017/04/21.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2017/04/11.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2017/03/30.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2017/03/24.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2017/03/15.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2017/03/03.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/governance/2017/02/08.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/settings/account/invite_users_to_a_rightscale_account.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/settings/enterprise/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_upgrade_to_3_0.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_installation_guide.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_prepare_vsphere_environment.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_download_deploy_configure.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_register_vsphere_cloud.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_grant_account.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_add_vsphere_cloud.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_image_requirements.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_upgrade_to_3_0_1.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_high_availability.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_administrator.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rcav/v3.0/rcav_troubleshooting_guide.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/security/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/configuration-management-tool-integration/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/platform/open-source-ack/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/platform/guides/configuring_sso/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/platform/guides/configuring_sso/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/platform/saml/rightscale_saml_relay_states.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/security/rightscale_security_program.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/security/security_announcements.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/security/standard_practices.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/security/faqs.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/security/security_resources.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/server_templates/servertemplates_concepts.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/servicenow/</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/servicenow/releases.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/servicenow/overview.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/servicenow/faq.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/servicenow/2018/03/19.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/management_guide/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/administrators_guide/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/designers_guide/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/server_templates/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/servertemplate_dev_guide/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/pas/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/windows_guide/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/where_does_rightscale_fit_in_the_cloud_ecosystem.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/story_of_a_rightscale_server.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/alerts.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/alert_escalation.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/compatibility_release.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/dashboard_feature_stages.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/deployment.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/inputs.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/multicloud_image_(mci).html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/multicloud_marketplace_(mcm).html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/rightscripts.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/server.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/servertemplate.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/server_array.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/rightscale_components_relationship_diagram.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/discovery_inventory_in_rightscale.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/cloning.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/version_control_(diff_and_merge).html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/laws_of_inheritance_and_hierarchy.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/locking.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/release_methodology.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/rightimages.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/rightscale_api.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/server_defaults.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/sharing.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/tagging.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/understanding_inputs.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/archiving.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/events.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/freezing_software_repositories.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/image_fingerprints.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/logging_tools.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/monitoring_system.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/reports.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/server_login_control.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/repose.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/rightscale_alert_system.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/rs101/rightscale_os_software_mirrors.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/account_overview.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/manage/deployments/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/manage/instances_and_servers/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/manage/arrays/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/manage/networks/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/manage/containers/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/server_templates/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/repositories/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/cookbooks/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/rightscripts/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/multicloud_images/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/alert_escalations/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/credentials/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/widgets/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/multicloud_marketplace/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/account_library/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/clouds/generic/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/clouds/aws/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/clouds/azure/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/clouds/google/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/clouds/softlayer/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/clouds/openstack/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/clouds/vsphere/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/reports/audit_entries/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/reports/servertemplate_usage/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/reports/infrastructure_audits/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/settings/user/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/settings/account/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/settings/enterprise/index.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/administrators_guide/user_and_account_management.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/administrators_guide/network_and_firewall_management.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/administrators_guide/monitoring_and_alerts_management.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/input_types.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/rightscript_categories.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/multicloud_images.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/monitored_metrics.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/environment_inputs.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/list_of_rightscale_tags.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/ref/field_definitions.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/09/19.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/09/13.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/09/04.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/08/08.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/06/28.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/06/13.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/manage/arrays/arrays_cwf.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/06/12.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/azure_resource_manager/getting_started/register_using_ad_application.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/04/24.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/04/05.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/03/16.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2018/02/12.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/alert_escalations/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/alert_escalations/alert_escalations_actions.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/12/14.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/11/29.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/google/getting_started/google_connect_gce_to_rightscale.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/10/25.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/10/11.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/09/14.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/08/30.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/08/16.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/07/19.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/azure_resource_manager/reference/resources.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/06/01.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/05/17.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/04/19.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/04/13.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/03/29.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/azure_resource_manager/getting_started/register.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/03/01.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/01/19.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/01/11.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/aws/aws_quick_start.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rl10/reference/10.6.0/rl10_install_at_boot_windows.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2017/01/05.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/12/29.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rl10/reference/10.6.0/rl10_managed_ssh_login.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/12/15.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/azure_resource_manager/reference/tagging.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/12/07.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/11/30.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/11/16.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/11/10.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/11/02.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/10/26.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/10/12.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/09/28.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/09/21.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/rl10/reference/10.5.2/rl10_proxying_rightlink.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/09/08.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/08/31.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/08/17.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/08/10.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/07/28.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/07/21.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/07/07.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/06/29.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/06/08.html</loc>
+  <lastmod>2020-08-31T23:37:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/06/02.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/clouds/openstack/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/05/13.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/05/04.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/manage/containers/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/04/28.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/02/24.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/02/03.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/01/27.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2016/01/13.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/12/16.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/manage/networks/network_manager_gce.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/12/09.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/12/02.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/openstack/openstack_setup_guide.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/11/18.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/clouds/google/google_add_instance.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/11/11.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/10/28.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/management_guide/server_states.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/10/21.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/clouds/generic/instances_actions.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/design/server_templates/servertemplates_actions.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/10/14.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/09/30.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/09/23.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/09/16.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/cm/dashboard/settings/account/set_a_custom_dashboard_logo.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/09/09.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/clouds/openstack/openstack_boot_volume_guide.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/09/02.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/08/26.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/08/19.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/08/12.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/07/08.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/07/01.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/06/24.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/06/17.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/06/10.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/05/20.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/05/13.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/05/06.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/04/29.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/04/15.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/release-notes/cloud-management/2015/04/08.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/clouds/aws/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/clouds/google/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/clouds/azure/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/clouds/softlayer/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/clouds/vmware/</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/503_-_Service_Unavailable_How_Come_Tomcat_Will_Not_Start_and_it_Complains_that_Port_8080_is_Already_in_Use.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/CVE-2014-0160_Updating_OpenSSL_library_on_RightImage.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/CVE-2014-3566_POODLE_vulnerability.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/CVE-2014-6271_Updating_Bash_Package_on_RightImage.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/GHOST_CVE-2015-0235.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/Can_I_associate_multiple_AWS_accounts_with_a_single_RightScale_account.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/Can_I_get_a_list_of_operational_IP_Addresses_that_RightScale_uses_for_access_control_purposes.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/Could_not_create_SSL_TLS_secure_channel.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/does_rightscale_support_aws_longer_resource_ids.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/Does_RightScale_support_Puppet.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/EC2_t2.x_Instance_Type_Requirement.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_can_I_copy_files_to_my_server_instances.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_can_I_find_which_process_on_an_instance_is_using_too_much_CPU.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_Can_I_Generate_the_Metadata.json_File_From_Metadata.rb.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_can_I_log_the_source_client_IP_of_an_app_request_on_my_backend_Apache_application_server.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_can_I_modify_the_message_of_the_day.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/how_to_resize_an_instance.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_can_I_stop_a_RightScript_that_is_stuck_in_Scheduling_execution.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_can_I_synchronize_my_server_instance_times_to_support_monitoring_and_autoscaling.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_Can_I_Use_apt-get_on_CentOS-Based_Images.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_can_I_use_OpenVPN_with_RightScale.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/Running_API_queries_in_Self-Service_Manager.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/Error_during_repository_refetch_or_import.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_do_I_SSH_to_a_MyCloud_instance.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.rightscale.com/faq/How_do_I_access_64-bit_files_and_registry_keys_from_a_RightScript_using_PowerShell_on_a_Windows_instance.html</loc>
+  <lastmod>2020-08-31T23:37:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>

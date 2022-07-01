@@ -1,0 +1,845 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>CAT Plugins Reference</title><meta content="This page is a detailed reference for declarations related to CAT plugins" name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="20161221" name="docsearch:version_major" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="ss ss_reference ss_reference_cat ss_reference_cat_v20161221 ss_reference_cat_v20161221_ss_plugins" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Self-Service Docs</a> &#x2F; <a href="../../">Reference</a> &#x2F; <a href="../">Cloud Application Templates</a> &#x2F; <a href="./">CAT File Language</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>20161221&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/ss/reference/cat/v20161221/ss_plugins.html">20161221</a></li></ul></div></div><div class="page-header"><h1>CAT Plugins Reference</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>CAT Plugins allow CloudApps to interact with external services not natively supported by RightScale. This page provides details about the supported fields for plugin-related declarations. For an introduction to plugins and for an overview of how to write one see the <a href="/ss/guides/ss_plugins.html">CAT Plugins guide</a>.</p>
+
+<p>When working with plugins, there are two primary types of declarations:</p>
+
+<ul>
+<li><code>plugin</code> - generically describes the API to interact with</li>
+<li><code>resource_pool</code> - provides specific endpoint and login information to use with the <code>plugin</code></li>
+</ul>
+
+<p>A given <code>plugin</code> may have multiple <code>resource_pool</code>s associated with it, for example to connect to different services or to use different accounts with the same API.</p>
+
+<h2 id="plugins">Plugins</h2>
+
+<p>Plugins describe the API of a service provider for the RightScale platform to interact with, including defining the parameters which must be specified to interact with the service, the structure of resources in the service, and how RightScale can create and interact with those resources. A <code>plugin</code> declaration must contain exactly one <a href="#plugins-endpoint">endpoint</a>, any number of <a href="#plugins-parameter">parameters</a>, and any number of <a href="#plugins-type">types</a>. Additionally a plugin can define global <code>href_templates</code> values.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>A plugin declaration may only be declared in a <code>plugin</code> type CAT.</p>
+</div>
+
+<h3 id="plugins-usage">Usage</h3>
+<pre class="syntax-highlight ruby"><code><span class="n">plugin</span> <span class="s2">"kube"</span> <span class="k">do</span>
+  <span class="n">parameter</span> <span class="s2">"namespace"</span> <span class="k">do</span>
+    <span class="c1"># parameter fields</span>
+  <span class="k">end</span>
+
+  <span class="n">type</span> <span class="s2">"node"</span> <span class="k">do</span>
+    <span class="c1"># type fields</span>
+  <span class="k">end</span>
+
+  <span class="n">endpoint</span> <span class="k">do</span>
+    <span class="c1"># endpoint fields</span>
+  <span class="k">end</span>
+
+  <span class="n">href_templates</span> <span class="s2">"/namespaces/{{metadata.namespace}}/$type/{{metadata.name}}"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="plugins-parameter">Parameter</h3>
+
+<p>Plugin parameters are used to provide variability in how to construct the requests to the external service. The syntax used to declare each parameter is identical to the <a href="index.html#parameters">CAT parameter syntax</a>. Use a <code>parameter</code> when any part of the <code>endpoint</code> might change between different <code>resource_pool</code> definitions. Parameter values can be used in the following fields of a plugin:</p>
+
+<ul>
+<li><code>endpoint</code> -&gt; <code>headers</code></li>
+<li><code>endpoint</code> -&gt; <code>path</code></li>
+<li><code>type</code> -&gt; <code>action</code> -&gt; <code>path</code></li>
+</ul>
+
+<p>Parameter values must be supplied by resource pools <a href="ss_plugins.html#resource-pools-fields">parameter_values</a></p>
+
+<h4 id="fields">Fields</h4>
+
+<p>See <a href="index.html#parameters">CAT Parameters</a>.</p>
+
+<h4 id="usage">Usage</h4>
+
+<p>The example below shows a fictitious <code>kube</code> plugin that allows managing resources inside a Kubernetes namespace. A <q>real</q> Kubernetes plugin would probably not restrict itself to a single namespace, this is an artificial example.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">plugin</span> <span class="s2">"kube"</span> <span class="k">do</span>
+
+  <span class="n">parameter</span> <span class="s2">"namespace"</span> <span class="k">do</span>
+    <span class="n">type</span> <span class="s2">"string"</span>
+    <span class="n">label</span> <span class="s2">"Kubernetes namespace"</span>
+    <span class="n">description</span> <span class="s2">"Namespace used to create all resources"</span>
+  <span class="k">end</span>
+
+  <span class="n">endpoint</span> <span class="k">do</span>
+    <span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">.</span>
+    <span class="n">path</span> <span class="s2">"/api/v1/namespaces/$namespace"</span> <span class="c1"># Base request path, note the use of the $namespace parameter</span>
+    <span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">.</span>
+  <span class="k">end</span>
+
+  <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">end</span>
+</code></pre>
+
+<h3 id="plugins-endpoint">Endpoint</h3>
+
+<p>Endpoints define the base information needed to communicate with the service. It includes the host, scheme, base path and other options if not provided in the resource pool declaration.
+Parameters may be used to define the values for any of the properties listed above. Using a parameter simply consists of using the $name notation in string literals where <q>name</q> is the name of the parameter. Note that if a path value is specified then that value will be trimmed from resource hrefs if it is present.</p>
+
+<h4 id="fields">Fields</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>default_host</code></td>
+<td>no</td>
+<td>string</td>
+<td>Default api endpoint</td>
+</tr>
+<tr>
+<td><code>default_scheme</code></td>
+<td>no</td>
+<td>string</td>
+<td>Possible values <q>http</q> or <q>https</q>. Default: <q>https</q>.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>yes</td>
+<td>string</td>
+<td>Base request path.</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>no</td>
+<td>-</td>
+<td>Lists the common headers to inject in all requests</td>
+</tr>
+<tr>
+<td><code>headers.&lt;header_mapping&gt;</code></td>
+<td>no</td>
+<td>string</td>
+<td>The specific headers to send. (e.g. <q>User-Agent</q>: <q>Kube namespace</q>)</td>
+</tr>
+<tr>
+<td><code>no_cert_check</code></td>
+<td>no</td>
+<td>bool</td>
+<td>Whether to bypass the SSL certificate validation. Allowed values: <code>true</code> or <code>false</code>. Default: <code>true</code></td>
+</tr>
+<tr>
+<td><code>query</code></td>
+<td>no</td>
+<td>hash</td>
+<td>A hash of querystring key/value pairs that will be add into the query parameter of every request</td>
+</tr>
+<tr>
+<td><code>request_content_type</code></td>
+<td>no</td>
+<td>string</td>
+<td>the request mime type i.e: <code>application/json</code>, <code>application/xml</code>. Default: <q>application/json</q></td>
+</tr>
+</tbody></table>
+
+<h4 id="usage">Usage</h4>
+<pre class="syntax-highlight ruby"><code><span class="n">endpoint</span> <span class="k">do</span>
+  <span class="n">default_host</span> <span class="s2">"kube.example.com"</span>
+  <span class="n">default_scheme</span> <span class="s2">"https"</span>
+  <span class="c1"># Notice the $namespace which coresponds to a plugin parameter.</span>
+  <span class="n">path</span> <span class="s2">"/api/v1/namespaces/$namespace"</span>
+
+  <span class="c1"># Headers injected into every request</span>
+  <span class="n">headers</span> <span class="k">do</span> <span class="p">{</span>
+    <span class="s2">"User-Agent"</span><span class="p">:</span> <span class="s2">"Kube namespace"</span>
+  <span class="p">}</span> <span class="k">end</span>
+
+  <span class="c1"># Qery parameters injected into every request</span>
+  <span class="n">query</span> <span class="k">do</span> <span class="p">{</span>
+    <span class="s2">"Version"</span><span class="p">:</span> <span class="s2">"2017-03-31"</span>
+  <span class="p">}</span> <span class="k">end</span>
+
+  <span class="c1"># Check the SSL certificate validity</span>
+  <span class="n">no_cert_check</span> <span class="kp">false</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="plugins-type">Type</h3>
+
+<p>The <code>type</code> declaration is one of the most important, powerful, and complex parts of a CAT plugin; it provides the information required to construct each resource the plugin exposes and specifies how to interact with those resources via actions. In many cases this declaration will be a one to one match with the API that the plugin is interacting with. It&#39;s also possible to construct a new resource comprised of one or more other resources that exposes a layer of abstraction above the raw resources.</p>
+
+<h4 id="fields">Fields</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>href_templates</code></td>
+<td>no</td>
+<td>comma separated strings</td>
+<td>Sets of template used to match a response to the resource and to generate <code>href</code>s in the resulting resource collection. See <a href="ss_plugins.html#plugins-href-templates">href_templates</a> for more information.</td>
+</tr>
+<tr>
+<td><code>provision</code></td>
+<td>yes</td>
+<td>string</td>
+<td>Specifies the Cloud Workflow <code>definition</code> that will be called to provision the resource.</td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td>yes</td>
+<td>string</td>
+<td>Specifies the Cloud Workflow <code>definition</code> that will be called to delete the resource.</td>
+</tr>
+<tr>
+<td><code>output_path</code></td>
+<td>no</td>
+<td>string</td>
+<td>Defines a default <a href="http://jmespath.org/">JMESPath</a> or <a href="https://www.w3.org/TR/xpath/all">XMLPath</a> expression to be used on the response body to extract the <a href="ss_plugins.html#plugin-type-field-details-output">output</a> fields.</td>
+</tr>
+<tr>
+<td><code>output</code></td>
+<td>no</td>
+<td>object <a href="ss_plugins.html#plugin-type-field-details-output">see below</a></td>
+<td>Defines a field which can be used in CAT outputs, other CAT resource fields, action <code>path</code> and <code>url</code> templates and fields that can be accessed in RCL. A <code>type</code> can have many <code>output</code>s.</td>
+</tr>
+<tr>
+<td><code>field</code></td>
+<td>no</td>
+<td>object <a href="ss_plugins.html#plugin-type-field-details-field">see below</a></td>
+<td>Declares a resource field used to create the resource. A <code>type</code> can have many <code>field</code>s.</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>no</td>
+<td>object <a href="ss_plugins.html#plugin-type-field-details-action">see below</a></td>
+<td>Defines a supported action for this resource type. A <code>type</code> can have many <code>action</code>s.</td>
+</tr>
+<tr>
+<td><code>link</code></td>
+<td>no</td>
+<td>object <a href="ss_plugins.html#plugin-type-field-details-link">see below</a></td>
+<td>Defines a link to other resources. A <code>type</code> can have many <code>link</code>s.</td>
+</tr>
+</tbody></table>
+
+<h3 id="plugins-href-templates">Href templates</h3>
+
+<p><code>href_templates</code> defines the templates used to build one or more hrefs from a response (JSON or XML). Each template may use JMESPath or XMLPath expressions delimited with the &#39;{{&#39; and &#39;}}&#39; strings. The template paths (either JMESPath or XMLPath) are matched against the response and the first template for which all path sections match is used to build the response resource collection.
+Template href may be defined at plugin level or <a href="ss_plugins.html#plugins-type">type level</a></p>
+
+<p>Plugin-level HREF templates will be applied to all types in the plugin. They also expose a special variable, <code>$type</code>, which will be populated with the name of the respective plugin type when it&#39;s used for matching. If a <code>type</code> does not define any HREF templates of its own then only those at the plugin level will be used. If a <code>type</code> defines its own HREF templates then those will be prioritized over any plugin-level HREF templates during matching (that is – plugin-level HREF templates will only be used if no type-level HREF templates match). If a parameter name type is defined in the plugin then that parameter value will be used instead of the type name.</p>
+
+<h2 id="plugin-type-field-details">Plugin Type Field Details</h2>
+
+<h3 id="plugin-type-field-details-output">Output</h3>
+
+<p>Defines a field which can be used in CAT outputs, other CAT resource fields, and fields that can be accessed in RCL. Essentially variable storage for a resource.</p>
+
+<p>By default the field is treated as the top level field after applying the <a href="ss_plugins.html#plugins-type">output_path</a>. An optional body_path can be specified to extract fields that are not in the top level of the response. E.g: <q>kernel_version</q> in the example below. Alternatively a an optional <code>header_name</code> (mutually exclusive with <code>body_path</code>) can be specified to extract fields from the response header. <code>header_name</code> should be the name of the header which contains the value. Finally a <code>type</code> can be specified when the response format is XML, it allows to disambiguate if the output should be an single value or an array.</p>
+
+<p><strong>Note:</strong> Must be delcared within a <a href="#plugins-type">Plugin Type</a> declaration</p>
+
+<h4 id="fields">Fields</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>body_path</code></td>
+<td>no</td>
+<td>string</td>
+<td>Defines a JMESPath relative to the output_path of an output field.</td>
+</tr>
+<tr>
+<td><code>header_name</code></td>
+<td>no</td>
+<td>string</td>
+<td>The name of the header that contains the value of the output to extract.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>no</td>
+<td>string</td>
+<td>For XML response only. Disambiguate if an output from XML response should be an element or an array. Possible values: <code>simple_element</code>, <code>array</code>.</td>
+</tr>
+</tbody></table>
+
+<h4 id="usage">Usage</h4>
+
+<p>Given the following response json:</p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"instance_details"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"resource_uid"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"resource_name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2GB"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"kernel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.10.84"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Use the following output declaration to capture the values.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">output_path</span> <span class="s2">"instance_details"</span>
+
+<span class="n">output</span> <span class="s2">"id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">,</span> <span class="s2">"memory"</span>
+
+<span class="n">output</span> <span class="s2">"kernel_version"</span> <span class="k">do</span>
+  <span class="n">body_path</span> <span class="s2">"kernel.version"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="plugin-type-field-details-field">Field</h3>
+
+<p>Fields declare the resource fields, they are used in CAT to declare and validate resources and correspond to fields sent to create a resource. Not to be confused with an <a href="ss_plugins.html#plugin-type-field-details-output">output</a>.</p>
+
+<p><strong>Note:</strong> Must be declared within a <a href="#plugins-type">Plugin Type</a> declaration</p>
+
+<h4 id="fields">Fields</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>type</code></td>
+<td>yes</td>
+<td>string</td>
+<td>Defines the type of field. Possible values: <code>string</code>, <code>number</code>, <code>boolean</code>, <code>resource_array</code>, <code>resource</code>, <code>array</code>, <code>composite</code>, or <code>object</code>.</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>no</td>
+<td>bool</td>
+<td>Declares a resource field used to create the resource. Possible values <code>true</code> or <code>false</code>. Defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>location</code></td>
+<td>no</td>
+<td>string</td>
+<td>Where this field is used. By default the field is used in the body of the request to create the resource. The location value can be one of: <code>body</code>, <code>header</code>, <code>path</code>, <code>query</code>.</td>
+</tr>
+<tr>
+<td><code>alias_for</code></td>
+<td>no</td>
+<td>string</td>
+<td>The actual name used when used in the specified location. By default the name attribute will be used. Since names are unique, if the name of a field in one location collides with the name another field in a different location, an alias can be used.</td>
+</tr>
+</tbody></table>
+
+<h4 id="usage">Usage</h4>
+
+<p>This example is of a required string that must be passed in the request. The CAT will fail to compile if this field is not passed to the resource.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">field</span> <span class="s2">"name"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"string"</span>
+  <span class="n">required</span> <span class="kp">true</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This example sends a header <q>X-Api-Version: $api_version</q> in the request. Where $api_version is the value of the field.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">field</span> <span class="s2">"api_version"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"string"</span>
+  <span class="n">location</span> <span class="s2">"header"</span>
+  <span class="n">alias_for</span> <span class="s2">"X-Api-Version"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>This example passes the field in the request URL. The request would go to <q>/api/accounts/$account/resources</q> where $account is the value of the field.</p>
+<pre class="syntax-highlight ruby"><code>
+<span class="n">field</span> <span class="s2">"account"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"string"</span>
+  <span class="n">location</span> <span class="s2">"path"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="plugin-type-field-details-action">Action</h3>
+
+<p>There are two categories of actions that can be executed on a resource / resource collection:</p>
+
+<ul>
+<li>CRUD actions (Create Read Update Delete) form the basis needed to create, retrieve, update and destroy resources. These actions exist on all resource types (although some may return errors in case the backend service doesn&#39;t actually support it). Each of these actions map to a predefined HTTP request scheme and content.</li>
+<li>create actions translate to HTTP POST requests to the resource collection URL. The request body contains the data needed to construct the resource(s).</li>
+<li>read actions translate to HTTP GET requests either to the resource collection URL (index) or to a specific resource URL (show).</li>
+<li>update actions translate to HTTP PUT requests to the specific resource URL. The request body contains the data needed to update the resource.</li>
+<li>delete actions translate to HTTP DELETE requests to the specific resource URL.</li>
+<li>Custom actions provide additional capabilities specific to the resource type (e.g. snapshot a volume, stop an instance etc.). There is no well defined HTTP format for such requests although the RightScale system defaults to POST requests to the specific resource URL appended with <code>/actions/&lt;name of action&gt;</code> (e.g /api/volumes/123/actions/snapshot). This defaults can be overridden by the plugin type declaration.</li>
+</ul>
+
+<p>Actions may return nothing, JSON values or resource collections.</p>
+
+<p><strong>Note:</strong> Must be delcared within a <a href="#plugins-type">Plugin Type</a> declaration</p>
+
+<h4 id="fields">Fields</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>output_path</code></td>
+<td>no</td>
+<td>string</td>
+<td>Overrides the output_path of the resource type for the json returned by this action.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>no</td>
+<td>string</td>
+<td>The URL path of the action.(Defaults to href (see href_template below) for show, update and destroy, collection href for create and list, and <code>/actions/&lt;name&gt;</code> for all others).</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>no</td>
+<td>string</td>
+<td>The <code>type</code> of resource returned by the action.</td>
+</tr>
+<tr>
+<td><code>verb</code></td>
+<td>no</td>
+<td>string</td>
+<td>The the HTTP verb (defaults to GET for list and show, PUT for update, DELETE for destroy and POST for everything else)</td>
+</tr>
+</tbody></table>
+
+<h4 id="usage">Usage</h4>
+<pre class="syntax-highlight ruby"><code><span class="c1"># Example were the target output items exist within the "droplets" subschema of the response json</span>
+<span class="n">action</span> <span class="s2">"list"</span> <span class="k">do</span>
+  <span class="n">output_path</span> <span class="s2">"droplets"</span>
+<span class="k">end</span>
+
+<span class="c1"># Example CRUD operations using default behavior</span>
+<span class="n">action</span> <span class="s2">"show"</span><span class="p">,</span> <span class="s2">"create"</span><span class="p">,</span> <span class="s2">"destroy"</span>
+
+<span class="c1"># Example action that overrides the path and expects a resource type action returned</span>
+<span class="n">action</span> <span class="s2">"operate"</span> <span class="k">do</span>
+  <span class="n">path</span> <span class="s2">"$href/actions"</span>
+  <span class="n">type</span> <span class="s2">"actions"</span>
+<span class="k">end</span>
+
+<span class="c1"># Example action that sets the request verb to "GET" and overrides the path</span>
+<span class="n">action</span> <span class="s2">"kernels"</span> <span class="k">do</span>
+  <span class="n">verb</span> <span class="s2">"GET"</span>
+  <span class="n">path</span> <span class="s2">"$href/kernels"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="plugin-type-field-details-link">Link</h3>
+
+<p>Links define a relationship using an href to other resources. Links can be used in RCL e.g. <code>@droplet.actions()</code>. A link specifies both the type of the resource(s) being linked to and the template used to build the path. Links may also specify an absolute URL instead of a path via the <code>url</code> field. The template used to build the path and the url may use any of the output fields for the resource by encapsulating the output name in curly brackets (e.g) <code>{{output_name}}</code>. The HREFs for the resources returned for the links are built using the HREF templates for the corresponding resource type.</p>
+
+<p>Note that links are always retrieved via a GET request and must always return resource collections (might be empty, the point is no raw value).</p>
+
+<h4 id="fields">Fields</h4>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>path</code></td>
+<td>yes</td>
+<td>string</td>
+<td>The template used to build the path. It may use any of the <code>output</code> fields by prefixing it with <code>$</code>. ex: <code>$output_name</code></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>no</td>
+<td>string</td>
+<td>Used to specify an absolute url and path to the resource instead of just the path for the resource.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>yes</td>
+<td>string</td>
+<td>The <code>type</code> of the resource being linked to.</td>
+</tr>
+<tr>
+<td><code>output_path</code></td>
+<td>no</td>
+<td>string</td>
+<td>Overrides the default output_path for <q>action</q> type.</td>
+</tr>
+</tbody></table>
+
+<h4 id="usage">Usage</h4>
+<pre class="syntax-highlight ruby"><code><span class="n">link</span> <span class="s2">"actions"</span> <span class="k">do</span>
+  <span class="n">path</span> <span class="s2">"$href/actions"</span>
+  <span class="n">type</span> <span class="s2">"actions"</span>
+  <span class="n">output_path</span> <span class="s2">"actions"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="resource-pools">Resource Pools</h2>
+
+<p>Using the resources defined in a plugin requires the use of the resource pool declaration. This declaration instantiates a plugin by providing actual values to the parameters and an actual endpoint and associated auth (required only if a default host is not defined in the plugin declaration). The <q>auth</q> declaration allows specifying how requests sent to the service should be signed.</p>
+
+<h3 id="resource-pools-fields">Fields</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required?</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>plugin</code></td>
+<td>no</td>
+<td>string</td>
+<td>The name of the plugin this resource pool instantiates. Corresponds to the plugin declaration of the plugin itself.</td>
+</tr>
+<tr>
+<td><code>parameter_values</code></td>
+<td>no</td>
+<td>-</td>
+<td>Each plugin parameter is listed here with it&#39;s value</td>
+</tr>
+<tr>
+<td><code>parameter_values.&lt;parameter_name&gt;</code></td>
+<td>no</td>
+<td>string</td>
+<td>One or many parameter name to value mappings. Syntax: <parameter_name> <q>value</q>. See Usage.</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>no</td>
+<td>string</td>
+<td>(Optional) Overrides the default_host of the plugin endpoint.</td>
+</tr>
+<tr>
+<td><code>auth</code></td>
+<td>no</td>
+<td>-</td>
+<td>The authentication details for the resource pool. See <a href="#resource-pools-authentication">Authentication</a> for detailed examples.</td>
+</tr>
+</tbody></table>
+
+<h3 id="resource-pools-usage">Usage</h3>
+
+<p>The currently recommended form of resource pool authentication refers to credentials that are viewable in the
+<q>Credentials</q> tab of the Governance portal (i.e. the Credentials Management UI). See <a href="#resource-pools-authentication">Authentication</a> below for more details.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">credentials</span> <span class="s2">"aws_cred"</span> <span class="k">do</span>
+  <span class="n">schemes</span> <span class="s2">"aws"</span><span class="p">,</span> <span class="s2">"aws_sts"</span>
+  <span class="n">label</span> <span class="s2">"AWS EC2 Plugin Credentials"</span>
+  <span class="n">description</span> <span class="s2">"This credential should have read access to AWS EC2 resources"</span>
+  <span class="n">tags</span> <span class="s2">"provider=aws"</span>
+<span class="k">end</span>
+
+<span class="n">resource_pool</span> <span class="s1">'ec2_pool'</span> <span class="k">do</span>
+  <span class="n">plugin</span> <span class="vg">$aws_ec2_example</span>
+
+  <span class="n">parameter_values</span> <span class="k">do</span>
+    <span class="c1"># note that CAT plugins currently only accept string parameters</span>
+    <span class="n">page_size</span> <span class="vg">$launch_page_size</span>
+    <span class="n">region</span> <span class="vg">$launch_region</span>
+  <span class="k">end</span>
+
+  <span class="n">auth</span> <span class="vg">$aws_cred</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The following is an example of a Resource Pool using the legacy form of authentication, which provides the authentication type and secrets
+as fields of the &#39;auth&#39; declaration.
+See <a href="#resource-pools-legacy-authentication">Legacy Authentication</a> below for more details.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource_pool</span> <span class="s2">"kube"</span> <span class="k">do</span>
+  <span class="n">plugin</span> <span class="s2">"kube"</span>
+
+  <span class="n">parameter_values</span> <span class="k">do</span>
+    <span class="n">namespace</span> <span class="s2">"us_east"</span>
+  <span class="k">end</span>
+
+  <span class="n">host</span> <span class="s2">"kube-east.example.com"</span>
+
+  <span class="n">auth</span> <span class="s2">"key"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"api_key"</span> <span class="k">do</span>
+    <span class="n">key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"KUBE_US_EAST_API_TOKEN"</span><span class="p">)</span>
+    <span class="nb">format</span> <span class="s2">"Bearer $key"</span>
+    <span class="n">location</span> <span class="s2">"header"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="resource-pools-authentication">Authentication</h3>
+
+<p>Authentication against any external APIs that a Resource Pool uses is handled using credentials entered in the Governance Portal or via the <a href="https://reference.rightscale.com/cred-management/">Credentials Management API</a>. To use Credentials with a Resource Pool, add a <code>credentials</code> declaration in the Cloud Application Template (CAT). This declaration specifies all the details needed to use credentials and will allow the user of the CAT to select the appropriate credentials when using the Resource Pool.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">credentials</span> <span class="o">&lt;</span><span class="nb">name</span><span class="o">&gt;</span> <span class="k">do</span>
+  <span class="n">schemes</span> <span class="o">&lt;</span><span class="n">type1</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">type2</span><span class="o">&gt;</span>
+  <span class="n">label</span> <span class="o">&lt;</span><span class="n">label</span><span class="o">&gt;</span>
+  <span class="n">description</span> <span class="o">&lt;</span><span class="n">description</span><span class="o">&gt;</span>
+  <span class="n">tags</span> <span class="o">&lt;</span><span class="n">tag</span> <span class="n">filters</span><span class="o">&gt;</span><span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">end</span>
+</code></pre>
+
+<ul>
+<li><code>name</code> is the variable name for the credentials in the CAT language, which must follow the standard for ruby-style variable names. It is referenced by prefixing the variable name with a dollar sign ($).</li>
+<li><code>label</code> is a short human readable label for the credential, which is shown when viewing and filtering the list of credentials in the UI.</li>
+<li><code>description</code> is a longer description of what the credential is used for in the Resource Pool and is also shown to the user.</li>
+<li><code>schemes</code> is the authentication <code>scheme</code> in the credentials service and must be one of <code>aws_sts</code>, <code>aws</code>, <code>basic</code>, <code>ntlm</code>, <code>api_key</code>, <code>jwt</code>, or <code>oauth2</code>, matching the API that the credential is used with. Multiple schemes can be listed if the credential and code work with multiple types. Only those credentials whose schemes match the credentials declared by tht CAT can be used to launch an application.</li>
+<li><code>tags</code> is an optional field used to filter the credentials. It may contain tags in the form of <code>key=value</code>. By default, the Credentials Management UI use the tag key <code>provider</code> for credential matching purposes.</li>
+</ul>
+
+<p>Each <code>credentials</code> declaration will require a separate selection from the user.</p>
+
+<p>The following example will authenticate against an AWS API using either an <code>aws</code> or <code>aws_sts</code> scheme type and export a <code>$cred_aws</code> reference.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">credentials</span> <span class="s2">"cred_aws"</span> <span class="k">do</span>
+  <span class="n">schemes</span> <span class="s2">"aws"</span><span class="p">,</span> <span class="s2">"aws_sts"</span>
+  <span class="n">label</span> <span class="s2">"AWS Credential"</span>
+  <span class="n">description</span> <span class="s2">"This credential should have read/write access to AWS EC2 Instances"</span>
+  <span class="n">tags</span> <span class="s2">"provider=aws"</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The following example will authenticate against an Azure API using either an <code>oauth2</code>  scheme type. Since there many be many APIs using the <code>oauth2</code> scheme, an optional tags declaration is added to this example. Credentials can be tagged with arbitrary key value pairs. In this case, this block is telling it to filter for credentials marked with <q>cloud=azure</q></p>
+<pre class="syntax-highlight ruby"><code><span class="n">credentials</span> <span class="s2">"cred_azure_compute"</span> <span class="k">do</span>
+  <span class="n">schemes</span> <span class="s2">"oauth2"</span><span class="p">,</span>
+  <span class="n">label</span> <span class="s2">"Azure compute credential"</span>
+  <span class="n">description</span> <span class="s2">"Enter a credential with read/write access to Microsoft.Compute resources."</span>
+  <span class="n">tags</span> <span class="s2">"provider=azure"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="resource-pools-legacy-authentication">Legacy Authentication</h3>
+
+<p>Legacy Authentication includes fields for secrets in the resource pool declaration, which is no longer considered best
+practice. These credentials are statically defined at launch time so they do not get updated when the legacy credentials
+from Cloud Management are updated. See <a href="#resource-pools-authentication">Authentication</a> for the currently recommended approach.</p>
+
+<p>The supported legacy authentication mechanisms are as follows.</p>
+
+<h4 id="basic-authentication">Basic Authentication</h4>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_basic_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"basic"</span> <span class="k">do</span>
+  <span class="c1"># Basic auth username</span>
+  <span class="c1"># Uses standard CAT field syntax</span>
+  <span class="n">username</span> <span class="s2">"user"</span>
+  <span class="c1"># Basic auth password</span>
+  <span class="c1"># Uses standard CAT field syntax</span>
+  <span class="n">password</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"PASSWORD"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4 id="api-key-authentication-(header-or-querystring)">API Key Authentication (header or querystring)</h4>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_API_key_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"api_key"</span> <span class="k">do</span>
+  <span class="c1"># API key value</span>
+  <span class="c1"># Uses standard CAT field syntax</span>
+  <span class="n">key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"API_KEY"</span><span class="p">)</span>
+  <span class="c1"># Location of the authorization, "header" or "query" - defaults to "header"</span>
+  <span class="n">location</span> <span class="s2">"header"</span>
+  <span class="c1"># Name of either the authorization header key or the query parameter field (defaults to "Authorization")</span>
+  <span class="n">field</span> <span class="s2">"Authorization"</span>
+  <span class="c1"># Type of authorization header, prefixes the key value (defaults to "Bearer")</span>
+  <span class="n">type</span> <span class="s2">"Bearer"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4 id="jwt-authentication">JWT Authentication</h4>
+
+<p>Using basic auth or an API key to retrieve the JWT, We will make a call to the <code>token_url</code> using either <code>api_key</code> or <code>basic</code> auth, we expect the token_url to return a 200 status, and the
+following json formatted body:</p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w">  </span><span class="s2">"2YotnFZFEjr1zCsicMWpAA"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w">    </span><span class="mi">3600</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tGzv3JOkF0XG5Qx2TlKWIA"</span><span class="p">,</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<p>Here the <code>access_token</code> field is required in the response and <code>expires_in</code> and <code>refresh_token</code> fields are optional.
+JWT Code:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_JWT_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"jwt"</span> <span class="k">do</span>
+  <span class="c1"># API key used to retrieve JWT</span>
+  <span class="n">api_key</span> <span class="vg">$my_API_key_auth</span>
+  <span class="c1"># - OR -</span>
+  <span class="c1"># Basic auth used to retrieve JWT</span>
+  <span class="n">basic</span> <span class="vg">$my_basic_auth</span>
+  <span class="c1"># URL used to retrieve JWT, request is a GET to that URL signed with either $my_basic_auth or $my_API_key_auth</span>
+  <span class="n">token_url</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">example</span><span class="p">.</span><span class="nf">com</span><span class="o">/</span><span class="n">token</span><span class="o">/</span>
+  <span class="c1"># Location of the authorization, "header" or "query" - defaults to "header"</span>
+  <span class="n">location</span> <span class="s2">"header"</span>
+  <span class="c1"># Name of either the JWT header or the query parameter field (defaults to "Authorization")</span>
+  <span class="n">field</span> <span class="s2">"Authorization"</span>
+  <span class="c1"># Type of authorization header, prefixes the key value (defaults to "Bearer")</span>
+  <span class="n">type</span> <span class="s2">"Bearer"</span>
+  <span class="c1"># Any additional headers to send with refresh request.</span>
+  <span class="n">additional_headers</span> <span class="p">{</span>
+    <span class="s2">"X-Account"</span><span class="p">:</span> <span class="s2">"123"</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4 id="oauth2-authentication">OAuth2 Authentication</h4>
+
+<p>OAuth2 supports the following grant types: refresh_token, client_credentials, and jwt_bearer.</p>
+
+<h5 id="refresh_token">refresh_token</h5>
+
+<p>In this method the <code>refresh_token</code> is sent to the <code>token_url</code> in exchange for an access token. The refresh_token must be retrieved separately. The token response must be in the following JSON structure:</p>
+<pre class="syntax-highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w">  </span><span class="s2">"2YotnFZFEjr1zCsicMWpAA"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w">    </span><span class="mi">3600</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tGzv3JOkF0XG5Qx2TlKWIA"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Here the <code>access_token</code> field is required in the response and <code>expires_in</code> and <code>refresh_token</code> fields are optional.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_rs_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"oauth2"</span> <span class="k">do</span>
+  <span class="c1"># Refresh POST URL, request body is "grant_type=refresh_token&amp;refresh_token=$token"</span>
+  <span class="n">token_url</span> <span class="vg">$oauth_url</span>
+  <span class="n">grant</span> <span class="ss">type: </span><span class="s2">"refresh_token"</span> <span class="k">do</span>
+    <span class="c1"># OAuth2 refresh token value</span>
+    <span class="c1"># Uses standard CAT field syntax</span>
+    <span class="n">token</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"RS_REFRESH_TOKEN"</span><span class="p">)</span>
+    <span class="c1"># Any additional headers to send with refresh request.</span>
+    <span class="n">additional_headers</span> <span class="k">do</span> <span class="p">{</span>
+      <span class="s2">"X-Api-Version"</span> <span class="o">=&gt;</span> <span class="s2">"1.5"</span>
+    <span class="p">}</span> <span class="k">end</span>
+    <span class="c1"># Basic auth used to refresh the token</span>
+    <span class="n">client</span>  <span class="vi">@my_basic_auth</span>
+    <span class="c1"># list of scopes used to create access token</span>
+    <span class="n">scopes</span> <span class="s2">"gcs:read"</span><span class="p">,</span> <span class="s2">"gcs:write"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h5 id="client_credentials">client_credentials</h5>
+
+<p>The client can request an access token using only its client credentials (or other supported means of authentication) when the client is requesting access to the protected resources under its
+control, or those of another resource owner that have been previously arranged with the authorization server (the method of which is beyond the scope of this specification).</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"azure_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"oauth2"</span> <span class="k">do</span>
+  <span class="n">token_url</span> <span class="s2">"https://login.microsoftonline.com/TENANT_ID/oauth2/token"</span>
+  <span class="n">grant</span> <span class="ss">type: </span><span class="s2">"client_credentials"</span> <span class="k">do</span>
+    <span class="n">client_id</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"AZURE_APPLICATION_ID"</span><span class="p">)</span>
+    <span class="n">client_secret</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"AZURE_APPLICATION_KEY"</span><span class="p">)</span>
+    <span class="n">additional_params</span> <span class="k">do</span> <span class="p">{</span>
+      <span class="s2">"resource"</span> <span class="o">=&gt;</span> <span class="s2">"https://management.azure.com/"</span>
+    <span class="p">}</span> <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h5 id="jwt_bearer">jwt_bearer</h5>
+
+<p>In this method, a JWT token is constructed with the provided options and signed with the <code>signing_key</code> and sent to the <code>token_url</code> to fetch an access token.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_google_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"oauth2"</span> <span class="k">do</span>
+  <span class="n">token_url</span> <span class="vg">$oauth_url</span>
+  <span class="n">grant</span> <span class="ss">type: </span><span class="s2">"jwt_bearer"</span> <span class="k">do</span>
+    <span class="c1"># The issuer of the JWT token</span>
+    <span class="n">iss</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"GC_ACCOUNT_EMAIL"</span><span class="p">)</span>
+    <span class="c1"># The audience of this JWT token</span>
+    <span class="n">aud</span> <span class="s2">"https://www.googleapis.com/oauth2/v4/token"</span>
+    <span class="c1"># Any additional claims to be used in JWT</span>
+    <span class="n">additional_claims</span> <span class="k">do</span> <span class="p">{</span>
+      <span class="s2">"scope"</span> <span class="o">=&gt;</span> <span class="s2">"https://www.googleapis.com/auth/prediction"</span>
+    <span class="p">}</span> <span class="k">end</span>
+    <span class="c1"># The key used to sign the JWT token</span>
+    <span class="n">signing_key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"GC_PRIVATE_KEY"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4 id="aws-signature-based-authentication">AWS signature based Authentication</h4>
+
+<p>Service and region can be set to <q>inferred</q> to let the signer determine them automatically from the request URL, allowing a single auth definition to work across multiple AWS services and their regions.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_aws_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"aws"</span> <span class="k">do</span>
+  <span class="c1"># The AWS signature version. defaults to 4</span>
+  <span class="n">version</span> <span class="mi">4</span>
+  <span class="c1"># AWS Service for which request is signed, can use "inferred"</span>
+  <span class="n">service</span> <span class="s2">"ec2"</span>
+  <span class="c1"># AWS region hosting service endpoint, can use "inferred"</span>
+  <span class="n">region</span> <span class="s2">"us-east-1"</span>
+  <span class="c1"># The Access Key ID cred</span>
+  <span class="n">access_key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"AWS_ACCESS_KEY"</span><span class="p">)</span>
+  <span class="c1"># The Secret Access Key cred</span>
+  <span class="n">secret_key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"AWS_SECRET_KEY"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4 id="aws-sts-signature-based-authentication">AWS STS signature based Authentication</h4>
+
+<p>Service and region can be set to <q>inferred</q> to let the signer determine them automatically from the request URL, allowing a single auth definition to work across multiple AWS services and their regions.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">auth</span> <span class="s2">"my_aws_sts_auth"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"aws_sts"</span> <span class="k">do</span>
+  <span class="c1"># The AWS signature version. defaults to 4</span>
+  <span class="n">version</span> <span class="mi">4</span>
+  <span class="c1"># AWS Service for which request is signed, can use "inferred"</span>
+  <span class="n">service</span> <span class="s2">"ec2"</span>
+  <span class="c1"># AWS region hosting service endpoint, can use "inferred"</span>
+  <span class="n">region</span> <span class="s2">"us-east-1"</span>
+  <span class="c1"># The Access Key ID cred</span>
+  <span class="n">access_key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"AWS_ACCESS_KEY"</span><span class="p">)</span>
+  <span class="c1"># The Secret Access Key cred</span>
+  <span class="n">secret_key</span> <span class="n">cred</span><span class="p">(</span><span class="s2">"AWS_SECRET_KEY"</span><span class="p">)</span>
+  <span class="c1"># Amazon Resource Name (ARN) of the role to assume</span>
+  <span class="n">role_arn</span> <span class="s2">"arn:aws:iam::031a1f6c8,:role/test-role"</span>
+  <span class="c1"># Identifier for the assumed role session</span>
+  <span class="n">role_session_name</span> <span class="s2">"open_buckets_policy"</span>
+  <span class="c1"># Restrictive IAM policy, mutually exclusive with policy_json, optional</span>
+  <span class="n">policy</span> <span class="p">{</span><span class="no">Version</span><span class="p">:</span> <span class="mi">2012</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">17</span><span class="p">.</span><span class="nf">.</span><span class="o">.</span><span class="p">}</span>
+  <span class="c1"># Restrictive IAM policy in JSON format, mutually exclusive with policy, optional</span>
+  <span class="n">policy_json</span> <span class="s2">"{Version:2012-10-17...}"</span>
+  <span class="c1"># Unique identifier that might be required when assuming a role in another account, optional</span>
+  <span class="n">external_id</span> <span class="s2">"c4202e1830"</span>
+<span class="k">end</span>
+</code></pre>
+
+<h2 id="permissions-required">Permissions Required</h2>
+
+<p>Describes the privileges needed to design and publish plugin CATs. <a href="/ss/guides/ss_permissions.html#cloudapp-permission-strategies-delegation">Delegation</a> is used</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

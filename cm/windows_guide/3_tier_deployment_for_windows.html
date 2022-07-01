@@ -1,0 +1,640 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>3-Tier Deployment for Windows</title><meta content="Steps for creating a 3-tier Windows Deployment from scratch using the Microsoft IIS App Server, Database Manager for Microsoft SQL Server, and Load Balancer with HAProxy ServerTemplates." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_windows_guide cm_windows_guide_3_tier_deployment_for_windows" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Windows Guide</a></p><div class="page-header"><h1>3-Tier Deployment for Windows</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This tutorial covers the creation of a 3-tier Windows Deployment from scratch using the <strong>Microsoft IIS App Server (v14.0)</strong> and <strong>Database Manager for Microsoft SQL Server (v14.0.1)</strong> ServerTemplates on Amazon EC2 (<strong>Load Balancer with HAProxy (v14.1.1)</strong> as a load balancer, <strong>Microsoft IIS App Server (v14.0)</strong> as an application server and mirrored <strong>Database Manager for Microsoft SQL Server (v14.0.1)</strong> as a database server).</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>This tutorial works with the v14.x infinity lineage branch only. Earlier ServerTemplates are not compatible.</p>
+</div>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>&#39;actor&#39;, &#39;server_login&#39;, and &#39;security_manager&#39; user role privileges</li>
+<li>Access to a DNSMadeEasy Account</li>
+<li>If the following ServerTemplates do not exist in your RightScale account (Design &gt; ServerTemplates), you need &#39;library&#39; user role privileges to import them from the MultiCloud Marketplace:
+
+<ul>
+<li>Microsoft IIS App Server (v14.0)</li>
+<li>Database Manager for Microsoft SQL Server (v14.0.1)</li>
+<li>Load Balancer with HAProxy (v14.1.1)</li>
+</ul></li>
+<li>Windows server with RightLink installed</li>
+<li>A zip archive that contains your application code and full backup of the application database. This tutorial uses DotNetNuke (<a href="http://www.dotnetnuke.com/">http://www.dotnetnuke.com/</a>) as example application.</li>
+</ul>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-create-an-ec2-ssh-key">Create an EC2 SSH Key</h3>
+
+<p>Determine which AWS region the Windows servers will be launched into and create an EC2 SSH Key in that region. See <a href="/cm/dashboard/clouds/generic/ssh_keys_actions.html#create-a-new-ssh-key">Create a New SSH Key</a>.</p>
+
+<h3 id="steps-create-elastic-ips--eip-">Create Elastic IPs (EIP)</h3>
+
+<p>You will need two EIPs for both of the front end Load Balancers. Name them appropriately (e.g., myapp-lb1 and myapp-lb2). For this example, choose the EC2 Classic network option. See <a href="/cm/dashboard/clouds/aws/actions/ec2_elastic_ips_actions.html#create-a-new-elastic-ip--eip-">Create Elastic IPs (EIP)</a>.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Write down your EIP names and their IP addresses.</p>
+</div>
+
+<h3 id="steps-create-an-ec2-security-group">Create an EC2 Security Group</h3>
+
+<p>Create an EC2 Security Group with the following port permissions in the selected AWS region. For development and test purposes you can simply create a single security group that will be used by all Windows servers. However, if you are building a production environment, you should consider creating separate security groups for each tier. Use <code>0.0.0.0/0</code> CIDR notation to open the ports to any IP address. See <a href="/cm/dashboard/manage/networks/create_a_single_security_group_for_a_3-tier_windows_tutorial.html">Create a New EC2 Security Group</a>.</p>
+
+<ul>
+<li>22 for SSH access (Linux) (The load balancers in this example will be Linux instances.)</li>
+<li>80 (HTTP)</li>
+<li>443 for (HTTPS) -- Ignore if you are not using SSL.</li>
+<li>3389 for RDP access (Windows)</li>
+<li>1433 for SQL Server database connections</li>
+<li>5022 for SQL Server mirroring connections</li>
+</ul>
+
+<p>The created security group should have permissions that look like the following:</p>
+
+<p><img src="/img/cm-list-rules-win.png" alt="cm-list-rules-win.png" width="725" height="362" /></p>
+
+<h3 id="steps-save-application-and-database-files-in-an-s3-bucket">Save Application and Database Files in an S3 Bucket</h3>
+
+<p>Create an S3 bucket with a properly formatted name (see <a href="/cm/dashboard/clouds/aws/actions/s3_browser_actions.html">Create a New S3 Bucket</a>) and upload an archive file of the application code (.zip) and a valid database file. You can either restore the database using a SQL backup file (.bak) or attach an existing database file (.mdf). Upload the files to the S3 bucket. Later in this tutorial you will need to provide the URLs to these files as input values. If you do not have your own files that you would like to use, you can download and use the following example files to complete the tutorial.</p>
+
+<ul>
+<li><a href="https://s3-us-west-2.amazonaws.com/rs-docs-assets/DotNetNuke.zip">DotNetNuke.zip</a></li>
+<li><a href="https://s3-us-west-2.amazonaws.com/rs-docs-assets/DotNetNuke.bak">DotNetNuke.bak</a></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>When you upload a file to an S3 bucket, its access permissions will automatically be set to <q>private</q> which means it can only be accessed with the AWS account credentials. Our scripts will be able to access the database dump file if it is located inside one of your account&#39;s S3 buckets even if it is <q>private</q> because the AWS account credentials can be used for authentication. However, if you&#39;re using an application or dump file that&#39;s in an S3 bucket that doesn&#39;t belong to this account, you will need to make sure the file is set to <q>public-read</q> by updating its permissions with the drop down menu.</p>
+</div>
+
+<h3 id="steps-configure-dns-records">Configure DNS Records</h3>
+
+<p>The <strong>Database Manager for Microsoft SQL Server (v14.0.1)</strong> ServerTemplate supports the following DNS Providers:</p>
+
+<ul>
+<li>DNS Made Easy</li>
+<li>DynDNS</li>
+<li>Route53</li>
+</ul>
+
+<p>You will need to create three DNS A records: two for both of the load balancers and one for the SQL Server principal node. Log into your DNS account and follow the steps below.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The following steps were created using a DNS Made Easy account.</p>
+</div>
+
+<h4 id="load-balancer---1">Load balancer - 1</h4>
+
+<ul>
+<li>Create an &#39;A Record&#39; for your first Load Balancer in your domain. For example, <q>myapp-www</q>. <em>Note</em>: In this basic example, the fully qualified domain name becomes: myapp-www.example.com.</li>
+<li>For the IP address field, use the public IP address that was assigned to the first EIP you created earlier in this tutorial.</li>
+<li>Uncheck Dynamic DNS.</li>
+<li>Leave the Password field blank (if prompted).</li>
+<li>Since this is a load balancer, it is OK to use a longer TTL. Set the value to 1800 seconds.</li>
+</ul>
+
+<h4 id="load-balancer---2">Load balancer - 2</h4>
+
+<ul>
+<li>Create another &#39;A record&#39; for your second Load Balancer.</li>
+<li>You must use the <em>same</em> name as the first Load Balancer (i.e. myapp-www).<br></li>
+<li>Use the second EIP you created in the RightScale Dashboard earlier. (<strong>Important!</strong> - The only difference between the two &#39;A Records&#39; created for the two Load Balancers is that each Load Balancer should be using a different Elastic IP)</li>
+</ul>
+
+<h4 id="sql-server---principal-node">SQL Server - Principal Node</h4>
+
+<ul>
+<li>Create an &#39;A Record&#39; for the server that will point to the <q>principal</q> Microsoft SQL Server.  Name it something simple, for example your initials then <q>db1</q>  (e.g. abc-db1).</li>
+<li>Give it any legal, temporary IP address. (e.g. 1.2.3.4)  The actual value does not matter, since it is simply a placeholder IP address that will be replaced at a later time when the DNS script is run.</li>
+<li>Set the TTL to 60 seconds.  TTL=60</li>
+<li>Be sure to check the Dynamic DNS option so that the DNS A record will be assigned a 7-digit code that will be used to identify and update the record. The DDNSID will be a required input parameter that you will need to provide when you define your deployment&#39;s inputs.  This will allow the temporary IP address of 1.2.3.4 (which you created above) to be dynamically replaced by the actual IP address of the cloud server after it boots up.</li>
+<li>Leave the Password blank (if prompted).</li>
+<li>Record the DDNSID of your Master (displayed in a pop-up window when you select the DDNSID link in your DME account). (e.g. 1234123)</li>
+</ul>
+
+<h3 id="steps-create-a-deployment">Create a Deployment</h3>
+
+<p>Create a new deployment that will be used to contain all of the Windows servers.  See <a href="/cm/dashboard/manage/deployments/deployments_actions.html#create-a-new-deployment">Create a New Deployment</a>.</p>
+
+<h3 id="steps-launch-the-primary-server">Launch the Primary Server</h3>
+
+<p>Now that you have a deployment, you can now use the <strong>Database Manager for Microsoft SQL Server (v14.0.1)</strong> ServerTemplate to launch a SQL database server.</p>
+
+<p>Go to the new Deployment and click  <strong>Add Server</strong>  button.  See  <a href="/cm/dashboard/manage/deployments/deployments_actions.html#add-a-server-to-a-deployment">Add a Server to a Deployment</a>.</p>
+
+<ol>
+<li>Add the Server to the AWS region into which you will later launch your database servers.</li>
+<li>Select the <strong>Database Manager for Microsoft SQL Server (v14.0.1)</strong> ServerTemplate.</li>
+<li>Under <strong>Server Name</strong> in the Server Details tab, enter a name for the server (e.g. MyApp-DB1). Do not include <q>primary</q> in the server&#39;s nickname because the server&#39;s role might change in a disaster recovery or failover scenario. To avoid future confusion in the event that you promote a partner server to become the new primary server, you should use generic server nicknames.</li>
+<li>Select the SSH Key that you created earlier in this tutorial.</li>
+<li>Select the Security Group that you created earlier in this tutorial</li>
+<li>Ignore all other values.</li>
+<li>Click  <strong>Confirm</strong> and then <strong>Finish</strong>.</li>
+</ol>
+
+<h3 id="steps-define-inputs">Define Inputs</h3>
+
+<p>The next step is to provide values for any missing inputs at the Deployment level. Some input parameters are inherited from the ServerTemplate, whereas some are left undefined because they are user-specific.</p>
+
+<p>Go to the Deployment&#39;s <strong>Inputs</strong> tab and click <strong>Edit</strong>. Although you technically only have to define inputs that are required to launch a database server, you might want to define values for some of the other missing inputs at the deployment level so that you can better manage and keep track of your settings. Also, if you define your inputs now, you will not need to provide any inputs later when you run any of the Operational Scripts.</p>
+
+<h4 id="required-inputs">Required Inputs</h4>
+
+<ul>
+<li>You will need to create a credential for the ADMIN_PASSWORD input.</li>
+<li>Password to set for the local administrator account. Required parameter. You will use this password to log into the Server using RDP. <a href="/cm/dashboard/design/credentials/credentials.html#create-a-new-credential">Create a Credential</a> to use and name it ADMIN_PASSWORD.</li>
+</ul>
+
+<p>You will need to provide a password that meets the syntax requirements.</p>
+
+<ul>
+<li>Minimum of 7 characters</li>
+<li>At least one upper case letter</li>
+<li>At least one lower case letter</li>
+<li>At least one number</li>
+</ul>
+
+<p>Go to the Inputs tab of your Deployment and click <strong>Edit</strong> and define these missing inputs:</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ADMIN_PASSWORD</td>
+<td>Set the password for the local Administrator account. This should be at least 7 characters long with at least one uppercase letter, one lowercase letter, and one digit.</td>
+<td>Cred: ADMIN_PASSWORD</td>
+</tr>
+<tr>
+<td>AWS_ACCESS_KEY_ID</td>
+<td>Your AWS credentials are used to set up EBS volumes created and attached to your server.</td>
+<td>Cred:AWS_ACCESS_KEY_ID</td>
+</tr>
+<tr>
+<td>AWS_SECRET_ACCESS_KEY</td>
+<td>Your AWS credentials are used to set up EBS volumes created and attached to your server.</td>
+<td>Cred:AWS_SECRET_ACCESS_KEY</td>
+</tr>
+<tr>
+<td>DATA_VOLUME_SIZE</td>
+<td>Enter the size (in GB) for the volume that will be used to store the database file. By default, drive letter  *<em>D:\ *</em> will be used for the data volume. To override this setting and use a different drive letter you can use the OPT_DATA_VOLUME_LETTER input.</td>
+<td>Text: 30</td>
+</tr>
+<tr>
+<td>DB_LINEAGE_NAME</td>
+<td>The lineage of the database backups. A string that is used to track all backups in a certain &#39;set&#39; usually deployment wide.</td>
+<td>Text: dotnetnuke</td>
+</tr>
+<tr>
+<td>DNS_DOMAIN_NAME</td>
+<td>Enter the Fully Qualified Domain Name (FQDN) of the DNS record.</td>
+<td>e.g. text: abc-db1.domain.com</td>
+</tr>
+<tr>
+<td>DNS_ID</td>
+<td>Enter the DDNSID of the DNS record you created in a previous step.</td>
+<td>1234123</td>
+</tr>
+<tr>
+<td>DNS_IP_ADDRESS</td>
+<td>Choose whether to use &#39;public&#39; or &#39;private&#39; IP addresses for the DNS record.</td>
+<td>text:Public IP</td>
+</tr>
+<tr>
+<td>DNS_PASSWORD</td>
+<td>Enter the password of your DNS account or select the appropriate credential.</td>
+<td>Cred:DNS_PASSWORD</td>
+</tr>
+<tr>
+<td>DNS_SERVICE</td>
+<td>Select one of the predefined DNS provider: DNS Made Easy, DynDNS, or Route53. Note: Do not override the predefined values.</td>
+<td>text: DNS Made Easy</td>
+</tr>
+<tr>
+<td>DNS_USER</td>
+<td>Enter the user name of your DNS account or select the appropriate credential.</td>
+<td>Cred:DNS_USER</td>
+</tr>
+<tr>
+<td>DNS_TTL</td>
+<td>Enter the TTL of the DNS record. The default value is 60 seconds.</td>
+<td>Text:60</td>
+</tr>
+<tr>
+<td>INIT_MIRRORING_METHOD</td>
+<td>Method of transferring database files and certificates between principal and mirror server to initialize mirroring session. Since we are placing principal and mirror servers in different availability zones, set this input to Remote Storage.</td>
+<td>Text: Remote Storage</td>
+</tr>
+<tr>
+<td>LOGS_VOLUME_SIZE</td>
+<td>Enter the size (in GB) for the volume that will be used to store the database log file. By default, drive letter E:\ will be used for the log volume. To override this setting and use a different drive letter you can use the OPT_LOGS_VOLUME_LETTER input.</td>
+<td>Text: 10</td>
+</tr>
+<tr>
+<td>OPT_USE_PUBLIC_IP</td>
+<td>Since we are placing principal and mirror database servers into different availability zones, this input should be set to True to use public (external) IPs for mirroring connection.</td>
+<td>Text: True</td>
+</tr>
+<tr>
+<td>REMOTE_STORAGE_CONTAINER, REMOTE_STORAGE_CONTAINER_APP</td>
+<td>Enter the name of S3 bucket to be used as storage for application files, initial database backup and certificate exchange.</td>
+<td>Text: Bucketname e.g. mybucket</td>
+</tr>
+<tr>
+<td>REMOTE_STORAGE_ACCOUNT_PROVIDER, REMOTE_STORAGE_ACCOUNT_PRROVIDER_APP</td>
+<td>Type of remote storage used to store database backup, application code and certificate exchange. Currently AWS S3, Windows Azure Storage, and SoftLayer Object Storage are supported. In this tutorial we are using S3.</td>
+<td>Text: Amazon S3</td>
+</tr>
+<tr>
+<td>REMOTE_STORAGE_ACCOUNT_ID, REMOTE_STORAGE_ACCOUNT_ID_APP</td>
+<td>The Account ID or Name of the Remote Storage account which is used to authenticate your requests to Remote Storage services. We are using S3 in this tutorial so AWS access key id should be used.</td>
+<td>Cred:AWS_ACCESS_KEY_ID</td>
+</tr>
+<tr>
+<td>REMOTE_STORAGE_ACCOUNT_SECRET, REMOTE_STORAGE_ACCOUNT_SECRET_APP</td>
+<td>The Secret Key or Password of the Remote Storage account which is used to authenticate your requests to Remote Storage services. We are using S3 in this tutorial so AWS secret access key should be used.</td>
+<td>Cred:AWS_SECRET_ACCESS_KEY</td>
+</tr>
+<tr>
+<td>SYS_WINDOWS_TZINFO</td>
+<td>Set the system time to a specific timezone. Some examples are provided in the dropdown, but can be overridden if the timezone is not listed.</td>
+<td>Text: Pacific Standard Time</td>
+</tr>
+</tbody></table>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>We are using the same S3 bucket to store IIS application code and SQL Server database. In a real world scenario you might want to use different S3 buckets (so 2 buckets need to be created and inputs REMOTE_STORAGE_CONTAINER and REMOTE_STORAGE_CONTAINER_APP set to appropriate values).</p>
+</div>
+
+<p>If you want to download application code from some URL (i.e. https://mydomain.com/app.zip) or from SVN repository you will need to set inputs <strong>ZIP_URL</strong> and  <strong>SVN_APP_PATH</strong>,  <strong>SVN_PASSWORD</strong>,  <strong>SVN_USERNAME</strong> respectively. For this tutorial all these inputs should be set to &#39;ignore&#39;.</p>
+
+<p>Other inputs can be left set to default values.</p>
+
+<p>Click <strong>Save</strong>.</p>
+
+<h4 id="launch-the-server">Launch the Server</h4>
+
+<ol>
+<li>Launch the server. On the Server&#39;s page click the <strong>Launch</strong> action button. You can also launch the server from the deployment&#39;s Servers tab. All of the required inputs should have defined values.  Keep the default values for the SERVER_UUID and SKETCHY inputs. Click the <strong>Launch</strong> button again to confirm that you want to launch the server with the predefined input values.</li>
+<li>Wait for the server instance to become operational before going to the next step.</li>
+</ol>
+
+<h4 id="import-the-database">Import the database</h4>
+
+<p>The next step is to import the database onto the instance by restoring it from a backup file (.bak) or attaching an SQL Server data file (.mdf). You will need to select and run the appropriate operational script based upon the chosen method.</p>
+
+<p><strong>Restore from a database backup (.bak)</strong></p>
+
+<p>Follow these instructions if you want to load the database by using a backup file (.bak).</p>
+
+<ul>
+<li>Go to the server&#39;s Scripts tab and run the <strong>DB SQLS Restore database from local disk / Remote Storage (v14.0)</strong> operational script. You will need to provide values for the following inputs before the script can be run:</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>BACKUP_FILE_NAME</td>
+<td>Enter the filename of the database backup file (.bak) that will be used to load the database. (e.g. DotNetNuke.bak)</td>
+<td>e.g. text: DotNetNuke.bak</td>
+</tr>
+<tr>
+<td>BACKUP_LOCAL_DIR</td>
+<td>You can leave this input with default value (&#39;ignore&#39;), it could be used to restore from backup file located on file system of the server (not downloading from S3 as in this tutorial).</td>
+<td>No value/Ignore</td>
+</tr>
+<tr>
+<td>DB_NAME</td>
+<td>The name of the default SQL Server database that will be created. (e.g. DotNetNuke) Note that this name should match the original database name the backup was taken from.</td>
+<td>text: DotNetNuke</td>
+</tr>
+<tr>
+<td>OPT_BACKUP_TEMP_DIR</td>
+<td>You can leave this input with default value (&#39;ignore&#39;)</td>
+<td>No value/Ignore</td>
+</tr>
+<tr>
+<td>OPT_LOGICAL_FILE_NAME</td>
+<td>Use this optional input to provide the logical name of the data and log files. If your backup files use the default SQL Server logical files naming convention, set this input to &#39;Ignore&#39;.</td>
+<td>No value/Ignore</td>
+</tr>
+<tr>
+<td>OPT_FORCE_NORECOVERY</td>
+<td>For this tutorial you can leave the default value of False to restore the database in Normal mode.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>REMOTE_STORAGE_CONTAINER</td>
+<td>Since we already configured this input on deployment level it should contain the name of S3 bucket where the database backup file (.bak) is stored.</td>
+<td>Text: Bucketname e.g. mybucket</td>
+</tr>
+<tr>
+<td>REMOTE_STORAGE_ACCOUNT_PROVIDER</td>
+<td>Leave the default value of Amazon S3 for this input.</td>
+<td>text: Amazon S3</td>
+</tr>
+<tr>
+<td>REMOTE_STORAGE_ACCOUNT_ID</td>
+<td>Leave the preconfigured value -- AWS access key ID.</td>
+<td>Cred:AWS_ACCESS_KEY_ID</td>
+</tr>
+<tr>
+<td>REMOTE_STORAGE_ACCOUNT_SECRET</td>
+<td>Leave the preconfigured value -- AWS secret access key.</td>
+<td>Cred:AWS_SECRET_ACCESS</td>
+</tr>
+</tbody></table>
+
+<p>Click <strong>Continue</strong>.</p>
+
+<p><strong>Attach a database file (.mdf)</strong></p>
+
+<p>Follow these instructions if you want to load the database by using a SQL Server data file (.mdf).</p>
+
+<ol>
+<li>Go to the server&#39;s Scripts tab and run the <strong>DB SQLS Attach database from local disk / Remote Storage (v14.0)</strong>  operational script. Most inputs you will need to provide should have the same values as for restoring from backup file (.bak). The only different input is that <strong>MDF_FILE_NAME</strong> is set to the filename of the SQL Server data file (.mdf) located in the S3 bucket. (e.g. DotNetNuke.mdf)</li>
+<li>Click <strong>Continue.</strong></li>
+</ol>
+
+<p>Now you have your principal server ready to serve the database.</p>
+
+<h3 id="steps-launch-the-partner--mirror--server">Launch the Partner (Mirror) Server</h3>
+
+<ol>
+<li>Clone the existing (primary) database server. (e.g. MyApp-DB1)</li>
+<li>Click <strong>Edit</strong> and rename the cloned server appropriately.  (e.g. MyApp-DB2)</li>
+<li>Set the Availability Zone field of the cloned server to place it in another availability zone than your primary database server (you might need to check the current availability zone of the principal server on the Info tab of the Server page).</li>
+<li>Launch the cloned server.</li>
+<li>When viewing the inputs confirmation page, set the <strong>SERVER_MODE</strong> to Text:Mirror.</li>
+<li>Click the  <strong>Launch</strong> button.  Do not click the <q>Save and Launch</q> button because you do not want to save this setting for future launches of this server because its role may change over time.  You only want to launch this current server as a <q>mirror</q> server because you earlier launched a <q>primary</q> server.</li>
+<li>Go to the principal server&#39;s Scripts tab and execute  <strong>DB SQLS Init principal</strong> Operational Script. You do not need to wait until your mirror server is operational to run this script.  <strong>DB SQLS Init principal</strong> waits for the mirror server automatically. Note that <strong>DB SQLS Init principal</strong> automatically completes the <strong>DB SQLS Init mirror</strong> script so this script does not need to be ran on the partner server.</li>
+<li>Wait for your mirror server to become operational and mirroring initialization to complete. (That takes approximately 20-25 minutes).</li>
+</ol>
+
+<h3 id="steps-register-the-primary-server-with-the-dns-provider">Register the Primary Server with the DNS Provider</h3>
+
+<p>Go to the <q>primary</q> server&#39;s Scripts tab and run the <strong>DNS Register IP</strong> Operational Script.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The inputs required to run this script have been defined at the Deployment level.</p>
+</div>
+
+<h3 id="steps-create-a-sql-server-login">Create a SQL Server Login</h3>
+
+<p>Create the SQL Server login username/password that will be used by the application servers to connect to the <q>primary</q> SQL database server.  Run the <strong>DB SQLS Create login</strong> script and specify the following inputs:</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>DB_NAME</td>
+<td>Enter the name of the database.</td>
+<td>text: DotNetNuke</td>
+</tr>
+<tr>
+<td>DB_REMOTE_SQL_LOGIN</td>
+<td>(Optional) Enter the SQL Server login username with administrative rights to the remote SQL Server database server.</td>
+<td>cred:DB_SQL_Login</td>
+</tr>
+<tr>
+<td>DB_REMOTE_SQL_PASSWORD</td>
+<td>(Optional) Enter SQL Server login password. You can enter a text:&#39;password&#39;, but for best practices it would be best to create a credential with your password value and name it something like DB_LOGIN_PASSWORD.</td>
+<td>cred:DB_SQL_PASSWORD</td>
+</tr>
+<tr>
+<td>DB_NEW_LOGIN_NAME</td>
+<td>Enter the login name for the new SQL Server user. You can enter a text:&#39;password&#39;, but for best practices it would be best to create a credential with your password value and name it something like SQL_SERVER_USER_NAME. This value needs to match the OPT_CONNECTION_STRING_DB_USER_ID defined later in this tutorial. To be properly configured, this DB value needs to match the IIS Server value (OPT).</td>
+<td>cred:SQL_SERVER_USER_NAME</td>
+</tr>
+<tr>
+<td>DB_NEW_LOGIN_PASSWORD</td>
+<td>Enter the login password for the new SQL Server user. You can enter a text:&#39;password&#39;, but for best practices it would be best to create a credential with your password value and name it something like SQL_SERVER_USER_PASSWORD. This value needs to match the OPT_CONNECTION_STRING_DB_USER_PASSWORD defined later in this tutorial. To be properly configured, this DB value needs to match the IIS Server value (OPT).</td>
+<td>cred:SQL_SERVER_USER_PASSWORD</td>
+</tr>
+</tbody></table>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You may not need to perform this step if your SQL Server configuration already contains all necessary logins/users for database access.</p>
+</div>
+
+<h3 id="steps-create-load-balancers">Create Load Balancers</h3>
+
+<p>Go to the new Deployment and click  <strong>Add Server</strong>  button. See  <a href="/cm/dashboard/manage/deployments/deployments_actions.html#add-a-server-to-a-deployment">Add a Server to a Deployment</a>.</p>
+
+<ol>
+<li>Add the Server to the AWS region into the same cloud/region as your database servers.</li>
+<li>Select the** Load Balancer with HAProxy (v13.0)** ServerTemplate.</li>
+<li>Enter a name for the server (e.g. MyApp Load Balancer 1) and select the SSH Key and Security Group that you created earlier in this tutorial.</li>
+<li>Select one of the Elastic IPs that you created in a previous step (e.g. MyApp-LB1).</li>
+<li>Ignore all other values.</li>
+<li>Click <strong>Confirm</strong> and then <strong>Finish</strong>.</li>
+<li>Since you want to create two load balancer servers for redundancy purposes, clone the created server and rename it. (e.g. MyApp Load Balancer 2)</li>
+<li>You now have two load balancer servers that have identical configurations. Under the second load balancer server <strong>Info</strong> tab, click <strong>Edit</strong> and select the second Elastic IP you created in previous step.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>For high availability purposes, you might want to launch the load balancers into different zones from each other. Typically, you will want to use the same zones as the database servers so that each zone will contain a load balancer and database server. To change availability zone of the server you can go to Info tab of that server and click Edit.</p>
+</div>
+
+<h4 id="define-inputs">Define Inputs</h4>
+
+<p>Go to the deployment&#39;s <strong>Inputs</strong> tab and define values for the following missing inputs:</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>APPLICATION</td>
+<td>Enter the name of the application.</td>
+<td>(e.g. myapp)</td>
+</tr>
+<tr>
+<td>HEALTH_CHECK_URI</td>
+<td>The URI of the health check page, which is used by HAProxy for checking whether the site is up or not. You must create your own health check page, which returns HTTP 200 OK. The contents of the page are not relevant but its name should be unique (preferably a random number). The same page is used for ALL application servers to determine if the server is UP. For example, if you use &#39;/hlthchk378923.html&#39; (Note: be sure to include the slash before the filename), the health check page would be &#39;http://www.mydomain.com:80/hlthchk378923.html&#39; and its content could be as simple as <q>OK.</q> For simplicity we are using /Default.aspx in this tutorial.</td>
+<td>text: /Default.aspx</td>
+</tr>
+</tbody></table>
+
+<h4 id="launch-the-servers">Launch the Servers</h4>
+
+<p>Go to the deployment&#39;s <strong>Servers</strong> tab and launch both of the load balancer servers.</p>
+
+<h3 id="steps-create-and-configure-a-scalable-server-array-for-application-tier">Create and Configure a Scalable Server Array for Application Tier</h3>
+
+<p>The next step is to create and launch server array consisting of Microsoft IIS Application Servers.  </p>
+
+<p>Go to the Deployment and click <strong>Add Array</strong> button.</p>
+
+<ol>
+<li>Add the Server Array to the AWS region into the same cloud/region as the other servers.</li>
+<li>Select the <strong>Microsoft IIS App Server (14.0)</strong> ServerTemplate.</li>
+<li>Enter a name for the server array and select the SSH Key and Security Group that you created earlier in this tutorial.</li>
+<li>Continue to the <strong>Array Details</strong> tab. Set the following autoscaling parameters:
+
+<ul>
+<li>Minimum = 2 servers</li>
+<li>Maximum = 5 servers</li>
+<li>Resize Up by = 3</li>
+<li>Resize Down by = 1</li>
+<li>Resize calm time = 8</li>
+</ul></li>
+<li>Make sure that the status is disabled for now and array type is alert-based.</li>
+<li>Click <strong>Confirm</strong> and then <strong>Finish</strong>.</li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>You may receive a warning ‘Some of the Input parameters for boot scripts are missing. Please update them to launch instances successfully’. This is OK, you will take care of the remaining inputs shortly.</p>
+</div>
+
+<p>Under the server array&#39;s <strong>Next Alerts</strong> tab you will be able to add to the existing alert specifications that are being inherited by the array&#39;s application ServerTemplate. Next, you will need to add two new alert specifications that will be used for triggering auto-scaling. When you set up your own custom deployment, you will want to pick appropriate metrics and thresholds that make sense for auto-scaling your own application. But for this tutorial, you can use the suggested parameters below:</p>
+
+<ul>
+<li>Click <strong>New</strong> to create two new alert specifications. Fill out the fields with the following information.
+
+<ul>
+<li><strong>Name</strong>: <q>Scale Up</q></li>
+<li> <strong>Condition</strong>: if &quot;cpu-0/cpu-idle.value &lt; &#39;30&#39; for 5 min then vote to grow array by setting the tag to be the name of your server array. We used &#39;3tier&#39;.</li>
+</ul></li>
+<li>Click <strong>Save</strong>.</li>
+<li>Create another, by again clicking <strong>New</strong>.</li>
+<li><strong>Name</strong>: <q>Scale Down</q></li>
+<li><q>Scale Down</q> - if cpu-0/cpu-idle.value &gt; &#39;80&#39; for 5 min then vote to shrink array by setting the tag &#39;3tier&#39;</li>
+<li>Click <strong>Save</strong>.</li>
+</ul>
+
+<h4 id="define-deployment-level-inputs">Define Deployment-level Inputs</h4>
+
+<p>Go to the deployment&#39;s <strong>Inputs</strong> tab and <strong>Edit</strong> values for the following missing inputs.</p>
+
+<p>The required inputs will be different depending on whether you are downloading the application code from a URL or SVN repository or Remote Storage. In this tutorial we are using ZIP file located in AWS S3 bucket.</p>
+
+<table><thead>
+<tr>
+<th>Input Name</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>OPT_CONNECTION_STRING_DB_NAME</td>
+<td>Name of the database for the application server to connect to. This is the database served by pair of SQL Server instances you configured earlier in this tutorial.</td>
+<td>e.g. text: DotNetNuke</td>
+</tr>
+<tr>
+<td>OPT_CONNECTION_STRING_DB_SERVER_NAME</td>
+<td>Fully qualified domain name of the database server you created earlier in this tutorial.</td>
+<td>e.g. text: abc-db1.example.com</td>
+</tr>
+<tr>
+<td>OPT_CONNECTION_STRING_DB_USER_ID</td>
+<td>Login name to be used for database connections created earlier in this tutorial. This value needs to match the DB_NEW_LOGIN_NAME defined earlier in this tutorial. To be properly configured, this IIS Server value needs to match the DB value.</td>
+<td>cred:SQL_SERVER_USER_NAME</td>
+</tr>
+<tr>
+<td>OPT_CONNECTION_STRING_DB_USER_PASSWORD</td>
+<td>Password for the login created by OPT_CONNECTION_STRING_DB_USER_ID above. This value needs to match the DB_NEW_LOGIN_PASSWORD defined earlier in this tutorial. To be properly configured, this IIS Server value needs to match the DB value.</td>
+<td>cred:SQL_SERVER_USER_PASSWORD</td>
+</tr>
+<tr>
+<td>OPT_CONNECTION_STRING_NAME</td>
+<td>Application-specific name of the connection string. For DotNetNuke the name is &#39;SiteSqlServer&#39;.</td>
+<td>e.g. text: SiteSqlServer</td>
+</tr>
+<tr>
+<td>ZIP_FILE_NAME</td>
+<td>File name of the zip file containing the application code located on remote storage (note that we already configured STORAGE_TYPE and STORAGE_CONTAINER_NAME inputs on deployment level earlier in this tutorial).</td>
+<td>e.g. text: DotNetNuke.zip</td>
+</tr>
+</tbody></table>
+
+<p>Note, if you want to download application code from some URL (i.e., https://mydomain.com/app.zip) or from SVN repository you will need to set inputs <strong>ZIP_URL</strong> and <strong>SVN_APP_PATH</strong>, <strong>SVN_PASSWORD</strong>, <strong>SVN_USERNAME</strong> respectively. For this tutorial all these inputs should be set to &#39;ignore&#39;.</p>
+
+<p>Other inputs you can leave to its default values.</p>
+
+<p>Click <strong>Save</strong>.</p>
+
+<h3 id="steps-launching-the-server-array">Launching the Server Array</h3>
+
+<p>Now that you have operational load balancers ready to accept requests, and primary/mirror database servers on the backend, you are ready to start-up the server array to run your application.</p>
+
+<p>Go to your server array page. Here you have two alternatives:</p>
+
+<ul>
+<li>Manually launch a single server into the array for testing by navigating to the array and clicking <strong>Launch</strong>. As a best practice, you should launch a single instance before enabling an array to test if everything has been properly configured.</li>
+<li>Enable the server array - if you are using this tutorial for learning purposes, just enable the server array by going to the server array&#39;s Info tab and clicking the <strong>enable</strong> link in the <strong>Status</strong> row.</li>
+</ul>
+
+<p>After being enabled, the array launches application servers as specified in the Default Min Count autoscaling policy parameters (configured earlier in this tutorial).</p>
+
+<h3 id="steps-testing-the-deployment">Testing the Deployment</h3>
+
+<p>To test if your deployment is operational just enter your LB_HOSTNAME in browser address fields. (http://my-www.example.com)</p>
+
+<h3 id="steps-shut-down-the-deployment">Shut Down the Deployment</h3>
+
+<p>You may find the need to perform some clean up, either to minimize costs, or to perform the tutorial again from a clean slate. Follow these high level steps to do so:</p>
+
+<ul>
+<li>Disable the server array.</li>
+<li>Terminate all servers in the array.</li>
+<li>Delete the server array.</li>
+<li>Terminate the load balancers.</li>
+<li>Terminate the mirror and primary database servers.</li>
+<li>Delete the deployment.</li>
+<li>Delete the two EIPs.</li>
+<li>Delete the SSH key.</li>
+<li>Delete the security group.</li>
+<li>Delete all credentials (unless you are sharing your account or deployment with others who might still be using them).</li>
+<li>Delete all four DNS Made Easy A records.</li>
+<li>Delete the application and database dump file from the two S3 buckets.</li>
+<li>Delete the S3 buckets for your application and database.</li>
+<li>Delete all snapshots produced by databases servers.</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

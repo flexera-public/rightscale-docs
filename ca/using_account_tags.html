@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Use Account Tags</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="ca ca_using_account_tags" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="about.html"><h4 class="list-group-heading"><img src="../img/product-cloud-analytics.svg" /><span>Optima</span></h4></a><a class="list-group-item" href="legacy.html">Legacy Feature Documentation</a><a class="list-group-item" href="https://helpnet.flexerasoftware.com/Optima">Current Feature Documentation</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./"></a></p><div class="page-header"><h1>Use Account Tags</h1></div><div class="main-content"><div class="alert alert-danger" role="alert"><strong>Warning</strong><p>The features described on this page will soon be deprecated. Refer to the <a href="https://helpnet.flexerasoftware.com/Optima">latest documentation</a> for information on the latest features.</p>
+</div>
+
+<h2 id="in-rightscale-optima">In RightScale Optima</h2>
+
+<p>RightScale Optima uses account tags in two places:</p>
+
+<ol>
+<li><strong>On the Instant Analyzer</strong>. Account tags are available alongside instance and deployment tags (<a href="/cm/rs101/tagging.html">read more about tagging</a>). Applying an account tag filter will restrict the instances displayed to RightScale accounts which have the tag selected. This filter can be used to create budget alerts, scenarios, and scheduled reports.</li>
+<li><p><strong>In the CSV export feature of the Dashboard</strong>. The downloaded CSV will contain a column for each account tag key present on the accounts in the file, with the tag value for the account being in each row. For example, if you have the accounts and tags below:</p>
+
+<table><thead>
+<tr>
+<th>Account ID</th>
+<th>Tags</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>org:businessunit=sales, org:location=ny</td>
+</tr>
+<tr>
+<td>2</td>
+<td>org:businessunit=marketing, org:location=ny</td>
+</tr>
+<tr>
+<td>3</td>
+<td>org:businessunit=product, org:location=ca</td>
+</tr>
+<tr>
+<td>4</td>
+<td>org:businessunit=it, org:location=ca</td>
+</tr>
+</tbody></table>
+
+<p>Then the exported CSV would have these values, along with the other data:</p>
+
+<table><thead>
+<tr>
+<th>...</th>
+<th>RightScale Account ID</th>
+<th>...</th>
+<th>Cost ($)</th>
+<th>org:businessunit</th>
+<th>org:location</th>
+</tr>
+</thead><tbody>
+<tr>
+<td></td>
+<td>1</td>
+<td></td>
+<td>200</td>
+<td>sales</td>
+<td>ny</td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td></td>
+<td>300</td>
+<td>marketing</td>
+<td>ny</td>
+</tr>
+<tr>
+<td></td>
+<td>3</td>
+<td></td>
+<td>100</td>
+<td>product</td>
+<td>ca</td>
+</tr>
+<tr>
+<td></td>
+<td>4</td>
+<td></td>
+<td>500</td>
+<td>it</td>
+<td>ca</td>
+</tr>
+</tbody></table></li>
+</ol>
+
+<h2 id="managing-account-tags-with-cloud-management">Managing Account Tags with Cloud Management</h2>
+
+<p>The Cloud Management UI supports tagging accounts that are part of an organization (<a href="/cm/dashboard/settings/enterprise/index.html">read more about RightScale Organization</a>). To add and remove tags for the organization, first connect to the master account, then go to <strong>Settings</strong> -&gt; <strong>Organization</strong> -&gt; <strong>Accounts</strong>. You should see this screen:</p>
+
+<div class="media">
+  <img src="/img/ca-using-account-tags-enterprise-ui.png" alt="">
+  <div class="media-caption">
+    <small>The enterprise accounts screen. Click on the checkboxes to select accounts, choose an operator (add or remove tags), and click apply</small>
+  </div>
+</div>
+
+<p>This will then allow you to add or remove multiple tags for the selected accounts at a time:</p>
+
+<div class="media">
+  <img src="/img/ca-using-account-tags-add-tags.png" alt="">
+  <div class="media-caption">
+    <small>Click on the add button to add a tag, and apply to save your changes</small>
+  </div>
+</div>
+
+<p>Clicking submit will add the tags to the accounts selected:</p>
+
+<div class="media">
+  <img src="/img/ca-using-account-tags-tag-added.png" alt="">
+  <div class="media-caption">
+    <small>The tag <code>demo:tag=master</code> has been applied to the Enterprise Test Master Account</small>
+  </div>
+</div>
+
+<h2 id="managing-account-tags-with-rightscale-api-1-5">Managing Account Tags with RightScale API 1.5</h2>
+
+<p>RightScale API 1.5 supports tagging accounts through the <a href="http://reference.rightscale.com/api1.5/resources/ResourceTags.html">Tags resource</a>. Account tags can be added and removed as for any other resource, with the <code>resource_href</code> for an account being <code>/api/accounts/$account_id</code>.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Although RightScale API 1.5&#39;s tagging actions may all operate on or return a list of resources, they can only do so with a single account at a time, because RightScale API 1.5 is scoped by account. To add tags to multiple accounts, you will need to make multiple API calls.</p>
+</div>
+
+<p>For this example, first generate a <code>rightscalecookies</code> file as described at the <a href="http://reference.rightscale.com/cloud_analytics/analytics_api/index.html#/">Analytics API reference</a>. (In general, you can authenticate however you normally do.) This <a href="http://reference.rightscale.com/api1.5/resources/ResourceTags.html#multi_add"><code>multi_add</code></a> call will tag the account ID 62909 with the tag <code>demo:tag=master</code> (the call does not return a response body):</p>
+<pre class="syntax-highlight shell"><code>curl https://us-4.rightscale.com/api/tags/multi_add <span class="se">\</span>
+      -b rightscalecookies <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -H <span class="s1">'X-Api-Version: 1.5'</span> <span class="se">\</span>
+      -H <span class="s1">'X-Account: 62909'</span> <span class="se">\</span>
+      -d <span class="s1">'{"resource_hrefs": ["/api/accounts/62909"], "tags": ["demo:tag=master"]}'</span>
+</code></pre>
+
+<p>Filtering <a href="http://reference.rightscale.com/api1.5/resources/ResourceTags.html#by_resource"><code>by_resource</code></a> by the account HREF then shows the newly-added tag:</p>
+
+<div class="tabpanel"><ul class="nav nav-tabs"><li class="active"><a href="#tab-0-0" data-toggle="tab">Request (using curl)</a></li><li><a href="#tab-0-1" data-toggle="tab">Response</a></li></ul></div><div class="clearfix">
+<div class="tab-content tab-doc"><div class="tab-pane fade in active" id="tab-0-0"><pre class="syntax-highlight shell"><code>curl https://us-4.rightscale.com/api/tags/by_resource <span class="se">\</span>
+      -b rightscalecookies <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -H <span class="s1">'X-Api-Version: 1.5'</span> <span class="se">\</span>
+      -H <span class="s1">'X-Account: 62909'</span> <span class="se">\</span>
+      -d <span class="s1">'{"resource_hrefs": ["/api/accounts/62909"]}'</span>
+</code></pre>
+</div><div class="tab-pane fade in" id="tab-0-1"><pre class="syntax-highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"demo:tag=master"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"rel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"resource"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/accounts/62909"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div></div>
+</div>
+
+<p>And calling <a href="http://reference.rightscale.com/api1.5/resources/ResourceTags.html#multi_delete"><code>multi_delete</code></a> removes it (this also has no response body):</p>
+<pre class="syntax-highlight shell"><code>curl https://us-4.rightscale.com/api/tags/multi_delete <span class="se">\</span>
+      -b rightscalecookies <span class="se">\</span>
+      -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+      -H <span class="s1">'X-Api-Version: 1.5'</span> <span class="se">\</span>
+      -H <span class="s1">'X-Account: 62909'</span> <span class="se">\</span>
+      -d <span class="s1">'{"resource_hrefs": ["/api/accounts/62909"], "tags": ["demo:tag=master"]}'</span>
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

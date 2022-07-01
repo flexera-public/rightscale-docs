@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Cloud Pricing in Optima</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="ca ca_ca_cloud_pricing" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="about.html"><h4 class="list-group-heading"><img src="../img/product-cloud-analytics.svg" /><span>Optima</span></h4></a><a class="list-group-item" href="legacy.html">Legacy Feature Documentation</a><a class="list-group-item" href="https://helpnet.flexerasoftware.com/Optima">Current Feature Documentation</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./"></a></p><div class="page-header"><h1>Cloud Pricing in Optima</h1></div><div class="main-content"><div class="alert alert-danger" role="alert"><strong>Warning</strong><p>The features described on this page will soon be deprecated. Refer to the <a href="https://helpnet.flexerasoftware.com/Optima">latest documentation</a> for information on the latest features.</p>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>Tracking cloud pricing is very complex and involves many components including different instance sizes, different regions, different operating system options, and specialized pricing such as AWS Reserved and Spot Instances or Google Sustained Use Discounts, Preemptible VMs, and Committed Usage Discounts.</p>
+
+<p>As a result of this complexity, RightScale tracks and manages more than 100,000 unique price points for compute resources across the top public cloud providers, and that number is growing rapidly.</p>
+
+<p>RightScale draws the latest pricing data from cloud provider APIs and also maintains historical data. RightScale also enables you to specify costs for your own internal private clouds.</p>
+
+<p>RightScale pricing data is available through the Optima user interface, as well as the RightScale Cloud Pricing Service API.</p>
+
+<h2 id="setting-up-public-cloud-pricing">Setting Up Public Cloud Pricing</h2>
+
+<p>RightScale automatically draws cloud pricing information from cloud vendors. If you have negotiated special pricing from a particular cloud vendor, RightScale allows you to add those prices as well. See <a href="/ca/ca_cloud_markups_markdowns.html">Cloud Markups and Markdowns</a>.</p>
+
+<p>If you use list pricing, just set up your cloud provider. Go to the navigation bar, click <strong>Accounts</strong>, and connect to a cloud.</p>
+
+<h2 id="setting-up-private-cloud-pricing">Setting Up Private Cloud Pricing</h2>
+
+<p>You can also <a href="/cm/dashboard/clouds/generic/instance_types_actions.html#set-instance-type-prices">add pricing of a private cloud</a> running <a href="http://www.rightscale.com/products-and-services/multi-cloud-platform/openstack-management">OpenStack</a>, <a href="http://www.rightscale.com/products-and-services/multi-cloud-platform/vsphere-management">VMware</a>, or on bare metal. As soon as you establish a connection between RightScale and your private cloud, then you can analyze the instance usage (in terms of number of virtual machines). Once you have defined your private cloud prices, you can also analyze costs.</p>
+
+<p>To set up your cloud pricing in RightScale Optima, first define the price to be associated with each instance type so that you can also analyze costs. To do this, you will need to work with your finance team to determine the internal price that you want to associate with your private cloud. Your private cloud will have several instance types, and you will need to associate hourly costs with each of them.</p>
+
+<p>Once you have determined your internal prices, go to the RightScale Cloud Management dashboard, navigate to <strong>Clouds</strong> &gt; <em>CloudName</em> &gt; <strong>Instance Types</strong>. From here you can then select <strong>Change Pricing</strong> and set an hourly price for each of your instance types.</p>
+
+<p>This price will be used to calculate private cloud costs as well as chargeback and showback reports, which are easily accessible in Optima. Please note that you must be an admin on the account to set private cloud prices — that is, you must be the one who connected your private cloud to RightScale.</p>
+
+<h2 id="markups-and-markdowns">Markups and Markdowns</h2>
+
+<p>RightScale also enables you to specify markups and markdowns. Markups and markdowns are applied to cloud prices automatically, and all users will see costs with markups and markdowns already included. See <a href="/ca/ca_cloud_markups_markdowns.html">Cloud Markups and Markdowns</a> for additional information.</p>
+
+<h2 id="rightscale-cloud-pricing-service-api">RightScale Cloud Pricing Service API</h2>
+
+<p>RightScale Cloud Pricing Service provides API access to our up-to-date repository of more than 100,000 current and historical public cloud prices. You can access list prices as well as prices after your markups and markdowns via the API. Additionally, if you have purchased AWS Reserved Instances (RIs) you can also access information on your purchased RIs catalog across all of your accounts — there is no need to log in to each account separately. The RightScale Cloud Pricing Service lets you access all these price points through an API so that you can integrate with other systems and automate processes in RightScale or other applications.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

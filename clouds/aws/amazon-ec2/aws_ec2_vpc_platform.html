@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>EC2-VPC Platform</title><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="clouds clouds_aws clouds_aws_amazon-ec2 clouds_aws_amazon-ec2_aws_ec2_vpc_platform" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="../aws_about.html"><h4 class="list-group-heading"><img src="../../../img/product-cloud-management.svg" /><span>Amazon Web Services</span></h4></a><a class="list-group-item" href="../aws_quick_start.html">Quick Start</a><a class="list-group-item" href="aws_EC2.html">Amazon EC2</a><a class="list-group-item" href="../aws_tutorials.html">Tutorials</a><a class="list-group-item" href="../../../faq/clouds/aws/">FAQs</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">Supported Clouds</a> &#x2F; <a href="../">Amazon Web Services</a> &#x2F; <a href="./">Amazon EC2</a></p><div class="page-header"><h1>EC2-VPC Platform</h1></div><div class="main-content"><h2 id="background-of-ec2-vpc-announcement">Background of EC2-VPC Announcement</h2>
+
+<p>On 3.11.13, AWS announced <a href="http://aws.typepad.com/aws/2013/03/amazon-ec2-update-virtual-private-clouds-for-everyone.html">Virtual Private Clouds for Everyone</a>. The announcement unveiled AWS&#39;s plan to give all accounts access to <a href="/clouds/aws/amazon-ec2/aws_ec2_vpc_platform.html">VPC</a> and calling the old functionality <q>EC2-Classic.</q> AWS plans to roll this out region by region. Newly created AWS accounts will launch instances on the <q>EC2-VPC</q> platform only. Existing users will experience EC2-VPC by default in new regions that they have not yet used but the regions they are already using remain unchanged.</p>
+
+<h2 id="overview-of-ec2-vpc-platform">Overview of EC2-VPC Platform</h2>
+
+<p>In this first phase, new AWS accounts will become <q>VPC exclusively</q> (region by region), meaning all resources will be within a Virtual Private Cloud. Each account receives a default VPC and default security group and API calls that create resources without specifying a VPC will use the defaults. This makes the legacy API version and non-VPC API calls work. The default VPC and default security group are configured at the time the account is created and enable a similar experience to accounts on the <q>EC2-Classic</q>. AWS is intentionally making the transition to <q>EC2-VPC</q> seamless in that <q>EC2-Classic</q> API interactions work with no change. All of this is compatible and consistent with RightScale&#39;s support.</p>
+
+<h3 id="overview-of-ec2-vpc-platform-amazon-plan">Amazon Plan</h3>
+
+<p>When a user creates a new AWS account, AWS creates a default /16 virtual network (VPC) automatically. This virtual network has a default /20 subnet in each availability zone. This network is attached to the Internet. In RightScale, all of this network configuration occurs behind the scenes and users do not need to configure anything if they choose not to. Their experience will resemble EC2-Classic.</p>
+
+<h3 id="overview-of-ec2-vpc-platform-rightscale-plan">RightScale Plan</h3>
+
+<ol>
+<li>RightScale will recognize EC2-VPC platform accounts and recognize default VPC and default security group so they can be displayed as such.</li>
+<li>The flows for adding a server support default VPC settings to support AWS&#39; effort to make <q>EC2-VPC</q> look like <q>EC2-Classic</q> as well as more advanced VPC configurations for advanced users.</li>
+</ol>
+
+<h2 id="background-ec2-classic-vpc-information">Background EC2-Classic VPC Information</h2>
+
+<p>Below is some background information about VPC in EC2-Classic that is helpful when transitioning to EC2-VPC.</p>
+
+<h3 id="background-ec2-classic-vpc-information-vpc-characteristics">VPC characteristics</h3>
+
+<ul>
+<li>VPC is available in all regions</li>
+<li>A single VPC is tied to a single region but can span multiple Availability Zones</li>
+<li>A single subnet spans 1 Availability Zone only</li>
+<li>A subnet is required when launching an EC2 instance in a VPC. A default subnet is automatically created in each Availability Zone in a default VPC.</li>
+<li>You can use all AMIs within a region within a VPC in that same region without having to reregister AMIs</li>
+<li>You can use existing EBS Snapshots within a region within a VPC in that same region</li>
+<li>You can boot an instance with an EBS volume within a VPC. But the instance launched will retain the same IP address when stopped and restarted, which is behaviorally different as compared to the EC2-Classic platform</li>
+<li>You can use reserved instances within a VPC.
+
+<ul>
+<li>Customers marked as <q>VPC Only</q> can buy Reserved Instances (they only get one choice for a Reserved Instance purchase, which is VPC). It is flagged as a VPC Reserved Instance. The EC2 or VPC designation only specifies where the capacity reservation is held. For everyone else, the price benefit of the Reserved Instance is the same in EC2 and VPC. For example, if you book 10 Reserved Instances in EC2 and you launch 10 instances in VPC, you will get the price reduction on those ten instances. However, since the Reserved Instance is in EC2 and you&#39;re launching in VPC, AWS may not have the required amount of capacity for a VPC launch, whereas AWS commits to reserving that capacity for you in EC2.</li>
+<li>You can also optionally reserve instances in Amazon VPC at the same prices as shown above. <a href="http://aws.amazon.com/ec2/reserved-instances/">Click here</a> to learn more about Reserved Instances.</li>
+<li>VPC Reserved Instances cannot be used with regular EC2 instances and vice versa. <a href="https://forums.aws.amazon.com/message.jspa?messageID=343090">Click here</a> for more information.</li>
+<li><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html">Click here</a> for more information on guaranteed capacity with Reserved Instance purchases when using EC2 Reserved Instances in VPC.</li>
+<li>CC1 instances are not supported, but CG1.4xl and CC2.8xl are in VPC</li>
+</ul></li>
+<li><a href="http://aws.amazon.com/devpay/faqs/#Can_my_customers_run_instances_of_my_paid_AMI_in_Amazon_Virtual_Private_Cloud">DevPay AMIs</a> are available in VPC</li>
+</ul>
+
+<h3 id="background-ec2-classic-vpc-information-account-defaults">Account defaults</h3>
+
+<ul>
+<li>5 VPCs per AWS Account per region</li>
+<li>200 subnets per VPC</li>
+<li>5 VPC EIPs per AWS account per region</li>
+<li>1 internet gateway per VPC</li>
+<li>5 virtual private gateways per AWS account per region</li>
+</ul>
+
+<p>See <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html">Amazon VPC Limits</a> for the full list.</p>
+
+<h2 id="ec2-vpc-platform-instance-behavior">EC2-VPC Platform Instance behavior</h2>
+
+<h3 id="ec2-vpc-platform-instance-behavior-instance-behavior">Instance Behavior</h3>
+
+<p>When a new user launches an instance, just like in EC2-Classic, it is actually launched in the default VPC, even if the user does not specify a VPC or a subnet.</p>
+
+<ul>
+<li>All existing commands that users use in EC2-Classic will continue to work, except they execute in a VPC.</li>
+<li>All instances launched by the user in a default subnet will automatically receive public IPs, just like EC2-Classic.
+
+<ul>
+<li>Users can set a flag on a subnet that says PublicIP=true|false. All instances launched into that subnet will or will not get a public IP. The public IP will be removed when the instance is stopped. The subnet-level flag can be overridden by an instance level flag on ec2run that says PublicIP=true|false.</li>
+</ul></li>
+<li>All instances launched by the user will be able to access the Internet automatically, just like EC2-Classic.
+
+<ul>
+<li>The default VPC is automatically attached to an internet gateway and routes are set appropriately.</li>
+</ul></li>
+<li>Users can associate multiple EIPs to these instances, including multiple EIPs per interface, if desired.
+
+<ul>
+<li>This requires users to first assign multiple private IPs to the interface, then they can associate an EIP to each private IP</li>
+<li>Users can remove the public IP addresses from these instances during launch or after the instance is running, if desired.</li>
+<li>Users can designate which subnets should automatically provide public IP addresses to instances during launch (unless a user overrides this setting at launch)</li>
+</ul></li>
+<li>Instances running with private IPs will only be able to access the internet via a NAT instance in the VPC.</li>
+<li>All EC2 commands will work just like EC2-Classic with no need to specify subnets at launch or specify security groups IDs (security group names are acceptable).</li>
+</ul>
+
+<h3 id="ec2-vpc-platform-instance-behavior-changes-of-note">Changes of Note</h3>
+
+<ol>
+<li>EIPs behave slightly differently when an instance is stopped (the EIP remains attached in VPC, while it becomes detached in EC2-Classic).</li>
+<li>VPC security groups cannot reference security groups in other VPCs or in EC2-Classic.</li>
+</ol>
+
+<h3 id="ec2-vpc-platform-instance-behavior-exceptions">Exceptions</h3>
+
+<p>Instances will work just like EC2-Classic, except for the following cases (if so desired):</p>
+
+<ul>
+<li>Instances can use egress filtering in security groups</li>
+<li>Instances can specify any protocol in their security groups</li>
+<li>Instances can change security group membership on the fly without needing to be re-launched</li>
+<li>Instances can be assigned multiple IP addresses</li>
+</ul>
+
+<p>Instances can be attached to multiple network interfaces</p>
+
+<h2 id="ec2-vpc-platform-feature-availability">EC2-VPC Platform Feature Availability</h2>
+
+<p>Standard VPC features will remain available in EC2-VPC platform, including the following:</p>
+
+<ul>
+<li>Users can attach VPNs to their network if they desire.
+
+<ul>
+<li>Users will not need to enter home network routes into route tables when they do VPNs, that can happen automatically, if desired</li>
+</ul></li>
+<li>Users can create additional subnets if they want and they can launch instances into these subnets, but only if they target their launches into these subnets</li>
+<li>Users can create other VPCs if they want, however, to launch into these other VPCs, they will need to target launches into the subnets in these VPCs</li>
+<li>All instances in this environment will get DNS hostnames, unless the user decides to turn off this feature* All AWS Services including ElastiCache, Beanstalk, OpsWorks, etc. are supported for use in this new environment.</li>
+</ul>
+
+<h3 id="ec2-vpc-platform-feature-availability-ec2-vpc-and-ec2-classic-behavioral-differences">EC2-VPC and EC2-Classic Behavioral Differences</h3>
+
+<ul>
+<li>Security groups in one VPC <strong>cannot</strong> reference security groups in another VPC or EC2-Classic</li>
+<li>EIPs in EC2-Classic <strong>cannot</strong> be used in EC2-VPC environment</li>
+<li>In EC2-Classic, when you stop an instance, its Elastic IP address is unmapped, and you must remap it when you restart the instance; whereas in VPC if you stop an instance, its Elastic IP address stays mapped.</li>
+<li>In EC2-Classic, instances can talk to each other via private IPs. In EC2-VPC, instances cannot talk to each other over private IPs when in different VPCs.
+
+<ul>
+<li>Users will need to start using hostnames to talk to each other, which will resolve to public IPs when called from outside the VPC or to the private IP when called from within the VPC.</li>
+</ul></li>
+</ul>
+
+<h2 id="future-steps">Future Steps</h2>
+
+<p>Contact RightScale Support with issues regarding EC2-VPC platform accounts. Consult this page in the interim while AWS rolls EC2-VPC platform to all regions and check back as we will release new documentation in the coming weeks to allow you to get the most out of VPC. Make sure to reference <a href="https://forums.aws.amazon.com/ann.jspa?annID=1875">Enabling Regions for the default VPC feature set</a> for updated information such as which regions roll out as EC2-VPC.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

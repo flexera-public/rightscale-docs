@@ -1,0 +1,1864 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Policy Template Language Permissions</title><meta content="The Policy Template Language allows you to specify needed permissions to run a given policy." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="policies policies_developers policies_developers_reference policies_developers_reference_v20180301 policies_developers_reference_v20180301_permissions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/"><h4 class="list-group-heading"><img src="../../../../img/product-governance.svg" /><span>Policies Users Guide</span></h4></a><a class="list-group-item" href="/policies/">About</a><a class="list-group-item" href="/policies/users/getting_started">Getting Started</a><a class="list-group-item" href="/policies/users/guides">Guides</a><a class="list-group-item" href="../../../users/policy_list.html">Flexera Policies</a><a class="list-group-item" href="/policies/users/faq">FAQ</a></nav></aside><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/policies/developers"><h4 class="list-group-heading"><img src="../../../../img/product-governance.svg" /><span>Policies Developers Guide</span></h4></a><a class="list-group-item" href="/policies/developers">Overview</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Policy Automation</a> &#x2F; <a href="../../">Developers Guide</a> &#x2F; <a href="../">Developers Guide</a> &#x2F; <a href="./">Developers Guide</a></p><div class="page-header"><h1>Policy Template Language Permissions</h1></div><div class="main-content"><p>The following table lists all RightScale resources and actions that can be used in a policy template 
+language <a href="/policies/reference/policy_template_language.html#permissions">permissions</a> block.
+The table also lists the least-privileged <a href="/cm/ref/user_roles.html">RightScale role</a> that provides
+the given <a href="cm/ref/user_role_privs.html">privilege</a>. Note that more powerful roles will generally grant 
+privileges from less valuable roles. For example, actor will grant all observer privileges and admin 
+will grant everything the actor and observer roles grant.</p>
+
+<table><thead>
+<tr>
+<th>Resource</th>
+<th>Action</th>
+<th>Privilege</th>
+<th>Role</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rs_cm.account_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAccountGroups.html#index">rs_cm.index</a></td>
+<td>cm:legacy:publisher</td>
+<td>publisher</td>
+</tr>
+<tr>
+<td>rs_cm.account_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAccountGroups.html#show">rs_cm.show</a></td>
+<td>cm:legacy:publisher</td>
+<td>publisher</td>
+</tr>
+<tr>
+<td>rs_cm.accounts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAccounts.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.alert_specs</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlertSpecs.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.alert_specs</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlertSpecs.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.alert_specs</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlertSpecs.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.alert_specs</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlertSpecs.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.alert_specs</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlertSpecs.html#update">rs_cm.update</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.alerts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.alerts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html#disable">rs_cm.disable</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.alerts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html#enable">rs_cm.enable</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.alerts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.alerts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html#quench">rs_cm.quench</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.alerts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.audit_entries</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAuditEntries.html#append">rs_cm.append</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.audit_entries</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAuditEntries.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.audit_entries</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAuditEntries.html#detail">rs_cm.detail</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.audit_entries</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAuditEntries.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.audit_entries</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAuditEntries.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.audit_entries</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceAuditEntries.html#update">rs_cm.update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.backups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceBackups.html#cleanup">rs_cm.cleanup</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.backups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceBackups.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.backups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceBackups.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.backups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceBackups.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.backups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceBackups.html#restore">rs_cm.restore</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.backups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceBackups.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.backups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceBackups.html#update">rs_cm.update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.child_accounts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceChildAccounts.html#create">rs_cm.create</a></td>
+<td>cm:legacy:enterprise_manager</td>
+<td>enterprise_manager</td>
+</tr>
+<tr>
+<td>rs_cm.child_accounts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceChildAccounts.html#index">rs_cm.index</a></td>
+<td>cm:legacy:enterprise_manager</td>
+<td>enterprise_manager</td>
+</tr>
+<tr>
+<td>rs_cm.child_accounts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceChildAccounts.html#update">rs_cm.update</a></td>
+<td>cm:legacy:enterprise_manager</td>
+<td>enterprise_manager</td>
+</tr>
+<tr>
+<td>rs_cm.cloud_accounts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCloudAccounts.html#create">rs_cm.create</a></td>
+<td>cm:legacy:admin</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>rs_cm.cloud_accounts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCloudAccounts.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:admin</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>rs_cm.cloud_accounts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCloudAccounts.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.cloud_accounts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCloudAccounts.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.cloud_accounts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCloudAccounts.html#update">rs_cm.update</a></td>
+<td>cm:legacy:admin</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>rs_cm.clouds</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceClouds.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.clouds</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceClouds.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbook_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbookAttachments.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbook_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbookAttachments.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbook_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbookAttachments.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbook_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbookAttachments.html#multi_attach">rs_cm.multi_attach</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbook_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbookAttachments.html#multi_detach">rs_cm.multi_detach</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbook_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbookAttachments.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbooks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbooks.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbooks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbooks.html#follow">rs_cm.follow</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbooks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbooks.html#freeze">rs_cm.freeze</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbooks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbooks.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbooks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbooks.html#obsolete">rs_cm.obsolete</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.cookbooks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCookbooks.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.credentials</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCredentials.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.credentials</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCredentials.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.credentials</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCredentials.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.credentials</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCredentials.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.credentials</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCredentials.html#update">rs_cm.update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.credentials</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCredentials.html#show">rs_cm.show_sensitive</a></td>
+<td>cm:legacy:credential_viewer <em>OR</em> cm:legacy:admin</td>
+<td>credential_viewer</td>
+</tr>
+<tr>
+<td>rs_cm.credentials</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceCredentials.html#index">rs_cm.index_sensitive</a></td>
+<td>cm:legacy:credential_viewer <em>OR</em> cm:legacy:admin</td>
+<td>credential_viewer</td>
+</tr>
+<tr>
+<td>rs_cm.datacenters</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDatacenters.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.datacenters</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDatacenters.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.deployments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDeployments.html#clone">rs_cm.clone</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.deployments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDeployments.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.deployments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDeployments.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.deployments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDeployments.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.deployments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDeployments.html#lock">rs_cm.lock</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.deployments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDeployments.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.deployments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDeployments.html#unlock">rs_cm.unlock</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.deployments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDeployments.html#update">rs_cm.update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.deployments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceDeployments.html#servers">rs_cm.servers</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.identity_providers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIdentityProviders.html#index">rs_cm.index</a></td>
+<td>cm:legacy:admin</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>rs_cm.identity_providers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIdentityProviders.html#show">rs_cm.show</a></td>
+<td>cm:legacy:admin</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>rs_cm.images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceImages.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceImages.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.inputs</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInputs.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.inputs</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInputs.html#multi_update">rs_cm.multi_update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instance_types</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstanceTypes.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.instance_types</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstanceTypes.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#launch">rs_cm.launch</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#lock">rs_cm.lock</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#multi_run_executable">rs_cm.multi_run_executable</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#multi_terminate">rs_cm.multi_terminate</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#reboot">rs_cm.reboot</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#run_executable">rs_cm.run_executable</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#start">rs_cm.start</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#stop">rs_cm.stop</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#terminate">rs_cm.terminate</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#unlock">rs_cm.unlock</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.instances</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceInstances.html#update">rs_cm.update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.ip_address_bindings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddressBindings.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.ip_address_bindings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddressBindings.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.ip_address_bindings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddressBindings.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.ip_address_bindings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddressBindings.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.ip_addresses</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddresses.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.ip_addresses</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddresses.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.ip_addresses</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddresses.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.ip_addresses</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddresses.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.ip_addresses</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddresses.html#update">rs_cm.update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.monitoring_metrics</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMonitoringMetrics.html#data">rs_cm.data</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.monitoring_metrics</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMonitoringMetrics.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.monitoring_metrics</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMonitoringMetrics.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_image_matchers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageMatchers.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_image_matchers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageMatchers.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_image_matchers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageMatchers.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_image_matchers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageMatchers.html#rematch">rs_cm.rematch</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_image_matchers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageMatchers.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_image_settings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageSettings.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_image_settings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageSettings.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_image_settings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageSettings.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_image_settings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageSettings.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_image_settings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageSettings.html#update">rs_cm.update</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImages.html#clone">rs_cm.clone</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImages.html#commit">rs_cm.commit</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImages.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImages.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImages.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImages.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImages.html#update">rs_cm.update</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.network_gateways</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkGateways.html#create">rs_cm.create</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.network_gateways</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkGateways.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.network_gateways</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkGateways.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.network_gateways</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkGateways.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.network_gateways</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkGateways.html#update">rs_cm.update</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.network_option_group_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkOptionGroupAttachments.html#create">rs_cm.create</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.network_option_group_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkOptionGroupAttachments.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.network_option_group_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkOptionGroupAttachments.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.network_option_group_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkOptionGroupAttachments.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.network_option_group_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkOptionGroupAttachments.html#update">rs_cm.update</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.network_option_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkOptionGroups.html#create">rs_cm.create</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.network_option_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkOptionGroups.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.network_option_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkOptionGroups.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.network_option_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkOptionGroups.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.network_option_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworkOptionGroups.html#update">rs_cm.update</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.networks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworks.html#create">rs_cm.create</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.networks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworks.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.networks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworks.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.networks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworks.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.networks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceNetworks.html#update">rs_cm.update</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.permissions</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePermissions.html#create">rs_cm.create</a></td>
+<td>cm:legacy:admin</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>rs_cm.permissions</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePermissions.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:admin</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>rs_cm.permissions</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePermissions.html#index">rs_cm.index</a></td>
+<td>cm:legacy:admin</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>rs_cm.permissions</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePermissions.html#show">rs_cm.show</a></td>
+<td>cm:legacy:admin</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>rs_cm.placement_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePlacementGroups.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.placement_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePlacementGroups.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.placement_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePlacementGroups.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.placement_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePlacementGroups.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.preferences</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePreferences.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.preferences</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePreferences.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.preferences</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePreferences.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.preferences</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePreferences.html#update">rs_cm.update</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.publication_lineages</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePublicationLineages.html#show">rs_cm.show</a></td>
+<td>cm:legacy:publisher</td>
+<td>publisher</td>
+</tr>
+<tr>
+<td>rs_cm.publications</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePublications.html#import">rs_cm.import</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.publications</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePublications.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.publications</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourcePublications.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.recurring_volume_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRecurringVolumeAttachments.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.recurring_volume_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRecurringVolumeAttachments.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.recurring_volume_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRecurringVolumeAttachments.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.recurring_volume_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRecurringVolumeAttachments.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.repositories</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositories.html#cookbook_import">rs_cm.cookbook_import</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.repositories</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositories.html#cookbook_import_preview">rs_cm.cookbook_import_preview</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.repositories</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositories.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.repositories</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositories.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.repositories</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositories.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.repositories</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositories.html#refetch">rs_cm.refetch</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.repositories</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositories.html#resolve">rs_cm.resolve</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.repositories</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositories.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.repositories</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositories.html#update">rs_cm.update</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.repository_assets</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositoryAssets.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.repository_assets</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRepositoryAssets.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.resource_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceResourceGroups.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.resource_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceResourceGroups.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.resource_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceResourceGroups.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.resource_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceResourceGroups.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.resource_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceResourceGroups.html#update">rs_cm.update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.right_script_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScriptAttachments.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.right_script_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScriptAttachments.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.right_script_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScriptAttachments.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.right_script_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScriptAttachments.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.right_script_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScriptAttachments.html#update">rs_cm.update</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.right_scripts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScripts.html#commit">rs_cm.commit</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.right_scripts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScripts.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.right_scripts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScripts.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.right_scripts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScripts.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.right_scripts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScripts.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.right_scripts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScripts.html#show_source">rs_cm.show_source</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.right_scripts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScripts.html#update">rs_cm.update</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.right_scripts</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRightScripts.html#update_source">rs_cm.update_source</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.route_tables</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRouteTables.html#create">rs_cm.create</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.route_tables</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRouteTables.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.route_tables</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRouteTables.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.route_tables</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRouteTables.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.route_tables</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRouteTables.html#update">rs_cm.update</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.routes</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRoutes.html#create">rs_cm.create</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.routes</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRoutes.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.routes</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRoutes.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.routes</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRoutes.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.routes</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRoutes.html#update">rs_cm.update</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.runnable_bindings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRunnableBindings.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.runnable_bindings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRunnableBindings.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.runnable_bindings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRunnableBindings.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.runnable_bindings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRunnableBindings.html#multi_update">rs_cm.multi_update</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.runnable_bindings</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceRunnableBindings.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.security_group_rules</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroupRules.html#create">rs_cm.create</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.security_group_rules</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroupRules.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.security_group_rules</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroupRules.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.security_group_rules</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroupRules.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.security_group_rules</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroupRules.html#update">rs_cm.update</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.security_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroups.html#create">rs_cm.create</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.security_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroups.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.security_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroups.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.security_groups</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSecurityGroups.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#clone">rs_cm.clone</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#disable_runnable_bindings">rs_cm.disable_runnable_bindings</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#enable_runnable_bindings">rs_cm.enable_runnable_bindings</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#monitor">rs_cm.monitor</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#scale_down">rs_cm.scale_down</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#scale_up">rs_cm.scale_up</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#update">rs_cm.update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#current_instances">rs_cm.current_instances</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#launch">rs_cm.launch</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#multi_terminate">rs_cm.multi_terminate</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_arrays</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerArrays.html#multi_run_executable">rs_cm.multi_run_executable</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.server_template_multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplateMultiCloudImages.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.server_template_multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplateMultiCloudImages.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.server_template_multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplateMultiCloudImages.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.server_template_multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplateMultiCloudImages.html#make_default">rs_cm.make_default</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.server_template_multi_cloud_images</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplateMultiCloudImages.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#clone">rs_cm.clone</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#commit">rs_cm.commit</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#create">rs_cm.create</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#detect_changes_in_head">rs_cm.detect_changes_in_head</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#publish">rs_cm.publish</a></td>
+<td>cm:legacy:publisher</td>
+<td>publisher</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#resolve">rs_cm.resolve</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#swap_repository">rs_cm.swap_repository</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.server_templates</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServerTemplates.html#update">rs_cm.update</a></td>
+<td>cm:legacy:designer</td>
+<td>designer</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#clone">rs_cm.clone</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#disable_runnable_bindings">rs_cm.disable_runnable_bindings</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#enable_runnable_bindings">rs_cm.enable_runnable_bindings</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#unwrap">rs_cm.unwrap</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#update">rs_cm.update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#wrap_instance">rs_cm.wrap_instance</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#launch">rs_cm.launch</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.servers</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceServers.html#terminate">rs_cm.terminate</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.sessions</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSessions.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.ssh_keys</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSshKeys.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.ssh_keys</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSshKeys.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.ssh_keys</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSshKeys.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.ssh_keys</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSshKeys.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.ssh_keys</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSshKeys.html#show">rs_cm.show_sensitive</a></td>
+<td>cm:legacy:credential_viewer <em>OR</em> cm:legacy:admin</td>
+<td>credential_viewer</td>
+</tr>
+<tr>
+<td>rs_cm.ssh_keys</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSshKeys.html#index">rs_cm.index_sensitive</a></td>
+<td>cm:legacy:credential_viewer <em>OR</em> cm:legacy:admin</td>
+<td>credential_viewer</td>
+</tr>
+<tr>
+<td>rs_cm.subnets</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSubnets.html#create">rs_cm.create</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.subnets</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSubnets.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.subnets</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSubnets.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.subnets</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSubnets.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.subnets</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceSubnets.html#update">rs_cm.update</a></td>
+<td>cm:legacy:security_manager</td>
+<td>security_manager</td>
+</tr>
+<tr>
+<td>rs_cm.tags</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceTags.html#by_resource">rs_cm.by_resource</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.tags</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceTags.html#by_tag">rs_cm.by_tag</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.tags</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceTags.html#multi_add">rs_cm.multi_add</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.tags</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceTags.html#multi_delete">rs_cm.multi_delete</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.tasks</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceTasks.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.user_datas</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceUserDatas.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.users</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceUsers.html#create">rs_cm.create</a></td>
+<td>cm:legacy:admin <em>OR</em> cm:legacy:enterprise_manager</td>
+<td>admin</td>
+</tr>
+<tr>
+<td>rs_cm.users</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceUsers.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.users</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceUsers.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.users</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceUsers.html#update">rs_cm.update</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.volume_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeAttachments.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.volume_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeAttachments.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.volume_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeAttachments.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.volume_attachments</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeAttachments.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.volume_snapshots</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeSnapshots.html#copy">rs_cm.copy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.volume_snapshots</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeSnapshots.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.volume_snapshots</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeSnapshots.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.volume_snapshots</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeSnapshots.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.volume_snapshots</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeSnapshots.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.volume_types</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeTypes.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.volume_types</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeTypes.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.volumes</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumes.html#create">rs_cm.create</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.volumes</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumes.html#destroy">rs_cm.destroy</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_cm.volumes</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumes.html#index">rs_cm.index</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.volumes</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumes.html#show">rs_cm.show</a></td>
+<td>cm:legacy:observer</td>
+<td>observer</td>
+</tr>
+<tr>
+<td>rs_cm.volumes</td>
+<td><a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumes.html#update">rs_cm.update</a></td>
+<td>cm:legacy:actor</td>
+<td>actor</td>
+</tr>
+<tr>
+<td>rs_optima.allocation_table</td>
+<td>rs_optima.show</td>
+<td>optima:billing_center:show</td>
+<td>billing_center_viewer (org scope only)</td>
+</tr>
+<tr>
+<td>rs_optima.allocation_table</td>
+<td>rs_optima.upsert</td>
+<td>optima:billing_center:update</td>
+<td>billing_center_admin (org scope only)</td>
+</tr>
+<tr>
+<td>rs_optima.aws_reserved_instances</td>
+<td>rs_optima.index</td>
+<td>ca:legacy:user</td>
+<td>ca_user (org scope only)</td>
+</tr>
+<tr>
+<td>rs_optima.recommendation_rules</td>
+<td>rs_optima.index</td>
+<td>optima:recommendation:index</td>
+<td>billing_center_viewer (org scope only)</td>
+</tr>
+<tr>
+<td>rs_optima.recommendation_rules</td>
+<td>rs_optima.show</td>
+<td>optima:recommendation:show</td>
+<td>billing_center_viewer (org scope only)</td>
+</tr>
+<tr>
+<td>rs_optima.recommendations</td>
+<td>rs_optima.index</td>
+<td>optima:recommendation:index</td>
+<td>billing_center_viewer (org scope only)</td>
+</tr>
+<tr>
+<td>rs_optima.recommendations</td>
+<td>rs_optima.show</td>
+<td>optima:recommendation:show</td>
+<td>billing_center_viewer (org scope only)</td>
+</tr>
+<tr>
+<td>rs_optima.recommendations</td>
+<td>rs_optima.resolve</td>
+<td>optima:recommendation:update</td>
+<td>billing_center_admin (org scope only)</td>
+</tr>
+<tr>
+<td>rs_optima.recommendations</td>
+<td>rs_optima.unresolve</td>
+<td>optima:recommendation:update</td>
+<td>billing_center_admin (org scope only)</td>
+</tr>
+</tbody></table>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

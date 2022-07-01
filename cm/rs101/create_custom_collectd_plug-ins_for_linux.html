@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Create Custom collectd Plug-ins for Linux</title><meta content="Procedure for writing a custom collectd plugin for Linux instances so that the data can be collected and graphs can be drawn and displayed in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_rs101 cm_rs101_create_custom_collectd_plug-ins_for_linux" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Cloud Management - Terminology and Concepts</a></p><div class="page-header"><h1>Create Custom collectd Plug-ins for Linux</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To write a custom collectd plugin for Linux instances so that the data can be collected and graphs can be drawn and displayed in the RightScale Dashboard.</p>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-create-the-custom-plugin">Create the Custom Plugin</h3>
+
+<p>Let&#39;s try a simple example: a plug-in that collects cpu load by calling &#39;uptime&#39; and parsing the output (note this is not necessarily the best way to do the data collection, but it&#39;s a simple example). Save the contents into the <code>mycpuload.rb</code> file.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>The step must be 20 for all RRDs and data must be sent at 20 second intervals. Anything else is a waste of bandwidth and processing. <a href="monitoring_limitations.html">Read more about the monitoring system limitations</a>.</p>
+</div>
+<pre class="syntax-highlight ruby"><code><span class="c1">#!/usr/bin/env ruby</span>
+
+<span class="c1"># The name of the collectd plugin, something like apache, memory, mysql, interface, ...</span>
+<span class="no">PLUGIN_NAME</span> <span class="o">=</span> <span class="s1">'mycpuload'</span>
+<span class="n">hostname</span>    <span class="o">=</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'COLLECTD_HOSTNAME'</span><span class="p">]</span> <span class="o">||</span> <span class="s2">"localhost"</span>
+<span class="n">interval</span>    <span class="o">=</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'COLLECTD_INTERVAL'</span><span class="p">]</span> <span class="o">||</span> <span class="mi">20</span>
+
+<span class="k">def</span> <span class="nf">usage</span>
+  <span class="nb">puts</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="vg">$0</span><span class="si">}</span><span class="s2"> -h &lt;host_id&gt; [-i &lt;sampling_interval&gt;]"</span><span class="p">)</span>
+  <span class="nb">exit</span>
+<span class="k">end</span>
+
+<span class="c1"># Main</span>
+<span class="k">begin</span>
+  <span class="c1"># Sync stdout so that it will flush to collectd properly.</span>
+  <span class="vg">$stdout</span><span class="p">.</span><span class="nf">sync</span> <span class="o">=</span> <span class="kp">true</span>
+
+  <span class="c1"># Collection loop</span>
+  <span class="k">while</span> <span class="kp">true</span> <span class="k">do</span>
+    <span class="n">start_run</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">to_i</span>
+    <span class="n">next_run</span> <span class="o">=</span> <span class="n">start_run</span> <span class="o">+</span> <span class="n">interval</span>
+
+    <span class="c1"># collectd data and print the values</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="sb">`uptime`</span><span class="p">[</span><span class="sr">/load average: ([\d.]+)/</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="c1"># get 5-minute load average</span>
+    <span class="nb">puts</span><span class="p">(</span><span class="s2">"PUTVAL </span><span class="si">#{</span><span class="n">hostname</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="no">PLUGIN_NAME</span><span class="si">}</span><span class="s2">/gauge-5_minute_load </span><span class="si">#{</span><span class="n">start_run</span><span class="si">}</span><span class="s2">:</span><span class="si">#{</span><span class="n">data</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># sleep to make the interval</span>
+    <span class="k">while</span><span class="p">((</span><span class="n">time_left</span> <span class="o">=</span> <span class="p">(</span><span class="n">next_run</span> <span class="o">-</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">to_i</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">do</span>
+      <span class="nb">sleep</span><span class="p">(</span><span class="n">time_left</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<div class="alert alert-warning" role="alert"><strong>Important!</strong><p>The value you choose for your <code>PLUGIN_NAME</code> variable must be unique and not conflict with any of the existing RigthtScale collectd plugin names. For example, if you use <code>haproxy</code>, <code>cpu</code>, <code>df-</code>, <code>apache</code>, or <code>load</code> as a plugin name an error will occur and may cause unexpected behavior.</p>
+</div>
+
+<p>Now when we run this from the command line, this is what it looks like: </p>
+<pre class="syntax-highlight plaintext"><code>[root@ip-10-251-70-47 /]# cd /usr/lib/collectd/plugins
+[root@ip-10-251-70-47 plugins]# chmod +x mycpuload.rb #give permissions to execute the file
+[root@ip-10-251-70-47 plugins]# ./mycpuload.rb #Terminate the script with Ctrl+c
+PUTVAL localhost/mycpuload/gauge-5_minute_load 1207188959:0.01
+PUTVAL localhost/mycpuload/gauge-5_minute_load 1207188979:0.00
+PUTVAL localhost/mycpuload/gauge-5_minute_load 1207188999:0.08
+./mycpuload:46:in `sleep': Interrupt
+    from ./mycpuload:46
+[root@ip-10-251-70-47 plugins]#
+</code></pre>
+
+<p>If you look carefully at the timestamps (the 10-digit number), you&#39;ll notice that the three lines are all 20 seconds apart. The number at the end of the line is the load reported by uptime. Note that the <code>localhost</code> in the output above will be the correct hostname when run with collectd.</p>
+
+<p>Now it&#39;s time to explain what the <code>01-EHII6FZK7KAAB/mycpuload/gauge-5_minute_load</code> string represents.</p>
+
+<p>The format of this string is <code>&lt;instance-id&gt;/&lt;plugin&gt;-&lt;plugin_instance&gt;/&lt;type&gt;-&lt;type_instance&gt;</code></p>
+
+<p>The meaning of each field is:</p>
+
+<ul>
+<li><code>instance-id</code>: This is the ID that identifies the server that is sending the data to the monitoring servers. This can be obtained by looking at the env value of <code>COLLECTD_HOSTNAME</code> or the Info tab of the Server page.</li>
+<li><code>plugin</code>: identifies the plugin that is typically associated with an application or a resource. Examples include apache, mysql, squid, cpu, memory, etc. NOTE:</li>
+<li><code>plugin_instance</code>: identifies the instance of an application/resource when there are multiple applications/resourse. Examples are cpu-0, cpu-1 on dual-core servers, or df-mnt and df-root for the two filesystems on small instances.</li>
+<li><code>type</code>: identifies the type of data being collected. Your custom plugin must use one of the <a href="/cm/rs101/supported_graphs_types.html">Supported Graphs Types</a>, defined in types.db.</li>
+<li><code>type-instance</code>: the name of the variable being collected, or the instance of the variable of the given type being collected Examples are: (for the cpu type) idle, wait, busy; (for the &#39;mysql_command&#39; type) selects, updates, executes.</li>
+</ul>
+
+<p>All of this can be pretty confusing at first. To try and make the fields easier to understand, note how a <code>-</code> separates plugin and plugin_instance or type and type_instance, while an <code>_</code> is sometimes used within any of these four items. The best way to understand how all this works is to look at where each of these identifiers shows up on the web pages.</p>
+
+<ul>
+<li>Each <code>&lt;plugin&gt;-&lt;plugin_instance&gt;</code> combination results in a menu box at the top of the monitoring page</li>
+<li>The graph <code>&lt;type&gt;</code> determines how the data is interpreted and how the graphs are drawn by the TSS servers. The preceding example uses the <code>gauge</code> type. You must use one of the <a href="/cm/rs101/supported_graphs_types.html">Supported Graphs Types</a>, otherwise TSS will not be able to create any graphs. Either the <code>counter</code> or <code>gauge</code> graph types are recommended for custom plug-ins.</li>
+<li>The <code>&lt;type_instance&gt;</code> shows up in the title of the graph(s)</li>
+</ul>
+
+<h3 id="steps-add-the-new-plugin">Add the New Plugin</h3>
+
+<p>Now, you need to link the new plugin into <code>collectd.conf</code>. Based on the distribution, you need to create a <code>mycpuload.conf</code> file in either <code>/etc/collectd.d/</code> (CentOS) or <code>/etc/collectd/conf/</code> (Ubuntu) with this content: </p>
+<pre class="syntax-highlight plaintext"><code>LoadPlugin exec
+&lt;Plugin exec&gt;
+  # userid plugin executable plugin args
+  Exec "my_user" "/usr/lib/collectd/plugins/mycpuload.rb"
+&lt;/Plugin&gt;
+</code></pre>
+
+<p>Now, we need to create the user <code>my_user</code> , used by collectd to run the script:</p>
+<pre class="syntax-highlight plaintext"><code>[root@ip-10-251-70-47 /]# cd /usr/lib/collectd/plugins/
+[root@ip-10-251-70-47 plugins]# useradd my_user -s /sbin/nologin -M
+[root@ip-10-251-70-47 plugins]# chown my_user:my_user mycpuload.rb #change owner and group
+[root@ip-10-251-70-47 plugins]# ls -l
+total 12
+-rwxr-xr-x 1 haproxy haproxy 7066 Sep 28 10:23 haproxy
+-rwxr-xr-x 1 my_user my_user 1220 Sep 30 15:32 mycpuload.rb
+</code></pre>
+
+<h3 id="steps-allow-my_user-in-sudoers--optional-">Allow my_user in sudoers (optional)</h3>
+
+<p>Collectd will not allow plugins to run as root, and in most cases this is fine. However, in the event your plugin requires root privlieges, you will need to write the plugin to sudo the appropriate commands. Generally this is not a recommended practice, but if it is needed, here is an example:</p>
+<pre class="syntax-highlight plaintext"><code>my_user ALL=(ALL) NOPASSWD:/usr/lib/collectd/plugins/mycpuload.rb
+</code></pre>
+
+<h3 id="steps-restart-collectd">Restart collectd</h3>
+
+<p>Now we need to restart collectd and check for correct script execution:</p>
+<pre class="syntax-highlight plaintext"><code>[root@ip-10-251-70-47 plugins]# service collectd restart
+Stopping collectd: [OK]
+Starting collectd: [OK]
+[root@ip-10-251-70-47 plugins]# tail /var/log/messages #/var/log/syslog on Ubuntu
+Sep 30 16:00:46 ip-10-251-70-47 collectd[23768]: Exiting normally
+Sep 30 16:00:47 ip-10-251-70-47 collectd[23768]: exec plugin: Sent SIGTERM to 23777
+Sep 30 16:00:47 ip-10-251-70-47 collectd[23768]: exec plugin: Sent SIGTERM to 23778
+[root@ip-10-251-70-47 plugins]# ps aux | grep mycpuload
+my_user 23591 0.0 0.1 3528 1936 ? S 15:37 0:00 ruby /usr/lib/collectd/plugins/mycpuload.rb 
+</code></pre>
+
+<p>If the script is being executed by <code>my_user</code>, you should find the <code>mycpuload</code> graph in the Dashboard.</p>
+
+<h2 id="see-also">See also</h2>
+
+<ul>
+<li><a href="/cm/rs101/create_a_custom_alert_specification.html">Create a Custom Alert Specification</a></li>
+<li><a href="monitoring_limitations.html">Monitoring System Limitations</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

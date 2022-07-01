@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Perform a Health Check Test</title><meta content="Steps and procedures for performing a standard health check test to make ensure proper communication between HAProxy load balancers and the application servers in a RightScale Deployment." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_management_guide cm_management_guide_perform_a_health_check_test" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Lifecycle Management</a></p><div class="page-header"><h1>Perform a Health Check Test</h1></div><div class="main-content"><h2 id="objective">Objective</h2>
+
+<p>To perform a standard health check test to make ensure proper communication between HAProxy load balancers and the application servers in its load balancing pool.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>A running 3-tier deployment that&#39;s based on the v12.11 LTS or Infinity ServerTemplates published by RightScale.</li>
+<li>Load Balancer tier must be HAProxy</li>
+<li>&#39;designer&#39;, &#39;actor&#39;, and &#39;server_login&#39; user role privileges</li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>In this tutorial, you will perform the following actions:</p>
+
+<ul>
+<li>Create a RightScript that tests the connection between the load balancers and application servers.</li>
+<li>Customize a Chef-based ServerTemplate by adding a RightScript.</li>
+<li>Modify the current inputs on running servers.</li>
+<li>Test the script and save the changes.</li>
+</ul>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-check-the-load-balancing-pool">Check the Load Balancing Pool</h3>
+
+<p>The first step is to check your load balancing pool to make sure that you have at least two operational application servers. There are two different ways to check the load balancing pool to make sure that all running application servers are properly connected to a load balancer.</p>
+
+<h4 id="ssh">SSH</h4>
+
+<p>The following test shows a mapping of the Resource ID of the array servers with their internal, Private IP Address. In the example below, the traffic to these servers is routed over port 8000.</p>
+
+<ol>
+<li>SSH into one of the running load balancer servers.</li>
+<li>Run the following shell command to view the HAProxy configuration file (/etc/haproxy/haproxy.cfg)
+~~~
+cd /home/haproxy/
+less rightscale_lb.cfg
+~~~</li>
+<li>Scroll to the bottom of the return message (spacebar) and you should see entries for each application server in the load balancer pool, similar to the following:
+~~~
+server i-f3ee8795 10.203.85.169:8000 check inter 3000 rise 2 fall 3 maxconn 255
+server i-a3d1b8c5 10.204.97.84:8000 check inter 3000 rise 2 fall 3 maxconn 255
+~~~</li>
+</ol>
+
+<h4 id="haproxy-status-page">HAProxy Status Page</h4>
+
+<p>Add <strong><q>/haproxy-status</q></strong> to the end of the URL to see which application servers are part of the HAProxy load balancing pool. (e.g. www.example.com/haproxy-status)</p>
+
+<p><img src="/img/cm-ha-proxy-status.png" alt="cm-ha-proxy-status.png" width="725" height="427" /></p>
+
+<p>You should see the instance ID of each operational application server. If an application server is properly connected to the HAProxy servers in the load balancing tier, it will be listed in a row highlighted in green. If the server is highlighted in red, the application server is not in the load balancing pool and will not receive any requests from a load balancer server.</p>
+
+<h3 id="steps-create-a-rightscript">Create a RightScript</h3>
+
+<p>The next step is to create a simple RightScript that tests the ability of the load balancers to send incoming requests to the application servers in a rotating fashion.</p>
+
+<ol>
+<li>Go to <strong>Design &gt; RightScripts &gt; New</strong>.</li>
+<li><p>Provide the following information about the RightScript.</p>
+
+<ul>
+<li><strong>Name</strong> - Enter a name. (e.g. Load Balancer Test)</li>
+<li><strong>Description</strong> - Provide a simple description. (e.g. <q>Simple test for the HAProxy load balancers and the application servers in its load balancing pool.</q>)</li>
+<li><p><strong>Script</strong> - Copy and paste the following code, which creates a webpage ( <strong>servername.html</strong> ) that will display the instance ID of the application server that&#39;s used for the current session.</p>
+<pre class="syntax-highlight html"><code>#!/bin/bash -ex
+cat &gt; /home/webapps/$APPLICATION_NAME/servername.html <span class="err">&lt;</span><span class="nt">&lt; EOF</span>
+<span class="err">&lt;</span><span class="na">html</span><span class="nt">&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;</span>Which application server am I connected to?<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>Instance ID: <span class="nt">&lt;font</span> <span class="na">color=</span><span class="s">"blue"</span><span class="nt">&gt;</span>
+EOF
+cat /var/spool/cloud/meta-data/instance-id &gt;&gt; /home/webapps/$APPLICATION_NAME/servername.html
+cat &gt;&gt; /home/webapps/$APPLICATION_NAME/servername.html <span class="err">&lt;</span><span class="nt">&lt; EOF</span>
+<span class="err">&lt;/</span><span class="na">font</span><span class="nt">&gt;&lt;/h2&gt;&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;</span>
+EOF
+</code></pre></li>
+<li><p><strong>Packages</strong> - Leave this field blank.</p></li>
+<li><p><strong>Inputs</strong> - After pasting in the sample code, click the <strong>Identify</strong> button to show all of the user configurable inputs in the script. For this example, you will only have one input (&#39;APPLICATION_NAME&#39;).</p></li>
+<li><p><strong>Enabled</strong> - Make sure the input is enabled. The checkbox should be checked.</p></li>
+<li><p><strong>Input Type</strong> - Since the application name will be a string value, use the <q>Input is a single value</q> option. (default)</p></li>
+<li><p><strong>Default Value</strong> - You have the option to create a default value for this input. For this example, keep the <q>None</q> option. (default)</p></li>
+<li><p><strong>Category</strong> - Select under which category the input will displayed under in the Inputs tab. Select the <q>Application</q> option.</p></li>
+<li><p><strong>Input description</strong> - Enter a brief description for the input. (e.g. The application name.)</p></li>
+</ul></li>
+<li><p>Click <strong>Save</strong>.</p></li>
+<li><p>Since you haven&#39;t tested the script yet to verify that there are no errors in your code, there is no reason to commit the script. You will use the editable HEAD version of the script until you can test its functionality.</p></li>
+</ol>
+
+<h3 id="steps-test-the-script">Test the Script</h3>
+
+<p>A common misconception is that you can&#39;t use RightScripts in a ServerTemplate that primarily uses Chef cookbooks and recipes. In fact, you may find it easier to create simple RightScripts to perform simple actions instead of creating a Chef recipe that accomplishes the same task.</p>
+
+<h4 id="running-server-(committed-revision)">Running Server (Committed Revision)</h4>
+
+<ol>
+<li>To test the script on a running application server that was launched with a committed (uneditable) ServerTemplate, you can go to the <strong>Scripts</strong> tab of the <q>current</q> running server and use the &#39;Any Script&#39; option to select and run the new RightScript. (<em>Tip</em>: It will be located under the <q>Unpublished</q> Publisher category in the script selector.)</li>
+<li>Use the same value for the <strong>APPLICATION_NAME</strong> input that you used for the <q>**Application Name**</q> input under the <q>WEB\_APACHE</q> category. (<em>Tip</em>: You may want to check your settings in a different web browser tab.)</li>
+<li>Wait for the script to be 100% completed. You can track the status under the Events pane or under each running server&#39;s <strong>Audit Entries</strong> tab.</li>
+<li>Repeat the steps above across all running application servers.</li>
+</ol>
+
+<h4 id="running-server-(head)">Running Server (HEAD)</h4>
+
+<ol>
+<li>If you are using a server or array that&#39;s using an editable HEAD version of the application ServerTemplate, go to the <strong>Scripts</strong> tab of the ServerTemplate and add the new RightScript to the Operational Scripts list so that it will automatically appear as an executable script on your running application servers. (<em>Tip</em>: It will be located under the <q>Unpublished</q> Publisher category in the script selector.)<br>
+<img src="/img/cm-add-blt-test-script.png" alt="cm-add-blt-test-script.png" width="550" height="292" /></li>
+<li>Go to the <strong>Inputs</strong> tab of the <q>current</q> running server. Edit the inputs and enter the same value for the <strong>APPLICATION_NAME</strong> input that you used for the <q>**Application Name**</q> input under the <q>WEB\_APACHE</q> category.</li>
+<li>Go to the <strong>Scripts</strong> tab of the running application server and run the script.</li>
+<li>Wait for the script to be 100% completed. You can track the status under the Events pane or under each running server&#39;s <strong>Audit Entries</strong> tab.</li>
+<li>Repeat the steps above across all running application servers.</li>
+</ol>
+
+<h3 id="steps-check-the-webpage">Check the Webpage</h3>
+
+<p>Since a server&#39;s scripts are defined by its ServerTemplate and you launched the application server(s) with an editable HEAD version of the application ServerTemplate, you can now test the script on a running server.</p>
+
+<ol>
+<li>In a new browser window, view the <strong>servername.html</strong> web page that the RightScript just created on the application server. Construct a URL using the FQDN associated with the load balancer servers (e.g. www.example.com/servername.html) or use the public IP address of a load balancer server (e.g. 204.33.451.23/servername.html). You should see a web page that displays the instance ID of the application server that responded to the web request.</li>
+<li>Refresh the browser to verify that the load balancer servers are properly sending requests to all of the application servers in a round-robin fashion. Refresh the browser a few more times to see all of the application servers in the load balancing pool. (<em>Tip</em>: It sometimes helps to click the refresh button really fast if the instance ID does not change after each refresh.)<br>
+<img src="/img/cm-web-instance-id2.png" alt="cm-web-instance-id2.png" width="300" height="230" /></li>
+</ol>
+
+<h3 id="steps-commit-the-changes">Commit the Changes</h3>
+
+<p>If the previous test was successful and you want to save the changes, commit the ServerTemplate. Since the ServerTemplate has a HEAD RightScript, you will be prompted to also commit the RightScript as part of the same action. Make sure the checkbox is checked. When you commit a HEAD ServerTemplate that references a HEAD RightScript, both components will be committed and new, static revisions will be created. The new ServerTemplate revision will reference the latest revision of the RightScript. However, the HEAD ServerTemplate will continue to reference the HEAD RightScript so that you can continue to make modifications to the script, which is useful during development cycles. However, if you do not want to make any further changes to the script, you can select the most recently committed revision of the RightScript under the HEAD ServerTemplate&#39;s Scripts tab.</p>
+
+<ol>
+<li>Go to the custom application ServerTemplate and click the <strong>Commit</strong> action button.</li>
+<li>Leave a descriptive commit message that explains all of the changes and click <strong>Commit</strong>.<br>
+<img src="/img/cm-commit-php.png" alt="cm-commit-php.png" width="550" height="292" /></li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

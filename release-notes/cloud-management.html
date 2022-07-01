@@ -1,0 +1,757 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Release Notes</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="release-notes release-notes_cloud-management"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/release-notes"><h4 class="list-group-heading">Release Notes</h4></a><a class="list-group-item menu-item-cm" href="cloud-management.html">Cloud Management</a><a class="list-group-item menu-item-ss" href="self-service.html">Self-Service</a><a class="list-group-item menu-item-gov" href="governance.html">Governance</a><a class="list-group-item menu-item-ca" href="https://helpnet.flexerasoftware.com/?product=Optima">Optima</a><a class="list-group-item menu-item-rca" href="rca-v.html">RCA-V</a><a class="list-group-item menu-item-rl10" href="right-link-10.html">RightLink 10</a></nav></aside><div class="callout"><a href="https://support.rightscale.com/18-Release_Notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Archived Release Notes</h4></div><span>View previously published release notes.</span></div></div></a></div><div class="callout"><a href="mailto:support@rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Release Questions?</h4></div><span>Our technical support staff is ready to help.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="clearfix"><div class="main-content"><div class="page-header"><h1>Release Notes</h1><div class="page-subheader category-cloud-management"></div></div><div class="row release-notes-category"><div class="col-md-8"><div class="article"><div class="article-title"><time datetime="09-19-2018"> <a href="/release-notes/cloud-management/2018/09/19.html">September 19, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Hashicorp has certified the <strong><a href="https://www.terraform.io/docs/providers/rightscale/index.html">RightScale provider for Terraform</a></strong>, allowing <a href="https://www.terraform.io">Terraform</a> users to include multi-cloud resources in their configurations. RightScale resources can be provisioned/updated/destroyed/etc using the Terraform tools like any other resource, and allow for building Terraform configurations that can support multiple clouds with one set of files/resources. Additionally, the provider exposes the ability to run arbitrary <a href="/ss/reference/rcl/v2/index.html">Cloud Workflow code</a> as part of a configuration, providing a powerful tool for complex configuration tasks as part of a Terraform configuration.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-13-2018"> <a href="/release-notes/cloud-management/2018/09/13.html">September 13, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added support for the <strong>AWS X1e instance type</strong></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09- 4-2018"> <a href="/release-notes/cloud-management/2018/09/04.html">September  4, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added support for the <strong>AWS t3 instance type</strong></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08- 8-2018"> <a href="/release-notes/cloud-management/2018/08/08.html">August  8, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added support for the <strong>AWS r5, r5d, and z1d instance families</strong>.</li>
+<li>New <a href="https://reference.rightscale.com/api1.6/index.html#/1.6/controller/V1_6-Definitions-CloudAccounts">CM 1.6 Cloud Account API</a> to expose <strong>cloud accounts</strong> registered in the RightScale account. The index call will return the subscription-id for Azure, Account id for AWS, and Project name for Google in the <code>tenant_uid</code> field of the response. The API requires <code>observer</code> role on any account.</li>
+<li><p>Support for discovering <strong>Google Custom Instances</strong>. RightScale will now detect the custom instance and display it in the instance list for Google. It may take up to 5 minutes before the information is updated.</p>
+
+<p><img src="/img/google_custom_image.png" alt="google_custom_image.png" width="1528" height="988" /></p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-28-2018"> <a href="/release-notes/cloud-management/2018/06/28.html">June 28, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added support for the <strong>AWS c5d and m5d instance families</strong></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-13-2018"> <a href="/release-notes/cloud-management/2018/06/13.html">June 13, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Server Array <strong>scaling behavior can now be customized using Cloud Workflow</strong>. When a server array needs to scale up or down, <a href="/cm/dashboard/manage/arrays/arrays_cwf.html">custom RCL logic can be used to tailor the specific behavior</a>, such as configuring the launching instance to use spot pricing or available RIs, or ensuring the terminating instance is the instance of your choosing. </li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-12-2018"> <a href="/release-notes/cloud-management/2018/06/12.html">June 12, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Azure Resource Manager subscriptions can now be registered with Cloud Management <strong>using an Azure Active Directory Application</strong> of your choosing. This provides full control over the security principle that RightScale uses to interact with your subscriptions and is available via Cloud Management API 1.5. <a href="/clouds/azure_resource_manager/getting_started/register_using_ad_application.html">Read more about how to register your subscriptions here</a>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04-24-2018"> <a href="/release-notes/cloud-management/2018/04/24.html">April 24, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for <strong>C5, M5, and R4 instance types in additional AWS Regions</strong></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04- 5-2018"> <a href="/release-notes/cloud-management/2018/04/05.html">April  5, 2018</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<h3 id="changes-in-behavior-api-1-5">API 1.5</h3>
+
+<ul>
+<li>By default, the <code>VolumeAttachments.create</code> call in the API behaves synchronously, blocking until the volume is attached. An <code>api_behavior=async</code> attribute was added to the <a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeAttachments.html#create">VolumeAttachments create</a> call, allowing you to make the call and then poll for status.</li>
+<li>Added <code>skip_deletion=&#39;true&#39;</code> to <a href="http://reference.rightscale.com/api1.5/resources/ResourceBackups.html#cleanup">Backups cleanup</a>. The cleanup action will return a list of backups that can be removed without removing them.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03-16-2018"> <a href="/release-notes/cloud-management/2018/03/16.html">March 16, 2018</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><p>A new account preference has been added which, when enabled, uses the user-specified volume name as the name of the volume in Google Cloud Platform. If left disabled, the default, RightScale uses a unique string for the volume name in Google to prevent clashes. This setting can be enabled per-account by any user with the <code>admin</code> role by going to Settings -&gt; Account Settings -&gt; Preferences and enabling the <q>Unique Google Volume Names</q> setting.</p>
+
+<p><img src="/img/cm-account-settings-google-volumes.png" alt="/img/cm-account-settings-google-volumes.png" width="521" height="547" /></p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="02-12-2018"> <a href="/release-notes/cloud-management/2018/02/12.html">February 12, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Alerts can now <a href="/cm/dashboard/design/alert_escalations/#valid-actions-for-alert-escalations-run-cloud-workflow">trigger arbitrary Cloud Workflow code</a> to run, allowing for orchestration of complex tasks and integration with external paging/ticketing systems</li>
+<li><a href="/cm/dashboard/design/alert_escalations/alert_escalations_actions.html#create-a-new-alert-escalation-define-alert-resolution-action--labs-">Actions can now be taken when an active alert <q>resolves</q></a>, enabling richer integration with incident tracking systems and reducing operator overhead</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12-14-2017"> <a href="/release-notes/cloud-management/2017/12/14.html">December 14, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for <strong>F1 FPGA instance type in AWS</strong></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11-29-2017"> <a href="/release-notes/cloud-management/2017/11/29.html">November 29, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for using <strong>service accounts in GCE</strong> to register projects with RightScale accounts. To learn more <a href="/clouds/google/getting_started/google_connect_gce_to_rightscale.html">check out the registration documentation</a>. If you already have GCE projects registered, <a href="/clouds/google/getting_started/google_connect_gce_to_rightscale.html#updating-your-credentials">read about updating them to use service accounts</a>.</li>
+<li>Support for <strong>P3 and C5 instance types in AWS</strong></li>
+<li>Support for <strong>M5 and H1 instance types in AWS</strong></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Registering Google projects with RightScale accounts <a href="/clouds/google/getting_started/google_connect_gce_to_rightscale.html">now uses service accounts</a> instead of user credentials.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-25-2017"> <a href="/release-notes/cloud-management/2017/10/25.html">October 25, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for <strong>specifying service accounts</strong> for instances/servers on Google Compute Engine in the Cloud Management UI, CM API 1.5, and Self-Service CAT files. Use service accounts in GCE to allow your virtual machine to make scoped calls to other services in your project. You can find the new option in the instance and server launch windows and the <code>cloud_specific_attributes</code> hash in CM API 1.5 (and CAT files).</li>
+<li>Improved security group rule support for Azure Resource Manager allows you to use RightScale to see more information about your security group rules created in Azure.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-11-2017"> <a href="/release-notes/cloud-management/2017/10/11.html">October 11, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p>Support for <strong>image families on Google</strong> so that a Multi-Cloud Image can point to the <q>latest</q> of a given image family on GCP instead of a specific version. Use <q>latest</q> images to avoid having the versioned image deprecated out from under your servers.</p>
+
+<p><img src="/img/google-image-family.png" alt="google-image-family.png" width="593" height="277" /></p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-14-2017"> <a href="/release-notes/cloud-management/2017/09/14.html">September 14, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for <strong>Azure Dv3 and Ev3 instance types</strong> for launching infrastructure in Cloud Management and Self-Service</li>
+<li>Support for <strong>resizing stopped instances</strong> on Azure and Google to match what was already supported in AWS</li>
+<li>Support for <strong>resizing a volume when restoring a snapshot</strong> on Google</li>
+<li>Redesigned account picker that shows <strong>accounts sorted by organization</strong>, making it easier to locate and organize your accounts in Cloud Management</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-30-2017"> <a href="/release-notes/cloud-management/2017/08/30.html">August 30, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for <strong><q>deny</q> rules and rule priority</strong> for Security Group Rules in Azure Resource Manager, available through the Cloud Management UI, CM API 1.5, and Self-Service CAT files</li>
+<li>Support for <strong>Korea South region</strong> in Azure Resource Manager</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Discovery of the <code>os_platform</code> for custom Windows images on Google Compute Engine</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-16-2017"> <a href="/release-notes/cloud-management/2017/08/16.html">August 16, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Added support for showing the attachment between OS disks and Servers in AzureRM clouds -- now associated OS disk volumes can be found in the Volumes tab for a Server.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-19-2017"> <a href="/release-notes/cloud-management/2017/07/19.html">July 19, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added support for <strong>Managed Disks in Microsoft Azure</strong>, allowing you to create and manage these resources through the Cloud Management UI, API, and CAT files in Self-Service. For more information, <a href="/clouds/azure_resource_manager/reference/resources.html#managed-disks">read the documentation for Managed Disks</a>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06- 1-2017"> <a href="/release-notes/cloud-management/2017/06/01.html">June  1, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added support for <code>cs1</code> and <code>st1</code> volume types in Amazon.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-17-2017"> <a href="/release-notes/cloud-management/2017/05/17.html">May 17, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p>Simplified invite experience for the <strong>Self-Service</strong> users by adding the new roles (<code>ss_end_user</code>, <code>ss_designer</code>, and <code>ss_observer</code>) to the current Invite flow.</p>
+
+<p><img src="/img/selfservice_invite_flow.png" alt="selfservice_invite_flow.png" width="1584" height="676" /></p></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix: changed the way Security Group Rules map to Inbound and Outbound security rules in Azure Resource Manager to more closely match the behavior in Azure</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04-19-2017"> <a href="/release-notes/cloud-management/2017/04/19.html">April 19, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>When creating a network in Azure Resource Manager, RightScale no longer creates a default subnet. Instead, create subnets as required when creating a new network.</li>
+<li>Bill data can now only be added to your organization&#39;s master account in RightScale.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04-13-2017"> <a href="/release-notes/cloud-management/2017/04/13.html">April 13, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>CentOS 5 mirrors are now frozen to 4/12/2017 (<code>latest</code> points to this date). Any use of a date farther in the future will cause errors when launching.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03-29-2017"> <a href="/release-notes/cloud-management/2017/03/29.html">March 29, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Google Virtual Machines can now be launched <strong>using images from another project</strong> if the current project has appropriate read access to those images. In order to take advantage of this, you will <a href="/clouds/google/google_connect_gce_to_rightscale.html#adding-images-from-other-projects">need to whitelist the source projects</a> in RightScale.</li>
+<li>The <a href="/clouds/azure_resource_manager/getting_started/register.html#connect-microsoft-azure-resource-manager-to-your-rightscale-account">registration process for Azure Resource Manager</a> <strong>has been greatly simplified</strong> and no longer requires the user to provide the tenant or subscription ID.</li>
+<li>Added <strong>support for AWS i3 instance types</strong> to Cloud Management, Self-Service, and Optima</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03- 1-2017"> <a href="/release-notes/cloud-management/2017/03/01.html">March  1, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Improved <strong>integration with Azure Resource Groups</strong>, allowing you to launch resources through RightScale into user-specified new or existing Resource Groups in Azure. Associate any RightScale Deployment with any Azure Resource Group so that resources in the Deployment exist in the associated Resource Group. Read more about <a href="/clouds/azure_resource_manager/reference/resources.html#azure-resource-groups">this integration in the docs site</a>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="01-19-2017"> <a href="/release-notes/cloud-management/2017/01/19.html">January 19, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>New Audit Entries</strong> are now being created when a Server Array pricing type or state change is made in either Cloud Management UI or CM API 1.5. You can find these audit entries in the Audit Entries tab of the affected Server Array.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that would, in some cases, cause VmWare volumes to not be able to be re-attached once they were detached</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="01-11-2017"> <a href="/release-notes/cloud-management/2017/01/11.html">January 11, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Support for new AWS Regions</strong> - AWS Canada Central, and AWS UK London are now available in Cloud Management. Follow the <a href="/clouds/aws/aws_quick_start.html#add-aws-add-aws-account-credentials">AWS registration flow</a> to add these new regions to your account.</li>
+<li>A <strong>custom admin username</strong> can now be set for Windows instances on Azure Resource Manager. You can find the new field in the Server launch UI and API.</li>
+<li><strong>Install-at-boot support for Windows on ARM, GCE, and AWS</strong> allows for easier installation of the RightLink10 agent on your servers. Follow the <a href="/rl10/reference/10.6.0/rl10_install_at_boot_windows.html">install-at-boot instructions</a> and note that this requires <a href="/rl10/reference/">RightLink v10.6.0</a> or later</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="01- 5-2017"> <a href="/release-notes/cloud-management/2017/01/05.html">January  5, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>New Audit Entries</strong> are now being created for various actions in Cloud Management. The following actions are now being audited and can be found in the accounts audit entries under Reports -&gt; Audit Entries:
+
+<ul>
+<li>Connecting to a cloud</li>
+<li>Changes to IP Whitelist settings</li>
+<li>Creating a new child account</li>
+<li>Changes to SSO settings</li>
+</ul></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12-29-2016"> <a href="/release-notes/cloud-management/2016/12/29.html">December 29, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Ed25519 and other new key types</strong> are now supported by <a href="/rl10/reference/10.6.0/rl10_managed_ssh_login.html">RightLink10 Managed Login</a></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix: fixed a bug that would cause problems when launching multiple instances concurrently on Azure Resource Manager</li>
+<li>Bugfix: fixed a bug that would revert the spot/On-Demand choice for AWS instances when editing a Server</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12-15-2016"> <a href="/release-notes/cloud-management/2016/12/15.html">December 15, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Azure Resource Manager is now available</strong> for all accounts and plan types. As part of this release, Cloud Management now shows the Storage Account (<a href="/clouds/azure_resource_manager/reference/resources.html#storage-accounts">Placement Group in RightScale</a>) type in the UI and the API. Additionally, <a href="/clouds/azure_resource_manager/reference/tagging.html#tagging-on-arm-and-rightscale-resource-groups-and-deployments">tags are now synced between RightScale Deployments and Azure Resource Groups</a></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>You can now specify just a <strong>Server href instead of an Instance href</strong> when creating <a href="http://reference.rightscale.com/api1.5/resources/ResourceIpAddressBindings.html#create">IPAddressBindings</a> and <a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeAttachments.html#create">VolumeAttachments</a>, simplifying the API call and/or Cloud Workflow code for managing these resources (the server must have a current_instance)</li>
+<li>The <strong>Availability Set is now an optional parameter</strong> when creating a server/instance in Azure Resource Manager</li>
+<li>Bugfix: fixed a bug where not all available volumes were being shown for attachment for vSphere clouds</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12- 7-2016"> <a href="/release-notes/cloud-management/2016/12/07.html">December  7, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Support for AWS R4 and refreshed T2</strong> instance types is now available in RightScale. You can read more about these new instances types on the <a href="https://aws.amazon.com/blogs/aws/ec2-instance-type-update-t2-r4-f1-elastic-gpus-i3-c5/">AWS Blog</a>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11-30-2016"> <a href="/release-notes/cloud-management/2016/11/30.html">November 30, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Instance tag synchronization</strong> is now enabled for Azure Resource Manager. For more information, read the <a href="/clouds/azure_resource_manager/reference/tagging.html">documentation for Azure Resource Manager</a></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Use of Availability Sets for Instances in Azure Resource Manager is now optional</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11-16-2016"> <a href="/release-notes/cloud-management/2016/11/16.html">November 16, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Increased the amount of SSD disks</strong> that can be attached to a new instance in Google Cloud Platform to 8, to match their current capabilities.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Updated various parts of the UI to make it clear that SSH Keys are not required for launching instances in AWS</li>
+<li>Bugfix: fixed a bug that prevented prices from showing in Cloud Management for Azure Resource Manager instance types</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11-10-2016"> <a href="/release-notes/cloud-management/2016/11/10.html">November 10, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Improved monitoring graphs</strong> have been released as a Beta feature under our Labs banner. The new graphs improve on the user interface by adding drag-to-zoom, interactive highlighting, and more. If you are interested in checking these out and providing feedback, please contact your Account Manager.</li>
+</ul>
+
+<p><img src="/img/monitoring_new_graphs.png" alt="new-monitoring-graphs" width="733" height="223" /></p>
+</div></div><div class="article"><div class="article-title"><time datetime="11- 2-2016"> <a href="/release-notes/cloud-management/2016/11/02.html">November  2, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for AWS Ohio (us-east-2) region </li>
+<li>Support for AWS Seoul (ap-northeast-2) region</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix that was preventing more than 400 ELBs from being displayed in the ELB Browser for AWS</li>
+<li>Bugfix that was preventing more than 100 RDSs from being displayed in the RDS Browser for AWS</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-26-2016"> <a href="/release-notes/cloud-management/2016/10/26.html">October 26, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that prevented tags starting with <code>ec2</code> to be inherited from a MultiCloudImage to a Server launched from that image</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-12-2016"> <a href="/release-notes/cloud-management/2016/10/12.html">October 12, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Support for P2 Instance Types</strong> when launching servers on AWS. Note that the pricing information has not yet been updated in Optima, so Instance Analyzer might show incorrect costs for these instances.</li>
+<li><strong>Azure Placement Group Tags now sync</strong> between RightScale and Azure Resource Manager. Use the tag predicate <code>azure</code> in RightScale to create a tag that syncs to the cloud. More resource tag sync functionality is coming soon.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-28-2016"> <a href="/release-notes/cloud-management/2016/09/28.html">September 28, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Stop/Start/Reboot</strong> is now supported on Azure Resource Manager, no matter whether the action is initiated from the RightScale UI/API or from Azure itself.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-21-2016"> <a href="/release-notes/cloud-management/2016/09/21.html">September 21, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added the ability to use <strong>Credentials for proxy username/password</strong> tag settings for RightLink 10, offering a secure method for configuring proxy information. Read more about <a href="/rl10/reference/10.5.2/rl10_proxying_rightlink.html">how to use these settings</a>.</li>
+<li>Add support for <strong>fingerprinted images in CM API 1.5</strong>, making it easier to create MultiCloud Images (MCIs) in an automated fashion for your private clouds. The new <a href="http://reference.rightscale.com/api1.5/resources/ResourceMultiCloudImageMatchers.html">CM API 1.5 MultiCloudImageMatchers resource</a> allows you to manage these MCI configurations.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09- 8-2016"> <a href="/release-notes/cloud-management/2016/09/08.html">September  8, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for the <strong>X1 instance type</strong> on AWS clouds</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-31-2016"> <a href="/release-notes/cloud-management/2016/08/31.html">August 31, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Added new <code>destroy</code> action to the <a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html#destroy">Alerts resource in CM API 1.5</a>, allowing you to remove Alerts from servers entirely</li>
+<li>The <a href="http://reference.rightscale.com/api1.5/resources/ResourceClouds.html#index">Clouds.index call in CM API 1.5</a> can now be made by users with the <code>instance</code> role (i.e., RightLink 10 instance credentials)</li>
+<li>Deprecated CloudFront Distributions and CloudFront Origin Access Identities from Cloud Management per our <a href="/faq/end_of_life_end_of_service.html#schedule-other">End of Life policy</a></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-17-2016"> <a href="/release-notes/cloud-management/2016/08/17.html">August 17, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Premium Storage Accounts are now supported</strong> in RightScale - they can be managed via the Cloud Management UI and API as well as included in CAT files in Self-Service. Read more about <a href="/clouds/azure_resource_manager/reference/resources.html#storage-accounts">using Azure Storage Accounts here</a>.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that cause some support emails sent from the Cloud Management UI to bounce</li>
+<li>Fixed an issue where starting a stopped server would sometimes cause the server to be stuck in the <code>booting</code> state</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-10-2016"> <a href="/release-notes/cloud-management/2016/08/10.html">August 10, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Azure private images in premium storage accounts</strong> can now be used to launch servers.</li>
+<li><strong>Expandable Deployment descriptions</strong> in Cloud Management allow you to leverage Deployment descriptions more effectively by placing relevant content right where it can be used while ensuring that important Server information isn&#39;t below the fold</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-28-2016"> <a href="/release-notes/cloud-management/2016/07/28.html">July 28, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Support for new Azure Regions and Azure India</strong> - RightScale now supports the additional regions recently added by MS Azure, West US 2 and West Central US as well as Azure India. <a href="/clouds/azure_resource_manager/getting_started/register.html">Re-register your Azure Resource Manager subscriptions</a> to get access to these new regions.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that was preventing proxy tags on an MCI from being inherited by Servers</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-21-2016"> <a href="/release-notes/cloud-management/2016/07/21.html">July 21, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Initial Support for Azure Resource Manager</strong> - Now available in Cloud Management is the next generation Microsoft cloud, Azure Resource Manager. During this initial release, access must be requested through support and there are some important known limitations to be aware of. Read more about our <a href="/clouds/azure_resource_manager">ARM Support here</a></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07- 7-2016"> <a href="/release-notes/cloud-management/2016/07/07.html">July  7, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Improved support for install-at-boot for RightLink 10 when an instance is behind a proxy. The <code>rs_agent:mime_shellscript</code> tag can be used to provide a proxy-aware environment to run the install script. Read more on the <a href="/rl10/reference/rl10_proxying_rightlink.html">RightLink 10 Proxying page</a>.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that caused some attributes set by API calls to not show correctly in the UI.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-29-2016"> <a href="/release-notes/cloud-management/2016/06/29.html">June 29, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Improved Managed Login functionality for RightLink 10.5 and higher. With the new managed login feature, RightLink 10 leverages an open-source NSS plugin to authorize users from RightScale roles (<code>server_login</code> and <code>server_superuser</code>) and authenticate users using their keys stored in RightScale. Every user has a system-provided login name and can create a <q>preferred</q> login name in their User Settings under SSH. Read more on the <a href="/rl10/reference/rl10_managed_ssh_login.html">RightLink 10 Managed SSH Login page</a>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06- 8-2016"> <a href="/release-notes/cloud-management/2016/06/08.html">June  8, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Tags on an MCI are now inherited by any instance that is launched using that MCI. This allows you to set tags on an MCI and know that all instances created from it will have those tags.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06- 2-2016"> <a href="/release-notes/cloud-management/2016/06/02.html">June  2, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>OpenStack Liberty Support</strong>. OpenStack Liberty is now a supported private cloud in RightScale. All of the major capabilities of OpenStack that are supported by RightScale are available with Liberty. Read more about RightScale&#39;s support for OpenStack <a href="/cm/dashboard/clouds/openstack/">on our docs site</a>.</li>
+<li>Added a new field to instances that indicate whether or not they were <strong>provisioned by</strong> RightScale.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Changed the way that the platform gets password data for AWS instances -- if AWS responds with a <code>403 Permission Denied</code>, the platform now gives up instead of retrying the call.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-13-2016"> <a href="/release-notes/cloud-management/2016/05/13.html">May 13, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Change to the way instance names are set in GCE and Azure</strong>. With this release, the name of the Server/Array in RightScale is used as the instance name in those clouds, after it&#39;s been sanitized per cloud limitations. By default, a unique ID is still appended to ensure uniqueness on the cloud, but this can be disabled using an account setting by going to <code>Account</code> -&gt; <code>Preferences</code>.</li>
+<li>Added support to <strong>choose the root volume type</strong> for GCE instances. Use any supported volume type via the UI, API, and CAT files.<br></li>
+<li>Added <strong>support for I2 instance types in AWS-Beijing</strong>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05- 4-2016"> <a href="/release-notes/cloud-management/2016/05/04.html">May  4, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p><strong>Container Management</strong> is now available under <q>Manage</q>. This page shows information about the containers running on your instances, including image and tag information as well as monitoring data. <a href="/cm/dashboard/manage/containers">Read the documentation</a> for more information.</p>
+
+<p><img src="/img/cm-container-management-clean.png" alt="Container Management" width="940" height="618" /></p></li>
+<li><p>Added support for the new <strong>D15v2 instance type</strong> in Azure</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04-28-2016"> <a href="/release-notes/cloud-management/2016/04/28.html">April 28, 2016</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug where the Network rulemap would sometimes show incorrect information for Openstack clouds</li>
+</ul>
+
+<h2 id="cm-api-1-5-change-log">CM API 1.5 Change Log</h2>
+
+<p><strong>Modified Resources</strong></p>
+
+<ul>
+<li><strong>Permissions</strong>
+
+<ul>
+<li>Permissions IDs have changed from being a unique numeric ID for the resource to containing a combination of <strong><em>user ID</em></strong> and <strong><em>role title</em></strong> (example: <code>user_id-role_title</code>). <a href="http://reference.rightscale.com/api1.5/resources/ResourcePermissions.html">See API documentation for details</a></li>
+</ul></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="02-24-2016"> <a href="/release-notes/cloud-management/2016/02/24.html">February 24, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Google Compute Engine</strong> - GCE Subnetworks are now discovered and can be used when creating and launching servers, arrays, and instances in GCE. Networks and their subnets are shown in Network Manager, however they can not be managed there today – they must first be created/configured in GCE. Any of those subnets can be used when managing servers, arrays, and instances through the CM Dashboard, CM API 1.5, and Self-Service CAT files.</li>
+<li><strong>MultiCloud Images</strong> - The MCI image selector now allows filtering on image metadata such as ID.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><strong>AWS API Requests</strong> - We have updated the backoff algorithm used when AWS throttles API requests.</li>
+<li><strong>Deprecation of old Servers tab</strong> In 2013, we released a new version of our Servers tab for a deployment, while allowing you the option to switch back to the older version. This release removes the option to use the legacy Server tab for a deployment and all accounts will automatically switch to the new version of the Servers tab.
+*</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="02- 3-2016"> <a href="/release-notes/cloud-management/2016/02/03.html">February  3, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Support for OpenStack volume types</strong> - RightScale now supports volume types for OpenStack volumes. You can create volumes using different volume types and view the type for any existing volume. This can done in Cloud Management as well as automated through the API and Self-Service CAT files.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="01-27-2016"> <a href="/release-notes/cloud-management/2016/01/27.html">January 27, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>MCI Creation</strong> - Selection of machine images when creating or editing MCIs has been improved with a new filterable selection interface.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><strong>Server Arrays</strong> - Cloning a Server Array will now also clone the recurring volume attachments. </li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="01-13-2016"> <a href="/release-notes/cloud-management/2016/01/13.html">January 13, 2016</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Amazon Web Services</strong> - Added support for the new t2.nano instance type across all supported AWS regions.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12-16-2015"> <a href="/release-notes/cloud-management/2015/12/16.html">December 16, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Google Compute Engine (GCE) - Network Support</strong> - Google Networks are now supported in the Network Manager of RightScale. Use RightScale&#39;s UI, API, and CAT files to create, manipulate, and manage any GCE Network object that is part of your application. See <a href="/cm/dashboard/manage/networks/network_manager_gce.html">Using Network Manager with GCE</a> for additional information.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12- 9-2015"> <a href="/release-notes/cloud-management/2015/12/09.html">December  9, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>GCE Instance Types</strong> - We have added support for GCE instance types that exist only in specific regions (specifically: n1-highcpu-32, n1-highmem-32, n1-standard-32).</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Changes to security group rules are now audited in more detail, including the exact fields of the rule that was created/removed, the author of the change, and the resulting security group definition.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12- 2-2015"> <a href="/release-notes/cloud-management/2015/12/02.html">December  2, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>OpenStack</strong> - OpenStack Kilo is now officially supported in RightScale. For more information, see the <a href="/clouds/openstack/openstack_setup_guide.html">OpenStack documentation</a> on our docs site.</li>
+<li><strong>Dashboard Sidebar Redesign</strong> - Along with resolving minor bugs in how the sidebar hides/shows on certain views within Cloud Management, the new sidebar design is part of a continued effort to align the look and feel of RightScale&#39;s applications for a consistent user experience.</li>
+<li><strong>Disabling RightScripts</strong> - We have added support for disabling RightScripts from the boot sequence when launching a Server/Array through the CM API 1.5, allowing you greater control of the boot behavior of your RightScale servers.</li>
+<li><strong>EC2 Instance Tenancy Option</strong> - In EC2, you can now select the tenancy for a given instance when launching it (instead of relying on the VPC tenancy setting), giving you more flexibility around workload placement in AWS.</li>
+<li><strong>EC2 g2 Instances</strong> - We have added support for <code>g2.8xl</code> instance types in EC2.</li>
+<li><strong>GCE Preemptible Instances</strong> - We have added support for launching instances and configuring servers/arrays to use <q>preemptible</q> instances in GCE. Use of these types of instances in GCE can drastically reduce costs, but come with a variety of limitations -- see GCE documentation for more information. This setting is now available in the Cloud Management Dashboard and available in the API and CAT through the <code>cloud_specific_attributes</code> hash of an instance.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11-18-2015"> <a href="/release-notes/cloud-management/2015/11/18.html">November 18, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Google GCE - Local SSDs</strong> -  RightScale now supports local SSDs on GCE instances. When launching a supported instance, simply choose how many SSDs to attach. Each local SSD provides 375GB of storage and is deleted when the instance is terminated. See <a href="/cm/dashboard/clouds/google/google_add_instance.html">Create and Launch a New GCE Instance</a> for additional information.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11-11-2015"> <a href="/release-notes/cloud-management/2015/11/11.html">November 11, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Microsoft Azure</strong> - All Azure instance types are now supported, including the newly released Dv2 instance type series.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Updated the name sync with CloudStack so that hyphens no longer get stripped from instance names.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-28-2015"> <a href="/release-notes/cloud-management/2015/10/28.html">October 28, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>GCE Instance Tag Support</strong> - RightScale now supports GCE instance tags and syncs them with the cloud. Any tags on a RS instance prefixed with <q>gce:</q> will be synced to GCE, and tags from GCE will come in to RS in the same format. <a href="/cm/rs101/tagging.html#how-rightscale-tags-and-cloud-tags-are-related-gce-instance-tags">Read more about it here.</a></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><strong>SAML/SSO Improvements</strong> - Our SAML/SSO implementation has been enhanced as follows:
+
+<ul>
+<li>Invitation emails sent to an SSO-enabled invitee now contain a link that logs the user in through SSO with one click, no additional user action required and no discovery hint needed.</li>
+<li>SAML login once again redirects to a user&#39;s last account instead of to an account selector. (This is default behavior that can be changed by making use of default SAML RelayState; refer to the <a href="/platform/saml/rightscale_saml_relay_states.html">RightScale SAML RelayStates</a> page on our documentation site for additional information.</li>
+<li>Password-reset emails have consistent HTML styling.</li>
+</ul></li>
+<li><strong>Hard Instance Shutdown</strong> - We&#39;ve added a hard shutdown after an instance has been decommissioning for a specified period. The default time is 50 minutes, but can be extended through the use of an instance tag. <a href="/cm/management_guide/server_states.html#rightscale-server-states-decommissioning">Read more about it here.</a></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-21-2015"> <a href="/release-notes/cloud-management/2015/10/21.html">October 21, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>OpenStack Bootable Volumes</strong> - We now support in the Cloud Management dashboard the ability to launch an OpenStack instance, server, or array and boot from an image to a new volume. You may also specify the size of the new volume and whether to delete or retain the volume when the instance/server terminates. The <strong>Instance Provisioner</strong> and <strong>Add Server Assistant</strong> UIs have been enhanced to provide this capability. For additional information, see <a href="/cm/dashboard/clouds/generic/instances_actions.html#create-a-new-instance-using-the-instance-provisioner">Create a New Instance using the Instance Provisioner</a> and <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#add-server-assistant">Add Server Assistant</a>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-14-2015"> <a href="/release-notes/cloud-management/2015/10/14.html">October 14, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p><strong>Google Compute Engine - Stop/Start</strong> - We have added support for Stop/Start for instances on Google Compute Engine. Note that any instance terminated directly in Google Compute Engine will show as <q>stopped</q> in RightScale since they can be restarted. </p></li>
+<li><p><strong>CM API 1.5 - Private IP Address</strong> - This new feature adds the ability to specify a private IP address when creating or updating the next instance of a Server resource. While currently available in the Cloud Management user interface, this feature extends the functionality into CM API 1.5.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-30-2015"> <a href="/release-notes/cloud-management/2015/09/30.html">September 30, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Pricing Support</strong> - Building upon the recent addition of <q>Spot</q> or <q>On-Demand</q> pricing support for ServerArray and Server resources in API 1.5, you can now also specify <q>Spot</q> or <q>On-Demand</q> pricing when launching raw instances via API 1.5.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-23-2015"> <a href="/release-notes/cloud-management/2015/09/23.html">September 23, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Google Compute Engine</strong> - Added support for the GCE option <q>canIpForward</q> for instances. You can find this option in both the <strong>Server</strong> and <strong>Instance Launch</strong> flows.</li>
+</ul>
+
+<p><img src="/img/cm-enable-ip-forward.png" alt="cm-enable-ip-forward.png" width="257" height="159" /></p>
+</div></div><div class="article"><div class="article-title"><time datetime="09-16-2015"> <a href="/release-notes/cloud-management/2015/09/16.html">September 16, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p><strong>Network Manager</strong> - Outbound security group rules are now supported for Openstack in Network Manager.</p></li>
+<li><p><strong>API 1.5 - Spot Pricing</strong> - Allowing the specification of Spot or On-Demand pricing for Server and ServerArray resources via API 1.5 adds further flexibility in selecting the best instance pricing for a given workload. While already available in the Cloud Management user interface, this feature extends this functionality into API 1.5. Read more about it in the API docs here: <a href="http://reference.rightscale.com/api1.5/index.html">http://reference.rightscale.com/api1.5/index.html</a>.</p></li>
+<li><p><strong>Customization - Logo Support</strong> - Cloud Management now provides a setting for organizations to change the top-left logo in the Cloud Management and Optima interfaces to your own custom logo. <a href="/cm/dashboard/settings/account/set_a_custom_dashboard_logo.html">Read more about changing the RightScale Logo to your own custom logo here.</a></p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09- 9-2015"> <a href="/release-notes/cloud-management/2015/09/09.html">September  9, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p><strong>OpenStack - Bootable Volume Support</strong> - We now provide tools that help you leverage OpenStack&#39;s ability to boot instances from an existing volume. With RightScale, you can now create volumes from images as well as specify volumes to boot from. See the <a href="/clouds/openstack/openstack_boot_volume_guide.html">OpenStack boot volume guide</a> for additional information.</p></li>
+<li><p><strong>CM API 1.5 - Instance MediaType</strong> - Two new attributes have been added to API 1.5 Instance MediaType. The attributes are: <code>monitoring_collector_http</code> which specifies the hostname used to GET from or POST to the monitoring system, and <code>monitoring_collector_udp</code> which specifies the hostname used to push the data to the monitoring system using the collectd udp protocol. See <a href="http://reference.rightscale.com/api1.5/media_types/MediaTypeInstance.html">http://reference.rightscale.com/api1.5/media_types/MediaTypeInstance.html</a> for additional information.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09- 2-2015"> <a href="/release-notes/cloud-management/2015/09/02.html">September  2, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>CM API 1.5 - New Sessions Resource View</strong> - We have introduced a new “whoami” view to the API 1.5  Sessions resource that provides a link to the currently logged-in user (or instance) and to the account they are interacting with. This is useful for OAuth clients who may be given a refresh token without knowing to whom it belongs. For more information, see <a href="http://reference.rightscale.com/api1.5/resources/ResourceSessions.html#index">http://reference.rightscale.com/api1.5/resources/ResourceSessions.html#index</a></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-26-2015"> <a href="/release-notes/cloud-management/2015/08/26.html">August 26, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>GCE - Remove Public IP Option</strong> - When creating an instance, server, or array on GCE, you now have the option to remove the public IP from the instance, ensuring that it will not have a public IP assigned when it is launched. When using this option, you must ensure that the instance&#39;s private network allows routes to the RightScale platform in order for RightLink to connect.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>RightScale now identifies and correctly handles cases in which instances are stopped/started in the cloud instead of through RightScale. This applies to AWS, Azure, VMware, and SoftLayer.</li>
+<li>For OpenStack cloud registration, if the protocol returned by the public endpoint is incorrect, we instead use the protocol used in the catalog.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-19-2015"> <a href="/release-notes/cloud-management/2015/08/19.html">August 19, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>OpenStack SSH Keypairs</strong> - OpenStack ssh keypairs are now supported, allowing you to manage the keypairs with the RightScale UI/API and assign them to servers upon launch.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-12-2015"> <a href="/release-notes/cloud-management/2015/08/12.html">August 12, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p><strong>Account Overview</strong> - The Account Overview feature is now enabled for all customer accounts.</p></li>
+<li><p><strong>TSS Monitoring</strong> - We have switched all customer accounts to the new monitoring system – TSS. This change will allow you to do a lot more with your monitoring system data in the future.</p></li>
+</ul>
+
+<p><strong>Note</strong>: If you construct your own monitoring URLs you may need to update them. Previously, you could submit data points through collectd by using the hostname <code>sketchyX-Y.rightscale.com</code> (e.g., sketchy1-1.rightscale.com). With TSS, new instances will be assigned to <code>tssX-Y</code> instead of <code>sketchyX-Y</code>. You will now have to submit your data points to <code>tss-collectdX-Y.rightscale.com</code>. This change does not impact those using our RightScript/Recipe without modification, nor does it impact instances that are still assigned to the legacy sketchyX-Y.</p>
+</div></div><div class="article"><div class="article-title"><time datetime="07- 8-2015"> <a href="/release-notes/cloud-management/2015/07/08.html">July  8, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>SoftLayer</strong> - Added the ability to Stop and Start virtual servers using the RightScale Cloud Management (CM) Dashboard as well as the RightScale API. Due to the fickle nature of SoftLayer cloud, after issuing the Stop request, please confirm that the operation indeed completed successfully by looking at the audit entries for the virtual server in the CM Dashboard. In the event of failures, a retry of the operation is recommended.</li>
+</ul>
+
+<h2 id="cm-api-1-5-change-log">CM API 1.5 Change Log</h2>
+
+<p><strong>Modified Resources:</strong></p>
+
+<ul>
+<li><em>VolumeSnapshots</em>
+
+<ul>
+<li><strong>create</strong> - removed the optional <code>volume_snapshot_copy</code> hash</li>
+<li>added <em>copy</em> action</li>
+</ul></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07- 1-2015"> <a href="/release-notes/cloud-management/2015/07/01.html">July  1, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Support for New AWS Instance Types</strong> - RightScale now supports the new <strong>M4</strong> and <strong>t2.large</strong> instance types. Both instance types support 64-bit HVM AMIs and require to be launched within a VPC. For information on the M4 instance type see the official AWS blog entry -  <a href="https://aws.amazon.com/blogs/aws/the-new-m4-instance-type-bonus-price-reduction-on-m3-c4/">The New M4 Instance Type</a>. For information on the new t2.large instance type see the official AWS blog entry - <a href="https://aws.amazon.com/blogs/aws/new-t2-large-instances/">New T2.Large Instances</a>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-24-2015"> <a href="/release-notes/cloud-management/2015/06/24.html">June 24, 2015</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><strong>Removal of Usage Estimate Report</strong> - As part of our continued effort to remove cost information from the Cloud Management Dashboard, we have removed the Usage Estimate Report feature from the dashboard with this release. The Usage Estimate option is no longer accessible from the Reports menu in the dashboard user interface. Customers are encouraged to view costing information for their accounts using RightScale Optima.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-17-2015"> <a href="/release-notes/cloud-management/2015/06/17.html">June 17, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Instance Provisioner</strong>: Availability zones for AWS subnets are now visible in the Subnet Selector within the Instance Provisioner.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>The Deployment Show Servers (DSS) page (<strong>Manage &gt; Deployments &gt; Servers</strong>) was displaying selected items incorrectly in the overview. This issue has been resolved.</li>
+<li>The Servers page had a bug where the SSH icon would not display. This defect has been fixed.</li>
+<li>There was a bug in the Instance Provisioner which prevented the user from expanding the <strong>Hardware -&gt; Advanced</strong> section. This problem has been addressed.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-10-2015"> <a href="/release-notes/cloud-management/2015/06/10.html">June 10, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Support Added for AWS China Region</strong> - RightScale continues to expand its support for newly introduced AWS regions. The latest supported region is AWS China. The China (Beijing) region offers a technology service platform that is similar to other AWS Regions around the world with the same API and protocols that work in other regions. Customers who wish to use AWS resources in China are required to create an AWS (China) Account which includes a set of credentials that are distinct and separate from other global AWS Accounts. Only customers with an AWS (China) Account will be able to use resources operated in the AWS China (Beijing) region. For additional details on the AWS China region, please refer to: <a href="https://www.amazonaws.cn/en/about-aws/china/">https://www.amazonaws.cn/en/about-aws/china/</a>.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><p><strong>Login Panel</strong> - The new login page will now remember your preferences. If you have closed the marketing panel or selected to log in via SSO etc, these preferences will now be persisted.</p></li>
+<li><p><strong>Multiple Tag Updates</strong> - When updating multiple tags at once in the Instances and Servers page, the updated tags would not be copied through properly to AWS. This bug has now been fixed.</p></li>
+<li><p><strong>Miscellaneous</strong> - A number of minor defects have been addressed in this release.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-20-2015"> <a href="/release-notes/cloud-management/2015/05/20.html">May 20, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>OpenStack and SoftLayer Support Added to Instance Provisioner</strong> - The Instance Provisioner in the RightScale Cloud Management Dashboard now supports OpenStack and SoftLayer clouds. You can access the Instance Provisioner by navigating to Manage &gt; Instances &amp; Servers &gt; New Instance. For additional information on using the Instance Provisioner in the RightScale Dashboard see <a href="/cm/dashboard/manage/instances_and_servers/index.html#new-instance">New Instance</a> on the RightScale support site.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><p><strong>Product Selector Menu</strong> - The Product Selector on the RightScale Cloud Management Dashboard has been enhanced to always show all menu options (Optima and Self-Service) regardless of account settings.</p></li>
+<li><p><strong>Account Cost Quotas</strong> - As indicated in a previous release note, we are gradually removing cost information from the CM Dashboard. With this release we have removed Account Cost Quotas from the Enterprise Account View on the CM Dashboard.</p></li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard">Archived Release Notes are Available Here</a></p>
+</div></div><div class="article"><div class="article-title"><time datetime="05-13-2015"> <a href="/release-notes/cloud-management/2015/05/13.html">May 13, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Login Panel</strong> - We now have a new Dashboard Login Panel with cleaner styling for an improved user experience.</li>
+<li><strong>OpenStack</strong> - The web socket tunneling software <strong>wstunnel</strong> is now supported for OpenStack. The <strong>wstunnel</strong> server establishes a TCP socket tunnel over a web socket connection.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><strong>Search Box</strong> - The search box in the Dashboard header now has expand/collapse functionality.</li>
+<li><strong>Account Overview</strong> - You can now hide the Getting Started content box on the Account Overview page. Previously, the Getting Started box would always be visible for the first 30 days that a new account was active. Now, clicking the &#39;close&#39; button on the Getting Started box will dismiss the box.</li>
+<li><strong>Instance Provisioner</strong> - The Placement Group setting in the Instance Provisioner for Azure cloud is now optional.</li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard">Archived Release Notes are Available Here</a></p>
+</div></div><div class="article"><div class="article-title"><time datetime="05- 6-2015"> <a href="/release-notes/cloud-management/2015/05/06.html">May  6, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p><strong>Stop/Start Functionality on Raw Instances</strong> - We now support stopping and starting raw instances on the Instances and Servers view as well as the Manage &gt; Deployments &gt; Servers Show view. For additional information see <a href="/cm/dashboard/manage/instances_and_servers/index.html">Instances and Servers</a></p></li>
+<li><p><strong>SoftLayer</strong> - Block device support has been added for the SoftLayer cloud.</p></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><strong>Cost Information Removed from the Enterprise Account View</strong> - As indicated in a previous release note, we are gradually removing cost information from the CM Dashboard. With this release we have removed cost information from the Enterprise Account View.</li>
+</ul>
+
+<h2 id="cm-api-change-log">CM API Change Log</h2>
+
+<p><strong>Modified Resources</strong>:</p>
+
+<ul>
+<li><em>Volumes</em>
+
+<ul>
+<li><strong>update</strong> - added <code>allowed_instance_hrefs</code> hash (optional)</li>
+</ul></li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard">Archived Release Notes are Available Here</a></p>
+</div></div><div class="article"><div class="article-title"><time datetime="04-29-2015"> <a href="/release-notes/cloud-management/2015/04/29.html">April 29, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p><strong>VMware vSphere and Rackspace Support Added to Instance Provisioner</strong> - The Instance Provisioner in the RightScale Dashboard now supports VMware vSphere and Rackspace. You can access the Instance Provisioner by navigating to Manage &gt; Instances &amp; Servers &gt; New Instance. For additional information on using the Instance Provisioner in the RightScale Dashboard see <a href="/cm/dashboard/manage/instances_and_servers/index.html#actions">New Instance</a> on the RightScale support site.</p></li>
+<li><p><strong>Style Updates</strong> - We&#39;re refreshing part of Cloud Management Dashboard and converging on CSS buttons for cross-product design consistency.</p></li>
+<li><p><strong>AuditEase</strong> - Audit information is now updated automatically on the Audit Entries tab. You no longer have to refresh the page manually to see the latest audit log records. This feature is now available to all customers.</p></li>
+<li><p><strong>SoftLayer SSH key support</strong> - SSH keys created in SoftLayer management console can now be used through RS dashboard and API during server launch. SSH keys can also be imported into SoftLayer, using RS dashboard.
+<em>Note:</em> At this time, SoftLayer cloud does not allow creation of new SSH keys.  New SSH keys have to be created using tools like ssh-keygen and then imported into SoftLayer through RS dashboard or using SoftLayer management console directly.</p></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><strong>Cost Information in CM is Starting to be Removed</strong> - We will be gradually removing cost information from the CM Dashboard, first from the deployment overview widget on the Widgets dashboard, and also on the old Servers view in a deployment.</li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard">Archived Release Notes are Available Here</a></p>
+</div></div><div class="article"><div class="article-title"><time datetime="04-15-2015"> <a href="/release-notes/cloud-management/2015/04/15.html">April 15, 2015</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p><strong>Google GCE Support Added to Instance Provisioner</strong> - The Instance Provisioner in the RightScale Dashboard now supports Google GCE. You can access the Instance Provisioner by navigating to Clouds &gt; Google &gt; Instances &gt; New or Manage &gt; Instances &amp; Servers &gt; New Instance &gt; Google. For additional information on using the Instance Provisioner in the RightScale Dashboard see <a href="/cm/dashboard/manage/instances_and_servers/index.html#actions">New Instance</a> on the RightScale support site.</p></li>
+<li><p><strong>Support Added for New AWS D2 Instance Types</strong> - The new Dense Storage instances for EC2 are suitable for situations where large amounts of data storage are needed. See the official [AWS blog on D2 Instance Types[(http://aws.amazon.com/blogs/aws/next-generation-of-dense-storage-instances-for-ec2/)] for additional information.</p></li>
+<li><p><strong>Cloud Management API v1.6</strong> - Reference documentation is now publicly available for Cloud Management API v1.6. View the new API v1.6 docs here.</p></li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard">Archived Release Notes are Available Here</a></p>
+</div></div><div class="article"><div class="article-title"><time datetime="04- 8-2015"> <a href="/release-notes/cloud-management/2015/04/08.html">April  8, 2015</a> </time></div><div class="article-body"><h2 id="cm-api-change-log">CM API Change Log</h2>
+
+<p><strong>Modified Resources</strong>:</p>
+
+<ul>
+<li><em>Instances</em>
+
+<ul>
+<li><strong>create</strong> - added <code>api_behavior</code> attribute (optional)</li>
+<li><strong>index</strong> - added <code>sensitive</code> view</li>
+<li><strong>show</strong> - added <code>sensitive</code> view</li>
+</ul></li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard">Archived Release Notes are Available Here</a></p>
+</div></div></div></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

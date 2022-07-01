@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Root Volume - Instance Store and EBS Backed</title><meta content="There are 2 Types of Volumes that can be used as Root Device, the Instance Store and EBS Backed volumes. The original AWS Instances came with the Instance Store volume and later with the EBS Backed volume." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="faq faq_Root_Volume_Instance_Store_and_EBS_Backed" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">RightScale General FAQs</a></p><div class="page-header"><h1>Root Volume - Instance Store and EBS Backed</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>There are 2 Types of Volumes that can be used as Root Device, the Instance Store and EBS Backed volumes. The original AWS Instances came with the Instance Store volume and later with the EBS Backed volume. The 2 can be distinguished as below.</p>
+
+<ul>
+<li><strong>Instance Store</strong> - Volume size is limited to 10GB</li>
+<li><strong>EBS Backed</strong> - Volume size can go as much as 1TB</li>
+</ul>
+
+<p>Many have asked about this specific topic and it&#39;s good to understand what options are available when dealing with the Root Device volume on the Server, specially if there&#39;s a need to expand the Root Volume on the Server which currently can be done only on EBS Backed volume.</p>
+
+<ul>
+<li><strong>Expanding Root EBS Backed Volume</strong> - <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-expand-volume.html">Click HERE</a></li>
+</ul>
+
+<p><strong>NOTE</strong>: Must carefully test and follow the instruction from AWS. Result may not be the same as outlined in the instruction, hence it&#39;s good to perform a thorough testing of this option before touching any Production Servers.</p>
+
+<p>An example below showing a Root Volume not reflecting the new volume size after it was resized. The new volume had to be extended so its actual size is reflected properly.</p>
+<pre class="syntax-highlight plaintext"><code>**root@TestNode~]# df -h**  
+ Filesystem                    Size  Used Avail Use% Mounted on  
+ /dev/xvda1                    9.9G  2.2G  7.2G  24% /  
+ none                          1.9G     0  1.9G   0% /dev/shm  
+ /dev/mapper/vg--data-lvol0    400G  545M  400G   1% /mnt/ephemeral
+</code></pre>
+<pre class="syntax-highlight plaintext"><code>**[root@TestNode ~]# file -s /dev/xvda1**  
+ /dev/xvda1: Linux rev 1.0 ext3 filesystem data (needs journal recovery) (large files)
+</code></pre>
+<pre class="syntax-highlight plaintext"><code>**[root@TestNode ~]# resize2fs /dev/xvda1**  
+ resize2fs 1.41.12 (17-May-2010)  
+ Filesystem at /dev/xvda1 is mounted on /; on-line resizing required  
+ old desc\_blocks = 1, new\_desc\_blocks = 2  
+ Performing an on-line resize of /dev/xvda1 to 6553600 (4k) blocks.  
+ The filesystem on /dev/xvda1 is now 6553600 blocks long.
+</code></pre>
+<pre class="syntax-highlight plaintext"><code>**[root@TestNode ~]# df -h**  
+ Filesystem                    Size  Used Avail Use% Mounted on  
+ /dev/xvda1                    25G  2.2G   22G  10% /  
+ none                         1.9G     0  1.9G   0% /dev/shm  
+ /dev/mapper/vg--data-lvol0   400G  545M  400G   1% /mnt/ephemeral  
+ [root@ip-10-91-156-71 ~]#
+</code></pre>
+
+<p>More references can be followed as needed.</p>
+
+<ul>
+<li><a href="http://support.rightscale.com/06-FAQs/Does_UCP_support_bundling%3F/index.html">Creating your own AMI</a></li>
+<li><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device">More about these 2 Types of Root Volume</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

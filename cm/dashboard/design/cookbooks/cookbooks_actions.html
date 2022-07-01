@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Cookbooks - Actions and Procedures</title><meta content="Common procedures for working with Cookbooks in the RightScale Cloud Management Dashboard." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_design cm_dashboard_design_cookbooks cm_dashboard_design_cookbooks_cookbooks_actions" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Design</a> &#x2F; <a href="./">Cookbooks</a></p><div class="page-header"><h1>Cookbooks - Actions and Procedures</h1></div><div class="main-content"><h2 id="download-a-cookbook">Download a Cookbook</h2>
+
+<p>Downloading a cookbook allows you to get the contents of a cookbook that had been imported into your account. You can make changes to this on your machine locally and, if you want to bring it into RightScale and use it with a ServerTemplate, you can do so by adding it as a repository.</p>
+
+<h3 id="download-a-cookbook-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Cookbooks</strong>.</li>
+<li>Select the Cookbook you would like to download.</li>
+<li>Choose the version.</li>
+<li>Select <strong>Download</strong>.
+<img src="/img/cm-download-a-cookbook.png" alt="cm-download-a-cookbook.png" width="725" height="398" /><br></li>
+<li>A .tar file of the cookbook will download. You can unzip this file to view the contents of the cookbook. A cookbook can contain the following folders and files:
+
+<ul>
+<li><strong>attributes</strong> - Attributes are displayed as user-configurable inputs in the RightScale dashboard. Attributes are most commonly used in Chef recipes. In order for attributes to be displayed in the dashboard, they must be properly documented in the Chef metadata (metadata.rb).</li>
+<li><strong>definitions</strong> - Definitions allow you to create new Resources by stringing together existing resources.</li>
+<li><strong>providers</strong> - A provider consists of the platform-specific code that will be executed on a server based on its underlying system architecture. Whereas a Chef resource describes the desired task (e.g. install a package), it&#39;s the related Chef provider that actually provides the underlying code that&#39;s executed to accomplish the task. Instead of creating a single bash script that contains each supported option through a long list of If/Else statements, you can create a single Chef recipe that leverages existing Chef resources and providers that accomplish the same task in a more efficient and scalable manner.</li>
+<li><strong>recipes</strong> - Recipes are located inside of a Chef cookbook. A recipe is a script written in Chef&#39;s domain-specific language (DSL) that will be executed on a running instance. A ServerTemplate consists of scripts that are either RightScripts or Chef recipes. Similar to RightScripts, Chef recipes support variable substitution where inputs (called Chef attributes) allow a user to define values that will be used when the script is executed. A recipe can also contain Chef resources that are located in another cookbook of a referenced repository.</li>
+<li><strong>templates</strong> - A template is a file written in a markup language that allows one to dynamically generate a file&#39;s final content based on variables or more complex logic. Templates are commonly used to manage configuration files with Chef.</li>
+<li>MANIFEST</li>
+<li><strong>metadata.rb</strong> - Contains a Ruby DSL that&#39;s used to build the metadata.json file. The metadata.rb file is a human readable version of the metadata.json file. When you create a new cookbook using knife, a metadata.rb will automatically be created for you.</li>
+<li><strong>metadata.json</strong> - The actual meta-data file that&#39;s used by RightScale (which acts as the Chef Server) to understand the contents of the cookbook and how its components can be used.</li>
+</ul></li>
+</ol>
+
+<p>For more information about using Chef in RightScale, see the <a href="http://support.rightscale.com/12-Guides/Chef_Cookbooks_Developer_Guide/index.html">Chef Cookbooks Developer Guide</a>.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If you made changes to the file on your machine locally, you can upload that file to RightScale so you can add your cookbooks to ServerTemplates.</p>
+</div>
+
+<h2 id="view-a-cookbook">View a Cookbook</h2>
+
+<p>When you view a cookbook in RightScale, you are seeing the information of a cookbook that has been imported into your account from the Repositories section of RightScale.</p>
+
+<h3 id="view-a-cookbook-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Cookbooks</strong> and select the cookbook you want to view.</li>
+<li>Click on the version of the cookbook.</li>
+<li>Drop-downs will display that contain various information about the cookbook: <strong>Info</strong>, <strong>Recipes</strong>, and <strong>Attributes</strong>.</li>
+</ol>
+
+<h3 id="view-a-cookbook-info">Info</h3>
+
+<p>The Info section shows information of the cookbook that was defined when the cookbook was fetched from a repository and imported into RightScale.<br>
+<img src="/img/cm-cookbook-info.png" alt="cm-cookbook-info.png" width="725" height="427" /></p>
+
+<ul>
+<li><strong>Version</strong> - The cookbook name and version.</li>
+<li><strong>Namespace</strong> - Cookbooks in your account belongs to either a primary or alternate namespace. In the primary namespace, there can be only one cookbook with the same name and version. In the alternate namespace, cookbooks can share the same name and version if they come from a different source.</li>
+<li><strong>Summary</strong> - The summary provides a brief overview of the cookbook.</li>
+<li><strong>Long Description</strong> - This is a more detailed description of the cookbook. If the cookbook contains a README markdown (.md) file, this is where that information will display. If not, this field will be blank.</li>
+<li><strong>Last Updated</strong> - The date and time at which the cookbook was last updated. This information is based on the last time that RightScale fetched data from the repository.</li>
+<li><strong>Source</strong> - Indicates the location from which the cookbook was imported.</li>
+<li><strong>Status</strong> - The status can be one of the following:
+
+<ul>
+<li><strong>Normal</strong> - This is the default status of a cookbook. When a cookbook is imported into your account, this is the status it will have.</li>
+<li><strong>Follow</strong> (alternate namespace only) - RightScale periodically scrapes the source repository and updates the cookbook content when it changes in the repository. If a new version of the cookbook appears in the source repository (as defined in the Chef metadata), the new version will be automatically imported into the alternate namespace as well.</li>
+<li><strong>Frozen</strong> (primary namespace only) - A frozen cookbook cannot be be re-imported or modified.</li>
+<li><strong>Obsolete</strong> - Obsolete cookbooks will only appear in the cookbooks section of RightScale. They will not appear when adding cookbooks to a ServerTemplate or in other indexes or listings.</li>
+</ul></li>
+</ul>
+
+<h3 id="view-a-cookbook-recipes">Recipes</h3>
+
+<p>The Recipes section list all the recipes that are located inside the cookbook. A recipe is a script written in Chef&#39;s domain-specific language (DSL) that can be used to run in a ServerTemplate. A ServerTemplate consists of scripts that are either RightScripts or recipes. Similar to RightScripts, recipes support variable substitution where inputs (or attributes) allow a user to define values that will be used when the script is executed. A recipe can also contain resources that are located in other cookbooks.</p>
+
+<p>In this section, you can see the list of recipe names and a summary of the recipes in the cookbook.</p>
+
+<p><img src="/img/cm-cookbook-recipes.png" alt="cm-cookbook-recipes.png" width="725" height="316" /></p>
+
+<h3 id="view-a-cookbook-attributes">Attributes</h3>
+
+<p>The Attributes section lists all the attributes that are located in the cookbook. Attributes display as user-configurable inputs in the RightScale dashboard. Attributes are most commonly used in recipes. In order for attributes to be displayed in the dashboard, they must be properly documented in the Chef metadata (metadata.rb).</p>
+
+<p>In this section, you see the attribute, if it&#39;s optional or required when the script runs in the dashboard, what values are set by default, what recipes use the attribute, and a description of the attribute.</p>
+
+<p><img src="/img/cm-cookbook-attributes.png" alt="cm-cookbook-attributes.png" width="725" height="252" /></p>
+
+<h2 id="follow-a-cookbook">Follow a Cookbook</h2>
+
+<p>When a cookbook is being followed, the new or updated versions of that cookbook that appear in the repositories section will automatically get imported. This only applies to cookbooks that have been imported into the alternate namespace from a repository.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Repositories are automatically re-scraped roughly once a day.</p>
+</div>
+
+<h3 id="follow-a-cookbook-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Cookbooks</strong> and select the cookbook follow. Following a cookbook can only apply to cookbooks in the alternate namespace.</li>
+<li>Select the cookbook version or versions you would like to follow.</li>
+<li>From the <strong>Actions</strong> drop-down, select Follow.<br>
+<img src="/img/cm-follow-cookbooks.png" alt="cm-follow-cookbooks.png" width="725" height="341" /><br></li>
+<li>A confirmation will ask if you want to follow the selected cookbook version or versions. You can only follow cookbooks from an alternate namespace and you can&#39;t follow an alternate namespace that is already being followed. Additionally, you can only apply one status at a time to a cookbook. For example, if a cookbook is marked as obsolete, this will change the status to followed.<br>
+<img src="/img/cm-convirmation-follow-cookbook.png" alt="cm-convirmation-follow-cookbook.png" width="566" height="406" /></li>
+<li>Select <strong>OK</strong>.</li>
+</ol>
+
+<h2 id="unfollow-a-cookbook">Unfollow a Cookbook</h2>
+
+<p>When you unfollow a cookbook, you will no longer get new or updated versions of the cookbook automatically imported into your account when a change has been fetched by your repository. Following or unfollowing cookbooks only apply to cookbooks in an alternate namespace.</p>
+
+<h3 id="unfollow-a-cookbook-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Cookbooks</strong> and select the cookbook you would like to no longer follow. Following a cookbook can only apply to cookbooks in the alternate namespace.</li>
+<li>Select the cookbook version or versions you would like to follow.</li>
+<li>From the <strong>Actions</strong> drop-down, select Unfollow.<br>
+<img src="/img/cm-unfollow-cookbooks.png" alt="cm-unfollow-cookbooks.png" width="725" height="337" /><br></li>
+<li>A confirmation will ask if you want to unfollow the selected cookbook version or versions. You can only follow cookbooks from an alternate namespace and you can only unfollow an alternate namespace that is being followed.</li>
+<li>Click <strong>Ok</strong>.</li>
+</ol>
+
+<h2 id="freeze-a-cookbook">Freeze a Cookbook</h2>
+
+<p>When you freeze a cookbook, the cookbook can&#39;t be modified. Any changes to the cookbook must be imported as a new version. You can only freeze a cookbook in the primary namespace. Primary namespace cookbooks are generally brought over from your own repositories.</p>
+
+<h3 id="freeze-a-cookbook-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Cookbooks</strong> and select the cookbook you want to freeze. You can only freeze a cookbook in the primary namespace.</li>
+<li>Select the cookbook version or versions you would like to freeze.</li>
+<li>From the <strong>Actions</strong> drop-down, select Freeze.<br>
+<img src="/img/cm-freeze-a-cookbook.png" alt="cm-freeze-a-cookbook.png" width="725" height="298" /><br></li>
+<li>A confirmation will ask if you want to freeze the selected cookbook or cookbooks. You can only freeze cookbooks in a primary namespace. Additionally, you can only apply one status at a time to a cookbook. For example, if a cookbook is marked as obsolete, this will change the status to frozen.<br>
+<img src="/img/cm-confirm-cookbook-freeze.png" alt="cm-confirm-cookbook-freeze.png" width="550" height="394" /><br></li>
+<li>Select <strong>Ok</strong>.</li>
+</ol>
+
+<h2 id="unfreeze-a-cookbook">Unfreeze a Cookbook</h2>
+
+<p>When you unfreeze a cookbook, the cookbook can be modified. Any changes changes to the cookbook that gets imported as the same version will replace the cookbook. You can only freeze or unfreeze a cookbook in the primary namespace. Primary namespace cookbooks are generally brought over from your own repositories.</p>
+
+<h3 id="unfreeze-a-cookbook-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Cookbooks</strong> and select the cookbook you want to unfreeze. You can only freeze or unfreeze a cookbook in the primary namespace.</li>
+<li>Select the cookbook version or versions you would like to unfreeze.</li>
+<li>From the <strong>Actions</strong> drop-down, select Unfreeze.<br>
+<img src="/img/cm-unfreeze-a-cookbook.png" alt="cm-unfreeze-a-cookbook.png" width="725" height="275" /></li>
+<li>A confirmation will ask if you want to unfreeze the selected cookbook version or versions. You can only unfreeze cookbooks from a primary namespace and you can only unfreeze an primary namespace that is frozen.</li>
+<li>Click <strong>Ok</strong>.</li>
+</ol>
+
+<h2 id="make-a-cookbook-obsolete">Make a Cookbook Obsolete</h2>
+
+<p>When a cookbook is marked as obsolete, the cookbook cannot be attached to a ServerTemplate. This does not detach a cookbook if it has already been attached.</p>
+
+<h3 id="make-a-cookbook-obsolete-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Cookbooks</strong> and select the cookbook version or versions you want to mark as obsolete.</li>
+<li>Select the cookbook version or versions you would like to make obsolete.</li>
+<li>From the <strong>Actions</strong> drop-down, select Make Obsolete.
+<img src="/img/cm-make-a-cookbook-obsolete.png" alt="cm-make-a-cookbook-obsolete.png" width="725" height="317" /><br></li>
+<li>A confirmation will ask if you want to make the selected cookbook version or versions obsolete. You can only assign one state at a time to a cookbook. So if the cookbook is frozen, and you mark it as obsolte, it will change it to obsolete.</li>
+<li>Select <strong>OK</strong>.</li>
+</ol>
+
+<h2 id="undo-an-obsoleted-cookbook">Undo an Obsoleted Cookbook</h2>
+
+<p>When a cookbook is marked as obsolete, the cookbook cannot be attached to a ServerTemplate. If you would like to make a undo a cookbook that was made obsolete so you can use it in your ServerTemplates, it is possible.</p>
+
+<h3 id="undo-an-obsoleted-cookbook-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Cookbooks</strong> and select the cookbook version or versions you want to undo as obsolete.</li>
+<li>Select the cookbook version or versions you would like to undo as obsolete.</li>
+<li>From the <strong>Actions</strong> drop-down, select Undo Obsolete.
+<img src="/img/cm-undo-cookbook-obsolete.png" alt="cm-undo-cookbook-obsolete.png" width="725" height="369" /></li>
+<li>A confirmation will ask if you want to make the selected cookbook version or versions obsolete.</li>
+<li>Click <strong>Ok</strong>.</li>
+</ol>
+
+<h2 id="delete-a-cookbook">Delete a Cookbook</h2>
+
+<p>You can remove any cookbooks that have been imported into your account from the repositories section. When you remove a cookbook, it is deleting it from RightScale, but will not remove it from the repository the cookbook came from. Cookbooks that are Frozen cannot be deleted. Also, cookbooks that are used by Head ServerTemplates cannot be deleted. If a cookbook is in use by a committed revision of a ServerTemplate, deleting the cookbook from your account does not affect the committed ServerTemplate(s).</p>
+
+<h3 id="delete-a-cookbook-steps">Steps</h3>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>Cookbooks</strong> and select the cookbook you would like to remove.</li>
+<li>Select the cookbook version or versions you would like to remove.</li>
+<li>From the <strong>Actions</strong> drop-down, select Delete.<br>
+<img src="/img/cm-delete-cookbooks.png" alt="cm-delete-cookbooks.png" width="725" height="371" /></li>
+<li>A confirmation will ask if you want to remove. If a recipe of that cookbook is in use by a ServerTemplate, then you will not be allowed to delete the cookbooks. You will need to remove the recipe attached to the ServerTemplate. Deleting a cookbook does not remove it from the repository it came from.</li>
+<li>Click <strong>OK</strong> to confirm that you want to delete the cookbook version.</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

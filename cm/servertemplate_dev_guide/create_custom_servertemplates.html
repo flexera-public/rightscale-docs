@@ -1,0 +1,324 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Create Custom ServerTemplates</title><meta content="Detailed steps for creating your own custom ServerTemplates in RightScale including cloning and modifying an existing ServerTemplate or creating a ServerTemplate from scratch." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_servertemplate_dev_guide cm_servertemplate_dev_guide_create_custom_servertemplates" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">ServerTemplate Developer's Guide</a></p><div class="page-header"><h1>Create Custom ServerTemplates</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>There are two different ways to create a custom ServerTemplate.</p>
+
+<ul>
+<li>Clone and modify an existing ServerTemplate</li>
+<li>Create a ServerTemplate from scratch</li>
+</ul>
+
+<p>If possible, it is best to clone and modify an existing ServerTemplate, especially if you are only going to make minor changes such as adding a few new scripts or changing the inputs.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<h3 id="getting-started-clone-and-modify-a-servertemplate">Clone and Modify a ServerTemplate</h3>
+
+<p>You will save time and effort if you can find an existing ServerTemplate whose functionality is already similar to your current development needs. However, if you cannot find a similar ServerTemplate to modify, you will need to create a ServerTemplate from scratch. Before you invest the time and effort to create your own ServerTemplate from scratch, you should always check the MultiCloud Marketplace to see what&#39;s available.</p>
+
+<p>If you are successful finding a ServerTemplate in the MultiCloud Marketplace that you want to customize, you will need to import the latest committed revision and clone it to create an editable version.</p>
+
+<ol>
+<li>Go to <strong>Design</strong> &gt; <strong>MultiCloud Marketplace</strong> &gt; <strong>ServerTemplates</strong>. Use the keyword searches and category filters to find a ServerTemplate that best meets your requirements.</li>
+<li>Select and import the ServerTemplate that best meets your requirements.</li>
+<li>Clone the ServerTemplate to create an editable HEAD version. Change the ServerTemplate&#39;s name accordingly.</li>
+<li>(Recommended) Commit the ServerTemplate. This way, you&#39;ll know that the first revision of the cloned ServerTemplate matches the original version of the ServerTemplate that it was cloned from, which will allow you to always revert back to the original state of the ServerTemplate before you made any modifications to it. For the commit message, you can use a simple commit message like <q>original version.</q></li>
+<li>(Optional) Attach new (Chef) cookbooks to the ServerTemplate.</li>
+<li>Modify the ServerTemplate&#39;s script lists by adding Chef recipes (from one of the attached cookbooks) and/or RightScripts.</li>
+</ol>
+
+<p><img src="/img/cm-clone-server-template.png" alt="cm-clone-servertemplate.png" width="725" height="427" /></p>
+
+<h3 id="getting-started-create-a-servertemplate-from-scratch">Create a ServerTemplate from Scratch</h3>
+
+<p>If you want to build a ServerTemplate from scratch, it is strongly recommended that you start your ServerTemplate development using the latest version of RightScale&#39;s <q>Base</q> ServerTemplates in the MultiCloud Marketplace (MCM). You&#39;ll find base ServerTemplates for launching Linux or Windows servers. You will also find ones that use primarily RightScripts or Chef recipes.</p>
+
+<p><a href="https://www.rightscale.com/library/server_templates/RightLink-10-6-0-Linux-Base/228959">Base ServerTemplate for RightLink 10</a></p>
+
+<h4 id="about-the-base-servertemplates">About the Base ServerTemplates</h4>
+
+<p>The purpose of the base ServerTemplates is to provide ServerTemplates that already have built-in best practices for launching servers in the cloud using ServerTemplates. The base ServerTemplates include the following:</p>
+
+<ul>
+<li><strong>Base Configurations</strong> - Basic set of scripts for a RightLink-based server with logging, monitoring, alerts, etc. Scripts are required for displaying audit entries, log data, alerts, and monitoring graphs in the Dashboard. RightLink is a client-side agent that&#39;s installed by a RightImage and used for setting up optimized communication between an instance and the RightScale management platform.</li>
+<li><strong>MultiCloud Support</strong> - Each base ServerTemplate includes several MultiCloud Images (MCIs) that reference the latest supported images with a frozen software repository date that has been tested across a variety of different clouds. (e.g. AWS, Azure, etc.)</li>
+<li><strong>Predefined Alerts</strong> - Basic set of alerts that is suitable for monitoring most server types.</li>
+<li><strong>Predefined Inputs</strong> - Examples of system required input variables.</li>
+<li><strong>Built-in Best Practices</strong> - Each ServerTemplate includes all of RightScale&#39;s best practices for ServerTemplate development.</li>
+</ul>
+
+<h4 id="how-to-use-the-base-servertemplates">How to use the Base ServerTemplates</h4>
+
+<ol>
+<li>Go to Design -&gt; MultiCloud Marketplace -&gt; ServerTemplates. Perform a keyword search for <q>base servertemplate</q> to find the most recently published base ServerTemplates in the MCM. Look for the ServerTemplates where <q>RightScale</q> is the publisher. You&#39;ll find a few different types of base ServerTemplates for both Linux and Windows operating systems.</li>
+<li>Select and import the latest published revision of the ServerTemplate that best meets your requirements.</li>
+<li>Clone the ServerTemplate to create an editable HEAD version. Change the ServerTemplate&#39;s name accordingly.<br>
+<img src="/img/cm-clone-base.png" alt="cm-clone-base.png" width="507" height="271" /></li>
+<li>Commit the ServerTemplate. This way, you&#39;ll know that the first revision of the cloned ServerTemplate matches the original version of the ServerTemplate that it was cloned from, which will allow you to always revert back to the original state of the ServerTemplate before you made any modifications to it. For the commit message, you can use a simple commit message like <q>original version.</q></li>
+</ol>
+
+<div class="alert alert-info" role="alert"><strong>Tip:</strong><p>Under the cloned ServerTemplate&#39;s Info tab, you can always see which ServerTemplate it was originally cloned from.</p>
+</div>
+
+<p><img src="/img/cm-cloned-from.png" alt="cm-cloned-from.png" width="560" height="31" /></p>
+
+<h2 id="build-a-test-server">Build a Test Server</h2>
+
+<p>If you are developing a ServerTemplate, you should start by creating a server using the HEAD version of your custom ServerTemplate in a designated deployment that you&#39;ve created for performing sandbox tests. The created server should serve as your <q>development/test</q> server.</p>
+
+<p><img src="/img/cm-server-template-server.png" alt="diag-ServerTemplate2Server.png" width="586" height="269" /></p>
+
+<ol>
+<li>Create a <q>Test</q> deployment.</li>
+<li>Go to the HEAD version of your custom ServerTemplate that you&#39;re currently developing and add a server to the <q>test</q> deployment. it is important that you add the server using the HEAD version so that any changes that you make to the HEAD ServerTemplate will be reflected in the created server.</li>
+<li>Under the test deployment&#39;s <strong>Inputs</strong> tab, define any missing inputs that are required by any of the boot or decommission scripts. If you are not sure which inputs are required to successfully launch/terminate a server, you can launch the server and see which inputs are highlighted in red at the inputs confirmation page. Since operational scripts may or may not be executed during the lifetime of the server, it is not required that you specify values for all missing inputs that are used by operational scripts in order to successfully launch/terminate a server.</li>
+<li>The first step is to launch the server before you have made any modifications to the ServerTemplate. Launch a test server and make sure that it successfully becomes operational. If the server <q>strands in booting</q> and does not launch successfully, create a RightScale support ticket. Although it is rare to experience an error launching an unmodified published ServerTemplate, it is best to perform this simple test to be absolutely sure that you are using a solid ServerTemplate that does not have any obvious bugs. You must be able to successfully launch a server using the unmodified HEAD ServerTemplate so that you&#39;ll know that if there are any problems with the server, it is not a result of a preexisting bug.</li>
+<li>Once it becomes operational, terminate the server. Similarly, if the server <q>strands in decommissioning</q> you should log a RightScale support ticket.</li>
+<li>Commit the HEAD ServerTemplate that was used to successfully launch and terminate the test server. The reason why you&#39;re committing a cloned and unmodified ServerTemplate is so that you can always revert back to the first committed revision (rev1), which is the original, pristine state of the ServerTemplate before you introduced any changes. When committing the ServerTemplate, you can leave a simple commit message. (e.g. Original version)</li>
+<li>You are now ready to start modifying the ServerTemplate.</li>
+</ol>
+
+<h2 id="script-customizations">Script Customizations</h2>
+
+<h3 id="script-customizations-add-scripts">Add Scripts</h3>
+
+<p>Remember, a server inherits its list of scripts from its ServerTemplate. it is a one-to-one relationship. Therefore, if you add a script to a HEAD ServerTemplate, the script will automatically appear when viewing a server that was created with the HEAD version of that ServerTemplate.</p>
+
+<p>Follow the guidelines below for adding scripts to one of the boot, operational, or decommission script phases.</p>
+
+<h4 id="boot-script-modifications">Boot Script Modifications</h4>
+
+<p>If you are making modifications to the boot scripts phase of a ServerTemplate, follow the guidelines below.</p>
+
+<p>it is recommended that you only add one script (or a set of scripts if they&#39;re related) at a time instead of adding several unrelated scripts all at once, which will help you better troubleshoot your template and scripts, if there are problems. This way, if there&#39;s an error, you&#39;ll know exactly which script caused the problem.</p>
+
+<ol>
+<li>If you are adding completely new scripts to a ServerTemplate&#39;s <q>boot scripts</q> section you should launch a server using a HEAD version of a ServerTemplate. If you intend to add the new script as a boot script and you are still developing and testing it, you will find it helpful to first test the script as an operational script instead of a boot script. This way, if the script fails, it will not result in a <q>stranded</q> server and you avoid having to relaunch or launch new servers to test the script. Therefore, you should first add a HEAD version of the script to the ServerTemplate as an operational script. Test the script on an operational server. If it fails, you can modify the HEAD version of the RightScript and execute it again on the running server. Once you have tested the script and confirmed its functionality, you should commit the RightScript. You can then safely add the newly committed revision to the end of the ServerTemplate&#39;s boot script list. Repeat the steps to add additional scripts to the boot phase.</li>
+<li>Generally speaking, new scripts that introduce new functionality should be added to the end of the boot/decommission scripts list. Remember, boot and decommission scripts are executed in sequential order, so be sure to list any software installation scripts before related configuration scripts. (See screenshot below.) If you are adding scripts that introduce new server functionality it is typically safe to add them to the bottom of the list (recommended), which will make it easier to identify custom scripts that were added to the ServerTemplate and also make it easier to view the differences between revisions when you perform a differential (diff).
+[<img src="/img/cm-add-boot-script.png" alt="cm-add-boot-script.png" width="550" height="534" /></li>
+<li>If you are modifying an existing script or replacing it with a similar script be sure to add the modified version of the script in the same location to ensure that the script will be executed at the proper time. For example, in the screenshot below, we are replacing the application code checkout script that is designed to pull the application code from an SVN repository with a different script that will pull the application code from an S3 bucket. As a best practice, you should always add the new script before/after the script that it is going to replace before you delete the old script from the list.<br>
+<img src="/img/cm-swap-script.png" alt="cm-swap-script.png" width="605" height="113" /></li>
+<li>Boot scripts are executed in sequential order at boot time when an server is launched/relaunched. Therefore, if you add a new script to the ServerTemplate&#39;s boot script list and there is already a running server that&#39;s using the HEAD version, you will need to relaunch the server (or launch a new server) to test the new script. If the server becomes stranded in booting, you will need to troubleshoot the script to determine the cause of the failure. Use the server&#39;s audit entries or SSH/RDP into the server to troubleshoot the problem. Although you can manually execute a newly added boot script on a running server, you should always test any modifications to the boot script list with a relaunch or launch of a fresh new server in order to test the automated execution of these scripts to ensure that there are not any script dependencies that you might not have taken into consideration.</li>
+</ol>
+
+<h4 id="operational-script-modifications">Operational Script Modifications</h4>
+
+<p>The list of operational scripts should be reserved for only containing useful scripts that may or may not be executed during the runtime of your server. It should not contain any scripts that are not relevant to the ServerTemplate. Unlike boot and decommission scripts, the order in which the scripts are placed in the list is not important because operational scripts are always executed manually, on-demand.</p>
+
+<p>it is also important to remember that any boot or decommission scripts can also be executed on-demand on a running server, so you may not want to add the same script again under the operational script list. However, some users find it useful to see all of the operational scripts listed together because a script may have a dependency which might prevent its successful execution as a standalone operational script. If you do choose to place a script in both the boot/decommission script list as well as the operational script list you must remember to keep both script revisions in-sync.</p>
+
+<h4 id="decommission-script-modifications">Decommission Script Modifications</h4>
+
+<p>Decommission scripts follows many of the same guidelines as boot scripts since they are also executed automatically in sequential order. However, a key difference between boot and decommission scripts is the time period in which they must be executed. When a server is terminated, RightScale enforces a 180 second time period during which all decommission scripts are executed before an instance termination request is made to the cloud. Therefore, you should keep the list of decommission scripts to a minimum. You do not want to include a script that will take a long time to complete because it may fail to execute completely or prevent subsequent scripts from ever being executed. For example, you should not include a <q>database backup</q> script in the decommission phase. On the contrary, running a script that updates a load balancer&#39;s HAProxy configuration file to remove an application server that&#39;s being terminated from the load balancing pool would be an acceptable and recommended action.</p>
+
+<h3 id="script-customizations-test-scripts">Test Scripts</h3>
+
+<p>Perform the following steps to properly test any script modifications.</p>
+
+<p><strong>Boot/Decommission Scripts</strong></p>
+
+<ol>
+<li>Add the new script that you want to test to the editable ServerTemplate&#39;s HEAD version. Note: You should only test one script at a time.</li>
+<li>You should already have a <q>test</q> server that you created earlier that references the HEAD version of the ServerTemplate so that any changes to the HEAD version will automatically be reflected in the test server. If you do not have a test server, create one now. See <a href="/cm/servertemplate_dev_guide/create_custom_servertemplates.html#build-a-test-server">Build a Test Server</a>.</li>
+<li>Launch the server.</li>
+<li><p>Did the server become operational?</p>
+
+<ul>
+<li><strong>Yes</strong> - If the server becomes operational, you can check the audit entries and/or SSH into the instance to verify that the script was executed successfully and performed the expected actions. Commit the ServerTemplate to preserve your successful modification.</li>
+<li><strong>No</strong> - If the server becomes <q>stranded</q> in booting/decommissioning and never becomes operational because one of the scripts failed, you should troubleshoot the problem. Once you have fixed the script you can test the ServerTemplate again by re-launching the server. Alternatively, if you do not want to terminate the running server, you can manually run the fixed script again by either manually running the script from the dashboard under the current server&#39;s Scripts tab or using the <code>rs_run_right_script -n &quot;RightScriptName&quot;</code> command for executing a RightScript or <code>rs_run_recipe -n &quot;RecipeName&quot;</code> for a Chef recipe. Continue to execute the remaining scripts in the boot/decommissioning script list. Once you are confident that all of the boot/decommission scripts will run successfully, relaunch the server to test it again. As a basic rule, you should only commit a ServerTemplate if it can successfully launch a server into an operational state.
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If you use rs_run_right_script with the -p option, you must pass a COMPLETE set of input values in which case the input values that are defined on the server are not merged. If you omit any inputs, e.g. do not use -p, then the values defined on the server are used. However we do not provide a way to mix and match.</p>
+</div></li>
+</ul></li>
+<li><p>Reboot the server. You should always reboot the server to make sure that the new script is reboot-safe.</p></li>
+<li><p>Did the server reboot properly?</p>
+
+<ul>
+<li><strong>Yes</strong> - it is important to make sure that the new script is reboot-safe.</li>
+<li><strong>No</strong> - If the server does not successfully reboot, you will need to troubleshoot the problem. Follow the troubleshooting steps outlined in the <q>No</q> section in step 4 above and then test the reboot action again.</li>
+</ul></li>
+<li><p>If the server was successfully launched and rebooted, you should commit the ServerTemplate to preserve your successful modification. Note: By committing the ServerTemplate you will be prompted to also commit any HEAD objects (e.g. RightScripts, MultiCloud Images, etc.) by default.</p></li>
+<li><p>Repeat the process to test another script.</p></li>
+</ol>
+
+<p><strong>Operational Scripts</strong></p>
+
+<p><img src="/img/cm-add-operational-script.png" alt="cm-add-operational-script.png" width="704" height="269" /></p>
+
+<ol>
+<li>Add the new script to the operational scripts list of the editable HEAD version of the ServerTemplate. Note: You should only test one script at a time.</li>
+<li>You should already have a <q>test</q> server that you created and launched earlier that references the HEAD version of the ServerTemplate so that any changes to the HEAD version will automatically be reflected in the test server. The new script will automatically become visible at the server level. If you do not have a test server, create and launch one now. See <a href="/index.html">Build a Test Server</a>.</li>
+<li>Run the operational script. Provide values for any required inputs that are missing. One of the benefits of using a dev/test server that&#39;s using a HEAD ServerTemplate is that you can make changes to the ServerTemplate&#39;s list of scripts so that you can instantly test new scripts without having to relaunch the server. Alternatively, you can always use the <q>Any Script</q> option on a running server to run and test a script before you decide to add it to the ServerTemplate.
+
+<ul>
+<li><strong>Note for RightScripts</strong>: Although you can also run a RightScript at the command line of an instance by using the <code>rs_run_right_script</code> command, it is not a recommended best practice because a complete audit entry will not be generated and there is no way to know which user is responsible for running the script. One of the key benefits of using the RightScale cloud management platform is that fact that user actions are properly tracked and recorded. See <a href="/cm/dashboard/design/rightscripts/rightscripts_actions.html#run-a-rightscript-on-a-server">Run a RightScript on a Server</a>.</li>
+</ul></li>
+<li>Did the script execute successfully Check the server&#39;s audit entries and/or SSH into the instance to verify that the script was executed successfully and performed the expected actions.
+
+<ul>
+<li><strong>Yes</strong> - Commit the ServerTemplate to preserve your successful modification. Note: By committing the ServerTemplate you will be prompted to also commit any HEAD objects (e.g. RightScripts, MultiCloud Images, etc.) by default.</li>
+<li><strong>No</strong> - Check the audit entry to troubleshoot the problem. Fix the problem and run the script again to retest.</li>
+</ul></li>
+<li>Repeat the process to test another script.</li>
+</ol>
+
+<h2 id="multicloud-images">MultiCloud Images</h2>
+
+<p>By definition, a ServerTemplate is cloud-agnostic. On the other hand, the actual machine images that are used to launch an instance in a cloud infrastructure are cloud-specific. MultiCloud Images help bridge the gap between a cloud and the server that you&#39;re trying to launch with a ServerTemplate.</p>
+
+<p>A ServerTemplate&#39;s list of MultiCloud Images (MCIs) determines which clouds it supports. At a minimum, a ServerTemplate must have at least one MCI that supports at least one cloud. However, you&#39;ll often find that ServerTemplates in the MultiCloud Marketplace are published with multiple MCIs and support multiple clouds.</p>
+
+<p>If you are building a custom ServerTemplate, there are several factors to take into consideration for determining which MCIs should be included in your ServerTemplate.</p>
+
+<ul>
+<li><strong>Cloud Support</strong> - Which clouds (AWS US-East, AWS US-West, etc.) should the ServerTemplate support? (i.e. A user should be able to use the ServerTemplate to launch a server into which cloud(s)?)</li>
+<li><strong>OS Support</strong> - Which operating system (OS) and distribution should the ServerTemplate support? (Note: Options may be limited by the clouds themselves.)</li>
+<li><strong>Custom Images</strong> - Will the ServerTemplate be designed to use custom-built images? If you are building custom images that you&#39;ve RightScale-enabled by installing RightLink on them, you will need to create new MCIs. If you are building custom images that you want another RightScale account to be able to use, you will need to either make those custom images publicly available in the selected cloud or share them accordingly. See <a href="/cm/dashboard/design/multicloud_images/multicloud_images_actions.html#create-a-custom-rightimage-for-faster-boot-times">Create a custom RightImage for faster boot times</a>.</li>
+</ul>
+
+<p>The RightScale platform makes it easy to build ServerTemplates that support multiple clouds.</p>
+
+<p>If you are going to build a custom ServerTemplate, you can design it to support multiple clouds with minimal effort. For example, if you are building a ServerTemplate from scratch, it is strongly recommended that you start with one of the <q>Base</q> Linux/Windows ServerTemplates published by RightScale because they have been published with MCIs that support multiple clouds.</p>
+
+<p>See <a href="/cm/dashboard/design/multicloud_images/multicloud_images_actions.html#create-a-new-multicloud-image">Create a New MultiCloud Image</a>.</p>
+
+<h2 id="inputs">Inputs</h2>
+
+<p>One of the best ways to improve the usability of a ServerTemplate is to provide useful input descriptions and default values. As a general rule, keep the number of undefined inputs at the ServerTemplate to a minimum so that the users of your ServerTemplate will only have to provide values for a few missing inputs.</p>
+
+<p>There are several things to take into consideration.</p>
+
+<ul>
+<li>Does an input already exist for providing the same information? For example, many of RightScale&#39;s RightScript-based ServerTemplates have an input called ADMIN_EMAIL. Therefore, if you need to pass the same information to a new script, you should reuse the existing input name instead of creating a new input variable with a similar name.</li>
+<li>Provide default values for generic inputs. To make it easier for a user to use your ServerTemplate, you should provide as many acceptable default values as possible and only leave the application-specific inputs blank. Users will be encouraged to define values for any missing inputs at the deployment level to promote consistent server configurations across all servers in a deployment.</li>
+<li>Provide detailed input tooltip descriptions for each input.<br>
+<img src="/img/cm-tooltip.png" alt="cm-tooltip.png" width="563" height="154" /></li>
+<li>Be sure to include a clear description and a sample value to show acceptable values and correct syntax.
+
+<ul>
+<li><strong>RightScripts</strong> - To add or change an input description, go to a RightScript&#39;s Scripts tab.</li>
+<li><strong>Chef Recipes</strong> - To add or change an input (Chef attribute) description, update the cookbook&#39;s metadata.rb file.</li>
+</ul></li>
+<li>Remove duplicate input descriptions. By default, each variation of an input description will be displayed as the input&#39;s tooltip. Since multiple scripts can use the same input, it is important that every script uses the same description for a particular input in order to prevent multiple descriptions from being displayed in the dashboard. In the screenshot below, notice that LB_VHOST_NAME is an input that is <q>used in</q> two scripts.<br></li>
+</ul>
+
+<p>When you hover over the info icon for the input&#39;s tooltip description, two different descriptions are actually displayed because each script has a different description for the input. In such cases, it can be quite confusing for an end user. As a result, a user will often enter an incorrect value which will cause a script to fail. (See screenshot below.) In order to provide a consistent description for an input, the same description must be used by each script.
+  [<img src="/img/cm-two-input-descriptions.png" alt="cm-two-input-descriptions.png" width="471" height="550" />
+To solve the duplicate input description problem above, update the scripts so that they use the same description for the input. As a best practice, only one description should be displayed for each input.<br>
+For <strong>RightScripts</strong>, you can change the input&#39;s description under the Scripts tab.
+For <strong>Chef Recipes</strong>, you can change the input&#39;s description in the cookbook&#39;s metadata.rb file.</p>
+
+<ul>
+<li>Use cloud-agnostic input names, if applicable. For example, instead of using cloud-specific input name like S3_BUCKET_NAME or CLOUD_FILES_CONTAINER, you could use a generic name for the input such as REMOTE_STORAGE_CONTAINER. Perhaps you would also need to add another input where a user can use a dropdown list to select which type of cloud storage will be used for storing backup files.</li>
+</ul>
+
+<p>To learn the best practices for creating and managing inputs in RightScripts and Chef recipes, see <a href="/cm/rs101/understanding_inputs.html">Understanding Inputs</a> and <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#change-the-category-for-an-input-on-a-servertemplate">Change the Category for an Input on a ServerTemplate</a>.</p>
+
+<h2 id="software-repositories">Software Repositories</h2>
+
+<p>Since many server instances in the cloud are based off of various Linux distributions, it is strongly recommended that you <q>freeze</q> or lock the software repositories down to a specific date.</p>
+
+<p>The machine images (e.g. RightImages) that are loaded onto an instance leverage several open source projects (e.g. CentOS, Ubuntu, etc.). In order to provide a predictable and reliable way to launch instances in clouds using various open source projects, RightScale creates mirrors of these commonly used public repositories. RightScale creates a static copy (once per day) of each public repository that we support on our mirrors. This way, when a server is launched from the RightScale platform and an instance is created in the cloud using a CentOS machine image for example, you can use the repository date to control exactly which CentOS packages will be used to launch the server. As a result, you&#39;ll be able to launch a server the exact same way several years later with the exact same packages, which is absolutely critical for any deployments that may be subject to audit checks in the future.</p>
+
+<p>However, if you want to develop your ServerTemplates using the current versions that are available in the various software repositories, you can use the <q>Current</q> option, which will use what is currently available in the public repositories on that particular day. Obviously, in such cases, a server&#39;s configuration is not static and can change over time because the public repositories themselves will change over time.</p>
+
+<p>As a best practice, before you start testing a ServerTemplate you should always freeze the software repositories to a specific date.</p>
+
+<p>See <a href="/cm/rs101/freezing_software_repositories.html">Freezing Software Repositories</a>.</p>
+
+<h2 id="alerts">Alerts</h2>
+
+<p>You may want to add predefined alerts to a ServerTemplate&#39;s Alerts tab to monitor various system and application-specific metrics that are relevant for the server/application. If you are using one of the ServerTemplates published by RightScale, it will automatically include several useful alert specifications by default. All of the alert specifications use one of the three predefined alert escalations (critical, warning, and default) that are created by default when a RightScale account is created.</p>
+
+<p>If you add your own custom alert specifications to a ServerTemplate, you should make sure that any RightScale account that will use that ServerTemplate has the appropriately named and defined alert escalations otherwise a triggered alert may not perform the related actions defined by the alert escalation. For this reason, it is recommended that you use one of the three predefined alert escalations that are typically common to all RightScale accounts.</p>
+
+<p>There are several factors to take into consideration when defining additional alert specifications for a custom ServerTemplate.</p>
+
+<ul>
+<li>Will the ServerTemplate be used outside of the current RightScale account?
+
+<ul>
+<li>If <strong>yes</strong>, you should only create new alert specifications that reference one of the three alert escalations (critical, warning, and default) that are common between all RightScale accounts, especially if you intend to make the ServerTemplate publicly available in the MultiCloud Marketplace. However, if you are going to privately share the ServerTemplate with a select set of RightScale accounts, you can include new alert specifications that reference custom alert escalations, but you must remember to coordinate the sharing process with the other RightScale accounts so that the other accounts also have the appropriately named and configured alert escalations to ensure proper alert functionality. You could also distribute the ServerTemplate as part of a macro, where part of the macro&#39;s code creates the required alert escalations. Otherwise a triggered alert will attempt to call an alert escalation that doesn&#39;t exist in the RightScale account resulting in no action. Remember, alert escalations are account-specific and are not imported/created when a ServerTemplate is imported into another RightScale account.</li>
+<li>If <strong>no</strong>, then you can safely reference custom alert escalations that are unique to the current RightScale account.</li>
+</ul></li>
+<li>Does the ServerTemplate contain alerts that are designed to trigger an autoscaling event?
+
+<ul>
+<li>If <strong>yes</strong>, it is important to realize that the ServerTemplate will most likely not cause a successful autoscaling event because the alert specification configured to vote for a grow/shrink action assumes that a server array already exists in the RightScale account and is configured to look for the matching voter tag. For this reason, autoscaling should be manually configured within a RightScale account and you should not include alerts for autoscaling purposes in the ServerTemplate. The only way to predefine an autoscaling array is to create a macro that will build all the necessary components (e.g. deployment, server array, alert escalations, etc.) when it is run.</li>
+<li>If <strong>no</strong>, you will not have a problem.</li>
+</ul></li>
+<li>Are there any alert specifications that already exist that you want to reuse?
+
+<ul>
+<li>If <strong>yes</strong>, use the <q>Import Alert</q> feature to use an existing alert specification that&#39;s already been defined for you instead of creating a new alert specification from scratch. See <a href="/cm/rs101/import_an_alert_specification.html">Import an Alert Specification</a>.</li>
+</ul></li>
+</ul>
+
+<p>See <a href="/cm/dashboard/design/alert_escalations/alert_escalations.html">Alert Escalations</a> and <a href="/cm/dashboard/manage/arrays/arrays_actions.html#set-up-autoscaling-using-voting-tags">Set up Autoscaling using Voting Tags</a>.</p>
+
+<h3 id="alerts-commit-a-servertemplate">Commit a ServerTemplate</h3>
+
+<p>The purpose of committing a ServerTemplate is to lock down a static revision of the ServerTemplate so that it can no longer be modified.</p>
+
+<p>A committed revision of a ServerTemplate allows you to relaunch and configure a server the exact same way in the future, which may prove to be invaluable if your deployment is ever audited and you are required to recreate the exact same server environment or perform the same test. By default, when you commit a ServerTemplate you will be prompted to also lock down any editable configurations, which is strongly recommended since the purpose of committing a ServerTemplate is to create a static revision that cannot be modified.</p>
+
+<p>There may be unique scenarios where you would not want to commit everything, although it is not a recommended best practice. For example, you may want to always use the current version of a software repository during the development phase and only freeze the repository when you&#39;re ready to use it in a production deployment. Or perhaps there is an operational RightScript that you&#39;re still modifying. In such cases, you can choose to not commit those design objects when committing the ServerTemplate.</p>
+
+<p>By default, when you commit a ServerTemplate, the following configurations will also be committed (saved) if any of them are in an editable (HEAD) state.</p>
+
+<ul>
+<li>ServerTemplate name and description (Info tab)</li>
+<li>HEAD MultiCloud Images (Images tab)</li>
+<li>Software repositories (Repos tab)</li>
+<li>HEAD RightScripts (Scripts tab)</li>
+<li>Alert specifications (Alerts tab)</li>
+<li>Predefined input parameters (Inputs tab)</li>
+</ul>
+
+<p>Below are some general guidelines for committing ServerTemplates.</p>
+
+<ul>
+<li>You should only commit a HEAD ServerTemplate if the changes have been properly tested and result in a properly functioning server that meets your requirements. You do not want to have a committed revision of a ServerTemplate that will not successfully launch a server.</li>
+<li>Test all operational scripts on a running server.</li>
+<li>Test all boot scripts by launching servers using the HEAD version of the ServerTemplate before committing the ServerTemplate.</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

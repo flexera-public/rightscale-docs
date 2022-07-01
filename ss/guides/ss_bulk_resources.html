@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Bulk Resources in Self-Service</title><meta content="Bulk resources in Self-Service provide an easy way to launch a large number of similar resources quickly and efficiently." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="ss ss_guides ss_guides_ss_bulk_resources" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/ss/"><h4 class="list-group-heading"><img src="../../img/product-self-service.svg" /><span>Self-Service</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/ss/getting_started">Getting Started</a><a class="list-group-item" href="/ss/guides">Guides</a><a class="list-group-item" href="/ss/reference">Reference</a><a class="list-group-item" href="/ss/tools">Tools</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><div class="page-header"><h1>Bulk Resources in Self-Service</h1></div><div class="main-content"><p>There are many situations in which you might want to launch more than one of a given resource that is very similar. For example, perhaps you need to launch a distributed database with 5 nodes, all of which launch from the same image/template and have almost identical properties. CAT files and Cloud Workflow provide built-in mechanisms for this kind of situation that combine an easy-to-use syntax with a highly performant backend implementation.</p>
+
+<h2 id="introduction-to-bulk-resources">Introduction to Bulk Resources</h2>
+
+<p>Any time that an application requires multiple <q>copies</q> of a given resource, even if each copy has slightly different properties, bulk resources should be considered. Defining multiple resources in this way is simple in both CAT and in Cloud Workflow code, with built-in constructs to help declare, launch, manage, and destroy bulk resources.</p>
+
+<h2 id="bulk-resources-in-cat">Bulk Resources in CAT</h2>
+
+<p>In a CAT file, creating bulk resources is as simple as adding the <code>copies</code> attribute to a <code>resource</code> declaration. For example, the following will create 5 identical servers:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"basic_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span><span class="p">,</span> <span class="ss">copies: </span><span class="mi">5</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="s2">"Basic Server"</span>
+  <span class="n">cloud</span> <span class="s2">"EC2 us-west-2"</span>
+  <span class="n">ssh_key</span> <span class="n">find</span><span class="p">(</span><span class="s2">"default"</span><span class="p">)</span>
+  <span class="n">server_template</span> <span class="n">find</span><span class="p">(</span><span class="s2">"RightLink 10.6.0 Linux Base"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Usually, each of the copies will have <em>some</em> slight difference, such as appending the <q>number</q> to the <code>name</code> of each server. For this purpose, the <a href="/ss/reference/cat/v20161221/index.html#built-in-methods-and-other-keywords"><code>copy_index</code> function</a> can be used to get the current index in the collection. For example, the following code will launch the same 5 servers, but each with their own unique name:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"basic_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span><span class="p">,</span> <span class="ss">copies: </span><span class="mi">5</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="n">join</span><span class="p">([</span><span class="s2">"Basic Server #"</span><span class="p">,</span> <span class="n">copy_index</span><span class="p">()])</span>
+  <span class="n">cloud</span> <span class="s2">"EC2 us-west-2"</span>
+  <span class="n">ssh_key</span> <span class="n">find</span><span class="p">(</span><span class="s2">"default"</span><span class="p">)</span>
+  <span class="n">server_template</span> <span class="n">find</span><span class="p">(</span><span class="s2">"RightLink 10.6.0 Linux Base"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Of course, you can also use a value from a <code>mapping</code> or a <code>parameter</code> to determine the number of copies to create:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"server_count"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"number"</span>
+  <span class="n">label</span> <span class="s2">"Number to create"</span>
+<span class="k">end</span>
+
+<span class="n">resource</span> <span class="s2">"basic_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span><span class="p">,</span> <span class="ss">copies: </span><span class="vg">$server_count</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="n">join</span><span class="p">([</span><span class="s2">"Basic Server #"</span><span class="p">,</span> <span class="n">copy_index</span><span class="p">()])</span>
+  <span class="n">cloud</span> <span class="s2">"EC2 us-west-2"</span>
+  <span class="n">ssh_key</span> <span class="n">find</span><span class="p">(</span><span class="s2">"default"</span><span class="p">)</span>
+  <span class="n">server_template</span> <span class="n">find</span><span class="p">(</span><span class="s2">"RightLink 10.6.0 Linux Base"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="bulk-resources-in-cat-advanced-example">Advanced example</h3>
+
+<p>There may be cases in which the number of copies needs to be calculated, and where bulk resources need to be created that refer to other bulk resources. CAT provides a set of built-in methods that can be used to help calculate the number bulk resources to launch and to ensure that the right item in a collection of bulk resources is being referenced.</p>
+
+<p>Let&#39;s look at an example where there is a variable number of servers being created, each of which needs to have 3 volumes attached:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">parameter</span> <span class="s2">"server_count"</span> <span class="k">do</span>
+  <span class="n">type</span> <span class="s2">"number"</span>
+  <span class="n">label</span> <span class="s2">"Number to create"</span>
+<span class="k">end</span>
+
+<span class="n">resource</span> <span class="s2">"basic_server"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"server"</span><span class="p">,</span> <span class="ss">copies: </span><span class="vg">$server_count</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="n">join</span><span class="p">([</span><span class="s2">"Basic Server #"</span><span class="p">,</span> <span class="n">copy_index</span><span class="p">()])</span>
+  <span class="n">cloud</span> <span class="s2">"Google"</span>
+  <span class="n">datacenter</span> <span class="s2">"us-central1-a"</span>
+  <span class="n">instance_type</span> <span class="s2">"n1-standard-1"</span>
+  <span class="n">server_template</span> <span class="n">find</span><span class="p">(</span><span class="s2">"RightLink 10.6.0 Linux Base"</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">resource</span> <span class="s2">"volume"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"volume"</span><span class="p">,</span> <span class="ss">copies: </span><span class="n">prod</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="vg">$server_count</span><span class="p">)</span> <span class="k">do</span>
+  <span class="nb">name</span> <span class="n">join</span><span class="p">([</span><span class="s2">"Bulk volume #"</span><span class="p">,</span> <span class="n">copy_index</span><span class="p">()])</span>
+  <span class="n">cloud</span> <span class="s2">"Google"</span>
+  <span class="n">datacenter</span> <span class="s2">"us-central1-a"</span>
+  <span class="n">size</span> <span class="mi">10</span>
+<span class="k">end</span>
+
+<span class="n">resource</span> <span class="s2">"volume_attachment"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"volume_attachment"</span><span class="p">,</span> <span class="ss">copies: </span><span class="n">prod</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="vg">$server_count</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">cloud</span> <span class="s2">"Google"</span>
+  <span class="n">server</span> <span class="n">get</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">copy_index</span><span class="p">(),</span><span class="mi">3</span><span class="p">),</span> <span class="vi">@basic_server</span><span class="p">)</span>
+  <span class="n">volume</span> <span class="n">get</span><span class="p">(</span><span class="n">copy_index</span><span class="p">(),</span> <span class="vi">@volume</span><span class="p">)</span>
+  <span class="n">device</span> <span class="n">join</span><span class="p">([</span><span class="s2">"persistent-disk-"</span><span class="p">,</span> <span class="n">inc</span><span class="p">(</span><span class="n">mod</span><span class="p">(</span><span class="n">copy_index</span><span class="p">(),</span> <span class="mi">3</span><span class="p">),</span><span class="mi">1</span><span class="p">)])</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>The <code>server</code> resource is pretty clear on how it works - it is creating the number of servers that the user specifies in the <code>parameter</code>. The other resources contain some interesting use of built-in methods that it is worth exploring in detail.</p>
+
+<p>First, because we want to attach 3 volumes to each server, note that the <code>copies</code> count for each the <code>volume</code> and <code>volume_attachment</code> resources is the parameter value multiplied by 3, using the <a href="/ss/reference/cat/v20161221/index.html#built-in-methods-and-other-keywords"><code>prod</code> function</a>.</p>
+<pre class="syntax-highlight ruby"><code><span class="n">resource</span> <span class="s2">"volume"</span><span class="p">,</span> <span class="ss">type: </span><span class="s2">"volume"</span><span class="p">,</span> <span class="ss">copies: </span><span class="n">prod</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="vg">$server_count</span><span class="p">)</span> <span class="k">do</span>
+</code></pre>
+
+<p>Basic math functions can be used in the attributes section of resource declarations, and are <a href="/ss/reference/cat/v20161221/index.html#built-in-methods-and-other-keywords-using-cat-methods-on-attributes">listed here</a>.</p>
+
+<p>Another interesting piece of the above CAT is how the <code>volume_attachment</code> references both the <code>volume</code> and the <code>server</code> bulk resources. Every volume attachment resource contains the <code>server</code> the volume should be attached to as well as the <code>volume</code> to attach. In this case, those resources are defined by bulk resources above and each <code>volume_attachment</code> must reference the correct resource. </p>
+
+<p>For referencing the volume, the solution is straightforward as we need to reference the <code>volume</code> with the same index as the current <code>volume_attachment</code>. To do this, the <a href="/ss/reference/cat/v20161221/index.html#built-in-methods-and-other-keywords"><code>get()</code> function</a> is leveraged to get the specific volume in the bulk collection that corresponds to this iteration of the <code>volume_attachment</code>.</p>
+<pre class="syntax-highlight ruby"><code>  <span class="n">volume</span> <span class="n">get</span><span class="p">(</span><span class="n">copy_index</span><span class="p">(),</span> <span class="vi">@volume</span><span class="p">)</span>
+</code></pre>
+
+<p>To reference the correct <code>server</code> however, it is not as simple, since each server is getting 3 volumes attached to it. In this case we use the basic <a href="/ss/reference/cat/v20161221/index.html#built-in-methods-and-other-keywords"><code>div</code> function</a> to get a value of either <code>0</code>, <code>1</code>, or <code>2</code> and then use that as an index into the <code>basic_server</code> collection of servers.</p>
+<pre class="syntax-highlight ruby"><code>  <span class="n">server</span> <span class="n">get</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">copy_index</span><span class="p">(),</span><span class="mi">3</span><span class="p">),</span> <span class="vi">@basic_server</span><span class="p">)</span>
+</code></pre>
+
+<p>Lastly, we give each volume a unique device path which is specified as part of the <code>volume_attachment</code>. In GCE, these paths must match the format <code>persistent-disk-</code>, appended with a unique number. Using the basic <a href="/ss/reference/cat/v20161221/index.html#built-in-methods-and-other-keywords"><code>mod</code> and <code>inc</code> math functions</a>, we can derive the correct number for this iteration of the attachment and <code>join</code> it to the requisite string prefix.</p>
+<pre class="syntax-highlight ruby"><code>  <span class="n">device</span> <span class="n">join</span><span class="p">([</span><span class="s2">"persistent-disk-"</span><span class="p">,</span> <span class="n">inc</span><span class="p">(</span><span class="n">mod</span><span class="p">(</span><span class="n">copy_index</span><span class="p">(),</span> <span class="mi">3</span><span class="p">),</span><span class="mi">1</span><span class="p">)])</span>
+</code></pre>
+
+<h2 id="bulk-resources-in-rcl">Bulk Resources in RCL</h2>
+
+<h3 id="bulk-resources-in-rcl-creating-bulk-resources">Creating Bulk Resources</h3>
+
+<p>By using <a href="/ss/reference/rcl/v2/index.html#resources-resource-declarations">bulk resource declarations</a> in Cloud Workflow, you can use the <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#resource-management-provision"><code>provision</code> function</a> to get a fully populated <a href="/ss/reference/rcl/v2/index.html#resources-resource-collections">resource collection</a> returned. Generally, <a href="/ss/reference/rcl/v2/index.html#resources-resource-declarations">resource declarations</a> are defined in a CAT and then passed in to Cloud Workflow definitions -- creating resource declarations manually is outside the scope of this document.</p>
+
+<p>Given a resource declaration with one item in it, RCL provides multiple methods to generate a bulk resource declaration. In a simple case, imagine a resource declaration with one <code>server</code> defined in it. To create a bulk declaration from that, you simple use the <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#resource-management-copy"><code>copy</code> function</a></p>
+<pre class="syntax-highlight ruby"><code><span class="n">define</span> <span class="n">main</span><span class="p">(</span><span class="vi">@server</span><span class="p">)</span> <span class="k">return</span> <span class="vi">@servers</span> <span class="k">do</span>
+  <span class="vi">@servers</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="vi">@server</span><span class="p">)</span>
+  <span class="n">provision</span><span class="p">(</span><span class="vi">@servers</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h3 id="bulk-resources-in-rcl-provisioning-bulk-resources">Provisioning Bulk Resources</h3>
+
+<p>Once a bulk resource declaration has been defined, provisioning the resources is as simple as calling the <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#resource-management-provision"><code>provision</code> function</a> on the declaration. The documentation for the function describes its behavior with bulk resource declarations. To provision the server bulk declaration from above, one would use the following RCL:</p>
+<pre class="syntax-highlight ruby"><code><span class="n">provision</span><span class="p">(</span><span class="vi">@servers</span><span class="p">)</span>
+</code></pre>
+
+<h4 id="manually-working-with-bulk-resources">Manually Working with Bulk Resources</h4>
+
+<p>Although not recommended, bulk resource declarations can also be manually created outside of the <code>provision</code> function. When creating bulk resources using a bulk resource declaration, use of the <a href="/ss/reference/rcl/v2/index.html#resources-creating-resources"><code>create_copies</code> built-in action</a> should be considered, as it simplifies the process and provides performance benefits.</p>
+
+<p>Of particular note when working with bulk resources in custom code is how to deal with errors when creating resources. Since the <code>create_copies</code> function makes the <code>create</code> call on all of the items in the bulk declaration, care must be taken when there are errors creating one or more items in the declaration. This topic is <a href="/ss/reference/rcl/v2/index.html#resources-creating-resources">covered in the documentation for create_copies</a>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

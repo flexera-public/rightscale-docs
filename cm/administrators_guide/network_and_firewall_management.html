@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Network and Firewall Management</title><meta content="Overview of the RightScale Firewall and Network Management capabilities including best practices and utilizing Private Clouds in RightScale." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_administrators_guide cm_administrators_guide_network_and_firewall_management" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">RightScale Administrator's Guide</a></p><div class="page-header"><h1>Network and Firewall Management</h1></div><div class="main-content"><h2 id="network-firewall-settings">Network Firewall Settings</h2>
+
+<h3 id="network-firewall-settings-who-should-be-given-the--security_manager--user-permission-">Who should be given the 'security_manager' user permission?</h3>
+
+<p>Make sure only trusted users are granted the &#39;security_manager&#39; user role permission.</p>
+
+<ul>
+<li><strong>&#39;security_manager&#39;</strong><br></li>
+</ul>
+
+<p>Ability to manage network and firewall permissions that are used by instances in the cloud. You will need this permission in order to create security groups and define individual firewall rules within those security groups. You will also need this permission in order to create Virtual Private Clouds (VPCs) and subnets. Only trusted users should be granted this permission. You will also be able to view and generate Infrastructure Audit Reports.</p>
+
+<p><strong>Warning!</strong> A user with this permission can affect firewall permissions of running instances. For example, any changes to an EC2 security group will instantly take effect on any running instances that are using that particular security group. For security reasons, you may want to create all of the required security groups and related firewall port permissions for each RightScale account beforehand so that the users who are configuring and launching servers in the account will already have the necessary network settings pre-configured and available for use. You may also find it useful to use Server Defaults to pre-select the desired security groups on a per cloud basis. See <a href="user_and_account_management.html">Should I set default configurations for servers?</a></p>
+
+<p>Remember, you can also grant temporary access (by day) to a user and give them the &#39;security_manager&#39; role if it is required for an initial setup but not for perpetuity.</p>
+
+<h3 id="network-firewall-settings-should-i-create-security-groups-that-are-specific-for-ssh-rdp-access-">Should I create security groups that are specific for SSH/RDP access?</h3>
+
+<p>Before you can properly answer this question you must first determine how you want to grant SSH (Linux) or RDP (Windows) access within a RightScale account. There are several factors to take into consideration before you determine how the security groups should be configured across your account.</p>
+
+<ul>
+<li>Which users within a RightScale account should be allowed to create and manage security groups? Perhaps the leader of each team or maybe only the Operations team should have that ability. Remember, if a user has the &#39;security_manager&#39; user role, he/she can create firewall rules at anytime to allow/deny remote access.</li>
+<li>Should security groups be defined on a per project/deployment basis or account-wide? For example, if you are deploying multiple applications within the same RightScale account, you may want to empower each engineering team to manage their own security group and set up their own SSH/RDP firewall rules. Or maybe you want to create a global &#39;SSH/RDP&#39; security group that everyone has to use instead.</li>
+<li>How many clouds will be used in the account? Remember, security groups are cloud-specific resources. Therefore, you&#39;ll need to duplicate your security group settings across all clouds into which you&#39;re going to deploy applications.</li>
+<li>One of the key benefits of using an account-wide security group is that it will be easier for you to manage SSH access across all deployments in your account. Since you&#39;ll only have to manage a single SSH/RDP security group in each cloud that you&#39;re using, it will be relatively easy to change your firewall rules at anytime to either allow/deny remote access.</li>
+<li>If you do not want your users to create and/or modify their own security groups and related firewall permissions, someone will need to create the appropriate security groups for their use in advance.</li>
+<li>To encourage users to always use the correct security group for granting remote SSH/RDP access, you can use <a href="/cm/rs101/server_defaults.html">Server Defaults</a> at either the deployment or account level to make sure that the appropriate SSH/RDP security groups are automatically pre-selected for users when they either add a new server or server array to a deployment.</li>
+<li>Use tier-specific security groups for more granular control of remote access. For example, you may have more strict SSH/RDP firewall rules for the database tier than at the load balancer tier.</li>
+</ul>
+
+<p>Several different examples of how you can set up security groups in your account for granting remote SSH/RDP access are shown below. Each configuration has its own advantages and disadvantages, and requires varying degrees of maintenance depending on who has the ability to manage security groups within an account. If you&#39;re using multiple RightScale accounts for your organization it&#39;s also important to remember that each account is unique so you might not want to use the same security group configurations across all accounts. Determine what&#39;s the right balance between control and security for each account and set up your security group access controls accordingly.</p>
+
+<p><img src="/img/cm-security-group-scenarios.png" alt="cm-security-group-scenarios.png" width="725" height="440" /></p>
+
+<h3 id="network-firewall-settings-how-can-i-check-and-manage-security-groups-across-an-account-for-auditing-purposes-">How can I check and manage security groups across an account for auditing purposes?</h3>
+
+<h4 id="infrastructure-audit-reports">Infrastructure Audit Reports</h4>
+
+<p><em>(For Amazon EC2 only)</em></p>
+
+<p>Any user with either &#39;admin&#39; or &#39;security_manager&#39; user role permissions can generate an infrastructure audit report to get a current snapshot of all firewall related permissions across all security groups* within a RightScale account.</p>
+
+<p>* Currently, only EC2 security groups are evaluated at this time.</p>
+
+<ol>
+<li>Go to <strong>Reports &gt; Infrastructure Audit</strong>.</li>
+<li>Click <strong>Perform New Audit</strong>. You can either generate a report that shows only publicly open ports or all ports.</li>
+<li>Review the results and make sure there aren&#39;t any firewall rules that do not comply with your network access policies.</li>
+</ol>
+
+<h4 id="network-maps">Network Maps</h4>
+
+<p><em>(For Amazon EC2 only)</em></p>
+
+<p>Another great resource to getting a more visual representation of open ports across all security groups of a given cloud* is the Network Maps feature.</p>
+
+<p>* Currently, only EC2 security groups are evaluated at this time.</p>
+
+<ol>
+<li>Go to <strong>Manage &gt; Networks</strong>.</li>
+<li>Select a specific cloud/region.</li>
+<li>Click the <strong>Map</strong> tab.</li>
+<li>Review the results and make sure there aren&#39;t any firewall rules that do not comply with your network access policies.</li>
+</ol>
+
+<p><img src="/img/cm-network-map-example.png" alt="cm-network-map-example.png" width="725" height="200" /></p>
+
+<h2 id="remote--root--access">Remote 'Root' Access</h2>
+
+<h3 id="remote--root--access-how-do-i-control-who-can-ssh-or-rdp-into-running-servers-">How do I control who can SSH or RDP into running servers?</h3>
+
+<p>Please refer back to the <a href="user_and_account_management.html">User and Account Management</a> section.</p>
+
+<h2 id="using-private-clouds-with-rightscale">Using Private Clouds with RightScale</h2>
+
+<h3 id="using-private-clouds-with-rightscale-how-do-i-connect-my-private-cloud-to-rightscale-">How do I connect my private cloud to RightScale?</h3>
+
+<p>​If you are setting up your own private cloud infrastructure (e.g. VMware vSphere or OpenStack) and want to manage it through RightScale&#39;s Cloud Management Platform, you will need to set up your network to allow the necessary communication between RightScale and your private cloud.</p>
+
+<p>See <a href="/faq/Firewall_Configuration_Ruleset.html">Firewall Configuration Ruleset</a>.</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>See <a href="monitoring_and_alerts_management.html">Monitoring and Alert Management</a>.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,783 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Release Notes</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="release-notes release-notes_governance"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/release-notes"><h4 class="list-group-heading">Release Notes</h4></a><a class="list-group-item menu-item-cm" href="cloud-management.html">Cloud Management</a><a class="list-group-item menu-item-ss" href="self-service.html">Self-Service</a><a class="list-group-item menu-item-gov" href="governance.html">Governance</a><a class="list-group-item menu-item-ca" href="https://helpnet.flexerasoftware.com/?product=Optima">Optima</a><a class="list-group-item menu-item-rca" href="rca-v.html">RCA-V</a><a class="list-group-item menu-item-rl10" href="right-link-10.html">RightLink 10</a></nav></aside><div class="callout"><a href="https://support.rightscale.com/18-Release_Notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Archived Release Notes</h4></div><span>View previously published release notes.</span></div></div></a></div><div class="callout"><a href="mailto:support@rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Release Questions?</h4></div><span>Our technical support staff is ready to help.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="clearfix"><div class="main-content"><div class="page-header"><h1>Release Notes</h1><div class="page-subheader category-governance"></div></div><div class="row release-notes-category"><div class="col-md-8"><div class="article"><div class="article-title"><time datetime="03-16-2021"> <a href="/release-notes/governance/2021/03/16.html">March 16, 2021</a> </time></div><div class="article-body"><h2 id="platform-changes">Platform Changes</h2>
+
+<ul>
+<li>The FROM email address in the Policy Incident emails changed to noreply@flexera.com from noreply-governance@rightscale.com</li>
+</ul>
+
+<h2 id="new-policy-templates">New Policy Templates</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/azure/hybrid_use_benefit_linux/">Azure Hybrid Use Benefit for Linux</a> - The policy identifies all Linux server instances (SLES and RHEL) that are not currently using <a href="https://azure.microsoft.com/en-us/pricing/hybrid-benefit/">Azure Hybrid Use Benefit</a>. It raises an incident for all applicable VMs not currently using AHUB, which once approved, will enable AHUB on all identified instances.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/azure/reserved_instances/mca_recommendations/">Azure MCA Reserved Instances Recommendations</a> - This new policy provides recommendations for Azure Reservations billed under Azure CSP MCA.</li>
+</ul>
+
+<h2 id="changes-to-existing-policy-templates">Changes to Existing Policy Templates</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/scheduled_reports">Schedule Reports</a> - Fixed issue with top 10 cost categories when there is no data yet for current month.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/superseded_instance">Superseded Instances</a> - Corrected duplicate column name</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_volumes/">AWS Unused Volumes</a> - 1) Fixed issue that may prevent an AWS snapshot to be created before terminating a volume.  2) Improved action error handling and debug logging.  3) Add a parameter to override the Flexera One org ID to use when querying Optima for cases when the project is not in the same org where the AWS bill is registered in Optima</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_ip_addresses/">AWS Unused IP Addresses</a> - 1) Improved action error handling and debug logging. 2) corrected the cost for total estimated savings</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/old_snapshots/">AWS Old Snapshots</a> - 1) Improved action error handling and debug logging. 2) Add a parameter to override the Flexera One org ID to use when querying Optima for cases when the project is not in the same org where the AWS bill is registered in Optima</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/budget_alerts_by_account/">Budget Alerts by Cloud Account</a> - 1) Fixed AWS account name lookup bug that lead to an error, 2) Refactored Billing Center index call to return Billing Centers the user has access to, 3) Fixed budget column heading</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12-21-2020"> <a href="/release-notes/governance/2020/12/21.html">December 21, 2020</a> </time></div><div class="article-body"><h2 id="new-policy-templates">New Policy Templates</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/compliance/policy_update_notification">Policy Updates</a> Be informed of updated policy templates in the Policy Catalog.  This policy template identifies the version of all the policies that are applied in an account and compares them to the version of respective policy template in catalog. It further creates an incident providing details on when the policy was last updated in catalog and the link to README and CHANGELOG files.</li>
+</ul>
+
+<h2 id="changes-to-existing-policy-templates">Changes to Existing Policy Templates</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/azure/unused_ip_addresses/">Azure Unused IP Addresses</a> - Includes Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_rds/">AWS Unused RDS Instance</a> - Includes Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/old_snapshots/">AWS Old Snapshots</a> - Changed Deregister Image parameter default to No to prevent accidental deletion of AMI Snapshots.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/">AWS Cost Policy Templates</a> - Identity the AWS Account by adding the  AWS Account ID to the Policy Incident summary.</li>
+<li>AWS Policy Templates - Update all AWS policy templates to evaluate the allowed regions to support AWS Service Control Policy (SCP).</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_ip_addresses/">AWS Unused IP Address</a> - Remove IP Addresses from the incident report that have an association with an instance.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/azure/reserved_instances/utilization/">Azure Reserved Instances Utilization</a> - Resolve false positive reports for RI Utilization.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/low_service_usage/">Low Service Usage</a> - Resolve ability to apply the policy template.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/saas/fsm/">SaaS Manager Policy Templates</a> - Added support for EU Zone instance of the Policy Manager.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/google/cud_report/">Google Committed Discount</a> - Fixed issue to support multiple zones.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09- 9-2020"> <a href="/release-notes/governance/2020/09/09.html">September  9, 2020</a> </time></div><div class="article-body"><h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/old_snapshots">AWS Old Snapshots</a> included Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/elb/clb_unused">AWS Delete Unused Classic Load Balancers</a> included Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/azure/idle_compute_instances/">Azure Idle Compute Instances</a> included Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_ip_addresses/">AWS Unused IP Addresses</a> included Total Estimated Monthly Savings in the policy incident.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/operational/snapshots">No Recent Snapshots</a> include running and operational states when searching for instances with no recent snapshots</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/billing_center_cost_anomaly">Billing Center Cost Anomaly</a> fixed empty table cells in incident</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/google/cloudsql_rightsizing/">Google Rightsize CloudSQL Instances</a> fix error related to getting CPU metrics</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/azure/hybrid_use_benefit">Azure Hybrid Use Benefit for Windows Server</a> - removed Windows Client/Windows 10 VM&#39;s from the incident.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/instance_cloudwatch_utilization/">AWS Inefficient Instance Utilization using CloudWatch</a> - Fix issue with duplicate records displayed in the incident</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-25-2020"> <a href="/release-notes/governance/2020/08/25.html">August 25, 2020</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/azure/schedule_instance">Azure - Schedule Instance</a> allows you to schedule start and stop times for your Azure virtual machine.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/google/schedule_instance">Google - Schedule Instance</a> allows you to schedule start and stop times for your Google instances.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_volumes">AWS Unused Volumes</a> included Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/azure/unattached_volumes">Azure Unused Volumes</a> included Estimated Monthly Savings for each resource in the policy incident and Total Estimated Monthly Savings.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/azure/rightsize_sql_instances">Azure Rightsize SQL Databases</a></li>
+<li>All AWS Policies - fix issue where the policy failed because of AWS Service Control Policy region restrictions.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-14-2020"> <a href="/release-notes/governance/2020/08/14.html">August 14, 2020</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>The Policy Manager has a new feature to allow users to run actions on selected resources within a Policy Incident.  The user also can select an action to run automatically when the incident is created.  <a href="/policies/users/getting_started/#selectable-actions">Read more</a>.  Review the Readme file of the policy templates that interest you for additional details as it pertains this new feature.</li>
+</ul>
+
+<h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/unused_ip_addresses">AWS - Unused IP Addresses</a> identify unused AWS EC2 IP Addresses (EIP) and allows the user to delete the IP address.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/compliance/aws/untagged_resources">AWS - Untagged Resources</a> identifies AWS resources that do not have a tag and allow the user to create a new tag on the resource</li>
+<li><a href="https://github.com/flexera/policy_templates/tree/master/cost/aws/schedule_instance">AWS - Schedule Instance</a> allows the user to stop and start an AWS instance on a schedule.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/compliance/azure/azure_untagged_resources">Azure - Untagged Resources</a> identifies Azure resources that do not have a tag and allow the user to create a new tag on the resource.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/azure/unused_ip_addresses">Azure - Unused IP Addresses</a> identifies unused Azure IP Addresses and allows the user to delete the IP address.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/compliance/google/unlabeled_resources">Google - Unlabeled Resources</a> identifies Google Cloud resources that do not have a label and allow the user to create a new label on the resource.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-25-2020"> <a href="/release-notes/governance/2020/06/25.html">June 25, 2020</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/fsm/users_by_category">SaaS Manager - SaaS App User Report by Category</a> uses Flexera SaaS Manager to identify users entitled to SaaS apps within a specified department.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/budget_alerts_by_account/">Budget Alerts by Cloud Account</a> uses Optima to determine if a Cloud Account has exceeded its monthly cost budget.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/aws/scp_audit/">AWS Service Control Policy Audit</a> audits whether a named policy is applied across all AWS Accounts in the organization</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06- 3-2020"> <a href="/release-notes/governance/2020/06/03.html">June  3, 2020</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/operational/azure/sync_tags_with_optima/">Azure Sync Tags with Optima</a> identifies all Azure tag keys that are not being used as custom dimensions in Flexera Optima.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/servicenow/inactive_approvers">ServiceNow Inactive Approvers</a> identifies approver users in ServiceNow that have not approved any requests in the past <strong>n</strong> days.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-22-2020"> <a href="/release-notes/governance/2020/05/22.html">May 22, 2020</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/fsm/duplicate_users">SaaS Manager - Duplicate User Accounts</a> creates an incident when Flexera SaaS Manager identifies duplicate user accounts within a single managed SaaS application.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/fsm/unsanctioned_apps_with_contract">SaaS Manager - Unsanctioned Applications with Existing Contract</a> creates an incident when Flexera SaaS Manager identifies unsanctioned SaaS purchases for managed applications under an existing license contract.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-13-2020"> <a href="/release-notes/governance/2020/05/13.html">May 13, 2020</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>The Policy Manager has an improved incident table.  The new incident table allows users to sort columns, hide and show columns and filter for text within the table.  This feature requires the use of the <a href="/policies/developers/reference/v20180301/policy_template_language.html#describing-the-policy-conditions">export block</a> within the policy template.</li>
+</ul>
+
+<h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/fsm/inactive_users_by_dept">SaaS Manager - Inactive Users</a> create an incident when Flexera SaaS Manager identifies inactive or never active users for managed applications.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/fsm/redundant_apps">SaaS Manager - Redundant Apps</a> create an incident when Flexera SaaS Manager identifies application categories with an excessive number of applications.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/fnms/fnms_low_licenses_available">FlexNet Manager Low Available Licenses</a> creates and incident when Flexnet Manager Licenses with available count less than user provide percentage.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04- 7-2020"> <a href="/release-notes/governance/2020/04/07.html">April  7, 2020</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>The Policy Manager now allows users to update configuration options of an Applied Policy.
+See the <a href="/policies/users/getting_started/#updating-applied-policies">documentation to learn more</a>.</li>
+<li>The Policy Manager now allows user to set the Severity when applying or updating an Applied Policy.<br>
+See the <a href="/policies/users/guides/apply_policy.html#common-policy-configuration-options--severity-">documentation to learn more</a>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03-20-2020"> <a href="/release-notes/governance/2020/03/20.html">March 20, 2020</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/operational/aws/long_running_instances/README.md">AWS Long Running Instances</a> checks for instances that have been running for a long time and may be able to be terminated or upgraded.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/azure/old_snapshots/README.md">Azure Old Snapshots</a> checks for snapshots on Azure that may be able to be deleted.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="02-28-2020"> <a href="/release-notes/governance/2020/02/28.html">February 28, 2020</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Credential manager now supports native creation and editing of credentials for <a href="/policies/users/guides/credential_management.html#provider-specific-credentials--azure--">Azure Resource Manager</a>, <a href="/policies/users/guides/credential_management.html#provider-specific-credentials--azure--">Azure Enterprise Agreement</a>, and <a href="/policies/users/guides/credential_management.html#provider-specific-credentials--google--">Google cloud</a>. These native editors simplify the process of creating and updating credentials for those services.</li>
+<li>The <a href="https://reference.rightscale.com/cred-management/">API for managing credentials</a> is now publicly available. Automate the process of connecting services and rotating creds by leveraging this set of API calls.</li>
+</ul>
+
+<h2 id="changes-to-existing-features">Changes to Existing Features</h2>
+
+<ul>
+<li>Improved success and error messages when managing credentials</li>
+<li>Selected credential information is now available when viewing applied policies</li>
+<li>Improved experience when editing credentials</li>
+<li>Simplified credential editing screens for AWS credential types</li>
+</ul>
+
+<h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/tree/master/cost/aws/unused_volumes/README.md">AWS Unattached Volumes</a> checks for old volumes that can be deleted using the AWS APIs directly.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/google/unattached_volumes/README.md">Google Unattached Volumes</a> checks for old volumes that can be deleted using the Google APIs directly.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/google/old_snapshots/README.md">Google Old Snapshots</a> checks for old snapshots that can be deleted using the Google APIs directly.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/budget_alerts/README.md">Budget Alerts</a> was updated to provide a more accurate assessment of current month costs against the specified budget amount.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/billing_center_cost_anomaly/README.md">Billing Center Cost Anomalies</a> was updated to help reduce noise by allowing for a minimum spend amount before billing centers are reported on.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="01-17-2020"> <a href="/release-notes/governance/2020/01/17.html">January 17, 2020</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Policies now have <strong>credential management</strong> built-in to the product, making it easier to connect your different clouds for policy governance. Along with the feature release, many policies have been upgraded to use the new credential capability (see below). <a href="/policies/users/guides/credential_management.html">Check out the docs to learn more</a>. Some of the benefits include:
+
+<ul>
+<li>Simplified experience to connect clouds for policy governance</li>
+<li>Ability to rotate credentials without affecting running policies</li>
+<li>Support for new credential types including AWS Cross-Account Roles and NTLM</li>
+<li>Reduced overhead when dealing with multiple cloud accounts</li>
+</ul></li>
+<li>Policy designers can now specify a <strong>default frequency</strong> value <a href="/policies/developers/reference/v20180301/policy_template_language.html#metadata">in their policies</a>, simplifying the process of applying a policy for their users.</li>
+</ul>
+
+<h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li>An on-premises version of <a href="https://github.com/rightscale/policy_templates/blob/master/compliance/aws/instances_without_fnm_agent/README.md">AWS EC2 Instances not running FlexNet Inventory Agent</a></li>
+<li>An on-premises version of <a href="https://github.com/rightscale/policy_templates/blob/master/compliance/azure/instances_without_fnm_agent/README.md">Azure Instances not running FlexNet Inventory Agent</a></li>
+<li>An on-premises version of <a href="https://github.com/rightscale/policy_templates/blob/master/compliance/fnms/fnms_licenses_at_risk/README.md">FlexNet Manager Licenses At Risk</a></li>
+<li>An on-premises version of <a href="https://github.com/rightscale/policy_templates/blob/master/operational/fnms/schedule_fnms_reports/README.md">Schedule FlexNet Manager Report</a></li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<p>The following policies have been updated to support the new method of credential management mentioned above:</p>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/aws/instances_without_fnm_agent/README.md">AWS EC2 Instances not running FlexNet Inventory Agent - Cloud</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/instance_cloudwatch_utilization/README.md">AWS Inefficient Instance Utilization using CloudWatch</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/security/storage/aws/public_buckets/README.md">AWS Open Buckets</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/rds_instance_cloudwatch_utilization/README.md">AWS Rightsize RDS Instances</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/unused_rds/README.md">AWS Unused RDS Instance</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/azure/instances_log_analytics_utilization/README.md">Azure Inefficient Instance Utilization using Log Analytics</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/azure/instances_without_fnm_agent/README.md">Azure Instances not running FlexNet Inventory Agent - Cloud</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/azure/azure_long_stopped_instances/README.md">Azure Long-Stopped Instances</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/azure/rightsize_sql_instances/README.md">Azure Rightsize SQL Databases</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/azure/subscription_access/README.md">Azure Subscription Access</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/fnms/fnms_licenses_at_risk/README.md">FlexNet Manager Licenses At Risk - Cloud</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/google/instances_stackdriver_utilization/README.md">Google Inefficient Instance Utilization using StackDriver</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/operational/fnms/schedule_fnms_reports/README.md">Schedule FlexNet Manager Report - Cloud</a></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="12- 6-2019"> <a href="/release-notes/governance/2019/12/06.html">December  6, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/disallowed_images/README.md">Disallowed Cloud Images</a> reports on any image usage outside of the specified approved images.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/fsm/suspicious_users/README.md">SaaS Manager - Suspicious Users</a> creates an incident when Flexera SaaS Manager detects suspicious users logging into SaaS applications.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/fsm/user_status_change/README.md">SaaS Manager - User Status Change</a> identifies users whose status changes to <code>inactive</code> in Flexera SaaS Manager.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/fsm/renewal_reminder/README.md">SaaS Manager - Renewal Reminder</a> identifies applications with upcoming contract renewals.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/office365/security_alerts/README.md">Office 365 Security Alerts</a> surfaces security alerts of a user-specified severity level that have been raised in Office 365.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/saas/fsm/unsanctioned_spend/README.md">SaaS Manager - Unsanctioned Spend</a> creates an incident when Flexera SaaS Manager identifies unsanctioned spend on SaaS applications.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11-15-2019"> <a href="/release-notes/governance/2019/11/15.html">November 15, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/aws/long_stopped_instances/README.md">AWS Long-stopped Instances</a> checks for instances stopped longer than the specified period of time and terminates the instance after user approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/google/long_stopped_instances/README.md">Google Long-Stopped Instances</a> checks for instances stopped longer than the specified period of time and terminates the instance after user approval.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/azure/rightsize_sql_instances/README.md">Azure Rightsize SQL Databases</a> was renamed and now can take action to resize the SQL Database after user approval.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11- 8-2019"> <a href="/release-notes/governance/2019/11/08.html">November  8, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/savings_plan/recommendations/README.md">AWS Savings Plan Recommendations</a> uses the AWS Cost Explorer to raise incidents if AWS recommends any Savings Plan purchases where the savings is more than the specified threshold.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/aws/instances_without_fnm_agent/README.md">AWS EC2 Instances not running FlexNet Inventory Agent</a> reports on any instance running in EC2 that does not have the FlexNet Inventory Agent installed.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/operational/azure/azure_migrate/README.md">Azure Migrate Integration</a> collects the resources from a RISC Foundations assessment and seeds Azure Migrate with the discovered servers.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="11- 1-2019"> <a href="/release-notes/governance/2019/11/01.html">November  1, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/azure/compliance_score/README.md">Azure Regulatory Compliance</a> provides an overview of the regulatory compliance controls and compliance scores from <a href="https://docs.microsoft.com/en-us/azure/security-center/security-center-intro">Azure Security Center</a></li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/operational/azure/network_flow/README.md">NetFlow Top Talkers</a> uses RISC Foundations data to identify the top communication routes for each application stack to external dependencies based on network traffic patterns.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/operational/compute_instance_migration/README.md">Application Migration Recommendations</a> analyzes RISC CloudScape data and provides recommendations for migrating application stacks to the most cost effective cloud provider.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/rightlink_rightsize/README.md">Inefficient Instance Utilization using RightLink</a> was renamed for clarity and now supports VMWare instances through the use of RCA-V.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/scheduled_reports/README.md">Scheduled Report</a> now provides additional options for the timeline of spend visualization when running this policy.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-25-2019"> <a href="/release-notes/governance/2019/10/25.html">October 25, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/instance_anomaly/README.md">Running Instance Count Anomaly</a> checks for changes in the count of instances running in a specific account over the prior 30-day period and alerts you if the count has crossed the specified threshold.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/security/aws/clb_unencrypted/README.md">AWS Unencrypted ELB Listeners (CLB)</a> checks for any CLBs that are unencrypted and sends an alert.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/security/aws/elb_unencrypted/README.md">AWS Unencrypted ELB Listeners (ALB/NLB)</a> checks for any ALBs or NLBs that are unencrypted and sends an alert.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/budget_v_actual/README.md">Monthly Actual v. Budgeted Spend Report</a> allows you to specify a budget amount for a given billing center and be altered if the spend crosses that threshold.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/aws/disallowed_regions/README.md">AWS Disallowed Regions</a> reports on any instance usage in regions that you specify as disallowed, allowing for termination of the instances after user approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/azure/unused_sql_databases/README.md">Azure Unused SQL Databases</a> checks for unused Azure SQL Databases, based on DB connections, and deletes the database after user approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/new_service_usage/README.md">New Service Usage</a> reports on any new service usage in the current month that did not exist in the previous month, based on billing data.</li>
+</ul>
+
+<h2 id="changes-to-existing-features">Changes to Existing Features</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/azure/subscription_access/README.md">Azure Subscription Access</a> was modified to account for more than 100 users and to only gather subscription-level role assignments.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-11-2019"> <a href="/release-notes/governance/2019/10/11.html">October 11, 2019</a> </time></div><div class="article-body"><h2 id="changes-to-existing-features">Changes to Existing Features</h2>
+
+<ul>
+<li>Policies can now be configured <strong>to run on a monthly interval</strong> for use cases that require less frequent checks. Simply choose the <a href="/policies/users/guides/apply_policy.html#common-policy-configuration-options--policy-schedule-">monthly option under policy schedule</a> when applying your policy.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10- 4-2019"> <a href="/release-notes/governance/2019/10/04.html">October  4, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/azure/instances_without_fnm_agent/README.md">Azure Instances not running FlexNet Inventory Agent</a> checks for any instances in Azure not running the agent so that you can ensure full license coverage across your compute landscape.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/fnms/fnms_licenses_at_risk/README.md">FlexNet Manager Licenses At Risk</a> provides a report of all licenses at risk according to FlexNet Manager.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-27-2019"> <a href="/release-notes/governance/2019/09/27.html">September 27, 2019</a> </time></div><div class="article-body"><h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li>Multiple policies were modified to include a manual approval step before taking action so that items can be reviewed before being modified. Manual approval for any policy can be skipped by checking the <a href="/policies/users/guides/apply_policy.html#common-policy-configuration-options--skip-action-approvals-"><q>Skip Action Approvals</q></a> option when applying a policy.</li>
+<li>Multiple policies were modified such that they are now limited to only being applied to only one account. This limitation is appropriate in cases where the policy uses an external credential for authentication and running the policy on multiple accounts would lead to the exact same behavior repeated numerous times.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-20-2019"> <a href="/release-notes/governance/2019/09/20.html">September 20, 2019</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Policies can now be <strong>restricted to only being applied in one account</strong> by the policy designer for those policies that do cross-account checks and actions. Avoid accidental policy applications across many accounts when each one will behave the exact same by using the <a href="/policies/developers/reference/v20180301/policy_template_language.html#metadata-policy-tenancy"><code>tenancy</code> attribute</a> of the policy template language.</li>
+</ul>
+
+<h2 id="changes-to-existing-features">Changes to Existing Features</h2>
+
+<ul>
+<li>The policy Catalog and Dashboard page have been updated to show any <code>category</code> that is <a href="/policies/developers/reference/v20180301/policy_template_language.html#metadata">defined in the policy template</a> instead of grouping them into an <q>Other</q> category.</li>
+</ul>
+
+<h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/object_storage_optimization/README.md">AWS Object Storage Optimization</a> checks for S3 objects that haven&#39;t been updated outside of the specified timeframe and moves the object to Glacier or Glacier Deep Archive after user approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/rds_instance_cloudwatch_utilization/README.md">AWS Rightsize RDS Instances</a> provides rightsizing recommendations for RDS instances by gathering AWS CloudWatch data on 30 day intervals and can rightsize the instances after user approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/unused_rds/README.md">AWS Unused RDS Instances</a> checks for unused RDS instances by reviewing the CloudWatch DBconnection metric for the last 30 days. If there have been no connections the RDS instance is reported can be automatically terminated after user approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/azure/object_storage_optimization/README.md">Azure Blob Storage Optimization</a> checks Azure Blob Storage for objects that haven&#39;t been updated outside of the specified timeframe and moves them to the Cool or Archive tier after user approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/idle_compute_instances/README.md">Azure Idle Compute Instances</a> checks for idle virtual machines in Azure, as defined by CPU utilization, and optionally terminates the virtual machines after approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/azure/reserved_instances/expiration/README.md">Azure Expiring Reserved Instances</a> reports on active Azure RIs that are expiring within a user-provided window.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/azure/rightsize_sql_instances/README.md">Azure Rightsize SQL Instances</a> provides rightsizing recommendations for SQL instances based on CPU usage for the last 30 days.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/google/cud_expiration/README.md">Google Expiring Committed Use Discount (CUD)</a> reports on active Google CUDs that are expiring within a user-provided window.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/google/object_storage_optimization/README.md">Google Object Storage Optimization</a> checks for objects that haven&#39;t been updated outside of the specified timeframe and moves the object to nearline or coldline storage after user approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/google/unused_cloudsql_instances/README.md">Google Unused CloudSQL Instances</a> checks for unused CloudSQL instance in Google Compute Engine and terminates them upon approval.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/google/unutilized_ip_addresses/README.md">Google Unutilized IP Addresses</a> has been enhanced to include remediation actions to delete unutilized IP addresses after approval.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="09-13-2019"> <a href="/release-notes/governance/2019/09/13.html">September 13, 2019</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Organizational Summaries</strong> give users with org-scoped access to policies an improved view of policy information across all accounts in the organization. All operational views of policies, including the Dashboard, provide an <q>Organization Summary</q> option in the account selector that rolls up data from across all accounts in the organization. Applied policies are grouped together and can be managed from a single page. To check it out, go to the Dashboard page in Policy Manager.</li>
+<li>Policy managers can now <strong><a href="/policies/users/guides/apply_policy.html#common-policy-configuration-options--skip-action-approvals-">skip pre-defined approval steps</a></strong> in the action sequence of a policy incident, allowing for policy remediations to be fully automated. When applying a policy, a new option is available called <q>Skip action approvals</q> in both the UI and the API.</li>
+</ul>
+
+<h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/tree/master/operational/fnms/schedule_fnms_reports">Schedule FlexNet Manager report</a> runs a FlexNet Manager custom report and sends the results via email.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/google/idle_compute_instances/README.md">Google Idle Compute Instances</a> checks for idle instances in Google Compute Engine, as defined by CPU and memory average utilization, and optionally terminates the instances after approval.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/aws/idle_compute_instances/README.md">AWS Idle Compute Instances</a> checks for idle instances in AWS, as defined by CPU and memory average utilization, and optionally terminates the instances after approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/s3_bucket_size/README.md">AWS Bucket Size Check</a> checks for S3 buckets larger than a specified size.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-30-2019"> <a href="/release-notes/governance/2019/08/30.html">August 30, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/azure/azure_long_stopped_instances/README.md">Azure Long Stopped Instances</a> checks for Azure VMs that have been stopped for a user-specified amount of time and optionally terminates the instances after approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/azure/ahub_manual/README.md">Azure AHUB Utilization with Manual Entry</a> ensures that you are taking full advantage of the Azure Hybrid Use Benefit in your cloud environments.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/superseded_instance/README.md">Superseded Instances</a> was updated to include the region of the instance in the report.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-23-2019"> <a href="/release-notes/governance/2019/08/23.html">August 23, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/tree/master/security/azure/sql_publicly_accessible_managed_instance">Azure Publicly Accessible SQL Managed Instances</a> checks for publicly accessibly managed SQL instances in Azure and provides the option to disable the public endpoint or delete the instance.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/burstable_instance_cloudwatch_credit_utilization/README.md">AWS Burstable Instance CloudWatch Utilization</a> recommends instance type changes based on Cloudwatch utilization data for burstable instance types.</li>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/saas/okta/inactive_users/README.md">Okta Inactive Users</a> identifies users that have not logged in within the specified number of days and optionally deactivates the users after approval.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/flexera/policy_templates/blob/master/cost/volumes/old_snapshots/README.md">Discover Old Snapshots</a> was updated to filter out snapshots created from images.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/low_account_usage/README.md">Low Account Usage</a> was updated to sum up the total potential savings and to remove the APN Fee from the calculation.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-16-2019"> <a href="/release-notes/governance/2019/08/16.html">August 16, 2019</a> </time></div><div class="article-body"><h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/superseded_instance/README.md">Superseded Instances</a> was updated to show the monthly estimated cost for each instance instead of the run rate.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/cheaper_regions/README.md">Cheaper Regions</a> was updated to show the resource IDs of affected virtual machines.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/volumes/old_snapshots/README.md">Old Snaphots</a> was updated to always send an email when new snapshots are detected.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08- 9-2019"> <a href="/release-notes/governance/2019/08/09.html">August  9, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/security/aws/unencrypted_s3_buckets/README.md">AWS Unencrypted S3 Buckets</a> checks all S3 buckets in the AWS account and reports on any that do not have default encryption set, allowing the user to set encryption settings for the bucket or delete it after manual approval.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/low_service_usage/README.md">Low Service Usage</a> has been changed to more closely meet the data provided in Optima Recommendations.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08- 2-2019"> <a href="/release-notes/governance/2019/08/02.html">August  2, 2019</a> </time></div><div class="article-body"><h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/instance_cloudwatch_utilization/README.md">AWS Instance CloudWatch Utilization</a> now supports Windows instances as well if Cloudwatch is configured appropriately (see the readme for configuration details).</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/aws/reserved_instances/recommendations/README.md">AWS Reserved Instances Recommendation</a> corrected an error that caused only the first page of recommendations to show.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-26-2019"> <a href="/release-notes/governance/2019/07/26.html">July 26, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/operational/azure/vms_without_managed_disks/README.md">Azure VMs Not Using Managed Disks</a> checks all Azure VMs and reports on any that are not using Managed Disks, which are the latest offering from Azure and are much easier to manage.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/security/storage/aws/s3_buckets_without_server_access_logging/README.md">AWS S3 Buckets without Server Access Logging</a> checks for any S3 buckets that don&#39;t have Server Access logging enabled and allows the user to enable logging after approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/azure/subscription_access/README.md">Azure Subscription Access</a> checks all users who have Owner or Contributor access to a given Azure subscription and creates an incident whenever that user list changes.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-11-2019"> <a href="/release-notes/governance/2019/07/11.html">July 11, 2019</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Cloud workflow now <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#miscellaneous-jwt_encode">supports JWT tokens</a> when making <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#http-https-functions">http calls</a> so that any API that uses JWT can be leveraged when remediating policy incidents or automating cloud resource actions.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07- 5-2019"> <a href="/release-notes/governance/2019/07/05.html">July  5, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/operational/aws/instance_scheduled_events">AWS Instance Scheduled Events</a> checks for any scheduled events on EC2 instances that could cause operational issues.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-28-2019"> <a href="/release-notes/governance/2019/06/28.html">June 28, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/superseded_instance">Superseded Instances</a> checks for instances running on instance types that have been superseded by newer, usually improved, instance types.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><p><a href="https://github.com/rightscale/policy_templates/tree/master/cost/aws/instance_cloudwatch_utilization/">AWS Instance CloudWatch Utilization</a> now supports tags to ignore instances, minimum usage thresholds for reporting, and actions to tag the resources that fail the policy check.</p></li>
+<li><p><a href="https://github.com/rightscale/policy_templates/tree/master/cost/low_account_usage">Low Account Usage</a> can now be run against specific billing centers, supports a minimum savings threshold to limit the noise, and reports against the monthly run rate instead of the current usage.</p></li>
+<li><p><a href="https://github.com/rightscale/policy_templates/tree/master/cost/low_service_usage">Low Service Usage</a> can now be run against specific billing centers, supports a minimum savings threshold to limit the noise, and reports against the monthly run rate instead of the current usage.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-21-2019"> <a href="/release-notes/governance/2019/06/21.html">June 21, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><p><a href="https://github.com/rightscale/policy_templates/blob/master/cost/azure/instances_log_analytics_utilization">Azure Instance Utilization using Log Analytics</a> uses performance metrics from Azure Log Analytics from the last 30 days to identify underutilized instances.</p></li>
+<li><p><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/unapproved_instance_types">Unapproved instance types</a> reports on any instances that are running using instance types that are not in a pre-approved list of instances provided by the user.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-14-2019"> <a href="/release-notes/governance/2019/06/14.html">June 14, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><p><a href="https://github.com/rightscale/policy_templates/tree/master/cost/aws/reserved_instances/recommendations">AWS Reserved Instance Recommendations</a> checks the AWS Cost Explorer API and reports on any RI recommendations with potential savings above a specified threshold.</p></li>
+<li><p><a href="https://github.com/rightscale/policy_templates/tree/master/cost/azure/reserved_instances/recommendations">Azure Reserved Instance Recommendations</a> checks the Azure EA API and reports on any RI recommendations with potential savings above a specified threshold.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="06-12-2019"> <a href="/release-notes/governance/2019/06/12.html">June 12, 2019</a> </time></div><div class="article-body"><h2 id="changes-to-existing-features">Changes to Existing Features</h2>
+
+<ul>
+<li>Policies <strong>now support pagination markers in the body</strong> of a request, enabling the use of APIs that leverage this method for pagination, such as some AWS API calls. You can find additional information and examples of the <code>body_field</code> page marker in the Pagination section of the <a href="/policies/reference/v20180301/policy_template_language.html#retrieving-data-api-data-with-datasources">policy language documentation</a>.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-31-2019"> <a href="/release-notes/governance/2019/05/31.html">May 31, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/operational/stranded_servers">Stranded Servers</a> reports on any servers that are stranded in booting so that they can be repaired or terminated to reduce waste.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/cheaper_regions">Cheaper Regions</a> policy now reports only on instance data instead of all region costs, helping to simplify the report and help users target relevant spend.</li>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/volumes/unattached_volumes/README.md">Unattached Volumes</a> now provides an option to take a snapshot of the volume before deleting it.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-24-2019"> <a href="/release-notes/governance/2019/05/24.html">May 24, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/security/aws/rds_unencrypted">AWS Unencrypted RDS Instances</a> checks all RDS instances and reports on any that are unencrypted.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/security/aws/rds_publicly_accessible">AWS Public Accessible RDS Instances</a> checks all RDS instances and reports on any that are publicly accessible.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/operational/vmware/instance_tag_sync">VMWare Instance Tag Sync</a> ensures that all tags that exist in Cloud Management are pushed to VMWare.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/google/instances_stackdriver_utilization/">Google StackDriver Utilization</a> utilizes Google Stackdriver to provide a report of utilization on all instances in the given project.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/aws/instance_cloudwatch_utilization/">AWS Instance CloudWatch Utilization</a> utilizes AWS Cloudwatch to provide a report of utilization on all instances in the given account.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/compliance/github/outside_collaborators/">GitHub.com Unpermitted Outside Collaborators</a> checks for any users that have access to a repository but are outside the Github organization and haven&#39;t been whitelisted.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/compliance/github/repository_naming/">GitHub.com Unpermitted Repository Names</a> checks all repositories in the Github organization for any that do not match the specified naming scheme.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/compliance/github/toplevel_teams/">GitHub.com Unpermitted Top-Level Teams</a> checks the top-level/parent teams for a Github organization to ensure they are in the specified whitelist.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/compliance/github/repository_size/">GitHub.com Unpermitted Sized Repositories</a> checks all repositories in the Github organization that are too small and/or too old (potentially indicating an unused repository).</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/compliance/github/repository_branch_protection/">GitHub.com Repository Branches without Protection</a> checks all repositories that are part of the Github organization for any specified branch names that are not protected.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/compliance/github/repository_admin_team/">GitHub.com Repositories without Admin Team</a> checks for any repositories in the Github organization that do have at least one team assigned the <code>admin</code> role.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-10-2019"> <a href="/release-notes/governance/2019/05/10.html">May 10, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/compliance/aws/ecs_unused">AWS Unused ECS Clusters</a> checks all ECS clusters to determine if any are unused (no registered instances, no running tasks, no pending tasks, no active services) and offers the option to delete the cluster after manual approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/security/aws/loadbalancer_internet_facing">AWS Internet-facing Load Balancers</a> checks all AWS load balancers (both Classic Load Balancers(ELBs) and Application Load Balancers(ALBs)) and reports on any that are Internet-facing. When such a load balancer is detected, the user can choose to delete it after approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/security/aws/ebs_unencrypted_volumes">AWS Unencrypted Volumes</a> checks all Elastic Block Store (EBS) volumes in a given account and reports on any that are not encrypted.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/low_account_usage">Low Account Usage</a> reports on accounts with low usage, which may indicate abandoned accounts that could be cancelled or consolidated into larger accounts for ease of management.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/low_service_usage">Low Service Usage</a> reports on services with low usage, which may indicate abandoned services that can be terminated or potentially consolidated into a larger account/region for ease of management.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/google/unutilized_ip_addresses">Google Unused IP Address</a> checks Google for Unutilized IP Addresses.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/budget_alerts">Budget Alerts</a> was updated to reduce the frequency of incident creation and notification for already-reported overages.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/aws/reserved_instances/utilization">AWS Reserved Instance Utilization Report</a> was updated to add additional fields to the report.</li>
+</ul>
+
+<p><a href="/policies/faq/#general-questions-how-do-i-update-an-applied-policy-with-a-new-version-of-the-policy-">Learn about updating policies</a></p>
+</div></div><div class="article"><div class="article-title"><time datetime="04-26-2019"> <a href="/release-notes/governance/2019/04/26.html">April 26, 2019</a> </time></div><div class="article-body"><h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/blob/master/cost/scheduled_reports/README.md">Scheduled Report</a> - added more dimensions to slice the graph by, added ability to report on child billing centers, added <a href="/optima/guides/currency.html">currency symbol support</a>.</li>
+</ul>
+
+<p><a href="/policies/faq/#general-questions-how-do-i-update-an-applied-policy-with-a-new-version-of-the-policy-">Learn about updating policies</a></p>
+</div></div><div class="article"><div class="article-title"><time datetime="04-19-2019"> <a href="/release-notes/governance/2019/04/19.html">April 19, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><p><a href="https://github.com/rightscale/policy_templates/tree/master/cost/aws/elb/clb_unused">AWS Delete Unused Classic Load Balancers</a> identifies any unused CLBs and allows them to be deleted after user approval.</p></li>
+<li><p><a href="https://github.com/rightscale/policy_templates/tree/master/operational/aws/vpc_name_sync">Cheaper Regions</a> reports on usage in regions where there is a less expensive, geographically similar region that could be used instead.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04- 3-2019"> <a href="/release-notes/governance/2019/04/03.html">April  3, 2019</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<p>Policy <strong>incidents are now archived</strong> after 30 days if there is nothing actionable and the incident is <code>terminated</code> or <code>resolved</code>. Archived incidents can still be <a href="https://reference.rightscale.com/governance-policies/#/ArchivedIncident/ArchivedIncident_index">found in the API</a> if additional information is needed. Read more about <a href="/policies/#basic-concepts-incident">incidents on the docs page</a>.</p>
+</div></div><div class="article"><div class="article-title"><time datetime="03-29-2019"> <a href="/release-notes/governance/2019/03/29.html">March 29, 2019</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<p>Policies now give you <strong>more control over what conditions cause an incident to be updated</strong>, allowing you to specify which fields of data should be used in determining whether or not incident data has changed. This is particularly useful in cases where incident data contains a time element, such as <q>N days ago</q>, allowing you to ignore the <q>days ago</q> field when determining if an incident has been updated. For more on this feature, see the <code>hash_include</code> and <code>hash_exclude</code> attributes of the <code>policy</code> declaration, <a href="/policies/reference/v20180301/policy_template_language.html#describing-the-policy-conditions">described in the documentation</a></p>
+
+<h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><p><a href="https://github.com/rightscale/policy_templates/blob/master/operational/aws/subnet_name_sync">AWS Subnet Name Sync</a> ensures that all Subnet names in AWS are synchronized to Cloud Management.</p></li>
+<li><p><a href="https://github.com/rightscale/policy_templates/tree/master/operational/aws/vpc_name_sync">AWS VPC Name Sync</a> ensures that all VPC names in AWS are synchronized to Cloud Management.</p></li>
+<li><p><a href="https://github.com/rightscale/policy_templates/blob/master/compliance/tags/azure_rg_tags">Azure: Tag Resources with Resource Group Name</a> ensures that all resources contain a user-specified tag containing the name of the Resource Group containing the resource.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03-22-2019"> <a href="/release-notes/governance/2019/03/22.html">March 22, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/compliance/github/available_seats">GitHub Available Seats</a> alerts you when you are close to your maximum number of seats in a GitHub organization or when the seats you have purchased are under-utilized.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03-15-2019"> <a href="/release-notes/governance/2019/03/15.html">March 15, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/google/cud_report">Google Committed Use Discount (CUD) Report</a> reports on all CUDs that have been purchased in the given GCP project.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/downsize_instance">Downsize Instances</a> - refreshed with new instance type mappings for scaling up or down</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="02-22-2019"> <a href="/release-notes/governance/2019/02/22.html">February 22, 2019</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<p>The <a href="https://github.com/rightscale/policy_sdk/tree/master/cmd/fpt"><code>fpt</code> command-line tool</a> has been released which provides policy developers with an improved workflow to build, test, and deploy policies across their organization. More information on the tool and policy development in general can be found in the <a href="/policies/getting_started">policies getting started guides</a>.</p>
+</div></div><div class="article"><div class="article-title"><time datetime="02-15-2019"> <a href="/release-notes/governance/2019/02/15.html">February 15, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/billing_center_cost_anomaly">Billing Center Cost Anomaly</a> analyzes spend in billing centers and alerts if there is a change in spend above a given threshold.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/scheduled_reports">Scheduled Report</a> - added a graphical chart of the previous 6 months of spend</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="02- 1-2019"> <a href="/release-notes/governance/2019/02/01.html">February  1, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/azure/reserved_instances/utilization">Underutilized Azure Reserved Instances</a> reports on Azure Reserved Instances that are not being utilized to help identify and remediate waste.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/budget_alerts">Budget Alerts</a> allows you to set a budget amount on a per-billing center or organization level and get an alert when your actual or forecasted spend is above the specified budget amount.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/azure/hybrid_use_benefit">Azure Hybrid Use Benefit</a> identifies all VMs not leveraging Azure Hybrid Use Benefit (AHUB) and allows for AHUB to be enabled after approval.</li>
+</ul>
+
+<h2 id="changes-to-existing-policies">Changes to Existing Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/compliance/tags/tag_checker">Untagged Resources</a> - fixed issue with creating tag for invalid_tag</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/downsize_instance">Downsize Instances</a> - Added cpu and memory datapoint check for instances that are operational, but not sending monitoring data back to the platform</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="01-25-2019"> <a href="/release-notes/governance/2019/01/25.html">January 25, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="">Azure Superseded Instance Types</a> identifies VMs that are running on older instance types where a newer instance type exists and can automatically resize the VM to the new type after approval.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="01-18-2019"> <a href="/release-notes/governance/2019/01/18.html">January 18, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/scheduled_reports">Scheduled Reports</a> provides the user with periodic reports of their cloud spend for the selected billing centers. </li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="01-11-2019"> <a href="/release-notes/governance/2019/01/11.html">January 11, 2019</a> </time></div><div class="article-body"><h2 id="new-policies">New Policies</h2>
+
+<ul>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/unattached_addresses">Unattached IP Addresses</a> checks your account for unattached IP addresses and deletes them after approval.</li>
+<li><a href="https://github.com/rightscale/policy_templates/tree/master/security/security_groups/world_open_ports">Security Group Rules with public ports</a> reviews your security groups and alerts if any security group rules are open to the public. Deletion of the Security Group Rules only occur after approval.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-25-2018"> <a href="/release-notes/governance/2018/10/25.html">October 25, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p>Policies now include the option to approve actions prior to execution. Users have the ability to add an approval action as part of escalation or resolution. The <a href="https://reference.rightscale.com/governance-policies/#/Approval"><code>Approval</code> API</a> creates an approval request and blocks further actions from executing until a user approves or denies the action. Parameters can be referenced by subsequent cloud workflows or emails within the same escalation or resolution. Users with policy_approval role can approve or deny an action with the ability to add a comment, the details of which can be seen on the Incident details page as well as the api.
+<img src="/img/governance-policy-approvals.png" alt="policy_approval.png" /></p></li>
+<li><p>Applied polices <a href="https://reference.rightscale.com/governance-policies/#/AppliedPolicy/AppliedPolicy#index">API</a> now includes a filtering option on name.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="08-24-2018"> <a href="/release-notes/governance/2018/08/24.html">August 24, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>An applied policy can now be run on-demand by leveraging the <q>Run Now</q> option in either the UI in the Actions menu or <a href="https://reference.rightscale.com/governance-policies/#/AppliedPolicy/AppliedPolicy_evaluate_applied_policy">the <code>AppliedPolicy#evaluate</code> method in the API</a>.</li>
+<li><p>Each run of a policy now provides a detailed log that can be accessed by users with the <code>policy_designer</code> role to see a full log of all data and requests made by the policy. Users with the privilege will see this both in the UI in the Actions menu as well as in the <a href="https://reference.rightscale.com/governance-policies/#/AppliedPolicy/AppliedPolicy#show_applied_policy_log">AppliedPolicy#log action in the API</a>.</p>
+
+<p><img src="/img/policy_actions.png" alt="policy_actions.png" width="338" height="296" /></p></li>
+<li><p>The <code>datasource</code> now supports an <code>ignore_status_code</code> field to allow you to specify any status code responses to ignore, instead of throwing an error. Read more about this in the <code>Request</code> details for datasource <a href="/policies/reference/v20180301/policy_template_language.html#retrieving-data-api-data-with-datasources">in the documentation</a>.</p></li>
+<li><p>Applied policies now provide detailed status, including the last time the policy was started and finished as well as the next scheduled time it will run. All of these fields are available in the <a href="https://reference.rightscale.com/governance-policies/#/AppliedPolicy/AppliedPolicy_show_applied_policy_status">AppliedPolicy#status action in the API</a> and the last <q>started</q> time is shown in the UI as <q>Last ran on</q>.</p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="07-30-2018"> <a href="/release-notes/governance/2018/07/30.html">July 30, 2018</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<p>Announcing a completely redesigned multi-cloud policy management capability in RightScale with built-in <strong>Cost, Security, Compliance, and Operational</strong> policies to help you achieve quick ROI. </p>
+
+<p><strong>Key Capabilities</strong> </p>
+
+<ul>
+<li><a href="/policies/getting_started/policy_list.html">Built-in Policies</a> for Cost, Security, Operational, and Compliance use cases</li>
+<li>Dry run policies and then configure them to take automatic actions on any API backed cloud, service, and resource</li>
+<li>Automate policies across your entire cloud landscape (multiple accounts)</li>
+<li>Maintain policy-as-code using the built-in <a href="/policies/reference/policy_template_language.html">policy template language</a> to write your own policies</li>
+<li>Policies can enforce rules on any cloud or any service with an API</li>
+<li>Automate your policies using the fully-featured Policies API and documentation</li>
+</ul>
+
+<p>Learn more about <a href="/policies">RightScale Policies</a>.</p>
+
+<p><img src="/img/policy_catalog.png" alt="policy_catalog.png" width="1866" height="1080" /></p>
+
+<p><img src="/img/policy_dashboard_v1.png" alt="policy_dashboard_v1.png" width="1866" height="1078" /></p>
+
+<p><img src="/img/policy_applied.png" alt="policy_applied.png" width="1865" height="1074" /></p>
+
+<p><img src="/img/policy_incidents.png" alt="policy_incidents.png" width="1859" height="1070" /></p>
+
+<p><img src="/img/policy_template.png" alt="policy_template.png" width="2880" height="1800" /></p>
+</div></div><div class="article"><div class="article-title"><time datetime="04- 6-2018"> <a href="/release-notes/governance/2018/04/06.html">April  6, 2018</a> </time></div><div class="article-body"><h2 id="new-feature">New Feature</h2>
+
+<ul>
+<li><p>Introducing a new dedicated role (<code>credential_viewer</code>) for <strong>view-only</strong> permissions on RightScale&#39;s <a href="/cm/dashboard/design/credentials/">Credentials</a> feature. You no longer have to grant <code>admin</code> role to view credentials. The <code>credential_viewer</code> role can be assigned to users at an organization level (all accounts), as well as to individual accounts, like other Governance roles.</p>
+
+<p><img src="/img/governance_credentials_viewer.png" alt="governance_credentials_viewer.png" width="1342" height="538" /></p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="10-27-2017"> <a href="/release-notes/governance/2017/10/27.html">October 27, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><p>To increase visibility around billing center level permissions, users with <code>enterprise_manager</code> role can use Governance to see the list of billing centers a user has access to with the ability to easily navigate to them.</p>
+
+<div style="border: thin solid black">
+    <img src="/img/billing_center_gov.png" alt="">
+</div></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05-23-2017"> <a href="/release-notes/governance/2017/05/23.html">May 23, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><p>Introducing new frictionless way to manage users, groups, and accounts in <strong>bulk</strong>. Governance users can now switch the view to update multiple users, roles, accounts, and groups seamlessly.</p>
+
+<p><strong>Users Page</strong></p>
+
+<div style="border: thin solid black">
+    <img src="/img/gov-users-listview.png" alt="">
+</div> 
+
+<p><strong>Groups Page</strong></p>
+
+<div style="border: thin solid black">
+    <img src="/img/gov-groups-listview.png" alt="">
+</div>
+
+<p><strong>Accounts Page</strong></p>
+
+<div style="border: thin solid black">
+    <img src="/img/gov-accounts-listview.png" alt="">
+</div></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="05- 9-2017"> <a href="/release-notes/governance/2017/05/09.html">May  9, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p>Governance users can now download a detailed user role report (CSV), broken down by accounts, for better visibility as well as auditing.</p>
+
+<p><strong>Enterprise Manager&#39;s View</strong></p>
+
+<p><img src="/img/governance-exportcsv.gif" alt="governance-exportcsv.gif" width="1118" height="762" /></p>
+
+<p><strong>Admin&#39;s View</strong></p>
+
+<p><img src="/img/governance-exportcsv-accounts.gif" alt="governance-exportcsv-accounts.gif" width="1134" height="754" /></p></li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04-21-2017"> <a href="/release-notes/governance/2017/04/21.html">April 21, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed an intermittent bug causing admins to see <strong><q>lack privileges</q></strong> screen on login or navigating from Cloud Management.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="04-11-2017"> <a href="/release-notes/governance/2017/04/11.html">April 11, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Reduce confusion for Enterprise Managers by hiding users, with no roles, from the accounts view.</li>
+<li>Performance improvements by reducing amount of network requests.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03-30-2017"> <a href="/release-notes/governance/2017/03/30.html">March 30, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p>Enterprise Managers now have the option to navigate to the Invitations Page directly from the Users page.</p>
+
+<p><img src="/img/add_user.png" alt="add_user.png" width="1166" height="776" />  </p></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>New UI loading indicator while the page is loading the data. </li>
+<li>Improved usability around new user invite flow by reducing the number of clicks it takes to get to the Invite page.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03-24-2017"> <a href="/release-notes/governance/2017/03/24.html">March 24, 2017</a> </time></div><div class="article-body"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>To provide more context to the users, who belong to a single organization, Governance will now show the organization name in the UI. Previously, the organization name only appeared for users affiliated with multiple organizations.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03-15-2017"> <a href="/release-notes/governance/2017/03/15.html">March 15, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p>Enterprise Managers can now seamlessly <em>remove</em> a user, including all it&#39;s roles, from the organization.</p>
+
+<p><img src="/img/gov_select_user_for_removal.png" alt="gov_select_user_for_removal" width="1381" height="776" /></p></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Security bug fix to ensure that access token can not be generated by a terminated instance.</li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="03- 3-2017"> <a href="/release-notes/governance/2017/03/03.html">March  3, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>You can now create user groups with <strong>special characters</strong>. </li>
+<li><p><strong>Usability improvement</strong> to reduce number of clicks and time to value by making <q>Roles</q> as the default tab. </p>
+
+<p><img src="/img/gov_roles_tab.png" alt="gov_roles_tab.png" width="1864" height="958" /></p></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bug fix around user roles were not reflecting all inherited roles. </li>
+<li>Bug fix where incorrect message was displayed if a user only had roles inherited from the organization level. </li>
+</ul>
+</div></div><div class="article"><div class="article-title"><time datetime="02- 8-2017"> <a href="/release-notes/governance/2017/02/08.html">February  8, 2017</a> </time></div><div class="article-body"><h2 id="new-features">New Features</h2>
+
+<p>Announcing General Availability of the new Governance application, located within the RightScale product dropdown, to provide enhanced identity access management (IAM). With features like User Groups, Role Inheritance, Full Audit entries etc, users with role <code>enterprise_managers</code> and <code>admins</code> will get greater control over the user&#39;s permissions.</p>
+
+<p><img src="/img/governance_release_notes.png" alt="governance_release_notes.png" width="1852" height="953" />  </p>
+
+<ul>
+<li><p><strong>Organizations:</strong> Organization is new concept we have introduced to help you manage multiple accounts within your company. For existing customers, we have automatically created an Organization based on your master account.</p></li>
+<li><p><strong>Groups:</strong> Organize users into Groups based on your organizational needs or other criteria and assign specific roles to the Groups.</p></li>
+<li><p><strong>Role inheritance:</strong> Inheritance is a powerful feature for assigning Roles at the top level, say organization, and then cascading it down to the Group/Account/User level. Roles granted at the organization level will automatically appear at the account level.</p></li>
+</ul>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>All inherited roles are shown explicitly and can only be modified at the level they were assigned. <code>enterprise_manager</code> can only be granted at the organization level whereas role <code>admin</code> can only be granted at the account level.</p>
+</div>
+
+<ul>
+<li><p><strong>Audit Entries:</strong> Gain visibility into which users are making changes to your cloud resources.</p></li>
+<li><p><strong>New Self-Service User types:</strong> New granular roles (<code>ss_end_user</code>, <code>ss_designer</code>, <code>ss_observer</code>) for the Self-Service application designed to give you complete flexibility. Learn more <a href="/ss/getting_started/ss_user_types.html">Self-Service User types</a></p></li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><p>Cloud Management <strong>User</strong> tab, for managing permissions, is now moved under the new Governance application to allow you to manage user permissions in one place. </p></li>
+<li><p><strong>API support for provisioning Self-Service users:</strong> Self-Service roles (<code>ss_end_user</code>, <code>ss_designer</code>, <code>ss_observer</code>) can now be assigned via the <a href="http://reference.rightscale.com/api1.5/resources/ResourcePermissions.html">API 1.5</a>. Learn more about <a href="/ss/getting_started/ss_user_types.html#inviting-self-service-users">Inviting Self-Service users.</a></p></li>
+<li><p>With the new Self-Service user types, you can now grant Cloud Management and Self-Service roles independently of each other giving you more control over the platform.</p></li>
+</ul>
+
+<p><img src="/img/governance_releasenotes_roles.png" alt="governance_releasenotes_roles.png" width="1132" height="361" /></p>
+</div></div></div></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

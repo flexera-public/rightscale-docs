@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Writing Windows Powershell RightScripts</title><meta content="Procedure for writing and running Windows PowerShell RightScripts in the context of a RightScale Server." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="cm cm_windows_guide cm_windows_guide_writing_windows_powershell_rightscripts" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Cloud Management</a> &#x2F; <a href="./">Windows Guide</a></p><div class="page-header"><h1>Writing Windows Powershell RightScripts</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This tutorial takes you through writing two separate PowerShell RightScripts. The first one simply renames an attached file to a name you supply as an input. The second script performs a number of administrative tasks, including changing the administrator password, listing environment variables and backing up the registry.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>RightScripts can only be run in the context of a RightScale server, which means a cloud instance that is running the RightLink agent. You cannot run a RightScript on a Windows instance that was launched directly from a cloud image without first installing the RightLink agent. To install the RightLink agent on any running instance, follow the <a href="/rl10/getting_started.html">Getting Started with RightLink</a> guide.</p>
+
+<p>This tutorial assumes you have a running Windows server, and access to the software installation files.</p>
+
+<p>If you have never created a RightScript before, see <a href="/cm/dashboard/design/rightscripts/rightscripts_actions.html#create-a-new-rightscript">Create a New RightScript</a>.</p>
+
+<h2 id="steps">Steps</h2>
+
+<h3 id="steps-powershell-script-with-an-input-and-attachment">PowerShell Script with an Input and Attachment</h3>
+
+<p>The sample code demonstrates how to declare an input variable and reference an attachment. The code references the following:</p>
+
+<ul>
+<li><strong>Input</strong> : NEW_NAME</li>
+<li><strong>Attachment</strong> : logo-rightscale.png</li>
+</ul>
+
+<p>The purpose of the script is to rename an attached file to the name you supply as the value to the input NEW_NAME. The file that&#39;s to be renamed is called &#39;logo-rightscale.png&#39;. Right-click the following link and choose Save Link As to download the file to your local system. Later, you will attach this file to your new RightScript.</p>
+
+<ul>
+<li><a href="/img/logo-rightscale.png">logo-rightscale.png</a></li>
+</ul>
+
+<p>Now navigate to <strong>Design</strong> &gt; <strong>RightScripts</strong> &gt; <strong>New</strong>, and enter the name for your new RightScript. Cut/paste the following PowerShell code into the <strong>Scripts</strong> box.</p>
+<pre class="syntax-highlight plaintext"><code>#Windows Powershell RightScript with input(NEW_NAME) and attachment(logo.png)
+
+#tell the script to "stop" or "continue" when a command fails
+$errorActionPreference = "stop"
+
+$target_file = "c:\$env:NEW_NAME"
+
+if (test-path $target_file)
+{
+   Write-Output "File [$target_file] already exists. Skipping script"
+   exit 0
+}
+
+cd $env:RS_ATTACH_DIR
+Get-ChildItem . | Select-Object FullName, LastWriteTime
+
+Write-Output "*** Moving file to [$target_file]"
+mv logo.png $target_file
+
+Get-ChildItem c:\ | Select-Object FullName, LastWriteTime
+</code></pre>
+
+<p>Click the <strong>Identify</strong> action button to extract and display any Inputs from the PowerShell code. The input NEW_NAME should be identified. As a best practice, fill out the Description field that will serve as a hoverable tooltip text for your users, then click the <strong>Save</strong> action button.</p>
+
+<p>Click the <strong>Attachments</strong> tab and upload the file &#39;logo.png&#39; you retrieved from this document.</p>
+
+<p>If you wish you could take a couple minutes to read through this code, to see if you can follow the steps.</p>
+
+<ol>
+<li>Navigate to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong> and filter for Running Instances.</li>
+<li>Click your running Windows server and select the Scripts tab. Expand the &#39;Any Script&#39; section and click the <strong>Select a Script to Run</strong> button.</li>
+<li>Click &#39;Unpublished&#39;, click on your new script in the RightScripts column, click the <strong>Select</strong> button, then click the <strong>Run</strong> button.</li>
+<li>Enter a value for the NEW_NAME Input and click <strong>Continue</strong>. You should see progress of the RightScript being run in the Events area of the Dashboard.</li>
+</ol>
+
+<h4 id="verifying-the-script-on-the-server">Verifying the Script on the Server</h4>
+
+<p>To verify that the script was successfully executed on the server, you can RDP into the Windows server, and verify that the file (with the new name that you specified) exists in the server&#39;s C:\ root directory. Alternatively, you could check this by using PowerShell directly:</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>TCP Port 3389 must be open in the server&#39;s security group.</p>
+</div>
+
+<ol>
+<li>RDP into the Windows Server</li>
+<li>Go to <strong>Start</strong> &gt; <strong>Run</strong>, enter <strong>PowerShell</strong> and click <strong>OK</strong>.</li>
+<li><p>Type the following into the command window</p>
+
+<p><code>Get-ChildItem c:\ | Select-Object FullName, LastWriteTime</code></p></li>
+</ol>
+
+<p><img src="/img/cm-powershell-screen.png" alt="cm-powershell-screen.png" width="550" height="271" /></p>
+
+<h3 id="steps-configuring-windows-with-powershell">Configuring Windows with PowerShell</h3>
+
+<p>The aim of the RightScript is to do the following simple tasks using a single PowerShell script:</p>
+
+<ol>
+<li>Change the administrator password.</li>
+<li>Disable UAC by changing a registry value (User Account Controls (UAC) notifies the user when programs try to make changes to the computer).</li>
+<li>List environment variable values and export these to a file.</li>
+<li>Backup the registry.</li>
+</ol>
+
+<p>Now navigate to <strong>Design</strong> &gt; <strong>RightScripts</strong> &gt; <strong>New</strong>, and enter the name for your new RightScript. Cut/paste the following PowerShell code into the <strong>Scripts</strong> box.</p>
+<pre class="syntax-highlight plaintext"><code>#Powershell RightScript to configure Windows
+#stop and fail script when a command fails
+$errorActionPreference="Stop"
+
+#Disable UAC
+Set-ItemProperty -path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -name "EnableLUA" -value 0
+
+#Print all environment variables to a file determined by the input ENVFILENAME
+$env_file = "c:\$env:ENVFILENAME"
+dir env: | sort Name &gt; $env_file
+
+#Backup the registry to the directory c:\
+reg export HKLM c:\HKLM.txt /y
+reg export HKCU c:\HKCU.txt /y
+reg export HKCR c:\HKCR.txt /y
+reg export HKU c:\HKU.txt /y
+reg export HKCC c:\HKCC.txt /y
+
+#Change the administrator password
+net user administrator "$env:ADMIN_PASSWORD"
+</code></pre>
+
+<p>Click <strong>Identify</strong> to extract Inputs form the PowerShell code. The following inputs should be identified.</p>
+
+<ul>
+<li>ENVFILENAME</li>
+<li>ADMIN_PASSWORD</li>
+</ul>
+
+<p>Now click <strong>Save</strong>. If you wish you could take a couple minutes to read through this code, to see if you can follow the steps.</p>
+
+<ol>
+<li>Navigate to <strong>Manage</strong> &gt; <strong>Instances &amp; Servers</strong> and filter for Running Instances.</li>
+<li>Click your running Windows server and select the Scripts tab. Expand the &#39;Any Script&#39; section and click the <strong>Select a Script to Run</strong> button.</li>
+<li>Click &#39;Unpublished&#39;, click on your new script in the RightScripts column, click the <strong>Select</strong> button, then click the <strong>Run</strong> button.</li>
+</ol>
+
+<p>Next, you should see progress of the script being run in the Events area of the Dashboard.</p>
+
+<h4 id="verification-of-your-configuration-changes">Verification of Your Configuration Changes</h4>
+
+<p>Be sure to wait for the script to be 100% complete before you perform this verification step. If an RDP window is already open because of the previous step, close the window.</p>
+
+<ul>
+<li>RDP into the Windows server. You will be prompted for the new password that you set as an input.</li>
+<li>To verify the registry change, run the following command in a PowerShell window<br></li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>Get-ItemProperty -path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -name "EnableLUA"
+</code></pre>
+
+<p>You should see output similar to the following:</p>
+<pre class="syntax-highlight plaintext"><code>PS C:\&gt; Get-ItemProperty -path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -name "EnableLUA"
+
+PSPath : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System
+PSParentPath : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies
+PSChildName : System
+PSDrive : HKLM
+PSProvider : Microsoft.PowerShell.Core\Registry
+EnableLUA : 0
+
+PS C:\&gt;
+</code></pre>
+
+<ul>
+<li>To ensure the Environment Variable and Registry backup files have been created (e.g. HKCC.txt, HKCR.txt, etc.), open Windows explorer and browse to c:. Alternatively, you could check this by using PowerShell directly. Go to Start &gt; Run, enter <strong>PowerShell</strong> and click OK, then type the following into the command window</li>
+</ul>
+<pre class="syntax-highlight plaintext"><code>Get-ChildItem c:\ | Select-Object FullName, LastWriteTime
+</code></pre>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+<li><a href="/cm/dashboard/design/rightscripts/rightscripts_actions.html#create-a-new-rightscript">Create a new RightScript</a></li>
+<li><a href="/cm/dashboard/design/rightscripts/rightscripts_developing.html">Developing RightScripts</a></li>
+<li><a nocheck href='https://technet.microsoft.com/en-us/scriptcenter/powershell.aspx'>Scripting with Windows Powershell</a> (Microsoft technet)</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

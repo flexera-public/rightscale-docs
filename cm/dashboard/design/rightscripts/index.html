@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightScripts</title><meta content="In the RightScale Cloud Management Dashboard, A RightScript is an executable piece of code that can be run on a server in the cloud." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../../js/main.js"></script></head><body class="cm cm_dashboard cm_dashboard_design cm_dashboard_design_rightscripts cm_dashboard_design_rightscripts_index" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/cm"><h4 class="list-group-heading"><img src="../../../../img/product-cloud-management.svg" /><span>Cloud Management</span></h4></a><a class="list-group-item" href="../../../about.html">About</a><a class="list-group-item" href="/cm/rs101/">Terminology and Concepts</a><a class="list-group-item" href="/cm/management_guide/">Lifecycle Management</a><a class="list-group-item" href="/cm/dashboard/">Dashboard User's Guide</a><a class="list-group-item" href="/cm/administrators_guide/">Administrator's Guide</a><a class="list-group-item" href="/cm/designers_guide/">Designer's Guide</a><a class="list-group-item" href="/cm/dashboard/design/server_templates/">ServerTemplates</a><a class="list-group-item" href="/cm/servertemplate_dev_guide/">ServerTemplate Developer's Guide</a><a class="list-group-item" href="/cm/pas/">Publishing and Sharing</a><a class="list-group-item" href="/cm/windows_guide/">Windows Guide</a><a class="list-group-item" href="/cm/ref/">Reference Information</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../../">Flexera CMP Docs</a> &#x2F; <a href="../../../">Cloud Management</a> &#x2F; <a href="../../">Dashboard User's Guide</a> &#x2F; <a href="../">Design</a></p><div class="page-header"><h1>RightScripts</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>A <strong>RightScript</strong> is an executable piece of code that can be run on a server. RightScripts consist of changes that can be run on a server during the boot, operational, or shutdown phases. They cannot be run on a <q>stranded</q> server. A RightScript consists of a script (typically written in Bash, Ruby, or Perl), a set of attachments that are downloaded from S3, a set of packages that are installed using the system&#39;s package manager (yum in the case of Red Hat-based systems), and a set of input parameters that must be passed into the script. In order to use RightScripts on a server, a ServerTemplate must be created, the RightScript(s) must be added to the template, inputs must be provided, and lastly a server must be launched.</p>
+
+<p>The following operational buttons exist from this page:</p>
+
+<ul>
+<li><strong>New</strong> - Create a new RightScript from scratch.</li>
+<li><strong>Diff</strong> - Compare two RightScripts or multiple revisions of the same RightScript.</li>
+<li><strong>Merge</strong> - Merge the differences of two RightScripts together into one RightScript. Perform a 3-way merge of RightScripts. For example, let&#39;s say you have cloned and customized a public script. When a new revision of the public script is published, you can merge those updates into your customized script.</li>
+<li><strong>Search</strong> - Search through Private, Shared, RightScale and/or Partner RightScripts for a specific text pattern.</li>
+</ul>
+
+<p>Visit the <a href="/cm/dashboard/design/rightscripts/rightscripts_actions.html">RightSripts - Actions and Procedures</a> page for information on common RightScript-related tasks.</p>
+
+<p>See <a href="/cm/dashboard/design/rightscripts/rightscripts_developing.html">Developing RightScripts</a> for a step-by-step guide to creating RightScripts on your own.</p>
+
+<h2 id="concepts">Concepts</h2>
+
+<p>RightScripts consist of changes that can be applied to a Server during the boot, operational, or shutdown phase. When a ServerTemplate is imported from the MultiCloud Marketplace, all of its RightScripts become visible under Design -&gt; RightScripts. You can publish RightScripts by themselves or in the context of a ServerTemplate.</p>
+
+<p>When a RightScript is added to a ServerTemplate, it can be added as a boot, operational, or decommission script.</p>
+
+<ol>
+<li><strong>Boot Scripts</strong> - RightScripts that are automatically run during a Server&#39;s boot time. Boot scripts are often software installation and configuration scripts.</li>
+<li><strong>Operational Scripts</strong> - RightScripts that are run during a Server&#39;s run time, often to automate &#39;runbook&#39; operations.</li>
+<li><strong>Decommission Scripts</strong> - RightScripts that are run during a Server&#39;s decommissioning phase when a Server is terminated.</li>
+</ol>
+
+<ul>
+<li><strong>Any Script</strong> - (available on operational servers only) If a server is running, you also have the ability to run any available RightScript from a dropdown menu. The <q>Any Script</q> option will only appear when an instance is operational, under the <strong>Scripts</strong> tab.</li>
+</ul>
+
+<p>A RightScript consists of the following components:</p>
+
+<ul>
+<li>A <strong>script</strong> (typically written in Bash, Ruby, Perl or Powershell, or other executable languages.</li>
+<li>A set of optional <strong>attachments</strong> that are downloaded (typically from S3 buckets) and made available on the instance.</li>
+<li>A set of <strong>packages</strong> that are installed using the system&#39;s package manager (for example, yum in the case of Red-Hat-Linux based systems).</li>
+<li>A set of <strong>Inputs</strong> - configuration parameters that must be passed into the script and specified in the RightScale Dashboard or via the API.</li>
+</ul>
+
+<h3 id="concepts-what-are-the-benefits-of-using-rightscripts-">What are the benefits of using RightScripts?</h3>
+
+<p>RightScripts provide an easy way of performing actions on a Server, and allow you to extract variable configuration information from common operations. Similar to ServerTemplates, they provide a very modular solution for increased reliability and repeatability. For example, you can update a single RightScript which is referenced across multiple ServerTemplates and deployments, changing the configuration for a variety of servers at once.</p>
+
+<h3 id="concepts-how-do-i-create-a-rightscript-and-add-it-to-a-servertemplate-">How do I create a RightScript and add it to a ServerTemplate?</h3>
+
+<p>The <a href="http://support.rightscale.com/03-Tutorials/02-AWS/01-Beginner_Examples/4._Intermediate_Example/index.html">Intermediate Example</a> tutorial walks you through the steps of creating a new RightScript from scratch, adding it to a ServerTemplate and rearranging the order of executable boot scripts.</p>
+
+<h2 id="about-rightscript-attachments">About RightScript Attachments</h2>
+
+<h3 id="about-rightscript-attachments-what-is-an-attachment-">What is an attachment?</h3>
+
+<p>An attachment is a file that you can statically link with a RightScript. It&#39;s useful for attaching smaller files for development and testing purposes where can easily use the attached files in your RightScript&#39;s code using the &#39;RS_ATTACH_DIR&#39; environment variable. For example, you could attach a MySQL dumpfile (.gz) or tarball of your application code (.tgz) to an install boot script. However, for production environments, it is recommended that you store your application code in a git/svn repository and your database backups using automated backups that are created using RightScale-published ServerTemplates.</p>
+
+<h3 id="about-rightscript-attachments-how-do-i-upload-an-attachment-to-a-rightscript-">How do I upload an attachment to a RightScript?</h3>
+
+<p>See <a href="/cm/dashboard/design/rightscripts/rightscripts_actions.html">Upload an Attachment to a RightScript.</a></p>
+
+<h3 id="about-rightscript-attachments-where-are-attachments-stored-">Where are attachments stored?</h3>
+
+<p>When you upload an attachment to a RightScript in your own RightScale account, RightScale will store the object in our local repository and will make the object available to the instance at runtime.</p>
+
+<h3 id="about-rightscript-attachments-can-i-edit-an-attachment-in-the-dashboard-">Can I edit an attachment in the Dashboard?</h3>
+
+<p>Yes. See <a href="/cm/dashboard/design/rightscripts/rightscripts_actions.html">Edit RightScript Attachments</a>.</p>
+
+<h3 id="about-rightscript-attachments-what-is-the-maximum-size-of-an-attachment-">What is the maximum size of an attachment?</h3>
+
+<p>100 MB</p>
+
+<h3 id="about-rightscript-attachments-how-do-i-call-an-attachment-in-a-rightscript-">How do I call an attachment in a RightScript?</h3>
+
+<p>Before a RightScript is run on an instance, all of its attachments are downloaded to a temporary directory. The path to the temporary directory is passed to the script in the RS_ATTACH_DIR environment variable. All files will be stored in that directory using their original file names (without any path component).</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Please use RS_ATTACH_DIR, as the ATTACH_DIR variable has been deprecated.</p>
+</div>
+
+<p><strong>Bash</strong>: $RS_ATTACH_DIR</p>
+
+<p><strong>Ruby</strong>: ENV[&#39;RS_ATTACH_DIR&#39;]</p>
+
+<p><strong>Powershell</strong>: <q>$env:RS_ATTACH_DIR</q></p>
+
+<h2 id="decommission-rightscripts">Decommission RightScripts</h2>
+
+<p>There are 3 types of RightScripts:</p>
+
+<ul>
+<li>Boot Scripts - RightScripts that are called when a new instance is launched and in the boot-up phase.</li>
+<li>Operational Scripts - RightScripts that are available from the Dashboard in the operational phase.</li>
+<li>Decommission Scripts - RightScripts that are called when an instance is terminated.</li>
+</ul>
+
+<p><strong>Decommission Scripts</strong> are essentially operational scripts that help you safely terminate (decommission) an instance from a deployment. Previously, when an instance was terminated, there was no way to perform any last minute actions before it was terminated and disappeared. Decommission scripts provide a great way to gracefully <q>un-launch</q> an instance and perform important last minute actions that need to be done before an instance is permanently terminated. However, there is typically a time frame of a couple minutes depending on the cloud to perform these actions. If you list too many actions or one of them takes a long time to complete, the remaining actions might not have enough time to successfully execute.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If the time allotted for Instance Termination is exceeded, the remaining portion of the script and all scripts that follow will not be called.</p>
+</div>
+
+<h3 id="decommission-rightscripts-what-types-of-decommission-scripts-are-recommended-">What types of Decommission Scripts are recommended?</h3>
+
+<p>Decommission scripts should only be used for performing critical last minute actions that do not require a long time to complete.</p>
+
+<ul>
+<li>Deregister the instance&#39;s IP address. It usually takes a second or less to perform.</li>
+<li>Disconnect the instance from (HAProxy) load balancers.</li>
+</ul>
+
+<h3 id="decommission-rightscripts-what-types-of-events-are-not-recommended-">What types of events are not recommended?</h3>
+
+<ul>
+<li>Backups to S3. Large backups may take a very long time and partial backups may cause problems later.</li>
+<li>Sending emails.The e-mail is queued, but may never get sent in time.</li>
+</ul>
+
+<h3 id="decommission-rightscripts-how-do-i-perform-actions-that-take-longer-than-100-seconds-before-an-instance-is-terminated-">How do I perform actions that take longer than 100 seconds before an instance is terminated?</h3>
+
+<p>There may be cases where 100 seconds is an insufficient amount of time to perform some necessary final actions. Therefore, you cannot use decommissioning scripts. In such cases, you&#39;ll need to perform these longer actions using operational scripts since there is no time limit associated with operational scripts. Simply end the operational script with a request to EC2 to terminate this server. After the self-termination, decommission scripts will run in the same way they would have run from the RightScale Dashboard.</p>
+
+<h4 id="example:-wait-200-seconds,-then-self-decommission-&amp;-terminate">Example: Wait 200 seconds, then self-decommission &amp; terminate</h4>
+
+<p>Using RightScale-enabled images w/ RightLink &gt;= 5.6 is recommended for this technique.</p>
+
+<p>The intention of sleeping is only to simulate running a script longer than 100 seconds.</p>
+
+<p>After decommission call the system&#39;s shutdown command.  </p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Depending on the kernel you are using (and if the instance is instance-store or EBS) a shutdown may stop the instance instead of terminate.  </p>
+</div>
+
+<p>To ensure termination, use the RightScale or appropriate cloud API to terminate the instance by name or identifier.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -ex</span>
+
+    sleep 200; service rightlink decommission <span class="o">&amp;&amp;</span> shutdown -h now &amp;
+</code></pre>
+
+<h4 id="example:-backup-to-s3,-then-self-terminate">Example: Backup to S3, then self-terminate</h4>
+
+<p>Create a tar archive of your whole home directory (/home) and save it to S3 before your instance disappears.</p>
+
+<p>The script below is very simple. For instance, you may want to add more checks to see if the backup is 100% solid.<br>
+ Feel free to cut and paste this code as an example and expand on the error checks as needed.</p>
+
+<p>Amazon EC2 API Tools is required. You can use the <a href="http://www.rightscale.com/library/right_scripts/Install-Amazon-EC2-API-Tools/23675">Install Amazon EC2 API Tools</a> RightScript to install these. Your AWS/EC2 credentials are also needed. Use <a href="http://www.rightscale.com/library/right_scripts/Import-AWS-and-EC2-credentials/23672">Import AWS and EC2 credentials</a> to copy them to ~/root on the instance.</p>
+<pre class="syntax-highlight shell"><code>    <span class="c">#! /bin/bash -x</span>
+
+    <span class="c"># Description: Perform a backup and then Terminate this Server.</span>
+
+    <span class="nb">source</span> /etc/profile <span class="c"># Must be first, the same for the OS login.</span>
+    <span class="nb">source</span> /var/spool/ec2/meta-data.sh
+    <span class="nb">source</span> /var/spool/ec2/user-data.sh
+
+    <span class="c"># Work in a safe place to write.</span>
+    <span class="c">#</span>
+    <span class="nb">cd</span> /tmp
+
+    <span class="c"># At this point in the script we have all of the ENV set like a login to root.</span>
+
+    <span class="c"># Backup all of the /home file tree, this may take a while....</span>
+    <span class="c">#</span>
+    <span class="c"># NOTE: Assumes that we havce lots of free space. Watch out.</span>
+    tar czf /tmp/my_home_tar.tgz /home
+
+    <span class="c"># Save the backup in S3 for later use.</span>
+    <span class="c">#</span>
+    <span class="c"># You need an AWS S3 account for this step.</span>
+    <span class="c">#</span>
+    <span class="c"># NOTE: Script assumes that the bucket exists before the stript is run.</span>
+    s3cmd put my_bucket:my_home_tar.tgz /tmp/my_home_tar.tgz
+
+    <span class="c"># Terminate this server now that the data is saved.</span>
+    <span class="c">#</span>
+    <span class="c"># NOTE: $EC2_INSTANCE_ID has the instances name for this instance.</span>
+    ec2-terminate-instances <span class="s2">"</span><span class="nv">$EC2_INSTANCE_ID</span><span class="s2">"</span>
+
+    <span class="c"># This script ends while EC2 is doing the terminate.</span>
+</code></pre>
+
+<h2 id="revision-history-timeline-for-rightscripts--">Revision History Timeline for RightScripts  </h2>
+
+<p>The Revision timeline for RightScripts shows the most recently committed revisions of the script. Similar functionality exists for ServerTemplates.</p>
+
+<p><img src="/img/cm-revision-timeline-default.png" alt="cm-revision-timeline-default.png" width="533" height="49" /></p>
+
+<p>By default, the timeline will only show the two most recent revisions along with the HEAD revision.</p>
+
+<p>You can either select a different revision to view or click the <strong>Revision</strong> button, which will take you to the script&#39;s <strong>Revisions</strong> tab.</p>
+
+<p>If you select a revision that&#39;s older than the two most recent revisions, it will be displayed and the Revision timeline will display [...] to denote a larger gap in the revision history.</p>
+
+<p><img src="/img/cm-revision-timeline-old-revision.png" alt="cm-revision-timeline-old-revision.png" width="542" height="52" /></p>
+
+<h2 id="related-faqs">Related FAQs</h2>
+
+<ul>
+<li><a href="/faq/How_do_I_access_64-bit_files_and_registry_keys_from_a_RightScript_using_PowerShell_on_a_Windows_instance.html">How do I access 64-bit files and registry keys from a RightScript using PowerShell on a Windows instance?</a></li>
+<li><a href="/faq/clouds/google/Why_do_scripts_and_recipes_fail_with_a_missing_project_ID_error.html">Why do scripts and recipes fail with a missing project ID error?</a></li>
+<li><a href="/faq/How_can_I_stop_a_RightScript_that_is_stuck_in_Scheduling_execution.html">How can I stop a RightScript that is stuck in Scheduling execution</a></li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Audit Entries</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../js/main.js"></script></head><body class="api api_api_1" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../">Flexera CMP Docs</a> &#x2F; <a href="../">Flexera CMP APIs</a> &#x2F; <a href="./">Examples</a></p><div class="page-header"><h1>Audit Entries</h1></div><div class="main-content"><h2 id="list-audit-entries">List Audit Entries</h2>
+
+<p>To list out Audit Entries based on a specified start/end date and setting an upper limit on the number of entries returned.</p>
+
+<p><strong>Note</strong> : Listing out all audit entries is very resource intensive. Hence setting a start and end date as well as an upper limit is required.</p>
+
+<h3 id="list-audit-entries-curl">Curl</h3>
+
+<p><strong>Important</strong> : When looking at the online reference information for the <a href="http://reference.rightscale.com/api1.5/resources/ResourceAuditEntries.html#index">start/end_date regular expressions</a>, you&#39;ll notice that the seconds are prepended with a &#39;+&#39;. The plus sign does cause issues with the URL when using the curl command. Hence, the example below encodes the plus sign as a <q>%2B</q> before following it with all zeros.</p>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a>, and your valid session cookie is in &#39;mycookie&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight shell"><code>    <span class="c">#!/bin/sh -e</span>
+    curl -i -H X_API_VERSION:1.5 -b mycookie -X GET <span class="se">\</span>
+    -d <span class="nv">limit</span><span class="o">=</span>250 <span class="se">\ </span><span class="c"># Set upper limit on entries returned to 250</span>
+    -d <span class="nv">start_date</span><span class="o">=</span><span class="s1">'2012/10/01 00:00:00 %2B0000'</span> <span class="se">\ </span><span class="c"># Note: Must encode the plus sign as a %2B</span>
+    -d <span class="nv">end_date</span><span class="o">=</span><span class="s1">'2012/10/31 00:00:00 %2B0000'</span> <span class="se">\ </span><span class="c"># Encode plus sign as %2B again. Start/end date = October</span>
+    https://my.rightscale.com/api/audit_entries.xml
+</code></pre>
+
+<p><strong>Note</strong> : As mentioned earlier, audit entry operations can be resource intensive. On some clouds, the script above could take several minutes.</p>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>. . . XML headers and output is truncated . . .</p>
+
+<p><strong>Note</strong> : Output below contains three audit entries. <em>Tip</em>: Browser search for <q>summary</q> to find each one.</p>
+
+<ol>
+<li>Launch failure</li>
+<li>Array resize failure</li>
+<li>Completion of a load balancer attach all recipe</li>
+</ol>
+<pre class="syntax-highlight plaintext"><code>    &lt;audit_entries&gt;
+    &lt;audit_entry&gt;
+        &lt;detail_size&gt;211&lt;/detail_size&gt;
+        &lt;updated_at&gt;2012/10/02 00:57:41 +0000&lt;/updated_at&gt;
+        &lt;actions&gt;
+          &lt;action rel="append"/&gt;
+        &lt;/actions&gt;
+        &lt;user_email&gt;&lt;/user_email&gt;
+        &lt;summary&gt;Resize array by (+1)&lt;/summary&gt;
+        &lt;links&gt;
+          &lt;link href="/api/audit_entries/77767394001" rel="self"/&gt;
+          &lt;link href="/api/server_arrays/210825001" rel="auditee"/&gt;
+          &lt;link href="/api/audit_entries/77767394001/detail" rel="detail"/&gt;
+        &lt;/links&gt;
+      &lt;/audit_entry&gt;
+      &lt;audit_entry&gt;
+        &lt;detail_size&gt;26&lt;/detail_size&gt;
+        &lt;updated_at&gt;2012/10/02 01:02:11 +0000&lt;/updated_at&gt;
+        &lt;actions&gt;
+          &lt;action rel="append"/&gt;
+        &lt;/actions&gt;
+        &lt;user_email&gt;&lt;/user_email&gt;
+        &lt;summary&gt;Failed to launch&lt;/summary&gt;
+        &lt;links&gt;
+          &lt;link href="/api/audit_entries/77768513001" rel="self"/&gt;
+          &lt;link href="/api/server_arrays/210825001" rel="auditee"/&gt;
+          &lt;link href="/api/audit_entries/77768513001/detail" rel="detail"/&gt;
+        &lt;/links&gt;
+      &lt;/audit_entry&gt;
+
+      &lt;audit_entry&gt;
+        &lt;detail_size&gt;7455&lt;/detail_size&gt;
+        &lt;updated_at&gt;2012/10/02 01:09:03 +0000&lt;/updated_at&gt;
+        &lt;actions&gt;
+          &lt;action rel="append"/&gt;
+        &lt;/actions&gt;
+        &lt;user_email&gt;&lt;/user_email&gt;
+        &lt;summary&gt;completed: lb::do_attach_all&lt;/summary&gt;
+        &lt;links&gt;
+          &lt;link href="/api/audit_entries/77770317001" rel="self"/&gt;
+          &lt;link href="/api/clouds/232/instances/91GK4VDL5DOEA" rel="auditee"/&gt;
+          &lt;link href="/api/audit_entries/77770317001/detail" rel="detail"/&gt;
+        &lt;/links&gt;
+      &lt;/audit_entry&gt;
+    &lt;/audit_entries&gt;
+</code></pre>
+
+<h4 id="supplemental">Supplemental</h4>
+
+<p>With the script above and basic knowledge of the shell you can create several helpful commands. For example, if the script above is AuditList:</p>
+<pre class="syntax-highlight plaintext"><code>    $ ./AuditList | grep -i "failed to launch" | wc -l # Number of servers that failed to launch in October
+</code></pre>
+
+<p><strong>Tip</strong> : If you want to check the audit entry summary for several different patterns, you are better off saving the output to a file then running <q>grep</q> and <q>wc</q> in a pipeline to get various numbers. This will only tax API resources one time. For example:</p>
+<pre class="syntax-highlight plaintext"><code>    $ ./AuditList | grep summary &gt; AuditList.out # API call for audit entries performed one time
+    $ grep -i fail AuditList.out | wc -l # How many failures?
+</code></pre>
+<pre class="syntax-highlight plaintext"><code>    $ grep terminated AuditList.out | wc -l # How many instances have been terminated?
+</code></pre>
+
+<h3 id="list-audit-entries-powershell">PowerShell</h3>
+
+<p><strong>Prerequisite</strong> : Example assumes you have previously <a href="/api/api_1.5_examples/authentication.html">authenticated</a> and your session cookie for subsequent requests is in &#39;cookieContainer&#39;.</p>
+
+<h4 id="example-call">Example Call</h4>
+<pre class="syntax-highlight plaintext"><code>    #get cookie container from authentication $cookieContainer
+    $limit = "250"
+    $start_date = "2013/02/01 00:00:00 %2B0000"
+    $end_date = "2013/02/21 00:00:00 %2B0000"
+    $auditEntryRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/audit_entries.xml?limit=$limit&amp;start_date=$start_date&amp;end_date=$end_date")
+    $auditEntryRequest.Method = "GET"
+    $auditEntryRequest.CookieContainer = $cookieContainer
+    $auditEntryRequest.Headers.Add("X_API_VERSION", "1.5");
+    [System.Net.WebResponse] $auditEntryResponse = $auditEntryRequest.GetResponse()
+    $auditEntryResponseStream = $auditEntryResponse.GetResponseStream()
+    $auditEntryResponseStreamReader = New-Object System.IO.StreamReader -argumentList $auditEntryResponseStream
+    [string]$auditEntryResponseString = $auditEntryResponseStreamReader.ReadToEnd()
+    write-host $auditEntryResponseString
+</code></pre>
+
+<h4 id="sample-output">Sample Output</h4>
+
+<p>See http/curl output.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

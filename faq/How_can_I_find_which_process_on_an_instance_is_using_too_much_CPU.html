@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>How can I find which process on an instance is using too much CPU?</title><meta content="The RightScale monitoring system shows that there are high CPU events but it is not being caused by one of the processes that is actually being monitored such as httpd or mysqld." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="faq faq_How_can_I_find_which_process_on_an_instance_is_using_too_much_CPU" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">RightScale General FAQs</a></p><div class="page-header"><h1>How can I find which process on an instance is using too much CPU?</h1></div><div class="main-content"><h2 id="background-information">Background Information</h2>
+
+<p>The RightScale monitoring system shows that there are high CPU events but it is not being caused by one of the processes that is actually being monitored such as httpd or mysqld. How can I identify which process is causing the problem? This is easy enough to do if the instance is still running by running top, but what if the instance terminates because it is part of an autoscaling array or it is not accessible for some other reason? I need something like this for debugging purposes.</p>
+
+<hr>
+
+<h2 id="answer">Answer</h2>
+
+<p>One way of doing this is to install a program on the instance itself that sends information on high process use to <code>/var/log/messages</code>. Since this is available from the Dashboard, even after the instance terminates, you can look to see what high cpu procesess were running. The following script is very simple and can be expanded. It wakes up every minute and checks the process list and any process that is using over 40% CPU will be logged in <code>/var/log/messages</code>. You can modify the sleep time and cpu threshold by modifying the script.</p>
+
+<p>You will want to install this as a boot script on your instances. If you want to test it (you probably should) then use the included C program at the end. You can compile and run it and it will stress the CPU. This will allow you to run it on an instance and see that messages are getting logged. You will also be able to see the monitoring graphs at work.</p>
+
+<p>Install the following script as an attachment to your boot script. You can create a text file and upload it. You can edit the attachment directly in the Dashboard as well if you need to modify the script:</p>
+
+<h3 id="answer-attachment-to-script--procwarn-txt--">ATTACHMENT TO SCRIPT (procwarn.txt):</h3>
+<pre class="syntax-highlight shell"><code>  <span class="c">#! /bin/bash</span>
+  <span class="k">while </span><span class="nb">true
+  </span><span class="k">do
+   </span><span class="nv">STRING</span><span class="o">=</span><span class="sb">`</span>ps -e -o <span class="nv">pcpu</span><span class="o">=</span> -o <span class="nv">comm</span><span class="o">=</span> | sort -k1 -n -r | more | head -1<span class="sb">`</span>
+   <span class="nv">CPU</span><span class="o">=</span><span class="sb">`</span>ps -e -o <span class="nv">pcpu</span><span class="o">=</span> -o <span class="nv">comm</span><span class="o">=</span> | sort -k1 -n -r | more | head -1 | awk <span class="s1">'{ print $1 }'</span><span class="sb">`</span>
+   <span class="nv">CPU</span><span class="o">=</span><span class="k">${</span><span class="nv">CPU</span><span class="p">%%.*</span><span class="k">}</span>
+   <span class="k">if</span> <span class="o">[</span><span class="nv">$CPU</span> -gt 40]
+   <span class="k">then
+          </span>logger -t ProcessWarning <span class="nv">$STRING</span>
+   <span class="k">fi
+   </span>sleep 60
+  <span class="k">done</span>
+</code></pre>
+
+<h3 id="answer-boot-script-">BOOT SCRIPT:</h3>
+<pre class="syntax-highlight shell"><code>  <span class="c">#! /bin/bash</span>
+  cp <span class="nv">$RS_ATTACH_DIR</span>/procwarn.txt /root/procwarn
+
+  chmod 700 /root/procwarn
+  /root/procwarn &amp;
+</code></pre>
+
+<p>When this script runs, it installs the attachment script (procwarn.txt) as <code>/root/procwarn</code> and runs it. This will create a process that wakes up every minute and checks for any processes consuming more than 40% CPU and then logs it to <code>/var/log/messages</code>. It only prints the <q>top</q> process. Not all of them. It is used for identifying the single process consuming the most CPU.</p>
+
+<p>To test, you can SSH into your instance and install and compile the following C program on your instance:</p>
+<pre class="syntax-highlight plaintext"><code>  vi test.c
+
+
+  int main(){while (1);}
+
+
+  gcc test.c
+
+
+  ./a.out &amp;
+</code></pre>
+
+<p>You will now have an a.out process running that consumes enough CPU to trigger the warning. You can check your server instance in the Dashboard <q>logs</q> tab to see the process getting thrown.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

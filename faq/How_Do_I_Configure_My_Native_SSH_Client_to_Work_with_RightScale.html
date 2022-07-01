@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>How do I configure my native SSH client to work with RightScale?</title><meta content="In order to start an SSH session, RightScale must determine which terminal emulator to use and which SSH client to use. This choice is influenced by which operating system you are running and by the applications you have installed." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="faq faq_How_Do_I_Configure_My_Native_SSH_Client_to_Work_with_RightScale" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">RightScale General FAQs</a></p><div class="page-header"><h1>How do I configure my native SSH client to work with RightScale?</h1></div><div class="main-content"><h2 id="background-information">Background Information</h2>
+
+<p>When you initiate an SSH connection to a running server, the RightScale Dashboard lets you use a Java Web Start application, a Java Applet, or ssh:// protocol links for launching your SSH session. You can specify your SSH client preference under <strong>Settings -&gt; User Settings -&gt; SSH</strong>.</p>
+
+<p>Before you can SSH into a machine, you must first ensure that port 22 is open for the security group that the server belongs to.</p>
+
+<p><strong>Note</strong>: If you are using the Java Web Start Application or Java Applet for launching your SSH session from RightScale you will need Java installed (5.0 Update 9 or later). You can verify whether Java is enabled for your browser <a nocheck href="https://www.java.com/en/download/installed.jsp">here</a>, and download Java (if needed) <a nocheck href="http://java.com/en/download/index.jsp">here</a>.</p>
+
+<hr>
+
+<h2 id="answer">Answer</h2>
+
+<p>In order to start an SSH session, RightScale must determine which terminal emulator to use and which SSH client to use. This choice is influenced by which operating system you are running and by the applications you have installed.</p>
+
+<p>If you are running Microsoft Windows, a terminal emulator program is not always needed; GUI SSH clients such as PuTTY provide their own terminal emulator functionality. However, Windows does not ship with an SSH client pre-installed. Therefore, you will need to install one before using SSH:</p>
+
+<ul>
+<li><a href="http://www.chiark.greenend.org.uk/%7Esgtatham/putty/download.html">Dowload PuTTY installer</a></li>
+<li><a href="https://github.com/PowerShell/Win32-OpenSSH/releases/latest/">Download OpenSSH for Windows</a></li>
+</ul>
+
+<p>Mac OS X and Linux both ship with OpenSSH, so an SSH client is always available. However, a separate terminal program is required under both operating systems, and the choice of which terminal program to use is not always clear.</p>
+
+<p>The RightScale SSH launcher currently uses a hard-coded list of terminal programs and clients for each OS. It scans through the list in order and launches the first available client. At this time, there is no way for end users to influence the order in which we select the client application to use.</p>
+
+<h3 id="answer-mac-os-x">Mac OS X</h3>
+
+<table><thead>
+<tr>
+<th>SSH Client</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>OpenSSH + iTerm</td>
+<td>How do I set iTerm2 as the handler for ssh:// links?<br>1. Create a new profile called <q>ssh</q>. In the General tab, select the Command: button and enter $$ as the command.<br>2. In Preferences-&gt;Profiles-&gt;General, select <q>ssh</q> for <q>Select URL Schemes....</q></td>
+</tr>
+<tr>
+<td>OpenSSH + Terminal.app</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="answer-linux-unix">Linux/Unix</h3>
+
+<table><thead>
+<tr>
+<th>SSH Client</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>OpenSSH + GNOME Terminal</td>
+<td></td>
+</tr>
+<tr>
+<td>OpenSSH + Konsole</td>
+<td></td>
+</tr>
+<tr>
+<td>OpenSSH + Xterm</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="answer-windows">Windows</h3>
+
+<table><thead>
+<tr>
+<th>SSH Client</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>PuTTY</td>
+<td>Must be installed to <q>C:\Program Files (x86)\PuTTY\</q></td>
+</tr>
+<tr>
+<td>Windows Command Prompt + OpenSSH</td>
+<td>Should be installed to a folder named <q>OpenSSH</q> under Program Files.</td>
+</tr>
+<tr>
+<td>Windows Command Prompt + Generic SSH client</td>
+<td>If a program named SSH.exe is found anywhere in your search path, the launcher prompts you to invoke it. The client&#39;s command-line interface should be OpenSSH-compatible.</td>
+</tr>
+</tbody></table>
+
+<h2 id="what-to-do-if-you-receive-permission-denied-when-clicking-on-ssh-links-">What to do if you receive permission denied when clicking on SSH links?</h2>
+
+<p>If you choose to use ssh:// protocol links to ssh into your servers, you will need to make sure your private key is added to your authentication agent.&nbsp; OpenSSH in particular defaults to id_rsa, which may not be the right key to use to ssh into your Servers.</p>
+
+<p>To resolve this issue, download your private key from RightScale&#39;s Cloud Management dashboard under <strong>Settings -&gt; User Settings -&gt; SSH</strong>.</p>
+
+<p>Then on the command prompt, run the ssh-add command with the recently downloaded private key file name. This will add your private key identity to the authentication agent.</p>
+
+<p><strong>Your Feedback Is Important</strong></p>
+
+<p>If you use an SSH client that is not listed above, or if you find that the launcher invokes a program other than the one you prefer, please let us know via the public feedback tracker at <a href="http://feedback.rightscale.com">http://feedback.rightscale.com</a>. Simply create an <q>idea</q> for your preferred SSH client, and vote for it.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

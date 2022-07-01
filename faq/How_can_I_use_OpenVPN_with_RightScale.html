@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>How can I use OpenVPN with RightScale?</title><meta content="This FAQ covers how to create a RightScript that will install OpenVPN client and server. There are a number of ways to use OpenVPN." name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="faq faq_How_can_I_use_OpenVPN_with_RightScale" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/faq/"><h4 class="list-group-heading"><span>Frequently Asked Questions</span></h4></a><a class="list-group-item" href="/faq/">General</a><a class="list-group-item" href="/faq/clouds/aws">AWS</a><a class="list-group-item" href="/faq/clouds/google">Google Cloud Platform</a><a class="list-group-item" href="/faq/clouds/azure">Microsoft Azure</a><a class="list-group-item" href="/faq/clouds/softlayer">SoftLayer</a><a class="list-group-item" href="/faq/clouds/vmware">VMware</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./">RightScale General FAQs</a></p><div class="page-header"><h1>How can I use OpenVPN with RightScale?</h1></div><div class="main-content"><p>This FAQ covers how to create a RightScript that will install OpenVPN client and server. There are a number of ways to use OpenVPN. This specific example covers one possible scenario but there are many others. You can modify the script to suite your needs.</p>
+
+<h2 id="problem">Problem</h2>
+
+<ol>
+<li>A credit card payment processing gateway identifies client connections by an IP address that is qualified through a whitelist process. Therefore we must have a set of static IP addresses (Elastic IP&#39;s).</li>
+<li>Application servers on scalable arrays cannot use static IP addresses on Amazon EC2 because they are in short supply. Rather, they use dynamic IP&#39;s. Unassigned EIPs are expensive (Amazon charges a premium for them) and while it might be possible to have 5-10 whitelisted EIP&#39;s it is not realistic to have dozens or hundreds.</li>
+<li>When a user submits a checkout they need send credit card information to a payment gateway and it needs to appear to be coming from one of the whitelisted IP&#39;s.</li>
+<li>All traffic must be https since this is a secure website.</li>
+</ol>
+
+<h2 id="solution">Solution</h2>
+
+<p>Install an Open VPN client on each app server and an Open VPN server with EIP acting as a NAT gateway. A static route on each client routes traffic to payment gateway through the VPN tunnel (tun0). Other traffic is routed normally through eth0. The VPN insures that traffic from the client to the payment gateway is routed back to the client. To the payment gateway it looks like all traffic is coming from a single public whitelisted IP address.</p>
+
+<p><img src="/img/faq-VPN.gif" alt="faq-VPN.gif" width="600" height="800" /></p>
+
+<h3 id="solution-how-to-set-it-up">How to Set it Up</h3>
+
+<ol>
+<li><p>Create the following rightscript called Install OpenVPN.</p>
+<pre class="syntax-highlight shell"><code><span class="c">#!/bin/bash</span>
+yum -y install openvpn
+cp <span class="nv">$RS_ATTACH_DIR</span>/keys.tgz /root/keys.tgz
+<span class="nb">cd</span> /root
+tar -zxf /root/keys.tgz
+<span class="k">if</span> <span class="o">[</span><span class="nv">$VPN_TYPE</span> <span class="o">=</span> <span class="s2">"server"</span><span class="o">]</span>; <span class="k">then
+</span><span class="nb">echo</span> <span class="s2">"VPN Server setup"</span>
+iptables --table nat --append POSTROUTING -s 172.31.0.0/12 --out-interface eth0 -j MASQUERADE
+<span class="nb">echo </span>1 &gt; /proc/sys/net/ipv4/ip_forward
+service iptables save
+service iptables restart
+cat &gt; /etc/openvpn/server.conf <span class="sh">&lt;&lt; EOF
+dev tun
+proto udp
+port 1194
+server 172.31.0.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+key /root/server.key
+ca /root/ca.crt
+cert /root/server.crt
+keepalive 10 60
+inactive 600
+persist-tun
+duplicate-cn
+dh /root/dh1024.pem
+EOF
+</span><span class="k">fi
+if</span> <span class="o">[</span><span class="nv">$VPN_TYPE</span> <span class="o">=</span> <span class="s2">"client"</span><span class="o">]</span>; <span class="k">then
+</span><span class="nb">echo</span> <span class="s2">"VPN Client setup"</span>
+cat &gt; /etc/openvpn/client.conf <span class="sh">&lt;&lt; EOF
+client
+dev tun
+proto udp
+port 1194
+resolv-retry infinite
+nobind
+remote $VPN_SERVER_IP
+keepalive 10 60
+inactive 600
+persist-tun
+persist-key
+dh /root/dh1024.pem
+ca /root/ca.crt
+cert /root/client.crt
+key /root/client.key
+EOF
+</span><span class="k">fi
+</span><span class="nb">echo</span> <span class="s2">"Starting openvpn"</span>
+service openvpn start
+</code></pre>
+
+<p>Notice there are two inputs that are required - click the <q>identify</q> button to identify them. The $VPN_TYPE indicates if this instance will be a client or a server. The VPN_SERVER_IP is the actual EIP of the VPN server instance.</p></li>
+<li><p>Certificates need to be generated for the client and the server.</p></li>
+</ol>
+
+<p><a href="http://openvpn.net/index.php/open-source/documentation/howto.html#pki">http://openvpn.net/index.php/open-source/documentation/howto.html#pki</a></p>
+
+<p>You can ssh into a running instance you already have and run the commands after doing a yum install openvpn.&nbsp;&nbsp; You can uninstall openvpn when you are done.&nbsp;&nbsp; You can also use a linux desktop or server with openvpn installed on it.&nbsp; The keys generated need to be generated for client and server and put into a tarball (keys.tgz).&nbsp; In order to support scaling all clients and servers use the same keys and certs.&nbsp; This is secure because the servers are not ever leaving the cloud (they aren&#39;t laptops wandering around the city). You can use the secure copy (scp) command from an SSH session to copy it your local machine and then use the <q>attachments tab</q> of the rightscale script editor to upload it and attach it to the script.</p>
+
+<ol>
+<li><p>Add the script to your existing server templates.&nbsp; You may want to create a new server template for the vpn server since it doesn&#39;t need much on it (all it really needs is this script - and possibly the monitoring tools and syslogging).&nbsp; But you can put whatever you want on it.</p></li>
+<li><p>Open port 1194 for UDP&nbsp;traffic in your security group.</p></li>
+<li><p>Start the vpn server instance.&nbsp;&nbsp; Be sure to set the VPN_TYPE as: server</p></li>
+<li><p>When the server is running start the vpn client instance</p></li>
+<li><p>To test the vpn from one of the client app server instance you can ssh in: <code>ping 172.31.0.1</code>
+If you get a response the vpn is working.
+You can also test seting up a route. Run lynx from the instance and navigate to whatismyipaddress.com. Sscroll down and note your IP - it should be the public ip of the instance - this proves that traffic is routing to eth0 - that your instance is talking directly to the internet. To add a route through the vpn you use the command <code>route add -host whatismyipaddress.com dev tun0</code>
+Rerun the lynx browser and go to whatismyipaddress.com.&nbsp; You can scroll down and see that it thinks your IP is the IP of your NAT gateway - not the IP of your client browser.It should be the EIP of your server instances.&nbsp; The client is taking through the vpn tun0 adapter to the server.</p></li>
+<li><p>You will want to add the route to the payment gateway as a boot script on your app server (clients).</p></li>
+</ol>
+
+<p><strong>NOTES:</strong> The clients are automatically assigned IP addresses by the VPN server. They will keep their IP addresses. The VPN server saves each client IP in ipp.txt (ifconfig-pool-persist ipp.txt directive handles this). You can setup multiple VPN servers as well, for redundancy and can even do round robin for load balancing.</p>
+
+<p>If you are having issues connecting beyond the OpenVPN gateway, and are unable to communicate with servers within the private network, you may need to log into the AWS console and un-check <q>Change Source / Dest Check</q> as it looks like it may prevent routing between instances. The following screenshot shows what it looks like in a right-click context menu, within EC2 Instances:</p>
+
+<p><img src="/img/faq-openvpn.png" alt="faq-openvpn.png" width="313" height="493" /></p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

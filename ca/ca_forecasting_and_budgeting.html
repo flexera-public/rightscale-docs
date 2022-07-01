@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Forecasting and Budgeting</title><meta name="description" /><meta content="initial-scale=1" name="viewport" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../js/main.js"></script></head><body class="ca ca_ca_forecasting_and_budgeting" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="about.html"><h4 class="list-group-heading"><img src="../img/product-cloud-analytics.svg" /><span>Optima</span></h4></a><a class="list-group-item" href="legacy.html">Legacy Feature Documentation</a><a class="list-group-item" href="https://helpnet.flexerasoftware.com/Optima">Current Feature Documentation</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../">Flexera CMP Docs</a> &#x2F; <a href="./"></a></p><div class="page-header"><h1>Forecasting and Budgeting</h1></div><div class="main-content"><div class="alert alert-danger" role="alert"><strong>Warning</strong><p>The features described on this page will soon be deprecated. Refer to the <a href="https://helpnet.flexerasoftware.com/Optima">latest documentation</a> for information on the latest features.</p>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>RightScale Optima lets you forecast your future cloud compute costs with Scenario Builder. You can forecast costs for existing workloads or for new workloads. You can also do what-if analyses to determine how costs will change if you purchase <a href="/ca/ca_managing_reserved_instances.html">Reserved Instances</a>, adjust instance types, or run a workload in a different cloud.</p>
+
+<p>You can also use the forecasts created in Scenario Builder to define your cloud budgets and determine where to set your Budget Alerts. Scenarios are private to you, so other users will not see your forecasts.</p>
+
+<h2 id="forecasting-costs-for-a-new-workload">Forecasting Costs for a New Workload</h2>
+
+<p>If you want to forecast costs for a brand new workload, or one that is not currently running in the cloud, you can create a blank scenario and specify the necessary infrastructure.</p>
+
+<ol>
+<li><p>From the navigation bar in Optima select <strong>Scenario Builder</strong>.</p></li>
+<li><p>Click <strong>Create Scenario</strong> and select <strong>Blank scenario</strong> from the dropdown.</p>
+
+<p><img src="/img/ca_fb_0.png" alt="ca_fb_0.png" width="727" height="305" /></p></li>
+<li><p>Give your scenario a name and click <strong>Add instances to scenario</strong>.</p>
+
+<p><img src="/img/ca_fb_1.png" alt="ca_fb_1.png" width="727" height="527" /></p></li>
+<li><p>In the <strong>Add instances</strong> page, select the clouds you want to consider and adjust the sliders for your CPU, memory, and HDD requirements. The list will update to show you instance types that match your requirements along with the hourly price.</p>
+
+<p><img src="/img/ca_fb_2.png" alt="ca_fb_2.png" width="725" height="421" /></p></li>
+<li><p>Select an instance type. A panel appears allowing you to specify the region, datacenter, and platform, monthly runtime schedule, and the number of instances.</p>
+
+<p><img src="/img/ca_fb_3.png" alt="ca_fb_3.png" width="727" height="357" /></p></li>
+<li><p>RightScale displays the monthly cost based on your specific criteria, including the Google sustained-use discount if you plan to run a Google instance continuously. Click <strong>Create instances</strong> to add the specified instance(s) to your scenario.</p>
+
+<p><img src="/img/ca_fb_4.png" alt="ca_fb_4.png" width="317" height="435" /></p></li>
+<li><p>Scenario Builder shows you a 3-year cost projection. Notice that the monthly costs may vary slightly depending on the number of days in a particular month.</p>
+
+<p><img src="/img/ca_fb_5.png" alt="ca_fb_5.png" width="727" height="285" /></p></li>
+<li><p>Repeat the process for additional instance types.</p>
+
+<p><img src="/img/ca_fb_6.png" alt="ca_fb_6.png" width="727" height="362" /></p></li>
+<li><p>Next, if you expect the application load to change over time, you can add patterns to forecast costs of any expected growth (or decline). For example, you might plan for the load on an application to grow steadily or to follow a seasonal pattern. See <a href="/ca/ca_forecasting_and_budgeting.html#adding-growth-patterns-to-your-forecast">Adding Growth Patterns to your Forecast</a>. For applications running in AWS, you can also forecast potential savings from purchasing Reserved Instances. See <a href="/ca/ca_forecasting_and_budgeting.html#determining-cost-savings-from-purchasing-reserved-instances">Determining Cost Savings from Purchasing Reserved Instances</a>.</p></li>
+</ol>
+
+<h2 id="forecasting-costs-for-an-existing-workload">Forecasting Costs for an Existing Workload</h2>
+
+<p>If you want to forecast costs for a workload that is already running in the cloud, you can start by using Instant Analyzer filters to select the particular workload.</p>
+
+<ol>
+<li><p>From the navigation bar in Optima select <strong>Analyze</strong>.</p></li>
+<li><p>On the Instant Analyzer, use the Deployments filter to drill in on the application for which you want to forecast costs*<em>.</em>*</p>
+
+<p><img src="/img/ca_fb_7.png" alt="ca_fb_7.png" width="727" height="352" /></p>
+
+<p><img src="/img/ca_fb_8.png" alt="ca_fb_8.png" width="354" height="384" /></p></li>
+<li><p>Click <strong>Create</strong> and select <strong>Scenario</strong> to create a forecast based on the current filters you’ve selected on the Instant Analyzer.</p>
+
+<p><img src="/img/ca_fb_9.png" alt="ca_fb_9.png" width="347" height="148" /></p></li>
+<li><p>A new Scenario is created showing costs over the prior 12 months for the selected application. The Scenario also includes a 3-year cost forecast based on the current number of running instances.</p>
+
+<p><img src="/img/ca_fb_10.png" alt="ca_fb_10.png" width="727" height="290" /></p></li>
+<li><p>Give your scenario a name and, if you want to add more baseline instances that will be included for the entire 3-year forecast, click <strong>Add instances to scenario</strong>.</p></li>
+<li><p>If you expect the application load to change over time, you can add patterns to forecast costs of any expected growth (or decline). For example, you might plan for the load on an application to grow steadily or to follow a seasonal pattern. See <a href="/ca/ca_forecasting_and_budgeting.html#adding-growth-patterns-to-your-forecast">Adding Growth Patterns to your Forecast</a>. For applications running in AWS, you can also forecast potential savings from purchasing Reserved Instances. See <a href="/ca/ca_forecasting_and_budgeting.html#determining-cost-savings-from-purchasing-reserved-instances">Determining Cost Savings from Purchasing Reserved Instances</a>.</p></li>
+</ol>
+
+<h2 id="forecasting-costs-for-a-group-of--workloads">Forecasting Costs for a Group of  Workloads</h2>
+
+<p>If you want to forecast costs for a group of workloads that are already running in the cloud, you can start by using Instant Analyzer filters to select the group of workloads.</p>
+
+<ol>
+<li><p>From the navigation bar in Optima select <strong>Analyze</strong>.</p></li>
+<li><p>On the Instant Analyzer, use the filters to drill in on the group applications for which you want to forecast costs**. You can select Deployments by name, or use other filters, such as Tags or Cloud to identify a group of workloads.</p></li>
+<li><p>Click <strong>Create</strong> and select <strong>Scenario</strong> to create a forecast based on the current filters you’ve selected on the Instant Analyzer.</p>
+
+<p><img src="/img/ca_fb_11.png" alt="ca_fb_11.png" width="347" height="148" /></p></li>
+<li><p>A new <strong>Scenario</strong> is created showing costs over the prior 12 months for the selected filters. The scenario also includes a 3-year cost forecast based on the current number of running instances within that filtered group of workloads.</p></li>
+<li><p>Give your scenario a name and, if you want to add more baseline instances that will be included for the entire 3-year forecast, click <strong>Add instances to scenario</strong>.</p></li>
+<li><p>If you expect the application load to change over time, you can add patterns to forecast costs of any expected growth (or decline). For example, you might plan for the load on an application to grow steadily or to follow a seasonal pattern. See Adding Growth Patterns to your Forecast. For applications running in AWS, you can also forecast potential savings from purchasing <a href="/ca/ca_managing_reserved_instances.html">Reserved Instances</a>. See <a href="/ca/ca_forecasting_and_budgeting.html#determining-cost-savings-from-purchasing-reserved-instances">Determining Cost Savings from Purchasing Reserved Instances</a>.</p></li>
+</ol>
+
+<h2 id="adding-growth-patterns-to-your-forecast">Adding Growth Patterns to your Forecast</h2>
+
+<p>When forecasting costs, you will need to account for any expected growth or decline in the load on your application. Patterns can be added to your Scenarios in Optima to model these changing needs for infrastructure. Examples include:</p>
+
+<ul>
+<li><p>a software product that will have a growing number of users over time</p></li>
+<li><p>a website or e-commerce application that will experience higher traffic during holiday seasons.</p></li>
+<li><p>a mobile application or game that is may grow exponentially.</p></li>
+<li><p>a marketing campaign that will see an initial traffic spike followed by a slow decline in traffic over time.</p></li>
+</ul>
+
+<ol>
+<li><p>From the navigation bar, select <strong>Scenario Builder</strong>. Open a saved scenario, or create a new one.</p>
+
+<p><img src="/img/ca_fb_12.png" alt="ca_fb_12.png" width="727" height="336" /></p></li>
+<li><p>Scroll to the <strong>Instances</strong> list below the graph and click <strong>Patterns</strong> for any instance type.</p>
+
+<p><img src="/img/ca_fb_13.png" alt="ca_fb_13.png" width="727" height="132" /></p></li>
+<li><p>Select an existing Pattern or <a href="/ca/ca_forecasting_and_budgeting.html#creating-new-growth-patterns">create a new one</a>.</p>
+
+<p><img src="/img/ca_fb_14.png" alt="ca_fb_14.png" width="219" height="279" /></p></li>
+<li><p>The pattern you select will be applied to the 3-year cost forecast. In the example below there is an increase of 10% each month. You can see the impact of the growth on the future year costs.</p>
+
+<p><img src="/img/ca_fb_15.png" alt="ca_fb_15.png" width="727" height="294" /></p></li>
+<li><p>You can add multiple patterns to each instance type. For example, you can apply one pattern with a consistent growth rate of 1% a month and then apply a second pattern with a seasonal spike.</p>
+
+<p><img src="/img/ca_fb_16.png" alt="ca_fb_16.png" width="727" height="125" /></p>
+
+<p><img src="/img/ca_fb_17.png" alt="ca_fb_17.png" width="727" height="291" /></p></li>
+<li><p>Keep in mind that Optima will calculate the number of instances required by using the baseline instances. In the example below, there is a 2% monthly growth rate. Once an instance is added, the number of instances (and hence the costs) stays flat for several months until the load has grown enough to utilize that most recently added instance. Only then will another instance be added to the cost forecast. As a result, you may see stepped growth patterns as shown below.</p>
+
+<p><img src="/img/ca_fb_18.png" alt="ca_fb_18.png" width="727" height="331" /></p></li>
+</ol>
+
+<h2 id="creating-new-growth-patterns">Creating New Growth Patterns</h2>
+
+<p>You can create and save <strong>patterns</strong> in Optima and then use those patterns in multiple scenarios.</p>
+
+<ol>
+<li><p>From Scenario Builder, click <strong>Manage Patterns</strong> or open any scenario and click <strong>Patterns</strong> and then click <strong>Create new Scenario</strong>. Give your pattern a name.</p></li>
+<li><p>Choose whether to create a temporary pattern (that will apply only during the months and years you select) or a permanent pattern that persists.</p></li>
+<li><p>Specify the years and months when the pattern applies. You can also create multiple overlapping patterns to model different growth rates during different years. For example, create one pattern with a 5% growth rate that only applies to year 1 and then create a separate pattern with a 1% growth rate for years 2 and 3. Apply both patterns to get a growth rate of 5% for one year and then 2% for the next two years.</p>
+
+<p><img src="/img/ca_fb_19.png" alt="ca_fb_19.png" width="682" height="588" /></p></li>
+<li><p>Specify the % or number of instances to increase or decrease each month. You can also set a particular month or set of months to a specific value. For example, you can forecast for a set number of instances to support higher load during a product launch.</p>
+
+<p><img src="/img/ca_fb_20.png" alt="ca_fb_20.png" width="668" height="204" /></p></li>
+<li><p>Apply patterns to additional instance types as needed. For example, you might apply one pattern to instances running application servers and a different pattern to your database instances.</p>
+
+<p><img src="/img/ca_fb_21.png" alt="ca_fb_21.png" width="727" height="216" /></p></li>
+<li><p>If you change a pattern, all your scenarios that use that pattern will be updated.</p></li>
+</ol>
+
+<h2 id="determining-cost-savings-from-purchasing-reserved-instances">Determining Cost Savings from Purchasing Reserved Instances</h2>
+
+<p>For workloads running in AWS, you can often save money by purchasing <a href="/ca/ca_managing_reserved_instances.html">Reserved Instances</a>. Scenario Builder allows you to forecast the potential savings.</p>
+
+<ol>
+<li><p>Open any scenario and scroll to the Instances list. Find an instance type in AWS and click <strong>Reserved Instances</strong>.</p>
+
+<p><img src="/img/ca_fb_22.png" alt="ca_fb_22.png" width="727" height="122" /></p></li>
+<li><p>Select the type of Reserved Instance to purchase. You’ll see the total % savings for each option as well as the breakeven date assuming that the instances are running continuously (24x7). Click on a purchase option to see the upfront cost.</p>
+
+<p><img src="/img/ca_fb_23.png" alt="ca_fb_23.png" width="608" height="570" /></p></li>
+<li><p>Optima provides a default quantity based on the current number of instances of this type that are running, but you can adjust the quantity.<img src="/img/ca_fb_24.png" alt="ca_fb_24.png" width="727" height="120" /></p></li>
+<li><p>Click <strong>Add Reserved</strong> Instance to add the selected RI option to your forecast. Your 3-year forecast costs will now take into account the savings from the Reserved Instances. If you selected 1-year RIs, you’ll see savings just in year 1 of the forecast. If you select 3-year RIs, you’ll see savings for all 3 years.</p>
+
+<p><img src="/img/ca_fb_25.png" alt="ca_fb_25.png" width="727" height="42" /></p>
+
+<p><img src="/img/ca_fb_26.png" alt="ca_fb_26.png" width="727" height="49" /></p></li>
+</ol>
+
+<h2 id="determining-costs-of-running-on-a-different-cloud">Determining Costs of Running on a Different Cloud</h2>
+
+<p>Many cloud users want to perform what-if analyses to calculate the cost of running a workload on a different cloud.</p>
+
+<ol>
+<li><p>On the Instant Analyzer, filter by Deployments to select a workload running on a particular cloud.</p></li>
+<li><p>Click <strong>Create</strong> and select <strong>Scenario</strong> and give the scenario a name. Make sure to include the current cloud in the name. The scenario will show you the 3-year cost based on the current run rate.</p>
+
+<p><img src="/img/ca_fb_27.png" alt="ca_fb_27.png" width="727" height="382" /></p></li>
+<li><p>Return to the Instant Analyzer, and with the same filters in place. Click <strong>Create</strong> and select <strong>Scenario</strong> and give the scenario a new name that includes the cloud you want to compare.</p></li>
+<li><p>Scroll to the <strong>Instances</strong> list below the graph. For each instance type, click the <strong>Edit</strong> (pencil) icon to the right of the Instance type.</p>
+
+<p><img src="/img/ca_fb_28.png" alt="ca_fb_28.png" width="727" height="94" /></p></li>
+<li><p>Select the clouds you want to compare. Use the sliders to find similar size instances on other clouds. There may not be instances that exactly match on different clouds, so you will need to choose the closest option. <img src="/img/ca_fb_29.png" alt="ca_fb_29.png" width="680" height="556" /></p></li>
+<li><p>Select the cloud region for the new cloud and click <strong>Save changes</strong>.</p>
+
+<p><img src="/img/ca_fb_30.png" alt="ca_fb_30.png" width="304" height="207" /></p></li>
+<li><p>Repeat for the remaining instances. Add growth patterns to each cloud if needed. For AWS, you can also add <a href="/ca/ca_managing_reserved_instances.html">Reserved Instances</a>.</p></li>
+<li><p>Compare the 3-year forecast to see the lowest cost cloud. You can use the same technique to compare different regions on the same cloud.</p>
+
+<p><img src="/img/ca_fb_31.png" alt="ca_fb_31.png" width="727" height="382" /></p>
+
+<p><img src="/img/ca_fb_32.png" alt="ca_fb_32.png" width="727" height="377" /></p></li>
+</ol>
+
+<h2 id="reviewing-and-sharing-forecast-details">Reviewing and Sharing Forecast Details</h2>
+
+<p>Once you’ve created a scenario, you can review the details of the forecast and share it with others.</p>
+
+<ol>
+<li><p>Open any scenario and click the Forecast Details tab. You’ll see month by month details of the number of instances and costs.</p>
+
+<p><img src="/img/ca_fb_33.png" alt="ca_fb_33.png" width="727" height="384" /></p></li>
+<li><p>You can copy and paste from the table into a spreadsheet to share the detailed budget with your finance team or managers.</p>
+
+<p><img src="/img/ca_fb_34.png" alt="ca_fb_34.png" width="554" height="154" /></p></li>
+<li><p>Drill down on individual months to get the breakdown of cloud, datacenter, instance types and platform.</p>
+
+<p><img src="/img/ca_fb_35.png" alt="ca_fb_35.png" width="727" height="248" /></p></li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2022 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>
