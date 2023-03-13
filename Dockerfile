@@ -4,7 +4,7 @@ WORKDIR /srv
 
 # Setup Surge (Node.js + surge)
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
+RUN sudo apt-get install -y --force-yes nodejs
 RUN npm install --global surge
 
 # Setup Ruby bundle
