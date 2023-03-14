@@ -64,7 +64,7 @@ jobs:
           else
             echo unknown github ref $GITHUB_REF
           fi
-     
+
       - name: Get Pull Request status
         run: |
           if [ -z "$GITHUB_PULL_REQUEST_STATUS" ]
@@ -88,8 +88,10 @@ jobs:
         run: |
           git config --global user.email "TravisCI"
           git config --global user.name "Automated Deployment"
-      
+
       - name: Script
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Pull Request: $TRAVIS_PULL_REQUEST"
           # Ensure the site builds, otherwise fail the build on PRs
