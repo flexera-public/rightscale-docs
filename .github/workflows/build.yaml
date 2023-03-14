@@ -90,9 +90,6 @@ jobs:
           git config --global user.name "Automated Deployment"
 
       - name: Script
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Pull Request: $TRAVIS_PULL_REQUEST"
           # Ensure the site builds, otherwise fail the build on PRs
@@ -104,3 +101,4 @@ jobs:
           if [[ $CI_NODE_INDEX = "build" && $TRAVIS_PULL_REQUEST == 'false' ]]; then bundle exec rake download_policy_list; bundle exec middleman deploy; fi
         env:
           CI_NODE_INDEX: ${{ matrix.index }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
