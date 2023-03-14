@@ -64,7 +64,7 @@ jobs:
           else
             echo unknown github ref $GITHUB_REF
           fi
-     
+
       - name: Get Pull Request status
         run: |
           if [ -z "$GITHUB_PULL_REQUEST_STATUS" ]
@@ -88,7 +88,7 @@ jobs:
         run: |
           git config --global user.email "TravisCI"
           git config --global user.name "Automated Deployment"
-      
+
       - name: Script
         run: |
           echo "Pull Request: $TRAVIS_PULL_REQUEST"
@@ -101,3 +101,4 @@ jobs:
           if [[ $CI_NODE_INDEX = "build" && $TRAVIS_PULL_REQUEST == 'false' ]]; then bundle exec rake download_policy_list; bundle exec middleman deploy; fi
         env:
           CI_NODE_INDEX: ${{ matrix.index }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
