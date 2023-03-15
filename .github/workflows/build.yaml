@@ -30,10 +30,10 @@ jobs:
         #with:
         #  ssh-private-key: ${{ secrets.GLOBAL_FLEXERA_CI_PRIVATE_SSH_KEY }}
       - name: Checkout so we can get build tags
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-        #  ssh-key: ${{ secrets.GLOBAL_FLEXERA_CI_PRIVATE_SSH_KEY }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           submodules: recursive
       - name: Setup Environment Variables
         env:
@@ -86,7 +86,7 @@ jobs:
 
       - name: Update git config
         run: |
-          git config --global user.email "TravisCI"
+          git config --global user.email "Github Actions"
           git config --global user.name "Automated Deployment"
 
       - name: Script
@@ -101,4 +101,3 @@ jobs:
           if [[ $CI_NODE_INDEX = "build" && $TRAVIS_PULL_REQUEST == 'false' ]]; then bundle exec rake download_policy_list; bundle exec middleman deploy; fi
         env:
           CI_NODE_INDEX: ${{ matrix.index }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
