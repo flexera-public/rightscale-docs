@@ -101,4 +101,4 @@ jobs:
           if [[ $CI_NODE_INDEX = "build" && $TRAVIS_PULL_REQUEST == 'false' ]]; then bundle exec rake download_policy_list; bundle exec middleman deploy; fi
         env:
           CI_NODE_INDEX: ${{ matrix.index }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
