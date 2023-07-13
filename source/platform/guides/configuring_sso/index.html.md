@@ -29,7 +29,7 @@ If your IdP requires manual setup, you can use the values here to describe Right
 | ---------------- | ----------------------------------------------------------------- |
 | Entity ID        | https://login.rightscale.com/login/saml2/metadata                 |
 | ACS URL          | https://login.rightscale.com/login/saml2/consume                  |
-| X509 Certificate | [click to download](/platform/saml/login.rightscale.com-2022.pem)  Fingerprint=*7B:80:9A:F3:A3:8A:DA:31:FA:36:E7:FF:30:A5:5F:B9:25:0D:39:29* |
+| X509 Certificate | [click to download](/platform/saml/login.rightscale.com-2023.pem) Fingerprint=*FB:A0:77:B4:CA:EB:66:31:9F:37:AE:23:E1:42:92:21:A7:9B:48* |
 
 Some IdPs, especially web-based SaaS products, have additional compatibility settings which are less critical but sometimes cause problems if misconfigured:
 
