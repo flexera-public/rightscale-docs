@@ -22,4 +22,5 @@
 # vim tmp files
 .*.sw[nmop]
 
-data/policies.json
+# policies file
+#data/policies.json

@@ -3,6 +3,8 @@ title: Cloud-Init Installation
 description: Using the RightScale-provided cloud-init package in RightLink 10.
 version_number: 10.5.2
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_cloud_init_installation.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_cloud_init_installation.html
   - name: 10.6.2

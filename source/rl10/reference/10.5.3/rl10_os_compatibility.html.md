@@ -3,6 +3,8 @@ title: Operating System Compatibility
 description: Summary of the Linux and Windows operating system compatibility in RightLink 10. Includes links the currently compatible operating system images tested by RightScale.
 version_number: 10.5.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_os_compatibility.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_os_compatibility.html
   - name: 10.6.2

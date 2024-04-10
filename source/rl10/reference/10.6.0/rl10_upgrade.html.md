@@ -3,6 +3,8 @@ title: Upgrade RightLink 10
 description: Check whether a RightLink upgrade is available and perform the upgrade.
 version_number: 10.6.0
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_upgrade.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_upgrade.html
   - name: 10.6.2

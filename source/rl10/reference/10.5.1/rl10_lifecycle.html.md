@@ -3,6 +3,8 @@ title: Lifecycle - Launch, Reboot, Stop-Start
 description: Describes the lifecycle of a server in the context of RightLink 10 including Launch, Reboot, and Stop-Start.
 version_number: 10.5.1
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_lifecycle.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_lifecycle.html
   - name: 10.6.2

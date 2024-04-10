@@ -3,6 +3,8 @@ title: RightLink Files
 description: RightLink 10 is a single statically compiled Go binary. Outside of the executable, there are a couple runtime files and a few support files for managing the service, detailed below.
 version_number: 10.5.1
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_files.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_files.html
   - name: 10.6.2

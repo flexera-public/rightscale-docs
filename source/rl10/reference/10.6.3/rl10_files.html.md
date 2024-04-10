@@ -1,10 +1,10 @@
 ---
 title: RightLink Installation and Configuration Files
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_files.html, rl10/reference/rl10_files.html]
 description: The installation of RightLink 10 consists of a statically compiled Go binary with supporting binaries, scripts, and configuration files. System configuration files are also updated to allow RightLink to function within the operating system.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_files.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_files.html
   - name: 10.6.2

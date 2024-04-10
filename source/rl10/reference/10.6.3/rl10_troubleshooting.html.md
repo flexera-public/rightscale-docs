@@ -1,10 +1,10 @@
 ---
 title: Troubleshooting
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_troubleshooting.html, rl10/reference/rl10_troubleshooting.html]
 description: RightLink 10 Troubleshooting.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_troubleshooting.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_troubleshooting.html
   - name: 10.6.2
@@ -71,7 +71,7 @@ Below is a typical log output file for the boot sequence (with comments added) u
 
   ~~~ bash
   # RL10 Version, build timestamp, build SHA
-  2016/10/10 23:04:21 RightLink 10.6.3 - 2016-10-07 17:28:53 - 8d5b5beeaef0b677ba48e4e5ca4e1678f4e32ea0
+  2016/10/10 23:04:21 RightLink 10.6.4 - 2016-10-07 17:28:53 - 8d5b5beeaef0b677ba48e4e5ca4e1678f4e32ea0
   2016/10/10 23:04:21 RightLink10 == RightLinkLite == RLL :-)
   2016/10/10 23:04:21 Operating system type: ubuntu
   2016/10/10 23:04:21 Running as user: rightlink

@@ -1,10 +1,10 @@
 ---
 title: RightLink as Non-root User
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_non_root.html, rl10/reference/rl10_non_root.html]
 description: Guidelines and rationale for running the RightLink 10 agent as a non-root user.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_non_root.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_non_root.html
   - name: 10.6.2

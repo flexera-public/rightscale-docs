@@ -1,10 +1,10 @@
 ---
 title: Enable Running Instances for Windows
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_enable_running_instances_windows.html, rl10/reference/rl10_enable_running_instances_windows.html]
 description: This page describes a method for enabling already running raw instances using the rightlink.enable.ps1 script to provide all the amenities of a RightScale server, including automation, operational scripts, and monitoring.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_enable_running_instances_windows.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_enable_running_instances_windows.html
   - name: 10.6.2
@@ -50,11 +50,11 @@ This page describes a method for enabling already running raw instances using th
 
 ## How it works
 
-1. The command line to install RightLink and run on the instance looks something like this, for version 10.6.3:
+1. The command line to install RightLink and run on the instance looks something like this, for version 10.6.4:
 
 ~~~ powershell
   $REFRESHTOKEN = "e22f8d37...456"
-  $SERVERTEMPLATENAME = "RightLink 10.6.3 Windows Base"
+  $SERVERTEMPLATENAME = "RightLink 10.6.4 Windows Base"
   $DEPLOYMENTNAME = "Staging Deployment"
   $CLOUDTYPE = "amazon"
   $APISERVER = "us-3.rightscale.com"

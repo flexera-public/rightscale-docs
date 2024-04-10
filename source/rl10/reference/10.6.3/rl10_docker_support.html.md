@@ -1,10 +1,10 @@
 ---
 title: Docker Support
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_docker_support.html, rl10/reference/rl10_docker_support.html]
 description: This document describes the Docker integration features in RightLink 10.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_docker_support.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_docker_support.html
   - name: 10.6.2

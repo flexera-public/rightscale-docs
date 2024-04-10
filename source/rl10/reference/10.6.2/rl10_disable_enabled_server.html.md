@@ -3,6 +3,8 @@ title: Disable a (previously enabled) Server
 description: This page outlines the steps for using the rightlink.disable.sh or rightlink.disable.ps1 script to disable previously enabled raw instances.
 version_number: 10.6.2
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_disable_enabled_server.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_disable_enabled_server.html
   - name: 10.6.2
@@ -37,7 +39,7 @@ This page outlines the steps for using the `rightlink.disable.sh` or `rightlink.
 
 ## How it Works
 
-1. The command line to run on the instance looks something like this, for version 10.6.3
+1. The command line to run on the instance looks something like this, for version 10.6.4
 
     ~~~ bash
     curl -s https://rightlink.rightscale.com/rll/10.6.2/rightlink.disable.sh | sudo bash -s -- -k e22f8d37...456

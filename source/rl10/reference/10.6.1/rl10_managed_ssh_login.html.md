@@ -3,6 +3,8 @@ title: Managed SSH Login
 description: Enabling and understanding the Managed Login feature to enable users to SSH into instances.
 version_number: 10.6.1
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_managed_ssh_login.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_managed_ssh_login.html
   - name: 10.6.2

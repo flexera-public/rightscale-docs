@@ -1,10 +1,10 @@
 ---
 title: Managed SSH Login
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_managed_ssh_login.html, rl10/reference/rl10_managed_ssh_login.html]
 description: Enabling and understanding the Managed Login feature to enable users to SSH into instances.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_managed_ssh_login.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_managed_ssh_login.html
   - name: 10.6.2

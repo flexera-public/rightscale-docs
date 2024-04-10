@@ -1,10 +1,10 @@
 ---
 title: Reference
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/index.html, rl10/reference/index.html]
 description: Visit the following links to reference information covering RightLink 10.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/index.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/index.html
   - name: 10.6.2

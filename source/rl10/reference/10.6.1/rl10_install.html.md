@@ -3,6 +3,8 @@ title: Custom Images with RightLink for Linux
 description: This page describes how to install RightLink 10 on your custom images. RightLink has the ability to be installed at boot time using cloud-init.
 version_number: 10.6.1
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_install.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_install.html
   - name: 10.6.2

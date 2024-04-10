@@ -3,6 +3,8 @@ title: Disable a (previously enabled) Server
 description: This page outlines the steps for using the rightlink.disable.sh or rightlink.disable.ps1 script to disable previously enabled raw instances.
 version_number: 10.6.1
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_disable_enabled_server.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_disable_enabled_server.html
   - name: 10.6.2

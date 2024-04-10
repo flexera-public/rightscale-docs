@@ -3,6 +3,8 @@ title: Custom Images with RightLink for Windows
 description: This page describes how to install RightLink 10 on your custom images. RightLink can be pre-installed and a new image created by snapshotting an existing image.
 version_number: 10.5.2
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_install_windows.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_install_windows.html
   - name: 10.6.2

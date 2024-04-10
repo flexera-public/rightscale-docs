@@ -3,6 +3,8 @@ title: Time Synchronization
 description: This page describes how to synchronize time on your RightLink 10 images.
 version_number: 10.6.0
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_time_synchronization.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_time_synchronization.html
   - name: 10.6.2

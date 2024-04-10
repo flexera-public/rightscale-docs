@@ -3,6 +3,8 @@ title: Reference
 description: Visit the following links to reference information covering RightLink 10.
 version_number: 10.6.1
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/index.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/index.html
   - name: 10.6.2

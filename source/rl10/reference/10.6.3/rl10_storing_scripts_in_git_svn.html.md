@@ -1,10 +1,10 @@
 ---
 title: Storing Scripts in Git, Subversion, or other VCS
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_storing_scripts_in_git_svn.html, rl10/reference/rl10_storing_scripts_in_git_svn.html]
 description: RightLink 10 RightScripts can be stored in a Git or SVN version control system instead of in the Design > RightScripts section of the RightScale Cloud Management Dashboard.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_storing_scripts_in_git_svn.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_storing_scripts_in_git_svn.html
   - name: 10.6.2

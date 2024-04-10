@@ -3,6 +3,8 @@ title: Enable Running Instances for Linux
 description: This page describes a method for enabling already running raw instances using the rightlink.enable.sh script to provide all the amenities of a RightScale server, including managed login, operational scripts, and monitoring.
 version_number: 10.5.2
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_enable_running_instances.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_enable_running_instances.html
   - name: 10.6.2

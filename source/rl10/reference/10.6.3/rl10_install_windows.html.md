@@ -1,10 +1,10 @@
 ---
 title: Custom Images with RightLink for Windows
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_install_windows.html, rl10/reference/rl10_install_windows.html]
 description: This page describes how to install RightLink 10 on your custom images. RightLink can be pre-installed and a new image created by snapshotting an existing image.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_install_windows.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_install_windows.html
   - name: 10.6.2

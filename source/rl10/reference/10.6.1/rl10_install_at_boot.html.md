@@ -3,6 +3,8 @@ title: Install at Boot for Linux
 description: Steps for installing RightLink 10 at boot.
 version_number: 10.6.1
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_install_at_boot.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_install_at_boot.html
   - name: 10.6.2
