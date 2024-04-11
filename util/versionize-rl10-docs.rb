@@ -8,7 +8,7 @@ old_ver = ARGV[0]
 new_ver = ARGV[1]
 
 remote_url = `git config --list | grep remote.origin.url`
-unless remote_url.include?('rightscale/docs')
+unless remote_url.include?('flexera-public/rightscale-docs')
   raise "Run this from the docs repo"
 end
 
@@ -24,7 +24,7 @@ new_dir = File.join(ref_dir, new_ver)
 raise "Cannot find #{old_dir}" unless File.exists?(old_dir)
 
 
-system('git checkout master && git pull') or raise "Failed to checkout master && pull"
+system('git checkout main && git pull') or raise "Failed to checkout main && pull"
 new_branch = "RightLink_#{new_ver}_release"
 make_branch = `git branch`.include?(new_branch) ? '' : '-b'
 system("git checkout #{make_branch} #{new_branch}") or raise "Failed to make/use git branch #{new_branch}"

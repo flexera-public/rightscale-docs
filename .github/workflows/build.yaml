@@ -2,12 +2,12 @@ name: "Docs - Build"
 on:
   push:
     branches:
-      - master
+      - main
     tags:
       - release*
   pull_request:
     branches:
-      - master
+      - main
 
 env:
   # HOME required by Setup Git and Setup Go Steps
