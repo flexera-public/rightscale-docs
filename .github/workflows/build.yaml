@@ -81,7 +81,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "2.3.4"
+          ruby-version: "2.3.8"
           bundler-cache: true
 
       - name: Update git config
@@ -92,6 +92,8 @@ jobs:
 
       - name: Script
         run: |
+          # Update rubygems
+          gem update --system 3.2.3
           echo "Pull Request: $TRAVIS_PULL_REQUEST"
           # Ensure the site builds, otherwise fail the build on PRs
           if [[ $CI_NODE_INDEX = "build" && $TRAVIS_PULL_REQUEST != 'false' ]]; then bundle exec rake download_policy_list; bundle exec middleman build; fi
