@@ -2,12 +2,12 @@ name: "Docs - Build"
 on:
   push:
     branches:
-      - master
+      - main
     tags:
       - release*
   pull_request:
     branches:
-      - master
+      - main
 
 env:
   # HOME required by Setup Git and Setup Go Steps
@@ -25,15 +25,15 @@ jobs:
           - check_links
     steps:
       # SSH Agent Setup required for git to pull modules from private repos
-      - name: SSH Agent Setup
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.GLOBAL_FLEXERA_CI_PRIVATE_SSH_KEY }}
+      #      - name: SSH Agent Setup
+      #        uses: webfactory/ssh-agent@v0.5.3
+      #with:
+      #  ssh-private-key: ${{ secrets.GLOBAL_FLEXERA_CI_PRIVATE_SSH_KEY }}
       - name: Checkout so we can get build tags
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ssh-key: ${{ secrets.GLOBAL_FLEXERA_CI_PRIVATE_SSH_KEY }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           submodules: recursive
       - name: Setup Environment Variables
         env:
@@ -86,8 +86,9 @@ jobs:
 
       - name: Update git config
         run: |
-          git config --global user.email "TravisCI"
+          git config --global user.email "Github Actions"
           git config --global user.name "Automated Deployment"
+          git config --global url."git@github.com:".insteadOf "https://github.com"
 
       - name: Script
         run: |
