@@ -1,10 +1,10 @@
 ---
 title: Local and Proxied HTTP Requests
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_local_and_proxied_http_requests.html, rl10/reference/rl10_local_and_proxied_http_requests.html]
 description: Guidelines and steps for performing local and proxied HTTP requests in the context of RightLink 10.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_local_and_proxied_http_requests.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_local_and_proxied_http_requests.html
   - name: 10.6.2

@@ -18,7 +18,7 @@ COPY source /srv/source/
 COPY data /srv/data/
 
 # Pull down latest policies.json to docker image
-RUN curl -s -o /srv/data/policies.json https://s3.amazonaws.com/rs-policysync-tool/active-policy-list.json
+#RUN curl -s -o /srv/data/policies.json https://s3.amazonaws.com/rs-policysync-tool/active-policy-list.json
 
 EXPOSE 4567 23729
 

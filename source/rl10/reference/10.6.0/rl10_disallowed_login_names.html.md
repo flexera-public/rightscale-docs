@@ -3,6 +3,8 @@ title: Disallowed Logins for User Definable Custom Login Name
 description: List of logins disallowed from use in setting User Definable Custom Login Name
 version_number: 10.6.0
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_disallowed_login_names.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_disallowed_login_names.html
   - name: 10.6.2

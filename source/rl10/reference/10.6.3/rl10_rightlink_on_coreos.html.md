@@ -1,10 +1,10 @@
 ---
 title: RightLink on CoreOS
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_rightlink_on_coreos.html, rl10/reference/rl10_rightlink_on_coreos.html]
 description: Support for CoreOS is available starting with RightLink 10.3.0 under the Enable-running, Install-at-boot, and Install-on-image use cases.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_rightlink_on_coreos.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_rightlink_on_coreos.html
   - name: 10.6.2
@@ -60,7 +60,7 @@ coreos:
         Type=oneshot
         RemainAfterExit=yes
         Environment="https_proxy={{ rs_agent.http_proxy }}"
-        ExecStart=/usr/bin/bash -c "/usr/bin/curl -s https://rightlink.rightscale.com/rll/10.6.3/rightlink.boot.sh | /usr/bin/bash"
+        ExecStart=/usr/bin/bash -c "/usr/bin/curl -s https://rightlink.rightscale.com/rll/10.6.4/rightlink.boot.sh | /usr/bin/bash"
 ~~~
 
 #### Dealing with Reboot Strategies

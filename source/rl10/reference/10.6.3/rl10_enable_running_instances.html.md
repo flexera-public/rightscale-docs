@@ -1,10 +1,10 @@
 ---
 title: Enable Running Instances for Linux
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_enable_running_instances.html, rl10/reference/rl10_enable_running_instances.html]
 description: This page describes a method for enabling already running raw instances using the rightlink.enable.sh script to provide all the amenities of a RightScale server, including managed login, operational scripts, and monitoring.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_enable_running_instances.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_enable_running_instances.html
   - name: 10.6.2
@@ -52,9 +52,9 @@ The `rightlink.enable.sh` script must be executed with root privileges
 
 ## How it works
 
-1. The command line to install RightLink and have it run on the instance looks something like this, for version 10.6.3:
+1. The command line to install RightLink and have it run on the instance looks something like this, for version 10.6.4:
   ~~~ bash
-  curl -s https://rightlink.rightscale.com/rll/10.6.3/rightlink.enable.sh | sudo bash -s -- -k "e22f8d37...456" -t "RightLink 10.5.2 Linux Base" -n "Test Server" -d "Staging Deployment" -c "amazon"
+  curl -s https://rightlink.rightscale.com/rll/10.6.4/rightlink.enable.sh | sudo bash -s -- -k "e22f8d37...456" -t "RightLink 10.5.2 Linux Base" -n "Test Server" -d "Staging Deployment" -c "amazon"
   ~~~
   Additional versions can be found on the [releases](/rl10/releases) page. As a convenience, more generic versions such as "10" or "10.5" may be specified as a way to install the latest GA version for a lineage. For example, https://rightlink.rightscale.com/rll/10/rightlink.enable.ps1 will pull the latest RightLink 10 client.
 

@@ -1,10 +1,10 @@
 ---
 title: Upgrade RightLink 10
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_upgrade.html, rl10/reference/rl10_upgrade.html]
 description: Check whether a RightLink upgrade is available and perform the upgrade.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_upgrade.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_upgrade.html
   - name: 10.6.2
@@ -37,7 +37,7 @@ RightLink 10 upgrades can be performed using the provided scripts or manually.
 
 The recommended approach for upgrading RightLink 10 is to use the RightScale-provided upgrade script ([Linux](https://github.com/rightscale/rightlink_scripts/blob/master/rll/upgrade.sh), [Windows](https://github.com/rightscale/rightlink_scripts/blob/master/rlw/upgrade.ps1)). Additionally, RightScale provides a "setup-automatic-upgrade" script ([Linux](https://github.com/rightscale/rightlink_scripts/blob/master/rll/setup-automatic-upgrade.sh), [Windows](https://github.com/rightscale/rightlink_scripts/blob/master/rlw/setup-automatic-upgrade.ps1)) that will create the needed cron entry/scheduled job to periodically run the upgrade script mentioned previously.
 
-The "upgrade" script takes an input `UPGRADE_VERSION` which is a version to upgrade (or downgrade) to, such as "10.6.3".
+The "upgrade" script takes an input `UPGRADE_VERSION` which is a version to upgrade (or downgrade) to, such as "10.6.4".
 
 The "setup-automatic-upgrade" script takes an input `UPGRADES_FILE_LOCATION` which is the URL of an `upgrades` file. This file can be the default file provided by RightScale, or a custom file.
 
@@ -51,7 +51,7 @@ It is recommended that you maintain your own `upgrades` file so that you can ens
 
 #### Upgrades file syntax
 
-The `upgrades` file lists each allowed upgrade path, in the form `<running_version>:<desired_version>`. For example: `10.4.0:10.6.3`. 
+The `upgrades` file lists each allowed upgrade path, in the form `<running_version>:<desired_version>`. For example: `10.4.0:10.6.4`. 
 
 !!info*Note*Each `running_version` can only be listed once in the file, or upgrades from that version will fail to start.
 
@@ -63,9 +63,9 @@ Example:
 # RightScale Rightlink10 Self-Upgrade Manifest
 # Each line has the form <current_version>:<desired_version>
 
-10.3.1:10.6.3
-10.4.0:10.6.3
-10.5.0:10.6.3
+10.3.1:10.6.4
+10.4.0:10.6.4
+10.5.0:10.6.4
 ~~~
 
 ### Reverting an Upgrade
@@ -75,7 +75,7 @@ If you want to revert an upgrade, it is recommended you re-run the "upgrade" scr
 ## Breaking Changes
 
 Certain RightLink versions may have key breaking changes. The following is summary of major ones:
-* 10.6.3 - The script revision will now be printed in the summary.
+* 10.6.4 - The script revision will now be printed in the summary.
 * 10.5.0 - Managed login changed to [Enhanced Managed Login](rl10_managed_ssh_login.html). Instead of logging in as the `rightscale` user, users now login under their individual usernames. In addition, managed login was changed from an automatic feature to an optional feature. The `RL10 Linux Enable Managed Login` RightScript was added to the 10.5.0 Linux Base ServerTemplate to enable this optional feature. To always enable this feature, this RightScript will have to run and be added to the boot scripts of an upgraded server. Note you can change the revision for [all servers](/cm/dashboard/design/server_templates/servertemplates_actions.html#update-a-servertemplate-revision-on-multiple-servers) attached to a ServerTemplate or for [individual servers](/cm/management_guide/managing_active_current_servers.html#supported-modifications-for-active-servers-that-are-in-the-operational-state).
 * 10.2.1 - `rightlink` service changed from root to `rightlink` user. Upgrade of previous versions to this version or later not supported.
 

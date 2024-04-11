@@ -3,6 +3,8 @@ title: RightLink as Non-root User
 description: Guidelines and rationale for running the RightLink 10 agent as a non-root user.
 version_number: 10.6.2
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_non_root.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_non_root.html
   - name: 10.6.2

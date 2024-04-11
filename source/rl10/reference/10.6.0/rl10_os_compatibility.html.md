@@ -3,6 +3,8 @@ title: Operating System Compatibility
 description: Summary of the Linux and Windows operating system compatibility in RightLink 10. Includes links the currently compatible operating system images tested by RightScale.
 version_number: 10.6.0
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_os_compatibility.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_os_compatibility.html
   - name: 10.6.2
@@ -49,7 +51,7 @@ RightLink 10 is principally supported on most modern Windows distributions that 
 
 ## RightScale Tested Images
 
-Each release of RightLink 10 and its associated Base ServerTemplate is tested on a number of clouds using as stock/official an image for each OS as possible. Since these stock/official images are made available by the cloud provider or the OS developer, they can be deregistered and made unavailable at anytime at the discretion of the owner. The following table lists the provenance of the images for the most recent releases. For the exact images used in testing each release, please consult the release notes (e.g. [RightLink 10.6.0 Release](../../releases/rl10_10.6.3_release.html)). Note that the list of tested images is not intended as a recommendation of these images, but as a reference so you can locate known-to-work images and compare with your own images if you are having difficulties.
+Each release of RightLink 10 and its associated Base ServerTemplate is tested on a number of clouds using as stock/official an image for each OS as possible. Since these stock/official images are made available by the cloud provider or the OS developer, they can be deregistered and made unavailable at anytime at the discretion of the owner. The following table lists the provenance of the images for the most recent releases. For the exact images used in testing each release, please consult the release notes (e.g. [RightLink 10.6.0 Release](../../releases/rl10_10.6.4_release.html)). Note that the list of tested images is not intended as a recommendation of these images, but as a reference so you can locate known-to-work images and compare with your own images if you are having difficulties.
 
 !!warning*Warning* Since these stock/official images are made available by the cloud provider or the OS developer, they can be deregistered and made unavailable at anytime at the discretion of the owner. It is advised that you create your own [MultiCloud Image](/cm/dashboard/design/multicloud_images/multicloud_images_actions.html) with your own custom image for [linux](rl10_install.html) or [windows](rl10_install_windows.html).
 

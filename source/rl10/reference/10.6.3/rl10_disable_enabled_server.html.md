@@ -1,10 +1,10 @@
 ---
 title: Disable a (previously enabled) Server
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_disable_enabled_server.html, rl10/reference/rl10_disable_enabled_server.html]
 description: This page outlines the steps for using the rightlink.disable.sh or rightlink.disable.ps1 script to disable previously enabled raw instances.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_disable_enabled_server.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_disable_enabled_server.html
   - name: 10.6.2
@@ -39,17 +39,17 @@ This page outlines the steps for using the `rightlink.disable.sh` or `rightlink.
 
 ## How it Works
 
-1. The command line to run on the instance looks something like this, for version 10.6.3
+1. The command line to run on the instance looks something like this, for version 10.6.4
 
     ~~~ bash
-    curl -s https://rightlink.rightscale.com/rll/10.6.3/rightlink.disable.sh | sudo bash -s -- -k e22f8d37...456
+    curl -s https://rightlink.rightscale.com/rll/10.6.4/rightlink.disable.sh | sudo bash -s -- -k e22f8d37...456
     ~~~
 
     or
 
     ~~~ powershell
     $wc = New-Object System.Net.Webclient
-    $wc.DownloadFile("https://rightlink.rightscale.com/rll/10.6.3/rightlink.disable.ps1", "$pwd\rightlink.disable.ps1")
+    $wc.DownloadFile("https://rightlink.rightscale.com/rll/10.6.4/rightlink.disable.ps1", "$pwd\rightlink.disable.ps1")
     Powershell -ExecutionPolicy Unrestricted -File rightlink.disable.ps1 -k e22f8d37...456
     ~~~
 

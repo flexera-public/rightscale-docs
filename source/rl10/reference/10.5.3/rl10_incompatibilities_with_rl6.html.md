@@ -3,6 +3,8 @@ title: Incompatibilities with RightLink 6
 description: Describes the breaking changes introduced with RightLink 10 including incompatibilities with RightLink 6.
 version_number: 10.5.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_incompatibilities_with_rl6.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_incompatibilities_with_rl6.html
   - name: 10.6.2

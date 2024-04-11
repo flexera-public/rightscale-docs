@@ -3,6 +3,8 @@ title: Docker Support
 description: This document describes the Docker integration features in RightLink 10.
 version_number: 10.6.2
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_docker_support.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_docker_support.html
   - name: 10.6.2

@@ -3,6 +3,8 @@ title: RL10 Windows Resource Utilization(CPU,Memory,Network I/O)
 description: RL10 agents memory and cpu footprint on windows.
 version_number: 10.6.0
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_windows_resource_utilization
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_windows_resource_utilization
   - name: 10.6.2

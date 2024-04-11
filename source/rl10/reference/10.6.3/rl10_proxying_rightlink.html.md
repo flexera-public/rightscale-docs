@@ -1,10 +1,10 @@
 ---
 title: RightLink Through a Proxy
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_proxying_rightlink.html, rl10/reference/rl10_proxying_rightlink.html]
 description: RightLink 10 is capable of routing all its traffic through an external proxy for both all workflows ("enable running", "install at boot", "custom image").
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_proxying_rightlink.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_proxying_rightlink.html
   - name: 10.6.2
@@ -91,16 +91,16 @@ script on Windows as shown in the following example. For further details, see En
 for [Linux](rl10_enable_running_instances.html) or [Windows](rl10_enable_running_instances_windows.html).
 
   ~~~ bash
-  curl -s https://rightlink.rightscale.com/rll/10.6.3/rightlink.enable.sh | sudo bash -s -- -l -k "e22f8d37...456"
-  -t "RightLink 10.6.3 Linux Base" -n "Test Server" -d "RightLink Enabled Test" -c "amazon"
+  curl -s https://rightlink.rightscale.com/rll/10.6.4/rightlink.enable.sh | sudo bash -s -- -l -k "e22f8d37...456"
+  -t "RightLink 10.6.4 Linux Base" -n "Test Server" -d "RightLink Enabled Test" -c "amazon"
   -x "http://basicuser:basicpass@1.2.3.4:3126" -y "dontproxy.com"
   ~~~
 
   ~~~ powershell
   $wc = New-Object System.Net.WebClient
-  $wc.DownloadFile("https://rightlink.rightscale.com/rll/10.6.3/rightlink.enable.ps1", "$pwd\rightlink.enable.ps1")
+  $wc.DownloadFile("https://rightlink.rightscale.com/rll/10.6.4/rightlink.enable.ps1", "$pwd\rightlink.enable.ps1")
   Powershell -ExecutionPolicy Unrestricted -File rightlink.enable.ps1 -refreshToken "e22f8d37...456"
-  -serverTemplateName "RightLink 10.6.3 Windows Base" -serverName "Test Server" -deploymentName "RightLink Enabled Test"
+  -serverTemplateName "RightLink 10.6.4 Windows Base" -serverName "Test Server" -deploymentName "RightLink Enabled Test"
   -cloudType "amazon" -Proxy "http://basicuser:basicpass@1.2.3.4:3126" -NoProxy "dontproxy.com"
   ~~~
 

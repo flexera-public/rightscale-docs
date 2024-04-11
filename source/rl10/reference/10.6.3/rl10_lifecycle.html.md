@@ -1,10 +1,10 @@
 ---
 title: Lifecycle - Launch, Reboot, Stop-Start, Decommission, Terminate
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_lifecycle.html, rl10/reference/rl10_lifecycle.html]
 description: Describes the lifecycle of a server in the context of RightLink 10 including Launch, Reboot, Stop-Start, Decommission, and Terminate.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_lifecycle.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_lifecycle.html
   - name: 10.6.2

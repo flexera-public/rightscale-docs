@@ -3,6 +3,8 @@ title: RL10 Linux Resource Utilization(CPU,Memory,Network I/O)
 description: RL10 resource utilization on linux.
 version_number: 10.6.1
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_linux_resource_utilization
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_linux_resource_utilization
   - name: 10.6.2

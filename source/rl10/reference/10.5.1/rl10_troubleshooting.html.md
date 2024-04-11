@@ -3,6 +3,8 @@ title: Troubleshooting
 description: RightLink 10 Troubleshooting.
 version_number: 10.5.1
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_troubleshooting.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_troubleshooting.html
   - name: 10.6.2

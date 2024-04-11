@@ -3,6 +3,8 @@ title: Advanced Networking for vSphere
 description: RightLink 10 now ships with network configuration scripts for RightScale Cloud Appliance for vSphere. These scripts will automatically be installed if VMware tools are installed on the instance and will only run on the VMware hypervisor.
 version_number: 10.5.1
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_rcav.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_rcav.html
   - name: 10.6.2

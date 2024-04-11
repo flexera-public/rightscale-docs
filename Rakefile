@@ -92,24 +92,37 @@ task :check_links do
   end
 end
 
+# desc 'download policy list into data folder'
+# task :download_policy_list do
+#   puts "Downloading Policy List"
+#   uri = URI('https://s3.amazonaws.com/rs-policysync-tool/active-policy-list.json')
+#   # Must be somedomain.net instead of somedomain.net/, otherwise, it will throw exception.
+#   Net::HTTP.start(uri.host, uri.port,:use_ssl => uri.scheme == 'https') do |http|
+#       resp = http.get uri
+#       policy_hash = JSON.parse(resp.body)
+#       categorized_data = policy_hash["policies"].group_by{ |x| x['category'].gsub(" ","_").downcase }
+#       categorized_data.each_key do |c|
+#         categorized_data[c].sort_by! {|p| p['name']}
+#       end
+#       open("data/policies.json", "wb") do |file|
+#           file.write(JSON.pretty_generate(categorized_data))
+#           file.write("\n")
+#       end
+#   end
+#   puts "Done."
+# end
+
+# This checks if the file exists, the task above is the original
 desc 'download policy list into data folder'
 task :download_policy_list do
-  puts "Downloading Policy List"
-  uri = URI('https://s3.amazonaws.com/rs-policysync-tool/active-policy-list.json')
-  # Must be somedomain.net instead of somedomain.net/, otherwise, it will throw exception.
-  Net::HTTP.start(uri.host, uri.port,:use_ssl => uri.scheme == 'https') do |http|
-      resp = http.get uri
-      policy_hash = JSON.parse(resp.body)
-      categorized_data = policy_hash["policies"].group_by{ |x| x['category'].gsub(" ","_").downcase }
-      categorized_data.each_key do |c|
-        categorized_data[c].sort_by! {|p| p['name']}
-      end
-      open("data/policies.json", "wb") do |file|
-          file.write(JSON.pretty_generate(categorized_data))
-          file.write("\n")
-      end
+  puts "Checking if data/policies.json file exists"
+
+  if File.exists?("data/policies.json")
+    puts "File exists."
+    puts "Done."
+  else
+    puts "File doesn't exists"
   end
-  puts "Done."
 end
 
 # Wait until the server responds with a 200

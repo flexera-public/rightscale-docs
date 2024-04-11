@@ -3,6 +3,8 @@ title: RightLink Through a Proxy
 description: RightLink 10 is capable of routing all its traffic through an external proxy for both all workflows ("enable running", "install at boot", "custom image").
 version_number: 10.6.0
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_proxying_rightlink.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_proxying_rightlink.html
   - name: 10.6.2

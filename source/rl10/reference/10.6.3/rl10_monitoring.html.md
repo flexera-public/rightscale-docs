@@ -1,10 +1,10 @@
 ---
 title: RightLink Monitoring and Alerts
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_monitoring.html, rl10/reference/rl10_monitoring.html]
 description: This document describes the steps for setting up monitoring and alerts with RightLink 10. With RightLink 10.1.2 and newer, monitoring and alerts are handled by RightScale Time Series Storage, or TSS.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_monitoring.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_monitoring.html
   - name: 10.6.2

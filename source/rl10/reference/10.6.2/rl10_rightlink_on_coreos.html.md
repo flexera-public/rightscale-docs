@@ -3,6 +3,8 @@ title: RightLink on CoreOS
 description: Support for CoreOS is available starting with RightLink 10.3.0 under the Enable-running, Install-at-boot, and Install-on-image use cases.
 version_number: 10.6.2
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_rightlink_on_coreos.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_rightlink_on_coreos.html
   - name: 10.6.2

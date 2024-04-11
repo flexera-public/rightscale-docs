@@ -1,10 +1,10 @@
 ---
 title: Incompatibilities with RightLink 6
-# IMPORTANT: 'alias:' metadata line MUST ONLY BE in LATEST REV, requiring removal of 'alias:' line upon a new latest doc directory revision
-alias: [rl/reference/rl10_incompatibilities_with_rl6.html, rl10/reference/rl10_incompatibilities_with_rl6.html]
 description: Describes the breaking changes introduced with RightLink 10 including incompatibilities with RightLink 6.
 version_number: 10.6.3
 versions:
+  - name: 10.6.4
+    link: /rl10/reference/10.6.4/rl10_incompatibilities_with_rl6.html
   - name: 10.6.3
     link: /rl10/reference/10.6.3/rl10_incompatibilities_with_rl6.html
   - name: 10.6.2
