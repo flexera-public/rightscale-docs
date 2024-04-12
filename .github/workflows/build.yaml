@@ -8,7 +8,9 @@ on:
   pull_request:
     branches:
       - main
-permissions: write-all
+permissions:
+  contents: write
+  pages: write
 env:
   # HOME required by Setup Git and Setup Go Steps
   HOME: ${{ github.workspace }}
