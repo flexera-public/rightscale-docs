@@ -97,7 +97,7 @@ jobs:
           gem update --system 3.2.3
           echo "Pull Request: $TRAVIS_PULL_REQUEST"
           # Ensure the site builds, otherwise fail the build on PRs
-          if [[ $CI_NODE_INDEX = "build" && $TRAVIS_PULL_REQUEST != 'false' ]]; then bundle exec rake download_policy_list; bundle exec middleman build; fi
+          if [[ $CI_NODE_INDEX = "build" && $TRAVIS_PULL_REQUEST != 'false' ]]; then bundle exec rake download_policy_list; TARGET="test" bundle exec middleman deploy; fi
           # Ensure the links work, otherwise fail the build on PRs (only on PRs)
           if [[ $CI_NODE_INDEX = "check_links" && $TRAVIS_PULL_REQUEST != 'false' ]]; then echo "TODO Fix check_links to throttle itself properly"; fi
           # Only deploy the site live if the master branch is updated (not during pull-requests)
