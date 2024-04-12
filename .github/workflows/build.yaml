@@ -8,7 +8,8 @@ on:
   pull_request:
     branches:
       - main
-
+permissions:
+  contents: write
 env:
   # HOME required by Setup Git and Setup Go Steps
   HOME: ${{ github.workspace }}
@@ -104,3 +105,4 @@ jobs:
           if [[ $CI_NODE_INDEX = "build" && $TRAVIS_PULL_REQUEST == 'false' ]]; then bundle exec rake download_policy_list; bundle exec middleman deploy; fi
         env:
           CI_NODE_INDEX: ${{ matrix.index }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
