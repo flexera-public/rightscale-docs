@@ -108,7 +108,7 @@ jobs:
           CI_NODE_INDEX: ${{ matrix.index }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy to Github Pages
-        if: ${{env.CI_NODE_INDEX == 'build'}}
+        if: ${{env.CI_NODE_INDEX == 'build' && github.ref == 'refs/heads/main'}}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
