@@ -264,26 +264,13 @@ configure :build do
 end
 
 # middleman-deploy configuration
-case ENV['TARGET'].to_s.downcase
-when 'test'
-  activate :deploy do |deploy|
-    # Automatically run `middleman build` during `middleman deploy`
-    deploy.build_before = true
+activate :deploy do |deploy|
+  # Automatically run `middleman build` during `middleman deploy`
+  deploy.build_before = true
 
-    # rsync, ftp, sftp, or git
-    deploy.method = :git
-    deploy.branch = "test-gh-pages"
-  end
-else
-  activate :deploy do |deploy|
-    # Automatically run `middleman build` during `middleman deploy`
-    deploy.build_before = true
-
-    # rsync, ftp, sftp, or git
-    deploy.method = :git
-  end
+  # rsync, ftp, sftp, or git
+  deploy.method = :git
 end
-
 
 page "/release-feed.xml", :layout => false
 
