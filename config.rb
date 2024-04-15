@@ -270,7 +270,6 @@ activate :deploy do |deploy|
 
   # rsync, ftp, sftp, or git
   deploy.method = :git
-
 end
 
 page "/release-feed.xml", :layout => false
