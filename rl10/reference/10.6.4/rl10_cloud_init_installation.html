@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Cloud-Init Installation</title><meta content="Using the RightScale-provided cloud-init package in RightLink 10." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_cloud_init_installation.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_cloud_init_installation.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_cloud_init_installation.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_cloud_init_installation.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_cloud_init_installation.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_cloud_init_installation.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_cloud_init_installation.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_cloud_init_installation.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>Cloud-Init Installation</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>In order to use RightLink 10 on clouds that are not supported by cloud-init, you will need to use the RightScale-provided cloud-init package. See the supported clouds list below to determine if you need the RightScale-provided cloud-init package to support your desired cloud. RightScale cloud-init differs from the stock cloud-init by adding a plugin for the SoftLayer cloud. RightScale cloud-init will always have RightScale as the package Vendor/Maintainer and <q>rightscale</q> in the release name.</p>
+
+<table><thead>
+<tr>
+<th>Cloud</th>
+<th>Cloud-init Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>EC2, Azure, Google<sup><a href="#fn2">[2]</a></sup>, OpenStack, RCA-V<sup><a href="#fn1">[1]</a></sup></td>
+<td>Vanilla</td>
+</tr>
+<tr>
+<td>Softlayer<sup><a href="#fn3">[3]</a></sup></td>
+<td>RightScale</td>
+</tr>
+</tbody></table>
+
+<p><sup><a name="fn1">[1]</a></sup> Requires RCA-V version 2.0_20160415_21 or above<br>
+<sup><a name="fn2">[2]</a></sup> CentOS 6.x on GCE has a specific note below<br>
+<sup><a name="fn3">[3]</a></sup> Ubuntu 14.04 and Ubuntu 16.04 work with vanilla Cloud-init and cloud images comes with them pre-installed. CentOS/RHEL and older Ubuntu versions do not.</p>
+
+<h2 id="installing-vanilla-cloud-init">Installing Vanilla Cloud-Init</h2>
+
+<p>The installation steps for &#39;vanilla&#39; cloud-init will vary depending on your operating system. The following sections provide instructions specific to each of the supported operating systems.</p>
+
+<h3 id="installing-vanilla-cloud-init-red-hat-based-systems,-such-as-centos">Red Hat Based Systems, Such as CentOS</h3>
+
+<p>Depending on the specific version of your system, cloud-init may be part of the <q>Extras</q> repo. If not, the packages may be found in the <a href="https://fedoraproject.org/wiki/EPEL">Fedora Extra Packages for Enterprise Linux</a> repository. Use the following command-line to install cloud-init on Red Hat-based systems.</p>
+<pre class="syntax-highlight plaintext"><code>  yum -y install cloud-init
+</code></pre>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>CentOS 6x on GCE: We have observed intermittent issues with the CentOS 6.x native version of cloud-init (cloud-init-0.7.5-10.el6.centos.2.src.rpm) hanging prior to our userdata script being executed. The suggested workaround for this is to use the RHEL version of cloud-init <a href="http://ftp.redhat.com/pub/redhat/linux/enterprise/6Server/en/RH-COMMON/SRPMS/cloud-init-0.7.5-2.el6.src.rpm">cloud-init-0.7.5-2.el6.src.rpm</a>. To rebuild where epel can not update:</p>
+</div>
+<pre class="syntax-highlight plaintext"><code>  rpm -Uvh cloud-init-0.7.5-2.el6.src.rpm
+  sed -i.orig -e 's/2%{?dist}/20%{?dist}/g' ~/rpmbuild/SPECS/cloud-init.spec
+  rpmbuild -ba ~/rpmbuild/SPECS/cloud-init.spec
+  rpm -Uvh ~/rpmbuild/RPMS/x86_64/cloud-init-0.7.5-20.el6.x86_64.rpm
+  rm -fr ~/rpmbuild
+</code></pre>
+
+<h3 id="installing-vanilla-cloud-init-debian-based-systems,-such-as-ubuntu">Debian Based systems, Such as Ubuntu</h3>
+
+<p>Use the following command-line to install cloud-init on Debian-based systems.</p>
+<pre class="syntax-highlight plaintext"><code>  apt-get -y update
+  apt-get -y install cloud-init
+</code></pre>
+
+<h2 id="installing-rightscale-cloud-init--softlayer-">Installing RightScale Cloud-Init (Softlayer)</h2>
+
+<p>The installation steps for RightScale cloud-init will vary depending on your operating system. The following sections provide instructions specific to each of the supported operating systems.</p>
+
+<h3 id="installing-rightscale-cloud-init--softlayer--centos-6-x-7-x">CentOS 6.x/7.x</h3>
+<pre class="syntax-highlight plaintext"><code>  cat &lt;&lt;EOF &gt; /etc/yum.repos.d/RightScale-epel.repo
+  [rightscale-epel]
+  name=RightScale Software
+  baseurl=http://mirror.rightscale.com/rightscale_software/centos/\$releasever/x86_64/archive/latest/
+  enabled=1
+  gpgcheck=1
+  gpgkey=http://mirror.rightscale.com/rightlink/rightscale.pub
+  priority=1
+  EOF
+  yum -y install cloud-init
+</code></pre>
+
+<h3 id="installing-rightscale-cloud-init--softlayer--ubuntu-12-04">Ubuntu 12.04</h3>
+
+<p>Ubuntu 12.04 Cloud-Init Install - Part 1</p>
+<pre class="syntax-highlight plaintext"><code>  cat &lt;&lt;EOF &gt; /etc/apt/preferences.d/rightscale-cloud-init-pin-1001
+  Package: cloud-init
+  Pin: version 0.7.2*
+  Pin-Priority: 1001
+  EOF
+</code></pre>
+
+<p>Ubuntu 12.04 Cloud-Init Install - Part 2</p>
+<pre class="syntax-highlight plaintext"><code>  curl http://mirror.rightscale.com/rightlink/rightscale.pub | apt-key add -
+  echo "deb [arch=amd64] http://mirror.rightscale.com/rightscale_software_ubuntu/latest precise main" &gt; /etc/apt/sources.list.d/rightscale_extra.sources.list
+  apt-get -y update
+  apt-get -y --force-yes install cloud-init
+</code></pre>
+
+<p>For Ubuntu 14.04 and 16.04, please use vanilla cloud-init. Use the stock Ubuntu images provided by Canonical, which come with cloud-init pre-installed, as a reference.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

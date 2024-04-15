@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Operating System Compatibility</title><meta content="Summary of the Linux and Windows operating system compatibility in RightLink 10. Includes links the currently compatible operating system images tested by RightScale." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_os_compatibility.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_os_compatibility.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_os_compatibility.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_os_compatibility.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_os_compatibility.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_os_compatibility.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_os_compatibility.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_os_compatibility.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>Operating System Compatibility</h1></div><div class="main-content"><h2 id="summary">Summary</h2>
+
+<p>This article provides an overview of Linux and Windows operating system compatibility in RightLink 10 and includes links to the compatible operating system images tested by RightScale. Please see <a href="/rl10/os_use_case_cloud_support.html">Operating System, Use Case, and Cloud Support</a> for detailed information on which particular RightLink 10 versions support specific use cases and operating system versions.</p>
+
+<h3 id="summary-linux">Linux</h3>
+
+<p>All use cases (&#39;enable running instance&#39;, &#39;install at boot&#39;, &#39;custom image&#39;) are regression tested by RightScale to work <q>out-of-the-box</q> on a standard install of: Ubuntu 16.04, Ubuntu 14.04, Ubuntu 12.04, RHEL 7, RHEL 6, CentOS 7, CentOS 6, CoreOS.</p>
+
+<p>RightLink 10 is principally supported on most modern Linux distributions that satisfy a few simple pre-requisites. Summary of the Linux prerequisites for RightLink 10 and the standard <code>rightlink.install.sh</code> and <code>rightlink.enable.sh</code> scripts:</p>
+
+<ul>
+<li>bash</li>
+<li>curl or wget</li>
+<li>SSL root certificates</li>
+<li>SysV init, systemd, or upstart</li>
+<li>apt or yum (for package management)</li>
+<li>cloud-init (with multipart MIME support)</li>
+<li>useradd</li>
+</ul>
+
+<h3 id="summary-windows">Windows</h3>
+
+<p>All use cases (&#39;enable running instance&#39;, &#39;install at boot&#39;, &#39;custom image&#39;) are regression tested by RightScale to work <q>out-of-the-box</q> on a standard install of: Windows Server 2012R2, Windows Server 2012, and Windows Server 2008R2.</p>
+
+<p>RightLink 10 is principally supported on most modern Windows distributions that satisfy a few simple pre-requisites. Summary of the Windows prerequisites for RightLink 10 and the standard <code>rightlink.install.ps1</code> and <code>rightlink.enable.ps1</code> scripts:</p>
+
+<ul>
+<li>Current SSL root certificates</li>
+<li>.Net 2.0 or newer</li>
+<li>PowerShell 2.0 or newer</li>
+</ul>
+
+<h2 id="rightscale-tested-images">RightScale Tested Images</h2>
+
+<p>Each release of RightLink 10 and its associated Base ServerTemplate is tested on a number of clouds using as stock/official an image for each OS as possible. Since these stock/official images are made available by the cloud provider or the OS developer, they can be deregistered and made unavailable at anytime at the discretion of the owner. The following table lists the provenance of the images for the most recent releases. For the exact images used in testing each release, please consult the release notes (e.g. <a href="../../releases/rl10_10.6.4_release.html">RightLink 10.6.4 Release</a>). Note that the list of tested images is not intended as a recommendation of these images, but as a reference so you can locate known-to-work images and compare with your own images if you are having difficulties.</p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning</strong><p>Since these stock/official images are made available by the cloud provider or the OS developer, they can be deregistered and made unavailable at anytime at the discretion of the owner. It is advised that you create your own <a href="/cm/dashboard/design/multicloud_images/multicloud_images_actions.html">MultiCloud Image</a> with your own custom image for <a href="rl10_install.html">linux</a> or <a href="rl10_install_windows.html">windows</a>.</p>
+</div>
+
+<p>The following images are regression tested by RightScale and known to work. <q>Known to work</q> means that the following features operate properly:</p>
+
+<ul>
+<li>enable a running <q>bare</q> instance using the <code>rightlink.enable.sh</code> or <code>rightlink.enable.ps1</code> scripts</li>
+<li>reboot the instance</li>
+<li>stop and start the enabled instance</li>
+<li>create the &#39;rightscale&#39; user</li>
+<li>support managed login (Linux only)</li>
+<li>install the RightLink 10 init scripts or Windows services</li>
+<li>install monitoring.</li>
+</ul>
+
+<table border="1" cellpadding="1" cellspacing="1">
+    <tbody>
+        <tr>
+            <td style="background-color: rgb(211, 211, 211);"><strong>OS</strong></td>
+            <td style="background-color: rgb(211, 211, 211);"><strong>Clouds</strong></td>
+            <td style="background-color:#D3D3D3;"><strong>Image provenance</strong></td>
+        </tr>
+        <tr>
+            <td colspan="1" rowspan="6">Ubuntu 12.04 / 14.04 / 16.04</td>
+            <td>AWS</td>
+            <td colspan="1">
+            <p><a class="external" href="http://cloud-images.ubuntu.com/locator/" title="http://cloud-images.ubuntu.com/locator/">Official Ubuntu image locator</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Azure</td>
+            <td>Official public image</td>
+        </tr>
+        <tr>
+            <td>AzureRM</td>
+            <td>Official public image</td>
+        </tr>
+        <tr>
+            <td>Google</td>
+            <td colspan="1">Official public image</td>
+        </tr>
+        <tr>
+            <td>OpenStack</td>
+            <td colspan="1">
+            <p><a class="external" href="http://cloud-images.ubuntu.com/" title="http://cloud-images.ubuntu.com/">Official Ubuntu image site</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Softlayer</td>
+            <td colspan="1">Official public image</td>
+        </tr>
+        <tr>
+            <td>VMware (using RCA-V)</td>
+            <td>Custom image based off the vanilla&nbsp;OS distro install, cloud-init, open-vm-tools, and A known user/pass or SSH&nbsp;key</td>
+        </tr>
+
+        <tr>
+            <td colspan="1" rowspan="6">
+            <p>CoreOS</p>
+            </td>
+            <td>AWS</td>
+            <td><a class="external" href="https://coreos.com/os/docs/latest/booting-on-ec2.html" rel="freeklink" title="https://coreos.com/os/docs/latest/booting-on-ec2.html">Official public image</a></td>
+        </tr>
+        <tr>
+            <td>Azure</td>
+            <td><a class="external" href="https://coreos.com/os/docs/latest/booting-on-azure.html" rel="freeklink" title="https://coreos.com/os/docs/latest/booting-on-azure.html">Official public image</a></td>
+        </tr>
+        <tr>
+            <td>AzureRM</td>
+            <td><a class="external" href="https://coreos.com/os/docs/latest/booting-on-azure.html" rel="freeklink" title="https://coreos.com/os/docs/latest/booting-on-azure.html">Official public image</a></td>
+        </tr>
+        <tr>
+            <td>Google</td>
+            <td><a class="external" href="https://coreos.com/os/docs/latest/booting-on-google-compute-engine.html" rel="freeklink" title="https://coreos.com/os/docs/latest/booting-on-google-compute-engine.html">Official public image</a></td>
+        </tr>
+        <tr>
+            <td>OpenStack</td>
+            <td><a class="external" href="https://coreos.com/os/docs/latest/booting-on-openstack.html" rel="freeklink" title="https://coreos.com/os/docs/latest/booting-on-openstack.html">Official public image</a></td>
+        </tr>
+        <tr>
+            <td>Softlayer</td>
+            <td>Official public image. NOTE: Enable running mode only</td>
+        </tr>
+        <tr>
+            <td>VMware (using RCA-V)</td>
+            <td><a class="external" href="https://coreos.com/os/docs/latest/booting-on-vmware.html" rel="freeklink" title="https://coreos.com/os/docs/latest/booting-on-vmware.html">Official public image</a>. NOTE: Requires v2.0 of RCA-V for install-at-boot and install on image modes.</td>
+        </tr>
+
+        <tr>
+            <td colspan="1" rowspan="6">
+            <p>CentOS 6 / 7</p>
+            </td>
+            <td>AWS</td>
+            <td><a class="external" href="http://wiki.centos.org/Cloud" rel="freeklink" title="http://wiki.centos.org/Cloud">http://wiki.centos.org/Cloud</a></td>
+        </tr>
+        <tr>
+            <td>Azure</td>
+            <td>Official public image. NOTE: Enable running mode only</td>
+        </tr>
+        <tr>
+            <td>AzureRM</td>
+            <td>Official public image. NOTE: Enable running mode only</td>
+        </tr>
+        <tr>
+            <td>OpenStack</td>
+            <td colspan="1">
+            <p><a class="external" href="http://cloud.centos.org/centos/" title="http://cloud.centos.org/centos/">Official CentOS image site</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Google</td>
+            <td>Official public image</td>
+        </tr>
+        <tr>
+            <td>Softlayer</td>
+            <td>Official public image</td>
+        </tr>
+        <tr>
+            <td>VMware (using RCA-V)</td>
+            <td>Custom image based off the vanilla OS distro install, RightScale cloud-init, A known user/pass or SSH key</td>
+        </tr>
+        <tr>
+            <td colspan="1" rowspan="5">
+            <p>Windows 2008R2 / 2012 / 2012R2</p>
+            </td>
+            <td>AWS</td>
+            <td>Official public image</td>
+        </tr>
+        <tr>
+            <td>Azure</td>
+            <td>Official public image</td>
+        </tr>
+        <tr>
+            <td>AzureRM</td>
+            <td>Official public image</td>
+        </tr>
+        <tr>
+            <td>OpenStack</td>
+            <td>Custom image</td>
+        </tr>
+        <tr>
+            <td>Google</td>
+            <td>Official public image</td>
+        </tr>
+        <tr>
+            <td>Softlayer</td>
+            <td>Official public image</td>
+        </tr>
+        <tr>
+            <td>VMware (using RCA-V)</td>
+            <td>Custom image</td>
+        </tr>
+    </tbody>
+</table>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

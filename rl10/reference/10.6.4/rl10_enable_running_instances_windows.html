@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Enable Running Instances for Windows</title><meta content="This page describes a method for enabling already running raw instances using the rightlink.enable.ps1 script to provide all the amenities of a RightScale server, including automation, operational scripts, and monitoring." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_enable_running_instances_windows.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_enable_running_instances_windows.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_enable_running_instances_windows.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_enable_running_instances_windows.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_enable_running_instances_windows.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_enable_running_instances_windows.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_enable_running_instances_windows.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_enable_running_instances_windows.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>Enable Running Instances for Windows</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This page describes a method for enabling already running raw instances using the <code>rightlink.enable.ps1</code> script to provide all the amenities of a RightScale server, including automation, operational scripts, and monitoring.</p>
+
+<h2 id="benefits">Benefits</h2>
+
+<ul>
+<li>Turns an instance into a server in the dashboard, making the UI and functionality the same while avoiding the need to work through some of the instance UI pages</li>
+<li>Enables operational and decommission scripts (plus <q>boot</q> scripts which are run when RightLink is installed)</li>
+<li>Enables monitoring by installing a bundled collectd-compatible monitoring agent as a boot script.</li>
+</ul>
+
+<h2 id="use-cases">Use-cases</h2>
+
+<ul>
+<li>Existing instances that were launched before RightScale was adopted</li>
+<li>Instances launched through an external system, such as SaltStack, AWS Autoscaling, AWS Cloud Formation, etc.</li>
+<li>Images that are being launched where installing RightLink and rebundling is not desirable</li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>The <code>rightlink.enable.ps1</code> script must be executed with Administrator privileges.</li>
+<li>A running instance that will be turned into a server</li>
+<li>RDP or WinRM access to this instance or the ability to execute commands from a PowerShell command-line on the instance</li>
+<li>A ServerTemplate with appropriate boot and operational scripts (possibly none) and the rs.image parameter set in vSphere (Right click VM, Edit Settings, VM Options, Advanced, Edit Configuration..., get value from RightScale Images page)</li>
+<li>An MCI that has a <code>rs_agent:type=right_link_lite</code> tag</li>
+<li>A deployment into which the server will be placed</li>
+<li>RightScale OAuth key for the desired account (Settings &gt; Account Settings &gt; API credentials in the Cloud Management dashboard)</li>
+<li>HTTPS network access to the RightScale platform from the instance (see <a href="rl10_proxying_rightlink.html">RightLink Through a Proxy</a> for more information)</li>
+</ul>
+
+<h2 id="how-it-works">How it works</h2>
+
+<ol>
+<li>The command line to install RightLink and run on the instance looks something like this, for version 10.6.4:</li>
+</ol>
+<pre class="syntax-highlight powershell"><code>  <span class="nv">$REFRESHTOKEN</span> <span class="o">=</span> <span class="s2">"e22f8d37...456"</span>
+  <span class="nv">$SERVERTEMPLATENAME</span> <span class="o">=</span> <span class="s2">"RightLink 10.6.4 Windows Base"</span>
+  <span class="nv">$DEPLOYMENTNAME</span> <span class="o">=</span> <span class="s2">"Staging Deployment"</span>
+  <span class="nv">$CLOUDTYPE</span> <span class="o">=</span> <span class="s2">"amazon"</span>
+  <span class="nv">$APISERVER</span> <span class="o">=</span> <span class="s2">"us-3.rightscale.com"</span>
+
+  <span class="nv">$wc</span> <span class="o">=</span> <span class="nb">New-Object </span>System.Net.WebClient
+  <span class="nv">$wc</span>.DownloadFile<span class="o">(</span><span class="s2">"https://rightlink.rightscale.com/rll/10/rightlink.enable.ps1"</span>, <span class="s2">"</span><span class="nv">$pwd</span><span class="se">\r</span><span class="s2">ightlink.enable.ps1"</span><span class="o">)</span> 
+  Powershell -ExecutionPolicy Unrestricted -File rightlink.enable.ps1 -refreshToken <span class="nv">$REFRESHTOKEN</span> -serverTemplateName <span class="nv">$SERVERTEMPLATENAME</span> -deploymentName <span class="nv">$DEPLOYMENTNAME</span> -cloudType <span class="nv">$CLOUDTYPE</span> -ApiServer <span class="nv">$APISERVER</span>
+</code></pre>
+
+<p>Additional versions can be found on the <a href="/rl10/releases">releases</a> page. As a convenience, more generic versions such as <q>10</q> or <q>10.5</q> may be specified as a way to install the latest GA version for a lineage. For example, https://rightlink.rightscale.com/rll/10/rightlink.enable.ps1 will pull the latest RightLink 10 client.</p>
+
+<ol>
+<li>The downloaded <code>rightlink.enable.ps1</code> script locates the ServerTemplate provided and locates the instance itself</li>
+<li>The script then creates a server around the instance using the located ServerTemplate and places it in the deployment provided</li>
+<li>It then retrieves the userdata for the new server, places it into <code>C:\ProgramData\RightScale\RightLink</code> and starts RightLink</li>
+<li>RightLink comes up as if the server had just booted, runs boot scripts, and transitions to operational</li>
+</ol>
+
+<p>After this process the server looks just like any other server. Please note however that Relaunch is not supported.</p>
+
+<p>For reference (please check the actual script you are using):</p>
+<pre class="syntax-highlight powershell"><code>  <span class="nb">PS</span> &gt; .<span class="se">\r</span>ightlink.enable.ps1 -Help
+  This script will take a unmanaged instance and turn it into a RightScale server.
+  Parameters:
+    -RefreshToken         RightScale API refresh token <span class="k">from </span>the dash Settings&gt;API
+                          Credentials <span class="o">(</span>required<span class="o">)</span>
+    -DeploymentName       Name of the pre-existing deployment into which to put
+                          the server
+    -DeploymentHref       HREF of the deployment to put the server. alternate to
+                          the name of the deployment <span class="o">(</span>ex. /api/deployments/123456789<span class="o">)</span>
+    -ServerTemplateName   Name of the ServerTemplate to associate with this instance
+    -ServerTemplateHref   Alternate to ServerTemplateName. HREF of the ServerTemplate
+                          to associate with this instance
+                          <span class="o">(</span>ex./api/server_templates/123456789<span class="o">)</span>
+    -ServerName           Name to call the server. Default is current Instance name
+                          or RightLink Enabled <span class="c1">#$pid</span>
+    -Inputs               Server inputs <span class="k">in </span>the form of <span class="nv">NAME</span><span class="o">=</span>key:value, separate
+                          multiple inputs with commas
+    -CloudType            Cloud <span class="nb">type </span>the instance is <span class="k">in</span>. Supported values are amazon,
+                          azure, azure_v2, google, open_stack_v2,
+                          soft_layer, vscale
+    -InstanceHref         RightScale API instance HREF <span class="o">(</span>disables self-detection<span class="o">)</span>
+                          <span class="o">(</span>ex. /api/clouds/1/instances/123456ABCDEF<span class="o">)</span>
+    -ApiServer            Hostname <span class="k">for </span>the RightScale API, Default: my.rightscale.com
+    -Proxy                Have RightLink use HTTP proxy. Will also install RightLink
+                          through proxy
+    -NoProxy              A list of hosts to not proxy. List is inherited by scripts
+                          as an environmental variable
+    -Username             RightLink Service User Name <span class="o">(</span>default: RightLink<span class="o">)</span>
+    -Password             RightLink Service User Password
+                          <span class="o">(</span>default: Randomly generated password<span class="o">)</span>
+    -Debug                Verbose output
+    -Help                 Display <span class="nb">help
+
+  </span>Required Inputs: -RefreshToken
+                   -ServerTemplateName or -ServerTemplateHref
+                   -DeploymentName or -DeploymentHref
+                   -CloudType or -InstanceHref
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

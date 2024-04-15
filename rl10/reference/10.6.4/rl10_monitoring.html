@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightLink Monitoring and Alerts</title><meta content="This document describes the steps for setting up monitoring and alerts with RightLink 10. With RightLink 10.1.2 and newer, monitoring and alerts are handled by RightScale Time Series Storage, or TSS." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_monitoring.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_monitoring.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_monitoring.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_monitoring.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_monitoring.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_monitoring.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_monitoring.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_monitoring.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>RightLink Monitoring and Alerts</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>With RightLink 10.1.2 and newer, monitoring and alerts are handled by RightScale Time Series Storage, or TSS. TSS is the name for the back-end system for aggregating, displaying, and acting on monitoring data via alerts. TSS is built to work with collectd and HTTPS. This document describes the steps for setting up monitoring and alerts with RightLink 10.</p>
+
+<h3 id="overview-requirements">Requirements</h3>
+
+<ol>
+<li>RightLink 10.1.2 or newer</li>
+<li>TSS enabled for your account. Contact RightScale Support if not enabled.</li>
+<li>Collectd 4.8 or newer (Linux)</li>
+</ol>
+
+<h3 id="overview-tss-vs-sketchy">TSS vs Sketchy</h3>
+
+<p>RightLink versions prior to 10.1.2 used a different back-end system (Sketchy servers) with a number of limitations. The Sketchy system only worked with Collectd 4 and only accepted UDP traffic. The Sketchy system had some shortcomings, such as UDP traffic not working well with proxies, firewalls, and not being easy to send data securely. For TSS, UDP is supported for backwards compatibility, but HTTPS is strongly preferred. The RightLink process runs a <a href="rl10_local_and_proxied_http_requests.html">proxy</a> for collectd data on the instance. Collectd data is first sent to the RightLink process on the instance over HTTP. RightLink then adds authentication headers and forwards the monitoring data onto the TSS back-end over HTTPS.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>Monitoring requires that time be accurate. It is recommended you <a href="rl10_time_synchronization.html">setup NTP</a>.</p>
+</div>
+
+<h2 id="linux-setup-procedure">Linux Setup Procedure</h2>
+
+<p>On Linux, monitoring is built on top of collectd, which sends data to the local RightLink process. As a reference, see the <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/enable-monitoring.sh">RL10 Linux Enable Monitoring</a> script which ships as part of <q>RightLink Linux 10.X.X Base</q> ServerTemplate (ST). The following steps are performed by this ServerTemplate:</p>
+
+<ol>
+<li><strong>Install collectd</strong>. Collectd 4 and 5 are both supported, though there are differences between them (see <a href="#usage-caveats">caveats</a>). For RedHat based systems (AWS Linux, CentOS, Fedora, Oracle Linux, etc.) the collectd packages may be found in the <a href="https://fedoraproject.org/wiki/EPEL">Fedora Extra Packages for Enterprise Linux</a> (EPEL) repository.</li>
+<li><strong>Configure any <a href="https://collectd.org/wiki/index.php/Category:Plugins">collectd plugins</a> needed</strong>. The Base ST configures syslog, interface, cpu, df, disk, memory, load, processes, users and swap plugins by default.</li>
+<li><strong>Configure the <q>write_http</q> plugin to post data to the RightLink process</strong>. The RightLink process has a HTTP server on a random high port recorded as RS_RLL_PORT in /var/run/rightlink/secret. Sample contents of plugin config, assuming collectd 5 is running. If 4 is running, change the collectdv5 to collectdv4:</li>
+</ol>
+<pre class="syntax-highlight xml"><code>    LoadPlugin "write_http"
+    <span class="nt">&lt;Plugin</span> <span class="err">"write_http"</span><span class="nt">&gt;</span>
+      URL "http://127.0.0.1:54312/rll/tss/collectdv5"
+    <span class="nt">&lt;/Plugin&gt;</span>
+</code></pre>
+
+<ol>
+<li><strong>Configure collectd</strong>. The <q>Hostname</q> value in the collectd config must be set to ENV:RS_INSTANCE_UUID variable passed in through the ServerTemplate config, formatted like this: 01-3IPDVL6CR0FSK. FQDNLookup must be false as this is a UUID type value and not a FQDN. This value may also be found on the Info tab of your Server. Use the default 20 second interval.</li>
+<li><strong>Add <code>rs_monitoring:state=auth</code> tag to the Server</strong>. Note that this tag has changed slightly. For pre-TSS accounts, this tag was rs_monitoring:state=active.</li>
+</ol>
+
+<h3 id="linux-setup-procedure-alternative-linux-monitoring-setup">Alternative Linux Monitoring Setup</h3>
+
+<p>Some Linux OSs do not have a standard install for collectd, such as CoreOS. By default, running the <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/enable-monitoring.sh">RL10 Linux Enable Monitoring</a> script on CoreOS will install native RightLink monitoring.  With this method of monitoring, RightLink will obtain the same metrics from the operating system as the default install of collectd5 on Ubuntu 14.04 and pass it to TSS.  A caveat of using this method of monitoring is the inability to use collectd plugins except those supported by <a href="#custom-monitoring-plugins-with-built-in-monitoring">Custom Monitoring Plugins with Built In Monitoring</a>.</p>
+
+<h2 id="windows-setup-procedure">Windows Setup Procedure</h2>
+
+<p>On Windows, monitoring is built into RightLink. It currently monitors CPU usage, memory usage, disk usage, and network traffic. The monitoring metric names are similar to those of Collectd 5 and has some plugin support with <a href="#custom-monitoring-plugins-with-built-in-monitoring">Custom Monitoring Plugins</a>. As a reference, see the <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rlw/enable-monitoring.ps1">RL10 Windows Enable Monitoring</a> script which ships as part of the <q>RightLink Linux 10.X.X Base</q> ServerTemplate (ST). The following step is performed by this ServerTemplate:</p>
+
+<ol>
+<li><strong>Enable Monitoring</strong>. This can be done with the RightScale API client (rsc), a Go-based API client that ships with RightLink: <code>rsc rl10 update /rll/tss/control enable_monitoring=all</code>. This request tells RightLink to start sending monitoring data to TSS and also adds the <code>rs_monitoring:state=auth</code> tag to the server.</li>
+</ol>
+
+<h2 id="alerts">Alerts</h2>
+
+<p>The RightLink 10 Linux and Windows Base ServerTemplates each come with a set of best practice alert specifications which
+are used with the <a href="/cm/rs101/rightscale_alert_system.html">RightScale Alert System</a>. Most of these alerts use monitoring
+metrics sent by Collectd or the built-in RightLink monitoring. These alerts can be seen on the Alerts tab of the
+ServerTemplates on the Cloud Management dashboard and they are defined in the <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/base.yml">rightscale/rightlink_scripts repository</a>
+in the Alerts sections of <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/base.yml">rll/base.yml</a> (Linux) and <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rlw/base.yml">rlw/base.yml</a> (Windows) which are ServerTemplate YAML files that
+can be used with the <a href="rl10_storing_scripts_in_git_svn.html#right-st-tool-method">Right ST Tool</a>.</p>
+
+<p>Since these ServerTemplates support multiple clouds and operating system distributions as wells supporting both Collectd
+4 and 5 on Linux, the monitoring metrics sent from a RightScale instance running RightLink might not match those in the
+alert specifications of the ServerTemplate so the ServerTemplates also provide RightScripts which make the necessary
+changes to the alerts on the instance so they match the monitoring metrics which will actually be sent.</p>
+
+<p>On Linux, the <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/setup-alerts.sh">RL10 Linux Setup Alerts</a>
+RightScript may modify the following alerts:</p>
+
+<ul>
+<li><strong>rs low space in root partition</strong>: If a Linux system is running collectd 4, the metric used for this alert will be
+set to <code>df/df-root.free</code> rather than <code>df-root/df_complex-free.value</code>.</li>
+<li><strong>rs high network tx activity</strong> and <strong>rs high network rx activity</strong>: On newer Linux distribution versions (such as
+CoreOS and Ubuntu 16.04) the network interface name is not necessarily <code>eth0</code> and there may be more network
+interfaces on the system, so this script will update and add the alerts to match the network interfaces on the
+system.</li>
+<li><strong>rs low swap space</strong>: If no swap is set up on a Linux system, no swap metrics will be sent. If you enable swap on
+the system at a later point, this script can be rerun to re-enable the alert.</li>
+</ul>
+
+<p>On Windows, the <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rlw/setup-alerts.ps1">RL10 Windows Setup Alerts</a>
+RightScript may modify the following alerts:</p>
+
+<ul>
+<li><strong>rs high network tx activity</strong> and <strong>rs high network rx activity</strong>: On Windows the network interface name comes from
+the name of the emulated or virtualized network interface driver which differs between hypervisors and clouds and
+there may be more network interfaces on the system, so this script will update and add the alerts to match the
+network interfaces on the system</li>
+</ul>
+
+<h2 id="viewing-accessing-data">Viewing/Accessing Data</h2>
+
+<p>Monitoring graphs should now show up on the <q>Monitoring</q> tab of your Server in the Cloud Management dashboard. Alerts may be set up on the <q>Alerts</q> tab of your Server. Metrics, alerts and alert actions may be viewed or set via API 1.5: <a href="http://reference.rightscale.com/api1.5/resources/ResourceMonitoringMetrics.html">MonitoringMetric</a>, <a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html">Alerts</a>, <a href="http://reference.rightscale.com/api1.5/resources/ResourceAlertSpecs.html">AlertSpecs</a>.</p>
+
+<h2 id="custom-monitoring-plugins-with-built-in-monitoring">Custom Monitoring Plugins with Built In Monitoring</h2>
+
+<p>RightLink&#39;s built in monitoring has support for running custom monitoring plugins that are compatible with <a href="https://collectd.org/wiki/index.php/Plugin:Exec">collectd&#39;s Exec plugin</a>. For Linux these can be scripts in any installed scripting language and on Windows they can be PowerShell scripts. Just like collectd, RightLink passes in the <code>COLLECTD_HOSTNAME</code> (the RightScale instance UUID) and <code>COLLECTD_INTERVAL</code> (the monitoring interval in seconds; the defaults is 20) environment variables and expects the scripts to run continuously, but will restart them if they exit at the next monitoring interval.</p>
+
+<p>Here is an example of a Bash script which would be used on Linux:</p>
+<pre class="syntax-highlight shell"><code>  <span class="c">#!/bin/bash</span>
+  <span class="k">while </span><span class="nb">true</span>; <span class="k">do
+    </span><span class="nv">NOW</span><span class="o">=</span><span class="sb">`</span>date +%s<span class="sb">`</span>
+    <span class="nv">VALUE</span><span class="o">=</span>do_magic<span class="o">()</span>
+    <span class="nb">printf</span> <span class="s2">"PUTVAL %s/exec-magic/gauge-magic_level interval=%d %d:%g</span><span class="se">\n</span><span class="s2">"</span> <span class="nv">$COLLECTD_HOSTNAME</span> <span class="se">\</span>
+      <span class="nv">$COLLECTD_INTERVAL</span> <span class="nv">$NOW</span> <span class="nv">$VALUE</span>
+    sleep <span class="nv">$COLLECTD_INTERVAL</span>
+  <span class="k">done</span>
+</code></pre>
+
+<p>And, here is an example of a PowerShell script which would be used on Windows:</p>
+<pre class="syntax-highlight powershell"><code>  <span class="k">while</span> <span class="o">(</span><span class="nv">$true</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nv">$now</span> <span class="o">=</span> <span class="o">[</span><span class="kt">int</span><span class="o">](</span><span class="nb">Get-Date</span> -UFormat %s<span class="o">)</span>
+    <span class="nv">$value</span> <span class="o">=</span> <span class="k">Do</span>-Magic<span class="o">()</span>
+    <span class="nb">Write-Output</span> <span class="o">(</span><span class="s2">"PUTVAL {0}/exec-magic/gauge-magic_level interval={1:d} {2:d}:{3:g}"</span> -f <span class="se">\</span>
+      <span class="nv">$env</span>:COLLECTD_HOSTNAME, <span class="nv">$env</span>:COLLECTD_INTERVAL, <span class="nv">$now</span>, <span class="nv">$value</span><span class="o">)</span>
+    <span class="nb">Sleep</span> <span class="nv">$env</span>:COLLECTD_INTERVAL
+  <span class="o">}</span>
+</code></pre>
+
+<p>These custom monitoring scripts can be configured to be run by RightLink through its <a href="rl10_local_and_proxied_http_requests.html#http-requests-handled-by-rightlink10-itself">HTTP interface</a>. The HTTP interface has actions for adding/updating, listing, and removing scripts from the configuration. RightLink stores this configuration so the scripts will be started again if the RightLink service is restarted, but a boot RightScript on a ServerTemplate should be used to ensure it is configured on instance reboot or relaunch. The <a href="https://github.com/rightscale/rsc">RSC</a> utility which comes with RightLink is the recommended tool for working with the HTTP interface.</p>
+
+<p>Here is an example RightScript that would install our example monitoring script from an attachment and configure it to run under RightLink on Linux:</p>
+<pre class="syntax-highlight shell"><code>  <span class="c">#!/bin/bash</span>
+  <span class="nv">magic_dir</span><span class="o">=</span><span class="s1">'/opt/magic_monitoring'</span>
+  <span class="nv">magic_script</span><span class="o">=</span><span class="s1">'magic.sh'</span>
+  <span class="nv">magic_path</span><span class="o">=</span><span class="s2">"</span><span class="nv">$magic_dir</span><span class="s2">/</span><span class="nv">$magic_script</span><span class="s2">"</span>
+  sudo install -D <span class="s2">"</span><span class="nv">$RS_ATTACH_DIR</span><span class="s2">/</span><span class="nv">$magic_script</span><span class="s2">"</span> <span class="nv">$magic_path</span>
+  rsc rl10 create /rll/tss/exec/magic <span class="nv">executable</span><span class="o">=</span><span class="nv">$magic_path</span>
+</code></pre>
+
+<p>And, here is an example RightScript that would install our example monitoring script from an attachment and configure it to run under RightLink on Windows:</p>
+<pre class="syntax-highlight powershell"><code>  <span class="nv">$magicDir</span> <span class="o">=</span> <span class="s1">'C:\Program Files\Magic Monitoring'</span>
+  <span class="nv">$magicScript</span> <span class="o">=</span> <span class="s1">'magic.ps1'</span>
+  <span class="nv">$magicPath</span> <span class="o">=</span> <span class="s2">"</span><span class="nv">$magicDir</span><span class="se">\$</span><span class="s2">magicScript"</span>
+  <span class="nb">New-Item</span> <span class="nv">$magicDir</span> -ItemType Directory
+  <span class="nb">Copy-Item</span> <span class="s2">"</span><span class="k">${</span><span class="nv">env</span>:RS_ATTACH_DIR<span class="k">}</span><span class="se">\$</span><span class="s2">magicScript"</span> <span class="nv">$magicPath</span>
+  rsc rl10 create /rll/tss/exec/magic <span class="nv">executable</span><span class="o">=</span><span class="nv">$magicPath</span>
+</code></pre>
+
+<p>If the <code>do_magic</code> or <code>Do-Magic</code> functions existed, running one of these RightScripts on an instance with RightLink 10 monitoring enabled would start showing a <code>gauge-magic_level</code> graph under <code>exec-magic</code> on the Monitoring tab for the server in the RightScale dashboard.</p>
+
+<p>Some example RightScripts with accompanying monitoring scripts for Windows are available in the <a href="https://github.com/rightscale/rightlink_scripts">rightscale/rightlink_scripts repository</a>:</p>
+
+<ul>
+<li><a href="https://github.com/rightscale/rightlink_scripts/blob/master/rlw-examples/iis-monitoring.ps1">SYS IIS monitoring install</a> installs and configures <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rlw-examples/attachments/iis-monitor.ps1">iis-monitor.ps1</a> which monitors Microsoft ISS.</li>
+<li><a href="https://github.com/rightscale/rightlink_scripts/blob/master/rlw-examples/mssql-monitoring.ps1">DB SQLS Install monitors</a> installs and configures <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rlw-examples/attachments/mssql-monitor.ps1">mssql-monitor.ps1</a> which monitors Microsoft SQL Server.</li>
+</ul>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<p>If collectd graphs do not appear to be populating, try the following steps:</p>
+
+<ol>
+<li>Check the RightLink main process audit log (RightLink 10.X.X log pid NNNN). This should note if data was posted.</li>
+<li>Run <code>collectd -T</code> to check the collectd process configuration. It should return an error or an empty string/status success.</li>
+<li>Check for the <code>rs_monitoring:state=auth</code> tag.</li>
+<li>Check the collectd config -- the write_http plugin configuration should post to the port specified in /var/run/rightlink/secret.</li>
+<li>Check to make sure system time is accurate. System time must be <a href="rl10_time_synchronization.html">properly synchronized</a>.</li>
+</ol>
+
+<h2 id="caveats">Caveats</h2>
+
+<p>TSS supports both collectd 4 and 5. There are differences between the versions. See <a href="https://collectd.org/wiki/index.php/V4_to_v5_migration_guide">Collectd v4 to v5 migration guide</a> for differences in plugin config and data formats. Some of the metric names have changed and will display differently in the dash and will be be different if selected for Alerts or polled <a href="http://reference.rightscale.com/api1.5/resources/ResourceMonitoringMetrics.html">via the API</a>. For example &#39;interface/if_octets-eth0&#39; was changed to &#39;interface-eth0/if_octets&#39;.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

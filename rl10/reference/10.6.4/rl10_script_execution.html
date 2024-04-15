@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Script Execution</title><meta content="Scripts are executed by RightLink 10 as part of a runlist, such as a boot runlist or as operational scripts." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_script_execution.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_script_execution.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_script_execution.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_script_execution.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_script_execution.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_script_execution.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_script_execution.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_script_execution.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>Script Execution</h1></div><div class="main-content"><h2 id="background">Background</h2>
+
+<p>Scripts are executed by RightLink 10 as part of a runlist, such as a boot runlist, as operational scripts, or as decommission scripts. Scripts come from RightScripts stored in the RightScale platform (Design &gt; RightScripts menu in the dashboard).</p>
+
+<table><thead>
+<tr>
+<th>Feature</th>
+<th>RightScript</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Attachments</td>
+<td><code>RS_ATTACH_DIR</code> environment variable set to directory containing all attachments</td>
+</tr>
+<tr>
+<td>Current working directory</td>
+<td>Temporary directory created for each individual script and deleted after the script&#39;s termination.</td>
+</tr>
+<tr>
+<td>Interpreter identification in Unix</td>
+<td>If the first line starts with &#39;#!/&#39; it is changed to the correct &#39;#! /&#39; (space added)</td>
+</tr>
+<tr>
+<td>Packages</td>
+<td><code>RS_PACKAGES</code> environment variable set to the union of all packages mentioned in the metadata of any RightScript in the runlist.</td>
+</tr>
+</tbody></table>
+
+<h3 id="background-script-execution-environment">Script Execution Environment</h3>
+
+<ul>
+<li>A few environment variables are pulled from RightLink 10&#39;s own environment: <code>PATH</code>, <code>HOME</code>, <code>SHELL</code>, <code>USER</code></li>
+<li>A few environment variables are set by RightLink 10:
+
+<ul>
+<li>client_id, account, and api_hostname, http_proxy, no_proxy (these are passed to RightLink 10 as command line flags or environment variables)</li>
+<li>RS_SELF_HREF is set to the instance&#39;s href in RightApi 1.5 (e.g. /api/instances/123456)</li>
+<li>For RightScripts, <code>RS_ATTACH_DIR</code> is set to the directory containing the script&#39;s attachments</li>
+<li>For RightScripts, <code>RS_PACKAGES</code> is set to the union of all <q>packages</q> listed by any RightScript in the runlist. This can be used to <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll-examples/install-packages.sh">install packages all at once</a>, near the beginning of the boot sequence, to economize on time spent doing package management. Note that the packages have no meaning to RightScale or RightLink; they are simply whitespace-delimited words to be interpreted by the RightScript that consumes them. The RightScale-provided <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll-examples/install-packages.sh">example script</a> implements some suggested semantics for using RightScript package metadata efficiently and in a distro-neutral way</li>
+</ul></li>
+<li>The RightScript&#39;s inputs are assigned to environment variables</li>
+<li>For RightScripts that start with &#39;#!/&#39; (Linux Only).</li>
+<li>For RightScripts that start with &#39;#!/&#39; and the first arrgument contains <q>powershell</q> as follows: <code>#!powershell -Version 2.0</code> the PowerShell version specified will be used (Windows Only).</li>
+<li>The script is executed by the operating system&#39;s <code>execve</code> system call, which means that unless the script starts with <code>#! /some/executable/path</code> it will not execute (there is no default to execute unmarked files using <code>$SHELL</code>)</li>
+</ul>
+
+<p>Note that the script can parse <code>/var/run/rightlink/secret</code> to obtain the information necessary to make HTTP requests to RightLink 10 and to RightApi1.5</p>
+
+<h3 id="background-script-termination">Script Termination</h3>
+
+<ul>
+<li>A script is deemed to have finished when the process launched by RightLink 10 exits irrespective of any child processes that may still be running</li>
+<li>The stdout/stderr pipes attached to the script process remain open and RightLink 10 will continue to consume any output produced on them past the script processes&#39; exit (this is possible if the script forks detached child processes) and RightLink 10 will continue to log such output in the audit entry. However, note that such <q>late</q> output may become intermixed with the output of successive scripts in the same runlist.</li>
+<li>Script success/failure is determined from the exit code of the script process, specifically 0 =&gt; success and non-zero =&gt; failure</li>
+</ul>
+
+<h3 id="background-starting-background-processes-in-scripts">Starting Background Processes in Scripts</h3>
+
+<p>Any background processes started in a script that are supposed to continue running while letting the script itself exit need to be detached. When using bash a simple way to detach child processes is to launch them using &#39;&amp;&#39; and then detach them using the &#39;disown&#39; command. Simply &#39;disown&#39; will detach all child processes. If the background processes are not detached they will be terminated by bash when the script itself exits.  When using powershell a simple way to detach a process is to use the &#39;Start-Process&#39; command.</p>
+
+<h3 id="background-script-standard-output--stdout--and-standard-error--stderr-">Script Standard Output (STDOUT) and Standard Error (STDERR)</h3>
+
+<p>The standard output (STDOUT) and standard error (STDERR) of scripts are sent to <a href="/cm/dashboard/reports/audit_entries/">Audit Entries</a>. If it is desired to have the STDOUT and STDERR of a script sent elsewhere, such as the local filesystem or syslog, this must be coded into the script.</p>
+
+<p>Here is an example of the beginning of a Bash script that sends all STDOUT and STDERR to a file and STDOUT:</p>
+<pre class="syntax-highlight shell"><code><span class="c">#!/bin/bash</span>
+<span class="nb">exec</span> &gt; &gt;<span class="o">(</span>tee -a /var/log/script-output.log<span class="o">)</span> 2&gt;&amp;1
+<span class="nb">echo</span> <span class="s2">"Standard Output also sent to file"</span>
+<span class="nb">echo</span> <span class="s2">"Standard Error also sent to file"</span> &gt;&amp;2
+</code></pre>
+
+<p>Here is another example of the beginning of a Bash script that sends all STDOUT and STDERR to <code>logger</code> only (<code>logger</code> is a command used to send messages to syslog):</p>
+<pre class="syntax-highlight shell"><code><span class="c">#!/bin/bash</span>
+<span class="nb">exec</span> &gt; &gt;<span class="o">(</span>logger --tag <span class="nb">test</span>-script-name<span class="o">)</span> 2&gt;&amp;1
+<span class="nb">echo</span> <span class="s2">"Standard Output redirected to syslog"</span>
+<span class="nb">echo</span> <span class="s2">"Standard Error redirected to syslog"</span> &gt;&amp;2
+</code></pre>
+
+<h3 id="background-decommission-runlist">Decommission Runlist</h3>
+
+<p>The decommission runlist is executed when RightLink 10 is told that the operating system is shutting down for a reboot, stop, or terminate and during a service restart. It is thus an extension of the operating system&#39;s shutdown sequence that runs as part of the init system&#39;s shutdown. The decommission runlist is only run if a server has reached an &#39;operational&#39; or &#39;stranded&#39; state, which indicates that it has finished executing it&#39;s boot bundle. On Windows and Linux, there are differences in when the decommission bundle is run.</p>
+
+<ul>
+<li>On Linux, the OS is always told to shut down first. As a result, the OS init system sends a SIGTERM to RightLink which triggers RightLink to run the decommission sequence. Because of this, decommission scripts have a limited amount of time to run determined by the OS init system. This is set to 3 minutes on Linux though may be modified by changing the timeouts in the service config files for upstart/systemd. If setting the timeout to longer than 50 minutes for stop or terminate, see rs_decommissioning:delay tag in <a href="/cm/ref/list_of_rightscale_tags.html">List of Rightcale Tags</a></li>
+<li>On Windows, the decommission runlist is executed before the OS is told to shutdown. This is because Windows has limited dependency management of services during shutdown, and very limited time to stop services. <em><strong>RightLink will only execute decommission scripts for Windows if the reboot/terminate/stop was initiated via the RightScale API or dashboard and not if it was executed via the cloud console or on the machine</strong></em>. There is no timeout on the running of the decommission bundle in the RightLink code. However, there is a timeout platform side when stopping or terminating instances. See the rs_decommissioning:delay tag in <a href="/cm/ref/list_of_rightscale_tags.html">List of Rightcale Tags</a>. On Windows, it is somewhat more common to do reboots during the boot bundle to install updates or hotfixes. If this is done, it&#39;s recommended to issue the shutdown with the <a nocheck href='https://technet.microsoft.com/en-us/library/bb491003.aspx'>shutdown command</a> and then to issue a <code>try { sleep 60 } finally { sleep 60 }</code> directly afterwards. The sleep ensures that you continue to pause execution until the terminate signal from the reboot is received by the RightLink process, which can take 10-20 seconds. The finally block is because the currently executing RightScript also receives the terminate signal and will record a spurious failure as a result.</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Lifecycle - Launch, Reboot, Stop-Start, Decommission, Terminate</title><meta content="Describes the lifecycle of a server in the context of RightLink 10 including Launch, Reboot, Stop-Start, Decommission, and Terminate." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_lifecycle.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_lifecycle.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_lifecycle.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_lifecycle.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_lifecycle.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_lifecycle.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_lifecycle.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_lifecycle.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>Lifecycle - Launch, Reboot, Stop-Start, Decommission, Terminate</h1></div><div class="main-content"><h2 id="launch-initial-boot">Launch-Initial Boot</h2>
+
+<p>When launching a new server (with a ServerTemplate and MultiCloudImage (MCI)) the following steps occur:</p>
+
+<ul>
+<li>The MCI and/or Server have tags that specify how the RightScale platform should produce user-data (see also cloud-init info):
+
+<ul>
+<li>typically the <code>rs_agent:type=right_link_lite</code> tag specifies user-data that will include RightLink 10 appropriate parameters</li>
+<li>if RightLink 10 is not installed on the image, then typically a <code>rs_agent:mime_shellscript</code> tag on Linux or <code>rs_agent:powershell_url</code> tag on Windows is used to have cloud agent download and execute the RightLink 10 installer</li>
+</ul></li>
+<li>If the instance was launched via <a href="rl10_rcav.html">RightScale Cloud Appliance for vSphere (RCA-V)</a>, networking is configured.</li>
+<li>The instance boots and an agent reads and acts on the user-data and metadata. On Linux, this agent is typically cloud-init while on Windows a native agent will be used if available to install RightLink. RightLink then comes bundled with tool to fetch userdata, detailed in the <a href="#userdata-retrieval-on-windows">Userdata Retrieval on Windows</a> section below.</li>
+<li>The first user-data script places the instance parameters into <code>/var/lib/rightscale-identity</code> (Linux) or <code>C:\ProgramData\RightScale\RightLink\rightscale-identity</code> (Windows).</li>
+<li>The optional second script installs RightLink 10, which includes the following steps:
+
+<ul>
+<li>creates a &#39;rightlink&#39; (Linux) and &#39;RightLink&#39; (Windows) user for the rightlink service</li>
+<li>installs sudoers config for the &#39;rightlink&#39; user (Linux only)</li>
+<li>downloads the RightLink 10 archive</li>
+<li>determines the type of init system (systemd, upstart, or sysvinit) and installs the appropriate startup scripts (Linux) or NSSM is used to install RightLink as a service (Windows)</li>
+<li>starts the RightLink 10 service</li>
+<li>ensures that the user-data based <q>user scripts</q> (the two scripts discussed here) run on every boot</li>
+</ul></li>
+<li>The RightLink 10 service starts and authenticates with the platform, it then:
+
+<ul>
+<li>retrieves the boot bundle and executes it</li>
+<li>if all scripts in the boot bundle execute successfully, an &#39;operational&#39; state is achieved</li>
+<li>if any script in the boot bundle fails, a &#39;stranded in booting&#39; state is achieved</li>
+<li>waits for commands from the platform</li>
+</ul></li>
+</ul>
+
+<p>When enabling a running instance the following differences exist:</p>
+
+<ul>
+<li>There is no user-data when the <q>enable</q> script starts. Instead of passing down user-data via the cloud as in the <q>new launch</q> case, the user-data is generated and fetched directly from the RightScale API. To do this, it first locates the HREF of the currently running instance, or unmanaged server, then turns the instance into a managed RightScale Server by associating that server with a RightScale ServerTemplate.</li>
+<li>Like the new launch case, in order to obtain the right type of user-data the MCI used by the ServerTemplate must have a <code>rs_agent:type=right_link_lite</code> tag.</li>
+</ul>
+
+<h2 id="userdata-retrieval-on-windows">Userdata Retrieval on Windows</h2>
+
+<p>On Windows, public clouds (Ec2, Azure, Google) all have proprietary agents that may run custom Powershell scripts using different methods. For some clouds, these <a href="rl10_install_at_boot_windows.html">agents may be leveraged</a> to bootstrap the instance. Once RightLink is installed, it includes a userdata fetcher script.</p>
+
+<p>This userdata fetcher is a powershell script located at <code>C:\Program Files\RightScale\RightLink\userdata-fetcher.ps1</code>. This script is wrapped as a Windows service named RightScaleUserdata and run at boot, starting RightLink when done. Logs may be viewed at <code>C:\Program Files\RightScale\Rightlink\userdata-fetcher.log</code>. Clouds supported include EC2, RCA-V, Google, OpenStack, Softlayer, and Azure.</p>
+
+<h2 id="reboot">Reboot</h2>
+
+<ul>
+<li>If you initiate the reboot through the platform RightLink 10 receives a &#39;decommission for reboot&#39; message, which is handled differently on Linux and Windows:
+
+<ul>
+<li><em>Linux</em>: it initiates an OS reboot (e.g., by changing to runlevel 6 on Linux) which sends a SIGTERM to the rightlink process. The Rightlink process then proceeds to run the decommission bundle if it has reached the &#39;operational&#39; or &#39;stranded&#39; state, which happens at the end of the boot bundle. Because of this, decommission scripts have a limited amount of time to run determined by the OS init system. This is set to 3 minutes on Linux though may be modified by changing the timeouts in the service config files for upstart/systemd. If setting the timeout for longer than 50 minutes, see <a href="#terminate">Terminate</a> and <a href="#stop-start">Stop-Start</a> sections below.</li>
+<li><em>Windows</em>: it runs the decommission bundle first, then initiates an OS reboot. This is because Windows has limited dependency management of services during shutdown, and very limited time to stop services. Because of this, <em><strong>RightLink will only execute decommission scripts for Windows if the reboot/terminate/stop was initiated via the RightScale API or dashboard and not if it was executed via the cloud console or on the machine</strong></em>. There is no timeout on the running of the decommission bundle in the RightLink code. However, see below for timeouts that apply to stop and terminate.</li>
+</ul></li>
+<li>When the OS starts the shutdown process it sends a kill SIGTERM signal to RightLink 10. For Linux, RightLink 10 fetches and executes the decommission bundle if it has achieved an &#39;operational&#39; or &#39;stranded&#39; state then exits. For Windows, the client simply exits immediately as the decommission bundle has already run.</li>
+<li>Decommission scripts detect whether this is a &#39;shutdown-for-reboot&#39; using a variety of methods described in the <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/shutdown-reason.sh">Linux Shutdown Reason</a> RightScript and the <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rlw/shutdown-reason.ps1">Windows Shutdown Reason</a>.</li>
+<li>When the OS starts again it causes cloud-init or native agent to run.</li>
+<li>Cloud-init (Linux) and UserDataFetcher (Windows) causes user-data to be reloaded (unchanged) and the scripts in it to be re-run.</li>
+<li>The first script causes the rightscale-identity file to be rewritten with the same content.</li>
+<li>The second script detects that RightLink 10 is already installed and does nothing.</li>
+<li>The init scripts/config installed causes RightLink 10 to start after cloud-init finishes.</li>
+<li>RightLink 10 authenticates and runs the boot bundle.</li>
+</ul>
+
+<h2 id="terminate">Terminate</h2>
+
+<p>Terminate is the same as the first few steps of a reboot. The only difference is that RightLink 10 tells the RightScale platform to terminate the instance. There is also a core side timeout on how longer an instance can be in a decommissioning state before stop/terminate. Thus if you set the upstart/systemd service stop timeout to be more than 50 minutes, you&#39;ll have to set a tag on the instance to tell the core to extend the timeout as well. See the <code>rs_decommissioning:delay</code> tag in <a href="/cm/ref/list_of_rightscale_tags.html">List of Rightcale Tags</a>.</p>
+
+<h2 id="stop-start">Stop-Start</h2>
+
+<p>Stop-start is similar to a reboot except that when the server restarts it is a different instance from the point of view of the RightScale platform. The decommissioning timeout mentioned in the <a href="#terminate">Terminate</a> section above also applies.</p>
+
+<p><strong>Note:</strong> Command line stop is not supported on the Azure Service Manager (legacy Azure) cloud. This is due to a limitation in the way Azure treats a stopped instance when done via the command line (allocated versus unallocated). On SoftLayer, command line stop is not supported as the Softlayer API will not return that the instance is stopped.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

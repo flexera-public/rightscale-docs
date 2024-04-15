@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Upgrade RightLink 10</title><meta content="Check whether a RightLink upgrade is available and perform the upgrade." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_upgrade.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_upgrade.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_upgrade.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_upgrade.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_upgrade.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_upgrade.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_upgrade.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_upgrade.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>Upgrade RightLink 10</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This page describes how RightLink 10 checks for and performs in-place upgrades of itself.</p>
+
+<h2 id="design">Design</h2>
+
+<p>RightLink 10 comes with a variety of tools to assist in upgrading the agent on a running machine. The recommended approach is to use an <code>upgrades</code> file which contains approved upgrade paths and, using the provided scripts, configure RL 10 to periodically consult that file and automatically upgrade. You can maintain your own <code>upgrades</code> file so that you can ensure your applications will continue to work with new versions, or you can use the default RightScale <code>upgrades</code> file which contains RightScaled-tested upgrade paths. You can also run a command on a machine to upgrade RL 10 to a specific binary already on the machine.</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>RightLink 10 upgrades can be performed using the provided scripts or manually.</p>
+
+<h3 id="usage-using-the-upgrades-file-and-scripts">Using the upgrades file and scripts</h3>
+
+<p>The recommended approach for upgrading RightLink 10 is to use the RightScale-provided upgrade script (<a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/upgrade.sh">Linux</a>, <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rlw/upgrade.ps1">Windows</a>). Additionally, RightScale provides a <q>setup-automatic-upgrade</q> script (<a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/setup-automatic-upgrade.sh">Linux</a>, <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rlw/setup-automatic-upgrade.ps1">Windows</a>) that will create the needed cron entry/scheduled job to periodically run the upgrade script mentioned previously.</p>
+
+<p>The <q>upgrade</q> script takes an input <code>UPGRADE_VERSION</code> which is a version to upgrade (or downgrade) to, such as <q>10.6.4</q>.</p>
+
+<p>The <q>setup-automatic-upgrade</q> script takes an input <code>UPGRADES_FILE_LOCATION</code> which is the URL of an <code>upgrades</code> file. This file can be the default file provided by RightScale, or a custom file.</p>
+
+<h4 id="rightscale-tested-upgrades-file">RightScale-tested upgrades file</h4>
+
+<p>As of today, we have not yet built the automation to test upgrade paths of the RL10 agent, so the RightScale-provided <code>upgrades</code> file (<a href="https://rightlink.rightscale.com/rightlink/upgrades">located here</a>) <strong>will not provide any upgrade paths</strong>. In the future, we plan on building such automation and maintaining that file for backwards-compatible upgrades. Details on the <code>upgrades</code> file are below.</p>
+
+<h4 id="custom-upgrades-file">Custom upgrades file</h4>
+
+<p>It is recommended that you maintain your own <code>upgrades</code> file so that you can ensure that an upgrade doesn&#39;t affect your machines and your application. The file should be placed somewhere that all of your instances can access (we recommend an S3 bucket). When a new version of RL10 is released, this gives your team the opportunity to test it, test the upgrade with whatever version you&#39;re currently using, and then update the file if the upgrade is successful. Details on the <code>upgrades</code> file are below.</p>
+
+<h4 id="upgrades-file-syntax">Upgrades file syntax</h4>
+
+<p>The <code>upgrades</code> file lists each allowed upgrade path, in the form <code>&lt;running_version&gt;:&lt;desired_version&gt;</code>. For example: <code>10.4.0:10.6.4</code>. </p>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>Each <code>running_version</code> can only be listed once in the file, or upgrades from that version will fail to start.</p>
+</div>
+
+<p>When the upgrade script is run, either manually or automatically, RightLink 10 will look through the file, locating the single match for its current version. If it finds the current version, it will use the <code>desired_version</code> string to construct the URL to the target binary using the official RightScale RightLink 10 download path (<code>https://rightlink.rightscale.com/rll/${desiredVersion}/...</code>).</p>
+
+<p>Example:</p>
+<pre class="syntax-highlight plaintext"><code># RightScale Rightlink10 Self-Upgrade Manifest
+# Each line has the form &lt;current_version&gt;:&lt;desired_version&gt;
+
+10.3.1:10.6.4
+10.4.0:10.6.4
+10.5.0:10.6.4
+</code></pre>
+
+<h3 id="usage-reverting-an-upgrade">Reverting an Upgrade</h3>
+
+<p>If you want to revert an upgrade, it is recommended you re-run the <q>upgrade</q> script with <code>UPGRADE_VERSION</code> set to the old version of RightLink. Note that the <code>UPGRADE_VERSION</code> input was added recently, so please make sure the latest version of the upgrade script for <a href="https://us-3.rightscale.com/library/right_scripts/RL10-Linux-Upgrade/lineage/55957">Linux</a> and <a href="https://us-3.rightscale.com/library/right_scripts/RL10-Windows-Upgrade/lineage/55960">Windows</a> is imported from the MultiCloud Marketplace and run as an <q>Any</q> script.</p>
+
+<h2 id="breaking-changes">Breaking Changes</h2>
+
+<p>Certain RightLink versions may have key breaking changes. The following is summary of major ones:</p>
+
+<ul>
+<li>10.6.4 - The script revision will now be printed in the summary.</li>
+<li>10.5.0 - Managed login changed to <a href="rl10_managed_ssh_login.html">Enhanced Managed Login</a>. Instead of logging in as the <code>rightscale</code> user, users now login under their individual usernames. In addition, managed login was changed from an automatic feature to an optional feature. The <code>RL10 Linux Enable Managed Login</code> RightScript was added to the 10.5.0 Linux Base ServerTemplate to enable this optional feature. To always enable this feature, this RightScript will have to run and be added to the boot scripts of an upgraded server. Note you can change the revision for <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#update-a-servertemplate-revision-on-multiple-servers">all servers</a> attached to a ServerTemplate or for <a href="/cm/management_guide/managing_active_current_servers.html#supported-modifications-for-active-servers-that-are-in-the-operational-state">individual servers</a>.</li>
+<li>10.2.1 - <code>rightlink</code> service changed from root to <code>rightlink</code> user. Upgrade of previous versions to this version or later not supported.</li>
+</ul>
+
+<h3 id="breaking-changes-known-limitations">Known Limitations</h3>
+
+<p>Please refer to the <a href="/rl10/releases/index.html">release changelogs</a> for for relevant bug fixes.</p>
+
+<ul>
+<li>10.2.1 - When upgrading from 10.2.1 monitoring graphs will disappear if the upgrade script is run. Re-run the &#39;Enable Monitoring&#39; script to re-enable monitoring.</li>
+</ul>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

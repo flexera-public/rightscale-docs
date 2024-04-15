@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Managed SSH Login</title><meta content="Enabling and understanding the Managed Login feature to enable users to SSH into instances." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_managed_ssh_login.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_managed_ssh_login.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_managed_ssh_login.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_managed_ssh_login.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_managed_ssh_login.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_managed_ssh_login.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_managed_ssh_login.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_managed_ssh_login.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>Managed SSH Login</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>With RightLink v10.5.0 and above, Managed Login for Linux based systems has been completely revamped. Users with the <a href="/cm/ref/user_roles.html#-server_login"><em>server_login</em></a> role can log into running servers with key-based SSH connections. Users who also have the <a href="cm/ref/user_roles.html#-server_superuser"><em>server_superuser</em></a> role can run sudo. The two login names available to users are the <a href="#login-names-rightscale-generated-default-login-name"><em>RightScale generated default login name</em></a> and a <a href="#login-names-user-definable-custom-login-name"><em>user definable custom login name</em></a>.</p>
+
+<h2 id="enabling-managed-login">Enabling Managed Login</h2>
+
+<p>Enabling the &#39;Managed Login&#39; feature is done by running the RL10 Linux Enable Managed Login RightScript (<a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/enable-managed-login.sh">Github</a>, <a href="http://www.rightscale.com/library/right_scripts/RL10-Linux-Enable-Managed-Logi/lineage/59044">MultiCloud Marketplace</a>).</p>
+
+<h2 id="installed-and-configuration-files">Installed and Configuration files</h2>
+
+<p>Managed Login uses these commonly used standard Linux components: PAM, NSS, sudo, and OpenSSH.</p>
+
+<p>Configuration of these components entails the following files:</p>
+
+<table><thead>
+<tr>
+<th>Files</th>
+<th>Format</th>
+<th>Purpose</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>/etc/ssh/sshd_config</td>
+<td>SSHD config file</td>
+<td>Configuration file updated to use /usr/local/bin/rs-ssh-keys.sh to obtain a user&#39;s ssh public key for key-based authentication.</td>
+</tr>
+<tr>
+<td>/usr/local/bin/rs-ssh-keys.sh</td>
+<td>bash script</td>
+<td>Custom open-source script that obtains a user&#39;s public key set in the RightScale Dashboard. This script is used in /etc/ssh/sshd_config. The script can be found in the <a href="https://github.com/rightscale/rightlink_scripts">rightscale/rightlink_scripts repository</a> as <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/attachments/rs-ssh-keys.sh">rs-ssh-keys.sh</a>.</td>
+</tr>
+<tr>
+<td>/etc/sudoers.d/90-rightscale-sudo-users</td>
+<td>Sudo config</td>
+<td>Configuration file enabling users with <em>server_superuser</em> role the ability to run sudo.</td>
+</tr>
+<tr>
+<td>/etc/pam.d/sshd</td>
+<td>PAM config</td>
+<td>Configuration file updated to use the pam_mkhomedir PAM module to create user&#39;s home directory at successful login.</td>
+</tr>
+<tr>
+<td>/etc/nsswitch.conf</td>
+<td>NSS config</td>
+<td>Name Service Switch configuration file updated to use RightScale&#39;s custom NSS module providing user and group information to the OS.</td>
+</tr>
+<tr>
+<td>/usr/local/lib/libnss_rightscale.so.2.0.0<br><em>/usr/local/lib/libnss_rightscale.so.2</em><br><em>/usr/local/lib/libnss_rightscale.so</em></td>
+<td>NSS binary module</td>
+<td>RightScale&#39;s custom NSS module to provide RightScale user and group information to the OS. This module is used in /etc/nsswitch.conf. The source code is available in the <a href="https://github.com/rightscale/libnss-rightscale">rightscale/libnss-rightscale repository</a>.</td>
+</tr>
+<tr>
+<td>/var/lib/rightlink/login_policy</td>
+<td>Login Policy File</td>
+<td>Generated file read by the custom NSS module, rs-ssh-keys.sh, and sshd_config.</td>
+</tr>
+<tr>
+<td>/var/lib/rightlink_keys</td>
+<td>SSH Keys Directory</td>
+<td>Ubuntu 12.04 has a version of OpenSSH that does not support the feature to use rs-ssh-keys.sh. In this case, this directory is created and used by sshd_config. A file is created in this directory for every user with the &#39;server_login&#39; role, containing their public key.</td>
+</tr>
+</tbody></table>
+
+<h2 id="login-names">Login Names</h2>
+
+<p>RightScale users with the <a href="/cm/ref/user_roles.html#-server_login"><em>server_login</em></a> role can log into an instance using either the <em>RightScale generated default login name</em> or their <em>user definable custom login name</em>. Both of these login names are mapped to the same Linux user ID (UID). Login names are defined under SSH settings, found in the RightScale UI: Settings\User Settings\SSH.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>In order to allow users to manage their own SSH key pairs <a href="/cm/dashboard/settings/account/enable_mandatory_server_login_control.html">Mandatory Server Login Control</a> must be enabled for the account.</p>
+</div>
+
+<h3 id="login-names-rightscale-generated-default-login-name">RightScale generated default login name</h3>
+
+<p>The default login name is generated for each user using the following pattern: <code>rightscale{RightScale_ID_Num}</code>. For example, your RightScale ID might be 123456 so you would have the login name <code>rightscale123456</code>.</p>
+
+<h3 id="login-names-user-definable-custom-login-name">User definable custom login name</h3>
+
+<p>Optionally, you can set a custom login name using the edit button with the following requirements:</p>
+
+<ul>
+<li>must be globally unique to the RightScale platform</li>
+<li>must be made up of only lower case letters, numbers, dashes, and underscores with the first character being a lowercase letter</li>
+<li>must be a minimum length of 3 characters and a maximum length of 32 characters</li>
+<li>must not be in the <a href="rl10_disallowed_login_names.html">list of disallowed login names</a></li>
+</ul>
+
+<p>If any of these restrictions are not met, an error message will present the issue. You can remove the custom login name by removing all characters from the <q>Custom Login Name</q> field and hitting save.</p>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>If a custom login name conflicts with an already existing username on the operating system, this conflict will be logged into Audit Entries and stating that the existing username may take authentication priority. The solution would be to use the default login name or change the custom login name that is in conflict.</p>
+</div>
+
+<div class="alert alert-info" role="alert"><strong>Note:</strong><p>Changing of custom login names, updating of public keys, and role updates are not immediatly available to every server in a RightScale account.  Please allow 5-10 minutes for updates to propagate across all servers.  Audit entries can be reviewed to check for updates on specific servers.</p>
+</div>
+
+<h2 id="home-directories">Home Directories</h2>
+
+<p>User home directories are created at SSH login if they do not exist. The location of a user&#39;s home directory is <code>/home/rightscale{RightScale_ID_Num}</code>, matching the default login name.  Regardless of what login name is used, this will always be the user&#39;s home directory.</p>
+
+<h2 id="-sudo--permission">'sudo' permission</h2>
+
+<p>RightScale users with both <a href="/cm/ref/user_roles.html#-server_login"><em>server_login</em></a> and <a href="cm/ref/user_roles.html#-server_superuser"><em>server_superuser</em></a> roles are given the ability to run <code>sudo</code> commands on the instance. By default configuration, ALL commands are available via &#39;sudo&#39; to users with <em>server_superuser</em> role.</p>
+
+<h2 id="managing-user-roles">Managing User Roles</h2>
+
+<p>Managing user roles is done in the RightScale UI. For more information on managing user roles, please see <a href="/cm/rs101/rightScale_account_and_user_role_management.html">RightScale Account and User Role Management</a>.</p>
+
+<h2 id="known-limitations">Known Limitations</h2>
+
+<p>Currently the Managed Login feature is not supported on CoreOS. This is due to an issue with PAM in the <q>stable</q> releases.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

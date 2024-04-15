@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Docker Support</title><meta content="This document describes the Docker integration features in RightLink 10." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_docker_support.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_docker_support.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_docker_support.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_docker_support.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_docker_support.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_docker_support.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_docker_support.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_docker_support.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>Docker Support</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>With RightLink 10.4.0 and later, integration with Docker 1.9.1 and above allows it to report the existence of Docker
+hosts, running containers, and images on RightLink-enabled instances and also provides basic monitoring for those
+containers. The reporting about Docker hosts, containers, and images is implemented as RightScale tags 
+on the RightLink-enabled instance while the monitoring information uses the existing monitoring system provided by RightScale. The <a href="/cm/dashboard/manage/containers/index.html">RightScale Container Manager</a> in Cloud Management leverages all of this information and provides a container-centric view of your infrastructure.</p>
+
+<p><strong>Note:</strong> The minimum requirement for Docker is kernel 3.10. CentOS 6 does not satisfy this prerequisite and is therefore not supported. For more information on Docker minimum requirements on CentOS, please see <a href="https://docs.docker.com/engine/installation/linux/centos/">Docker: Installation on CentOS</a>.</p>
+
+<h2 id="details">Details</h2>
+
+<h3 id="details-inventory">Inventory</h3>
+
+<p>In order to keep track of what Docker hosts exist, what containers are running on them, and what images are available on them, RightScale Tags are added and removed dynamically to the instance. The tag structure is as follows:</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>rs_docker:host</code></td>
+<td>The host tag has a value that is a JSON encoded list with the Docker engine ID, total memory, and number of CPUs. A RightScale instance will have this tag if it has the RightLink 10 Docker integration running. Here is an example of the host tag: <code>rs_docker:host=[&quot;XFFA:LPC3:7PJX:AEA5:DATR:ADDZ:AQGT:5N6S:WKK7:WNSI:6GI3:LZDE&quot;,3700,1]</code>.</td>
+</tr>
+<tr>
+<td><code>rs_docker:c-&lt;container_id&gt;</code></td>
+<td>The container tag has a predicate starting with <code>c-</code> and followed by the Docker container ID and the value is a JSON encoded list with the Docker container name, Docker image ID, committed memory, and CPU allocation. After completing the <a href="#setup-procedure">setup procedure</a>, a RightScale instance will have a container tag for each Docker container that is currently running on it. The <code>start</code> and <code>die</code> <a href="https://docs.docker.com/engine/reference/commandline/events/#/events">Docker container events</a> will add and remove container tags. Here is an example of a container tag: <code>rs_docker:c-860f61b2621568556442b1c13eafba0f0f01f4654c4e86407982cd8dfbf4e65b=[&quot;/naughty_morse&quot;,&quot;eb4a127a1188a3e274eb38f079c5e11680b942927956a38b9b6b6c6736e14fd2&quot;,0,0]</code>.</td>
+</tr>
+<tr>
+<td><code>rs_docker:i-&lt;image_id&gt;</code></td>
+<td>The image tag has a predicate starting with <code>i-</code> and followed by the Docker image ID and the value is a JSON encoded list with the Docker image name. After completing the <a href="#setup-procedure">setup procedure</a>, a RightScale instance will have an image tag for each Docker image that has been downloaded to it. The <code>import</code>, <code>pull</code>, and <code>tag</code> <a href="https://docs.docker.com/engine/reference/commandline/events/#/events">Docker image events</a> will add image tags while <code>untag</code> and <code>delete</code> will remove them. Here is an example of an image tag: <code>rs_docker:i-eb4a127a1188a3e274eb38f079c5e11680b942927956a38b9b6b6c6736e14fd2=[&quot;nginx:latest&quot;]</code>.</td>
+</tr>
+</tbody></table>
+
+<h3 id="details-monitoring">Monitoring</h3>
+
+<p>The monitoring portion of the RightLink 10 Docker integration adds basic per container metrics. These metrics are
+prefixed with the name of the container that they are for; for example, a container with an autogenerated Docker
+container name would have metrics with names like: <code>naughty_morse-cpu/cpu-total</code>, <code>naughty_morse-memory/memory-usage</code>,
+<code>naughty_morse-net/if_octets</code>, etc. These metrics match those provided by the Collectd <a href="https://collectd.org/wiki/index.php/Plugin:CPU">CPU</a>, <a href="https://collectd.org/wiki/index.php/Plugin:Memory">Memory</a>, and <a href="https://collectd.org/wiki/index.php/Plugin:Interface">Interface</a>
+plugins, but they only report the details pertaining to their respective Docker containers.</p>
+
+<h2 id="setup-procedure">Setup Procedure</h2>
+
+<p>The procedure for enabling the RightLink 10 Docker integration is to include the <a href="https://github.com/rightscale/rightlink_scripts/blob/master/rll/enable-docker.sh">RL10 Linux Enable Docker Support</a>
+RightScript on your ServerTemplate as either a boot or operational script, set the <code>RIGHTLINK_DOCKER</code> input as desired,
+and boot your server if it is a boot script or run the operational script otherwise. This script will check if Docker is
+installed (you will need to install Docker in a seperate RightScript if necessary), add the <code>rightlink</code> user to the
+<code>docker</code> group so the Docker integration can talk to the Docker socket in order access information about Docker on the
+instance, and tells RightLink 10 to enable the Docker integration to the level specified in the <code>RIGHTLINK_DOCKER</code>
+input via the <a href="rl10_local_and_proxied_http_requests.html#/rll/docker/control">/rll/docker/control</a> local API call. RightLink 10 will automatically restart itself if it was not already
+in the <code>docker</code> group so that it can access the Docker socket. The following are valid values for the <code>RIGHTLINK_DOCKER</code>
+input:</p>
+
+<table><thead>
+<tr>
+<th>Input Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>none</code></td>
+<td>This disables the RightLink 10 Docker integration completely so that no Docker related tags will be added and no Docker monitoring metrics will be recorded.</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>This enables only the RightLink 10 Docker tags portion of the integration so that tags will be added and removed according to the Docker images and containers on the instance, but no Docker monitoring metrics will be recorded.</td>
+</tr>
+<tr>
+<td><code>all</code></td>
+<td>This enables both the RightLink 10 Docker tags and monitoring portions of the integrations so that tags will be added and removed according to the Docker images and containers on the instance and monitoring metrics for running containers will be recorded.</td>
+</tr>
+</tbody></table>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

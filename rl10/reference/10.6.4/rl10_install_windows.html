@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Custom Images with RightLink for Windows</title><meta content="This page describes how to install RightLink 10 on your custom images. RightLink can be pre-installed and a new image created by snapshotting an existing image." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_install_windows.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_install_windows.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_install_windows.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_install_windows.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_install_windows.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_install_windows.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_install_windows.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_install_windows.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>Custom Images with RightLink for Windows</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>This page describes how to install RightLink 10 on your custom images. RightLink can be pre-installed and a new image created by snapshotting an existing image. Custom images are not supported across all clouds. While this is our goal the following list shows where Custom images are currently supported:</p>
+
+<table><thead>
+<tr>
+<th>Cloud</th>
+<th>Supported?</th>
+<th>Notes</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>EC2</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>OpenStack</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>SoftLayer</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>RCA-V</td>
+<td>Yes</td>
+<td>ExtraConfig must be turned on for <a href="rl10_rcav.html">Advanced Networking</a>.</td>
+</tr>
+<tr>
+<td>Google</td>
+<td>No*</td>
+<td>* Should work but not tested</td>
+</tr>
+<tr>
+<td>Azure (Classic)</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>Azure (Resource Manager)</td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>Google clouds should work although they are not tested or certified. </p>
+
+<p>Custom images are tested and supported on Windows 2008R2 and newer.</p>
+
+<h3 id="overview-use-cases">Use-cases</h3>
+
+<p>Launching RightLink 10 Servers because of:</p>
+
+<ul>
+<li>Limited outbound connectivity</li>
+<li>Internal policy</li>
+<li>Lack of existing image options on a public or private cloud.</li>
+<li>Need to use <a href="rl10_rcav.html">Advanced networking for RCA-V</a> features. Software for this feature will automatically be installed with RightLink 10.2.0 and newer if VMware Tools is installed.</li>
+<li>Running RightLink under alternate user account. By default RightLink runs under a local administrator account called <q>RightLink</q>, but can use <a href="rl10_non_root.html">pre-existing Domain accounts</a> as well.</li>
+</ul>
+
+<h3 id="overview-prerequisites">Prerequisites</h3>
+
+<ul>
+<li>Install script: Administrator privileges, PowerShell 2.0+, .NET Framework 2.0+.</li>
+<li>RCA-V images require VMware tools to be installed. Please see <a href="/rcav/v3.0/rcav_image_requirements.html">RCA-V Image Requirements</a>. By default, RightScale network configuration scripts for RCA-V are installed along with RightLink 10 if VMware tools are present. These scripts will configure your network devices at boot to enable use of <a href="rl10_rcav.html">Advanced Networking for RCA-V</a>. Pass <q>-NoNetworkingScripts</q> to not install this component.</li>
+</ul>
+
+<h3 id="overview-usage">Usage</h3>
+
+<p>rightlink.install.ps1 options are:</p>
+<pre class="syntax-highlight plaintext"><code>    Installs/Upgrades RightLink on an image.
+    Parameters:
+      -Username             RightLink Service User Name (default: RightLink)
+      -Password             RightLink Service User Password (default: Randomly generated password)
+      -NoNetworkingScripts  Skip installation of RightScale network configuration scripts for RCA-V
+      -Proxy                Install Rightlink through HTTP proxy
+      -Debug                Verbose output
+      -Help                 Display help
+</code></pre>
+
+<p>If a custom username is supplied, a password must also be supplied. The account must already exist -- domain and then local users will be checked.</p>
+
+<p>Example:
+The following will install the latest RightLink on an Windows 2012R2 image.</p>
+<pre class="syntax-highlight powershell"><code>  <span class="nv">$wc</span> <span class="o">=</span> <span class="nb">New-Object </span>System.Net.Webclient
+  <span class="nv">$wc</span>.DownloadFile<span class="o">(</span><span class="s2">"https://rightlink.rightscale.com/rll/10/rightlink.install.ps1"</span>,
+    <span class="s2">"</span><span class="nv">$pwd</span><span class="se">\r</span><span class="s2">ightlink.install.ps1"</span><span class="o">)</span>
+  Powershell -ExecutionPolicy Unrestricted -File rightlink.install.ps1
+</code></pre>
+
+<h4 id="installing-behind-a-proxy">Installing Behind a Proxy</h4>
+
+<p>The -Proxy flag may be used to install behind a proxy. The parameter must be of the form &lt;user&gt;:&lt;password&gt;@&lt;ip&gt;:&lt;port&gt;. The username and password are optional. Only Basic authenticaiton is supported for proxies. Example: <code>-Proxy myuser:mysecretpw@10.0.0.100:80</code>.</p>
+
+<h3 id="overview-snapshotting-and-bundling-the-image">Snapshotting and Bundling the Image</h3>
+
+<p>After installation of RightLink, the image is ready to be snapshotted.</p>
+
+<p>When bundling a Windows server or cloud instance it is recommended to utilize the Microsoft Windows System Preparation tool (SysPrep). This tool is specifically made to prepare Windows machines for duplication or reuse by removing system specific data from Windows along with other various tasks.</p>
+
+<p>Once prepared and SysPrepped, the instance should also be shutdown per best practice prior to bundling into a new image (/shutdown included in sysprep command below).</p>
+
+<div class="alert alert-warning" role="alert"><strong>Warning</strong><p>It is important that the Out of Box Experience (OOBE) phase is completely automated. Some public cloud providers, such as Amazon Web Services and Microsoft Azure, provide sysprep answer files on their marketplace images that are already preconfigured to automate the OOBE phase. For other environments, it may be necessary to develop your own answer file to be used with the sysprep <code>/unattend:&lt;file_name&gt;</code> switch. Here are further details from Microsoft on <a href="https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/settings-for-automating-oobe">Settings for Automating OOBE</a>.</p>
+</div>
+<pre class="syntax-highlight powershell"><code>    sysprep /oobe /generalize /shutdown
+</code></pre>
+
+<div class="alert alert-info" role="alert"><strong>Note</strong><p>Only run this command when you are satisfied with the state of the instance and are ready to bundle the image as it will shutdown the system in preparation for a bundle action. At this point, you can now safely bundle or snapshot the stopped instance into a new image.</p>
+</div>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

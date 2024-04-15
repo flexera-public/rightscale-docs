@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Install at Boot for Windows</title><meta content="Steps for installing RightLink 10 at boot." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_install_at_boot_windows.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_install_at_boot_windows.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_install_at_boot_windows.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_install_at_boot_windows.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_install_at_boot_windows.html">10.6.0</a></li></ul></div></div><div class="page-header"><h1>Install at Boot for Windows</h1></div><div class="main-content"><h2 id="introduction">Introduction</h2>
+
+<p>To install RightLink at boot an agent to interpret userdata or metadata and act on it as needed. Two things are passed to this agent as a executable Powershell block:</p>
+
+<ol>
+<li>Credentials (identity parameters) needed to initialize a RightScale Server via user-data.</li>
+<li>Code to download and install RightLink at boot time if its not already installed.</li>
+</ol>
+
+<p>Each cloud has its own agent. EC2, AzureRM, and Google agents are currently supported. The following methods are used for each cloud:</p>
+
+<ul>
+<li>EC2 - Ec2ConfigService leveraged to <a href="http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#user-data-execution">act on userdata with &lt;powershell&gt; tags</a></li>
+<li>Google - Startup script set by using metadata key <a href="https://cloud.google.com/compute/docs/startupscript#providing_a_startup_script_for_windows_instances">windows-startup-script-ps1</a></li>
+<li>AzureRM - CustomScriptExtension is added to <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows">run the script</a></li>
+</ul>
+
+<p>Other clouds are currently not supported at this time for install at boot. Please create a <a href="rl10_install_windows.html">custom image</a> for other clouds.</p>
+
+<h3 id="introduction-launching-a-server-with-a-stock-image">Launching a Server with a Stock Image</h3>
+
+<p>Two tags are needed to install RightLink 10 at boot. The first identifies the instance as RightLink10 based to the RightScale platform. The second causes cloud agents to run a Powershell script to download and install RightLink. The MultiCloudImage (MCI) or Server must be tagged with:</p>
+
+<ol>
+<li><code>rs_agent:type=right_link_lite</code></li>
+<li><code>rs_agent:powershell_url=https://rightlink.rightscale.com/rll/10.6.4/rightlink.boot.ps1</code></li>
+</ol>
+
+<p>The second tag above will install version 10.6.4 of RightLink. As a convenience, more generic versions such as <q>10</q> or <q>10.6</q> may be specified as a way to install the latest GA version for a lineage. For example, add tag <code>rs_agent:powershell_url=https://rightlink.rightscale.com/rll/10/rightlink.boot.ps1</code> to install the latest 10.x.x agent. See the <a href="/rl10/releases">releases</a> page for full list of supported versions to install and release notes.</p>
+
+<p>Since the script/agent are being downloaded and installed at boot time, there must be outbound connectivity to the rightlink.rightscale.com IP addresses. If there is no outbound connectivity for the instance a <a href="rl10_proxying_rightlink.html">proxy should be specified</a> using the <code>rs_agent:http_proxy</code> tag.</p>
+
+<p>It it recommended to use the <q>RightLink 10.x.x Windows Base</q> ServerTemplate available from the Marketplace as a starting point. See the <a href="/rl10/releases/">releases</a> page for links.</p>
+
+<h3 id="introduction-advanced-usage">Advanced Usage</h3>
+
+<p>See <a href="rl10_install_at_boot.html#advanced-usage">Advanced Usage</a> for Linux.</p>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>Troubleshooting</title><meta content="RightLink 10 Troubleshooting." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_troubleshooting.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_troubleshooting.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_troubleshooting.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_troubleshooting.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_troubleshooting.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_troubleshooting.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_troubleshooting.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_troubleshooting.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>Troubleshooting</h1></div><div class="main-content"><h2 id="quick-tips">Quick Tips</h2>
+
+<table><thead>
+<tr>
+<th>Symptom</th>
+<th>Suggested Solution</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>How to check that RightLink 10 is running</td>
+<td>Look for a process called rightlink.</td>
+</tr>
+<tr>
+<td>Server is sitting in the &#39;booting&#39; state forever</td>
+<td>The rightlink process transitions from &#39;booting&#39; to &#39;operational&#39; and may not be starting or authenticating with the platform. See troubleshooting tips for <q>RightLink 10 is not starting at boot (install-at-boot or custom-image use-cases)</q>.</td>
+</tr>
+<tr>
+<td>RightLink 10 is not starting at boot (install-at-boot or custom-image use-cases)</td>
+<td><ul><li>Verify that the instance has the expected user-data (see below)</li><li>Verify that cloud-init (Linux)/userdata-fetcher (Windows) has produced the identity file <code>/var/lib/rightscale-identity</code> (Linux) or <code>C:\ProgramData\RightScale\RightLink\rightscale-identity</code> on the instance</li><li>If the identity file is missing</li><ul><li>Linux: look that the raw user-data has been pulled-in by cloud-init in /var/lib/cloud/instance/user-data.txt</li><li>check the cloud-init log files in /var/log (they&#39;re very long and failures are difficult to spot)</li><li>If log files are present, make sure the <a href="rl10_cloud_init_installation.html">right cloud-init is installed</a></li><li>if no log files are present, cloud-init is not installed; if user-data was not pulled in either cloud-init is lacking the module for your cloud or user-data was not produced due to missing tags on the MCI/server</li><li>Windows: Verify that the userdata-fetcher service ran correctly. Check logs in <code>C:\Program Files\RightScale\RightLink\Logs\userdata-fetcher.log</code>.</li><li>If no logs are present, RightLink was not pre-installed. Note the install-at-boot use case isn&#39;t yet supported for Windows</li></ul></li></li><li>If /var/lib/rightscale-identity is present and has the correct values (double-check against the Server&#39;s info page in the case of stop and start)<ul><li>Linux: check that the installation of RightLink 10 was successful in <code>/var/log/rightlink.log</code></li><li>check the log of the OS&#39; init system, for example, <code>/var/log/upstart/rightlink.log</code> or <code>journalctl -u rightlink</code></li><li>check to make sure cloud-init runs user-scripts on every boot in <code>/etc/cloud/cloud.cfg</code> and that cloud-init runs before RightLink</li><li>Windows: Check installation and run logs in <code>C:\Program Files\RightScale\RightLink\Logs\</code>.</li></ul></td>
+</tr>
+<tr>
+<td>RightLink 10 is not starting in an enable-running use-case</td>
+<td>The enable script logs to <code>/var/log/rightlink.log</code> on Linux and <code>c:\Program Files\RightScale\RightLink\Logs\install.log</code> on Windows.</td>
+</tr>
+<tr>
+<td>Boot/operational scripts are not running</td>
+<td>Check the following audit entries in the Cloud Management dashboard: <ul><li>Each runlist/script execution creates an audit entry with the output (stderr &amp; stdout) of the script. On success, such an audit entry is labeled something like <q>Completed: RL10 Linux Wait For EIP, RL10 Linux Collectd</q></li><li>RightLink 10 also produces an audit entry with its own execution log (the same one you may find at <code>/var/log/upstart/rightlink.log</code> or <code>C:\Program Files\RightScale\RightLink\Logs\rightlink.log</code>). This audit entry is called something like <q>RightLink 10.3.1 log pid 1251</q> where &#39;10.3.1&#39; is the version of RightLink 10 and &#39;1251&#39; is the process id (this is helpful when restarting RightLink 10 or rebooting)</li><li>Restarting the RightLink service should help clear the issue</li><li>See some sample RightLink 10 log snippets below</li></ul></td>
+</tr>
+<tr>
+<td>Scripts are not executing and/or shows as queued forever in the Cloud Management dashboard</td>
+<td>Scripts are executed on a (logical) thread, meaning that successive scripts that use the same thread run sequentially. This means that if a script is <q>stuck</q>, i.e. not exiting, then that blocks future scripts.<ul><li>Scripts initiated from the Cloud Management dashboard use the default thread, check the RightLink 10 log to see whether some script was executed and has not completed. RightLink 10 shows the thread when starting a runlist: <code>*** Starting runlist &#39;&#39; with 3 executables on thread &#39;default&#39;</code> <li>Restarting RightLink 10 is the most expedient way to abort a stuck runlist</li></ul></td>
+</tr>
+<tr>
+<td>How do I restart RightLink 10, and is it safe?</td>
+<td>Yes, it is safe to restart RightLink 10 using <code>sudo service rightlink restart</code> on Linux or <code>Restart-Service rightlink</code> on Windows.<br>RightLink 10 has very little persistent state. It saves the boot state (whether the boot bundle has completed) to disk (<code>/var/run/rightlink/state</code> or <code>C:\ProgramData\Rightscale\RightLink\state</code>) so that boot scripts will not be rerun on restart of the service. Any explicitly set environment variables (via /rll/env) are saved to disk as well and restored on restart (see sample log below).<br>If RightLink 10 did not manage to start-up and enroll properly due to some issues on the instance or with networking the easiest way to get it to retry is <code>sudo service rightlink restart</code> on Linux or <code>Restart-Service rightlink</code> on Windows<br> Any runlists currently being being executed will be lost on restart and will have to be re-executed. Any audit entries that have not yet been sent up to the platform will be lost as well.</td>
+</tr>
+<tr>
+<td>Monitoring data not showing up</td>
+<td>See <a href="rl10_monitoring.html#troubleshooting">Monitoring:Troubleshooting</a></td>
+</tr>
+<tr>
+<td>RightLink refuses to start after joining a domain with a <code>logon failure</code> error</td>
+<td>Make sure that the RightLink user is a member of a Domain Admin or Local Administrator group</td>
+</tr>
+<tr>
+<td>RightLink is having trouble running operational scripts on Windows</td>
+<td>Ensure that the Hypervisor is set to the same time zone as the server. RightLink can have trouble running operational scripts due to a failed websocket connection if there is a time skew between RightScale and the instance. When the Hypervisor is set to a different timezone than the server it can incorrectly report the time skew.</td>
+</tr>
+<tr>
+<td>RightLink isn&#39;t running the boot scripts on reboot or stop / start on Linux</td>
+<td>RightLink stores its state file in the /var/run directory which should be symlinked to the /run directory, a temporary filesystem, by default. RightLink expects this directory to be automatically cleared on reboot and stop / start in order to determine if the boot scripts should be run or not.</td>
+</tr>
+<tr>
+<td>A different version of RightLink is being installed at boot on my custom image on Linux</td>
+<td>Ensure that your ServerTemplate and MCI are not tagged with rs_agent:mime_include_url=https://rightlink.rightscale.com/rll/.../rightlink.boot.sh. This tag is used to pass data to cloud-init which will download and install the version of RightLink 10 that is specified in the tag. The version specified in the tag will overwrite any versions that exist on the image already.</td>
+</tr>
+<tr>
+<td>Stop / Start isn&#39;t working on Softlayer for Windows</td>
+<td>Windows requires the appropriate version of PV Drivers installed in order to support instance stop and start. Currently, the SoftLayer provided images for both Windows Server 2008 R2 Datacenter Edition (64bit) and Windows Server 2012 R2 Datacenter Edition (64bit) have the incorrect version of PV Drivers and will have to be updated if these images are used. When attempting to stop an instance with this issue, SoftLayer will return this exception <q>Failed to perform a clean shutdown because the guest is missing PV drivers.</q></td>
+</tr>
+</tbody></table>
+
+<h2 id="sample-user-data">Sample User-Data</h2>
+
+<p>This user-data comes from a server whose MultiCloud Image (MCI) has the <code>rs_agent:type</code> tag to signify RightLink 10 and the <code>rs_agent:mime_include_url</code> tag to download RightLink 10 at boot. In the sample below, the bold text highlights the information RightLink 10 needs to connect to the RightScale platform including the URL from which cloud-init needs to download RightLink 10.</p>
+
+<p><pre>
+  Content-Type: multipart/mixed; boundary=Boundary_fiy12wousrdp4ww3w756uxq83c
+  Content-ID: <a href="mailto:7z4548ousrdp4ww3w756uxq8go@6g74u6ousrdp4ww3w756uxq8j4.local">7z4548ousrdp4ww3w756uxq8go@6g74u6ousrdp4ww3w756uxq8j4.local</a>
+  MIME-Version: 1.0
+  --Boundary_fiy12wousrdp4ww3w756uxq83c
+  Content-Type: text/x-shellscript
+  Content-ID: <a href="mailto:3sxsjnousrdp4ww3w756uxq9cw@abl7m4ousrdp4ww3w756uxq9ei.local">3sxsjnousrdp4ww3w756uxq9cw@abl7m4ousrdp4ww3w756uxq9ei.local</a>
+  #! /bin/bash
+  cat &lt;&lt;&#39;EOF&#39; &gt;/var/lib/rightscale-identity
+  <strong>client_id=&#39;16510987008&#39;
+  api_hostname=&#39;us-3.rightscale.com&#39;
+  account=&#39;60073&#39;
+  client_secret=&#39;a67702cc7a1afd2012345674a202abdec1ee&#39;
+  EOF</strong>
+  chmod 0600 /var/lib/rightscale-identity
+  --Boundary_fiy12wousrdp4ww3w756uxq83c
+  Content-Type: text/x-include-url
+  Content-ID: <a href="mailto:6qm8vkousrdp4ww3w756uxq9jk@1fjnx8ousrdp4ww3w756uxq9ky.local">6qm8vkousrdp4ww3w756uxq9jk@1fjnx8ousrdp4ww3w756uxq9ky.local</a>
+  <strong>https://rightlink.rightscale.com/rll/10.0.3/rightlink.boot.sh</strong>
+  --Boundary_fiy12wousrdp4ww3w756uxq83c--
+  </pre></p>
+
+<h2 id="sample-rightlink-10-log-output-at-boot">Sample RightLink 10 Log Output at Boot</h2>
+
+<p>Below is a typical log output file for the boot sequence (with comments added) up to the point RightLink 10 starts running the boot runlist. The log output has been annotated with comments.</p>
+<pre class="syntax-highlight shell"><code>  <span class="c"># RL10 Version, build timestamp, build SHA</span>
+  2016/10/10 23:04:21 RightLink 10.6.4 - 2016-10-07 17:28:53 - 8d5b5beeaef0b677ba48e4e5ca4e1678f4e32ea0
+  2016/10/10 23:04:21 RightLink10 <span class="o">==</span> RightLinkLite <span class="o">==</span> RLL :-<span class="o">)</span>
+  2016/10/10 23:04:21 Operating system <span class="nb">type</span>: ubuntu
+  2016/10/10 23:04:21 Running as user: rightlink
+  <span class="c"># Values passed in from user-data. Credentials to connect back to RightScale.</span>
+  2016/10/10 23:04:21 Option client_id from environment: 23064017003
+  2016/10/10 23:04:21 Option client_secret from environment: e03f0a...
+  2016/10/10 23:04:21 Option api_hostname from environment: us-3.rightscale.com
+  2016/10/10 23:04:21 Option account from environment: 67972
+  <span class="c"># State file, keeps track of whether boot bundle ras run and other runtime state.</span>
+  2016/10/10 23:04:21 No state file: this is a fresh boot
+  <span class="c"># Temporary cache directories.</span>
+  2016/10/10 23:04:21 Attachment spool dir: /var/spool/rightlink/attachments
+  2016/10/10 23:04:21 Cookbook spool dir: /var/spool/rightlink/cookbooks
+  2016/10/10 23:04:21 Script spool dir: /var/spool/rightlink/scripts
+  <span class="c"># Status of authentication back to RightScale platform</span>
+  2016/10/10 23:04:21 Connecting to us-3.rightscale.com
+  2016/10/10 23:04:21 rsclient.NewClient<span class="o">(</span>us-3.rightscale.com, 67972, master<span class="o">)</span>
+  <span class="c"># RightScale will have issues running operational scripts if time skew &gt; several minutes!</span>
+  2016/10/10 23:04:21 Time skew: <span class="nb">local time</span> - RightScale <span class="nb">time</span> <span class="o">=</span> 0.6 secs
+  2016/10/10 23:04:21 Next auth not before 2016-10-11T00:04:21.634882024Z
+  <span class="c"># We've authenticated, discovered ourself</span>
+  2016/10/10 23:04:22 Found self: /api/clouds/6/instances/4UUEHT9D4GB9T
+  <span class="c"># Phone home back to RightScale</span>
+  2016/10/10 23:04:22 Booter/declare successful <span class="nv">agent_id</span><span class="o">=</span>rs-instance-9242ee...
+  2016/10/10 23:04:22 Not a UCA based server: No keep-alive info found <span class="k">for </span>this instance
+  2016/10/10 23:04:22 Opening Websocket to wss://rightnet-router3.rightscale.com/router/connect
+  <span class="c"># Local http server has been started</span>
+  2016/10/10 23:04:22 Started proxy server on 127.0.0.1:51074
+  <span class="c"># The base environment ALL scripts inherit</span>
+  2016/10/10 23:04:22 Monitoring info from API1.5: <span class="nv">server</span><span class="o">=</span>tss3.rightscale.com <span class="nv">id</span><span class="o">=</span>03-1RMHCFNNPI2SB
+  2016/10/10 23:04:22     Base environment:
+  2016/10/10 23:04:22       <span class="nv">account</span><span class="o">=</span>67972
+  2016/10/10 23:04:22       <span class="nv">api_hostname</span><span class="o">=</span>us-3.rightscale.com
+  2016/10/10 23:04:22       <span class="nv">PATH</span><span class="o">=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  2016/10/10 23:04:22       <span class="nv">client_id</span><span class="o">=</span>23064017003
+  2016/10/10 23:04:22       <span class="nv">USER</span><span class="o">=</span>rightlink
+  2016/10/10 23:04:22       <span class="nv">HOME</span><span class="o">=</span>/home/rightlink
+  2016/10/10 23:04:22 Proxy: 51074 554dc...
+  2016/10/10 23:04:24 State update <span class="o">(</span>booting<span class="o">)</span> successful
+</code></pre>
+
+<p>Below is a typical sequence for running the boot runlist:</p>
+<pre class="syntax-highlight shell"><code>  <span class="c"># RL10 has retrieved the boot bundle</span>
+  2016/10/10 23:04:24 Get boot bundle successful; received <span class="o">(</span>2 keys<span class="o">)</span>
+  <span class="c"># Audit entry ID for boot script output</span>
+  2016/10/10 23:04:24 Audit id <span class="k">for </span>bundle is 445173544003
+  <span class="c"># Where we fetch attachments from</span>
+  2016/10/10 23:04:24 Repose servers are <span class="o">[</span>island10.rightscale.com]
+  2016/10/10 23:04:24 Executable bundle <span class="k">for </span>thread default is at head of queue
+  <span class="c"># We first download all attachments.</span>
+  2016/10/10 23:04:24 <span class="k">***</span> Starting runlist <span class="s1">'boot'</span> with 3 executables on thread <span class="s1">'default'</span>
+  2016/10/10 23:04:24     OS packages to install: <span class="o">[]</span>
+  2016/10/10 23:04:24     Downloading 3 attachments into /var/spool/rightlink/attachments
+  2016/10/10 23:04:24         Downloading attachment a15...eef/rightscale_login_policy.te 
+  2016/10/10 23:04:24         Downloading attachment ac2...8dd/rs-ssh-keys.sh 
+  2016/10/10 23:04:24         Downloading attachment 63e...506/libnss_rightscale.tgz 
+  2016/10/10 23:04:24         1.6KB <span class="k">in </span>0.0s <span class="k">for </span>ac2...8dd/rs-ssh-keys.sh
+  2016/10/10 23:04:24         0.5KB <span class="k">in </span>0.0s <span class="k">for </span>a15...eef/rightscale_login_policy.te
+  2016/10/10 23:04:24         18.4KB <span class="k">in </span>0.0s <span class="k">for </span>63e...506/libnss_rightscale.tgz
+  2016/10/10 23:04:24     Done with 3 attachments: 18KB <span class="k">in </span>0.0s -&gt; 0.675MB/s
+  2016/10/10 23:04:24     No cookbooks to download
+  <span class="c"># First RightScript starts executing. All inputs passed to the script are listed, with credentials blacked out.</span>
+  <span class="c"># These inputs are on top of the base environment listed above.</span>
+  2016/10/10 23:04:24 +++ RightScript: <span class="s1">'RL10 Linux Setup Hostname'</span>
+  2016/10/10 23:04:24     SERVER_HOSTNAME <span class="o">=</span> <span class="s1">''</span>
+  2016/10/10 23:04:24     Started /var/spool/rightlink/scripts/rll-943807325/__script-0 <span class="nv">pid</span><span class="o">=</span>1344 <span class="k">in</span> /var/spool/rightlink/scripts/rll-943807325
+  <span class="c"># Any calls back to the platform the script makes through RL10 local http server are listed here.</span>
+  2016/10/10 23:04:24 HTTP proxy: GET /api/sessions/instance
+  2016/10/10 23:04:25 PROXY HTTP GET /api/sessions/instance -&gt; 200 OK
+  2016/10/10 23:04:25 HTTP proxy: GET /api/clouds/6
+  2016/10/10 23:04:25 PROXY HTTP GET /api/clouds/6 -&gt; 200 OK
+  2016/10/10 23:04:25     RightScript execution successful
+  <span class="c"># Second script starts executing and has several attachments.</span>
+  2016/10/10 23:04:25 +++ RightScript: <span class="s1">'RL10 Linux Enable Managed Login'</span>
+  2016/10/10 23:04:25     MANAGED_LOGIN <span class="o">=</span> <span class="s1">'auto'</span>
+  2016/10/10 23:04:25     Linking attachment /var/spool/rightlink/scripts/rll-238855448/rs-ssh-keys.sh -&gt; ...
+  2016/10/10 23:04:25     Linking attachment /var/spool/rightlink/scripts/rll-238855448/libnss_rightscale.tgz -&gt; ...
+  2016/10/10 23:04:25     Linking attachment /var/spool/rightlink/scripts/rll-238855448/rightscale_login_policy.te -&gt; ...
+  2016/10/10 23:04:25     Started /var/spool/rightlink/scripts/rll-238855448/__script-1 <span class="nv">pid</span><span class="o">=</span>1361 <span class="k">in</span> /var/spool/rightlink/scripts/rll-238855448
+  <span class="c"># This script makes some calls to the local http server to enable managed login</span>
+  2016/10/10 23:04:29 HTTP proxy: PUT /rll/login/control
+  2016/10/10 23:04:29 Managed Login Enabled
+  <span class="c"># The managed login script sets a tag subscribing to receive policy changes</span>
+  2016/10/10 23:04:29 HTTP proxy: POST /api/tags/multi_add
+  2016/10/10 23:04:29 PROXY HTTP POST /api/tags/multi_add -&gt; 204 No Content
+  2016/10/10 23:04:29 Get login policy successful; received 26 entries
+  <span class="c"># Five users exist in this account, three with server_login rights</span>
+  2016/10/10 23:04:29 New users to process <span class="o">(</span>5<span class="o">)</span>: tve, rightscale8503, douglas, rightscale45778, hrich 
+  2016/10/10 23:04:29 Users allowed to login: tve, douglas, rightscale8503
+  2016/10/10 23:04:29 Users skipped to login: 
+  2016/10/10 23:04:29     RightScript execution successful
+  <span class="c"># Third script starts executing.</span>
+  2016/10/10 23:04:29 +++ RightScript: <span class="s1">'RL10 Linux Enable Monitoring'</span>
+  2016/10/10 23:04:29     RS_INSTANCE_UUID <span class="o">=</span> <span class="s1">'03-1RMHCFNNPI2SB'</span>
+  2016/10/10 23:04:29     COLLECTD_SERVER <span class="o">=</span> <span class="s1">'tss3.rightscale.com'</span>
+  2016/10/10 23:04:29     MONITORING_METHOD <span class="o">=</span> <span class="s1">'auto'</span>
+  2016/10/10 23:04:29     Started /var/spool/rightlink/scripts/rll-116970977/__script-4 <span class="nv">pid</span><span class="o">=</span>1447 <span class="k">in</span> /var/spool/rightlink/scripts/rll-116970977
+  2016/10/10 23:05:19 HTTP proxy: PUT /rll/tss/control
+  2016/10/10 23:05:19 Monitoring goroutine starting, <span class="nv">features</span><span class="o">=</span>1; <span class="nv">plugins</span><span class="o">=</span>
+  2016/10/10 23:05:20 TSS monitoring_enable <span class="nb">set </span>to <span class="s1">'util'</span>
+  2016/10/10 23:05:20 TSS returned 200 <span class="k">for </span>https://tss3.rightscale.com/push/acct/67972/collectdv5 -- 
+  2016/10/10 23:05:20     RightScript execution successful
+  <span class="c"># RL10 transitions the server to operational because all three scripts finished successfully</span>
+  2016/10/10 23:05:21 State update <span class="o">(</span>operational<span class="o">)</span> successful
+  2016/10/10 23:05:21 Entering main loop
+</code></pre>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>

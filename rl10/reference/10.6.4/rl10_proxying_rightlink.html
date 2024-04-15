@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><title>RightLink Through a Proxy</title><meta content="RightLink 10 is capable of routing all its traffic through an external proxy for both all workflows ("enable running", "install at boot", "custom image")." name="description" /><meta content="initial-scale=1" name="viewport" /><meta content="10" name="docsearch:version_major" /><meta content="6" name="docsearch:version_minor" /><meta content="4" name="docsearch:version_patch" /><link href="https://my.rightscale.com/favicon.ico" rel="icon" /><!--Stylesheets--><link href="../../../css/main.css" rel="stylesheet" /><!--JavaScript--><script src="../../../js/main.js"></script></head><body class="rl10 rl10_reference rl10_reference_10" data-spy="scroll" data-target="#subnav-right"><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container-fluid max-width"><div class="navbar-header"><button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/"><img src="../../../img/FX_Logo_pos.png" /></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a target="_blank" href="https://community.flexera.com/t5/Flexera-Community/ct-p/Flexera_Community">Community</a></li><li><a target="_blank" href="https://www.flexera.com/blog/">Blog</a></li><li><a target="_blank" href="https://www.flexera.com/about-us/contact-us.html">Contact</a></li><li><a target="_blank" href="https://login.rightscale.com/login/session/new">Log In</a></li></ul><ul class="nav navbar-nav navbar-right nav-status"><li class="nav-al-search"><a href="../../../search.html">Search</a></li></ul><form class="navbar-form navbar-left" role="search" action="/search.html" method="get" ><div class="form-group"><input class="form-control input-sm" id="site-search" placeholder="Search" type="text" name="q" /></div><input type="submit" style="position: absolute; left: -9999px"/></form><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script><script type="text/javascript"> docsearch({apiKey: 'b58c3ad6ab9d6e3cd425867d64a6766f',indexName: 'rightscale',inputSelector: '#site-search', debug: false, autocompleteOptions: {autoselect: false}});</script></div></div></nav><div class="wrap"><div class="container-fluid max-width"><div class="row"><div class="col-sm-3"><div class="clearfix"><aside class="main-nav" role="complementary"><nav class="list-group" role="navigations"><a class="list-group-item" href="/rl10"><h4 class="list-group-heading"><span>RightLink 10</span></h4></a><a class="list-group-item" href="../../about.html">About</a><a class="list-group-item" href="../../getting_started.html">Getting Started</a><a class="list-group-item" href="../../os_use_case_cloud_support.html">Operating System,<br> Use Case, and Cloud Support</a><a class="list-group-item" href="/rl10/reference">Reference</a><a class="list-group-item" href="/rl10/releases">Releases</a><a class="list-group-item" href="/rl10/tools">Tools</a><a class="list-group-item" href="/rl10/migration">Migration Guide</a></nav></aside><div class="callout"><a href="/api/"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-api.svg" /><h4>Flexera CMP APIs</h4></div><span>See the API reference documentation for all of our products.</span></div></div></a></div><div class="callout"><a href="../../../ca/cloud_comp/ca_getting_started_with_cloud_comparison.html"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-cloud-blue.svg" /><h4>Cloud Comparison</h4></div><span>Compare public clouds based on the features they offer.</span></div></div></a></div><div class="callout"><a target="_blank" href="http://feedback.rightscale.com"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-feedback.svg" /><h4>Feedback</h4></div><span>Get in touch and we’ll get back to you as soon as we can.</span></div></div></a></div><div class="callout"><a href="/release-notes"><div class="panel panel-default"><div class="panel-body"><div class="callout-title"><img src="../../../img/icon-notes.svg" /><h4>Release Notes</h4></div><span>See the notes for the latest releases of each application and what’s changed.</span></div></div></a></div></div></div><div class="col-sm-9"><div class="row"><div class="col-sm-9"><div class="clearfix"><p><a href="../../../">Flexera CMP Docs</a> &#x2F; <a href="../../">RightLink 10</a> &#x2F; <a href="../">Reference</a> &#x2F; <a href="./">Reference</a></p><div class="pull-right"><div class="btn-group"><a aria-haspopup="true" class="btn btn-success dropdown-toggle" data-toggle="dropdown" id="version-dropdown" type="button"><strong>Version:</strong>&nbsp;<span>10.6.4&nbsp;</span><span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="/rl10/reference/10.6.4/rl10_proxying_rightlink.html">10.6.4</a></li><li><a href="/rl10/reference/10.6.3/rl10_proxying_rightlink.html">10.6.3</a></li><li><a href="/rl10/reference/10.6.2/rl10_proxying_rightlink.html">10.6.2</a></li><li><a href="/rl10/reference/10.6.1/rl10_proxying_rightlink.html">10.6.1</a></li><li><a href="/rl10/reference/10.6.0/rl10_proxying_rightlink.html">10.6.0</a></li><li><a href="/rl10/reference/10.5.3/rl10_proxying_rightlink.html">10.5.3</a></li><li><a href="/rl10/reference/10.5.2/rl10_proxying_rightlink.html">10.5.2</a></li><li><a href="/rl10/reference/10.5.1/rl10_proxying_rightlink.html">10.5.1</a></li></ul></div></div><div class="page-header"><h1>RightLink Through a Proxy</h1></div><div class="main-content"><h2 id="overview">Overview</h2>
+
+<p>Starting with version 10.1 for Linux and 10.2 for Windows, RightLink is capable of routing all its traffic through an
+external proxy for all workflows (<q>enable running</q>, <q>install at boot</q>, <q>custom image</q>).</p>
+
+<p>The proxy server must support the HTTPS CONNECT protocol. SOCKS is currently not
+supported, and no HTTP requests are made by the RightLink client. Basic authentication
+is also supported by passing the username and password in the url itself. Digest and
+more advanced authentication schemes such as NTLM or Kerberos are not currently supported.</p>
+
+<h2 id="execution-environment">Execution environment</h2>
+
+<p>http_proxy, https_proxy, HTTP_PROXY, and HTTPS_PROXY will also be set in the execution
+environment of your scripts if RightLink is proxied. no_proxy and NO_PROXY will
+also be set if the no_proxy parameter is passed. Many unix programs (apt-get, yum, curl,
+rsc) will honor these parameters if set.</p>
+
+<h2 id="configuring-your-proxy">Configuring your proxy</h2>
+
+<p>RightLink communicates back with the RightScale platform in 4 ways:</p>
+
+<ol>
+<li>HTTPS requests to the RightScale API servers, such as us-3.rightscale.com</li>
+<li>HTTPS requests to the island load balancers (such as island1.rightscale.com) to download attachments.</li>
+<li>Websocket requests to the RightScale routers.</li>
+<li>HTTPS requests to the RightScale TSS servers, such as tss-3.rightscale.com.</li>
+</ol>
+
+<p>The websockets protocol is built on top of HTTPS and from the perspective of the
+proxy server it is an HTTPS connection that is kept open indefinitely. Requests are
+periodically sent on the websocket (every 5 minutes). In order to accommodate the
+websocket connection, make sure the inactivity timeout is at least 15 minutes and
+<a href="http://www.squid-cache.org/Doc/config/read_timeout/">read timeouts</a> are as high as possible.</p>
+
+<h4 id="hardened-proxy-whitelist">Hardened Proxy Whitelist</h4>
+
+<p>If you wish to whitelist only the hosts and paths specifically required for RightLink
+communication, you may use this ruleset.</p>
+
+<table><thead>
+<tr>
+<th>Communication Type</th>
+<th>Host(s)</th>
+<th>Path(s)</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RightScale API</td>
+<td>us-3.rightscale.com, us-4.rightscale.com, telstra-10.rightscale.com</td>
+<td>*</td>
+</tr>
+<tr>
+<td>RightScript Attachments</td>
+<td>island*.rightscale.com</td>
+<td>/attachments</td>
+</tr>
+<tr>
+<td>RightLink Updates</td>
+<td>island*.rightscale.com</td>
+<td>/rightlink, /rightscale_rightlink</td>
+</tr>
+<tr>
+<td>RightLink Websockets</td>
+<td>rightnet-router*.rightscale.com</td>
+<td>*</td>
+</tr>
+<tr>
+<td>RightLink Monitoring</td>
+<td>tss*.rightscale.com</td>
+<td>*</td>
+</tr>
+</tbody></table>
+
+<h4 id="ssl/tls-intercept-proxy-notes:">SSL/TLS Intercept Proxy Notes:</h4>
+
+<p>SSL/TLS interception proxy works by negotiating two sessions:</p>
+
+<ol>
+<li>Acts as the client on the server side</li>
+<li>Acts as server on the client side</li>
+<li>Generates new server key pair on client side</li>
+</ol>
+
+<p>When properly configured the SSL/TLS intercept proxy should be somewhat transparent to RightLink and should not impact RightLink communication.  The details for properly implementing and configuring SSL/TLS intercept proxies vary by manufacturer and as such these details are beyond the scope of this brief document <em>-please refer to your manufacturer&#39;s specific documents on implementation and configuration.</em>  In general, the best practice guidelines for implementing and configuring SSL/TLS intercept proxies are outlined below.</p>
+
+<ul>
+<li><strong>Transitive root/x.509 trusts</strong> should be established without any certificate validation flaws</li>
+<li><strong>Key pair caching and indexing</strong> should be working correctly for both first visit and subsequent visits</li>
+<li><strong>Websockets</strong> <em>must</em> be supported</li>
+<li><strong>Failure modes</strong> should be properly planned and accounted for such as passthrough in the case that the proxy goes down.  If not passthrough then the intercept proxy becomes the single point of failure.  Each failure mode: passthrough, fail close, friendly error has some trade offs.</li>
+<li><strong>Updating/Patching</strong> procedures should be planned and defined, and should include using a test ssl intercept proxy appliance when applying patches and updates vs. applying updates and patches to a live production proxy appliance.</li>
+<li><strong>All Testing passes</strong> e.g. Qualys SSL/TLS security scanner or others</li>
+</ul>
+
+<h2 id="usage">Usage</h2>
+
+<h3 id="usage-enabling-a-running-instance">Enabling a Running Instance</h3>
+
+<p>To use a proxy when enabling a running instance, pass the <code>-x proxy_url</code> and
+<code>-y no_proxy</code> options to the <code>rightlink.enable.sh</code> script on Linux or to the <code>rightlink.enable.ps1</code>
+script on Windows as shown in the following example. For further details, see Enable Running Instances
+for <a href="rl10_enable_running_instances.html">Linux</a> or <a href="rl10_enable_running_instances_windows.html">Windows</a>.</p>
+<pre class="syntax-highlight shell"><code>  curl -s https://rightlink.rightscale.com/rll/10.6.4/rightlink.enable.sh | sudo bash -s -- -l -k <span class="s2">"e22f8d37...456"</span>
+  -t <span class="s2">"RightLink 10.6.4 Linux Base"</span> -n <span class="s2">"Test Server"</span> -d <span class="s2">"RightLink Enabled Test"</span> -c <span class="s2">"amazon"</span>
+  -x <span class="s2">"http://basicuser:basicpass@1.2.3.4:3126"</span> -y <span class="s2">"dontproxy.com"</span>
+</code></pre>
+<pre class="syntax-highlight powershell"><code>  <span class="nv">$wc</span> <span class="o">=</span> <span class="nb">New-Object </span>System.Net.WebClient
+  <span class="nv">$wc</span>.DownloadFile<span class="o">(</span><span class="s2">"https://rightlink.rightscale.com/rll/10.6.4/rightlink.enable.ps1"</span>, <span class="s2">"</span><span class="nv">$pwd</span><span class="se">\r</span><span class="s2">ightlink.enable.ps1"</span><span class="o">)</span>
+  Powershell -ExecutionPolicy Unrestricted -File rightlink.enable.ps1 -refreshToken <span class="s2">"e22f8d37...456"</span>
+  -serverTemplateName <span class="s2">"RightLink 10.6.4 Windows Base"</span> -serverName <span class="s2">"Test Server"</span> -deploymentName <span class="s2">"RightLink Enabled Test"</span>
+  -cloudType <span class="s2">"amazon"</span> -Proxy <span class="s2">"http://basicuser:basicpass@1.2.3.4:3126"</span> -NoProxy <span class="s2">"dontproxy.com"</span>
+</code></pre>
+
+<h3 id="usage-installing-at-boot-and-custom-image">Installing at Boot and Custom Image</h3>
+
+<p>To use a proxy for a RightLink agent installed at boot via cloud-init for <a href="rl10_install_at_boot.html">Linux</a> or cloud-native agents for <a href="rl10_install_at_boot_windows.html">Windows</a> you may set tags on your RightScale Server of the form <code>rs_agent:http_proxy=url</code> and <code>rs_agent:http_no_proxy=url list</code>. For example, set these tags on your Server before launch:</p>
+<pre class="syntax-highlight shell"><code>  rs_agent:http_proxy<span class="o">=</span>http://basicuser:basicpass@1.2.3.4:3128
+  rs_agent:http_no_proxy<span class="o">=</span>example.com,myserver.com
+</code></pre>
+
+<p>These tags will also work for images with Cloud-init and RightLink pre-installed for Linux or RightLink pre-installed for Windows.</p>
+
+<p>Some additional options exist to optionally proxy username/password from a RightScale Credential so its not exposed as a tag. For a full list of http_proxy related tags see <a href="/cm/ref/list_of_rightscale_tags.html">list of rightscale tags</a>.</p>
+
+<h3 id="usage-in-a-vpc-or-private-network">In a VPC or Private Network</h3>
+
+<p>In a network with very limited outbound access, install-at-boot scenarios become a bit more complicated. Bootstrapping relies on cloud-init downloading and running an install script.</p>
+
+<ul>
+<li>If a proxy server must be used in the VPC or private network to gain access to the URL containing the rightlink install script, then use the <code>rs_agent:mime_shellscript</code> tag on Linux and <code>rs_agent:powershell_url</code> tag on Windows. Both these tags will add the proxy information from the <code>rs_agent:http_proxy</code> tag into the runtime environment before downloading.</li>
+<li>It is no longer recommended to use <code>rs_agent:mime_include_url</code>. This tag instructs cloud-init to download and run the script, however it has a couple issues: 1. On GCE it doesn&#39;t always work due to a race condition with the network setup and a lack of retries 2. On Linux, Cloud-init by default in not proxy aware (https://bugs.launchpad.net/cloud-init/+bug/1089405?comments=all).</li>
+</ul>
+
+<p>In addition to the above solutions, there are a number of network level solutions to allow outbound access:</p>
+
+<ol>
+<li>Create a rule to allow outbound access to <code>rightlink.rightscale.com</code> for your network.</li>
+<li>Create a custom image for <a href="rl10_install.html">Linux</a> or <a href="rl10_install_windows.html">Windows</a> with RightLink 10 pre-installed.</li>
+<li>Create a proxy to <code>rightlink.rightscale.com</code> in your private network and have the <code>rs_agent:mime_shellscript</code> or <code>rs_agent:powershell_url</code> tag reference that instead.</li>
+</ol>
+</div></div></div><div class="col-sm-3 hidden-xs affix-parent"><div class="clearfix" data-clampedwidth=".affix-parent" data-offset-bottom="200" data-offset-top="4" data-spy="affix"><nav class="subnav-right" id="subnav-right" role="sub-nav"><script>createRightHandNav();</script></nav></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+  // Add clipboard button trigger
+  var snippets = document.querySelectorAll('.syntax-highlight');
+  [].forEach.call(snippets, function(snippet) {
+  snippet.firstChild.insertAdjacentHTML('beforebegin', '<button class="btn snippet-clipboard" data-clipboard-snippet><img src="/img/icon-clipboard.svg"></button>');
+  });
+
+  // clipboard trigger
+  var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
+  target: function(trigger) {
+  return trigger.nextElementSibling;
+  }
+  });
+
+  // Tooltip trigger
+  clipboardSnippets.on('success', function(e) {
+  e.clearSelection();
+  showTooltip(e.trigger, 'Copied!');
+  });
+
+  // Error message
+  clipboardSnippets.on('error', function(e) {
+  showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+
+  // Tooltip events
+  var btns = document.querySelectorAll('.syntax-highlight .btn');
+  for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener('mouseleave', clearTooltip);
+  btns[i].addEventListener('blur', clearTooltip);
+  }
+
+  function clearTooltip(e) {
+  e.currentTarget.setAttribute('class', 'btn');
+  e.currentTarget.removeAttribute('aria-label');
+  }
+
+  function showTooltip(elem, msg) {
+  elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+  elem.setAttribute('aria-label', msg);
+  }
+</script></body></html>
