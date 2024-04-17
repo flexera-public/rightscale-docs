@@ -65,16 +65,16 @@ server i-a3d1b8c5 10.204.97.84:8000 check inter 3000 rise 2 fall 3 maxconn 255
 <li><strong>Name</strong> - Enter a name. (e.g. Load Balancer Test)</li>
 <li><strong>Description</strong> - Provide a simple description. (e.g. <q>Simple test for the HAProxy load balancers and the application servers in its load balancing pool.</q>)</li>
 <li><p><strong>Script</strong> - Copy and paste the following code, which creates a webpage ( <strong>servername.html</strong> ) that will display the instance ID of the application server that&#39;s used for the current session.</p>
-<pre class="syntax-highlight html"><code>#!/bin/bash -ex
-cat &gt; /home/webapps/$APPLICATION_NAME/servername.html <span class="err">&lt;</span><span class="nt">&lt; EOF</span>
-<span class="err">&lt;</span><span class="na">html</span><span class="nt">&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;</span>Which application server am I connected to?<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;h2&gt;</span>Instance ID: <span class="nt">&lt;font</span> <span class="na">color=</span><span class="s">"blue"</span><span class="nt">&gt;</span>
+<pre class="syntax-highlight shell"><code><span class="c">#!/bin/bash -ex</span>
+cat &gt; /home/webapps/<span class="nv">$APPLICATION_NAME</span>/servername.html <span class="sh">&lt;&lt; EOF
+&lt;html&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;Which application server am I connected to?&lt;/h1&gt;
+&lt;h2&gt;Instance ID: &lt;font color="blue"&gt;
 EOF
-cat /var/spool/cloud/meta-data/instance-id &gt;&gt; /home/webapps/$APPLICATION_NAME/servername.html
-cat &gt;&gt; /home/webapps/$APPLICATION_NAME/servername.html <span class="err">&lt;</span><span class="nt">&lt; EOF</span>
-<span class="err">&lt;/</span><span class="na">font</span><span class="nt">&gt;&lt;/h2&gt;&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;</span>
+</span>cat /var/spool/cloud/meta-data/instance-id &gt;&gt; /home/webapps/<span class="nv">$APPLICATION_NAME</span>/servername.html
+cat &gt;&gt; /home/webapps/<span class="nv">$APPLICATION_NAME</span>/servername.html <span class="sh">&lt;&lt; EOF
+&lt;/font&gt;&lt;/h2&gt;&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;
 EOF
-</code></pre></li>
+</span></code></pre></li>
 <li><p><strong>Packages</strong> - Leave this field blank.</p></li>
 <li><p><strong>Inputs</strong> - After pasting in the sample code, click the <strong>Identify</strong> button to show all of the user configurable inputs in the script. For this example, you will only have one input (&#39;APPLICATION_NAME&#39;).</p></li>
 <li><p><strong>Enabled</strong> - Make sure the input is enabled. The checkbox should be checked.</p></li>
