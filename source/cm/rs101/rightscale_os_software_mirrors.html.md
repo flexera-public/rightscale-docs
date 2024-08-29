@@ -4,6 +4,10 @@ layout: cm_layout
 description: The mirror.rightscale.com site is a mirroring service for RubyGems and OS software packages that RightScale provides to its customers.
 ---
 
+!!warning*Note* Rightscale Mirrors are deprecated.<br>If you're currently using [mirror.rightscale.com](http://mirror.rightscale.com) for your cloud instances, please use public repositories for your needs.
+
+---
+
 ## What is [mirror.rightscale.com](http://mirror.rightscale.com)?
 
 It is a mirroring service for RubyGems and OS software packages that RightScale provides to its customers. An array of cloud server instances host this service, enabling faster downloads and higher availability than public OS repositories.
