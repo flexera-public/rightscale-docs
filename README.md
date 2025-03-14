@@ -134,10 +134,7 @@ RestClient.get(...)
 Gliffy is a program used to create various types of diagrams and pictures. Any image created using Gliffy can be edited, published, or shared with other people. The exported images can be used in websites and blogs, used in standalone web pages, or downloaded as a png file.
 
 #### Getting Started
-You can access gliffy by visiting https://www.gliffy.com. Press the Sign In button in the upper right corner. Enter the following credentials:
-
-Username: it-purchase@rightscale.com
-Password: diagrams1docs1RS
+You can access gliffy by visiting https://www.gliffy.com.
 
 #### Editing a Pre-existing diagram
 From the tool bar in the top left corner select File -> Open. Locate the desired diagram either through the directory in the left column or from the list of recently edited diagrams in the center. Select the diagram and press “Open” to begin editing.
