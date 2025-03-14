@@ -581,15 +581,15 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <ul>
 <li><a href="">Azure Superseded Instance Types</a> identifies VMs that are running on older instance types where a newer instance type exists and can automatically resize the VM to the new type after approval.</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2019-01-14.html">Week of 2019-01-14</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/optima/2019/01/18.html">Optima</a> </h1><div class="article-time"><time datetime="01-18-2019">January 18, 2019</time></div><div class="article-tease"><h2 id="new-features">New features</h2>
-
-<ul>
-<li>Custom tag-based dimensions can now be added and updated directly by users in the UI which allow a user to specify tags used for filtering and grouping Billing Center cost data.  You can find them under Settings -&gt; Custom Tags in Optima.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/governance/2019/01/18.html">Policies</a> </h1><div class="article-time"><time datetime="01-18-2019">January 18, 2019</time></div><div class="article-tease"><h2 id="new-policies">New Policies</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2019-01-14.html">Week of 2019-01-14</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/governance/2019/01/18.html">Policies</a> </h1><div class="article-time"><time datetime="01-18-2019">January 18, 2019</time></div><div class="article-tease"><h2 id="new-policies">New Policies</h2>
 
 <ul>
 <li><a href="https://github.com/rightscale/policy_templates/tree/master/cost/scheduled_reports">Scheduled Reports</a> provides the user with periodic reports of their cloud spend for the selected billing centers. </li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/optima/2019/01/18.html">Optima</a> </h1><div class="article-time"><time datetime="01-18-2019">January 18, 2019</time></div><div class="article-tease"><h2 id="new-features">New features</h2>
+
+<ul>
+<li>Custom tag-based dimensions can now be added and updated directly by users in the UI which allow a user to specify tags used for filtering and grouping Billing Center cost data.  You can find them under Settings -&gt; Custom Tags in Optima.</li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2019-01-07.html">Week of 2019-01-07</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/governance/2019/01/11.html">Policies</a> </h1><div class="article-time"><time datetime="01-11-2019">January 11, 2019</time></div><div class="article-tease"><h2 id="new-policies">New Policies</h2>
 
@@ -740,6 +740,12 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 
 <p><img src="/img/governance_credentials_viewer.png" alt="governance_credentials_viewer.png" width="1342" height="538" /></p></li>
 </ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2018/04/05.html">Self-Service</a> </h1><div class="article-time"><time datetime="04- 5-2018">April  5, 2018</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Added <code>private_ip_address</code> attribute to the <a href="/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-instance">instance</a> and <a href="/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-server">server</a> resource declarations in cat. </li>
+<li>Allow users with only the <code>ss_end_user</code> role to use <a href="/ss/guides/ss_plugins.html">Self-Service Plugins</a></li>
+</ul>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2018/04/05.html">Cloud Management</a> </h1><div class="article-time"><time datetime="04- 5-2018">April  5, 2018</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
 
 <h3 id="changes-in-behavior-api-1-5">API 1.5</h3>
@@ -747,12 +753,6 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <ul>
 <li>By default, the <code>VolumeAttachments.create</code> call in the API behaves synchronously, blocking until the volume is attached. An <code>api_behavior=async</code> attribute was added to the <a href="http://reference.rightscale.com/api1.5/resources/ResourceVolumeAttachments.html#create">VolumeAttachments create</a> call, allowing you to make the call and then poll for status.</li>
 <li>Added <code>skip_deletion=&#39;true&#39;</code> to <a href="http://reference.rightscale.com/api1.5/resources/ResourceBackups.html#cleanup">Backups cleanup</a>. The cleanup action will return a list of backups that can be removed without removing them.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2018/04/05.html">Self-Service</a> </h1><div class="article-time"><time datetime="04- 5-2018">April  5, 2018</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Added <code>private_ip_address</code> attribute to the <a href="/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-instance">instance</a> and <a href="/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-server">server</a> resource declarations in cat. </li>
-<li>Allow users with only the <code>ss_end_user</code> role to use <a href="/ss/guides/ss_plugins.html">Self-Service Plugins</a></li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2018-03-19.html">Week of 2018-03-19</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/optima/2018/03/23.html">Optima</a> </h1><div class="article-time"><time datetime="03-23-2018">March 23, 2018</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -1027,7 +1027,14 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
     <img src="/img/gov-accounts-listview.png" alt="">
 </div></li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-05-15.html">Week of 2017-05-15</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2017/05/17.html">Cloud Management</a> </h1><div class="article-time"><time datetime="05-17-2017">May 17, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-05-15.html">Week of 2017-05-15</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/05/17.html">Self-Service</a> </h1><div class="article-time"><time datetime="05-17-2017">May 17, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p>Plugin CATs can now be more easily identified in the Designer view with a new column that shows the <code>type</code> of each CAT.</p>
+
+<p><img src="/img/ss-designer-type-column.png" alt="ss-designer-type-column.png" width="441" height="152" /></p></li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2017/05/17.html">Cloud Management</a> </h1><div class="article-time"><time datetime="05-17-2017">May 17, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><p>Simplified invite experience for the <strong>Self-Service</strong> users by adding the new roles (<code>ss_end_user</code>, <code>ss_designer</code>, and <code>ss_observer</code>) to the current Invite flow.</p>
@@ -1048,13 +1055,6 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 </ul>
 
 <p><strong>Version:</strong> vscale_2.0_20170517_10</p>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/05/17.html">Self-Service</a> </h1><div class="article-time"><time datetime="05-17-2017">May 17, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><p>Plugin CATs can now be more easily identified in the Designer view with a new column that shows the <code>type</code> of each CAT.</p>
-
-<p><img src="/img/ss-designer-type-column.png" alt="ss-designer-type-column.png" width="441" height="152" /></p></li>
-</ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-05-08.html">Week of 2017-05-08</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/05/10.html">Self-Service</a> </h1><div class="article-time"><time datetime="05-10-2017">May 10, 2017</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
 
 <ul>
@@ -1077,15 +1077,15 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 
 <p><img src="/img/governance-exportcsv-accounts.gif" alt="governance-exportcsv-accounts.gif" width="1134" height="754" /></p></li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-04-17.html">Week of 2017-04-17</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/governance/2017/04/21.html">Governance</a> </h1><div class="article-time"><time datetime="04-21-2017">April 21, 2017</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Fixed an intermittent bug causing admins to see <strong><q>lack privileges</q></strong> screen on login or navigating from Cloud Management.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/04/21.html">Self-Service</a> </h1><div class="article-time"><time datetime="04-21-2017">April 21, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-04-17.html">Week of 2017-04-17</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/04/21.html">Self-Service</a> </h1><div class="article-time"><time datetime="04-21-2017">April 21, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><a href="/ss/guides/ss_plugins.html">Self-Service Plugins</a> are now available, allowing you to <strong>integrate and manage any service</strong> through Self-Service CAT files. Integrate with any service from any cloud or service provider by defining a <code>plugin</code> in your CAT and publishing the application to the Catalog.</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/governance/2017/04/21.html">Governance</a> </h1><div class="article-time"><time datetime="04-21-2017">April 21, 2017</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed an intermittent bug causing admins to see <strong><q>lack privileges</q></strong> screen on login or navigating from Cloud Management.</li>
 </ul>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2017/04/19.html">Cloud Management</a> </h1><div class="article-time"><time datetime="04-19-2017">April 19, 2017</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
 
@@ -1123,6 +1123,12 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li>New UI loading indicator while the page is loading the data. </li>
 <li>Improved usability around new user invite flow by reducing the number of clicks it takes to get to the Invite page.</li>
 </ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/03/29.html">Self-Service</a> </h1><div class="article-time"><time datetime="03-29-2017">March 29, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>An indicator has been added for the <a href="/faq/end_of_life_end_of_service.html#schedule-cat-versions">deprecation of CAT version 20131202</a>. Anyone impacted has also received an email with additional information</li>
+<li>After publishing a CAT from Designer, the <q>Launch</q> link in the success growler will now launch the CloudApp from Catalog, instead of from Designer</li>
+</ul>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2017/03/29.html">Cloud Management</a> </h1><div class="article-time"><time datetime="03-29-2017">March 29, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
@@ -1130,18 +1136,19 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li>The <a href="/clouds/azure_resource_manager/getting_started/register.html#connect-microsoft-azure-resource-manager-to-your-rightscale-account">registration process for Azure Resource Manager</a> <strong>has been greatly simplified</strong> and no longer requires the user to provide the tenant or subscription ID.</li>
 <li>Added <strong>support for AWS i3 instance types</strong> to Cloud Management, Self-Service, and Optima</li>
 </ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/03/29.html">Self-Service</a> </h1><div class="article-time"><time datetime="03-29-2017">March 29, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li>An indicator has been added for the <a href="/faq/end_of_life_end_of_service.html#schedule-cat-versions">deprecation of CAT version 20131202</a>. Anyone impacted has also received an email with additional information</li>
-<li>After publishing a CAT from Designer, the <q>Launch</q> link in the success growler will now launch the CloudApp from Catalog, instead of from Designer</li>
-</ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-03-20.html">Week of 2017-03-20</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/governance/2017/03/24.html">Governance</a> </h1><div class="article-time"><time datetime="03-24-2017">March 24, 2017</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
 
 <ul>
 <li>To provide more context to the users, who belong to a single organization, Governance will now show the organization name in the UI. Previously, the organization name only appeared for users affiliated with multiple organizations.</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-03-13.html">Week of 2017-03-13</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/governance/2017/03/15.html">Governance</a> </h1><div class="article-time"><time datetime="03-15-2017">March 15, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-03-13.html">Week of 2017-03-13</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/03/15.html">Self-Service</a> </h1><div class="article-time"><time datetime="03-15-2017">March 15, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p>Any modification to a scheduled action, either postponing it or canceling it, will now be tracked in the Activity Feed view of the CloudApp along with the user that performed the action.</p>
+
+<p><img src="/img/ss_sched_action_modification.png" alt="ss_sched_action_modification.png" width="315" height="396" /></p></li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/governance/2017/03/15.html">Governance</a> </h1><div class="article-time"><time datetime="03-15-2017">March 15, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><p>Enterprise Managers can now seamlessly <em>remove</em> a user, including all it&#39;s roles, from the organization.</p>
@@ -1153,13 +1160,6 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 
 <ul>
 <li>Security bug fix to ensure that access token can not be generated by a terminated instance.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/03/15.html">Self-Service</a> </h1><div class="article-time"><time datetime="03-15-2017">March 15, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><p>Any modification to a scheduled action, either postponing it or canceling it, will now be tracked in the Activity Feed view of the CloudApp along with the user that performed the action.</p>
-
-<p><img src="/img/ss_sched_action_modification.png" alt="ss_sched_action_modification.png" width="315" height="396" /></p></li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-02-27.html">Week of 2017-02-27</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/governance/2017/03/03.html">Governance</a> </h1><div class="article-time"><time datetime="03- 3-2017">March  3, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -1176,15 +1176,15 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li>Bug fix around user roles were not reflecting all inherited roles. </li>
 <li>Bug fix where incorrect message was displayed if a user only had roles inherited from the organization level. </li>
 </ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2017/03/01.html">Cloud Management</a> </h1><div class="article-time"><time datetime="03- 1-2017">March  1, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li>Improved <strong>integration with Azure Resource Groups</strong>, allowing you to launch resources through RightScale into user-specified new or existing Resource Groups in Azure. Associate any RightScale Deployment with any Azure Resource Group so that resources in the Deployment exist in the associated Resource Group. Read more about <a href="/clouds/azure_resource_manager/reference/resources.html#azure-resource-groups">this integration in the docs site</a>.</li>
-</ul>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/03/01.html">Self-Service</a> </h1><div class="article-time"><time datetime="03- 1-2017">March  1, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li>Support for the <a href="/ss/reference/cat/v20161221/ss_CAT_resources.html#resources-resource_group">Resource Group</a> resource introduced in Cloud Management</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2017/03/01.html">Cloud Management</a> </h1><div class="article-time"><time datetime="03- 1-2017">March  1, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Improved <strong>integration with Azure Resource Groups</strong>, allowing you to launch resources through RightScale into user-specified new or existing Resource Groups in Azure. Associate any RightScale Deployment with any Azure Resource Group so that resources in the Deployment exist in the associated Resource Group. Read more about <a href="/clouds/azure_resource_manager/reference/resources.html#azure-resource-groups">this integration in the docs site</a>.</li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-02-13.html">Week of 2017-02-13</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/02/15.html">Self-Service</a> </h1><div class="article-time"><time datetime="02-15-2017">February 15, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -1251,17 +1251,17 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <ul>
 <li>Fixed a bug that would, in some cases, cause VmWare volumes to not be able to be re-attached once they were detached</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-01-09.html">Week of 2017-01-09</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2017/01/11.html">Cloud Management</a> </h1><div class="article-time"><time datetime="01-11-2017">January 11, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-01-09.html">Week of 2017-01-09</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/01/11.html">Self-Service</a> </h1><div class="article-time"><time datetime="01-11-2017">January 11, 2017</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Notification emails are now sent when a CloudApp fails if the launch process was <code>aborted</code> or <code>canceled</code></li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2017/01/11.html">Cloud Management</a> </h1><div class="article-time"><time datetime="01-11-2017">January 11, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><strong>Support for new AWS Regions</strong> - AWS Canada Central, and AWS UK London are now available in Cloud Management. Follow the <a href="/clouds/aws/aws_quick_start.html#add-aws-add-aws-account-credentials">AWS registration flow</a> to add these new regions to your account.</li>
 <li>A <strong>custom admin username</strong> can now be set for Windows instances on Azure Resource Manager. You can find the new field in the Server launch UI and API.</li>
 <li><strong>Install-at-boot support for Windows on ARM, GCE, and AWS</strong> allows for easier installation of the RightLink10 agent on your servers. Follow the <a href="/rl10/reference/10.6.0/rl10_install_at_boot_windows.html">install-at-boot instructions</a> and note that this requires <a href="/rl10/reference/">RightLink v10.6.0</a> or later</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2017/01/11.html">Self-Service</a> </h1><div class="article-time"><time datetime="01-11-2017">January 11, 2017</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Notification emails are now sent when a CloudApp fails if the launch process was <code>aborted</code> or <code>canceled</code></li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2017-01-02.html">Week of 2017-01-02</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2017/01/05.html">Cloud Management</a> </h1><div class="article-time"><time datetime="01- 5-2017">January  5, 2017</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -1275,7 +1275,18 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li>Changes to SSO settings</li>
 </ul></li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-12-26.html">Week of 2016-12-26</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/12/29.html">Cloud Management</a> </h1><div class="article-time"><time datetime="12-29-2016">December 29, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-12-26.html">Week of 2016-12-26</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/12/29.html">Self-Service</a> </h1><div class="article-time"><time datetime="12-29-2016">December 29, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Cloud Workflow code debugger is now available</strong> under the Designer menu -&gt; CWF Console. This console provides the ability to execute Cloud Workflow code (RCL) directly in order to help debugging your custom code. This feature is available in Labs.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>The use of <code>sha</code> has been changed to <code>ref</code></li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/12/29.html">Cloud Management</a> </h1><div class="article-time"><time datetime="12-29-2016">December 29, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><strong>Ed25519 and other new key types</strong> are now supported by <a href="/rl10/reference/10.6.0/rl10_managed_ssh_login.html">RightLink10 Managed Login</a></li>
@@ -1286,17 +1297,6 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <ul>
 <li>Bugfix: fixed a bug that would cause problems when launching multiple instances concurrently on Azure Resource Manager</li>
 <li>Bugfix: fixed a bug that would revert the spot/On-Demand choice for AWS instances when editing a Server</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/12/29.html">Self-Service</a> </h1><div class="article-time"><time datetime="12-29-2016">December 29, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><strong>Cloud Workflow code debugger is now available</strong> under the Designer menu -&gt; CWF Console. This console provides the ability to execute Cloud Workflow code (RCL) directly in order to help debugging your custom code. This feature is available in Labs.</li>
-</ul>
-
-<h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>The use of <code>sha</code> has been changed to <code>ref</code></li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-12-19.html">Week of 2016-12-19</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-10/2016/12/19.html">RightLink v10.6.0 Release</a> </h1><div class="article-time"><time datetime="12-19-2016">December 19, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -1364,7 +1364,12 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 </ul>
 
 <p><img src="/img/monitoring_new_graphs.png" alt="new-monitoring-graphs" width="733" height="223" /></p>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-10-31.html">Week of 2016-10-31</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/11/02.html">Cloud Management</a> </h1><div class="article-time"><time datetime="11- 2-2016">November  2, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-10-31.html">Week of 2016-10-31</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/11/02.html">Self-Service</a> </h1><div class="article-time"><time datetime="11- 2-2016">November  2, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix that was preventing some column preferences from being saved</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/11/02.html">Cloud Management</a> </h1><div class="article-time"><time datetime="11- 2-2016">November  2, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li>Support for AWS Ohio (us-east-2) region </li>
@@ -1384,11 +1389,6 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 </ul>
 
 <p><strong>Version:</strong> vscale_2.0_20161028_16</p>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/11/02.html">Self-Service</a> </h1><div class="article-time"><time datetime="11- 2-2016">November  2, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Bugfix that was preventing some column preferences from being saved</li>
-</ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-10-24.html">Week of 2016-10-24</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/10/26.html">Cloud Management</a> </h1><div class="article-time"><time datetime="10-26-2016">October 26, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
 
 <ul>
@@ -1425,7 +1425,13 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <ul>
 <li><strong>Stop/Start/Reboot</strong> is now supported on Azure Resource Manager, no matter whether the action is initiated from the RightScale UI/API or from Azure itself.</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-09-19.html">Week of 2016-09-19</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/09/21.html">Cloud Management</a> </h1><div class="article-time"><time datetime="09-21-2016">September 21, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-09-19.html">Week of 2016-09-19</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/09/21.html">Self-Service</a> </h1><div class="article-time"><time datetime="09-21-2016">September 21, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Changed the <code>from</code> email address on Self-Service automated emails to <code>noreply-selfservice@rightscale.com</code></li>
+<li>Updated the CAT parser to throw an error if the <code>rs_ca_ver</code> value is a <code>string</code> (it should be an <code>int</code>)</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/09/21.html">Cloud Management</a> </h1><div class="article-time"><time datetime="09-21-2016">September 21, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li>Added the ability to use <strong>Credentials for proxy username/password</strong> tag settings for RightLink 10, offering a secure method for configuring proxy information. Read more about <a href="/rl10/reference/10.5.2/rl10_proxying_rightlink.html">how to use these settings</a>.</li>
@@ -1438,18 +1444,7 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 </ul>
 
 <p><strong>Version:</strong> vscale_2.0_20160921_23</p>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/09/21.html">Self-Service</a> </h1><div class="article-time"><time datetime="09-21-2016">September 21, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Changed the <code>from</code> email address on Self-Service automated emails to <code>noreply-selfservice@rightscale.com</code></li>
-<li>Updated the CAT parser to throw an error if the <code>rs_ca_ver</code> value is a <code>string</code> (it should be an <code>int</code>)</li>
-</ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-09-05.html">Week of 2016-09-05</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/09/08.html">Cloud Management</a> </h1><div class="article-time"><time datetime="09- 8-2016">September  8, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li>Support for the <strong>X1 instance type</strong> on AWS clouds</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/09/08.html">Self-Service</a> </h1><div class="article-time"><time datetime="09- 8-2016">September  8, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-09-05.html">Week of 2016-09-05</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/09/08.html">Self-Service</a> </h1><div class="article-time"><time datetime="09- 8-2016">September  8, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li>A <strong>new function to retrieve Credential values</strong> has been added to both Cloud Workflow and CAT. This allows you to more easily leverage sensitive credential values in your CAT/CWF code. Learn how to use the <code>cred()</code> function in both <a href="/ss/reference/cat/v20160622/index.html#built-in-methods-and-other-keywords">CAT files</a> and in <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#miscellaneous-cred">Cloud Workflow code</a>.</li>
@@ -1460,6 +1455,11 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 
 <ul>
 <li>Bugfix: fixed a bug that prevented checkboxes from rendering properly in the CloudApp launch dialog</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/09/08.html">Cloud Management</a> </h1><div class="article-time"><time datetime="09- 8-2016">September  8, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Support for the <strong>X1 instance type</strong> on AWS clouds</li>
 </ul>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-10/2016/09/07.html">RightLink v10.5.2 Release</a> </h1><div class="article-time"><time datetime="09- 7-2016">September  7, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -1485,14 +1485,7 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 </ul>
 
 <p>For additional detail and documentation on this release, please refer to the following <a href="/rl10/releases/rl10_10.5.2_release.html">release notes.</a></p>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-08-29.html">Week of 2016-08-29</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/08/31.html">Cloud Management</a> </h1><div class="article-time"><time datetime="08-31-2016">August 31, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Added new <code>destroy</code> action to the <a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html#destroy">Alerts resource in CM API 1.5</a>, allowing you to remove Alerts from servers entirely</li>
-<li>The <a href="http://reference.rightscale.com/api1.5/resources/ResourceClouds.html#index">Clouds.index call in CM API 1.5</a> can now be made by users with the <code>instance</code> role (i.e., RightLink 10 instance credentials)</li>
-<li>Deprecated CloudFront Distributions and CloudFront Origin Access Identities from Cloud Management per our <a href="/faq/end_of_life_end_of_service.html#schedule-other">End of Life policy</a></li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/servicenow/2016/08/31.html">ServiceNow Integration</a> </h1><div class="article-time"><time datetime="08-31-2016">August 31, 2016</time></div><div class="article-tease"><h2 id="release-details">Release Details</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-08-29.html">Week of 2016-08-29</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/servicenow/2016/08/31.html">ServiceNow Integration</a> </h1><div class="article-time"><time datetime="08-31-2016">August 31, 2016</time></div><div class="article-tease"><h2 id="release-details">Release Details</h2>
 
 <ul>
 <li><a href="/servicenow/releases.html">ServiceNow Releases</a></li>
@@ -1520,6 +1513,13 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 </ul>
 
 <p><strong>Version:</strong> 1.1.11</p>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/08/31.html">Cloud Management</a> </h1><div class="article-time"><time datetime="08-31-2016">August 31, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Added new <code>destroy</code> action to the <a href="http://reference.rightscale.com/api1.5/resources/ResourceAlerts.html#destroy">Alerts resource in CM API 1.5</a>, allowing you to remove Alerts from servers entirely</li>
+<li>The <a href="http://reference.rightscale.com/api1.5/resources/ResourceClouds.html#index">Clouds.index call in CM API 1.5</a> can now be made by users with the <code>instance</code> role (i.e., RightLink 10 instance credentials)</li>
+<li>Deprecated CloudFront Distributions and CloudFront Origin Access Identities from Cloud Management per our <a href="/faq/end_of_life_end_of_service.html#schedule-other">End of Life policy</a></li>
+</ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-08-15.html">Week of 2016-08-15</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/08/18.html">Self-Service</a> </h1><div class="article-time"><time datetime="08-18-2016">August 18, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
@@ -1550,18 +1550,7 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li><strong>Azure private images in premium storage accounts</strong> can now be used to launch servers.</li>
 <li><strong>Expandable Deployment descriptions</strong> in Cloud Management allow you to leverage Deployment descriptions more effectively by placing relevant content right where it can be used while ensuring that important Server information isn&#39;t below the fold</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-07-25.html">Week of 2016-07-25</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/07/28.html">Cloud Management</a> </h1><div class="article-time"><time datetime="07-28-2016">July 28, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><strong>Support for new Azure Regions and Azure India</strong> - RightScale now supports the additional regions recently added by MS Azure, West US 2 and West Central US as well as Azure India. <a href="/clouds/azure_resource_manager/getting_started/register.html">Re-register your Azure Resource Manager subscriptions</a> to get access to these new regions.</li>
-</ul>
-
-<h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Fixed a bug that was preventing proxy tags on an MCI from being inherited by Servers</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/07/28.html">Self-Service</a> </h1><div class="article-time"><time datetime="07-28-2016">July 28, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-07-25.html">Week of 2016-07-25</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/07/28.html">Self-Service</a> </h1><div class="article-time"><time datetime="07-28-2016">July 28, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><strong>New strftime() function</strong> in RCL allows easy translation of datetimes into various string formats for use with other APIs. <a href="/ss/reference/rcl/v2/ss_RCL_functions.html#data-conversion-strftime">Learn how to use this function</a> in our docs.</li>
@@ -1574,6 +1563,17 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li>Redesigned tabs for consistency across fht eplatform</li>
 <li>Bugfix that was causing buttons to appear/disappear and the page to <q>jump</q></li>
 <li>Various other bugfixes and UI improvements</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/07/28.html">Cloud Management</a> </h1><div class="article-time"><time datetime="07-28-2016">July 28, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Support for new Azure Regions and Azure India</strong> - RightScale now supports the additional regions recently added by MS Azure, West US 2 and West Central US as well as Azure India. <a href="/clouds/azure_resource_manager/getting_started/register.html">Re-register your Azure Resource Manager subscriptions</a> to get access to these new regions.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that was preventing proxy tags on an MCI from being inherited by Servers</li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-07-18.html">Week of 2016-07-18</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-10/2016/07/22.html">RightLink v10.5.1 Release</a> </h1><div class="article-time"><time datetime="07-22-2016">July 22, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -1607,7 +1607,12 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li>Fixed a bug with using <code>import</code> statements in a file with Windows-style line endings</li>
 <li>Improved error messages for some cases</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-07-04.html">Week of 2016-07-04</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/07/07.html">Cloud Management</a> </h1><div class="article-time"><time datetime="07- 7-2016">July  7, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-07-04.html">Week of 2016-07-04</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/07/07.html">Self-Service</a> </h1><div class="article-time"><time datetime="07- 7-2016">July  7, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug in the <code>tag_value</code> function in RCL version 2</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/07/07.html">Cloud Management</a> </h1><div class="article-time"><time datetime="07- 7-2016">July  7, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li>Improved support for install-at-boot for RightLink 10 when an instance is behind a proxy. The <code>rs_agent:mime_shellscript</code> tag can be used to provide a proxy-aware environment to run the install script. Read more on the <a href="/rl10/reference/rl10_proxying_rightlink.html">RightLink 10 Proxying page</a>.</li>
@@ -1618,21 +1623,16 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <ul>
 <li>Fixed a bug that caused some attributes set by API calls to not show correctly in the UI.</li>
 </ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/07/07.html">Self-Service</a> </h1><div class="article-time"><time datetime="07- 7-2016">July  7, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Fixed a bug in the <code>tag_value</code> function in RCL version 2</li>
-</ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-06-27.html">Week of 2016-06-27</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/06/29.html">Cloud Management</a> </h1><div class="article-time"><time datetime="06-29-2016">June 29, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li>Improved Managed Login functionality for RightLink 10.5 and higher. With the new managed login feature, RightLink 10 leverages an open-source NSS plugin to authorize users from RightScale roles (<code>server_login</code> and <code>server_superuser</code>) and authenticate users using their keys stored in RightScale. Every user has a system-provided login name and can create a <q>preferred</q> login name in their User Settings under SSH. Read more on the <a href="/rl10/reference/rl10_managed_ssh_login.html">RightLink 10 Managed SSH Login page</a>.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/06/29.html">Self-Service</a> </h1><div class="article-time"><time datetime="06-29-2016">June 29, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-06-27.html">Week of 2016-06-27</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/06/29.html">Self-Service</a> </h1><div class="article-time"><time datetime="06-29-2016">June 29, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><strong>CAT Imports</strong> is now available, allowing you to create <em>package</em> CATs that can be imported into other CATs, enabling code reuse and best practices implementation. You can read more about how it works on the <a href="/ss/guides/ss_packaging_cats.html">Packaging CATs docs page</a>. Please note that this requires using a new CAT Version and associated RCL Version that both contain <strong>breaking changes</strong>. Details on the changes are listed on the <a href="/ss/reference/cat/changelog.html">CAT Changelog</a> and the <a href="/ss/reference/rcl/changelog.html">RCL Changelog</a> pages.</li>
 <li>Support for escaped characters and shorthand classes in RCL regex</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/06/29.html">Cloud Management</a> </h1><div class="article-time"><time datetime="06-29-2016">June 29, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Improved Managed Login functionality for RightLink 10.5 and higher. With the new managed login feature, RightLink 10 leverages an open-source NSS plugin to authorize users from RightScale roles (<code>server_login</code> and <code>server_superuser</code>) and authenticate users using their keys stored in RightScale. Every user has a system-provided login name and can create a <q>preferred</q> login name in their User Settings under SSH. Read more on the <a href="/rl10/reference/rl10_managed_ssh_login.html">RightLink 10 Managed SSH Login page</a>.</li>
 </ul>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-10/2016/06/29.html">RightLink v10.5.0 Release</a> </h1><div class="article-time"><time datetime="06-29-2016">June 29, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -1701,18 +1701,18 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li>Added support to <strong>choose the root volume type</strong> for GCE instances. Use any supported volume type via the UI, API, and CAT files.<br></li>
 <li>Added <strong>support for I2 instance types in AWS-Beijing</strong>.</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-05-02.html">Week of 2016-05-02</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/05/04.html">Cloud Management</a> </h1><div class="article-time"><time datetime="05- 4-2016">May  4, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-05-02.html">Week of 2016-05-02</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/05/04.html">Self-Service</a> </h1><div class="article-time"><time datetime="05- 4-2016">May  4, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that prevented some users from changing their timezone</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/05/04.html">Cloud Management</a> </h1><div class="article-time"><time datetime="05- 4-2016">May  4, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><p><strong>Container Management</strong> is now available under <q>Manage</q>. This page shows information about the containers running on your instances, including image and tag information as well as monitoring data. <a href="/cm/dashboard/manage/containers">Read the documentation</a> for more information.</p>
 
 <p><img src="/img/cm-container-management-clean.png" alt="Container Management" width="940" height="618" /></p></li>
 <li><p>Added support for the new <strong>D15v2 instance type</strong> in Azure</p></li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/05/04.html">Self-Service</a> </h1><div class="article-time"><time datetime="05- 4-2016">May  4, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Fixed a bug that prevented some users from changing their timezone</li>
 </ul>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-10/2016/05/04.html">RightLink v10.4.0 Release</a> </h1><div class="article-time"><time datetime="05- 4-2016">May  4, 2016</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -1730,7 +1730,15 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 </ul>
 
 <p>For additional detail and documentation on this release, please refer to the following <a href="/rl10/releases/rl10_10.4.0_release.html">release notes.</a></p>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-04-25.html">Week of 2016-04-25</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/04/28.html">Cloud Management</a> </h1><div class="article-time"><time datetime="04-28-2016">April 28, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2016-04-25.html">Week of 2016-04-25</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/04/28.html">Self-Service</a> </h1><div class="article-time"><time datetime="04-28-2016">April 28, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><strong>CloudApp Description Change</strong>: the description of a CloudApp is no longer populated with the <code>short_description</code> from the CAT. Previously, if a user launched a CloudApp and didn&#39;t set a description, the system would copy the <code>short_description</code> from the CAT -- this is no longer the case.</li>
+<li>Fixed a bug that sometimes prevented user time zone settings from being saved </li>
+<li>Fixed a bug related to selecting days when editing an existing Schedule in Designer </li>
+<li>Fixed a bug that would sometimes show an error growler when deleting a CloudApp </li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2016/04/28.html">Cloud Management</a> </h1><div class="article-time"><time datetime="04-28-2016">April 28, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
 
 <ul>
 <li>Fixed a bug where the Network rulemap would sometimes show incorrect information for Openstack clouds</li>
@@ -1746,14 +1754,6 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <ul>
 <li>Permissions IDs have changed from being a unique numeric ID for the resource to containing a combination of <strong><em>user ID</em></strong> and <strong><em>role title</em></strong> (example: <code>user_id-role_title</code>). <a href="http://reference.rightscale.com/api1.5/resources/ResourcePermissions.html">See API documentation for details</a></li>
 </ul></li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2016/04/28.html">Self-Service</a> </h1><div class="article-time"><time datetime="04-28-2016">April 28, 2016</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li><strong>CloudApp Description Change</strong>: the description of a CloudApp is no longer populated with the <code>short_description</code> from the CAT. Previously, if a user launched a CloudApp and didn&#39;t set a description, the system would copy the <code>short_description</code> from the CAT -- this is no longer the case.</li>
-<li>Fixed a bug that sometimes prevented user time zone settings from being saved </li>
-<li>Fixed a bug related to selecting days when editing an existing Schedule in Designer </li>
-<li>Fixed a bug that would sometimes show an error growler when deleting a CloudApp </li>
 </ul>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/rca-v/2016/04/26.html">Cloud Appliance for vSphere</a> </h1><div class="article-time"><time datetime="04-26-2016">April 26, 2016</time></div><div class="article-tease"><h2 id="rca-v-adapter-v2-0-update">RCA-V Adapter v2.0 update</h2>
 
@@ -1877,7 +1877,12 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <ul>
 <li><strong>Google Compute Engine (GCE) - Network Support</strong> - Google Networks are now supported in the Network Manager of RightScale. Use RightScale&#39;s UI, API, and CAT files to create, manipulate, and manage any GCE Network object that is part of your application. See <a href="/cm/dashboard/manage/networks/network_manager_gce.html">Using Network Manager with GCE</a> for additional information.</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-12-07.html">Week of 2015-12-07</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/12/09.html">Cloud Management</a> </h1><div class="article-time"><time datetime="12- 9-2015">December  9, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-12-07.html">Week of 2015-12-07</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/12/09.html">Self-Service</a> </h1><div class="article-time"><time datetime="12- 9-2015">December  9, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Additional String Functions</strong> - Cloud Workflow now supports many more common string functions to make it easier for you to work with different data sources in RCL. For more information, see the pertinent section of the <a href="/ss/reference/cat">RCL Functions</a> documentation.</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/12/09.html">Cloud Management</a> </h1><div class="article-time"><time datetime="12- 9-2015">December  9, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><strong>GCE Instance Types</strong> - We have added support for GCE instance types that exist only in specific regions (specifically: n1-highcpu-32, n1-highmem-32, n1-standard-32).</li>
@@ -1888,12 +1893,12 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <ul>
 <li>Changes to security group rules are now audited in more detail, including the exact fields of the rule that was created/removed, the author of the change, and the resulting security group definition.</li>
 </ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/12/09.html">Self-Service</a> </h1><div class="article-time"><time datetime="12- 9-2015">December  9, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-11-30.html">Week of 2015-11-30</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/12/02.html">Self-Service</a> </h1><div class="article-time"><time datetime="12- 2-2015">December  2, 2015</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
 
 <ul>
-<li><strong>Additional String Functions</strong> - Cloud Workflow now supports many more common string functions to make it easier for you to work with different data sources in RCL. For more information, see the pertinent section of the <a href="/ss/reference/cat">RCL Functions</a> documentation.</li>
+<li><strong>to_s Function</strong> - Changed the behavior of the <code>to_s</code> function for hashes to return a correct JSON representation of the hash as documented. It was incorrectly returning a string representation (similar to what <code>inspect</code> does).</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-11-30.html">Week of 2015-11-30</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/12/02.html">Cloud Management</a> </h1><div class="article-time"><time datetime="12- 2-2015">December  2, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/12/02.html">Cloud Management</a> </h1><div class="article-time"><time datetime="12- 2-2015">December  2, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><strong>OpenStack</strong> - OpenStack Kilo is now officially supported in RightScale. For more information, see the <a href="/clouds/openstack/openstack_setup_guide.html">OpenStack documentation</a> on our docs site.</li>
@@ -1914,11 +1919,6 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li>Look for the package labeled <code>vscale_1.3_20151202_17</code>.</li>
 <li><strong>Download</strong> and <strong>Activate</strong> that package.</li>
 <li>Refresh your browser window.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/12/02.html">Self-Service</a> </h1><div class="article-time"><time datetime="12- 2-2015">December  2, 2015</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li><strong>to_s Function</strong> - Changed the behavior of the <code>to_s</code> function for hashes to return a correct JSON representation of the hash as documented. It was incorrectly returning a string representation (similar to what <code>inspect</code> does).</li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-11-16.html">Week of 2015-11-16</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/11/18.html">RightScale Cloud Management - November 18, 2015</a> </h1><div class="article-time"><time datetime="11-18-2015">November 18, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -1948,7 +1948,18 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li><strong>Download</strong> and <strong>Activate</strong> that package.</li>
 <li>Refresh your browser window.</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-10-26.html">Week of 2015-10-26</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/10/28.html">Cloud Management</a> </h1><div class="article-time"><time datetime="10-28-2015">October 28, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-10-26.html">Week of 2015-10-26</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/10/28.html">Self-Service</a> </h1><div class="article-time"><time datetime="10-28-2015">October 28, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Account Selector</strong> - We&#39;ve added an Account Selector control to the header in the Self-Service UI to make it easy to switch to a different Self-Service enabled account in any shard. See <a href="/ss/guides/ss_user_interface_guide.html#account-selection">Account Selection</a> in the Self-Service User Interface Guide for additional information.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that would sometimes select other CloudApps in index view after a period of time.</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/10/28.html">Cloud Management</a> </h1><div class="article-time"><time datetime="10-28-2015">October 28, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><strong>GCE Instance Tag Support</strong> - RightScale now supports GCE instance tags and syncs them with the cloud. Any tags on a RS instance prefixed with <q>gce:</q> will be synced to GCE, and tags from GCE will come in to RS in the same format. <a href="/cm/rs101/tagging.html#how-rightscale-tags-and-cloud-tags-are-related-gce-instance-tags">Read more about it here.</a></li>
@@ -1966,37 +1977,26 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 </ul></li>
 <li><strong>Hard Instance Shutdown</strong> - We&#39;ve added a hard shutdown after an instance has been decommissioning for a specified period. The default time is 50 minutes, but can be extended through the use of an instance tag. <a href="/cm/management_guide/server_states.html#rightscale-server-states-decommissioning">Read more about it here.</a></li>
 </ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/10/28.html">Self-Service</a> </h1><div class="article-time"><time datetime="10-28-2015">October 28, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><strong>Account Selector</strong> - We&#39;ve added an Account Selector control to the header in the Self-Service UI to make it easy to switch to a different Self-Service enabled account in any shard. See <a href="/ss/guides/ss_user_interface_guide.html#account-selection">Account Selection</a> in the Self-Service User Interface Guide for additional information.</li>
-</ul>
-
-<h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Fixed a bug that would sometimes select other CloudApps in index view after a period of time.</li>
-</ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-10-19.html">Week of 2015-10-19</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/10/21.html">Cloud Management</a> </h1><div class="article-time"><time datetime="10-21-2015">October 21, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><strong>OpenStack Bootable Volumes</strong> - We now support in the Cloud Management dashboard the ability to launch an OpenStack instance, server, or array and boot from an image to a new volume. You may also specify the size of the new volume and whether to delete or retain the volume when the instance/server terminates. The <strong>Instance Provisioner</strong> and <strong>Add Server Assistant</strong> UIs have been enhanced to provide this capability. For additional information, see <a href="/cm/dashboard/clouds/generic/instances_actions.html#create-a-new-instance-using-the-instance-provisioner">Create a New Instance using the Instance Provisioner</a> and <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#add-server-assistant">Add Server Assistant</a>.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/10/21.html">Self-Service</a> </h1><div class="article-time"><time datetime="10-21-2015">October 21, 2015</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-10-19.html">Week of 2015-10-19</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/10/21.html">Self-Service</a> </h1><div class="article-time"><time datetime="10-21-2015">October 21, 2015</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
 
 <ul>
 <li>Fixed a bug that prevented using strings as regular expressions in the <code>split()</code> function.</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-10-12.html">Week of 2015-10-12</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/10/14.html">Cloud Management</a> </h1><div class="article-time"><time datetime="10-14-2015">October 14, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/10/21.html">Cloud Management</a> </h1><div class="article-time"><time datetime="10-21-2015">October 21, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>OpenStack Bootable Volumes</strong> - We now support in the Cloud Management dashboard the ability to launch an OpenStack instance, server, or array and boot from an image to a new volume. You may also specify the size of the new volume and whether to delete or retain the volume when the instance/server terminates. The <strong>Instance Provisioner</strong> and <strong>Add Server Assistant</strong> UIs have been enhanced to provide this capability. For additional information, see <a href="/cm/dashboard/clouds/generic/instances_actions.html#create-a-new-instance-using-the-instance-provisioner">Create a New Instance using the Instance Provisioner</a> and <a href="/cm/dashboard/design/server_templates/servertemplates_actions.html#add-server-assistant">Add Server Assistant</a>.</li>
+</ul>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-10-12.html">Week of 2015-10-12</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/10/14.html">Self-Service</a> </h1><div class="article-time"><time datetime="10-14-2015">October 14, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>CloudApp Details</strong> - We have revamped the UI when viewing details of a CloudApp based on user feedback and suggestions. The information and styling has been improved for all user types of Self-Service. For additional information, see the <a href="/ss/guides/ss_user_interface_guide.html#catalog-view-viewing-cloudapp-details">Viewing CloudApp Details</a> section of the Self-Service User Interface Guide.</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/10/14.html">Cloud Management</a> </h1><div class="article-time"><time datetime="10-14-2015">October 14, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><p><strong>Google Compute Engine - Stop/Start</strong> - We have added support for Stop/Start for instances on Google Compute Engine. Note that any instance terminated directly in Google Compute Engine will show as <q>stopped</q> in RightScale since they can be restarted. </p></li>
 <li><p><strong>CM API 1.5 - Private IP Address</strong> - This new feature adds the ability to specify a private IP address when creating or updating the next instance of a Server resource. While currently available in the Cloud Management user interface, this feature extends the functionality into CM API 1.5.</p></li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/10/14.html">Self-Service</a> </h1><div class="article-time"><time datetime="10-14-2015">October 14, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><strong>CloudApp Details</strong> - We have revamped the UI when viewing details of a CloudApp based on user feedback and suggestions. The information and styling has been improved for all user types of Self-Service. For additional information, see the <a href="/ss/guides/ss_user_interface_guide.html#catalog-view-viewing-cloudapp-details">Viewing CloudApp Details</a> section of the Self-Service User Interface Guide.</li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-09-29.html">Week of 2015-09-29</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-10/2015/10/02.html">RightLink v10.2.1 (GA)</a> </h1><div class="article-time"><time datetime="10- 2-2015">October  2, 2015</time></div><div class="article-tease"><p>RightLink version 10.2.1 is now Generally Available.</p>
 
@@ -2012,15 +2012,15 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 </ul>
 
 <p>For additional detail and documentation on this release, please refer to the following <a href="/rl10/releases/rl10_10.2.1_release.html">release notes.</a></p>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-09-28.html">Week of 2015-09-28</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/09/30.html">RightScale Cloud Management - September 30, 2015</a> </h1><div class="article-time"><time datetime="09-30-2015">September 30, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><strong>Pricing Support</strong> - Building upon the recent addition of <q>Spot</q> or <q>On-Demand</q> pricing support for ServerArray and Server resources in API 1.5, you can now also specify <q>Spot</q> or <q>On-Demand</q> pricing when launching raw instances via API 1.5.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/09/30.html">Self-Service</a> </h1><div class="article-time"><time datetime="09-30-2015">September 30, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-09-28.html">Week of 2015-09-28</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/09/30.html">Self-Service</a> </h1><div class="article-time"><time datetime="09-30-2015">September 30, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><strong>Introducing Test CloudApps</strong> - In order to help CAT developers during the design and testing phase of CATs as well as simplify the End User experience, we have introduced the notion of Test CloudApps. Test CloudApps are any CloudApp launched from the Designer UI and they are hidden from End Users. For more details, see <a href="/ss/guides/ss_testing_CATs.html">Testing CATs</a> on our docs site.</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/09/30.html">RightScale Cloud Management - September 30, 2015</a> </h1><div class="article-time"><time datetime="09-30-2015">September 30, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Pricing Support</strong> - Building upon the recent addition of <q>Spot</q> or <q>On-Demand</q> pricing support for ServerArray and Server resources in API 1.5, you can now also specify <q>Spot</q> or <q>On-Demand</q> pricing when launching raw instances via API 1.5.</li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-09-21.html">Week of 2015-09-21</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/09/23.html">Cloud Management</a> </h1><div class="article-time"><time datetime="09-23-2015">September 23, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -2029,18 +2029,18 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 </ul>
 
 <p><img src="/img/cm-enable-ip-forward.png" alt="cm-enable-ip-forward.png" width="257" height="159" /></p>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-09-14.html">Week of 2015-09-14</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/09/16.html">Cloud Management</a> </h1><div class="article-time"><time datetime="09-16-2015">September 16, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-09-14.html">Week of 2015-09-14</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/09/16.html">Self-Service</a> </h1><div class="article-time"><time datetime="09-16-2015">September 16, 2015</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li><p>It is now easier to use HTTP functions in RCL with RightScale APIs. To make any call to any of the RS APIs, just omit the authentication header and Cloud Workflow will use the existing session to make the call. Note that this means the user running the CloudApp must have the requisite permissions (or have had them delegated to the CloudApp).</p></li>
+<li><p>Fixed a bug where terminating Azure instances sometimes failed due to the boot volumes not having been deleted yet.</p></li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/09/16.html">Cloud Management</a> </h1><div class="article-time"><time datetime="09-16-2015">September 16, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><p><strong>Network Manager</strong> - Outbound security group rules are now supported for Openstack in Network Manager.</p></li>
 <li><p><strong>API 1.5 - Spot Pricing</strong> - Allowing the specification of Spot or On-Demand pricing for Server and ServerArray resources via API 1.5 adds further flexibility in selecting the best instance pricing for a given workload. While already available in the Cloud Management user interface, this feature extends this functionality into API 1.5. Read more about it in the API docs here: <a href="http://reference.rightscale.com/api1.5/index.html">http://reference.rightscale.com/api1.5/index.html</a>.</p></li>
 <li><p><strong>Customization - Logo Support</strong> - Cloud Management now provides a setting for organizations to change the top-left logo in the Cloud Management and Optima interfaces to your own custom logo. <a href="/cm/dashboard/settings/account/set_a_custom_dashboard_logo.html">Read more about changing the RightScale Logo to your own custom logo here.</a></p></li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/09/16.html">Self-Service</a> </h1><div class="article-time"><time datetime="09-16-2015">September 16, 2015</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li><p>It is now easier to use HTTP functions in RCL with RightScale APIs. To make any call to any of the RS APIs, just omit the authentication header and Cloud Workflow will use the existing session to make the call. Note that this means the user running the CloudApp must have the requisite permissions (or have had them delegated to the CloudApp).</p></li>
-<li><p>Fixed a bug where terminating Azure instances sometimes failed due to the boot volumes not having been deleted yet.</p></li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-09-07.html">Week of 2015-09-07</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/09/09.html">Cloud Management</a> </h1><div class="article-time"><time datetime="09- 9-2015">September  9, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -2053,21 +2053,7 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <ul>
 <li><strong>CM API 1.5 - New Sessions Resource View</strong> - We have introduced a new “whoami” view to the API 1.5  Sessions resource that provides a link to the currently logged-in user (or instance) and to the account they are interacting with. This is useful for OAuth clients who may be given a refresh token without knowing to whom it belongs. For more information, see <a href="http://reference.rightscale.com/api1.5/resources/ResourceSessions.html#index">http://reference.rightscale.com/api1.5/resources/ResourceSessions.html#index</a></li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-08-24.html">Week of 2015-08-24</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/08/27.html">Self-Service</a> </h1><div class="article-time"><time datetime="08-27-2015">August 27, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><strong>New Resource Support</strong> - The CAT language now supports additional resources, including: Networks, NetworkGateways, PlacementGroups, RouteTables, Routes, Subnets, and more. Leveraging these resources gives you the ability to define entire networks as part of your CloudApp. For more information on the resources supported by the CAT language, see our <a href="/ss/reference/cat">reference guide.</a>.</li>
-</ul>
-
-<h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Bugfix: fixed the denormalization of HTTP headers in <code>http_</code> function calls in RCL.</li>
-<li>The <q>Next action</q> for CloudApps is now more accurate, showing only actions that apply given the current state of the CloudApp (i.e., we will hide the <q>start</q> action if the CloudApp is already in the <q>Running</q> state).</li>
-<li>Improved the handling of regular expressions for parameter input validation. For more details, and for a link to an interactive, online regex testing tool, read our <a href="/ss/reference/cat">reference guide.</a></li>
-<li>The logic used for the <code>delete()</code> function in RCL (used both in custom code and by the auto_terminate built into Self-Service) has been improved to more accurately determine resource dependencies and ensure that resources are deleted in the correct order.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-6/2015/08/27.html">RightLink v6.3.4</a> </h1><div class="article-time"><time datetime="08-27-2015">August 27, 2015</time></div><div class="article-tease"><p><strong>Release Version</strong>: RightLink 6.3.4 GA</p>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-08-24.html">Week of 2015-08-24</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-6/2015/08/27.html">RightLink v6.3.4</a> </h1><div class="article-time"><time datetime="08-27-2015">August 27, 2015</time></div><div class="article-tease"><p><strong>Release Version</strong>: RightLink 6.3.4 GA</p>
 
 <p><strong>Release Date</strong>:  Aug 27, 2015</p>
 
@@ -2081,6 +2067,20 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <p>You can view full changes in the <a href="http://github.com/rightscale/right_link/blob/master/RELEASES.rdoc#634">GitHub repository located here</a>. <a href="http://support.rightscale.com/18-Release_Notes/RightLink_Release_Notes">Archived Release Notes for older releases are available Here</a></p>
 
 <p>It is also recommended that you review the <a href="http://support.rightscale.com/18-Release_Notes/RightLink_Release_Notes/RightLink_6.0/RightLink_5_to_6_Breaking_Changes/index.html">RightLink 5 to 6 Breaking Changes</a> document which identifies changes in RightLink 6 which may cause issues with ServerTemplates previously working with RightLink 5.</p>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/08/27.html">Self-Service</a> </h1><div class="article-time"><time datetime="08-27-2015">August 27, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>New Resource Support</strong> - The CAT language now supports additional resources, including: Networks, NetworkGateways, PlacementGroups, RouteTables, Routes, Subnets, and more. Leveraging these resources gives you the ability to define entire networks as part of your CloudApp. For more information on the resources supported by the CAT language, see our <a href="/ss/reference/cat">reference guide.</a>.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Bugfix: fixed the denormalization of HTTP headers in <code>http_</code> function calls in RCL.</li>
+<li>The <q>Next action</q> for CloudApps is now more accurate, showing only actions that apply given the current state of the CloudApp (i.e., we will hide the <q>start</q> action if the CloudApp is already in the <q>Running</q> state).</li>
+<li>Improved the handling of regular expressions for parameter input validation. For more details, and for a link to an interactive, online regex testing tool, read our <a href="/ss/reference/cat">reference guide.</a></li>
+<li>The logic used for the <code>delete()</code> function in RCL (used both in custom code and by the auto_terminate built into Self-Service) has been improved to more accurately determine resource dependencies and ensure that resources are deleted in the correct order.</li>
+</ul>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/08/26.html">Cloud Management</a> </h1><div class="article-time"><time datetime="08-26-2015">August 26, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
@@ -2093,15 +2093,15 @@ See the <a href="/policies/users/guides/apply_policy.html#common-policy-configur
 <li>RightScale now identifies and correctly handles cases in which instances are stopped/started in the cloud instead of through RightScale. This applies to AWS, Azure, VMware, and SoftLayer.</li>
 <li>For OpenStack cloud registration, if the protocol returned by the public endpoint is incorrect, we instead use the protocol used in the catalog.</li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-08-17.html">Week of 2015-08-17</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/08/19.html">Cloud Management</a> </h1><div class="article-time"><time datetime="08-19-2015">August 19, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><strong>OpenStack SSH Keypairs</strong> - OpenStack ssh keypairs are now supported, allowing you to manage the keypairs with the RightScale UI/API and assign them to servers upon launch.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/08/19.html">Self-Service</a> </h1><div class="article-time"><time datetime="08-19-2015">August 19, 2015</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-08-17.html">Week of 2015-08-17</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/08/19.html">Self-Service</a> </h1><div class="article-time"><time datetime="08-19-2015">August 19, 2015</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
 
 <ul>
 <li>Improved the error message shown to designers when a server&#39;s <q>launch</q> call fails.</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/08/19.html">Cloud Management</a> </h1><div class="article-time"><time datetime="08-19-2015">August 19, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>OpenStack SSH Keypairs</strong> - OpenStack ssh keypairs are now supported, allowing you to manage the keypairs with the RightScale UI/API and assign them to servers upon launch.</li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-08-10.html">Week of 2015-08-10</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/08/12.html">Cloud Management</a> </h1><div class="article-time"><time datetime="08-12-2015">August 12, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -2238,12 +2238,7 @@ The latest appliance encapsulates the latest versions of the vscale and vscale-a
 <li>added <em>copy</em> action</li>
 </ul></li>
 </ul>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-06-29.html">Week of 2015-06-29</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/07/01.html">Cloud Management</a> </h1><div class="article-time"><time datetime="07- 1-2015">July  1, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><strong>Support for New AWS Instance Types</strong> - RightScale now supports the new <strong>M4</strong> and <strong>t2.large</strong> instance types. Both instance types support 64-bit HVM AMIs and require to be launched within a VPC. For information on the M4 instance type see the official AWS blog entry -  <a href="https://aws.amazon.com/blogs/aws/the-new-m4-instance-type-bonus-price-reduction-on-m3-c4/">The New M4 Instance Type</a>. For information on the new t2.large instance type see the official AWS blog entry - <a href="https://aws.amazon.com/blogs/aws/new-t2-large-instances/">New T2.Large Instances</a>.</li>
-</ul>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/07/01.html">Self-Service</a> </h1><div class="article-time"><time datetime="07- 1-2015">July  1, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-06-29.html">Week of 2015-06-29</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/07/01.html">Self-Service</a> </h1><div class="article-time"><time datetime="07- 1-2015">July  1, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <p><strong>Introducing CloudApp Permissions</strong> - The permissions required to launch and operate a CloudApp in Self-Service are now captured in the CAT itself and can be delegated to users with lower levels of permission. This allows you to build complex CloudApps that can be launched by anyone on your team without worrying about giving them explicit permissions on all the resources in the CAT. Older CloudApps that use the legacy permissioning model are labeled as such in the Catalog for Designers so that they can be updated. <a href="/ss/guides/ss_permissions.html">Read more about CloudApp permissions here.</a></p>
 
@@ -2251,6 +2246,11 @@ The latest appliance encapsulates the latest versions of the vscale and vscale-a
 
 <ul>
 <li>Text inputs now support multi-line entry. Just hit <code>enter</code> or paste in text and the text input will grow as needed.</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/07/01.html">Cloud Management</a> </h1><div class="article-time"><time datetime="07- 1-2015">July  1, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Support for New AWS Instance Types</strong> - RightScale now supports the new <strong>M4</strong> and <strong>t2.large</strong> instance types. Both instance types support 64-bit HVM AMIs and require to be launched within a VPC. For information on the M4 instance type see the official AWS blog entry -  <a href="https://aws.amazon.com/blogs/aws/the-new-m4-instance-type-bonus-price-reduction-on-m3-c4/">The New M4 Instance Type</a>. For information on the new t2.large instance type see the official AWS blog entry - <a href="https://aws.amazon.com/blogs/aws/new-t2-large-instances/">New T2.Large Instances</a>.</li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-06-22.html">Week of 2015-06-22</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/06/24.html">Cloud Management</a> </h1><div class="article-time"><time datetime="06-24-2015">June 24, 2015</time></div><div class="article-tease"><h2 id="changes-in-behavior">Changes in Behavior</h2>
 
@@ -2273,19 +2273,6 @@ The latest appliance encapsulates the latest versions of the vscale and vscale-a
 </ul>
 
 <p>For additional detail and documentation on this release, please refer to the following <a href="/rl10/releases/rl10_10.1.3_release.html">release notes.</a></p>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/06/17.html">Cloud Management</a> </h1><div class="article-time"><time datetime="06-17-2015">June 17, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><strong>Instance Provisioner</strong>: Availability zones for AWS subnets are now visible in the Subnet Selector within the Instance Provisioner.</li>
-</ul>
-
-<h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>The Deployment Show Servers (DSS) page (<strong>Manage &gt; Deployments &gt; Servers</strong>) was displaying selected items incorrectly in the overview. This issue has been resolved.</li>
-<li>The Servers page had a bug where the SSH icon would not display. This defect has been fixed.</li>
-<li>There was a bug in the Instance Provisioner which prevented the user from expanding the <strong>Hardware -&gt; Advanced</strong> section. This problem has been addressed.</li>
-</ul>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/06/17.html">Self-Service</a> </h1><div class="article-time"><time datetime="06-17-2015">June 17, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <p><strong>User Inteface Enhancment</strong> - Introduced a new slideout panel for interactions with large amounts of content (such as launching a CloudApp and viewing a CAT source).</p>
@@ -2299,6 +2286,19 @@ The latest appliance encapsulates the latest versions of the vscale and vscale-a
 <li>Bugfix: fixed a bug that prevented users from Terminating a CloudApp that was in the Stopped state.</li>
 <li>Bugfix: fixed a bug that was calling the on_error handler during a <q>cancel</q> rollback.</li>
 <li>Added a timeout to the <code>canceling_operations</code> transition. When a CloudApp is terminated and operations are running, we cancel those operations. There is now a 2-hour timeout for those operations to be canceled, else the operations will be aborted.</li>
+</ul>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/06/17.html">Cloud Management</a> </h1><div class="article-time"><time datetime="06-17-2015">June 17, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><strong>Instance Provisioner</strong>: Availability zones for AWS subnets are now visible in the Subnet Selector within the Instance Provisioner.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>The Deployment Show Servers (DSS) page (<strong>Manage &gt; Deployments &gt; Servers</strong>) was displaying selected items incorrectly in the overview. This issue has been resolved.</li>
+<li>The Servers page had a bug where the SSH icon would not display. This defect has been fixed.</li>
+<li>There was a bug in the Instance Provisioner which prevented the user from expanding the <strong>Hardware -&gt; Advanced</strong> section. This problem has been addressed.</li>
 </ul>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-06-08.html">Week of 2015-06-08</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/06/10.html">Cloud Management</a> </h1><div class="article-time"><time datetime="06-10-2015">June 10, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
@@ -2379,7 +2379,23 @@ The latest appliance encapsulates the latest versions of the vscale and vscale-a
 </ul>
 
 <p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard">Archived Release Notes are Available Here</a></p>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-04-27.html">Week of 2015-04-27</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/04/29.html">Cloud Management</a> </h1><div class="article-time"><time datetime="04-29-2015">April 29, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-04-27.html">Week of 2015-04-27</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/04/29.html">Self-Service</a> </h1><div class="article-time"><time datetime="04-29-2015">April 29, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li>Added new <q>run</q> action to ScheduledActions resource in the API so that any custom operation can be scheduled.</li>
+<li>Improved the login process so that users are redirected to the correct location when they come to Self-Service by way of a link.</li>
+</ul>
+
+<h2 id="changes-in-behavior">Changes in Behavior</h2>
+
+<ul>
+<li>Fixed a bug that prevented End Users from modifying a running CloudApp schedule and end date.</li>
+<li>Fixed a bug that was causing notification emails to be sent for Terminated CloudApps.</li>
+<li>Added ranges as a first class entity type in RCL, providing an easy method to iterate through numerical or string ranges.</li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/Self-Service">Archived Release Notes are Available Here</a></p>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/04/29.html">Cloud Management</a> </h1><div class="article-time"><time datetime="04-29-2015">April 29, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
 <li><p><strong>VMware vSphere and Rackspace Support Added to Instance Provisioner</strong> - The Instance Provisioner in the RightScale Dashboard now supports VMware vSphere and Rackspace. You can access the Instance Provisioner by navigating to Manage &gt; Instances &amp; Servers &gt; New Instance. For additional information on using the Instance Provisioner in the RightScale Dashboard see <a href="/cm/dashboard/manage/instances_and_servers/index.html#actions">New Instance</a> on the RightScale support site.</p></li>
@@ -2396,22 +2412,6 @@ The latest appliance encapsulates the latest versions of the vscale and vscale-a
 </ul>
 
 <p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard">Archived Release Notes are Available Here</a></p>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/04/29.html">Self-Service</a> </h1><div class="article-time"><time datetime="04-29-2015">April 29, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li>Added new <q>run</q> action to ScheduledActions resource in the API so that any custom operation can be scheduled.</li>
-<li>Improved the login process so that users are redirected to the correct location when they come to Self-Service by way of a link.</li>
-</ul>
-
-<h2 id="changes-in-behavior">Changes in Behavior</h2>
-
-<ul>
-<li>Fixed a bug that prevented End Users from modifying a running CloudApp schedule and end date.</li>
-<li>Fixed a bug that was causing notification emails to be sent for Terminated CloudApps.</li>
-<li>Added ranges as a first class entity type in RCL, providing an easy method to iterate through numerical or string ranges.</li>
-</ul>
-
-<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/Self-Service">Archived Release Notes are Available Here</a></p>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-04-13.html">Week of 2015-04-13</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/mcis-right-images/2015/04/17.html">MCIs & RightImages</a> </h1><div class="article-time"><time datetime="04-17-2015">April 17, 2015</time></div><div class="article-tease"><h2 id="overview">Overview</h2>
 
 <p>These release notes document new features, changes, and bug fixes to RightImages.</p>
@@ -2507,15 +2507,6 @@ The latest appliance encapsulates the latest versions of the vscale and vscale-a
 </ul>
 
 <p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/MultiCloud_Image_and_RightImage_Release_Notes">Archived Release Notes are Available Here</a></p>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/04/15.html">Cloud Management</a> </h1><div class="article-time"><time datetime="04-15-2015">April 15, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
-
-<ul>
-<li><p><strong>Google GCE Support Added to Instance Provisioner</strong> - The Instance Provisioner in the RightScale Dashboard now supports Google GCE. You can access the Instance Provisioner by navigating to Clouds &gt; Google &gt; Instances &gt; New or Manage &gt; Instances &amp; Servers &gt; New Instance &gt; Google. For additional information on using the Instance Provisioner in the RightScale Dashboard see <a href="/cm/dashboard/manage/instances_and_servers/index.html#actions">New Instance</a> on the RightScale support site.</p></li>
-<li><p><strong>Support Added for New AWS D2 Instance Types</strong> - The new Dense Storage instances for EC2 are suitable for situations where large amounts of data storage are needed. See the official [AWS blog on D2 Instance Types[(http://aws.amazon.com/blogs/aws/next-generation-of-dense-storage-instances-for-ec2/)] for additional information.</p></li>
-<li><p><strong>Cloud Management API v1.6</strong> - Reference documentation is now publicly available for Cloud Management API v1.6. View the new API v1.6 docs here.</p></li>
-</ul>
-
-<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard">Archived Release Notes are Available Here</a></p>
 </div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/self-service/2015/04/15.html">Self-Service</a> </h1><div class="article-time"><time datetime="04-15-2015">April 15, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
 
 <ul>
@@ -2537,6 +2528,15 @@ The latest appliance encapsulates the latest versions of the vscale and vscale-a
 </ul>
 
 <p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/Self-Service">Archived Release Notes are Available Here</a></p>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/04/15.html">Cloud Management</a> </h1><div class="article-time"><time datetime="04-15-2015">April 15, 2015</time></div><div class="article-tease"><h2 id="new-features">New Features</h2>
+
+<ul>
+<li><p><strong>Google GCE Support Added to Instance Provisioner</strong> - The Instance Provisioner in the RightScale Dashboard now supports Google GCE. You can access the Instance Provisioner by navigating to Clouds &gt; Google &gt; Instances &gt; New or Manage &gt; Instances &amp; Servers &gt; New Instance &gt; Google. For additional information on using the Instance Provisioner in the RightScale Dashboard see <a href="/cm/dashboard/manage/instances_and_servers/index.html#actions">New Instance</a> on the RightScale support site.</p></li>
+<li><p><strong>Support Added for New AWS D2 Instance Types</strong> - The new Dense Storage instances for EC2 are suitable for situations where large amounts of data storage are needed. See the official [AWS blog on D2 Instance Types[(http://aws.amazon.com/blogs/aws/next-generation-of-dense-storage-instances-for-ec2/)] for additional information.</p></li>
+<li><p><strong>Cloud Management API v1.6</strong> - Reference documentation is now publicly available for Cloud Management API v1.6. View the new API v1.6 docs here.</p></li>
+</ul>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/01-RightScale_Dashboard">Archived Release Notes are Available Here</a></p>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-04-06.html">Week of 2015-04-06</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/cloud-management/2015/04/08.html">Cloud Management</a> </h1><div class="article-time"><time datetime="04- 8-2015">April  8, 2015</time></div><div class="article-tease"><h2 id="cm-api-change-log">CM API Change Log</h2>
 
 <p><strong>Modified Resources</strong>:</p>
@@ -2577,16 +2577,16 @@ The latest appliance encapsulates the latest versions of the vscale and vscale-a
 <p>(This Release Candidate is virtually identical to 10.0.3 except that the ServerTemplate has images for 7 operating systems on 4 clouds making it much easier to try out the install-at-boot use-cases than 10.0.3 and making it easier to refer to a known-to-work image if you&#39;re having difficulties.)</p>
 
 <p>For additional detail and documentation on this release, please refer to the following <a href="/rl10/releases/rl10_10.0.rc4_release.html">release notes.</a></p>
-</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-03-09.html">Week of 2015-03-09</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-6/2015/03/12.html">RightLink v6.3.3</a> </h1><div class="article-time"><time datetime="03-12-2015">March 12, 2015</time></div><div class="article-tease"><p><strong>Release Version</strong>: RightLink 6.3.3 GA</p>
+</div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-03-09.html">Week of 2015-03-09</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link/2015/03/12.html">RightLink v6.x</a> </h1><div class="article-time"><time datetime="03-12-2015">March 12, 2015</time></div><div class="article-tease"><p><a href="/release-notes/right-link-6.html">View the Release Notes for RightScale RightLink v6.x</a></p>
+
+<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/RightLink_Release_Notes">Archived Release Notes are Available Here</a></p>
+</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link-6/2015/03/12.html">RightLink v6.3.3</a> </h1><div class="article-time"><time datetime="03-12-2015">March 12, 2015</time></div><div class="article-tease"><p><strong>Release Version</strong>: RightLink 6.3.3 GA</p>
 
 <p><strong>Release Date</strong>: Mar 12, 2015</p>
 
 <p>You can view full changes in the <a href="http://github.com/rightscale/right_link/blob/master/RELEASES.rdoc#633">GitHub repository located here</a>. <a href="http://support.rightscale.com/18-Release_Notes/RightLink_Release_Notes">Archived Release Notes for older releases are available Here</a></p>
 
 <p>It is also recommended that you review the <a href="http://support.rightscale.com/18-Release_Notes/RightLink_Release_Notes/RightLink_6.0/RightLink_5_to_6_Breaking_Changes/index.html">RightLink 5 to 6 Breaking Changes</a> document which identifies changes in RightLink 6 which may cause issues with ServerTemplates previously working with RightLink 5.</p>
-</div></div><div class="article"><h1 class="article-title"> <a href="/release-notes/right-link/2015/03/12.html">RightLink v6.x</a> </h1><div class="article-time"><time datetime="03-12-2015">March 12, 2015</time></div><div class="article-tease"><p><a href="/release-notes/right-link-6.html">View the Release Notes for RightScale RightLink v6.x</a></p>
-
-<p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/RightLink_Release_Notes">Archived Release Notes are Available Here</a></p>
 </div></div></div></div><div class="article-group-object"><h4><a href="week-of-2015-03-02.html">Week of 2015-03-02</a></h4><div class="clearfix"><div class="article"><h1 class="article-title"> <a href="/release-notes/rca-v/2015/03/04.html">Cloud Appliance for vSphere</a> </h1><div class="article-time"><time datetime="03- 4-2015">March  4, 2015</time></div><div class="article-tease"><h2 id="overview">Overview</h2>
 
 <p>This version of the appliance addresses three specific issues:</p>
@@ -2622,7 +2622,7 @@ The latest appliance encapsulates the latest versions of the vscale and vscale-a
 </ul>
 
 <p><strong>Note</strong>: <a href="http://support.rightscale.com/18-Release_Notes/RCA-V">Archived Release Notes are Available Here</a></p>
-</div></div></div></div></div></div></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2024 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
+</div></div></div></div></div></div></div></div></div></div></div></div></div><footer class="main-footer" role="contentinfo"><div class="container-fluid max-width"><div class="row"><div class="col-sm-10"><ul class="list-inline"><li><small>&copy; 2025 Flexera</small></li><li><a href="http://www.flexera.com/" target="_blank"><small>Flexera Home</small></a></li><li><a href="https://www.flexera.com/about-us/careers.html" target="_blank"><small>We're Hiring</small></a></li></ul></div></div></div></footer><noscript><iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-KB9SMN" style="display:none;visibility:hidden" width="0"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KB9SMN');</script><script type="text/javascript">
   // Add clipboard button trigger
   var snippets = document.querySelectorAll('.syntax-highlight');
   [].forEach.call(snippets, function(snippet) {
