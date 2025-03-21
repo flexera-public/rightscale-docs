@@ -9,7 +9,7 @@ gem 'middleman-imageoptim',            '~> 0.2.1'
 gem 'middleman-syntax',                '~> 2.0.0'
 gem 'middleman-blog',                  '~> 3.5.3'
 gem 'slim',                            '~> 3.0.3'
-gem 'redcarpet',                       '~> 3.2.2'
+gem 'redcarpet',                       '~> 3.5.1'
 gem 'therubyracer',                    '~> 0.12.1'
 # For faster file watcher updates on Windows:
 gem 'wdm',                             '~> 0.1.0', platforms: [:mswin, :mingw, :mingw_20]
