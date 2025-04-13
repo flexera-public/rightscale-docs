@@ -20,7 +20,7 @@ gem 'middleman-breadcrumbs',           '~> 0.3.3'
 
 # Assets
 gem 'bourbon',                         '~> 3.2.3', require: false
-gem 'bootstrap-sass',                  '~> 3.3.5.1', require: false
+gem 'bootstrap-sass',                  '~> 3.4.1', require: false
 gem 'jquery-middleman',                '~> 3.0.4'
 gem 'middleman-trailing_slashes',	     '~> 0.0.1'
 gem 'middleman-alias',                 '~> 0.0'
